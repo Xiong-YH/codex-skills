@@ -32,6 +32,6 @@ flowchart TD
 
 > 使用 $pixel-game-video，在现有工程的第二镜加入碎屏转场，按源文件修改并验证该片段。
 
-运行依赖与命令见 [基础运行说明](skills/pixel-game-video/references/runtime.md)。结构、边界和迁移范围见 [架构设计](docs/pixel-video-architecture.md)，本次实测结果见 [重构核验](docs/modular-refactor-verification.md)。
+运行依赖与命令见 [基础运行说明](skills/pixel-game-video/references/runtime.md)。结构、边界和迁移范围见 [架构设计](docs/pixel-video-architecture.md)。实测记录：[重构核验](docs/modular-refactor-verification.md)、[背景与嘴型修复](docs/visual-polish.md)。
 
 旧 `pixel-game-explainer`、原始 32 秒成片、8 秒实验及原运动配方完整保留在 [legacy](legacy/README.md)。历史媒体不是新引擎的回归结果。新增 skill 或移动目录时遵守 [AGENTS.md](AGENTS.md)。

@@ -68,7 +68,7 @@
       label(e,part.label,outerX,labelY,.023,frame>=at?c.ink:c.muted,.16);
     });
     P.library.prop(e,'prop.core.v1',w*cx,h*cy,h*.18);
-    if(assembled===a.parts.length && a.resultLabel)label(e,a.resultLabel,cx,.715,.030,c.accent,.44);
+    if(assembled===a.parts.length && a.resultLabel)label(e,a.resultLabel,cx,.715,.030,c.ink,.44);
   }
   function focus(e,shot,frame){
     if(!(shot.objects||[]).length)P.library.prop(e,'prop.core.v1',e.width*.65,e.height*.48,e.height*.28);

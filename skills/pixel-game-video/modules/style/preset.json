@@ -1,6 +1,14 @@
 {
   "id": "style.modern-pixel.v1",
-  "colors": {"background":"#10182a","panel":"#19263c","edge":"#334762","ink":"#f3f5ed","muted":"#95a8be","accent":"#71ddbc","gold":"#f6cd76","danger":"#dd7587"},
+  "colors": {
+    "background":"#edf3e6","panel":"#fff9e9","edge":"#78968b",
+    "ink":"#27434b","muted":"#5b7475","accent":"#217967",
+    "gold":"#e7ad42","danger":"#c96769",
+    "sky":"#d9ebe7","skyHaze":"#e6efdf","cloud":"#f8f7e9",
+    "farHill":"#c5dacf","nearHill":"#aecabb","hillHighlight":"#d5e3cf",
+    "platformGrass":"#79ac96","platformLip":"#456f65",
+    "platformSand":"#d5b58b","platformShade":"#bd9874","ground":"#e6d2ad"
+  },
   "fontFamily": "Microsoft YaHei, Noto Sans CJK SC, sans-serif",
   "safeArea": {"x":0.05,"top":0.06,"bottom":0.08},
   "textRoles": {"title":0.047,"subtitle":0.033,"annotation":0.026,"label":0.025}
