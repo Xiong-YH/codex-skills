@@ -78,6 +78,8 @@ def _motion_params(recipe, params):
         "motion.pixel-iris.v1": {"x": (0, 1), "y": (0, 1)},
         "motion.focus-punch.v1": {"x": (0, 1), "y": (0, 1), "zoom": (3, 8)},
         "motion.mosaic-pullback.v1": {"columns": (3, 9)},
+        "motion.stage-focus-punch.v1": {"x": (0, 1), "y": (0, 1), "zoom": (3, 8)},
+        "motion.stage-mosaic-pullback.v1": {"columns": (3, 9)},
     }
     if recipe not in rules:
         raise ValueError(f"motion executor unavailable: {recipe}")
@@ -146,7 +148,8 @@ def compile_project(project_root, skill_root=None, *, write=False):
     validator = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(validator)
     for index, shot in enumerate(shots):
-        require("scenes", shot["scene"])
+        scene = require("scenes", shot["scene"])
+        shot["contentStage"] = scene.get("contentStage", content_stage)
         shot["actor"] = shot.get("actor")
         if shot["actor"] is not None:
             require("library", shot["actor"])
@@ -184,20 +187,21 @@ def compile_project(project_root, skill_root=None, *, write=False):
             if transition and (index == 0 or start != shot["startFrame"]):
                 raise ValueError(f"{recipe}: transition requires a previous shot and must start at shot.enter")
             if capability.get("layer") == "content":
+                bounds = shot["contentStage"]
                 if end - start < 8:
                     raise ValueError("content transition needs at least 8 frames for exit and entry")
-                if recipe == "motion.pixel-iris.v1":
+                if recipe in ("motion.pixel-iris.v1", "motion.stage-focus-punch.v1"):
                     for axis, extent in (("x", "width"), ("y", "height")):
-                        value = motion["params"].get(axis, content_stage[axis] + content_stage[extent] / 2)
-                        if not content_stage[axis] <= value <= content_stage[axis] + content_stage[extent]:
-                            raise ValueError("pixel-iris focus must be inside the content stage")
+                        value = motion["params"].get(axis, bounds[axis] + bounds[extent] / 2)
+                        if not bounds[axis] <= value <= bounds[axis] + bounds[extent]:
+                            raise ValueError(f"{recipe} focus must be inside the content stage")
                 half_width = .27 * project["height"] / project["width"] / 2
                 for owner in (shots[index - 1], shot):
                     for obj in owner["objects"]:
-                        if not (content_stage["x"] <= obj["x"] - half_width and
-                                obj["x"] + half_width <= content_stage["x"] + content_stage["width"] and
-                                content_stage["y"] <= obj["y"] - .135 and
-                                obj["y"] + .135 <= content_stage["y"] + content_stage["height"]):
+                        if not (bounds["x"] <= obj["x"] - half_width and
+                                obj["x"] + half_width <= bounds["x"] + bounds["width"] and
+                                bounds["y"] <= obj["y"] - .135 and
+                                obj["y"] + .135 <= bounds["y"] + bounds["height"]):
                             raise ValueError(f"{owner['id']}.{obj['id']}: object outside content stage; reposition it or use another transition")
             key = ("transition" if transition else ("camera" if capability.get('kind')=='camera' else recipe), motion["target"])
             if any(start < b and a < end for a, b in intervals.get(key, [])):

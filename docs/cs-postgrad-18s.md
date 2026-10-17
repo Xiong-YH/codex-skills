@@ -1,5 +1,7 @@
 # 18 秒《计算机，要不要考研？》
 
+当前样例已补回强转场：固定侧边人物，同时让右侧舞台完成焦点急推、场景墙后拉与再次推入。首版 `76b80c4` 的轻滑动/小窗口没有满足转场要求。修复与本次核验见 [固定人物下的强转场](standing-presenter-transitions.md)；下方首版核验保留为历史记录。
+
 ## 当前确认的表现方向
 
 人物主要固定站在画面一侧口播，另一侧用像素图文辅助说明；只需嘴型与眨眼，不安排跑动、取物、抱持等剧情活动。此前人物动作版属于方向偏差，保留为历史实验，不作为当前默认样例。保留已确认的 02 暖棕蓬发形象，以及暗色像素工作台背景。
@@ -20,7 +22,7 @@
 - `library/education.js`：学位帽、公文包、项目电脑和目标的 64×64 像素图标，不包含文案或镜头时序。
 - `scenes/presenter-board.js`：pair / hero / checklist 三种右侧布局，按事件出现图文。物体位置仍在 storyboard，素材选择在 production-plan，所有标题与标签在 script。
 - `library/runtime.js` 与 style.presenter：固定人物尺寸、横坐标和脚底锚点。使用原来的十个脸部变体，不调用活动表演器；像素计算风格将脚底对齐工作台。
-- `motion`：只使用内容区 panel-slide / pixel-iris，以及物体进入；不使用全画幅相机或人物运动。字幕独立绘制。
+- `motion`：内容舞台使用 stage-focus-punch / stage-mosaic-pullback，大幅改变图文与该区背景的景别；人物、字幕独立绘制。轻转场仍作为可选配方，不作为本片的转场。
 - `audio`：四份独立 PCM WAV、语句开始事件和轻量提示音。配音为 Microsoft Kangkang、rate=1；嘴型仍是拼音短句节奏模拟，不是真实音素强制对齐。
 
 角色职责的约定已写回 director 的创作合同与视觉叙事参考，SKILL.md 只保留路由和当前实例入口。
@@ -40,9 +42,9 @@ python work/cs-postgrad-18s-standalone/pixel-game-video/scripts/video.py build w
 
 已有目录时选新目录，避免覆盖旧片。独立工程携带源码、素材与旁白，运行时和字体仍需配置；只验证当前 Windows 环境，不扩大平台支持范围。
 
-实际成片与输入哈希、媒体核验、人物固定区域比较、独立重建及审查范围见 [核验记录](cs-postgrad-18s-verification.json)。
+首版的媒体与人物区域记录见 [历史核验](cs-postgrad-18s-verification.json)；当前强转场版本见 [本次核验](standing-presenter-transitions-verification.json)。
 
-## 本次核验
+## 首版核验（76b80c4，历史）
 
 成片实测 18.0 秒、1080 帧，21 项媒体与源文件绑定检查通过。基础层 34 项、导演层 14 项测试通过，两个 skill 的结构校验通过。已查看实际 MP4 解码的 90 张关键帧联系表，以及四句字幕的原尺寸代表帧：[01](verification/cs-postgrad-contact.jpg)、[02](verification/cs-postgrad-contact-02.jpg)、[03](verification/cs-postgrad-contact-03.jpg)。字幕完整，稳定画面的关键词可读；右侧转场按视窗裁切，人物保持原位。
 

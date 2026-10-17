@@ -77,6 +77,23 @@ class TransitionTests(unittest.TestCase):
         self.edit(lambda shots: shots[1].update(motions=[self.motion()]))
         compile_project(self.root)
 
+    def test_stage_focus_is_validated_in_global_coordinates(self):
+        recipe='motion.stage-focus-punch.v1'
+        self.edit(lambda shots: shots[1].update(actor='actor.lead02.v1'))
+        for params in ({'x':.2,'y':.5,'zoom':6}, {'x':.65,'y':.5,'zoom':9}):
+            self.edit(lambda shots: shots[1].update(motions=[self.motion(recipe,params=params)]))
+            with self.subTest(params=params), self.assertRaises(ValueError):compile_project(self.root)
+        self.edit(lambda shots: shots[1].update(motions=[self.motion(recipe,params={'x':.65,'y':.49,'zoom':6})]))
+        resolved=compile_project(self.root)
+        self.assertEqual(resolved['shots'][1]['actor'],'actor.lead02.v1')
+
+    def test_stage_mosaic_uses_transition_conflicts_and_grid_validation(self):
+        recipe='motion.stage-mosaic-pullback.v1'
+        self.edit(lambda shots:shots[1].update(motions=[self.motion(recipe,params={'columns':4})]))
+        with self.assertRaisesRegex(ValueError,'odd integer'):compile_project(self.root)
+        self.edit(lambda shots:shots[1].update(motions=[self.motion(recipe,params={'columns':5}),self.motion(id='other-transition')]))
+        with self.assertRaisesRegex(ValueError,'overlapping motion'):compile_project(self.root)
+
 
 if __name__ == '__main__':
     unittest.main()

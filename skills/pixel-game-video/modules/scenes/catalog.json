@@ -6,5 +6,5 @@
   {"id":"scenes.focus.v1","title":"焦点物体展示","params":"label?,detail?"},
   {"id":"scenes.cache-journey.v1","title":"数据往返与缓存副本","params":"phase: question/fetch/store/hit/miss/summary; environment; startEvent,arriveEvent,completeEvent; labels"},
   {"id":"scenes.cache-adventure.v1","title":"角色取数、复制与就近取用","params":"same event/label contract as cache-journey; actor required; articulated actions and physical staging"},
-  {"id":"scenes.presenter-board.v1","title":"侧边口播与右侧图文","params":"layout: pair/hero/checklist; heading,kicker; items: object,label,detail,event"}
+  {"id":"scenes.presenter-board.v1","title":"侧边口播与右侧图文","contentStage":{"x":0.36,"y":0.12,"width":0.59,"height":0.645},"params":"layout: pair/hero/checklist; heading,kicker; items: object,label,detail,event"}
 ]}

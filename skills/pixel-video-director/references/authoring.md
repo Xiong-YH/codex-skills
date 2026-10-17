@@ -2,7 +2,7 @@
 
 人物按镜头显式选择：production-plan 中 `actor:null` 表示不出镜。场景、物体与景别可以主导画面，不要求主角常驻。
 
-先保留用户指定的人物职责。用户要求侧边口播时，使用固定站位与嘴型/眨眼，内容在另一侧变化；不因追求动感改成跑动、取物或剧情表演，也不自动删人。此类工程避免全画幅相机和世界转场，优先对内容区做转场。项目当前确认的方向与实例见 [18 秒考研口播](../examples/cs-postgrad-18s/brief.json)。
+先保留用户指定的人物职责。用户要求侧边口播时，使用固定站位与嘴型/眨眼，内容在另一侧变化；不因追求动感改成跑动、取物或剧情表演，也不自动删人。人物固定与强转场是两个并行约束：已有强转场要求时，用 stage-focus-punch / stage-mosaic-pullback 保留大景别变化，不能降为轻滑动或小窗口。此类工程避免变换人物所在的全画幅相机。项目当前确认的方向与实例见 [18 秒考研口播](../examples/cs-postgrad-18s/brief.json)。
 
 四个 JSON 源文件是可独立继续的阶段产物；JSON Schema 在 [schemas/](../schemas/)，运行合同源在 [models.py](../scripts/directorlib/models.py)。`python scripts/director.py check PROJECT` 检查格式与交叉引用。
 

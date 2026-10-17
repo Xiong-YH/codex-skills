@@ -84,7 +84,7 @@
     {
       "id": "s2",
       "durationFrames": 306,
-      "intent": "人物固定口播，右侧用学位帽与研究/门槛关键词说明考虑读研的条件。",
+      "intent": "沿首镜学位帽急推7倍，以同一形状切入读研条件；人物仍固定在左侧口播。",
       "scene": "scenes.presenter-board.v1",
       "params": {
         "layout": "hero",
@@ -110,15 +110,23 @@
       "events": [
         {
           "id": "voice",
-          "frame": 36
+          "frame": 40
         },
         {
           "id": "voice_end",
-          "frame": 297
+          "frame": 301
         },
         {
           "id": "show-cap",
-          "frame": 30
+          "frame": 0
+        },
+        {
+          "id": "impact",
+          "frame": 19
+        },
+        {
+          "id": "land",
+          "frame": 35
         }
       ],
       "objects": [
@@ -145,7 +153,7 @@
     {
       "id": "s3",
       "durationFrames": 288,
-      "intent": "人物固定口播，右侧换为项目电脑与项目、实习两个实践关键词。",
+      "intent": "从读研路线拉远成5×5场景墙，中心换为就业路线并推入；人物不进入缩略场景。",
       "scene": "scenes.presenter-board.v1",
       "params": {
         "layout": "hero",
@@ -171,15 +179,23 @@
       "events": [
         {
           "id": "voice",
-          "frame": 39
+          "frame": 52
         },
         {
           "id": "voice_end",
-          "frame": 256
+          "frame": 269
         },
         {
           "id": "show-laptop",
-          "frame": 34
+          "frame": 0
+        },
+        {
+          "id": "impact",
+          "frame": 30
+        },
+        {
+          "id": "land",
+          "frame": 47
         }
       ],
       "objects": [
@@ -206,7 +222,7 @@
     {
       "id": "s4",
       "durationFrames": 288,
-      "intent": "右侧依次提示目标、岗位和投入，人物原地讲完并停留收束。",
+      "intent": "沿项目电脑急推6倍后切至目标清单，先看目标、再核验岗位和投入；人物原地讲完。",
       "scene": "scenes.presenter-board.v1",
       "params": {
         "layout": "checklist",
@@ -252,15 +268,15 @@
       "events": [
         {
           "id": "voice",
-          "frame": 33
+          "frame": 40
         },
         {
           "id": "voice_end",
-          "frame": 258
+          "frame": 265
         },
         {
           "id": "show-goal",
-          "frame": 36
+          "frame": 0
         },
         {
           "id": "show-cap",
@@ -269,6 +285,14 @@
         {
           "id": "show-laptop",
           "frame": 120
+        },
+        {
+          "id": "impact",
+          "frame": 19
+        },
+        {
+          "id": "land",
+          "frame": 35
         }
       ],
       "objects": [

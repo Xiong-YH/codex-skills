@@ -90,7 +90,7 @@
   P.scenes={eventFrame,performance(mouth,frame){const cue=mouth.find(c=>frame>=c.startFrame&&frame<c.endFrame);return cue?cue.pose:0;},
   stageBounds(e,shot){
     if(shot&&!shot.actor)return{x:e.width*.06,y:e.height*.08,width:e.width*.88,height:e.height*.70};
-    const s=e.resolved.contentStage;
+    const s=shot?.contentStage||e.resolved.contentStage;
     if(!s)throw new Error('Missing compiled content stage; rebuild the project');
     return {x:s.x*e.width,y:s.y*e.height,width:s.width*e.width,height:s.height*e.height};
   },

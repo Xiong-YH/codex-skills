@@ -67,28 +67,16 @@
       "motions": [
         {
           "id": "content-change",
-          "recipe": "motion.panel-slide.v1",
+          "recipe": "motion.stage-focus-punch.v1",
           "target": "scene",
           "start": {
             "event": "s2.enter"
           },
-          "durationFrames": 28,
+          "durationFrames": 36,
           "params": {
-            "direction": "left",
-            "distance": 0.3
-          }
-        },
-        {
-          "id": "reveal-cap",
-          "recipe": "motion.object-reveal.v1",
-          "target": "cap",
-          "start": {
-            "event": "s2.show-cap"
-          },
-          "durationFrames": 18,
-          "params": {
-            "scaleFrom": 0.72,
-            "turns": 0
+            "x": 0.5,
+            "y": 0.49,
+            "zoom": 7
           }
         }
       ]
@@ -105,28 +93,14 @@
       "motions": [
         {
           "id": "content-change",
-          "recipe": "motion.pixel-iris.v1",
+          "recipe": "motion.stage-mosaic-pullback.v1",
           "target": "scene",
           "start": {
             "event": "s3.enter"
           },
-          "durationFrames": 32,
+          "durationFrames": 48,
           "params": {
-            "x": 0.66,
-            "y": 0.48
-          }
-        },
-        {
-          "id": "reveal-laptop",
-          "recipe": "motion.object-reveal.v1",
-          "target": "laptop",
-          "start": {
-            "event": "s3.show-laptop"
-          },
-          "durationFrames": 18,
-          "params": {
-            "scaleFrom": 0.72,
-            "turns": 0
+            "columns": 5
           }
         }
       ]
@@ -151,28 +125,16 @@
       "motions": [
         {
           "id": "content-change",
-          "recipe": "motion.panel-slide.v1",
+          "recipe": "motion.stage-focus-punch.v1",
           "target": "scene",
           "start": {
             "event": "s4.enter"
           },
-          "durationFrames": 28,
+          "durationFrames": 36,
           "params": {
-            "direction": "right",
-            "distance": 0.3
-          }
-        },
-        {
-          "id": "reveal-goal",
-          "recipe": "motion.object-reveal.v1",
-          "target": "goal",
-          "start": {
-            "event": "s4.show-goal"
-          },
-          "durationFrames": 18,
-          "params": {
-            "scaleFrom": 0.72,
-            "turns": 0
+            "x": 0.49,
+            "y": 0.49,
+            "zoom": 6
           }
         },
         {
@@ -248,66 +210,6 @@
       "variant": 0
     },
     {
-      "id": "s2-transition",
-      "sound": "panel-open",
-      "at": {
-        "event": "s2.enter"
-      },
-      "level": 0.16,
-      "x": 0.66,
-      "variant": 0
-    },
-    {
-      "id": "s2-cap",
-      "sound": "code-tap",
-      "at": {
-        "event": "s2.show-cap"
-      },
-      "level": 0.13,
-      "x": 0.49,
-      "variant": 0
-    },
-    {
-      "id": "s3-transition",
-      "sound": "panel-open",
-      "at": {
-        "event": "s3.enter"
-      },
-      "level": 0.16,
-      "x": 0.66,
-      "variant": 0
-    },
-    {
-      "id": "s3-laptop",
-      "sound": "code-tap",
-      "at": {
-        "event": "s3.show-laptop"
-      },
-      "level": 0.13,
-      "x": 0.49,
-      "variant": 0
-    },
-    {
-      "id": "s4-transition",
-      "sound": "panel-open",
-      "at": {
-        "event": "s4.enter"
-      },
-      "level": 0.16,
-      "x": 0.66,
-      "variant": 0
-    },
-    {
-      "id": "s4-goal",
-      "sound": "select",
-      "at": {
-        "event": "s4.show-goal"
-      },
-      "level": 0.13,
-      "x": 0.45,
-      "variant": 0
-    },
-    {
       "id": "s4-cap",
       "sound": "select",
       "at": {
@@ -325,6 +227,76 @@
       },
       "level": 0.13,
       "x": 0.45,
+      "variant": 0
+    },
+    {
+      "id": "s2-transition",
+      "sound": "extract",
+      "at": {
+        "event": "s2.enter"
+      },
+      "level": 0.3,
+      "x": 0.66,
+      "variant": 0
+    },
+    {
+      "id": "s2-impact",
+      "sound": "lock",
+      "at": {
+        "event": "s2.impact"
+      },
+      "level": 0.36,
+      "x": 0.66,
+      "variant": 0
+    },
+    {
+      "id": "s3-transition",
+      "sound": "system-unfold",
+      "at": {
+        "event": "s3.enter"
+      },
+      "level": 0.3,
+      "x": 0.66,
+      "variant": 0
+    },
+    {
+      "id": "s3-impact",
+      "sound": "lock",
+      "at": {
+        "event": "s3.impact"
+      },
+      "level": 0.36,
+      "x": 0.66,
+      "variant": 0
+    },
+    {
+      "id": "s3-return",
+      "sound": "focus-step",
+      "at": {
+        "event": "s3.impact"
+      },
+      "level": 0.22,
+      "x": 0.66,
+      "variant": 0
+    },
+    {
+      "id": "s4-transition",
+      "sound": "extract",
+      "at": {
+        "event": "s4.enter"
+      },
+      "level": 0.3,
+      "x": 0.66,
+      "variant": 0
+    },
+    {
+      "id": "s4-impact",
+      "sound": "lock",
+      "at": {
+        "event": "s4.impact"
+      },
+      "level": 0.36,
+      "x": 0.66,
       "variant": 0
     }
   ],

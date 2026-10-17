@@ -6,4 +6,4 @@ params：`layout` 为 pair / hero / checklist，分别要求 2 项 / 1 项 / 1�
 
 物体坐标在 storyboard.objects、素材选择在 production-plan.objects；文案在 script.labels，以 labelId 交接。场景控制图文布局与出现状态，library 维护形状，motion 维护物体进入与内容区转场。pair 用于问题对比，hero 用于单个条件/主题，checklist 用于结尾判断。
 
-使用 panel-slide 或 pixel-iris 时，人物不随图文移动；新旁白与字幕在转场后开始。人物的固定比例和脚底位置可由 style.presenter 配置。具体文案和 18 秒片长不是场景默认值；其他主题可复用同一结构。
+人物不随图文移动；需要强转场时用 stage-focus-punch / stage-mosaic-pullback，轻交接才用 panel-slide / pixel-iris。场景的 contentStage 包含标题、图标与标签，强转场裁片包含该区背景，不含人物或字幕。新旁白与字幕在转场后开始；用于承接焦点的主图标应提前显露。人物的固定比例和脚底位置由 style.presenter 配置。具体文案和 18 秒片长不是场景默认值。

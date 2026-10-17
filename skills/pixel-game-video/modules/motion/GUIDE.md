@@ -8,6 +8,8 @@
 | `motion.camera-track.v1` | 相机 | [有边界的横向跟拍与景别变化](recipes/camera-track.md) |
 | `motion.focus-punch.v1` | 强转场 | [焦点冲入切换](recipes/focus-punch.md) |
 | `motion.mosaic-pullback.v1` | 强转场 | [马赛克拉远](recipes/mosaic-pullback.md) |
+| `motion.stage-focus-punch.v1` | 内容区强转场 | [固定人物下的焦点急推](recipes/stage-transitions.md) |
+| `motion.stage-mosaic-pullback.v1` | 内容区强转场 | [固定人物下的场景墙后拉](recipes/stage-transitions.md) |
 | `motion.panel-slide.v1` | 转场 | [信息面板接续](recipes/panel-slide.md) |
 | `motion.pixel-iris.v1` | 转场 | [像素窗口展开](recipes/pixel-iris.md) |
 | `motion.shatter-reveal.v1` | 转场 | [上一镜纹理碎裂](recipes/shatter-reveal.md) |
@@ -22,7 +24,8 @@
 转场从新镜头 enter 开始，需要一个前镜头；占用新镜头时间，不能越出镜头。
 画面主导时用 focus-punch 冲入焦点、mosaic-pullback 拉远重组；人物可通过 `actor:null` 退场。
 panel-slide、pixel-iris 是轻转场选项，仅替换右侧信息区，人物与背景保持稳定。
-字幕新句在转场结束后出现，首个机制事件应晚于转场结束；强转场可从 36–48 帧（60fps）起试。
+固定侧边人物与强转场可以同时成立：stage-focus-punch / stage-mosaic-pullback 只变换内容舞台的背景与图文，人物、字幕独立保持。不能因人物固定，自动把已要求的强转场降为轻滑动。
+字幕新句和新旁白在转场结束后出现；传递焦点的主物体须在切入时已显露，后续机制事件再排在落位后。强转场可从 36–48 帧（60fps）起试。
 碎屏保留给打破障碍等特殊剧情，不作为通用镜头切换。
 相机推进结束保持最终构图到镜头末，字幕保持独立。
 同镜头的转场不能互相重叠；其他同类运动在同一目标上不能重叠。

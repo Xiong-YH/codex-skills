@@ -147,6 +147,20 @@
     g.restore();
   }
   P.motion = {
+    stageTransition(e,outgoing,incoming,motion,frame) {
+      // Sources are opaque environment + content crops. Neither an actor nor
+      // subtitles enter the crop or its thumbnail gallery.
+      const s=stage(e),g=e.ctx,a=motion.params||{};
+      const recipe=motion.recipe.replace('motion.stage-','motion.');
+      const params={...a};
+      if(recipe==='motion.focus-punch.v1'){
+        params.x=((a.x??((s.x+s.width/2)/e.width))*e.width-s.x)/s.width;
+        params.y=((a.y??((s.y+s.height/2)/e.height))*e.height-s.y)/s.height;
+      }
+      g.save();clipStage(g,s);g.translate(s.x,s.y);
+      P.motion.worldTransition({...e,width:s.width,height:s.height},outgoing,incoming,{...motion,recipe,params},frame);
+      g.restore();
+    },
     worldTransition(e,outgoing,incoming,motion,frame) {
       const p=P.progress(frame,motion.startFrame,motion.endFrame);
       if(p<=0){e.ctx.drawImage(outgoing,0,0,e.width,e.height);return;}
