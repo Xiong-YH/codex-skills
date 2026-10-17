@@ -1,0 +1,4 @@
+interface:
+  display_name: "像素视频运镜与转场"
+  short_description: "设计和实现像素讲解视频的碎屏揭示、计数积累、突破光效与书封旋转转场"
+  default_prompt: "使用 $pixel-motion-transitions 为这条像素讲解视频设计并实现运镜与转场，保持主体连续和字幕可读。"
