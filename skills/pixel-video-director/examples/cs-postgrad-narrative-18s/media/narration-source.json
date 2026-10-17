@@ -1,0 +1,9 @@
+{
+  "culture": "zh-CN",
+  "source": "Windows System.Speech local synthesized narration",
+  "voice": "Microsoft Kangkang",
+  "format": "PCM 48000Hz 16-bit mono",
+  "scriptSha256": "8366c4821220bc33ca854318d4bab669424944846655d3b04365b563f6d01cf9",
+  "rate": 1,
+  "note": "Spoken cue texts unchanged; visual labels revised after synthesis."
+}

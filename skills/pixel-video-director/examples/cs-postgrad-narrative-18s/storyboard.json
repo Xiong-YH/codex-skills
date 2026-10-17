@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "shots": [
+    {
+      "id": "s1",
+      "durationFrames": 198,
+      "intent": "左侧人物站立口播，书与电脑代表两条路线。书页将成为进入研究空间的接力物体。",
+      "scene": "scenes.study-routes.v1",
+      "params": {
+        "phase": "question",
+        "environment": "workspace",
+        "heading": {
+          "labelId": "n-title1"
+        },
+        "kicker": {
+          "labelId": "n-kicker1"
+        },
+        "labels": [
+          {
+            "labelId": "n-a1"
+          },
+          {
+            "labelId": "n-b1"
+          },
+          {
+            "labelId": "n-c1"
+          }
+        ],
+        "startEvent": "develop",
+        "completeEvent": "complete",
+        "sourceShots": []
+      },
+      "events": [
+        {
+          "id": "voice",
+          "frame": 12
+        },
+        {
+          "id": "voice_end",
+          "frame": 165
+        },
+        {
+          "id": "develop",
+          "frame": 12
+        },
+        {
+          "id": "complete",
+          "frame": 100
+        }
+      ],
+      "objects": [],
+      "cues": [
+        {
+          "cueId": "c1",
+          "start": {
+            "event": "s1.voice",
+            "offsetFrames": -2
+          },
+          "end": {
+            "event": "s1.voice_end",
+            "offsetFrames": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "durationFrames": 306,
+      "intent": "书页铺满全屏，翻开后进入暖金档案馆；书中抽出论文与连接节点，解释研究兴趣与学历条件。",
+      "scene": "scenes.study-routes.v1",
+      "params": {
+        "phase": "research",
+        "environment": "research",
+        "heading": {
+          "labelId": "n-title2"
+        },
+        "kicker": {
+          "labelId": "n-kicker2"
+        },
+        "labels": [
+          {
+            "labelId": "n-a2"
+          },
+          {
+            "labelId": "n-b2"
+          },
+          {
+            "labelId": "n-c2"
+          }
+        ],
+        "startEvent": "develop",
+        "completeEvent": "complete",
+        "sourceShots": []
+      },
+      "events": [
+        {
+          "id": "voice",
+          "frame": 40
+        },
+        {
+          "id": "voice_end",
+          "frame": 301
+        },
+        {
+          "id": "develop",
+          "frame": 42
+        },
+        {
+          "id": "complete",
+          "frame": 188
+        },
+        {
+          "id": "impact",
+          "frame": 18
+        },
+        {
+          "id": "land",
+          "frame": 35
+        }
+      ],
+      "objects": [],
+      "cues": [
+        {
+          "cueId": "c2",
+          "start": {
+            "event": "s2.voice",
+            "offsetFrames": -2
+          },
+          "end": {
+            "event": "s2.voice_end",
+            "offsetFrames": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "durationFrames": 288,
+      "intent": "完整空间横移，前景书架经过镜头，换成青绿开发工坊；代码逐行出现，生成可交付项目与实习档案。",
+      "scene": "scenes.study-routes.v1",
+      "params": {
+        "phase": "practice",
+        "environment": "workshop",
+        "heading": {
+          "labelId": "n-title3"
+        },
+        "kicker": {
+          "labelId": "n-kicker3"
+        },
+        "labels": [
+          {
+            "labelId": "n-a3"
+          },
+          {
+            "labelId": "n-b3"
+          },
+          {
+            "labelId": "n-c3"
+          }
+        ],
+        "startEvent": "develop",
+        "completeEvent": "complete",
+        "sourceShots": []
+      },
+      "events": [
+        {
+          "id": "voice",
+          "frame": 52
+        },
+        {
+          "id": "voice_end",
+          "frame": 269
+        },
+        {
+          "id": "develop",
+          "frame": 52
+        },
+        {
+          "id": "complete",
+          "frame": 188
+        },
+        {
+          "id": "impact",
+          "frame": 24
+        },
+        {
+          "id": "land",
+          "frame": 47
+        }
+      ],
+      "objects": [],
+      "cues": [
+        {
+          "cueId": "c3",
+          "start": {
+            "event": "s3.voice",
+            "offsetFrames": -2
+          },
+          "end": {
+            "event": "s3.voice_end",
+            "offsetFrames": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "durationFrames": 288,
+      "intent": "开发工坊整体收成右侧一张路线卡，与左侧真实研究镜头并列；俯视路线桌，用连接线落到目标与岗位要求。",
+      "scene": "scenes.study-routes.v1",
+      "params": {
+        "phase": "decision",
+        "environment": "atlas",
+        "heading": {
+          "labelId": "n-title4"
+        },
+        "kicker": {
+          "labelId": "n-kicker4"
+        },
+        "labels": [
+          {
+            "labelId": "n-a4"
+          },
+          {
+            "labelId": "n-b4"
+          },
+          {
+            "labelId": "n-c4"
+          }
+        ],
+        "startEvent": "develop",
+        "completeEvent": "complete",
+        "sourceShots": [
+          "s2",
+          "s3"
+        ]
+      },
+      "events": [
+        {
+          "id": "voice",
+          "frame": 40
+        },
+        {
+          "id": "voice_end",
+          "frame": 265
+        },
+        {
+          "id": "develop",
+          "frame": 40
+        },
+        {
+          "id": "complete",
+          "frame": 170
+        },
+        {
+          "id": "impact",
+          "frame": 30
+        },
+        {
+          "id": "land",
+          "frame": 35
+        }
+      ],
+      "objects": [],
+      "cues": [
+        {
+          "cueId": "c4",
+          "start": {
+            "event": "s4.voice",
+            "offsetFrames": -2
+          },
+          "end": {
+            "event": "s4.voice_end",
+            "offsetFrames": 4
+          }
+        }
+      ]
+    }
+  ]
+}

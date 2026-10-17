@@ -36,13 +36,30 @@ def validate(scene_id, params, events, objects):
         'scenes.cache-journey.v1': {'phase','environment','startEvent','arriveEvent','completeEvent','labels'},
         'scenes.cache-adventure.v1': {'phase','environment','startEvent','arriveEvent','completeEvent','labels'},
         'scenes.presenter-board.v1': {'layout','heading','kicker','items'},
+        'scenes.study-routes.v1': {'phase','environment','heading','kicker','labels','startEvent','completeEvent','sourceShots'},
     }
     if scene_id not in allowed:
         raise ValueError(f'Unknown scene: {scene_id}')
     extras = set(params) - allowed[scene_id]
     if extras:
         raise ValueError(f'{scene_id}: unsupported parameters {sorted(extras)}')
-    if scene_id == 'scenes.presenter-board.v1':
+    if scene_id == 'scenes.study-routes.v1':
+        environments={'question':'workspace','research':'research','practice':'workshop','decision':'atlas'}
+        if params.get('phase') not in environments or params.get('environment')!=environments[params['phase']]:
+            raise ValueError('study-routes: phase and environment must match')
+        if objects:raise ValueError('study-routes owns its prop layout; objects must be empty')
+        label(params.get('heading'),'heading');label(params.get('kicker'),'kicker')
+        rows=params.get('labels')
+        if not isinstance(rows,list) or len(rows)!=3:raise ValueError('study-routes requires three labels')
+        for item in rows:label(item,'labels')
+        for key in ('startEvent','completeEvent'):event(params.get(key))
+        start=event_frames.get(params['startEvent']);end=event_frames.get(params['completeEvent'])
+        if start is not None and end is not None and start>=end:raise ValueError('study-routes requires start before complete')
+        sources=params.get('sourceShots')
+        count=2 if params['phase']=='decision' else 0
+        if not isinstance(sources,list) or len(sources)!=count or any(not isinstance(s,str) or not s for s in sources) or len(set(sources))!=len(sources):
+            raise ValueError('study-routes: decision needs two distinct preceding source shots; other phases none')
+    elif scene_id == 'scenes.presenter-board.v1':
         layout=params.get('layout');rows=params.get('items')
         limits={'pair':(2,2),'hero':(1,1),'checklist':(1,3)}
         if layout not in limits:raise ValueError('presenter-board: unknown layout')

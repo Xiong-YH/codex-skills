@@ -77,6 +77,7 @@
   }
   const handlers={'scenes.steps.v1':steps,'scenes.counter.v1':counter,'scenes.choice.v1':choice,'scenes.assembly.v1':assembly,'scenes.focus.v1':focus};
   function content(e,shot,frame){
+    if(shot.scene==='scenes.study-routes.v1'){P.studyRoutes.draw(e,shot,frame);return;}
     if(shot.scene==='scenes.presenter-board.v1'){P.presenterBoard.draw(e,shot,frame);return;}
     if(shot.scene==='scenes.cache-adventure.v1'){P.cacheAdventure.draw(e,shot,frame);return;}
     if(shot.scene==='scenes.cache-journey.v1'){P.cacheJourney.draw(e,shot,frame);return;}

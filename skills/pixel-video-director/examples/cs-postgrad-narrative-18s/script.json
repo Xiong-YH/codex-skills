@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "cues": [
+    {
+      "id": "c1",
+      "text": "计算机，要不要考研？",
+      "phrases": [
+        "ji suan ji",
+        "yao bu yao kao yan"
+      ],
+      "meaning": "提出问题，不先替所有人选择读研或就业。"
+    },
+    {
+      "id": "c2",
+      "text": "想做研究，或目标岗位要求硕士，可以考。",
+      "phrases": [
+        "xiang zuo yan jiu",
+        "huo mu biao gang wei yao qiu shuo shi",
+        "ke yi kao"
+      ],
+      "meaning": "研究兴趣和目标岗位的明确学历门槛，是考虑读研的理由；不概括所有岗位。"
+    },
+    {
+      "id": "c3",
+      "text": "想尽快就业，先做项目、找实习。",
+      "phrases": [
+        "xiang jin kuai jiu ye",
+        "xian zuo xiang mu",
+        "zhao shi xi"
+      ],
+      "meaning": "以尽快就业为目标时，先积累和验证实践能力。"
+    },
+    {
+      "id": "c4",
+      "text": "别跟风，先看目标，再看岗位要求。",
+      "phrases": [
+        "bie gen feng",
+        "xian kan mu biao",
+        "zai kan gang wei yao qiu"
+      ],
+      "meaning": "用个人目标和具体岗位要求倒推路线。"
+    }
+  ],
+  "labels": [
+    {
+      "id": "n-title1",
+      "text": "计算机，要不要考研？"
+    },
+    {
+      "id": "n-kicker1",
+      "text": "先想清楚，你要走向哪里"
+    },
+    {
+      "id": "n-a1",
+      "text": "读研"
+    },
+    {
+      "id": "n-b1",
+      "text": "就业"
+    },
+    {
+      "id": "n-c1",
+      "text": "两条路，各有条件"
+    },
+    {
+      "id": "n-title2",
+      "text": "把问题，研究深一点"
+    },
+    {
+      "id": "n-kicker2",
+      "text": "研究兴趣 · 明确的学历门槛"
+    },
+    {
+      "id": "n-a2",
+      "text": "想深入做研究"
+    },
+    {
+      "id": "n-b2",
+      "text": "岗位要求硕士"
+    },
+    {
+      "id": "n-c2",
+      "text": "可以考虑读研"
+    },
+    {
+      "id": "n-title3",
+      "text": "让能力，变成作品"
+    },
+    {
+      "id": "n-kicker3",
+      "text": "想尽快就业，就积累可展示的成果"
+    },
+    {
+      "id": "n-a3",
+      "text": "做项目"
+    },
+    {
+      "id": "n-b3",
+      "text": "找实习"
+    },
+    {
+      "id": "n-c3",
+      "text": "从能运行，到能交付"
+    },
+    {
+      "id": "n-title4",
+      "text": "目标先行，再选路线"
+    },
+    {
+      "id": "n-kicker4",
+      "text": "别跟风，也别把考研当默认选项"
+    },
+    {
+      "id": "n-a4",
+      "text": "研究 / 深造"
+    },
+    {
+      "id": "n-b4",
+      "text": "项目 / 就业"
+    },
+    {
+      "id": "n-c4",
+      "text": "先看目标 → 再看岗位要求"
+    }
+  ]
+}

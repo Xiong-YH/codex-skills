@@ -8,6 +8,7 @@
 | `motion.camera-track.v1` | 相机 | [有边界的横向跟拍与景别变化](recipes/camera-track.md) |
 | `motion.focus-punch.v1` | 强转场 | [焦点冲入切换](recipes/focus-punch.md) |
 | `motion.mosaic-pullback.v1` | 强转场 | [马赛克拉远](recipes/mosaic-pullback.md) |
+| `motion.book-sweep.v1` / `motion.shelf-travel.v1` / `motion.scene-to-card.v1` | 叙事转场 | [书页、跨空间横移与场景图卡](recipes/narrative-handoffs.md) |
 | `motion.panel-slide.v1` | 转场 | [信息面板接续](recipes/panel-slide.md) |
 | `motion.pixel-iris.v1` | 转场 | [像素窗口展开](recipes/pixel-iris.md) |
 | `motion.shatter-reveal.v1` | 转场 | [上一镜纹理碎裂](recipes/shatter-reveal.md) |

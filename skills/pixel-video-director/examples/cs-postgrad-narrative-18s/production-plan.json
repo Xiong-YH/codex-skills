@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "id": "cs-postgrad-narrative-18s-plan",
+  "title": "计算机，要不要考研？",
+  "output": {
+    "fps": 60,
+    "width": 1920,
+    "height": 1080,
+    "nativeWidth": 320,
+    "nativeHeight": 180
+  },
+  "style": "style.pixel-study.v1",
+  "seed": 7,
+  "audioMode": "narration+sfx",
+  "shots": [
+    {
+      "id": "s1",
+      "actor": "actor.lead02.v1",
+      "objects": [],
+      "motions": []
+    },
+    {
+      "id": "s2",
+      "actor": "actor.lead02.v1",
+      "objects": [],
+      "motions": [
+        {
+          "id": "narrative-handoff",
+          "recipe": "motion.book-sweep.v1",
+          "target": "scene",
+          "start": {
+            "event": "s2.enter"
+          },
+          "durationFrames": 36,
+          "params": {
+            "x": 0.515,
+            "y": 0.53
+          }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "actor": "actor.lead02.v1",
+      "objects": [],
+      "motions": [
+        {
+          "id": "narrative-handoff",
+          "recipe": "motion.shelf-travel.v1",
+          "target": "scene",
+          "start": {
+            "event": "s3.enter"
+          },
+          "durationFrames": 48,
+          "params": {}
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "actor": null,
+      "objects": [],
+      "motions": [
+        {
+          "id": "narrative-handoff",
+          "recipe": "motion.scene-to-card.v1",
+          "target": "scene",
+          "start": {
+            "event": "s4.enter"
+          },
+          "durationFrames": 36,
+          "params": {
+            "x": 0.54,
+            "y": 0.3,
+            "width": 0.29
+          }
+        }
+      ]
+    }
+  ],
+  "text": [
+    {
+      "cueId": "c1",
+      "role": "subtitle",
+      "y": 0.885
+    },
+    {
+      "cueId": "c2",
+      "role": "subtitle",
+      "y": 0.885
+    },
+    {
+      "cueId": "c3",
+      "role": "subtitle",
+      "y": 0.885
+    },
+    {
+      "cueId": "c4",
+      "role": "subtitle",
+      "y": 0.885
+    }
+  ],
+  "audio": [
+    {
+      "id": "question",
+      "sound": "question-tick",
+      "at": {
+        "event": "s1.develop"
+      },
+      "level": 0.12,
+      "x": 0.5,
+      "variant": 0
+    },
+    {
+      "id": "page-motion",
+      "sound": "extract",
+      "at": {
+        "event": "s2.enter"
+      },
+      "level": 0.24,
+      "x": 0.45,
+      "variant": 0
+    },
+    {
+      "id": "page-land",
+      "sound": "panel-open",
+      "at": {
+        "event": "s2.impact"
+      },
+      "level": 0.16,
+      "x": 0.55,
+      "variant": 0
+    },
+    {
+      "id": "research-connect",
+      "sound": "node-connect",
+      "at": {
+        "event": "s2.complete"
+      },
+      "level": 0.13,
+      "x": 0.6,
+      "variant": 0
+    },
+    {
+      "id": "shelf-motion",
+      "sound": "extract",
+      "at": {
+        "event": "s3.enter"
+      },
+      "level": 0.27,
+      "x": 0.75,
+      "variant": 0
+    },
+    {
+      "id": "shelf-land",
+      "sound": "lock",
+      "at": {
+        "event": "s3.land"
+      },
+      "level": 0.18,
+      "x": 0.55,
+      "variant": 0
+    },
+    {
+      "id": "project-ready",
+      "sound": "product-ready",
+      "at": {
+        "event": "s3.complete"
+      },
+      "level": 0.12,
+      "x": 0.72,
+      "variant": 0
+    },
+    {
+      "id": "card-motion",
+      "sound": "system-unfold",
+      "at": {
+        "event": "s4.enter"
+      },
+      "level": 0.22,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "card-land",
+      "sound": "commit",
+      "at": {
+        "event": "s4.impact"
+      },
+      "level": 0.18,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "routes-linked",
+      "sound": "verified",
+      "at": {
+        "event": "s4.complete"
+      },
+      "level": 0.11,
+      "x": 0.5,
+      "variant": 0
+    }
+  ],
+  "narration": [
+    {
+      "id": "voice-c1",
+      "file": "media/c1.wav",
+      "at": {
+        "event": "s1.voice"
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice-c2",
+      "file": "media/c2.wav",
+      "at": {
+        "event": "s2.voice"
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice-c3",
+      "file": "media/c3.wav",
+      "at": {
+        "event": "s3.voice"
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice-c4",
+      "file": "media/c4.wav",
+      "at": {
+        "event": "s4.voice"
+      },
+      "gain": 0.9
+    }
+  ]
+}

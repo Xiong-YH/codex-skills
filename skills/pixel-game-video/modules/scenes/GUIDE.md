@@ -13,6 +13,7 @@
 | `scenes.cache-journey.v1` | [数据旅程](cache-journey.md) | 往返、复制、缓存命中与未命中 |
 | `scenes.cache-adventure.v1` | [人物取数表演](cache-adventure.md) | 跑动取物、近景复制、伸手命中与回源 |
 | `scenes.presenter-board.v1` | [侧边口播](presenter-board.md) | 人物固定，右侧双项对比、图标强调或条件清单 |
+| `scenes.study-routes.v1` | [研究与实践](study-routes.md) | 书桌、研究档案馆、开发工坊与路线桌之间的叙事接力 |
 
 所有 params 中 event 均为本镜头局部 ID，可用 `enter`；`exit` 是不可见的右边界，不能触发状态动作。
 `contract.py` 校验参数与事件引用；`runtime.js` 只消费编译结果。

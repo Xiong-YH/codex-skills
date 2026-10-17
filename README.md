@@ -36,4 +36,4 @@ flowchart TD
 
 旧 `pixel-game-explainer`、原始 32 秒成片、8 秒实验及原运动配方完整保留在 [legacy](legacy/README.md)。历史媒体不是新引擎的回归结果。新增 skill 或移动目录时遵守 [AGENTS.md](AGENTS.md)。
 
-当前确认的方向是已确认人物固定站在一侧口播，另一侧用像素图文辅助；不安排人物跑动或取物。实片与核验见 [18 秒《计算机，要不要考研？》](docs/cs-postgrad-18s.md)。[历史人物动作实验](docs/cache-character-revision.md)保留供比较，不作为当前表现默认值。
+当前方向保留已确认人物在一侧站立口播；画面可主导，人物不跑动或取物。最新实验让书桌、研究档案馆、开发工坊与路线桌承担不同叙事任务，见 [18 秒跨空间叙事版](docs/narrative-transitions-review.md)。[旧版迭代](docs/cs-postgrad-18s.md)与[历史人物动作实验](docs/cache-character-revision.md)保留供比较。

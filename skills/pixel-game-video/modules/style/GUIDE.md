@@ -10,6 +10,7 @@
 | `cyberpunk.json`、`cyberpunk.js` | 夜城版颜色、字幕皮肤、背景与终端面板 |
 | `assets/` | 风格拥有的背景图与生成来源记录 |
 | `pixel-computing.json`、`pixel-computing.js` | 工作台与机房的像素计算风格、镜头环境选择 |
+| `pixel-study.json`、`pixel-study.js` | 研途场景组：书桌、档案馆、工坊、俯视路线桌；480×270 背景网格 |
 
 `style.modern-pixel.v1` 使用日光浅青天空、青绿远景、暖沙平台与奶油信息卡；深青文字保证明亮背景上的对比。
 背景按天空、远山、近景、平台分层；云和地表纹理避开主体信息区，不使用满屏点阵作装饰。
@@ -25,7 +26,7 @@
 专用背景和面板放目录项 `runtime`，在通用执行器后加载；素材在预设 `assets` 中按稳定 ID 引用模块内相对路径。
 可选 `subtitle` 字段提供 `background`、`opacity`、`border`、`accent` 和画高比例 `height`（默认 .16）；字幕排版仍由 text 模块负责。像素计算版使用 .105 的较薄底板，人物与道具仍须避开实际字幕文字。
 可选 `textShadow` 配置暗色描影；`blur`、`offsetY` 为画高比例，用于复杂背景上的标签分离。
-新建工程与当前样例选择夜城版；已有工程继续按自己的 style ID 构建，日光版可随时切换。
+新建工程按模板指定的 style ID；当前考研叙事样例显式选择 `style.pixel-study.v1`，不改变其他工程默认值。生成素材与提示词保存在 `assets/study-scenes-prompts.json`；`transitionTextures.shelf` 提供实体前景书架。
 字体通过 `fontFamily` 配置；目标机器须已安装对应字体，预览和导出使用同一浏览器。
 `presenter` 可配置固定讲述人物的 `x`、`baseline`、`height` 画幅比例；未配置时沿用原站位。像素计算风格将脚底放在工作台表面，不随镜头或图文事件走动。
 当前运行版为 320×180 原生网格、1920×1080 输出；其他尺寸须适配布局后验证。

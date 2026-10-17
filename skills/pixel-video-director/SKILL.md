@@ -21,4 +21,4 @@ description: Turn an idea or existing script into a pixel game-style video throu
 
 执行入口：[scripts/director.py](scripts/director.py)。结构模板在 [assets/templates/](assets/templates/)，完整样例：[12 秒选择机制](examples/bounded-choice/)、[缓存示意](examples/cache-journey/)、[缓存人物表演](examples/cache-adventure/)。样例主题与时长不是全局默认值。
 
-当前项目使用侧边人物站立口播，强转场遵循整幅场景的统一镜头；实例见 [18 秒考研口播](examples/cs-postgrad-18s/)，表现选择见 [创作合同](references/authoring.md)。
+当前项目保留侧边站立口播，采用书页换景、跨空间横移与路线卡归纳；实例见 [18 秒考研叙事版](examples/cs-postgrad-narrative-18s/)，表现选择见 [创作合同](references/authoring.md)。

@@ -79,6 +79,9 @@ def _motion_params(recipe, params):
         "motion.focus-punch.v1": {"x": (0, 1), "y": (0, 1), "zoom": (3, 8),
                                   "incomingX": (0, 1), "incomingY": (0, 1), "incomingZoom": (1, 8)},
         "motion.mosaic-pullback.v1": {"columns": (3, 9)},
+        "motion.book-sweep.v1": {"x": (0, 1), "y": (0, 1)},
+        "motion.shelf-travel.v1": {},
+        "motion.scene-to-card.v1": {"x": (0, .9), "y": (0, .9), "width": (.1, .8)},
     }
     if recipe not in rules:
         raise ValueError(f"motion executor unavailable: {recipe}")
@@ -96,6 +99,10 @@ def _motion_params(recipe, params):
             raise ValueError("shatter seed must be an integer")
         if key == "columns" and (type(value) is not int or value % 2 != 1):
             raise ValueError("mosaic columns must be an odd integer from 3 to 9")
+    if recipe == 'motion.scene-to-card.v1':
+        size = params.get('width', .29)
+        if any(params.get(k, default) + size > 1 for k, default in [('x', .54), ('y', .30)]):
+            raise ValueError('scene-to-card destination must fit inside the frame')
 
 
 def compile_project(project_root, skill_root=None, *, write=False):
@@ -165,6 +172,12 @@ def compile_project(project_root, skill_root=None, *, write=False):
             raise ValueError('cache-adventure requires an actor for the physical actions')
         if shot['scene']=='scenes.presenter-board.v1' and shot['actor'] is None:
             raise ValueError('presenter-board requires a presenter actor')
+        if shot['scene']=='scenes.study-routes.v1':
+            if project['style']!='style.pixel-study.v1':
+                raise ValueError('study-routes requires style.pixel-study.v1 for its environments')
+            previous_ids={s['id'] for s in shots[:index]}
+            if any(ident not in previous_ids for ident in shot['params']['sourceShots']):
+                raise ValueError('study-routes preview sources must refer to preceding shots')
         unique((m["id"] for m in shot["motions"]), f"{shot['id']}.motions")
         targets = {"scene", "actor"} | {o["id"] for o in shot["objects"]}
         intervals = {}
