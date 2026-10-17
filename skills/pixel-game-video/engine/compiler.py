@@ -76,10 +76,9 @@ def _motion_params(recipe, params):
         "motion.shatter-reveal.v1": {"x": (0, 1), "y": (0, 1), "seed": (0, 2147483647)},
         "motion.panel-slide.v1": {"distance": (0.1, 0.35)},
         "motion.pixel-iris.v1": {"x": (0, 1), "y": (0, 1)},
-        "motion.focus-punch.v1": {"x": (0, 1), "y": (0, 1), "zoom": (3, 8)},
+        "motion.focus-punch.v1": {"x": (0, 1), "y": (0, 1), "zoom": (3, 8),
+                                  "incomingX": (0, 1), "incomingY": (0, 1), "incomingZoom": (1, 8)},
         "motion.mosaic-pullback.v1": {"columns": (3, 9)},
-        "motion.stage-focus-punch.v1": {"x": (0, 1), "y": (0, 1), "zoom": (3, 8)},
-        "motion.stage-mosaic-pullback.v1": {"columns": (3, 9)},
     }
     if recipe not in rules:
         raise ValueError(f"motion executor unavailable: {recipe}")
@@ -190,7 +189,7 @@ def compile_project(project_root, skill_root=None, *, write=False):
                 bounds = shot["contentStage"]
                 if end - start < 8:
                     raise ValueError("content transition needs at least 8 frames for exit and entry")
-                if recipe in ("motion.pixel-iris.v1", "motion.stage-focus-punch.v1"):
+                if recipe == "motion.pixel-iris.v1":
                     for axis, extent in (("x", "width"), ("y", "height")):
                         value = motion["params"].get(axis, bounds[axis] + bounds[extent] / 2)
                         if not bounds[axis] <= value <= bounds[axis] + bounds[extent]:

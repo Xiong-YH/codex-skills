@@ -1,12 +1,12 @@
 # 18 秒《计算机，要不要考研？》
 
-当前样例已补回强转场：固定侧边人物，同时让右侧舞台完成焦点急推、场景墙后拉与再次推入。首版 `76b80c4` 的轻滑动/小窗口没有满足转场要求。修复与本次核验见 [固定人物下的强转场](standing-presenter-transitions.md)；下方首版核验保留为历史记录。
+当前样例使用整幅场景统一运镜，人物站立口播。首版 `76b80c4` 的轻转场强度不足；`4fb5401` 的局部背景裁片又造成空间割裂，已被否定并撤回。当前修复见 [整幅转场复核](world-transitions-review.md)；旧报告仅保留为历史记录。
 
 ## 当前确认的表现方向
 
 人物主要固定站在画面一侧口播，另一侧用像素图文辅助说明；只需嘴型与眨眼，不安排跑动、取物、抱持等剧情活动。此前人物动作版属于方向偏差，保留为历史实验，不作为当前默认样例。保留已确认的 02 暖棕蓬发形象，以及暗色像素工作台背景。
 
-本片严格 18 秒，1920×1080、60fps、1080 帧。四段合成旁白实测总长约 14.23 秒，其余时间用于内容区转场、停顿与片尾保持，未剪断语音或整片变速。
+本片严格 18 秒，1920×1080、60fps、1080 帧。四段合成旁白实测总长约 14.23 秒，其余时间用于转场、停顿与片尾保持，未剪断语音或整片变速。
 
 | 时间 | 旁白 | 右侧辅助画面 |
 | --- | --- | --- |
@@ -22,7 +22,7 @@
 - `library/education.js`：学位帽、公文包、项目电脑和目标的 64×64 像素图标，不包含文案或镜头时序。
 - `scenes/presenter-board.js`：pair / hero / checklist 三种右侧布局，按事件出现图文。物体位置仍在 storyboard，素材选择在 production-plan，所有标题与标签在 script。
 - `library/runtime.js` 与 style.presenter：固定人物尺寸、横坐标和脚底锚点。使用原来的十个脸部变体，不调用活动表演器；像素计算风格将脚底对齐工作台。
-- `motion`：内容舞台使用 stage-focus-punch / stage-mosaic-pullback，大幅改变图文与该区背景的景别；人物、字幕独立绘制。轻转场仍作为可选配方，不作为本片的转场。
+- `motion`：整幅场景使用 focus-punch / mosaic-pullback，房间、物体与站立人物遵循同一镜头；字幕独立。同物体切点承接特写后再拉回，不裁切局部背景。
 - `audio`：四份独立 PCM WAV、语句开始事件和轻量提示音。配音为 Microsoft Kangkang、rate=1；嘴型仍是拼音短句节奏模拟，不是真实音素强制对齐。
 
 角色职责的约定已写回 director 的创作合同与视觉叙事参考，SKILL.md 只保留路由和当前实例入口。
@@ -42,7 +42,7 @@ python work/cs-postgrad-18s-standalone/pixel-game-video/scripts/video.py build w
 
 已有目录时选新目录，避免覆盖旧片。独立工程携带源码、素材与旁白，运行时和字体仍需配置；只验证当前 Windows 环境，不扩大平台支持范围。
 
-首版的媒体与人物区域记录见 [历史核验](cs-postgrad-18s-verification.json)；当前强转场版本见 [本次核验](standing-presenter-transitions-verification.json)。
+首版的媒体与人物区域记录见 [历史核验](cs-postgrad-18s-verification.json)；被否定的局部裁片见 [历史实验](standing-presenter-transitions-verification.json)；当前版本见 [整幅转场复核](world-transitions-review.md)。
 
 ## 首版核验（76b80c4，历史）
 

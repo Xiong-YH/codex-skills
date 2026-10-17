@@ -67,7 +67,7 @@
       "motions": [
         {
           "id": "content-change",
-          "recipe": "motion.stage-focus-punch.v1",
+          "recipe": "motion.focus-punch.v1",
           "target": "scene",
           "start": {
             "event": "s2.enter"
@@ -76,7 +76,10 @@
           "params": {
             "x": 0.5,
             "y": 0.49,
-            "zoom": 7
+            "zoom": 7,
+            "incomingX": 0.49,
+            "incomingY": 0.49,
+            "incomingZoom": 4.4
           }
         }
       ]
@@ -93,7 +96,7 @@
       "motions": [
         {
           "id": "content-change",
-          "recipe": "motion.stage-mosaic-pullback.v1",
+          "recipe": "motion.mosaic-pullback.v1",
           "target": "scene",
           "start": {
             "event": "s3.enter"
@@ -125,7 +128,7 @@
       "motions": [
         {
           "id": "content-change",
-          "recipe": "motion.stage-focus-punch.v1",
+          "recipe": "motion.focus-punch.v1",
           "target": "scene",
           "start": {
             "event": "s4.enter"
@@ -134,7 +137,10 @@
           "params": {
             "x": 0.49,
             "y": 0.49,
-            "zoom": 6
+            "zoom": 6,
+            "incomingX": 0.45,
+            "incomingY": 0.36,
+            "incomingZoom": 8
           }
         },
         {

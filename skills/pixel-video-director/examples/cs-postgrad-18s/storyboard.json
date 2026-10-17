@@ -84,7 +84,7 @@
     {
       "id": "s2",
       "durationFrames": 306,
-      "intent": "沿首镜学位帽急推7倍，以同一形状切入读研条件；人物仍固定在左侧口播。",
+      "intent": "沿同一学位帽急推，以完整画幅切入读研条件；人物没有肢体活动，仅随统一镜头改变景别。",
       "scene": "scenes.presenter-board.v1",
       "params": {
         "layout": "hero",
@@ -153,7 +153,7 @@
     {
       "id": "s3",
       "durationFrames": 288,
-      "intent": "从读研路线拉远成5×5场景墙，中心换为就业路线并推入；人物不进入缩略场景。",
+      "intent": "整个场景拉远成为5×5场景墙中的一格，再推入就业路线；外围缩略场景不重复独立人物层。",
       "scene": "scenes.presenter-board.v1",
       "params": {
         "layout": "hero",
@@ -222,7 +222,7 @@
     {
       "id": "s4",
       "durationFrames": 288,
-      "intent": "沿项目电脑急推6倍后切至目标清单，先看目标、再核验岗位和投入；人物原地讲完。",
+      "intent": "完整画幅沿项目电脑推近后切至判断清单，房间、道具与人物同属一个空间，落位后人物继续左侧口播。",
       "scene": "scenes.presenter-board.v1",
       "params": {
         "layout": "checklist",

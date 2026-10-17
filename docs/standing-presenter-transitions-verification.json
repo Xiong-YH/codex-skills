@@ -172,5 +172,11 @@
     "Mouth timing is simulated, not phoneme alignment.",
     "Decoded sequences do not replace continuous realtime playback or subjective listening."
   ],
-  "createdAtUtc": "2026-10-17T16:12:53.919004+00:00"
+  "createdAtUtc": "2026-10-17T16:12:53.919004+00:00",
+  "acceptance": {
+    "status": "rejected",
+    "date": "2026-10-18",
+    "reason": "局部背景缩放产生硬边和空间割裂；技术指标与人物固定测试不构成视觉通过。",
+    "supersededBy": "world-transitions-review.md"
+  }
 }

@@ -1,0 +1,178 @@
+{
+  "date": "2026-10-18",
+  "createdAtUtc": "2026-10-17T16:30:05.043199+00:00",
+  "artifact": "work/cs-postgrad-world-transitions/video/outputs/film.mp4",
+  "baselineCommit": "4fb5401",
+  "inputHash": "6365132ac0c9c316f39a0fe67439cc28cb146674d75207ef9ed596ed8fcacd2c",
+  "videoSha256": "7c1fd8ad113a188bb30fb7b55dc670a8ba6bccf22e75200c0ead5444b630c0ee",
+  "technicalStatus": "passed",
+  "technicalChecks": {
+    "oneH264VideoTrack": true,
+    "dimensions": true,
+    "frameRate": true,
+    "decodedFrameCount": true,
+    "distinctTimestamps": true,
+    "everyFrameTimestamp": true,
+    "videoDuration": true,
+    "containerDuration": true,
+    "audioTrackCount": true,
+    "audioFormat": true,
+    "audioStart": true,
+    "audioDuration": true,
+    "videoHash": true,
+    "compiledInputHash": true,
+    "buildHash": true,
+    "timelineHash": true,
+    "sourceFrameRate": true,
+    "buildLock": true,
+    "currentSourceFiles": true,
+    "currentRuntimeFiles": true,
+    "currentAuthoringSources": true
+  },
+  "width": 1920,
+  "height": 1080,
+  "fps": 60.0,
+  "decodedFrames": 1080,
+  "durationSeconds": 18.0,
+  "environment": {
+    "system": "Windows",
+    "release": "11",
+    "machine": "AMD64",
+    "python": "3.12.14",
+    "node": "v24.19.0",
+    "playwright": "1.62.1",
+    "browser": "154.0.4258.62",
+    "ffmpeg": "ffmpeg version e6a2447 Copyright (c) 2000-2023 the FFmpeg developers",
+    "ffprobe": "ffprobe version n5.1.3-1-g0028275216-20230412 Copyright (c) 2007-2022 the FFmpeg developers",
+    "videoEncoder": "libo264rt"
+  },
+  "transitions": [
+    {
+      "shot": "s2",
+      "recipe": "motion.focus-punch.v1",
+      "startFrame": 198,
+      "endFrame": 234,
+      "params": {
+        "x": 0.5,
+        "y": 0.49,
+        "zoom": 7,
+        "incomingX": 0.49,
+        "incomingY": 0.49,
+        "incomingZoom": 4.4
+      }
+    },
+    {
+      "shot": "s3",
+      "recipe": "motion.mosaic-pullback.v1",
+      "startFrame": 504,
+      "endFrame": 552,
+      "params": {
+        "columns": 5
+      }
+    },
+    {
+      "shot": "s4",
+      "recipe": "motion.focus-punch.v1",
+      "startFrame": 792,
+      "endFrame": 828,
+      "params": {
+        "x": 0.49,
+        "y": 0.49,
+        "zoom": 6,
+        "incomingX": 0.45,
+        "incomingY": 0.36,
+        "incomingZoom": 8
+      }
+    }
+  ],
+  "sourceChecks": {
+    "checkedTransitionFrames": 120,
+    "worldSourcesFullFrame": true,
+    "worldCalls": 123,
+    "transitions": [
+      {
+        "startFrame": 198,
+        "endFrame": 234,
+        "changedLeftWorldSamples": 19800
+      },
+      {
+        "startFrame": 504,
+        "endFrame": 552,
+        "changedLeftWorldSamples": 19797
+      },
+      {
+        "startFrame": 792,
+        "endFrame": 828,
+        "changedLeftWorldSamples": 19798
+      }
+    ],
+    "randomAccessExact": true,
+    "pageErrors": []
+  },
+  "scriptBytesUnchanged": true,
+  "voiceBytesUnchanged": true,
+  "mixedAudioBytesUnchanged": true,
+  "audio": {
+    "sampleRate": 48000,
+    "samples": 864000,
+    "peakDbfs": -5.76,
+    "rmsDbfs": -23.58,
+    "subjectiveListening": "not_reviewed"
+  },
+  "tests": {
+    "foundation": 37,
+    "director": 14,
+    "skillsValidation": "passed",
+    "worldFixtureFrames": 84
+  },
+  "independentExport": {
+    "build": "passed",
+    "frames": [
+      {
+        "frame": 217,
+        "differentPixels": 0,
+        "pageErrors": []
+      },
+      {
+        "frame": 528,
+        "differentPixels": 0,
+        "pageErrors": []
+      }
+    ]
+  },
+  "review": {
+    "status": "not_reviewed",
+    "decodedTransitionFrames": 120,
+    "overviewFrames": 72,
+    "contactSheets": [
+      "verification/world-transition-1.jpg",
+      "verification/world-transition-2.jpg",
+      "verification/world-transition-3.jpg",
+      "verification/world-overview-1.jpg",
+      "verification/world-overview-2.jpg",
+      "verification/world-overview-3.jpg"
+    ],
+    "contactSheetsViewed": true,
+    "continuousPlayback": false,
+    "checks": {
+      "content": "not_reviewed",
+      "visual": "not_reviewed",
+      "motion": "not_reviewed",
+      "text": "passed",
+      "audio": "not_reviewed",
+      "technical": "passed"
+    },
+    "subtitleFrames": [
+      41,
+      498,
+      772,
+      931
+    ],
+    "resolvedStaticIssue": "cropped-room-break"
+  },
+  "limitations": [
+    "Only the configured Windows environment was exercised.",
+    "Simulated mouth timing is not phoneme alignment.",
+    "No subjective listening or continuous realtime playback was performed."
+  ]
+}
