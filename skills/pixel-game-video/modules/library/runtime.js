@@ -82,8 +82,9 @@
       const blink = blinkTime >= 0 && (blinkTime % Math.round(e.fps * 3.7)) < Math.max(1, Math.round(e.fps * .1)) ? 1 : 0;
       const image = e.assets[`${shot.actor}:${blink}-${pose}`];
       if (!image) throw new Error('Missing actor asset ' + shot.actor);
-      const height = e.height * .40, width = height * 32 / 36;
-      const x = e.width * .20, base = e.height * .75;
+      const placement=e.style.presenter||{};
+      const height = e.height * (placement.height??.40), width = height * 32 / 36;
+      const x = e.width * (placement.x??.20), base = e.height * (placement.baseline??.75);
       e.ctx.imageSmoothingEnabled = false;
       e.ctx.drawImage(image, x - width / 2, base - height * 33 / 36, width, height);
     },

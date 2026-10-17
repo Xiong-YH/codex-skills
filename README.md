@@ -36,4 +36,4 @@ flowchart TD
 
 旧 `pixel-game-explainer`、原始 32 秒成片、8 秒实验及原运动配方完整保留在 [legacy](legacy/README.md)。历史媒体不是新引擎的回归结果。新增 skill 或移动目录时遵守 [AGENTS.md](AGENTS.md)。
 
-缓存试片的人物与动作修订见 [人物表演版](docs/cache-character-revision.md)：恢复已确认角色，以跑动取数、抱持与伸手取用替代固定流程图构图。
+当前确认的方向是已确认人物固定站在一侧口播，另一侧用像素图文辅助；不安排人物跑动或取物。实片与核验见 [18 秒《计算机，要不要考研？》](docs/cs-postgrad-18s.md)。[历史人物动作实验](docs/cache-character-revision.md)保留供比较，不作为当前表现默认值。

@@ -83,6 +83,18 @@ class ContractTests(unittest.TestCase):
         self.assertEqual(compile_project(self.root), compile_project(self.root, write=True))
         self.assertTrue((self.root / "build/project-lock.json").is_file())
 
+    def test_presenter_board_requires_a_presenter_and_existing_unique_objects(self):
+        data=read_json(self.root/'timeline.json');shot=data['shots'][0]
+        shot.update(scene='scenes.presenter-board.v1',actor='actor.lead02.v1',motions=[],
+                    objects=[{'id':'cap','asset':'prop.grad-cap.v1','x':.49,'y':.49}],
+                    params={'layout':'hero','heading':'选择条件','kicker':'目标先行',
+                            'items':[{'object':'cap','label':'读研','detail':'研究兴趣','event':'reveal'}]})
+        write_json(self.root/'timeline.json',data);compile_project(self.root)
+        shot['actor']=None;write_json(self.root/'timeline.json',data)
+        with self.assertRaisesRegex(ValueError,'requires a presenter'):compile_project(self.root)
+        shot['actor']='actor.lead02.v1';shot['params']['items'][0]['object']='missing';write_json(self.root/'timeline.json',data)
+        with self.assertRaisesRegex(ValueError,'existing object'):compile_project(self.root)
+
     def test_counter_backwards_and_invisible_exit_events_fail(self):
         def counter(data):
             shot = data["shots"][0]

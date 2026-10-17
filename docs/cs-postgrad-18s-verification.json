@@ -1,0 +1,233 @@
+{
+  "date": "2026-10-17",
+  "artifact": "work/cs-postgrad-18s/video/outputs/film.mp4",
+  "inputHash": "eb436c644e59a6d6dabdb5945a7c10a609a9b646ea3d99d9fada3c5125cbd658",
+  "videoSha256": "0c0c4d67f7519809f3a3aa630b11c5d0e48e7c081e2d620c060e8ac9995978d4",
+  "buildSha256": "d988efff4971d0b7e6e3adad038ace14254426278b41f0b7e3d1fb16757a5df3",
+  "timelineSha256": "67865e90b82ea3c758064be58ab0336dda3ef336206b910ba7827c7075863c37",
+  "sourceRange": {
+    "startFrame": 0,
+    "endFrame": 1080,
+    "durationFrames": 1080,
+    "fps": 60,
+    "startSeconds": 0.0,
+    "endSeconds": 18.0
+  },
+  "environment": {
+    "system": "Windows",
+    "release": "11",
+    "machine": "AMD64",
+    "python": "3.12.14",
+    "node": "v24.19.0",
+    "playwright": "1.62.1",
+    "browser": "154.0.4258.62",
+    "ffmpeg": "ffmpeg version e6a2447 Copyright (c) 2000-2023 the FFmpeg developers",
+    "ffprobe": "ffprobe version n5.1.3-1-g0028275216-20230412 Copyright (c) 2007-2022 the FFmpeg developers",
+    "videoEncoder": "libo264rt"
+  },
+  "technicalStatus": "passed",
+  "technicalChecks": {
+    "oneH264VideoTrack": true,
+    "dimensions": true,
+    "frameRate": true,
+    "decodedFrameCount": true,
+    "distinctTimestamps": true,
+    "everyFrameTimestamp": true,
+    "videoDuration": true,
+    "containerDuration": true,
+    "audioTrackCount": true,
+    "audioFormat": true,
+    "audioStart": true,
+    "audioDuration": true,
+    "videoHash": true,
+    "compiledInputHash": true,
+    "buildHash": true,
+    "timelineHash": true,
+    "sourceFrameRate": true,
+    "buildLock": true,
+    "currentSourceFiles": true,
+    "currentRuntimeFiles": true,
+    "currentAuthoringSources": true
+  },
+  "width": 1920,
+  "height": 1080,
+  "fps": 60.0,
+  "decodedFrames": 1080,
+  "durationSeconds": 18.0,
+  "audio": {
+    "sampleRate": 48000,
+    "samples": 864000,
+    "peakDbfs": -5.76,
+    "rmsDbfs": -23.606,
+    "narrationSeconds": 14.226375,
+    "clips": [
+      {
+        "id": "voice-c1",
+        "frame": 12,
+        "samples": 121692,
+        "sha256": "c9ed7d93a6cdfc2755f8628861aecc93f938ead5ce77e5b3cdfa7dcd1016e0d5"
+      },
+      {
+        "id": "voice-c2",
+        "frame": 234,
+        "samples": 208029,
+        "sha256": "14b762eaca274757414046cc06fbda1734c603dc5b40d6c08ff13e446fd1368e"
+      },
+      {
+        "id": "voice-c3",
+        "frame": 543,
+        "samples": 173493,
+        "sha256": "3a7ede723b6b2d45794edea76ba478a381a779a40b6a1e0338993cb53af4692e"
+      },
+      {
+        "id": "voice-c4",
+        "frame": 825,
+        "samples": 179652,
+        "sha256": "8abb3308566ce0119c72f3ed35568c014ff8c5fa0c76ca6e50019c61dc4640b2"
+      }
+    ],
+    "source": {
+      "culture": "zh-CN",
+      "source": "Windows System.Speech local synthesized narration",
+      "voice": "Microsoft Kangkang",
+      "format": "PCM 48000Hz 16-bit mono",
+      "scriptSha256": "8366c4821220bc33ca854318d4bab669424944846655d3b04365b563f6d01cf9",
+      "rate": 1,
+      "note": "Spoken cue texts unchanged; visual labels revised after synthesis."
+    },
+    "subjectiveListening": "not_reviewed"
+  },
+  "presenter": {
+    "id": "actor.lead02.v1",
+    "placement": {
+      "x": 0.2,
+      "baseline": 0.785,
+      "height": 0.4
+    },
+    "originalPngSha256": "5a8e229ac5098c2c72f9b34c28f636c1bdecb76ee25adee2c8bc41303368a70d",
+    "standingOnly": true,
+    "fullFrameCameraMotions": false,
+    "sourceFrameStability": {
+      "samples": 14,
+      "regions": {
+        "torsoAndFeet": {
+          "box": [
+            190,
+            738,
+            580,
+            875
+          ],
+          "maximumDifferentPixels": 0
+        },
+        "hair": {
+          "box": [
+            190,
+            451,
+            580,
+            620
+          ],
+          "maximumDifferentPixels": 0
+        }
+      }
+    },
+    "decodedFrameStability": {
+      "samples": 90,
+      "regions": {
+        "torsoAndFeet": {
+          "box": [
+            190,
+            738,
+            580,
+            875
+          ],
+          "maximumDifferentPixels": 51339
+        },
+        "hair": {
+          "box": [
+            190,
+            451,
+            580,
+            620
+          ],
+          "maximumDifferentPixels": 59163
+        }
+      },
+      "note": "Encoded RGB colors are not bit-identical across decoded frames; these counts are not motion detection. Source regions are identical; decoded stills were separately inspected for the fixed pose."
+    },
+    "note": "Body and hair comparison excludes the moving mouth and eyelid areas."
+  },
+  "review": {
+    "status": "not_reviewed",
+    "decodedStills": 90,
+    "contactSheets": [
+      "verification/cs-postgrad-contact.jpg",
+      "verification/cs-postgrad-contact-02.jpg",
+      "verification/cs-postgrad-contact-03.jpg"
+    ],
+    "subtitleFrames": [
+      {
+        "file": "frame-000041.png",
+        "sourceFrame": 41,
+        "outputFrame": 41
+      },
+      {
+        "file": "frame-000247.png",
+        "sourceFrame": 247,
+        "outputFrame": 247
+      },
+      {
+        "file": "frame-000557.png",
+        "sourceFrame": 557,
+        "outputFrame": 557
+      },
+      {
+        "file": "frame-000931.png",
+        "sourceFrame": 931,
+        "outputFrame": 931
+      }
+    ],
+    "checks": {
+      "content": "not_reviewed",
+      "visual": "not_reviewed",
+      "motion": "not_reviewed",
+      "text": "passed",
+      "audio": "not_reviewed",
+      "technical": "passed"
+    },
+    "continuousPlayback": false
+  },
+  "tests": {
+    "foundation": 34,
+    "director": 14,
+    "bothSkillsValidation": "passed"
+  },
+  "independentExport": {
+    "build": "passed",
+    "renderedFrame": 350,
+    "pageErrors": [],
+    "differentPixels": 0,
+    "totalPixels": 2073600,
+    "copiedVoiceBytesMatch": true
+  },
+  "contentSources": {
+    "scriptApproach": "Original concise synthesis for an 18-second explainer; conditional guidance, not a current job-market forecast.",
+    "sources": [
+      {
+        "title": "考研与就业，你会怎样抉择？",
+        "url": "https://yz.chsi.com.cn/kyzx/kydt/201905/20190509/1790362920.html",
+        "published": "2019-05-09",
+        "use": "按个人目标、研究兴趣和目标工作的需要做选择；不使用当年的市场数字。"
+      },
+      {
+        "title": "清华大学计算机科学与技术系硕士研究生培养方案",
+        "url": "https://www.cs.tsinghua.edu.cn/__local/6/2B/74/43E402B80F178897CFE6FCED2AD_09F6E122_6157F.pdf",
+        "use": "硕士培养包含学术研究及专业学习；不据此推断所有岗位学历门槛。"
+      }
+    ]
+  },
+  "limitations": [
+    "Text-timed mouth performance is not phoneme alignment.",
+    "Continuous playback and subjective listening remain pending.",
+    "Only the configured Windows environment was exercised."
+  ]
+}

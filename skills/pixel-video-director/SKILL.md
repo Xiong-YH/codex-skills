@@ -20,3 +20,5 @@ description: Turn an idea or existing script into a pixel game-style video throu
 5. 审片绑定本次输入和 MP4 哈希；连续播放、文字核验和听音都要有实际证据，未检查记为 `not_reviewed`。
 
 执行入口：[scripts/director.py](scripts/director.py)。结构模板在 [assets/templates/](assets/templates/)，完整样例：[12 秒选择机制](examples/bounded-choice/)、[缓存示意](examples/cache-journey/)、[缓存人物表演](examples/cache-adventure/)。样例主题与时长不是全局默认值。
+
+当前项目确认使用人物站在一侧口播；实例见 [18 秒考研口播](examples/cs-postgrad-18s/)，表现选择见 [创作合同](references/authoring.md)。

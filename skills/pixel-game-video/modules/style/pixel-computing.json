@@ -24,6 +24,7 @@
     "wallShade": "#060c17"
   },
   "fontFamily": "Microsoft YaHei, Noto Sans CJK SC, sans-serif",
+  "presenter": {"x":0.20,"baseline":0.785,"height":0.40},
   "safeArea": {
     "x": 0.05,
     "top": 0.06,

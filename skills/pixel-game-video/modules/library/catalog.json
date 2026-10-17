@@ -6,5 +6,9 @@
   {"id":"prop.cache-terminal.v1","kind":"prop","title":"请求端终端","renderer":"computing"},
   {"id":"prop.data-vault.v1","kind":"prop","title":"原始数据仓","renderer":"computing"},
   {"id":"prop.cache-crate.v1","kind":"prop","title":"缓存副本盒","renderer":"computing"},
-  {"id":"prop.data-token.v1","kind":"prop","title":"同身份数据块","renderer":"computing"}
+  {"id":"prop.data-token.v1","kind":"prop","title":"同身份数据块","renderer":"computing"},
+  {"id":"prop.grad-cap.v1","kind":"prop","title":"学位帽与书籍","renderer":"education"},
+  {"id":"prop.work-case.v1","kind":"prop","title":"工作公文包","renderer":"education"},
+  {"id":"prop.project-laptop.v1","kind":"prop","title":"项目笔记本电脑","renderer":"education"},
+  {"id":"prop.goal-target.v1","kind":"prop","title":"目标与方向","renderer":"education"}
 ]}

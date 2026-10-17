@@ -35,13 +35,27 @@ def validate(scene_id, params, events, objects):
         'scenes.focus.v1': {'label', 'detail'},
         'scenes.cache-journey.v1': {'phase','environment','startEvent','arriveEvent','completeEvent','labels'},
         'scenes.cache-adventure.v1': {'phase','environment','startEvent','arriveEvent','completeEvent','labels'},
+        'scenes.presenter-board.v1': {'layout','heading','kicker','items'},
     }
     if scene_id not in allowed:
         raise ValueError(f'Unknown scene: {scene_id}')
     extras = set(params) - allowed[scene_id]
     if extras:
         raise ValueError(f'{scene_id}: unsupported parameters {sorted(extras)}')
-    if scene_id in ('scenes.cache-journey.v1','scenes.cache-adventure.v1'):
+    if scene_id == 'scenes.presenter-board.v1':
+        layout=params.get('layout');rows=params.get('items')
+        limits={'pair':(2,2),'hero':(1,1),'checklist':(1,3)}
+        if layout not in limits:raise ValueError('presenter-board: unknown layout')
+        low,high=limits[layout]
+        if not isinstance(rows,list) or not low<=len(rows)<=high:raise ValueError('presenter-board: incorrect item count')
+        label(params.get('heading'),'heading');label(params.get('kicker'),'kicker')
+        used=set();known={o['id'] for o in objects}
+        for row in rows:
+            if not isinstance(row,dict) or set(row)!={'object','label','detail','event'}:raise ValueError('presenter-board item requires object,label,detail,event')
+            if row['object'] not in known or row['object'] in used:raise ValueError('presenter-board: each item needs a unique existing object')
+            used.add(row['object']);label(row['label'],'label');label(row['detail'],'detail');event(row['event'])
+        if used!=known:raise ValueError('presenter-board: objects and items must match')
+    elif scene_id in ('scenes.cache-journey.v1','scenes.cache-adventure.v1'):
         if params.get('phase') not in ('question','fetch','store','hit','miss','summary'):
             raise ValueError('cache-journey: unknown phase')
         if params.get('environment') not in ('workspace','archive'):

@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "cues": [
+    {
+      "id": "c1",
+      "text": "计算机，要不要考研？",
+      "phrases": [
+        "ji suan ji",
+        "yao bu yao kao yan"
+      ],
+      "meaning": "提出问题，不先替所有人选择读研或就业。"
+    },
+    {
+      "id": "c2",
+      "text": "想做研究，或目标岗位要求硕士，可以考。",
+      "phrases": [
+        "xiang zuo yan jiu",
+        "huo mu biao gang wei yao qiu shuo shi",
+        "ke yi kao"
+      ],
+      "meaning": "研究兴趣和目标岗位的明确学历门槛，是考虑读研的理由；不概括所有岗位。"
+    },
+    {
+      "id": "c3",
+      "text": "想尽快就业，先做项目、找实习。",
+      "phrases": [
+        "xiang jin kuai jiu ye",
+        "xian zuo xiang mu",
+        "zhao shi xi"
+      ],
+      "meaning": "以尽快就业为目标时，先积累和验证实践能力。"
+    },
+    {
+      "id": "c4",
+      "text": "别跟风，先看目标，再看岗位要求。",
+      "phrases": [
+        "bie gen feng",
+        "xian kan mu biao",
+        "zai kan gang wei yao qiu"
+      ],
+      "meaning": "用个人目标和具体岗位要求倒推路线。"
+    }
+  ],
+  "labels": [
+    {
+      "id": "title1",
+      "text": "计算机\n要不要考研？"
+    },
+    {
+      "id": "kicker1",
+      "text": "读研还是就业，答案取决于目标"
+    },
+    {
+      "id": "study",
+      "text": "读研"
+    },
+    {
+      "id": "work",
+      "text": "就业"
+    },
+    {
+      "id": "studyDetail",
+      "text": "深造与研究"
+    },
+    {
+      "id": "workDetail",
+      "text": "实践与工作"
+    },
+    {
+      "id": "title2",
+      "text": "哪些情况，值得考虑？"
+    },
+    {
+      "id": "kicker2",
+      "text": "研究兴趣，或明确的学历门槛"
+    },
+    {
+      "id": "research",
+      "text": "可以考虑读研"
+    },
+    {
+      "id": "researchDetail",
+      "text": "想深入做研究\n目标岗位要求硕士"
+    },
+    {
+      "id": "title3",
+      "text": "想尽快进入职场？"
+    },
+    {
+      "id": "kicker3",
+      "text": "先积累可展示的实践成果"
+    },
+    {
+      "id": "practice",
+      "text": "先积累实战"
+    },
+    {
+      "id": "practiceDetail",
+      "text": "做项目\n找实习"
+    },
+    {
+      "id": "title4",
+      "text": "目标先行，再选路线"
+    },
+    {
+      "id": "kicker4",
+      "text": "别把考研当默认选项"
+    },
+    {
+      "id": "goal",
+      "text": "目标方向"
+    },
+    {
+      "id": "goalDetail",
+      "text": "你想做什么工作"
+    },
+    {
+      "id": "requirements",
+      "text": "岗位要求"
+    },
+    {
+      "id": "requirementsDetail",
+      "text": "查清具体学历门槛"
+    },
+    {
+      "id": "cost",
+      "text": "时间与成本"
+    },
+    {
+      "id": "costDetail",
+      "text": "是否愿意投入"
+    }
+  ]
+}

@@ -161,6 +161,8 @@ def compile_project(project_root, skill_root=None, *, write=False):
         validator.validate(shot["scene"], shot["params"], shot["events"], shot["objects"])
         if shot['scene']=='scenes.cache-adventure.v1' and shot['actor'] is None:
             raise ValueError('cache-adventure requires an actor for the physical actions')
+        if shot['scene']=='scenes.presenter-board.v1' and shot['actor'] is None:
+            raise ValueError('presenter-board requires a presenter actor')
         unique((m["id"] for m in shot["motions"]), f"{shot['id']}.motions")
         targets = {"scene", "actor"} | {o["id"] for o in shot["objects"]}
         intervals = {}

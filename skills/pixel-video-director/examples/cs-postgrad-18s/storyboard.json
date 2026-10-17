@@ -1,0 +1,306 @@
+{
+  "schemaVersion": 1,
+  "shots": [
+    {
+      "id": "s1",
+      "durationFrames": 198,
+      "intent": "提出问题：人物站在左侧讲述，右侧读研与就业并列，不替所有人默认选择。",
+      "scene": "scenes.presenter-board.v1",
+      "params": {
+        "layout": "pair",
+        "heading": {
+          "labelId": "title1"
+        },
+        "kicker": {
+          "labelId": "kicker1"
+        },
+        "items": [
+          {
+            "object": "cap",
+            "label": {
+              "labelId": "study"
+            },
+            "detail": {
+              "labelId": "studyDetail"
+            },
+            "event": "show-cap"
+          },
+          {
+            "object": "case",
+            "label": {
+              "labelId": "work"
+            },
+            "detail": {
+              "labelId": "workDetail"
+            },
+            "event": "show-case"
+          }
+        ]
+      },
+      "events": [
+        {
+          "id": "voice",
+          "frame": 12
+        },
+        {
+          "id": "voice_end",
+          "frame": 165
+        },
+        {
+          "id": "show-cap",
+          "frame": 12
+        },
+        {
+          "id": "show-case",
+          "frame": 22
+        }
+      ],
+      "objects": [
+        {
+          "id": "cap",
+          "x": 0.5,
+          "y": 0.49
+        },
+        {
+          "id": "case",
+          "x": 0.8,
+          "y": 0.49
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c1",
+          "start": {
+            "event": "s1.voice",
+            "offsetFrames": -2
+          },
+          "end": {
+            "event": "s1.voice_end",
+            "offsetFrames": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "durationFrames": 306,
+      "intent": "人物固定口播，右侧用学位帽与研究/门槛关键词说明考虑读研的条件。",
+      "scene": "scenes.presenter-board.v1",
+      "params": {
+        "layout": "hero",
+        "heading": {
+          "labelId": "title2"
+        },
+        "kicker": {
+          "labelId": "kicker2"
+        },
+        "items": [
+          {
+            "object": "cap",
+            "label": {
+              "labelId": "research"
+            },
+            "detail": {
+              "labelId": "researchDetail"
+            },
+            "event": "show-cap"
+          }
+        ]
+      },
+      "events": [
+        {
+          "id": "voice",
+          "frame": 36
+        },
+        {
+          "id": "voice_end",
+          "frame": 297
+        },
+        {
+          "id": "show-cap",
+          "frame": 30
+        }
+      ],
+      "objects": [
+        {
+          "id": "cap",
+          "x": 0.49,
+          "y": 0.49
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c2",
+          "start": {
+            "event": "s2.voice",
+            "offsetFrames": -2
+          },
+          "end": {
+            "event": "s2.voice_end",
+            "offsetFrames": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "durationFrames": 288,
+      "intent": "人物固定口播，右侧换为项目电脑与项目、实习两个实践关键词。",
+      "scene": "scenes.presenter-board.v1",
+      "params": {
+        "layout": "hero",
+        "heading": {
+          "labelId": "title3"
+        },
+        "kicker": {
+          "labelId": "kicker3"
+        },
+        "items": [
+          {
+            "object": "laptop",
+            "label": {
+              "labelId": "practice"
+            },
+            "detail": {
+              "labelId": "practiceDetail"
+            },
+            "event": "show-laptop"
+          }
+        ]
+      },
+      "events": [
+        {
+          "id": "voice",
+          "frame": 39
+        },
+        {
+          "id": "voice_end",
+          "frame": 256
+        },
+        {
+          "id": "show-laptop",
+          "frame": 34
+        }
+      ],
+      "objects": [
+        {
+          "id": "laptop",
+          "x": 0.49,
+          "y": 0.49
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c3",
+          "start": {
+            "event": "s3.voice",
+            "offsetFrames": -2
+          },
+          "end": {
+            "event": "s3.voice_end",
+            "offsetFrames": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "durationFrames": 288,
+      "intent": "右侧依次提示目标、岗位和投入，人物原地讲完并停留收束。",
+      "scene": "scenes.presenter-board.v1",
+      "params": {
+        "layout": "checklist",
+        "heading": {
+          "labelId": "title4"
+        },
+        "kicker": {
+          "labelId": "kicker4"
+        },
+        "items": [
+          {
+            "object": "goal",
+            "label": {
+              "labelId": "goal"
+            },
+            "detail": {
+              "labelId": "goalDetail"
+            },
+            "event": "show-goal"
+          },
+          {
+            "object": "cap",
+            "label": {
+              "labelId": "requirements"
+            },
+            "detail": {
+              "labelId": "requirementsDetail"
+            },
+            "event": "show-cap"
+          },
+          {
+            "object": "laptop",
+            "label": {
+              "labelId": "cost"
+            },
+            "detail": {
+              "labelId": "costDetail"
+            },
+            "event": "show-laptop"
+          }
+        ]
+      },
+      "events": [
+        {
+          "id": "voice",
+          "frame": 33
+        },
+        {
+          "id": "voice_end",
+          "frame": 258
+        },
+        {
+          "id": "show-goal",
+          "frame": 36
+        },
+        {
+          "id": "show-cap",
+          "frame": 78
+        },
+        {
+          "id": "show-laptop",
+          "frame": 120
+        }
+      ],
+      "objects": [
+        {
+          "id": "goal",
+          "x": 0.45,
+          "y": 0.36
+        },
+        {
+          "id": "cap",
+          "x": 0.45,
+          "y": 0.49
+        },
+        {
+          "id": "laptop",
+          "x": 0.45,
+          "y": 0.62
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c4",
+          "start": {
+            "event": "s4.voice",
+            "offsetFrames": -2
+          },
+          "end": {
+            "event": "s4.voice_end",
+            "offsetFrames": 4
+          }
+        }
+      ]
+    }
+  ]
+}
