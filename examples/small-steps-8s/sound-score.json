@@ -1,0 +1,44 @@
+[
+  {
+    "at": 0.45,
+    "kind": "lock",
+    "variant": 0,
+    "level": 0.57,
+    "x": 167
+  },
+  {
+    "at": 1.8,
+    "kind": "extract",
+    "variant": 0,
+    "level": 0.65,
+    "x": 177
+  },
+  {
+    "at": 2.85,
+    "kind": "stage-done",
+    "variant": 0,
+    "level": 0.6,
+    "x": 139
+  },
+  {
+    "at": 3.85,
+    "kind": "stage-done",
+    "variant": 1,
+    "level": 0.63,
+    "x": 186
+  },
+  {
+    "at": 4.85,
+    "kind": "stage-done",
+    "variant": 2,
+    "level": 0.66,
+    "x": 230
+  },
+  {
+    "at": 5.65,
+    "kind": "complete",
+    "variant": 0,
+    "level": 0.86,
+    "x": 274
+  }
+]

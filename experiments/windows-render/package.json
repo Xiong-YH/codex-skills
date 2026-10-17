@@ -1,0 +1,17 @@
+{
+  "name": "pixel-game-explainer-windows-render-experiment",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Experimental local Canvas renderer and FFmpeg encoder for one 8-second pixel explainer contract.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "render": "node native-canvas-render.cjs",
+    "encode": "node windows-render.cjs"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "0.1.100",
+    "sharp": "0.35.5"
+  }
+}

@@ -1,2 +1,14 @@
 __pycache__/
 *.py[cod]
+node_modules/
+.venv/
+.env
+.env.*
+!.env.example
+work/
+build/
+outputs/
+sfx-bank/
+*.log
+.DS_Store
+Thumbs.db
