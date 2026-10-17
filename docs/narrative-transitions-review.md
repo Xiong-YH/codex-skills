@@ -43,3 +43,9 @@ python work/narrative-export/pixel-game-video/scripts/video.py build work/narrat
 基础合同测试累计 40 项、导演层 14 项通过；新转场合成器覆盖 120 帧，原整幅转场回归覆盖 84 帧。检查了遮挡完整性、精确首尾、随机跳帧可复现、图卡拒绝当前/未来镜头引用。独立快照重建的第 528、950 帧与本次源 PNG 逐像素一致。
 
 解码序列能检查构图、文字、切点和明显拼接问题，不代表主观听音或连续实时观看已通过。Review 的 text/technical 按实际证据填写；其余整类保留 not_reviewed。新版是可观看和继续评审的设计实验，不预先宣布用户审美验收通过。
+
+## 用户反馈与经验沉淀
+
+提交 `b837203` 的成片得到用户反馈：“这样好多了，刚刚沟通了那么多，请你沉淀下经验”。据此记录跨空间叙事方向获得正向反馈，未完成的视听检查维持原状态。
+
+项目偏好与误解纠正在 [计算机知识口播](../skills/pixel-video-director/references/computing-voiceover.md)，可复用设计方法在 [视觉叙事](../skills/pixel-video-director/references/visual-storytelling.md)，审片遗漏在 [Review](../skills/pixel-video-director/references/review.md)。不把本例的 18 秒、四镜或三种转场组合升级为通用默认值。

@@ -10,6 +10,7 @@ description: Turn an idea or existing script into a pixel game-style video throu
 | 当前任务 | 读取 | 执行产物 |
 | --- | --- | --- |
 | 新创意、脚本或分镜 | [创作合同](references/authoring.md)、[视觉叙事](references/visual-storytelling.md) | brief / script / storyboard / production-plan |
+| 延续本项目的计算机知识口播 | [已确认的表达方向](references/computing-voiceover.md) | 将相关偏好带入 brief，按新主题设计画面 |
 | 交接、预览、出片 | [基础依赖与命令](references/handoff.md) | video/ 中的 VideoSpec 与成片 |
 | 审片、修改或继续已有工程 | [Review 与影响范围](references/review.md) | review.json 与定向源文件修改 |
 
@@ -21,4 +22,4 @@ description: Turn an idea or existing script into a pixel game-style video throu
 
 执行入口：[scripts/director.py](scripts/director.py)。结构模板在 [assets/templates/](assets/templates/)，完整样例：[12 秒选择机制](examples/bounded-choice/)、[缓存示意](examples/cache-journey/)、[缓存人物表演](examples/cache-adventure/)。样例主题与时长不是全局默认值。
 
-当前项目保留侧边站立口播，采用书页换景、跨空间横移与路线卡归纳；实例见 [18 秒考研叙事版](examples/cs-postgrad-narrative-18s/)，表现选择见 [创作合同](references/authoring.md)。
+跨空间叙事实例：[18 秒考研口播](examples/cs-postgrad-narrative-18s/)。复用其设计方法，题材、时长与转场组合按新工程决定。

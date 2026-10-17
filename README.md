@@ -36,4 +36,4 @@ flowchart TD
 
 旧 `pixel-game-explainer`、原始 32 秒成片、8 秒实验及原运动配方完整保留在 [legacy](legacy/README.md)。历史媒体不是新引擎的回归结果。新增 skill 或移动目录时遵守 [AGENTS.md](AGENTS.md)。
 
-当前方向保留已确认人物在一侧站立口播；画面可主导，人物不跑动或取物。最新实验让书桌、研究档案馆、开发工坊与路线桌承担不同叙事任务，见 [18 秒跨空间叙事版](docs/narrative-transitions-review.md)。[旧版迭代](docs/cs-postgrad-18s.md)与[历史人物动作实验](docs/cache-character-revision.md)保留供比较。
+继续本项目时先读 [计算机知识口播的已确认方向](skills/pixel-video-director/references/computing-voiceover.md)。人物在一侧站立讲述，画面可主导；用物体、状态与场所变化推进观点。获得正向反馈的 [18 秒跨空间叙事版](docs/narrative-transitions-review.md)作为实例；[旧版迭代](docs/cs-postgrad-18s.md)与[人物动作实验](docs/cache-character-revision.md)保留供比较。
