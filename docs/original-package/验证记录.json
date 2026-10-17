@@ -1,0 +1,147 @@
+{
+  "fullFilm": {
+    "audioTracks": 1,
+    "decodedFrames": 1920,
+    "distinctTimestamps": 1920,
+    "durationSeconds": 32,
+    "fps": 60,
+    "height": 1080,
+    "maximumFrameInterval": 0.016666666666669272,
+    "minimumFrameInterval": 0.01666666666666572,
+    "videoTracks": 1,
+    "width": 1920
+  },
+  "referenceFrameComparisons": [
+    {
+      "frame": 48,
+      "samePixels": true
+    },
+    {
+      "frame": 288,
+      "samePixels": true
+    },
+    {
+      "frame": 468,
+      "samePixels": true
+    },
+    {
+      "frame": 510,
+      "samePixels": true
+    },
+    {
+      "frame": 588,
+      "samePixels": true
+    },
+    {
+      "frame": 648,
+      "samePixels": true
+    },
+    {
+      "frame": 768,
+      "samePixels": true
+    },
+    {
+      "frame": 948,
+      "samePixels": true
+    },
+    {
+      "frame": 1050,
+      "samePixels": true
+    },
+    {
+      "frame": 1137,
+      "samePixels": true
+    },
+    {
+      "frame": 1248,
+      "samePixels": true
+    },
+    {
+      "frame": 1368,
+      "samePixels": true
+    },
+    {
+      "frame": 1482,
+      "samePixels": true
+    },
+    {
+      "frame": 1608,
+      "samePixels": true
+    },
+    {
+      "frame": 1770,
+      "samePixels": true
+    },
+    {
+      "frame": 1890,
+      "samePixels": true
+    }
+  ],
+  "regeneratedSfxMatchesApprovedWav": true,
+  "fullRender": {
+    "duration": 32,
+    "fps": 60,
+    "width": 1920,
+    "height": 1080,
+    "sourceStart": 0,
+    "sourceEnd": 32,
+    "frameCount": 1920,
+    "durationSeconds": 32,
+    "pageErrors": []
+  },
+  "handoff": {
+    "audioTracks": 1,
+    "decodedFrames": 60,
+    "distinctTimestamps": 60,
+    "durationSeconds": 1,
+    "fps": 60,
+    "height": 1080,
+    "maximumFrameInterval": 0.01666666666666672,
+    "minimumFrameInterval": 0.016666666666666607,
+    "videoTracks": 1,
+    "width": 1920
+  },
+  "handoffAudio": {
+    "sourceStartSeconds": 15.2,
+    "durationSeconds": 1.0,
+    "waveCorrelation": 0.9999910897885294,
+    "envelopeLagMs": 0,
+    "peakDbFS": -8.611289024353027,
+    "clippedSamples": 0
+  },
+  "visualOnlyWithoutAnySoundInputs": {
+    "audioTracks": 0,
+    "decodedFrames": 30,
+    "distinctTimestamps": 30,
+    "durationSeconds": 0.5,
+    "fps": 60,
+    "height": 1080,
+    "maximumFrameInterval": 0.01666666666666672,
+    "minimumFrameInterval": 0.016666666666666663,
+    "videoTracks": 1,
+    "width": 1920
+  },
+  "previewPlayback": [
+    {
+      "folder": "final skill handoff",
+      "errors": [],
+      "previewSilent": false,
+      "audioTime": 16.159677,
+      "visualTime": 16.157,
+      "audioMuted": false,
+      "soundButtonDisabled": false
+    },
+    {
+      "folder": "final skill silent",
+      "errors": [],
+      "previewSilent": true,
+      "audioTime": 16.162842,
+      "visualTime": 16.158,
+      "audioMuted": true,
+      "soundButtonDisabled": true
+    }
+  ],
+  "skillValidation": "quick_validate.py passed; local references and bus registration checked",
+  "unitTestsAddedOrRun": false,
+  "scope": "new skill, its reusable project and the 3 existing bus/index integration files only"
+}

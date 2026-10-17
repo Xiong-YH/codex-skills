@@ -1,0 +1,327 @@
+{
+  "durationSeconds": 32,
+  "sampleRate": 48000,
+  "channels": 2,
+  "approvedDirection": "G2 cyber-arena, diversified material palette",
+  "eventCount": 31,
+  "cueFamilies": 19,
+  "humanVoice": false,
+  "musicBed": false,
+  "windNoise": false,
+  "noiseSweeps": false,
+  "peakDbfs": -7.01,
+  "rmsDbfs": -29.63,
+  "activeSecondsAboveMinus60Dbfs": 5.124,
+  "events": [
+    {
+      "at": 0.32,
+      "kind": "code-tap",
+      "material": "mechanical contact",
+      "variant": 0,
+      "level": 0.4,
+      "pan": 0.518,
+      "duration": 0.085,
+      "bankFile": "sfx-bank/code-tap-01.wav"
+    },
+    {
+      "at": 0.98,
+      "kind": "code-tap",
+      "material": "mechanical contact",
+      "variant": 1,
+      "level": 0.42,
+      "pan": 0.518,
+      "duration": 0.085,
+      "bankFile": "sfx-bank/code-tap-02.wav"
+    },
+    {
+      "at": 1.74,
+      "kind": "code-tap",
+      "material": "mechanical contact",
+      "variant": 2,
+      "level": 0.44,
+      "pan": 0.518,
+      "duration": 0.085,
+      "bankFile": "sfx-bank/code-tap-03.wav"
+    },
+    {
+      "at": 2.69,
+      "kind": "replicate",
+      "material": "data grains",
+      "variant": 0,
+      "level": 0.64,
+      "pan": 0.5,
+      "duration": 0.25,
+      "bankFile": "sfx-bank/replicate-01.wav"
+    },
+    {
+      "at": 3.65,
+      "kind": "replicate",
+      "material": "data grains",
+      "variant": 1,
+      "level": 0.63,
+      "pan": 0.5,
+      "duration": 0.25,
+      "bankFile": "sfx-bank/replicate-02.wav"
+    },
+    {
+      "at": 4.67,
+      "kind": "replicate",
+      "material": "data grains",
+      "variant": 2,
+      "level": 0.58,
+      "pan": 0.5,
+      "duration": 0.25,
+      "bankFile": "sfx-bank/replicate-03.wav"
+    },
+    {
+      "at": 5.76,
+      "kind": "select",
+      "material": "contact + G2 identity",
+      "variant": 0,
+      "level": 0.75,
+      "pan": 0.577,
+      "duration": 0.18,
+      "bankFile": "sfx-bank/select-01.wav"
+    },
+    {
+      "at": 6.7,
+      "kind": "focus-step",
+      "material": "magnetic glide",
+      "variant": 0,
+      "level": 0.5,
+      "pan": 0.572,
+      "duration": 0.23,
+      "bankFile": "sfx-bank/focus-step-01.wav"
+    },
+    {
+      "at": 7.98,
+      "kind": "lock",
+      "material": "physical snap + electronic latch",
+      "variant": 0,
+      "level": 0.73,
+      "pan": 0.558,
+      "duration": 0.24,
+      "bankFile": "sfx-bank/lock-01.wav"
+    },
+    {
+      "at": 8.3,
+      "kind": "panel-open",
+      "material": "spring pop",
+      "variant": 0,
+      "level": 0.7,
+      "pan": 0.558,
+      "duration": 0.27,
+      "bankFile": "sfx-bank/panel-open-01.wav"
+    },
+    {
+      "at": 9.43,
+      "kind": "question-tick",
+      "material": "soft marker pop",
+      "variant": 1,
+      "level": 0.34,
+      "pan": 0.579,
+      "duration": 0.12,
+      "bankFile": "sfx-bank/question-tick-02.wav"
+    },
+    {
+      "at": 10.28,
+      "kind": "question-tick",
+      "material": "soft marker pop",
+      "variant": 2,
+      "level": 0.38,
+      "pan": 0.579,
+      "duration": 0.12,
+      "bankFile": "sfx-bank/question-tick-03.wav"
+    },
+    {
+      "at": 11.48,
+      "kind": "system-unfold",
+      "material": "glass sockets",
+      "variant": 0,
+      "level": 0.76,
+      "pan": 0.558,
+      "duration": 0.32,
+      "bankFile": "sfx-bank/system-unfold-01.wav"
+    },
+    {
+      "at": 12.08,
+      "kind": "node-connect",
+      "material": "contact + socket resonance",
+      "variant": 0,
+      "level": 0.5,
+      "pan": 0.558,
+      "duration": 0.18,
+      "bankFile": "sfx-bank/node-connect-01.wav"
+    },
+    {
+      "at": 15.42,
+      "kind": "extract",
+      "material": "spring + magnetic motion",
+      "variant": 0,
+      "level": 0.6,
+      "pan": 0.575,
+      "duration": 0.26,
+      "bankFile": "sfx-bank/extract-01.wav"
+    },
+    {
+      "at": 16.01,
+      "kind": "lock",
+      "material": "physical snap + electronic latch",
+      "variant": 1,
+      "level": 0.62,
+      "pan": 0.558,
+      "duration": 0.24,
+      "bankFile": "sfx-bank/lock-02.wav"
+    },
+    {
+      "at": 16.45,
+      "kind": "boundary-hit",
+      "material": "short electric fault",
+      "variant": 0,
+      "level": 0.38,
+      "pan": 0.621,
+      "duration": 0.15,
+      "bankFile": "sfx-bank/boundary-hit-01.wav"
+    },
+    {
+      "at": 17.1,
+      "kind": "boundary-hit",
+      "material": "short electric fault",
+      "variant": 1,
+      "level": 0.36,
+      "pan": 0.621,
+      "duration": 0.15,
+      "bankFile": "sfx-bank/boundary-hit-02.wav"
+    },
+    {
+      "at": 17.76,
+      "kind": "boundary-hit",
+      "material": "short electric fault",
+      "variant": 2,
+      "level": 0.38,
+      "pan": 0.621,
+      "duration": 0.15,
+      "bankFile": "sfx-bank/boundary-hit-03.wav"
+    },
+    {
+      "at": 18.13,
+      "kind": "repair",
+      "material": "glass recovery",
+      "variant": 0,
+      "level": 0.5,
+      "pan": 0.621,
+      "duration": 0.22,
+      "bankFile": "sfx-bank/repair-01.wav"
+    },
+    {
+      "at": 18.42,
+      "kind": "repair",
+      "material": "glass recovery",
+      "variant": 1,
+      "level": 0.54,
+      "pan": 0.621,
+      "duration": 0.22,
+      "bankFile": "sfx-bank/repair-02.wav"
+    },
+    {
+      "at": 18.76,
+      "kind": "verified",
+      "material": "glass + G2 confirmation",
+      "variant": 0,
+      "level": 0.84,
+      "pan": 0.558,
+      "duration": 0.36,
+      "bankFile": "sfx-bank/verified-01.wav"
+    },
+    {
+      "at": 20.02,
+      "kind": "compare",
+      "material": "paired tactile knocks",
+      "variant": 0,
+      "level": 0.72,
+      "pan": 0.558,
+      "duration": 0.3,
+      "bankFile": "sfx-bank/compare-01.wav"
+    },
+    {
+      "at": 22.12,
+      "kind": "select",
+      "material": "contact + G2 identity",
+      "variant": 1,
+      "level": 0.72,
+      "pan": 0.591,
+      "duration": 0.18,
+      "bankFile": "sfx-bank/select-02.wav"
+    },
+    {
+      "at": 23.1,
+      "kind": "commit",
+      "material": "snap + G2 latch",
+      "variant": 0,
+      "level": 0.78,
+      "pan": 0.558,
+      "duration": 0.33,
+      "bankFile": "sfx-bank/commit-01.wav"
+    },
+    {
+      "at": 24.2,
+      "kind": "product-build",
+      "material": "assembly contacts + power pulse",
+      "variant": 0,
+      "level": 0.8,
+      "pan": 0.558,
+      "duration": 0.37,
+      "bankFile": "sfx-bank/product-build-01.wav"
+    },
+    {
+      "at": 24.91,
+      "kind": "stage-done",
+      "material": "role-specific checkpoint",
+      "variant": 0,
+      "level": 0.48,
+      "pan": 0.477,
+      "duration": 0.16,
+      "bankFile": "sfx-bank/stage-done-01.wav"
+    },
+    {
+      "at": 25.61,
+      "kind": "stage-done",
+      "material": "role-specific checkpoint",
+      "variant": 1,
+      "level": 0.5,
+      "pan": 0.531,
+      "duration": 0.18,
+      "bankFile": "sfx-bank/stage-done-02.wav"
+    },
+    {
+      "at": 26.31,
+      "kind": "stage-done",
+      "material": "role-specific checkpoint",
+      "variant": 2,
+      "level": 0.52,
+      "pan": 0.585,
+      "duration": 0.21,
+      "bankFile": "sfx-bank/stage-done-03.wav"
+    },
+    {
+      "at": 26.76,
+      "kind": "product-ready",
+      "material": "power-on response",
+      "variant": 0,
+      "level": 0.66,
+      "pan": 0.558,
+      "duration": 0.3,
+      "bankFile": "sfx-bank/product-ready-01.wav"
+    },
+    {
+      "at": 29.0,
+      "kind": "complete",
+      "material": "G2 reward + crystal layer",
+      "variant": 0,
+      "level": 0.88,
+      "pan": 0.558,
+      "duration": 0.49,
+      "bankFile": "sfx-bank/complete-01.wav"
+    }
+  ]
+}
