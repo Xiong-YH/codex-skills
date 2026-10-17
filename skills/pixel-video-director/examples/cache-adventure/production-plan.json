@@ -1,0 +1,539 @@
+{
+  "schemaVersion": 1,
+  "id": "cache-adventure-plan",
+  "title": "缓存：这次不用再跑远路了",
+  "output": {
+    "fps": 60,
+    "width": 1920,
+    "height": 1080,
+    "nativeWidth": 320,
+    "nativeHeight": 180
+  },
+  "style": "style.pixel-computing.v1",
+  "seed": 7,
+  "audioMode": "narration+sfx",
+  "shots": [
+    {
+      "id": "s1",
+      "actor": "actor.lead02.v1",
+      "objects": [],
+      "motions": [
+        {
+          "id": "notice",
+          "recipe": "motion.camera-track.v1",
+          "target": "scene",
+          "start": {
+            "event": "s1.enter"
+          },
+          "durationFrames": 260,
+          "params": {
+            "scaleFrom": 1,
+            "scaleTo": 1.1,
+            "xFrom": 0.5,
+            "xTo": 0.51,
+            "yFrom": 0.5,
+            "yTo": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "actor": "actor.lead02.v1",
+      "objects": [],
+      "motions": [
+        {
+          "id": "match-action",
+          "recipe": "motion.focus-punch.v1",
+          "target": "scene",
+          "start": {
+            "event": "s2.enter"
+          },
+          "durationFrames": 36,
+          "params": {
+            "x": 0.59,
+            "y": 0.45,
+            "zoom": 4.8
+          }
+        },
+        {
+          "id": "follow-out",
+          "recipe": "motion.camera-track.v1",
+          "target": "scene",
+          "start": {
+            "event": "s2.depart"
+          },
+          "durationFrames": 129,
+          "params": {
+            "scaleFrom": 1.1,
+            "scaleTo": 1.2,
+            "xFrom": 0.28,
+            "xTo": 0.68,
+            "yFrom": 0.5,
+            "yTo": 0.5
+          }
+        },
+        {
+          "id": "follow-home",
+          "recipe": "motion.camera-track.v1",
+          "target": "scene",
+          "start": {
+            "event": "s2.arrive"
+          },
+          "durationFrames": 96,
+          "params": {
+            "scaleFrom": 1.2,
+            "scaleTo": 1.1,
+            "xFrom": 0.68,
+            "xTo": 0.28,
+            "yFrom": 0.5,
+            "yTo": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "actor": "actor.lead02.v1",
+      "objects": [],
+      "motions": [
+        {
+          "id": "match-action",
+          "recipe": "motion.focus-punch.v1",
+          "target": "scene",
+          "start": {
+            "event": "s3.enter"
+          },
+          "durationFrames": 36,
+          "params": {
+            "x": 0.19,
+            "y": 0.52,
+            "zoom": 4.8
+          }
+        },
+        {
+          "id": "copy-detail",
+          "recipe": "motion.camera-track.v1",
+          "target": "scene",
+          "start": {
+            "event": "s3.depart"
+          },
+          "durationFrames": 210,
+          "params": {
+            "scaleFrom": 1,
+            "scaleTo": 1.1,
+            "xFrom": 0.51,
+            "xTo": 0.57,
+            "yFrom": 0.5,
+            "yTo": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "actor": "actor.lead02.v1",
+      "objects": [],
+      "motions": [
+        {
+          "id": "nearby",
+          "recipe": "motion.camera-track.v1",
+          "target": "scene",
+          "start": {
+            "event": "s4.enter"
+          },
+          "durationFrames": 270,
+          "params": {
+            "scaleFrom": 1.02,
+            "scaleTo": 1.15,
+            "xFrom": 0.47,
+            "xTo": 0.54,
+            "yFrom": 0.5,
+            "yTo": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "actor": "actor.lead02.v1",
+      "objects": [],
+      "motions": [
+        {
+          "id": "turn-and-run",
+          "recipe": "motion.camera-track.v1",
+          "target": "scene",
+          "start": {
+            "event": "s5.enter"
+          },
+          "durationFrames": 195,
+          "params": {
+            "scaleFrom": 1.02,
+            "scaleTo": 1.08,
+            "xFrom": 0.5,
+            "xTo": 0.5,
+            "yFrom": 0.5,
+            "yTo": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "actor": "actor.lead02.v1",
+      "objects": [],
+      "motions": [
+        {
+          "id": "settle",
+          "recipe": "motion.camera-track.v1",
+          "target": "scene",
+          "start": {
+            "event": "s6.enter"
+          },
+          "durationFrames": 150,
+          "params": {
+            "scaleFrom": 1.02,
+            "scaleTo": 1.13,
+            "xFrom": 0.48,
+            "xTo": 0.52,
+            "yFrom": 0.5,
+            "yTo": 0.5
+          }
+        }
+      ]
+    }
+  ],
+  "text": [
+    {
+      "cueId": "c1",
+      "role": "subtitle",
+      "y": 0.885
+    },
+    {
+      "cueId": "c2",
+      "role": "subtitle",
+      "y": 0.885
+    },
+    {
+      "cueId": "c3",
+      "role": "subtitle",
+      "y": 0.885
+    },
+    {
+      "cueId": "c4",
+      "role": "subtitle",
+      "y": 0.885
+    },
+    {
+      "cueId": "c5",
+      "role": "subtitle",
+      "y": 0.885
+    },
+    {
+      "cueId": "c6",
+      "role": "subtitle",
+      "y": 0.885
+    }
+  ],
+  "audio": [
+    {
+      "id": "s1-sound-0",
+      "sound": "question-tick",
+      "at": {
+        "event": "s1.depart"
+      },
+      "level": 0.22,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s2-sound-0",
+      "sound": "extract",
+      "at": {
+        "event": "s2.enter"
+      },
+      "level": 0.28,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s2-sound-1",
+      "sound": "code-tap",
+      "at": {
+        "event": "s2.depart"
+      },
+      "level": 0.23,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s2-sound-2",
+      "sound": "node-connect",
+      "at": {
+        "event": "s2.arrive"
+      },
+      "level": 0.35,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s2-sound-3",
+      "sound": "verified",
+      "at": {
+        "event": "s2.complete"
+      },
+      "level": 0.3,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s3-sound-0",
+      "sound": "focus-step",
+      "at": {
+        "event": "s3.enter"
+      },
+      "level": 0.22,
+      "x": 0.43,
+      "variant": 0
+    },
+    {
+      "id": "s3-sound-1",
+      "sound": "replicate",
+      "at": {
+        "event": "s3.arrive"
+      },
+      "level": 0.48,
+      "x": 0.43,
+      "variant": 0
+    },
+    {
+      "id": "s3-sound-2",
+      "sound": "lock",
+      "at": {
+        "event": "s3.complete"
+      },
+      "level": 0.32,
+      "x": 0.43,
+      "variant": 0
+    },
+    {
+      "id": "s4-sound-0",
+      "sound": "code-tap",
+      "at": {
+        "event": "s4.depart"
+      },
+      "level": 0.2,
+      "x": 0.43,
+      "variant": 0
+    },
+    {
+      "id": "s4-sound-1",
+      "sound": "select",
+      "at": {
+        "event": "s4.arrive"
+      },
+      "level": 0.4,
+      "x": 0.43,
+      "variant": 0
+    },
+    {
+      "id": "s4-sound-2",
+      "sound": "verified",
+      "at": {
+        "event": "s4.complete"
+      },
+      "level": 0.4,
+      "x": 0.43,
+      "variant": 0
+    },
+    {
+      "id": "s5-sound-0",
+      "sound": "boundary-hit",
+      "at": {
+        "event": "s5.arrive"
+      },
+      "level": 0.3,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s5-sound-1",
+      "sound": "extract",
+      "at": {
+        "event": "s5.origin"
+      },
+      "level": 0.3,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s5-sound-2",
+      "sound": "verified",
+      "at": {
+        "event": "s5.complete"
+      },
+      "level": 0.25,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s6-sound-0",
+      "sound": "complete",
+      "at": {
+        "event": "s6.enter"
+      },
+      "level": 0.25,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s2-foot-0",
+      "sound": "code-tap",
+      "at": {
+        "event": "s2.depart",
+        "offsetFrames": 0
+      },
+      "level": 0.075,
+      "x": 0.5,
+      "variant": 0
+    },
+    {
+      "id": "s2-foot-1",
+      "sound": "code-tap",
+      "at": {
+        "event": "s2.depart",
+        "offsetFrames": 19
+      },
+      "level": 0.075,
+      "x": 0.5,
+      "variant": 1
+    },
+    {
+      "id": "s2-foot-2",
+      "sound": "code-tap",
+      "at": {
+        "event": "s2.depart",
+        "offsetFrames": 38
+      },
+      "level": 0.075,
+      "x": 0.5,
+      "variant": 2
+    },
+    {
+      "id": "s2-foot-3",
+      "sound": "code-tap",
+      "at": {
+        "event": "s2.depart",
+        "offsetFrames": 57
+      },
+      "level": 0.075,
+      "x": 0.5,
+      "variant": 0
+    },
+    {
+      "id": "s2-foot-4",
+      "sound": "code-tap",
+      "at": {
+        "event": "s2.depart",
+        "offsetFrames": 76
+      },
+      "level": 0.075,
+      "x": 0.5,
+      "variant": 1
+    },
+    {
+      "id": "s2-foot-5",
+      "sound": "code-tap",
+      "at": {
+        "event": "s2.depart",
+        "offsetFrames": 95
+      },
+      "level": 0.075,
+      "x": 0.5,
+      "variant": 2
+    },
+    {
+      "id": "s5-foot-0",
+      "sound": "code-tap",
+      "at": {
+        "event": "s5.arrive",
+        "offsetFrames": 0
+      },
+      "level": 0.075,
+      "x": 0.5,
+      "variant": 0
+    },
+    {
+      "id": "s5-foot-1",
+      "sound": "code-tap",
+      "at": {
+        "event": "s5.arrive",
+        "offsetFrames": 19
+      },
+      "level": 0.075,
+      "x": 0.5,
+      "variant": 1
+    },
+    {
+      "id": "s5-foot-2",
+      "sound": "code-tap",
+      "at": {
+        "event": "s5.arrive",
+        "offsetFrames": 38
+      },
+      "level": 0.075,
+      "x": 0.5,
+      "variant": 2
+    }
+  ],
+  "narration": [
+    {
+      "id": "voice-c1",
+      "file": "media/c1.wav",
+      "at": {
+        "event": "s1.voice"
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice-c2",
+      "file": "media/c2.wav",
+      "at": {
+        "event": "s2.voice"
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice-c3",
+      "file": "media/c3.wav",
+      "at": {
+        "event": "s3.voice"
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice-c4",
+      "file": "media/c4.wav",
+      "at": {
+        "event": "s4.voice"
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice-c5",
+      "file": "media/c5.wav",
+      "at": {
+        "event": "s5.voice"
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice-c6",
+      "file": "media/c6.wav",
+      "at": {
+        "event": "s6.voice"
+      },
+      "gain": 0.9
+    }
+  ]
+}

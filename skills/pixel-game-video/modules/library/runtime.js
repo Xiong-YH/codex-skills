@@ -77,6 +77,7 @@
   P.library = {
     actor(e, shot, frame) {
       if (!shot.actor) return;
+      if(shot.scene==='scenes.cache-adventure.v1')return;
       const pose = P.scenes.performance(e.mouth, frame), blinkTime = frame - Math.round(e.fps * 2.8);
       const blink = blinkTime >= 0 && (blinkTime % Math.round(e.fps * 3.7)) < Math.max(1, Math.round(e.fps * .1)) ? 1 : 0;
       const image = e.assets[`${shot.actor}:${blink}-${pose}`];

@@ -168,6 +168,13 @@
     camera(motions, frame) {
       let result = {scale:1,x:.62,y:.5};
       for (const m of [...motions].sort((a,b)=>a.startFrame-b.startFrame)) {
+        if(m.recipe==='motion.camera-track.v1'&&frame>=m.startFrame){
+          const a=m.params||{},p=smooth(P.progress(frame,m.startFrame,m.endFrame));
+          const mix=(a,b)=>a+(b-a)*p;
+          result={mode:'track',scale:mix(a.scaleFrom??1,a.scaleTo??1.2),
+            x:mix(a.xFrom??.5,a.xTo??.5),y:mix(a.yFrom??.5,a.yTo??.5)};
+          continue;
+        }
         if (m.recipe !== 'motion.camera-push.v1' || frame < m.startFrame) continue;
         const p = P.ease(P.progress(frame,m.startFrame,m.endFrame)), a = m.params || {};
         const targetScale=a.scale ?? 1.1,targetX=a.x ?? result.x,targetY=a.y ?? result.y;

@@ -56,6 +56,17 @@ class TransitionTests(unittest.TestCase):
         self.edit(lambda shots: shots[1].update(motions=[self.motion('motion.mosaic-pullback.v1', params={'columns':9})]))
         self.assertEqual(compile_project(self.root)['shots'][1]['motions'][0]['params']['columns'],9)
 
+    def test_camera_track_bounds_and_camera_conflicts(self):
+        track=self.motion('motion.camera-track.v1',params={'scaleFrom':1.1,'scaleTo':1.6,'xFrom':.2,'xTo':.8})
+        self.edit(lambda shots:shots[1].update(motions=[track]))
+        compile_project(self.root)
+        track['params']['scaleTo']=1.9
+        self.edit(lambda shots:shots[1].update(motions=[track]))
+        with self.assertRaisesRegex(ValueError,'scaleTo'):compile_project(self.root)
+        track['params']['scaleTo']=1.6
+        self.edit(lambda shots:shots[1].update(motions=[track,self.motion('motion.camera-push.v1',id='other-camera')]))
+        with self.assertRaisesRegex(ValueError,'overlapping motion'):compile_project(self.root)
+
     def test_light_transition_checks_stage_but_world_transition_accepts_full_frame(self):
         def setup(shots):
             shots[0]['objects'][0]['x'] = .2

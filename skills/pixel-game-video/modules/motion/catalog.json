@@ -1,4 +1,5 @@
 {"module":"motion","items":[
+  {"id":"motion.camera-track.v1","kind":"camera","title":"有边界的跟拍与景别变化","target":"scene","params":{"scaleFrom":[1,1.75],"scaleTo":[1,1.75],"xFrom":[0,1],"xTo":[0,1],"yFrom":[0,1],"yTo":[0,1]}},
   {"id":"motion.focus-punch.v1","kind":"transition","layer":"world","title":"焦点急推换景 · 全景别冲击","target":"scene","params":{"x":[0,1],"y":[0,1],"zoom":[3,8]}},
   {"id":"motion.mosaic-pullback.v1","kind":"transition","layer":"world","title":"场景卡墙后拉 · 锁定目标推入","target":"scene","params":{"columns":"odd integer 3–9"}},
   {"id":"motion.panel-slide.v1","kind":"transition","layer":"content","title":"任务面板交接 · 主体与背景保持","target":"scene","params":{"direction":["left","right"],"distance":[0.1,0.35]}},

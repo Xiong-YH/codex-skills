@@ -34,13 +34,14 @@ def validate(scene_id, params, events, objects):
         'scenes.assembly.v1': {'parts', 'resultLabel'},
         'scenes.focus.v1': {'label', 'detail'},
         'scenes.cache-journey.v1': {'phase','environment','startEvent','arriveEvent','completeEvent','labels'},
+        'scenes.cache-adventure.v1': {'phase','environment','startEvent','arriveEvent','completeEvent','labels'},
     }
     if scene_id not in allowed:
         raise ValueError(f'Unknown scene: {scene_id}')
     extras = set(params) - allowed[scene_id]
     if extras:
         raise ValueError(f'{scene_id}: unsupported parameters {sorted(extras)}')
-    if scene_id == 'scenes.cache-journey.v1':
+    if scene_id in ('scenes.cache-journey.v1','scenes.cache-adventure.v1'):
         if params.get('phase') not in ('question','fetch','store','hit','miss','summary'):
             raise ValueError('cache-journey: unknown phase')
         if params.get('environment') not in ('workspace','archive'):

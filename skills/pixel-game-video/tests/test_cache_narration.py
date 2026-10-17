@@ -50,6 +50,9 @@ class CacheNarrationTests(unittest.TestCase):
         s.update(scene='scenes.cache-journey.v1',actor=None,objects=[],motions=[],params={'phase':'hit','environment':'workspace','startEvent':'enter','arriveEvent':'reveal','completeEvent':'done','labels':labels})
         s['events'].append({'id':'done','frame':180});write_json(self.root/'timeline.json',t)
         compile_project(self.root)
+        s['scene']='scenes.cache-adventure.v1';write_json(self.root/'timeline.json',t)
+        with self.assertRaisesRegex(ValueError,'requires an actor'):compile_project(self.root)
+        s['actor']='actor.lead02.v1';write_json(self.root/'timeline.json',t);compile_project(self.root)
         s['params']['completeEvent']='enter';write_json(self.root/'timeline.json',t)
         with self.assertRaisesRegex(ValueError,'start < arrive < complete'):compile_project(self.root)
 

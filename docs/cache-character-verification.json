@@ -1,0 +1,152 @@
+{
+  "date": "2026-10-17",
+  "baselineCommit": "21e0778",
+  "baselineVideoSha256": "2bcbf2032a872dd745a24efa940894a12dd6a9b1e6d1f24ee735895134110e1a",
+  "artifact": "work/cache-adventure/video/outputs/film.mp4",
+  "inputHash": "104516e38d3eaefe03d66583ba782ac65a70a3dfba5b8e9e5e80b03b1edeca3c",
+  "videoSha256": "40f357c21c589b68f23599e97196c63c9f334392efc6d815da227394a6d6a0f6",
+  "buildSha256": "d7b7cd1ef65dc691a1d9e00edac2a697cdec99ffb406b029befc3181ddfe0b9f",
+  "timelineSha256": "0091bc127ca6a9ac8581a605cae42afe935128188a493a4e59953af0ddf6e746",
+  "sourceRange": {
+    "startFrame": 0,
+    "endFrame": 1704,
+    "durationFrames": 1704,
+    "fps": 60,
+    "startSeconds": 0.0,
+    "endSeconds": 28.4
+  },
+  "environment": {
+    "system": "Windows",
+    "release": "11",
+    "machine": "AMD64",
+    "python": "3.12.14",
+    "node": "v24.19.0",
+    "playwright": "1.62.1",
+    "browser": "154.0.4258.62",
+    "ffmpeg": "ffmpeg version e6a2447 Copyright (c) 2000-2023 the FFmpeg developers",
+    "ffprobe": "ffprobe version n5.1.3-1-g0028275216-20230412 Copyright (c) 2007-2022 the FFmpeg developers",
+    "videoEncoder": "libo264rt"
+  },
+  "actor": {
+    "id": "actor.lead02.v1",
+    "originalPngSha256": "5a8e229ac5098c2c72f9b34c28f636c1bdecb76ee25adee2c8bc41303368a70d",
+    "presentShots": [
+      "s1",
+      "s2",
+      "s3",
+      "s4",
+      "s5",
+      "s6"
+    ],
+    "sourcePngUnmodified": true,
+    "mouth": "original rest expression; separate narrator"
+  },
+  "technicalStatus": "passed",
+  "checks": {
+    "oneH264VideoTrack": true,
+    "dimensions": true,
+    "frameRate": true,
+    "decodedFrameCount": true,
+    "distinctTimestamps": true,
+    "everyFrameTimestamp": true,
+    "videoDuration": true,
+    "containerDuration": true,
+    "audioTrackCount": true,
+    "audioFormat": true,
+    "audioStart": true,
+    "audioDuration": true,
+    "videoHash": true,
+    "compiledInputHash": true,
+    "buildHash": true,
+    "timelineHash": true,
+    "sourceFrameRate": true,
+    "buildLock": true,
+    "currentSourceFiles": true,
+    "currentRuntimeFiles": true,
+    "currentAuthoringSources": true
+  },
+  "decodedFrames": 1704,
+  "fps": 60.0,
+  "frameIntervals": {
+    "minimum": 0.016665999999997183,
+    "maximum": 0.016667000000001764
+  },
+  "audio": {
+    "samples": 1363200,
+    "sampleRate": 48000,
+    "peakDbfs": -5.756,
+    "narrationClips": 6,
+    "subjectiveListening": "not_reviewed"
+  },
+  "review": {
+    "status": "not_reviewed",
+    "decodedStills": 136,
+    "contactSheets": [
+      "verification/cache-character-contact.jpg",
+      "verification/cache-character-contact-02.jpg",
+      "verification/cache-character-contact-03.jpg",
+      "verification/cache-character-contact-04.jpg"
+    ],
+    "fullSizeSubtitleFrames": [
+      {
+        "file": "frame-000149.png",
+        "sourceFrame": 149,
+        "outputFrame": 149
+      },
+      {
+        "file": "frame-000473.png",
+        "sourceFrame": 473,
+        "outputFrame": 473
+      },
+      {
+        "file": "frame-000759.png",
+        "sourceFrame": 759,
+        "outputFrame": 759
+      },
+      {
+        "file": "frame-001030.png",
+        "sourceFrame": 1030,
+        "outputFrame": 1030
+      },
+      {
+        "file": "frame-001315.png",
+        "sourceFrame": 1315,
+        "outputFrame": 1315
+      },
+      {
+        "file": "frame-001555.png",
+        "sourceFrame": 1555,
+        "outputFrame": 1555
+      }
+    ],
+    "checks": {
+      "content": "not_reviewed",
+      "visual": "not_reviewed",
+      "motion": "not_reviewed",
+      "text": "passed",
+      "audio": "not_reviewed",
+      "technical": "passed"
+    },
+    "continuousRealtimePlayback": false
+  },
+  "tests": {
+    "foundation": 33,
+    "director": 14,
+    "skillValidation": "both passed",
+    "cameraRuntime": "endpoints, end hold and random-access frame determinism passed"
+  },
+  "independentExport": {
+    "build": "passed",
+    "renderedFrame": 760,
+    "pageErrors": [],
+    "comparedWithFullRender": true,
+    "differentPixels": 0,
+    "totalPixels": 2073600,
+    "copiedWavBytesMatch": true
+  },
+  "limitations": [
+    "Original actor has a frontal sprite; runtime limb articulation does not provide a new profile/back sprite set.",
+    "Narrative analogy, not measured cache latency or replacement simulation.",
+    "Decoded-frame inspection is not continuous playback or subjective listening."
+  ]
+}

@@ -73,7 +73,8 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
     runtime = (style_root / 'runtime.js').read_text(encoding='utf-8')
     if selected.get('runtime'):
         runtime += '\n' + style_file(style_root, selected['runtime']).read_text(encoding='utf-8')
-    paths = ['text/runtime.js','library/runtime.js','library/computing.js','motion/runtime.js','scenes/runtime.js','scenes/cache-journey.js']
+    paths = ['text/runtime.js','library/runtime.js','library/computing.js','library/actor-performance.js',
+             'motion/runtime.js','motion/staging.js','scenes/runtime.js','scenes/cache-journey.js','scenes/cache-adventure.js']
     runtime += '\n' + '\n'.join((modules / path).read_text(encoding='utf-8') for path in paths)
     runtime += '\n' + (skill_root / 'engine' / 'player.js').read_text(encoding='utf-8')
     serialized = json.dumps(payload, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')

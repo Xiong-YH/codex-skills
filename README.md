@@ -35,3 +35,5 @@ flowchart TD
 运行依赖与命令见 [基础运行说明](skills/pixel-game-video/references/runtime.md)。结构、边界和迁移范围见 [架构设计](docs/pixel-video-architecture.md)。实测记录：[重构核验](docs/modular-refactor-verification.md)、[背景与嘴型修复](docs/visual-polish.md)、[强转场与画面构图](docs/transitions-upgrade.md)、[暗色赛博游戏风格](docs/cyberpunk-style.md)、[像素计算场景与缓存叙事试片](docs/cache-narrative-trial.md)。
 
 旧 `pixel-game-explainer`、原始 32 秒成片、8 秒实验及原运动配方完整保留在 [legacy](legacy/README.md)。历史媒体不是新引擎的回归结果。新增 skill 或移动目录时遵守 [AGENTS.md](AGENTS.md)。
+
+缓存试片的人物与动作修订见 [人物表演版](docs/cache-character-revision.md)：恢复已确认角色，以跑动取数、抱持与伸手取用替代固定流程图构图。

@@ -46,7 +46,13 @@
     function composite(g,source,shot,frame){
       const camera=P.motion.camera(shot.motions||[],frame);
       g.save();g.fillStyle=base.colors.background;g.fillRect(0,0,width,height);
-      g.translate(camera.x*width,camera.y*height);g.scale(camera.scale,camera.scale);g.translate(-camera.x*width,-camera.y*height);
+      if(camera.mode==='track'){
+        g.translate(P.clamp(width/2-camera.x*width*camera.scale,width-width*camera.scale,0),
+                    P.clamp(height/2-camera.y*height*camera.scale,height-height*camera.scale,0));
+        g.scale(camera.scale,camera.scale);
+      }else{
+        g.translate(camera.x*width,camera.y*height);g.scale(camera.scale,camera.scale);g.translate(-camera.x*width,-camera.y*height);
+      }
       g.imageSmoothingEnabled=false;g.drawImage(source,0,0);g.restore();
     }
     function snapshot(index){

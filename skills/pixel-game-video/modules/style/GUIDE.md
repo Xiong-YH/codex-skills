@@ -23,7 +23,7 @@
 
 替换风格：复制预设、修改 ID/颜色/字体、在目录项 `file` 引用该预设；构建器按项目 style 选择。
 专用背景和面板放目录项 `runtime`，在通用执行器后加载；素材在预设 `assets` 中按稳定 ID 引用模块内相对路径。
-可选 `subtitle` 字段只提供 `background`、`opacity`、`border`、`accent`；字幕排版仍由 text 模块负责。
+可选 `subtitle` 字段提供 `background`、`opacity`、`border`、`accent` 和画高比例 `height`（默认 .16）；字幕排版仍由 text 模块负责。像素计算版使用 .105 的较薄底板，人物与道具仍须避开实际字幕文字。
 可选 `textShadow` 配置暗色描影；`blur`、`offsetY` 为画高比例，用于复杂背景上的标签分离。
 新建工程与当前样例选择夜城版；已有工程继续按自己的 style ID 构建，日光版可随时切换。
 字体通过 `fontFamily` 配置；目标机器须已安装对应字体，预览和导出使用同一浏览器。

@@ -69,6 +69,8 @@ def _finite(value, label):
 def _motion_params(recipe, params):
     rules = {
         "motion.camera-push.v1": {"scale": (1, 1.25), "x": (0, 1), "y": (0, 1)},
+        "motion.camera-track.v1": {"scaleFrom": (1, 1.75), "scaleTo": (1, 1.75),
+                                    "xFrom": (0, 1), "xTo": (0, 1), "yFrom": (0, 1), "yTo": (0, 1)},
         "motion.object-reveal.v1": {"scaleFrom": (0.05, 1), "turns": (0, 4)},
         "motion.gold-burst.v1": {"x": (0, 1), "y": (0, 1)},
         "motion.shatter-reveal.v1": {"x": (0, 1), "y": (0, 1), "seed": (0, 2147483647)},
@@ -157,6 +159,8 @@ def compile_project(project_root, skill_root=None, *, write=False):
                 raise ValueError("object IDs cannot be scene/actor; object assets must be props")
         _finite(shot["params"], shot["id"])
         validator.validate(shot["scene"], shot["params"], shot["events"], shot["objects"])
+        if shot['scene']=='scenes.cache-adventure.v1' and shot['actor'] is None:
+            raise ValueError('cache-adventure requires an actor for the physical actions')
         unique((m["id"] for m in shot["motions"]), f"{shot['id']}.motions")
         targets = {"scene", "actor"} | {o["id"] for o in shot["objects"]}
         intervals = {}
@@ -193,7 +197,7 @@ def compile_project(project_root, skill_root=None, *, write=False):
                                 content_stage["y"] <= obj["y"] - .135 and
                                 obj["y"] + .135 <= content_stage["y"] + content_stage["height"]):
                             raise ValueError(f"{owner['id']}.{obj['id']}: object outside content stage; reposition it or use another transition")
-            key = ("transition" if transition else recipe, motion["target"])
+            key = ("transition" if transition else ("camera" if capability.get('kind')=='camera' else recipe), motion["target"])
             if any(start < b and a < end for a, b in intervals.get(key, [])):
                 raise ValueError(f"overlapping motion on {motion['target']}: {recipe}")
             intervals.setdefault(key, []).append((start, end))

@@ -5,6 +5,7 @@
 | 配方 | 类型 | 维护说明 |
 | --- | --- | --- |
 | `motion.camera-push.v1` | 相机 | [共享焦点推进](recipes/camera-push.md) |
+| `motion.camera-track.v1` | 相机 | [有边界的横向跟拍与景别变化](recipes/camera-track.md) |
 | `motion.focus-punch.v1` | 强转场 | [焦点冲入切换](recipes/focus-punch.md) |
 | `motion.mosaic-pullback.v1` | 强转场 | [马赛克拉远](recipes/mosaic-pullback.md) |
 | `motion.panel-slide.v1` | 转场 | [信息面板接续](recipes/panel-slide.md) |
@@ -28,4 +29,5 @@ panel-slide、pixel-iris 是轻转场选项，仅替换右侧信息区，人物�
 声音引用动作事件，由 [audio](../audio/GUIDE.md) 合成。
 
 固定场景计数归 [scenes](../scenes/GUIDE.md)；互动卡是场景和文字的组合，不冒充相机能力。
+前景遮挡辅助 `staging.js` 可用于动作中的场所切换；遮挡中点覆盖整个画幅，切换应藏在该点。它不是读取旧帧的通用转场配方。
 验收必须检查前、中、后帧及连续视频：焦点连贯、无裸底、无镜像字、无残片。

@@ -1,0 +1,9 @@
+{
+  "rate": 1,
+  "scriptSha256": "c0bda13c736b36bbbaf88fa35f8f8de1ed46c1efeadefdfc9f4d1947b194466c",
+  "source": "Windows System.Speech local synthesized narration",
+  "culture": "zh-CN",
+  "voice": "Microsoft Kangkang",
+  "format": "PCM 48000Hz 16-bit mono",
+  "note": "Reuses the same six synthesized cue texts; only scene labels changed."
+}
