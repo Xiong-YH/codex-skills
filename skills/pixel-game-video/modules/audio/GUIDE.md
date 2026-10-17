@@ -8,6 +8,7 @@
 | `game_audio.py` | 音符、包络、立体声写入 |
 | `palette.py` | 十九类动作材质与音色 |
 | `mixer.py` | 编译后帧事件混音、报告 |
+| `narration.py` | 项目内 PCM 旁白校验、事件对齐与音效压低 |
 | `preview.py` | 独立生成音色试听 WAV |
 
 输入 cue：`id / sound / at(event+offsetFrames) / level / x / variant`。
@@ -19,6 +20,9 @@
 `--silent` 或项目 silent 模式不生成、内嵌或复用旧音轨。
 WAV 为 48 kHz 双声道，长度按完整视频帧数计算；尾音在片尾截断。
 `sfx-events.json` 记录事件帧、采样点、音头长度、峰值和 RMS。
+
+旁白模式为 `project.audioMode="narration+sfx"`，在 audio.json 的 `narration` 数组中配置 `id/file/at/gain`。file 是工程内相对路径，WAV 必须为 48kHz、16-bit、单或双声道 PCM；剪辑不得重叠或超出成片。录音和合成语音都作为外部素材导入，不内置 TTS 服务。
+旁白文件参与输入哈希，修改后须重建；独立导出携带源 WAV。语音窗口自动压低音效，音效仍引用同一事件，混音报告记录每段采样范围。字幕按脚本事件安排，接入旁白不等于完成音素或嘴型对齐。
 
 验收：听实际视频并检查关键动作同步；无削波、长气音或无理由的连续提示音。
 嘴型独立于音效波形，见 [scenes](../scenes/GUIDE.md)。

@@ -5,6 +5,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+import wave
 from unittest.mock import patch
 
 SKILL = Path(__file__).resolve().parents[1]
@@ -67,6 +68,23 @@ class WorkflowTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "被手改"):
             handoff(self.project, self.foundation)
         self.assertEqual(target.read_bytes(), original)
+
+    def test_narration_handoff_preserves_assets_and_guards_both_copies(self):
+        media=self.project/'media';media.mkdir();clip=media/'voice.wav'
+        with wave.open(str(clip),'wb') as f:
+            f.setparams((1,2,48000,0,'NONE','not compressed'));f.writeframes(b'\0\0'*12000)
+        self.change('production-plan.json',lambda d:d.update(audioMode='narration+sfx',narration=[{'id':'voice1','file':'media/voice.wav','at':{'event':'s1.enter'},'gain':.9}]))
+        handoff(self.project,self.foundation)
+        copied=self.project/'video/media/voice.wav'
+        self.assertEqual(clip.read_bytes(),copied.read_bytes())
+        mapping=read_json(self.project/'video/source-map.json')
+        owner=next(m for m in mapping['mappings'] if m['generatedFile']=='audio.json' and m['jsonPointer']=='/narration/0/file')
+        self.assertEqual((owner['stableId'],owner['field']),('voice1','/file'))
+        guard_generated(self.project,require_current_sources=True)
+        copied.write_bytes(copied.read_bytes()+b' ')
+        with self.assertRaisesRegex(ValueError,'被手改'):handoff(self.project,self.foundation)
+        copied.write_bytes(clip.read_bytes());clip.write_bytes(clip.read_bytes()+b' ')
+        with self.assertRaisesRegex(ValueError,'创作源文件已变化'):guard_generated(self.project,require_current_sources=True)
 
     def test_explicit_null_actor_handoffs_with_source_ownership(self):
         self.change("production-plan.json", lambda d: d["shots"][0].update(actor=None))

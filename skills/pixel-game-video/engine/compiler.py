@@ -227,6 +227,27 @@ def compile_project(project_root, skill_root=None, *, write=False):
         cue["frame"] = frame
 
     source_hashes = {name: file_hash(root / name) for name in INPUT_MODELS}
+    narration = inputs['audio.json']['narration']
+    if bool(narration) != (project['audioMode'] == 'narration+sfx'):
+        raise ValueError('Narration clips require audioMode=narration+sfx and vice versa')
+    unique((c['id'] for c in narration), 'narration')
+    spec = importlib.util.spec_from_file_location('pixel_narration', skill / 'modules/audio/narration.py')
+    narration_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(narration_module)
+    intervals = []
+    for cue in narration:
+        frame = resolve(cue.pop('at'))
+        path, info = narration_module.inspect_clip(root, cue['file'])
+        sample = round(frame / project['fps'] * 48000)
+        end = sample + info['samples']
+        if frame < 0 or end > round(cursor / project['fps'] * 48000):
+            raise ValueError('Narration extends outside video')
+        if any(sample < b and a < end for a,b in intervals):
+            raise ValueError('Narration clips overlap for a single speaker')
+        intervals.append((sample,end))
+        relative = path.relative_to(root).as_posix()
+        cue.update(file=relative, frame=frame, **info)
+        source_hashes[relative] = info['sha256']
     runtime_hashes = {}
     for folder in ("engine", "modules", "scripts"):
         for path in sorted((skill / folder).rglob("*")):
@@ -239,7 +260,7 @@ def compile_project(project_root, skill_root=None, *, write=False):
     resolved = {"contractVersion": 1, "inputHash": digest, "project": project,
                 "contentStage": content_stage,
                 "durationFrames": cursor, "durationSeconds": cursor / project["fps"],
-                "shots": shots, "events": events, "cues": cues, "audio": audio}
+                "shots": shots, "events": events, "cues": cues, "audio": audio, "narration": narration}
     if write:
         write_json(root / "build/resolved-timeline.json", resolved)
         write_json(root / "build/project-lock.json", {"contractVersion": 1, "inputHash": digest,

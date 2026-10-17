@@ -1,0 +1,513 @@
+{
+  "schemaVersion": 1,
+  "shots": [
+    {
+      "id": "s1",
+      "durationFrames": 294,
+      "intent": "用 A 的身份和远处路径建立重复访问问题；场景是工作台，人物退场。",
+      "scene": "scenes.cache-journey.v1",
+      "params": {
+        "phase": "question",
+        "environment": "workspace",
+        "startEvent": "depart",
+        "arriveEvent": "arrive",
+        "completeEvent": "complete",
+        "labels": {
+          "requester": {
+            "labelId": "requester"
+          },
+          "origin": {
+            "labelId": "origin"
+          },
+          "cache": {
+            "labelId": "cache"
+          },
+          "dataA": {
+            "labelId": "dataA"
+          },
+          "dataB": {
+            "labelId": "dataB"
+          },
+          "hit": {
+            "labelId": "hit"
+          },
+          "miss": {
+            "labelId": "miss"
+          },
+          "copy": {
+            "labelId": "copy"
+          },
+          "longRoute": {
+            "labelId": "longRoute"
+          },
+          "shortRoute": {
+            "labelId": "shortRoute"
+          },
+          "result": {
+            "labelId": "result"
+          }
+        }
+      },
+      "events": [
+        {
+          "id": "depart",
+          "frame": 51
+        },
+        {
+          "id": "arrive",
+          "frame": 150
+        },
+        {
+          "id": "complete",
+          "frame": 246
+        },
+        {
+          "id": "voice",
+          "frame": 15
+        },
+        {
+          "id": "voice_end",
+          "frame": 268
+        }
+      ],
+      "objects": [],
+      "cues": [
+        {
+          "cueId": "c1",
+          "start": {
+            "event": "s1.voice",
+            "offsetFrames": -3
+          },
+          "end": {
+            "event": "s1.voice_end",
+            "offsetFrames": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "durationFrames": 312,
+      "intent": "跟随同一数据 A 去远处并返回；以整段往返表现成本。",
+      "scene": "scenes.cache-journey.v1",
+      "params": {
+        "phase": "fetch",
+        "environment": "archive",
+        "startEvent": "depart",
+        "arriveEvent": "arrive",
+        "completeEvent": "complete",
+        "labels": {
+          "requester": {
+            "labelId": "requester"
+          },
+          "origin": {
+            "labelId": "origin"
+          },
+          "cache": {
+            "labelId": "cache"
+          },
+          "dataA": {
+            "labelId": "dataA"
+          },
+          "dataB": {
+            "labelId": "dataB"
+          },
+          "hit": {
+            "labelId": "hit"
+          },
+          "miss": {
+            "labelId": "miss"
+          },
+          "copy": {
+            "labelId": "copy"
+          },
+          "longRoute": {
+            "labelId": "longRoute"
+          },
+          "shortRoute": {
+            "labelId": "shortRoute"
+          },
+          "result": {
+            "labelId": "result"
+          }
+        }
+      },
+      "events": [
+        {
+          "id": "depart",
+          "frame": 51
+        },
+        {
+          "id": "arrive",
+          "frame": 180
+        },
+        {
+          "id": "complete",
+          "frame": 276
+        },
+        {
+          "id": "voice",
+          "frame": 45
+        },
+        {
+          "id": "voice_end",
+          "frame": 285
+        }
+      ],
+      "objects": [],
+      "cues": [
+        {
+          "cueId": "c2",
+          "start": {
+            "event": "s2.voice",
+            "offsetFrames": -3
+          },
+          "end": {
+            "event": "s2.voice_end",
+            "offsetFrames": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "durationFrames": 270,
+      "intent": "沿返回 A 的焦点切近景，明确展示原数据与 A 副本同时存在。",
+      "scene": "scenes.cache-journey.v1",
+      "params": {
+        "phase": "store",
+        "environment": "workspace",
+        "startEvent": "depart",
+        "arriveEvent": "arrive",
+        "completeEvent": "complete",
+        "labels": {
+          "requester": {
+            "labelId": "requester"
+          },
+          "origin": {
+            "labelId": "origin"
+          },
+          "cache": {
+            "labelId": "cache"
+          },
+          "dataA": {
+            "labelId": "dataA"
+          },
+          "dataB": {
+            "labelId": "dataB"
+          },
+          "hit": {
+            "labelId": "hit"
+          },
+          "miss": {
+            "labelId": "miss"
+          },
+          "copy": {
+            "labelId": "copy"
+          },
+          "longRoute": {
+            "labelId": "longRoute"
+          },
+          "shortRoute": {
+            "labelId": "shortRoute"
+          },
+          "result": {
+            "labelId": "result"
+          }
+        }
+      },
+      "events": [
+        {
+          "id": "depart",
+          "frame": 48
+        },
+        {
+          "id": "arrive",
+          "frame": 120
+        },
+        {
+          "id": "complete",
+          "frame": 228
+        },
+        {
+          "id": "voice",
+          "frame": 39
+        },
+        {
+          "id": "voice_end",
+          "frame": 243
+        }
+      ],
+      "objects": [],
+      "cues": [
+        {
+          "cueId": "c3",
+          "start": {
+            "event": "s3.voice",
+            "offsetFrames": -3
+          },
+          "end": {
+            "event": "s3.voice_end",
+            "offsetFrames": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "durationFrames": 342,
+      "intent": "回到同一工作台，只走短路径；A 被读取后仍在缓存内。",
+      "scene": "scenes.cache-journey.v1",
+      "params": {
+        "phase": "hit",
+        "environment": "workspace",
+        "startEvent": "depart",
+        "arriveEvent": "arrive",
+        "completeEvent": "complete",
+        "labels": {
+          "requester": {
+            "labelId": "requester"
+          },
+          "origin": {
+            "labelId": "origin"
+          },
+          "cache": {
+            "labelId": "cache"
+          },
+          "dataA": {
+            "labelId": "dataA"
+          },
+          "dataB": {
+            "labelId": "dataB"
+          },
+          "hit": {
+            "labelId": "hit"
+          },
+          "miss": {
+            "labelId": "miss"
+          },
+          "copy": {
+            "labelId": "copy"
+          },
+          "longRoute": {
+            "labelId": "longRoute"
+          },
+          "shortRoute": {
+            "labelId": "shortRoute"
+          },
+          "result": {
+            "labelId": "result"
+          }
+        }
+      },
+      "events": [
+        {
+          "id": "depart",
+          "frame": 102
+        },
+        {
+          "id": "arrive",
+          "frame": 126
+        },
+        {
+          "id": "complete",
+          "frame": 153
+        },
+        {
+          "id": "voice",
+          "frame": 15
+        },
+        {
+          "id": "voice_end",
+          "frame": 314
+        }
+      ],
+      "objects": [],
+      "cues": [
+        {
+          "cueId": "c4",
+          "start": {
+            "event": "s4.voice",
+            "offsetFrames": -3
+          },
+          "end": {
+            "event": "s4.voice_end",
+            "offsetFrames": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "durationFrames": 204,
+      "intent": "改为请求 B，缓存仍只有 A；先判未命中再回源，避免万能加速误导。",
+      "scene": "scenes.cache-journey.v1",
+      "params": {
+        "phase": "miss",
+        "environment": "workspace",
+        "startEvent": "depart",
+        "arriveEvent": "arrive",
+        "completeEvent": "complete",
+        "labels": {
+          "requester": {
+            "labelId": "requester"
+          },
+          "origin": {
+            "labelId": "origin"
+          },
+          "cache": {
+            "labelId": "cache"
+          },
+          "dataA": {
+            "labelId": "dataA"
+          },
+          "dataB": {
+            "labelId": "dataB"
+          },
+          "hit": {
+            "labelId": "hit"
+          },
+          "miss": {
+            "labelId": "miss"
+          },
+          "copy": {
+            "labelId": "copy"
+          },
+          "longRoute": {
+            "labelId": "longRoute"
+          },
+          "shortRoute": {
+            "labelId": "shortRoute"
+          },
+          "result": {
+            "labelId": "result"
+          }
+        }
+      },
+      "events": [
+        {
+          "id": "depart",
+          "frame": 24
+        },
+        {
+          "id": "arrive",
+          "frame": 54
+        },
+        {
+          "id": "complete",
+          "frame": 174
+        },
+        {
+          "id": "origin",
+          "frame": 104
+        },
+        {
+          "id": "voice",
+          "frame": 12
+        },
+        {
+          "id": "voice_end",
+          "frame": 174
+        }
+      ],
+      "objects": [],
+      "cues": [
+        {
+          "cueId": "c5",
+          "start": {
+            "event": "s5.voice",
+            "offsetFrames": -3
+          },
+          "end": {
+            "event": "s5.voice_end",
+            "offsetFrames": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "durationFrames": 282,
+      "intent": "复用工作台和短路径，以稳定构图及循环收束副本与重复访问。",
+      "scene": "scenes.cache-journey.v1",
+      "params": {
+        "phase": "summary",
+        "environment": "workspace",
+        "startEvent": "depart",
+        "arriveEvent": "arrive",
+        "completeEvent": "complete",
+        "labels": {
+          "requester": {
+            "labelId": "requester"
+          },
+          "origin": {
+            "labelId": "origin"
+          },
+          "cache": {
+            "labelId": "cache"
+          },
+          "dataA": {
+            "labelId": "dataA"
+          },
+          "dataB": {
+            "labelId": "dataB"
+          },
+          "hit": {
+            "labelId": "hit"
+          },
+          "miss": {
+            "labelId": "miss"
+          },
+          "copy": {
+            "labelId": "copy"
+          },
+          "longRoute": {
+            "labelId": "longRoute"
+          },
+          "shortRoute": {
+            "labelId": "shortRoute"
+          },
+          "result": {
+            "labelId": "result"
+          }
+        }
+      },
+      "events": [
+        {
+          "id": "depart",
+          "frame": 18
+        },
+        {
+          "id": "arrive",
+          "frame": 66
+        },
+        {
+          "id": "complete",
+          "frame": 132
+        },
+        {
+          "id": "voice",
+          "frame": 18
+        },
+        {
+          "id": "voice_end",
+          "frame": 254
+        }
+      ],
+      "objects": [],
+      "cues": [
+        {
+          "cueId": "c6",
+          "start": {
+            "event": "s6.voice",
+            "offsetFrames": -3
+          },
+          "end": {
+            "event": "s6.voice_end",
+            "offsetFrames": 8
+          }
+        }
+      ]
+    }
+  ]
+}

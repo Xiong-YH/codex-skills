@@ -59,6 +59,37 @@
       "title": "Motion",
       "type": "object"
     },
+    "Narration": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "file": {
+          "minLength": 1,
+          "title": "File",
+          "type": "string"
+        },
+        "at": {
+          "$ref": "#/$defs/Ref"
+        },
+        "gain": {
+          "default": 0.9,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Gain",
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "file",
+        "at"
+      ],
+      "title": "Narration",
+      "type": "object"
+    },
     "Output": {
       "additionalProperties": false,
       "properties": {
@@ -298,6 +329,7 @@
     "audioMode": {
       "enum": [
         "sfx-only",
+        "narration+sfx",
         "silent"
       ],
       "title": "Audiomode",
@@ -325,6 +357,14 @@
         "$ref": "#/$defs/Sound"
       },
       "title": "Audio",
+      "type": "array"
+    },
+    "narration": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Narration"
+      },
+      "title": "Narration",
       "type": "array"
     }
   },

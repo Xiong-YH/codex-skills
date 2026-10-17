@@ -23,7 +23,7 @@ class Project(Model):
     nativeHeight: Literal[180] = 180
     style: Id = "style.cyberpunk.v1"
     seed: Annotated[int, Field(ge=0, le=2147483647)] = 7
-    audioMode: Literal["sfx-only", "silent"] = "sfx-only"
+    audioMode: Literal["sfx-only", "narration+sfx", "silent"] = "sfx-only"
 
 
 class FrameRef(Model):
@@ -92,8 +92,16 @@ class AudioCue(Model):
     variant: Annotated[int, Field(ge=0)] = 0
 
 
+class NarrationCue(Model):
+    id: Id
+    file: Annotated[str, Field(min_length=1)]
+    at: FrameRef
+    gain: Unit = 0.9
+
+
 class Audio(Model):
     cues: list[AudioCue] = Field(default_factory=list)
+    narration: list[NarrationCue] = Field(default_factory=list)
 
 
 INPUT_MODELS = {

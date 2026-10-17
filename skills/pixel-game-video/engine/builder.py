@@ -59,7 +59,7 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
         sys.path.insert(0, str(audio_dir))
         try:
             mixer = load_module('pixel_video_mixer', audio_dir / 'mixer.py')
-            wav = mixer.render(resolved, output)
+            wav = mixer.render(resolved, output, project_root)
             audio_uri = 'data:audio/wav;base64,' + base64.b64encode(wav.read_bytes()).decode('ascii')
         finally:
             sys.path.remove(str(audio_dir))
@@ -73,7 +73,8 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
     runtime = (style_root / 'runtime.js').read_text(encoding='utf-8')
     if selected.get('runtime'):
         runtime += '\n' + style_file(style_root, selected['runtime']).read_text(encoding='utf-8')
-    runtime += '\n' + '\n'.join((modules / name / 'runtime.js').read_text(encoding='utf-8') for name in ('text', 'library', 'motion', 'scenes'))
+    paths = ['text/runtime.js','library/runtime.js','library/computing.js','motion/runtime.js','scenes/runtime.js','scenes/cache-journey.js']
+    runtime += '\n' + '\n'.join((modules / path).read_text(encoding='utf-8') for path in paths)
     runtime += '\n' + (skill_root / 'engine' / 'player.js').read_text(encoding='utf-8')
     serialized = json.dumps(payload, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     template = (skill_root / 'engine' / 'player.html').read_text(encoding='utf-8')

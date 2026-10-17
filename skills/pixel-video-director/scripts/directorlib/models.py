@@ -120,6 +120,13 @@ class Sound(Contract):
     variant: int = Field(default=0, ge=0)
 
 
+class Narration(Contract):
+    id: str
+    file: str = Field(min_length=1)
+    at: Ref
+    gain: float = Field(default=0.9, ge=0, le=1)
+
+
 class Plan(Contract):
     schemaVersion: Literal[1] = 1
     id: str
@@ -127,10 +134,11 @@ class Plan(Contract):
     output: Output
     style: str
     seed: int
-    audioMode: Literal["sfx-only", "silent"]
+    audioMode: Literal["sfx-only", "narration+sfx", "silent"]
     shots: list[ShotPlan] = Field(min_length=1)
     text: list[TextPlan] = Field(min_length=1)
     audio: list[Sound] = []
+    narration: list[Narration] = []
 
 
 class Evidence(Contract):

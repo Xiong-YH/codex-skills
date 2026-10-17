@@ -77,6 +77,7 @@
   }
   const handlers={'scenes.steps.v1':steps,'scenes.counter.v1':counter,'scenes.choice.v1':choice,'scenes.assembly.v1':assembly,'scenes.focus.v1':focus};
   function content(e,shot,frame){
+    if(shot.scene==='scenes.cache-journey.v1'){P.cacheJourney.draw(e,shot,frame);return;}
     const handler=handlers[shot.scene];if(!handler)throw new Error('Unknown scene '+shot.scene);
     const g=e.ctx;g.save();
     // A shot without a presenter gives the mechanism the centre of the screen.
@@ -92,11 +93,11 @@
     return {x:s.x*e.width,y:s.y*e.height,width:s.width*e.width,height:s.height*e.height};
   },
   drawLayer(e,shot,frame,layer){
-    if(layer==='background')P.style.background(e);
+    if(layer==='background')P.style.background(e,shot);
     else if(layer==='actor')P.library.actor(e,shot,frame);
     else if(layer==='content')content(e,shot,frame);
     else throw new Error('Unknown scene layer '+layer);
   },draw(e,shot,frame){
-    P.style.background(e);P.library.actor(e,shot,frame);content(e,shot,frame);
+    P.style.background(e,shot);P.library.actor(e,shot,frame);content(e,shot,frame);
   }};
 })(globalThis.PixelVideo=globalThis.PixelVideo||{});

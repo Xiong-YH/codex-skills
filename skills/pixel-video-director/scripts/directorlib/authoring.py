@@ -87,6 +87,9 @@ def load_sources(project):
     if plan["audioMode"] == "silent" and plan["audio"]:
         raise ValueError("silent 模式不能同时安排音效，请回改 production-plan.audio。")
     unique(plan["audio"], "id", "production-plan.audio")
+    unique(plan['narration'], 'id', 'production-plan.narration')
+    if bool(plan['narration']) != (plan['audioMode'] == 'narration+sfx'):
+        raise ValueError('narration 需要 audioMode=narration+sfx，且该模式须提供旁白 WAV。')
     return data
 
 
@@ -166,6 +169,8 @@ def transform(sources):
             outputs["text.json"]["cues"].append(target)
     outputs["audio.json"]["cues"] = [map_value("audio.json", f"/cues/{i}", cue, "production-plan.json", cue["id"], "")
                                             for i, cue in enumerate(plan["audio"])]
+    if plan['narration']:
+        outputs['audio.json']['narration'] = [map_value('audio.json', f'/narration/{i}', cue, 'production-plan.json', cue['id'], '') for i,cue in enumerate(plan['narration'])]
     return outputs, mappings
 
 
@@ -191,16 +196,32 @@ def handoff(project, foundation=None):
                   "generatedHashes": {name: hashlib.sha256(encoded(data)).hexdigest() for name, data in outputs.items()},
                   "sourceHashes": {"../" + name: value for name, value in source_hashes(project).items()},
                   "mappings": mappings}
+    media = {}
+    for cue in sources['production-plan.json']['narration']:
+        relative = Path(cue['file'])
+        source = (project / relative).resolve()
+        if relative.is_absolute() or not source.is_relative_to(project):
+            raise ValueError('Narration file must stay inside the authoring project')
+        portable = source.relative_to(project).as_posix()
+        media[portable] = source
+        source_map['sourceHashes']['../' + portable] = hashlib.sha256(source.read_bytes()).hexdigest()
+        source_map['generatedHashes'][portable] = source_map['sourceHashes']['../' + portable]
     # A sibling staging directory keeps ../source.json valid during validation.
     with tempfile.TemporaryDirectory(prefix=".handoff-", dir=project) as staging_name:
         staging = Path(staging_name)
         for name, data in outputs.items():
             write_json(staging / name, data)
+        for name, source in media.items():
+            (staging / name).parent.mkdir(parents=True, exist_ok=True)
+            (staging / name).write_bytes(source.read_bytes())
         write_json(staging / "source-map.json", source_map)
         validation = foundation_validate(root, staging)
         video = project / "video"
         video.mkdir(exist_ok=True)
         for name in (*GENERATED, "source-map.json"):
+            os.replace(staging / name, video / name)
+        for name in media:
+            (video / name).parent.mkdir(parents=True, exist_ok=True)
             os.replace(staging / name, video / name)
     write_json(project / ".director-state.json", {"schemaVersion": 1, "sources": sources,
                                                   "inputHash": validation["inputHash"]})

@@ -73,6 +73,7 @@
       "default": "sfx-only",
       "enum": [
         "sfx-only",
+        "narration+sfx",
         "silent"
       ],
       "title": "Audiomode",

@@ -1,0 +1,8 @@
+{
+  "rate": 1,
+  "scriptSha256": "e2f8dd99b7804a9a233a6788f276bc371ebf9bafb7fac1a751c5354f91017ce3",
+  "source": "Windows System.Speech local synthesized narration",
+  "culture": "zh-CN",
+  "voice": "Microsoft Kangkang",
+  "format": "PCM 48000Hz 16-bit mono"
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion":1,
+  "cues":[
+    {"id":"c1","text":"同一份数据，为什么第二次拿到，往往更快？","phrases":["tong yi fen shu ju","wei shen me di er ci na dao","wang wang geng kuai"],"meaning":"以重复访问的速度差建立问题；让同一数据身份贯穿后续画面。"},
+    {"id":"c2","text":"第一次，去远处的仓库，把数据拿回来。","phrases":["di yi ci","qu yuan chu de cang ku","ba shu ju na hui lai"],"meaning":"完整演出请求远处数据并返回的往返成本，不展示虚构毫秒基准。"},
+    {"id":"c3","text":"拿回来后，在近处留下一份副本。","phrases":["na hui lai hou","zai jin chu","liu xia yi fen fu ben"],"meaning":"复制后原数据与缓存都保留 A，不能把缓存表现成删除原数据。"},
+    {"id":"c4","text":"再次请求，先查缓存。命中了，就近取走。","phrases":["zai ci qing qiu","xian cha huan cun","ming zhong le","jiu jin qu zou"],"meaning":"第二次请求 A 仅经过短路径；缓存中的 A 不能在读取后消失。"},
+    {"id":"c5","text":"没命中，再回原处读取。","phrases":["mei ming zhong","zai hui yuan chu du qu"],"meaning":"请求 B 未命中缓存 A 时回源，避免误导成所有请求都会加速。"},
+    {"id":"c6","text":"缓存，用更近的副本，减少重复访问。","phrases":["huan cun","yong geng jin de fu ben","jian shao chong fu fang wen"],"meaning":"收束为直观的缓存副本比喻；不推广为所有缓存的具体存储与一致性策略。"}
+  ],
+  "labels":[
+    {"id":"requester","text":"程序"},{"id":"origin","text":"原始数据"},{"id":"cache","text":"缓存副本"},
+    {"id":"dataA","text":"数据 A"},{"id":"dataB","text":"数据 B"},
+    {"id":"hit","text":"命中 A"},{"id":"miss","text":"未命中 B"},
+    {"id":"copy","text":"保留 A 的副本"},
+    {"id":"longRoute","text":"先访问远处"},{"id":"shortRoute","text":"再次请求 · 就近读取"},
+    {"id":"result","text":"保留副本，让重复访问少走一段路"}
+  ]
+}

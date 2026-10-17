@@ -67,6 +67,39 @@
       ],
       "title": "FrameRef",
       "type": "object"
+    },
+    "NarrationCue": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "file": {
+          "minLength": 1,
+          "title": "File",
+          "type": "string"
+        },
+        "at": {
+          "$ref": "#/$defs/FrameRef"
+        },
+        "gain": {
+          "default": 0.9,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Gain",
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "file",
+        "at"
+      ],
+      "title": "NarrationCue",
+      "type": "object"
     }
   },
   "additionalProperties": false,
@@ -76,6 +109,13 @@
         "$ref": "#/$defs/AudioCue"
       },
       "title": "Cues",
+      "type": "array"
+    },
+    "narration": {
+      "items": {
+        "$ref": "#/$defs/NarrationCue"
+      },
+      "title": "Narration",
       "type": "array"
     }
   },

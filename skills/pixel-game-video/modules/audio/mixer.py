@@ -5,7 +5,7 @@ import palette as P
 import game_audio as S
 
 
-def render(resolved, output):
+def render(resolved, output, project_root=None):
     fps = resolved['project']['fps']
     samples = round(resolved['durationFrames'] / fps * S.RATE)
     mixed = np.zeros((samples, 2))
@@ -17,6 +17,8 @@ def render(resolved, output):
         pan = .5 + (event.get('x', .5) - .5) * .32
         S.place(mixed, event['frame'] / fps, clip, pan, event.get('level', 1))
         records.append({**event, 'sample': round(event['frame'] / fps * S.RATE), 'durationSamples': len(clip)})
+    import narration
+    mixed, voices = narration.mix(resolved, project_root, mixed)
     options = resolved.get('mix') or {}
     gain = options.get('masterGain', .8)
     mastered = .8 * np.tanh(mixed * gain / .8)
@@ -25,8 +27,8 @@ def render(resolved, output):
     peak = float(np.max(np.abs(mastered))) if samples else 0
     rms = float(np.sqrt(np.mean(mastered ** 2))) if samples else 0
     report = {'sampleRate': S.RATE, 'channels': 2, 'samples': samples, 'durationSeconds': samples / S.RATE,
-              'source': 'G2 procedural palette, retained from approved source', 'humanVoice': False, 'musicBed': False,
+              'source': 'G2 procedural SFX plus optional project PCM narration', 'voiceover': bool(voices), 'musicBed': False,
               'peakDbfs': round(20 * np.log10(peak), 3) if peak else None,
-              'rmsDbfs': round(20 * np.log10(rms), 3) if rms else None, 'events': records}
+              'rmsDbfs': round(20 * np.log10(rms), 3) if rms else None, 'events': records, 'narration': voices}
     (output / 'sfx-events.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     return output / 'animation-sfx.wav'

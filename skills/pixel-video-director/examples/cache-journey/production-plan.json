@@ -1,0 +1,338 @@
+{
+  "schemaVersion": 1,
+  "id": "cache-journey-plan",
+  "title": "缓存：让第二次访问少走一段路",
+  "output": {
+    "fps": 60,
+    "width": 1920,
+    "height": 1080,
+    "nativeWidth": 320,
+    "nativeHeight": 180
+  },
+  "style": "style.pixel-computing.v1",
+  "seed": 7,
+  "audioMode": "narration+sfx",
+  "shots": [
+    {
+      "id": "s1",
+      "actor": null,
+      "objects": [],
+      "motions": []
+    },
+    {
+      "id": "s2",
+      "actor": null,
+      "objects": [],
+      "motions": [
+        {
+          "id": "follow-data",
+          "recipe": "motion.focus-punch.v1",
+          "target": "scene",
+          "start": {
+            "event": "s2.enter"
+          },
+          "durationFrames": 40,
+          "params": {
+            "x": 0.84,
+            "y": 0.39,
+            "zoom": 5.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "actor": null,
+      "objects": [],
+      "motions": [
+        {
+          "id": "follow-data",
+          "recipe": "motion.focus-punch.v1",
+          "target": "scene",
+          "start": {
+            "event": "s3.enter"
+          },
+          "durationFrames": 36,
+          "params": {
+            "x": 0.19,
+            "y": 0.47,
+            "zoom": 6.5
+          }
+        },
+        {
+          "id": "identity-confirm",
+          "recipe": "motion.gold-burst.v1",
+          "target": "scene",
+          "start": {
+            "event": "s3.arrive"
+          },
+          "durationFrames": 36,
+          "params": {
+            "x": 0.6,
+            "y": 0.51
+          }
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "actor": null,
+      "objects": [],
+      "motions": [
+        {
+          "id": "identity-confirm",
+          "recipe": "motion.gold-burst.v1",
+          "target": "scene",
+          "start": {
+            "event": "s4.arrive"
+          },
+          "durationFrames": 36,
+          "params": {
+            "x": 0.43,
+            "y": 0.51
+          }
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "actor": null,
+      "objects": [],
+      "motions": []
+    },
+    {
+      "id": "s6",
+      "actor": null,
+      "objects": [],
+      "motions": []
+    }
+  ],
+  "text": [
+    {
+      "cueId": "c1",
+      "role": "subtitle"
+    },
+    {
+      "cueId": "c2",
+      "role": "subtitle"
+    },
+    {
+      "cueId": "c3",
+      "role": "subtitle"
+    },
+    {
+      "cueId": "c4",
+      "role": "subtitle"
+    },
+    {
+      "cueId": "c5",
+      "role": "subtitle"
+    },
+    {
+      "cueId": "c6",
+      "role": "subtitle"
+    }
+  ],
+  "audio": [
+    {
+      "id": "s1-sound-0",
+      "sound": "question-tick",
+      "at": {
+        "event": "s1.depart"
+      },
+      "level": 0.22,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s2-sound-0",
+      "sound": "extract",
+      "at": {
+        "event": "s2.enter"
+      },
+      "level": 0.28,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s2-sound-1",
+      "sound": "code-tap",
+      "at": {
+        "event": "s2.depart"
+      },
+      "level": 0.23,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s2-sound-2",
+      "sound": "node-connect",
+      "at": {
+        "event": "s2.arrive"
+      },
+      "level": 0.35,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s2-sound-3",
+      "sound": "verified",
+      "at": {
+        "event": "s2.complete"
+      },
+      "level": 0.3,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s3-sound-0",
+      "sound": "focus-step",
+      "at": {
+        "event": "s3.enter"
+      },
+      "level": 0.22,
+      "x": 0.43,
+      "variant": 0
+    },
+    {
+      "id": "s3-sound-1",
+      "sound": "replicate",
+      "at": {
+        "event": "s3.arrive"
+      },
+      "level": 0.48,
+      "x": 0.43,
+      "variant": 0
+    },
+    {
+      "id": "s3-sound-2",
+      "sound": "lock",
+      "at": {
+        "event": "s3.complete"
+      },
+      "level": 0.32,
+      "x": 0.43,
+      "variant": 0
+    },
+    {
+      "id": "s4-sound-0",
+      "sound": "code-tap",
+      "at": {
+        "event": "s4.depart"
+      },
+      "level": 0.2,
+      "x": 0.43,
+      "variant": 0
+    },
+    {
+      "id": "s4-sound-1",
+      "sound": "select",
+      "at": {
+        "event": "s4.arrive"
+      },
+      "level": 0.4,
+      "x": 0.43,
+      "variant": 0
+    },
+    {
+      "id": "s4-sound-2",
+      "sound": "verified",
+      "at": {
+        "event": "s4.complete"
+      },
+      "level": 0.4,
+      "x": 0.43,
+      "variant": 0
+    },
+    {
+      "id": "s5-sound-0",
+      "sound": "boundary-hit",
+      "at": {
+        "event": "s5.arrive"
+      },
+      "level": 0.3,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s5-sound-1",
+      "sound": "extract",
+      "at": {
+        "event": "s5.origin"
+      },
+      "level": 0.3,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s5-sound-2",
+      "sound": "verified",
+      "at": {
+        "event": "s5.complete"
+      },
+      "level": 0.25,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "s6-sound-0",
+      "sound": "complete",
+      "at": {
+        "event": "s6.enter"
+      },
+      "level": 0.25,
+      "x": 0.65,
+      "variant": 0
+    }
+  ],
+  "narration": [
+    {
+      "id": "voice-c1",
+      "file": "media/c1.wav",
+      "at": {
+        "event": "s1.voice"
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice-c2",
+      "file": "media/c2.wav",
+      "at": {
+        "event": "s2.voice"
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice-c3",
+      "file": "media/c3.wav",
+      "at": {
+        "event": "s3.voice"
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice-c4",
+      "file": "media/c4.wav",
+      "at": {
+        "event": "s4.voice"
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice-c5",
+      "file": "media/c5.wav",
+      "at": {
+        "event": "s5.voice"
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice-c6",
+      "file": "media/c6.wav",
+      "at": {
+        "event": "s6.voice"
+      },
+      "gain": 0.9
+    }
+  ]
+}

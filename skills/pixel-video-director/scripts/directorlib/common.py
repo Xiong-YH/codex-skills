@@ -71,8 +71,8 @@ def guard_generated(project, require_current_sources=False):
     if not source_map_path.exists():
         raise ValueError("video/ 已有生成文件但缺少 source-map.json；请移出或恢复映射后交接，不能覆盖未知来源文件。")
     source_map = read_json(source_map_path)
-    for name in GENERATED:
-        path = video / name
+    for name in dict.fromkeys([*GENERATED,*source_map.get('generatedHashes',{})]):
+        path = confined(video, name)
         expected = source_map.get("generatedHashes", {}).get(name)
         if not path.exists() or not expected or digest(path) != expected:
             mappings = [m for m in source_map.get("mappings", []) if m["generatedFile"] == name]
@@ -80,5 +80,13 @@ def guard_generated(project, require_current_sources=False):
             raise ValueError(f"生成文件 video/{name} 被手改或缺失；请先把改动回写源文件 "
                              f"{', '.join(owners) or 'source-map.json 中对应 sourceFile'}，"
                              "然后恢复该生成文件再 handoff。详细定位见 video/source-map.json。")
-    if require_current_sources and source_map.get("sourceHashes") != {"../" + name: value for name, value in source_hashes(project).items()}:
-        raise ValueError("创作源文件已变化但尚未 handoff；请重新 handoff、render，再初始化 review。")
+    if require_current_sources:
+        recorded = source_map.get('sourceHashes', {})
+        core = {'../'+name:value for name,value in source_hashes(project).items()}
+        current = bool(recorded) and all(recorded.get(name)==value for name,value in core.items())
+        for name,expected in recorded.items():
+            source=(video/name).resolve()
+            if not source.is_relative_to(Path(project).resolve()) or not source.is_file() or digest(source)!=expected:
+                current=False;break
+        if not current:
+            raise ValueError("创作源文件已变化但尚未 handoff；请重新 handoff、render，再初始化 review。")

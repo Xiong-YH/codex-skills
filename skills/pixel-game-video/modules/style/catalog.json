@@ -2,6 +2,7 @@
   "module": "style",
   "items": [
     {"id":"style.modern-pixel.v1","title":"现代像素 · 日光青绿","file":"preset.json"},
-    {"id":"style.cyberpunk.v1","title":"像素赛博 · 霓虹夜城","file":"cyberpunk.json","runtime":"cyberpunk.js"}
+    {"id":"style.cyberpunk.v1","title":"像素赛博 · 霓虹夜城","file":"cyberpunk.json","runtime":"cyberpunk.js"},
+    {"id":"style.pixel-computing.v1","title":"像素计算 · 工作台与机房","file":"pixel-computing.json","runtime":"pixel-computing.js"}
   ]
 }

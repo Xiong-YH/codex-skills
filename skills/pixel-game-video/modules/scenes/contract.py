@@ -33,13 +33,31 @@ def validate(scene_id, params, events, objects):
         'scenes.choice.v1': {'options', 'selectedIndex', 'selectEvent'},
         'scenes.assembly.v1': {'parts', 'resultLabel'},
         'scenes.focus.v1': {'label', 'detail'},
+        'scenes.cache-journey.v1': {'phase','environment','startEvent','arriveEvent','completeEvent','labels'},
     }
     if scene_id not in allowed:
         raise ValueError(f'Unknown scene: {scene_id}')
     extras = set(params) - allowed[scene_id]
     if extras:
         raise ValueError(f'{scene_id}: unsupported parameters {sorted(extras)}')
-    if scene_id == 'scenes.steps.v1':
+    if scene_id == 'scenes.cache-journey.v1':
+        if params.get('phase') not in ('question','fetch','store','hit','miss','summary'):
+            raise ValueError('cache-journey: unknown phase')
+        if params.get('environment') not in ('workspace','archive'):
+            raise ValueError('cache-journey: unknown environment')
+        if objects:
+            raise ValueError('cache-journey owns its device placements; objects must be empty')
+        keys={'requester','origin','cache','dataA','dataB','hit','miss','copy','longRoute','shortRoute','result'}
+        labels=params.get('labels')
+        if not isinstance(labels,dict) or set(labels)!=keys:
+            raise ValueError('cache-journey requires its complete label set')
+        for key,value in labels.items():label(value,key)
+        order=[]
+        for key in ('startEvent','arriveEvent','completeEvent'):
+            event(params.get(key));order.append(event_frames.get(params[key]))
+        if all(v is not None for v in order) and not order[0]<order[1]<order[2]:
+            raise ValueError('cache-journey requires start < arrive < complete')
+    elif scene_id == 'scenes.steps.v1':
         parts('items', 1)
     elif scene_id == 'scenes.assembly.v1':
         parts('parts', 2)

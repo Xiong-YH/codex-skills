@@ -3,5 +3,6 @@
   {"id":"scenes.counter.v1","title":"固定场景整数计数积累","params":"from,to: safe integers; label?,unit?,startEvent,endEvent"},
   {"id":"scenes.choice.v1","title":"方案选择","params":"options: 2–3 strings,selectedIndex,selectEvent"},
   {"id":"scenes.assembly.v1","title":"部件组装","params":"parts: 2–5 × {label,event},resultLabel?"},
-  {"id":"scenes.focus.v1","title":"焦点物体展示","params":"label?,detail?"}
+  {"id":"scenes.focus.v1","title":"焦点物体展示","params":"label?,detail?"},
+  {"id":"scenes.cache-journey.v1","title":"数据往返与缓存副本","params":"phase: question/fetch/store/hit/miss/summary; environment; startEvent,arriveEvent,completeEvent; labels"}
 ]}

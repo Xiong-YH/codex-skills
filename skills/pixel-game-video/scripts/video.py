@@ -73,6 +73,10 @@ def export_project(root, destination):
     target.mkdir()
     for name in INPUT_MODELS:
         shutil.copy2(root / name, target / name)
+    for cue in resolved.get('narration', []):
+        media = target / cue['file']
+        media.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(root / cue['file'], media)
     # Export a standalone direct snapshot; authoring sources are included separately.
     if resolved["project"]["authoringMode"] == "director":
         source_dir = destination / "authoring-sources"
@@ -80,7 +84,9 @@ def export_project(root, destination):
         mapping = read_json(root / "source-map.json")
         for name in mapping["sourceHashes"]:
             source = (root / name).resolve()
-            shutil.copy2(source, source_dir / source.name)
+            authoring_target = source_dir / source.relative_to(root.parent)
+            authoring_target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, authoring_target)
         shutil.copy2(root / "source-map.json", source_dir / "source-map.json")
         project = read_json(target / "project.json")
         project["authoringMode"] = "direct"

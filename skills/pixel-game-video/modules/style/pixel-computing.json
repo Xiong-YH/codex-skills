@@ -1,0 +1,11 @@
+{
+  "id":"style.pixel-computing.v1",
+  "assets":{"style.pixel-workbench.v1":"assets/pixel-workbench.png","style.pixel-server-room.v1":"assets/pixel-server-room.png"},
+  "backgrounds":{"workspace":"style.pixel-workbench.v1","archive":"style.pixel-server-room.v1"},
+  "colors":{"background":"#0a1221","panel":"#142638","panelInset":"#0c1929","panelHighlight":"#3a5368","edge":"#547184","ink":"#edf5f8","muted":"#b9cad3","accent":"#79edcf","secondary":"#94b5ff","gold":"#ffc87a","danger":"#ee927e","wallGap":"#060c17","wallShade":"#060c17"},
+  "fontFamily":"Microsoft YaHei, Noto Sans CJK SC, sans-serif",
+  "safeArea":{"x":0.05,"top":0.06,"bottom":0.08},
+  "textRoles":{"title":0.045,"subtitle":0.033,"annotation":0.025,"label":0.025},
+  "textShadow":{"color":"#02050c","blur":0.004,"offsetY":0.002},
+  "subtitle":{"background":"#080f1c","opacity":0.94,"border":"#3d586c","accent":"#ffc87a"}
+}

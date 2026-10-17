@@ -10,6 +10,7 @@
 | `scenes.choice.v1` | `options,selectedIndex,selectEvent`，2–3 项 | 选择发生后突出方案 |
 | `scenes.assembly.v1` | `parts:[{label,event}],resultLabel?`，2–5 项 | 部件到位、连接核心 |
 | `scenes.focus.v1` | `label?,detail?` | 物体展示与镜头交接 |
+| `scenes.cache-journey.v1` | [数据旅程](cache-journey.md) | 往返、复制、缓存命中与未命中 |
 
 所有 params 中 event 均为本镜头局部 ID，可用 `enter`；`exit` 是不可见的右边界，不能触发状态动作。
 `contract.py` 校验参数与事件引用；`runtime.js` 只消费编译结果。

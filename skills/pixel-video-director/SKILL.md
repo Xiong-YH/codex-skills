@@ -9,7 +9,7 @@ description: Turn an idea or existing script into a pixel game-style video throu
 
 | 当前任务 | 读取 | 执行产物 |
 | --- | --- | --- |
-| 新创意、脚本或分镜 | [创作合同](references/authoring.md) | brief / script / storyboard / production-plan |
+| 新创意、脚本或分镜 | [创作合同](references/authoring.md)、[视觉叙事](references/visual-storytelling.md) | brief / script / storyboard / production-plan |
 | 交接、预览、出片 | [基础依赖与命令](references/handoff.md) | video/ 中的 VideoSpec 与成片 |
 | 审片、修改或继续已有工程 | [Review 与影响范围](references/review.md) | review.json 与定向源文件修改 |
 
@@ -19,4 +19,4 @@ description: Turn an idea or existing script into a pixel game-style video throu
 4. `video/` 是生成物；沿 `source-map.json` 回改源文件。工具拒绝静默覆盖手改生成文件。
 5. 审片绑定本次输入和 MP4 哈希；连续播放、文字核验和听音都要有实际证据，未检查记为 `not_reviewed`。
 
-执行入口：[scripts/director.py](scripts/director.py)。结构模板在 [assets/templates/](assets/templates/)，完整 12 秒样例在 [examples/bounded-choice/](examples/bounded-choice/)。样例主题与时长不是全局默认值。
+执行入口：[scripts/director.py](scripts/director.py)。结构模板在 [assets/templates/](assets/templates/)，完整样例：[12 秒选择机制](examples/bounded-choice/)、[28.4 秒缓存叙事与旁白](examples/cache-journey/)。样例主题与时长不是全局默认值。
