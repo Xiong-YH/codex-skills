@@ -56,7 +56,7 @@
       "type": "integer"
     },
     "style": {
-      "default": "style.modern-pixel.v1",
+      "default": "style.cyberpunk.v1",
       "maxLength": 100,
       "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
       "title": "Style",

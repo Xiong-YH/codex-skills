@@ -118,7 +118,7 @@
     }
     const gallery=e.gallery?.length?e.gallery:[outgoing,incoming];
     const tw=w*scale,th=h*scale,pitchX=tw*(1+gap),pitchY=th*(1+gap);
-    g.save();g.imageSmoothingEnabled=false;g.fillStyle=e.colors.ink;g.fillRect(0,0,w,h);
+    g.save();g.imageSmoothingEnabled=false;g.fillStyle=e.colors.wallGap||e.colors.ink;g.fillRect(0,0,w,h);
     for(let row=-half;row<=half;row++)for(let col=-half;col<=half;col++){
       const x=w/2+col*pitchX-tw/2,y=h/2+row*pitchY-th/2;
       if(x+tw<0||x>w||y+th<0||y>h)continue;
@@ -128,7 +128,7 @@
       g.drawImage(source,x,y,tw,th);
       if(!centre&&scale<.6){
         // A fixed palette shade separates thumbnails from the selected story.
-        g.globalAlpha=.13;g.fillStyle=e.colors.ink;g.fillRect(x,y,tw,th);g.globalAlpha=1;
+        g.globalAlpha=.13;g.fillStyle=e.colors.wallShade||e.colors.ink;g.fillRect(x,y,tw,th);g.globalAlpha=1;
       }
     }
     // The central image keeps its position while the camera discovers a much

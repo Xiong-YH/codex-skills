@@ -1,1 +1,7 @@
-{"module":"style","items":[{"id":"style.modern-pixel.v1","title":"现代像素 · 日光青绿","file":"preset.json"}]}
+{
+  "module": "style",
+  "items": [
+    {"id":"style.modern-pixel.v1","title":"现代像素 · 日光青绿","file":"preset.json"},
+    {"id":"style.cyberpunk.v1","title":"像素赛博 · 霓虹夜城","file":"cyberpunk.json","runtime":"cyberpunk.js"}
+  ]
+}

@@ -16,6 +16,8 @@
     const g = e.ctx;
     g.save(); g.font = `${weight} ${size}px ${e.style.fontFamily}`;
     g.fillStyle = color || e.colors.ink; g.textAlign = align; g.textBaseline = 'middle';
+    const shadow=e.style.textShadow;
+    if(shadow){g.shadowColor=shadow.color;g.shadowBlur=(shadow.blur||0)*e.height;g.shadowOffsetY=(shadow.offsetY||0)*e.height;}
     const rows = lines(g, value, maxWidth || e.width * .8);
     const rowHeight = size * 1.38;
     rows.forEach((row, i) => g.fillText(row, x, y + (i - (rows.length - 1) / 2) * rowHeight));
@@ -42,8 +44,12 @@
         if(cue.role==='subtitle'&&wrapped.length>2)
           throw new Error(`Subtitle ${cue.id} wraps to ${wrapped.length} lines; shorten it or split it into cues (maximum 2 lines).`);
         if (cue.role === 'subtitle') {
-          g.save(); g.fillStyle = c.background; g.globalAlpha = .96;
-          g.fillRect(w * .04, y-h*.08, w * .92, h * .16); g.restore();
+          const skin=e.style.subtitle||{},left=w*.04,top=y-h*.08,sw=w*.92,sh=h*.16;
+          g.save(); g.fillStyle = skin.background||c.background; g.globalAlpha = skin.opacity??.96;
+          g.fillRect(left,top,sw,sh);g.globalAlpha=1;
+          if(skin.border){g.fillStyle=skin.border;g.fillRect(left,top,sw,e.pixel*.5);}
+          if(skin.accent){g.fillStyle=skin.accent;g.fillRect(left,top,e.pixel*5,e.pixel*.5);}
+          g.restore();
           draw(e, cue.text, x, y, size, c.ink, maxWidth);
         } else draw(e, cue.text, x, y, size, cue.accent ? c.accent : c.ink, maxWidth, 'center', cue.role === 'title' ? '700' : '600');
       }

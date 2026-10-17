@@ -1,0 +1,91 @@
+{
+  "technicalStatus": "passed",
+  "inputHash": "eb04c88367548d10162eadc283e1f96a1e49f5035a748e1bce2ca50b788bf277",
+  "videoSha256": "72bc3d88f72d43d04116aab534e506019c56c454924e6cde96ae5090e7f4dbea",
+  "width": 1920,
+  "height": 1080,
+  "fps": 60.0,
+  "decodedFrames": 720,
+  "durationSeconds": 12.0,
+  "minimumFrameInterval": 0.01666599999999896,
+  "maximumFrameInterval": 0.0166670000000001,
+  "environment": {
+    "system": "Windows",
+    "release": "11",
+    "machine": "AMD64",
+    "python": "3.12.14",
+    "node": "v24.19.0",
+    "playwright": "1.62.1",
+    "browser": "154.0.4258.62",
+    "ffmpeg": "ffmpeg version e6a2447 Copyright (c) 2000-2023 the FFmpeg developers",
+    "ffprobe": "ffprobe version n5.1.3-1-g0028275216-20230412 Copyright (c) 2007-2022 the FFmpeg developers",
+    "videoEncoder": "libo264rt"
+  },
+  "checks": {
+    "oneH264VideoTrack": true,
+    "dimensions": true,
+    "frameRate": true,
+    "decodedFrameCount": true,
+    "distinctTimestamps": true,
+    "everyFrameTimestamp": true,
+    "videoDuration": true,
+    "containerDuration": true,
+    "audioTrackCount": true,
+    "audioFormat": true,
+    "audioStart": true,
+    "audioDuration": true
+  },
+  "schemaVersion": 1,
+  "date": "2026-10-17",
+  "style": "style.cyberpunk.v1",
+  "inspectCommand": "passed: all media and current source/runtime/build/authoring bindings",
+  "tests": {
+    "foundation": 28,
+    "director": 13,
+    "skillValidation": "both passed"
+  },
+  "authoringUnchangedExceptStyle": {
+    "brief.json": true,
+    "script.json": true,
+    "storyboard.json": true,
+    "production-plan.json": true
+  },
+  "audioWavSha256": "8f2e320698274a8a85a532f6e26faa69c25d1adc41c73cd9f3e5876447eef3f2",
+  "audioIdenticalToPreviousSample": true,
+  "styleAsset": {
+    "file": "skills/pixel-game-video/modules/style/assets/cyberpunk-city.png",
+    "width": 1672,
+    "height": 941,
+    "sha256": "c28269cdce6fca4baf01277aef9252cd5ebbc9ad3c0497341242cb9ce8a70b9e",
+    "generation": "built-in imagegen; no CLI fallback; prompt beside asset"
+  },
+  "standalone": {
+    "cleanExportAndBuild": "passed",
+    "browserFrame660PixelIdentical": false,
+    "browserFrame660": "rendered without errors; visually inspected",
+    "changedPixels": 156,
+    "totalPixels": 2073600,
+    "meanAbsoluteChannelDifference": 3.90625e-05,
+    "maximumChannelDifference": 22,
+    "differenceBounds": [
+      660,
+      408,
+      1259,
+      483
+    ],
+    "note": "Minor pixel-edge differences observed between full sequential rendering and standalone single-frame rendering; byte/pixel identity is not claimed."
+  },
+  "visualReview": {
+    "decodedKeyFrames": "reviewed",
+    "scope": "55 MP4-decoded scene/event/transition key frames in two contact sheets; selected full-size frames",
+    "fullRealtimePlayback": "not_reviewed",
+    "subjectiveAudioListening": "not_reviewed",
+    "findings": [
+      "Dark detailed cyberpunk city and rooftop match requested game atmosphere.",
+      "Mechanism labels and subtitles stay readable; optional text shadow separates free labels.",
+      "Mosaic gaps stay dark; no light background flash from the inverted text palette.",
+      "Detailed environment and coarser mechanism sprites remain different in pixel density."
+    ]
+  },
+  "localVideo": "work/cyberpunk-premium/video/outputs/film.mp4"
+}

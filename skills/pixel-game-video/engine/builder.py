@@ -14,6 +14,13 @@ def load_module(name, path):
     return module
 
 
+def style_file(style_root, relative):
+    path = (style_root / relative).resolve()
+    if not path.is_relative_to(style_root):
+        raise ValueError('Style files must stay inside the style module')
+    return path
+
+
 def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) -> Path:
     project_root, skill_root = Path(project_root), Path(skill_root)
     output = project_root / 'build'
@@ -26,13 +33,24 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
     selected = next((item for item in style_catalog if item['id'] == resolved['project']['style']), None)
     if not selected or not selected.get('file'):
         raise ValueError('Style has no runtime preset: ' + resolved['project']['style'])
-    preset_path = (style_root / selected['file']).resolve()
-    if not preset_path.is_relative_to(style_root):
-        raise ValueError('Style preset must stay inside the style module')
+    preset_path = style_file(style_root, selected['file'])
     style = json.loads(preset_path.read_text(encoding='utf-8'))
     if style['id'] != selected['id']:
         raise ValueError('Style catalog and preset identity differ')
     assets = prepare.prepare(modules / 'library')
+    library_asset_count = len(assets)
+    style_assets = style.get('assets', {})
+    if not isinstance(style_assets, dict):
+        raise ValueError('Style assets must map stable IDs to module-relative image files')
+    mime_types = {'.png':'image/png', '.jpg':'image/jpeg', '.jpeg':'image/jpeg', '.webp':'image/webp'}
+    for ident, relative in style_assets.items():
+        if ident in assets:
+            raise ValueError('Style asset ID collides with the library: ' + ident)
+        image_path = style_file(style_root, relative)
+        mime = mime_types.get(image_path.suffix.lower())
+        if not mime:
+            raise ValueError('Unsupported style image type: ' + image_path.suffix)
+        assets[ident] = 'data:' + mime + ';base64,' + base64.b64encode(image_path.read_bytes()).decode('ascii')
     mouth = mouth_module.schedule(resolved['cues'], resolved['project']['fps'])
     audio_uri = None
     if not silent and resolved['project'].get('audioMode') != 'silent':
@@ -52,7 +70,10 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
             if stale.is_file():
                 stale.unlink()
     payload = {'resolved': resolved, 'style': style, 'assets': assets, 'mouth': mouth, 'audio': audio_uri}
-    runtime = '\n'.join((modules / name / 'runtime.js').read_text(encoding='utf-8') for name in ('style', 'text', 'library', 'motion', 'scenes'))
+    runtime = (style_root / 'runtime.js').read_text(encoding='utf-8')
+    if selected.get('runtime'):
+        runtime += '\n' + style_file(style_root, selected['runtime']).read_text(encoding='utf-8')
+    runtime += '\n' + '\n'.join((modules / name / 'runtime.js').read_text(encoding='utf-8') for name in ('text', 'library', 'motion', 'scenes'))
     runtime += '\n' + (skill_root / 'engine' / 'player.js').read_text(encoding='utf-8')
     serialized = json.dumps(payload, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     template = (skill_root / 'engine' / 'player.html').read_text(encoding='utf-8')
@@ -64,6 +85,7 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
     (output / 'payload.json').write_text(json.dumps(payload, ensure_ascii=False), encoding='utf-8')
     (output / 'mouth-timing.json').write_text(json.dumps({'mode':'text-timed rehearsal; no voice alignment','cues':mouth}, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     (output / 'build-report.json').write_text(json.dumps({'contractVersion':resolved['contractVersion'],'inputHash':resolved['inputHash'],
-        'durationFrames':resolved['durationFrames'],'audioEnabled':audio_uri is not None,'actorVariants':len(assets),
+        'durationFrames':resolved['durationFrames'],'audioEnabled':audio_uri is not None,'actorVariants':library_asset_count,
+        'styleAssets':len(style_assets),
         'mouthSegments':len(mouth),'preview':'film.html'}, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     return target

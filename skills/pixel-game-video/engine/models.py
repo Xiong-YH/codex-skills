@@ -21,7 +21,7 @@ class Project(Model):
     height: Literal[1080] = 1080
     nativeWidth: Literal[320] = 320
     nativeHeight: Literal[180] = 180
-    style: Id = "style.modern-pixel.v1"
+    style: Id = "style.cyberpunk.v1"
     seed: Annotated[int, Field(ge=0, le=2147483647)] = 7
     audioMode: Literal["sfx-only", "silent"] = "sfx-only"
 

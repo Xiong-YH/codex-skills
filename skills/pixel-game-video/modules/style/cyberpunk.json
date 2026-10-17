@@ -1,0 +1,36 @@
+{
+  "id": "style.cyberpunk.v1",
+  "assets": {
+    "style.cyberpunk-city.v1": "assets/cyberpunk-city.png"
+  },
+  "colors": {
+    "background": "#080d1e",
+    "panel": "#101b2e",
+    "panelInset": "#0b1425",
+    "panelHighlight": "#213652",
+    "edge": "#435976",
+    "ink": "#ecf6ff",
+    "muted": "#b3c9df",
+    "accent": "#48edcf",
+    "secondary": "#f05cae",
+    "gold": "#ffc371",
+    "danger": "#ff7797",
+    "wallGap": "#060a16",
+    "wallShade": "#050915",
+    "propShell": "#101b32",
+    "propRecess": "#090f22",
+    "propBevel": "#344264",
+    "propLight": "#7188a7",
+    "neonPink": "#ed67ca"
+  },
+  "fontFamily": "Microsoft YaHei, Noto Sans CJK SC, sans-serif",
+  "safeArea": {"x":0.05,"top":0.06,"bottom":0.08},
+  "textRoles": {"title":0.047,"subtitle":0.033,"annotation":0.026,"label":0.025},
+  "textShadow": {"color":"#020611","blur":0.003,"offsetY":0.002},
+  "subtitle": {
+    "background": "#070e1e",
+    "opacity": 0.94,
+    "border": "#354b66",
+    "accent": "#48edcf"
+  }
+}
