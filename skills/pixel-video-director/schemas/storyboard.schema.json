@@ -1,0 +1,180 @@
+{
+  "$defs": {
+    "CuePlacement": {
+      "additionalProperties": false,
+      "properties": {
+        "cueId": {
+          "title": "Cueid",
+          "type": "string"
+        },
+        "start": {
+          "$ref": "#/$defs/Ref"
+        },
+        "end": {
+          "$ref": "#/$defs/Ref"
+        }
+      },
+      "required": [
+        "cueId",
+        "start",
+        "end"
+      ],
+      "title": "CuePlacement",
+      "type": "object"
+    },
+    "Event": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "frame": {
+          "minimum": 0,
+          "title": "Frame",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "frame"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "ObjectPlacement": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "x": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Y",
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "x",
+        "y"
+      ],
+      "title": "ObjectPlacement",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "event": {
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*\\.[a-zA-Z][a-zA-Z0-9_-]*$",
+          "title": "Event",
+          "type": "string"
+        },
+        "offsetFrames": {
+          "default": 0,
+          "title": "Offsetframes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "event"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "Shot": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "durationFrames": {
+          "exclusiveMinimum": 0,
+          "title": "Durationframes",
+          "type": "integer"
+        },
+        "intent": {
+          "minLength": 1,
+          "title": "Intent",
+          "type": "string"
+        },
+        "scene": {
+          "title": "Scene",
+          "type": "string"
+        },
+        "params": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Params",
+          "type": "object"
+        },
+        "events": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Event"
+          },
+          "title": "Events",
+          "type": "array"
+        },
+        "objects": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectPlacement"
+          },
+          "title": "Objects",
+          "type": "array"
+        },
+        "cues": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/CuePlacement"
+          },
+          "title": "Cues",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "durationFrames",
+        "intent",
+        "scene"
+      ],
+      "title": "Shot",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "default": 1,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "shots": {
+      "items": {
+        "$ref": "#/$defs/Shot"
+      },
+      "minItems": 1,
+      "title": "Shots",
+      "type": "array"
+    }
+  },
+  "required": [
+    "shots"
+  ],
+  "title": "Storyboard",
+  "type": "object"
+}

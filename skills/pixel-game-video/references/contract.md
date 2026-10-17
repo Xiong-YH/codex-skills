@@ -1,0 +1,22 @@
+# 制作合同 v1
+
+结构约束来自 `engine/models.py`；`schemas/*.schema.json` 由 `scripts/video.py schemas` 导出。编译器还检查跨文件引用、事件边界和执行能力。
+
+| 文件 | 唯一拥有的内容 |
+| --- | --- |
+| project.json | 标题、编写模式、画幅、帧率、风格、种子、声音模式 |
+| timeline.json | 镜头时长、场景、人物/物体引用、事件、运镜 |
+| text.json | 字幕、注释、标题、标签及讲解短句 |
+| audio.json | 音色、强度、声像和事件绑定 |
+
+看 `assets/project-template/` 的可运行实例。所有坐标 x/y 为画幅归一化的 0..1；世界图层在 320×180 绘制，文字在 1920×1080 绘制。首版只接受这一尺寸组合，fps 可为 30 或 60；实际测试范围见仓库核验报告。
+
+每镜头 `durationFrames` 为正整数；`events` 是镜内相对帧，自动具有 `enter=0` 和 `exit=durationFrames`。外部引用为 `{ "event": "s01.enter", "offsetFrames": 6 }`。场景 params 内的事件使用本镜 local ID。
+
+镜头、文字、动作区间统一为 `[startFrame,endFrame)`。音效起点不能等于总片长；转场只从后一个镜头 enter 开始，占用后一个镜头的时间，不另延长片长。碎屏需要前一镜头。
+
+`subtitle` 的 `phrases` 使用拼音短句，驱动模拟讲述嘴型；字幕内容与拼音需要一起改。其他文字角色可不提供 phrases。单说话人字幕不能重叠。
+
+`build/resolved-timeline.json` 是唯一运行时间线；`build/project-lock.json` 记录四份输入与运行代码/素材哈希。生成物不可作为下一轮编写源。
+
+direct 工程可以编辑四份输入。director 工程通过源映射验证四份生成文件和创作源的哈希；任意手改/上游变更会要求重新 handoff。

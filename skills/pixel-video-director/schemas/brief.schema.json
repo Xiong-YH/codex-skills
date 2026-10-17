@@ -1,0 +1,57 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "default": 1,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+    },
+    "idea": {
+      "minLength": 1,
+      "title": "Idea",
+      "type": "string"
+    },
+    "audience": {
+      "minLength": 1,
+      "title": "Audience",
+      "type": "string"
+    },
+    "takeaway": {
+      "minLength": 1,
+      "title": "Takeaway",
+      "type": "string"
+    },
+    "durationRangeSeconds": {
+      "items": {
+        "type": "number"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Durationrangeseconds",
+      "type": "array"
+    },
+    "constraints": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Constraints",
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "idea",
+    "audience",
+    "takeaway",
+    "durationRangeSeconds"
+  ],
+  "title": "Brief",
+  "type": "object"
+}

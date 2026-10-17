@@ -1,0 +1,8 @@
+{"module":"audio","items":[
+  {"id":"code-tap","maxVariant":2},{"id":"replicate","maxVariant":2},{"id":"select","maxVariant":2},
+  {"id":"focus-step","maxVariant":0},{"id":"lock","maxVariant":2},{"id":"panel-open","maxVariant":0},
+  {"id":"question-tick","maxVariant":2},{"id":"system-unfold","maxVariant":0},{"id":"node-connect","maxVariant":0},
+  {"id":"extract","maxVariant":0},{"id":"boundary-hit","maxVariant":2},{"id":"repair","maxVariant":1},
+  {"id":"verified","maxVariant":0},{"id":"compare","maxVariant":0},{"id":"commit","maxVariant":0},
+  {"id":"product-build","maxVariant":0},{"id":"stage-done","maxVariant":2},{"id":"product-ready","maxVariant":0},{"id":"complete","maxVariant":0}
+]}

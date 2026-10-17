@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "authoringMode": "direct",
+  "title": "找到线索，再做选择",
+  "fps": 60,
+  "width": 1920,
+  "height": 1080,
+  "nativeWidth": 320,
+  "nativeHeight": 180,
+  "style": "style.modern-pixel.v1",
+  "seed": 7,
+  "audioMode": "sfx-only"
+}

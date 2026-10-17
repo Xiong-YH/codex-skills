@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pixel Game Video"
+  short_description: "模块化像素视频制作、运镜、音效与核验"
+  default_prompt: "使用 $pixel-game-video，根据我的制作要求生成结构化工程并构建像素游戏感视频。"

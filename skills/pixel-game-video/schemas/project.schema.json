@@ -1,0 +1,87 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "default": 1,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "authoringMode": {
+      "default": "direct",
+      "enum": [
+        "direct",
+        "director"
+      ],
+      "title": "Authoringmode",
+      "type": "string"
+    },
+    "title": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "fps": {
+      "default": 60,
+      "enum": [
+        30,
+        60
+      ],
+      "title": "Fps",
+      "type": "integer"
+    },
+    "width": {
+      "const": 1920,
+      "default": 1920,
+      "title": "Width",
+      "type": "integer"
+    },
+    "height": {
+      "const": 1080,
+      "default": 1080,
+      "title": "Height",
+      "type": "integer"
+    },
+    "nativeWidth": {
+      "const": 320,
+      "default": 320,
+      "title": "Nativewidth",
+      "type": "integer"
+    },
+    "nativeHeight": {
+      "const": 180,
+      "default": 180,
+      "title": "Nativeheight",
+      "type": "integer"
+    },
+    "style": {
+      "default": "style.modern-pixel.v1",
+      "maxLength": 100,
+      "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+      "title": "Style",
+      "type": "string"
+    },
+    "seed": {
+      "default": 7,
+      "maximum": 2147483647,
+      "minimum": 0,
+      "title": "Seed",
+      "type": "integer"
+    },
+    "audioMode": {
+      "default": "sfx-only",
+      "enum": [
+        "sfx-only",
+        "silent"
+      ],
+      "title": "Audiomode",
+      "type": "string"
+    }
+  },
+  "required": [
+    "title"
+  ],
+  "title": "Project",
+  "type": "object"
+}

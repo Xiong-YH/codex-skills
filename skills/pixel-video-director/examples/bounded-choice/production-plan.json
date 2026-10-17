@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "id": "bounded-choice-plan",
+  "title": "先给选择设边界",
+  "output": {
+    "fps": 60,
+    "width": 1920,
+    "height": 1080,
+    "nativeWidth": 320,
+    "nativeHeight": 180
+  },
+  "style": "style.modern-pixel.v1",
+  "seed": 7,
+  "audioMode": "sfx-only",
+  "shots": [
+    {
+      "id": "s1",
+      "actor": "actor.lead02.v1",
+      "objects": [],
+      "motions": []
+    },
+    {
+      "id": "s2",
+      "actor": "actor.lead02.v1",
+      "objects": [],
+      "motions": [
+        {
+          "id": "reveal",
+          "recipe": "motion.shatter-reveal.v1",
+          "target": "scene",
+          "start": {
+            "event": "s2.enter",
+            "offsetFrames": 0
+          },
+          "durationFrames": 24,
+          "params": {}
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "actor": "actor.lead02.v1",
+      "objects": [],
+      "motions": []
+    },
+    {
+      "id": "s4",
+      "actor": "actor.lead02.v1",
+      "objects": [],
+      "motions": [
+        {
+          "id": "reward",
+          "recipe": "motion.gold-burst.v1",
+          "target": "scene",
+          "start": {
+            "event": "s4.ready",
+            "offsetFrames": 0
+          },
+          "durationFrames": 35,
+          "params": {}
+        }
+      ]
+    }
+  ],
+  "text": [
+    {
+      "cueId": "c1",
+      "role": "subtitle"
+    },
+    {
+      "cueId": "c2",
+      "role": "subtitle"
+    },
+    {
+      "cueId": "c3",
+      "role": "subtitle"
+    },
+    {
+      "cueId": "c4",
+      "role": "subtitle"
+    }
+  ],
+  "audio": [
+    {
+      "id": "pick",
+      "sound": "select",
+      "at": {
+        "event": "s1.choose",
+        "offsetFrames": 0
+      },
+      "level": 0.42,
+      "x": 0.6,
+      "variant": 0
+    },
+    {
+      "id": "goal-confirm",
+      "sound": "stage-done",
+      "at": {
+        "event": "s2.goal_done",
+        "offsetFrames": 0
+      },
+      "level": 0.3,
+      "x": 0.5,
+      "variant": 0
+    },
+    {
+      "id": "time-confirm",
+      "sound": "stage-done",
+      "at": {
+        "event": "s2.time_done",
+        "offsetFrames": 0
+      },
+      "level": 0.3,
+      "x": 0.6,
+      "variant": 1
+    },
+    {
+      "id": "resource-confirm",
+      "sound": "stage-done",
+      "at": {
+        "event": "s2.resource_done",
+        "offsetFrames": 0
+      },
+      "level": 0.3,
+      "x": 0.7,
+      "variant": 2
+    },
+    {
+      "id": "filtered",
+      "sound": "select",
+      "at": {
+        "event": "s3.filter_done",
+        "offsetFrames": 0
+      },
+      "level": 0.4,
+      "x": 0.65,
+      "variant": 1
+    },
+    {
+      "id": "ready",
+      "sound": "complete",
+      "at": {
+        "event": "s4.ready",
+        "offsetFrames": 0
+      },
+      "level": 0.5,
+      "x": 0.65,
+      "variant": 0
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "idea",
+  "idea": "",
+  "audience": "",
+  "takeaway": "",
+  "durationRangeSeconds": [
+    8.0,
+    30.0
+  ],
+  "constraints": []
+}

@@ -1,0 +1,336 @@
+{
+  "$defs": {
+    "AssetChoice": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "asset": {
+          "title": "Asset",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "asset"
+      ],
+      "title": "AssetChoice",
+      "type": "object"
+    },
+    "Motion": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "recipe": {
+          "title": "Recipe",
+          "type": "string"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "start": {
+          "$ref": "#/$defs/Ref"
+        },
+        "durationFrames": {
+          "exclusiveMinimum": 0,
+          "title": "Durationframes",
+          "type": "integer"
+        },
+        "params": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Params",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "recipe",
+        "target",
+        "start",
+        "durationFrames"
+      ],
+      "title": "Motion",
+      "type": "object"
+    },
+    "Output": {
+      "additionalProperties": false,
+      "properties": {
+        "fps": {
+          "const": 60,
+          "default": 60,
+          "title": "Fps",
+          "type": "integer"
+        },
+        "width": {
+          "const": 1920,
+          "default": 1920,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "const": 1080,
+          "default": 1080,
+          "title": "Height",
+          "type": "integer"
+        },
+        "nativeWidth": {
+          "const": 320,
+          "default": 320,
+          "title": "Nativewidth",
+          "type": "integer"
+        },
+        "nativeHeight": {
+          "const": 180,
+          "default": 180,
+          "title": "Nativeheight",
+          "type": "integer"
+        }
+      },
+      "title": "Output",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "event": {
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*\\.[a-zA-Z][a-zA-Z0-9_-]*$",
+          "title": "Event",
+          "type": "string"
+        },
+        "offsetFrames": {
+          "default": 0,
+          "title": "Offsetframes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "event"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "ShotPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "actor": {
+          "title": "Actor",
+          "type": "string"
+        },
+        "objects": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/AssetChoice"
+          },
+          "title": "Objects",
+          "type": "array"
+        },
+        "motions": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Motion"
+          },
+          "title": "Motions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "actor"
+      ],
+      "title": "ShotPlan",
+      "type": "object"
+    },
+    "Sound": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "sound": {
+          "title": "Sound",
+          "type": "string"
+        },
+        "at": {
+          "$ref": "#/$defs/Ref"
+        },
+        "level": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Level",
+          "type": "number"
+        },
+        "x": {
+          "default": 0.5,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "X",
+          "type": "number"
+        },
+        "variant": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Variant",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "sound",
+        "at",
+        "level"
+      ],
+      "title": "Sound",
+      "type": "object"
+    },
+    "TextPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "cueId": {
+          "title": "Cueid",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "subtitle",
+            "annotation",
+            "title",
+            "label"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "accent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Accent"
+        },
+        "x": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "X"
+        },
+        "y": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Y"
+        }
+      },
+      "required": [
+        "cueId",
+        "role"
+      ],
+      "title": "TextPlan",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "default": 1,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "output": {
+      "$ref": "#/$defs/Output"
+    },
+    "style": {
+      "title": "Style",
+      "type": "string"
+    },
+    "seed": {
+      "title": "Seed",
+      "type": "integer"
+    },
+    "audioMode": {
+      "enum": [
+        "sfx-only",
+        "silent"
+      ],
+      "title": "Audiomode",
+      "type": "string"
+    },
+    "shots": {
+      "items": {
+        "$ref": "#/$defs/ShotPlan"
+      },
+      "minItems": 1,
+      "title": "Shots",
+      "type": "array"
+    },
+    "text": {
+      "items": {
+        "$ref": "#/$defs/TextPlan"
+      },
+      "minItems": 1,
+      "title": "Text",
+      "type": "array"
+    },
+    "audio": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Sound"
+      },
+      "title": "Audio",
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "output",
+    "style",
+    "seed",
+    "audioMode",
+    "shots",
+    "text"
+  ],
+  "title": "Plan",
+  "type": "object"
+}

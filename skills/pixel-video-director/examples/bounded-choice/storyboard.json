@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "shots": [
+    {
+      "id": "s1",
+      "durationFrames": 180,
+      "intent": "先呈现三个选项，建立选择情境。",
+      "scene": "scenes.choice.v1",
+      "params": {
+        "options": [
+          {
+            "labelId": "optionA"
+          },
+          {
+            "labelId": "optionB"
+          },
+          {
+            "labelId": "optionC"
+          }
+        ],
+        "selectedIndex": 1,
+        "selectEvent": "choose"
+      },
+      "events": [
+        {
+          "id": "choose",
+          "frame": 100
+        }
+      ],
+      "objects": [],
+      "cues": [
+        {
+          "cueId": "c1",
+          "start": {
+            "event": "s1.enter",
+            "offsetFrames": 8
+          },
+          "end": {
+            "event": "s1.exit",
+            "offsetFrames": -8
+          }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "durationFrames": 180,
+      "intent": "三个边界逐项确认。",
+      "scene": "scenes.steps.v1",
+      "params": {
+        "items": [
+          {
+            "label": {
+              "labelId": "goal"
+            },
+            "event": "goal_done"
+          },
+          {
+            "label": {
+              "labelId": "time"
+            },
+            "event": "time_done"
+          },
+          {
+            "label": {
+              "labelId": "resource"
+            },
+            "event": "resource_done"
+          }
+        ]
+      },
+      "events": [
+        {
+          "id": "goal_done",
+          "frame": 42
+        },
+        {
+          "id": "time_done",
+          "frame": 84
+        },
+        {
+          "id": "resource_done",
+          "frame": 126
+        }
+      ],
+      "objects": [],
+      "cues": [
+        {
+          "cueId": "c2",
+          "start": {
+            "event": "s2.enter",
+            "offsetFrames": 8
+          },
+          "end": {
+            "event": "s2.exit",
+            "offsetFrames": -8
+          }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "durationFrames": 180,
+      "intent": "可行选项由三收敛为一。",
+      "scene": "scenes.counter.v1",
+      "params": {
+        "from": 3,
+        "to": 1,
+        "label": {
+          "labelId": "remaining"
+        },
+        "unit": {
+          "labelId": "unit"
+        },
+        "startEvent": "filter_start",
+        "endEvent": "filter_done"
+      },
+      "events": [
+        {
+          "id": "filter_start",
+          "frame": 30
+        },
+        {
+          "id": "filter_done",
+          "frame": 136
+        }
+      ],
+      "objects": [],
+      "cues": [
+        {
+          "cueId": "c3",
+          "start": {
+            "event": "s3.enter",
+            "offsetFrames": 8
+          },
+          "end": {
+            "event": "s3.exit",
+            "offsetFrames": -8
+          }
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "durationFrames": 180,
+      "intent": "方案和第一步合成行动入口。",
+      "scene": "scenes.assembly.v1",
+      "params": {
+        "parts": [
+          {
+            "label": {
+              "labelId": "plan"
+            },
+            "event": "plan_ready"
+          },
+          {
+            "label": {
+              "labelId": "step"
+            },
+            "event": "step_ready"
+          }
+        ],
+        "resultLabel": {
+          "labelId": "result"
+        }
+      },
+      "events": [
+        {
+          "id": "plan_ready",
+          "frame": 45
+        },
+        {
+          "id": "step_ready",
+          "frame": 100
+        },
+        {
+          "id": "ready",
+          "frame": 130
+        }
+      ],
+      "objects": [],
+      "cues": [
+        {
+          "cueId": "c4",
+          "start": {
+            "event": "s4.enter",
+            "offsetFrames": 8
+          },
+          "end": {
+            "event": "s4.exit",
+            "offsetFrames": -8
+          }
+        }
+      ]
+    }
+  ]
+}

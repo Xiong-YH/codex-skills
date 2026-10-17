@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__TITLE__</title><style>
+*{box-sizing:border-box}body{margin:0;background:#080e1a;color:#f3f5ed;font:14px system-ui,sans-serif;display:grid;min-height:100vh;place-items:center}main{width:min(100%,1280px)}canvas{display:block;width:100%;height:auto;aspect-ratio:16/9}nav{display:flex;gap:14px;align-items:center;padding:14px}button{background:#71ddbc;border:0;border-radius:4px;padding:8px 18px;color:#10182a;cursor:pointer}input{flex:1}output{font-variant-numeric:tabular-nums}body.render nav{display:none}
+</style></head><body><main><canvas id="film"></canvas><nav><button id="play">播放</button><input id="seek" aria-label="播放进度" type="range" min="0" max="1" step="0.001" value="0"><output id="time">0.00</output></nav></main>
+<script>__RUNTIME__</script><script>
+const payload=__PAYLOAD__;
+window.sceneDuration=payload.resolved.durationSeconds;
+window.sceneFrameRate=payload.resolved.project.fps;
+window.sceneInputHash=payload.resolved.inputHash;
+window.sceneReady=(async()=>{
+  const assets={};
+  await Promise.all(Object.entries(payload.assets).map(([key,src])=>new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>{assets[key]=image;resolve()};image.onerror=()=>reject(new Error('Asset could not load: '+key));image.src=src;})));
+  const canvas=document.getElementById('film');
+  const createCanvas=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c};
+  const renderer=PixelVideo.createRenderer({canvas,createCanvas,assets,resolved:payload.resolved,mouth:payload.mouth,style:payload.style});
+  window.renderFrame=t=>renderer.draw(t);
+  renderFrame(0);
+  const audio=payload.audio?new Audio(payload.audio):null;
+  let playing=false,position=0,started=0;
+  const button=document.getElementById('play'),seek=document.getElementById('seek'),output=document.getElementById('time');
+  const update=t=>{position=Math.min(sceneDuration,Math.max(0,t));renderFrame(position);seek.value=position/sceneDuration;output.value=position.toFixed(2)+' / '+sceneDuration.toFixed(2)};
+  function tick(now){if(!playing)return;update(audio?audio.currentTime:(now-started)/1000);if(position>=sceneDuration||(audio&&audio.ended)){playing=false;button.textContent='播放';if(audio)audio.pause();return}requestAnimationFrame(tick)}
+  button.onclick=async()=>{if(playing){playing=false;if(audio)audio.pause();button.textContent='播放';return}if(position>=sceneDuration-.02)position=0;if(audio){audio.currentTime=position;await audio.play()}started=performance.now()-position*1000;playing=true;button.textContent='暂停';requestAnimationFrame(tick)};
+  seek.oninput=()=>{update(Number(seek.value)*sceneDuration);started=performance.now()-position*1000;if(audio)audio.currentTime=position};
+  if(new URLSearchParams(location.search).has('render'))document.body.classList.add('render');
+  update(0);return true;
+})();
+</script></body></html>

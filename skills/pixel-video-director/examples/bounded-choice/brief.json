@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "bounded-choice",
+  "idea": "面对太多方案，先设边界，再决定第一步。",
+  "audience": "经常在多个方案之间犹豫的人",
+  "takeaway": "目标、时间和资源三个边界，能把选择收敛成一个可执行方案。",
+  "durationRangeSeconds": [
+    10.0,
+    12.0
+  ],
+  "constraints": [
+    "像素游戏感",
+    "纯游戏音效，无配音",
+    "用状态变化表达筛选过程"
+  ]
+}

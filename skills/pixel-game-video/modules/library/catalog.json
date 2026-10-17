@@ -1,0 +1,6 @@
+{"module":"library","items":[
+  {"id":"actor.lead02.v1","kind":"actor","title":"02 暖棕蓬发","path":"assets/02-brown-fluffy.png","nativeSize":[32,36],"anchor":[16,33],"sha256":"5a8e229ac5098c2c72f9b34c28f636c1bdecb76ee25adee2c8bc41303368a70d","expressions":"lead02"},
+  {"id":"prop.task-block.v1","kind":"prop","title":"任务方块","renderer":"task-block"},
+  {"id":"prop.book.v1","kind":"prop","title":"正面像素书封","renderer":"book","geometry":"2D front layer"},
+  {"id":"prop.core.v1","kind":"prop","title":"项目核心","renderer":"core"}
+]}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "shots": [
+    {
+      "id": "s1",
+      "durationFrames": 480,
+      "intent": "",
+      "scene": "scenes.focus.v1",
+      "params": {},
+      "events": [],
+      "objects": [],
+      "cues": [
+        {
+          "cueId": "c1",
+          "start": {
+            "event": "s1.enter",
+            "offsetFrames": 6
+          },
+          "end": {
+            "event": "s1.exit",
+            "offsetFrames": -6
+          }
+        }
+      ]
+    }
+  ]
+}

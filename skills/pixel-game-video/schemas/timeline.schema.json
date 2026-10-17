@@ -1,0 +1,208 @@
+{
+  "$defs": {
+    "Event": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "frame": {
+          "minimum": 0,
+          "title": "Frame",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "frame"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "FrameRef": {
+      "additionalProperties": false,
+      "properties": {
+        "event": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Event",
+          "type": "string"
+        },
+        "offsetFrames": {
+          "default": 0,
+          "title": "Offsetframes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "event"
+      ],
+      "title": "FrameRef",
+      "type": "object"
+    },
+    "Motion": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "recipe": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Recipe",
+          "type": "string"
+        },
+        "target": {
+          "default": "scene",
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Target",
+          "type": "string"
+        },
+        "start": {
+          "$ref": "#/$defs/FrameRef"
+        },
+        "durationFrames": {
+          "exclusiveMinimum": 0,
+          "title": "Durationframes",
+          "type": "integer"
+        },
+        "params": {
+          "additionalProperties": true,
+          "title": "Params",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "recipe",
+        "start",
+        "durationFrames"
+      ],
+      "title": "Motion",
+      "type": "object"
+    },
+    "SceneObject": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "asset": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Asset",
+          "type": "string"
+        },
+        "x": {
+          "default": 0.65,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "default": 0.5,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Y",
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "asset"
+      ],
+      "title": "SceneObject",
+      "type": "object"
+    },
+    "Shot": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "durationFrames": {
+          "exclusiveMinimum": 0,
+          "title": "Durationframes",
+          "type": "integer"
+        },
+        "scene": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Scene",
+          "type": "string"
+        },
+        "actor": {
+          "default": "actor.lead02.v1",
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Actor",
+          "type": "string"
+        },
+        "params": {
+          "additionalProperties": true,
+          "title": "Params",
+          "type": "object"
+        },
+        "objects": {
+          "items": {
+            "$ref": "#/$defs/SceneObject"
+          },
+          "title": "Objects",
+          "type": "array"
+        },
+        "events": {
+          "items": {
+            "$ref": "#/$defs/Event"
+          },
+          "title": "Events",
+          "type": "array"
+        },
+        "motions": {
+          "items": {
+            "$ref": "#/$defs/Motion"
+          },
+          "title": "Motions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "durationFrames",
+        "scene"
+      ],
+      "title": "Shot",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "shots": {
+      "items": {
+        "$ref": "#/$defs/Shot"
+      },
+      "maxItems": 500,
+      "minItems": 1,
+      "title": "Shots",
+      "type": "array"
+    }
+  },
+  "required": [
+    "shots"
+  ],
+  "title": "Timeline",
+  "type": "object"
+}

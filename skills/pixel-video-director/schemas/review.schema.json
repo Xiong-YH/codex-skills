@@ -1,0 +1,300 @@
+{
+  "$defs": {
+    "Binding": {
+      "additionalProperties": false,
+      "properties": {
+        "inputHash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Inputhash",
+          "type": "string"
+        },
+        "videoSha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Videosha256",
+          "type": "string"
+        },
+        "video": {
+          "title": "Video",
+          "type": "string"
+        },
+        "renderManifest": {
+          "title": "Rendermanifest",
+          "type": "string"
+        },
+        "sourceHashes": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Sourcehashes",
+          "type": "object"
+        }
+      },
+      "required": [
+        "inputHash",
+        "videoSha256",
+        "video",
+        "renderManifest",
+        "sourceHashes"
+      ],
+      "title": "Binding",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "frame",
+            "playback",
+            "audio",
+            "metadata",
+            "source"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "checked": {
+          "default": false,
+          "title": "Checked",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind",
+        "path",
+        "description"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "Issue": {
+      "additionalProperties": false,
+      "properties": {
+        "issueId": {
+          "title": "Issueid",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "content",
+            "visual",
+            "motion",
+            "text",
+            "audio",
+            "technical"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "blocker",
+            "major",
+            "minor"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "shotId": {
+          "title": "Shotid",
+          "type": "string"
+        },
+        "timeRange": {
+          "$ref": "#/$defs/TimeRange"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/Evidence"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "expected": {
+          "minLength": 1,
+          "title": "Expected",
+          "type": "string"
+        },
+        "ownerModule": {
+          "enum": [
+            "director",
+            "style",
+            "library",
+            "text",
+            "motion",
+            "audio",
+            "scenes",
+            "engine"
+          ],
+          "title": "Ownermodule",
+          "type": "string"
+        },
+        "sourceRef": {
+          "$ref": "#/$defs/SourceRef"
+        },
+        "status": {
+          "default": "failed",
+          "enum": [
+            "passed",
+            "failed",
+            "not_reviewed"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issueId",
+        "category",
+        "severity",
+        "shotId",
+        "timeRange",
+        "evidence",
+        "expected",
+        "ownerModule",
+        "sourceRef"
+      ],
+      "title": "Issue",
+      "type": "object"
+    },
+    "ReviewCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "enum": [
+            "content",
+            "visual",
+            "motion",
+            "text",
+            "audio",
+            "technical"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "status": {
+          "default": "not_reviewed",
+          "enum": [
+            "passed",
+            "failed",
+            "not_reviewed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "evidence": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Evidence"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "notes": {
+          "default": "",
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "category"
+      ],
+      "title": "ReviewCheck",
+      "type": "object"
+    },
+    "SourceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "enum": [
+            "brief.json",
+            "script.json",
+            "storyboard.json",
+            "production-plan.json"
+          ],
+          "title": "File",
+          "type": "string"
+        },
+        "stableId": {
+          "title": "Stableid",
+          "type": "string"
+        },
+        "field": {
+          "title": "Field",
+          "type": "string"
+        }
+      },
+      "required": [
+        "file",
+        "stableId",
+        "field"
+      ],
+      "title": "SourceRef",
+      "type": "object"
+    },
+    "TimeRange": {
+      "additionalProperties": false,
+      "properties": {
+        "startFrame": {
+          "minimum": 0,
+          "title": "Startframe",
+          "type": "integer"
+        },
+        "endFrame": {
+          "exclusiveMinimum": 0,
+          "title": "Endframe",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "startFrame",
+        "endFrame"
+      ],
+      "title": "TimeRange",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "default": 1,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "binding": {
+      "$ref": "#/$defs/Binding"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/ReviewCheck"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "issues": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Issue"
+      },
+      "title": "Issues",
+      "type": "array"
+    }
+  },
+  "required": [
+    "binding",
+    "checks"
+  ],
+  "title": "Review",
+  "type": "object"
+}

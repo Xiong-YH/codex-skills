@@ -1,0 +1,24 @@
+# 场景与角色表演
+
+场景把内容转成规则、状态变化和结果，组合素材、文字、运动与声音。
+
+| 场景 | params | 可见变化 |
+| --- | --- | --- |
+| `scenes.steps.v1` | `items:[{label,event}]`，1–5 项 | 事件后逐项完成 |
+| `scenes.counter.v1` | `from,to` 安全整数；`label?,unit?,startEvent,endEvent` | 固定场景内计数与进度 |
+| `scenes.choice.v1` | `options,selectedIndex,selectEvent`，2–3 项 | 选择发生后突出方案 |
+| `scenes.assembly.v1` | `parts:[{label,event}],resultLabel?`，2–5 项 | 部件到位、连接核心 |
+| `scenes.focus.v1` | `label?,detail?` | 物体展示与镜头交接 |
+
+所有 params 中 event 均为本镜头局部 ID，可用 `enter`；`exit` 是不可见的右边界，不能触发状态动作。
+`contract.py` 校验参数与事件引用；`runtime.js` 只消费编译结果。
+计数 from/to 为 JavaScript 安全整数（绝对值 ≤ 2⁵³−1）；startEvent 早于 endEvent，终值在 endEvent 精确到达并保持。
+状态持久到镜头结束；已完成步骤不因帧随机数而跳回。
+
+`performance.py` 根据字幕 cue 的拼音短句分配小口型及闭唇停顿。
+这是文案节奏模拟，不是真实人声或音素强制对齐；静音仍有嘴型。
+口型图像归素材库，字幕排版归文字模块。
+
+新增场景必须有参数合同、事件驱动的状态、运行实现和关键帧样例。
+原互动卡配方见 [interaction-card.md](interaction-card.md)，当前未注册执行器，不可当作已实现能力使用。
+验收：修改步骤数、选择项、计数终值或部件时，画面机制一起改变；不能只换字幕。

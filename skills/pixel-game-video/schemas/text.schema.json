@@ -1,0 +1,126 @@
+{
+  "$defs": {
+    "FrameRef": {
+      "additionalProperties": false,
+      "properties": {
+        "event": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Event",
+          "type": "string"
+        },
+        "offsetFrames": {
+          "default": 0,
+          "title": "Offsetframes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "event"
+      ],
+      "title": "FrameRef",
+      "type": "object"
+    },
+    "TextCue": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "subtitle",
+            "annotation",
+            "title",
+            "label"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "text": {
+          "maxLength": 240,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "phrases": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Phrases",
+          "type": "array"
+        },
+        "start": {
+          "$ref": "#/$defs/FrameRef"
+        },
+        "end": {
+          "$ref": "#/$defs/FrameRef"
+        },
+        "accent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Accent"
+        },
+        "x": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "X"
+        },
+        "y": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Y"
+        }
+      },
+      "required": [
+        "id",
+        "role",
+        "text",
+        "start",
+        "end"
+      ],
+      "title": "TextCue",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "cues": {
+      "items": {
+        "$ref": "#/$defs/TextCue"
+      },
+      "title": "Cues",
+      "type": "array"
+    }
+  },
+  "title": "Text",
+  "type": "object"
+}

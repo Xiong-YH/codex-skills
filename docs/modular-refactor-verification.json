@@ -1,0 +1,98 @@
+{
+  "date": "2026-10-17",
+  "scope": "Windows 11 on this configured machine; not a general platform certification",
+  "environment": {
+    "system": "Windows",
+    "release": "11",
+    "machine": "AMD64",
+    "python": "3.12.14",
+    "node": "v24.19.0",
+    "playwright": "1.62.1",
+    "browser": "154.0.4258.62",
+    "ffmpeg": "ffmpeg version e6a2447 Copyright (c) 2000-2023 the FFmpeg developers",
+    "ffprobe": "ffprobe version n5.1.3-1-g0028275216-20230412 Copyright (c) 2007-2022 the FFmpeg developers",
+    "videoEncoder": "libo264rt"
+  },
+  "finalRender": {
+    "technicalStatus": "passed",
+    "inputHash": "9e386526828fa6e55c366316c4b81c39fcf3cfbe1495d3bb1b8e2a709f70f5ca",
+    "videoSha256": "aef4c4a2f2e86cfeb07eec2568b55ece6ea09fca6316a6516e39e792f94b72cd",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60.0,
+    "decodedFrames": 720,
+    "distinctTimestamps": 720,
+    "durationSeconds": 12.0,
+    "minimumFrameInterval": 0.01666599999999896,
+    "maximumFrameInterval": 0.0166670000000001,
+    "audioTracks": 1,
+    "checks": {
+      "oneH264VideoTrack": true,
+      "dimensions": true,
+      "frameRate": true,
+      "decodedFrameCount": true,
+      "distinctTimestamps": true,
+      "everyFrameTimestamp": true,
+      "videoDuration": true,
+      "containerDuration": true,
+      "audioTrackCount": true,
+      "audioFormat": true,
+      "audioStart": true,
+      "audioDuration": true
+    }
+  },
+  "audioComparison": {
+    "sampleRate": 48000,
+    "samples": 576000,
+    "aacSourceCorrelation": 0.9999414202630238,
+    "peakCrossCorrelationLagSamples": 0,
+    "peakDbfs": -18.393,
+    "rmsDbfs": -42.091,
+    "interpretation": "Encoded audio waveform/time alignment only; no subjective listening approval"
+  },
+  "beforeRender": {
+    "inputHash": "2f6869667cdfb151bba3dd72d55f189d776d397a9ba8d014d8b43d529004f5da",
+    "videoSha256": "5ba61a950456694c38c41f817c64c15e31861191195ebaa0c19e3d2f0637b521"
+  },
+  "reviewScope": {
+    "decodedStaticFrames": "reviewed",
+    "fullPlayback": "not_reviewed",
+    "subjectiveAudio": "not_reviewed"
+  },
+  "evidence": {
+    "before-101": "verification/before-000101.png",
+    "before-641": "verification/before-000641.png",
+    "after-101": "verification/after-000101.png",
+    "after-641": "verification/after-000641.png"
+  },
+  "fixes": [
+    {
+      "issue": "Subtitle contradicted the selected card",
+      "source": "script.json c1 text/phrases/meaning",
+      "frames": [
+        "before-101",
+        "after-101"
+      ]
+    },
+    {
+      "issue": "Extra core duplicated assembly focal object",
+      "source": "storyboard.json s4 objects + production-plan.json s4 motions",
+      "frames": [
+        "before-641",
+        "after-641"
+      ]
+    },
+    {
+      "issue": "Assembly part label overlapped result label",
+      "source": "pixel-game-video/modules/scenes/runtime.js",
+      "frames": [
+        "before-641",
+        "after-641"
+      ]
+    }
+  ],
+  "localArtifacts": {
+    "video": "work/director-acceptance/video/outputs/film-v2.mp4",
+    "review": "work/director-acceptance/review-v2.json"
+  }
+}

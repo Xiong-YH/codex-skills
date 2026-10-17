@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "cues": [
+    {
+      "id": "c1",
+      "text": "面对多个方案，总想马上选。",
+      "phrases": [
+        "mian dui duo ge fang an",
+        "zong xiang ma shang xuan"
+      ],
+      "meaning": "先呈现面对多个方案立即选择的冲动，后续镜头再建立选择边界。"
+    },
+    {
+      "id": "c2",
+      "text": "先看目标、时间和资源。",
+      "phrases": [
+        "xian kan mu biao",
+        "shi jian he zi yuan"
+      ],
+      "meaning": "把三个边界变成可见的判定条件。"
+    },
+    {
+      "id": "c3",
+      "text": "边界一清楚，选项就变少。",
+      "phrases": [
+        "bian jie yi qing chu",
+        "xuan xiang jiu bian shao"
+      ],
+      "meaning": "条件逐项筛选，让三个方案收敛成一个。"
+    },
+    {
+      "id": "c4",
+      "text": "留下可行方案，迈出第一步。",
+      "phrases": [
+        "liu xia ke xing fang an",
+        "mai chu di yi bu"
+      ],
+      "meaning": "选择以执行收尾。"
+    }
+  ],
+  "labels": [
+    {
+      "id": "optionA",
+      "text": "方案甲"
+    },
+    {
+      "id": "optionB",
+      "text": "方案乙"
+    },
+    {
+      "id": "optionC",
+      "text": "方案丙"
+    },
+    {
+      "id": "goal",
+      "text": "目标"
+    },
+    {
+      "id": "time",
+      "text": "时间"
+    },
+    {
+      "id": "resource",
+      "text": "资源"
+    },
+    {
+      "id": "remaining",
+      "text": "剩余方案"
+    },
+    {
+      "id": "unit",
+      "text": "个"
+    },
+    {
+      "id": "plan",
+      "text": "可行方案"
+    },
+    {
+      "id": "step",
+      "text": "第一步"
+    },
+    {
+      "id": "result",
+      "text": "开始行动"
+    }
+  ]
+}

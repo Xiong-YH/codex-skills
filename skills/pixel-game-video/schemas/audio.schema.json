@@ -1,0 +1,84 @@
+{
+  "$defs": {
+    "AudioCue": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "sound": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Sound",
+          "type": "string"
+        },
+        "at": {
+          "$ref": "#/$defs/FrameRef"
+        },
+        "level": {
+          "default": 0.5,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Level",
+          "type": "number"
+        },
+        "x": {
+          "default": 0.5,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "X",
+          "type": "number"
+        },
+        "variant": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Variant",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "sound",
+        "at"
+      ],
+      "title": "AudioCue",
+      "type": "object"
+    },
+    "FrameRef": {
+      "additionalProperties": false,
+      "properties": {
+        "event": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Event",
+          "type": "string"
+        },
+        "offsetFrames": {
+          "default": 0,
+          "title": "Offsetframes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "event"
+      ],
+      "title": "FrameRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "cues": {
+      "items": {
+        "$ref": "#/$defs/AudioCue"
+      },
+      "title": "Cues",
+      "type": "array"
+    }
+  },
+  "title": "Audio",
+  "type": "object"
+}

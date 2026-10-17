@@ -1,0 +1,7 @@
+{
+  "id": "style.modern-pixel.v1",
+  "colors": {"background":"#10182a","panel":"#19263c","edge":"#334762","ink":"#f3f5ed","muted":"#95a8be","accent":"#71ddbc","gold":"#f6cd76","danger":"#dd7587"},
+  "fontFamily": "Microsoft YaHei, Noto Sans CJK SC, sans-serif",
+  "safeArea": {"x":0.05,"top":0.06,"bottom":0.08},
+  "textRoles": {"title":0.047,"subtitle":0.033,"annotation":0.026,"label":0.025}
+}

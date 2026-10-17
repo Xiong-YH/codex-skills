@@ -1,50 +1,37 @@
 # Codex Skills
 
-个人 Codex Skills 总仓库。每个技能放在 skills/<技能名称>/ 下，独立维护 SKILL.md、参考资料与必要资源。
+像素游戏感视频体系。日常使用两个 skill，运镜转场已融入基础制作模块。
 
-## 技能索引
-
-| Skill | 用途 |
+| Skill | 职责 |
 | --- | --- |
-| [pixel-game-explainer](skills/pixel-game-explainer/SKILL.md) | 纯代码像素讲解视频：语义分镜、角色、自然嘴型、游戏音效与成片交付 |
-| [pixel-motion-transitions](skills/pixel-motion-transitions/SKILL.md) | 像素视频运镜与转场：碎屏揭示、计数积累、金光突破、书封旋转和互动卡收尾 |
+| [pixel-game-video](skills/pixel-game-video/SKILL.md) | 按结构化工程制作视频；维护风格、素材、文字、运动、声音和场景，构建 HTML、MP4 与技术证据 |
+| [pixel-video-director](skills/pixel-video-director/SKILL.md) | 从创意到脚本、分镜、制作交接、review 和定向修复；调用基础 skill |
 
-## 目录
-
-```text
-skills/
-├── pixel-game-explainer/
-│   ├── SKILL.md
-│   ├── AGENTS.md
-│   ├── agents/
-│   ├── assets/
-│   ├── references/
-│   ├── scripts/
-│   ├── examples/
-│   ├── experiments/
-│   └── docs/
-└── pixel-motion-transitions/
-    ├── SKILL.md
-    ├── agents/openai.yaml
-    └── references/
-        ├── recipes.md
-        └── reference-case.md
+```mermaid
+flowchart TD
+    I[创意] --> D[pixel-video-director]
+    D --> S[脚本 / 分镜 / 制作方案]
+    S --> V[四份 VideoSpec JSON]
+    V --> F[pixel-game-video 编译与合成]
+    ST[style 风格] --> F
+    L[library 人物与物体] --> F
+    T[text 字幕与注释] --> F
+    M[motion 运镜与转场] --> F
+    A[audio 音色与混音] --> F
+    SC[scenes 游戏机制与表演] --> F
+    F --> O[HTML / MP4 / 核验证据]
+    O --> R[review 绑定输入与成片哈希]
+    R -->|按源映射修复| S
 ```
 
-## 使用
+基础工程只维护四份 JSON，不复制整个引擎。运镜、配色和音效各在自己的模块维护，两个 `SKILL.md` 只保留使用入口和按需链接。
 
-将所需技能的整个文件夹复制到本机 Codex skills 目录中，保留内部目录结构。例如将 skills/pixel-motion-transitions/ 复制到 ~/.codex/skills/pixel-motion-transitions/。
+将 `skills/pixel-game-video/` 完整复制到 Codex 的 skills 目录即可单独使用。使用 director 时同时安装 `skills/pixel-video-director/`；它通过同级目录、显式 `--foundation` 或 `PIXEL_VIDEO_SKILL` 定位基础层。
 
-调用示例：
+> 使用 $pixel-video-director，把我的创意转成脚本和分镜，制作一支像素游戏感视频，并给出有证据的 review。
 
-> 使用 $pixel-motion-transitions 为我的像素视频设计并实现碎屏转场和书封旋转入场。
+> 使用 $pixel-game-video，在现有工程的第二镜加入碎屏转场，按源文件修改并验证该片段。
 
-> 使用 $pixel-game-explainer，把我的主题做成现代像素游戏感讲解视频，保留高清文案、自然嘴型，只加音效。
+运行依赖与命令见 [基础运行说明](skills/pixel-game-video/references/runtime.md)。结构、边界和迁移范围见 [架构设计](docs/pixel-video-architecture.md)，本次实测结果见 [重构核验](docs/modular-refactor-verification.md)。
 
-## 维护
-
-先读根目录 [AGENTS.md](AGENTS.md)，再读取目标技能自己的维护约定。像素讲解视频的检查命令、原始 32 秒基线与 Windows 8 秒实验说明见 [维护入口](skills/pixel-game-explainer/README.md)。两个技能可配合使用，也可独立维护。
-
-## 添加新技能
-
-在 skills/ 下新增独立文件夹，包含带 name 和 description 的 SKILL.md；参考文件使用相对路径链接，并在此首页补充索引。
+旧 `pixel-game-explainer`、原始 32 秒成片、8 秒实验及原运动配方完整保留在 [legacy](legacy/README.md)。历史媒体不是新引擎的回归结果。新增 skill 或移动目录时遵守 [AGENTS.md](AGENTS.md)。
