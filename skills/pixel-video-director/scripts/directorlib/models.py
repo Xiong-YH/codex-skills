@@ -98,7 +98,7 @@ class Motion(Contract):
 
 class ShotPlan(Contract):
     id: str
-    actor: str
+    actor: str | None
     objects: list[AssetChoice] = []
     motions: list[Motion] = []
 

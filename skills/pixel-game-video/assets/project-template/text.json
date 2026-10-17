@@ -1,7 +1,7 @@
 {
   "cues": [
     {"id": "line1", "role": "subtitle", "text": "先找到线索，再决定方向。", "phrases": ["xian zhao dao xian suo", "zai jue ding fang xiang"], "start": {"event": "s01.enter", "offsetFrames": 12}, "end": {"event": "s01.exit", "offsetFrames": -12}},
-    {"id": "line2", "role": "subtitle", "text": "观察、验证，把发现记下来。", "phrases": ["guan cha yan zheng", "ba fa xian ji xia lai"], "start": {"event": "s02.enter", "offsetFrames": 36}, "end": {"event": "s02.exit", "offsetFrames": -12}},
-    {"id": "line3", "role": "subtitle", "text": "有了依据，选择就更清楚。", "phrases": ["you le yi ju", "xuan ze jiu geng qing chu"], "start": {"event": "s03.enter", "offsetFrames": 12}, "end": {"event": "s03.exit", "offsetFrames": -12}}
+    {"id": "line2", "role": "subtitle", "text": "观察、验证，把发现记下来。", "phrases": ["guan cha yan zheng", "ba fa xian ji xia lai"], "start": {"event": "s02.enter", "offsetFrames": 40}, "end": {"event": "s02.exit", "offsetFrames": -12}},
+    {"id": "line3", "role": "subtitle", "text": "有了依据，选择就更清楚。", "phrases": ["you le yi ju", "xuan ze jiu geng qing chu"], "start": {"event": "s03.enter", "offsetFrames": 52}, "end": {"event": "s03.exit", "offsetFrames": -12}}
   ]
 }

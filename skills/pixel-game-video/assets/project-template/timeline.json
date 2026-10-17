@@ -5,36 +5,154 @@
       "durationFrames": 240,
       "scene": "scenes.focus.v1",
       "actor": "actor.lead02.v1",
-      "params": {"label": "寻找线索", "detail": "观察，再开始"},
-      "objects": [{"id": "book", "asset": "prop.book.v1", "x": 0.68, "y": 0.48}],
-      "events": [{"id": "reveal", "frame": 24}],
+      "params": {
+        "label": "寻找线索",
+        "detail": "观察，再开始"
+      },
+      "objects": [
+        {
+          "id": "book",
+          "asset": "prop.book.v1",
+          "x": 0.68,
+          "y": 0.48
+        }
+      ],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 24
+        }
+      ],
       "motions": [
-        {"id": "reveal", "recipe": "motion.object-reveal.v1", "target": "book", "start": {"event": "s01.reveal"}, "durationFrames": 72, "params": {"scaleFrom": 0.25, "turns": 1}},
-        {"id": "push", "recipe": "motion.camera-push.v1", "target": "scene", "start": {"event": "s01.enter"}, "durationFrames": 240, "params": {"scale": 1.08, "x": 0.6, "y": 0.5}}
+        {
+          "id": "reveal",
+          "recipe": "motion.object-reveal.v1",
+          "target": "book",
+          "start": {
+            "event": "s01.reveal"
+          },
+          "durationFrames": 72,
+          "params": {
+            "scaleFrom": 0.25,
+            "turns": 1
+          }
+        },
+        {
+          "id": "push",
+          "recipe": "motion.camera-push.v1",
+          "target": "scene",
+          "start": {
+            "event": "s01.enter"
+          },
+          "durationFrames": 240,
+          "params": {
+            "scale": 1.08,
+            "x": 0.6,
+            "y": 0.5
+          }
+        }
       ]
     },
     {
       "id": "s02",
       "durationFrames": 240,
       "scene": "scenes.steps.v1",
-      "actor": "actor.lead02.v1",
-      "params": {"items": [{"label": "观察", "event": "observe"}, {"label": "验证", "event": "verify"}, {"label": "记录", "event": "record"}]},
+      "actor": null,
+      "params": {
+        "items": [
+          {
+            "label": "观察",
+            "event": "observe"
+          },
+          {
+            "label": "验证",
+            "event": "verify"
+          },
+          {
+            "label": "记录",
+            "event": "record"
+          }
+        ]
+      },
       "objects": [],
-      "events": [{"id": "observe", "frame": 60}, {"id": "verify", "frame": 120}, {"id": "record", "frame": 180}],
+      "events": [
+        {
+          "id": "observe",
+          "frame": 60
+        },
+        {
+          "id": "verify",
+          "frame": 120
+        },
+        {
+          "id": "record",
+          "frame": 180
+        }
+      ],
       "motions": [
-        {"id": "transition", "recipe": "motion.shatter-reveal.v1", "target": "scene", "start": {"event": "s02.enter"}, "durationFrames": 36, "params": {"x": 0.65, "y": 0.5}},
-        {"id": "success", "recipe": "motion.gold-burst.v1", "target": "scene", "start": {"event": "s02.record"}, "durationFrames": 48, "params": {"x": 0.65, "y": 0.5}}
+        {
+          "id": "transition",
+          "recipe": "motion.focus-punch.v1",
+          "target": "scene",
+          "start": {
+            "event": "s02.enter"
+          },
+          "durationFrames": 36,
+          "params": {
+            "x": 0.65,
+            "y": 0.49,
+            "zoom": 5.8
+          }
+        },
+        {
+          "id": "success",
+          "recipe": "motion.gold-burst.v1",
+          "target": "scene",
+          "start": {
+            "event": "s02.record"
+          },
+          "durationFrames": 48,
+          "params": {
+            "x": 0.5,
+            "y": 0.426
+          }
+        }
       ]
     },
     {
       "id": "s03",
       "durationFrames": 240,
       "scene": "scenes.choice.v1",
-      "actor": "actor.lead02.v1",
-      "params": {"options": ["立即猜测", "依据线索"], "selectedIndex": 1, "selectEvent": "choose"},
+      "actor": null,
+      "params": {
+        "options": [
+          "立即猜测",
+          "依据线索"
+        ],
+        "selectedIndex": 1,
+        "selectEvent": "choose"
+      },
       "objects": [],
-      "events": [{"id": "choose", "frame": 120}],
-      "motions": []
+      "events": [
+        {
+          "id": "choose",
+          "frame": 120
+        }
+      ],
+      "motions": [
+        {
+          "id": "transition",
+          "recipe": "motion.mosaic-pullback.v1",
+          "target": "scene",
+          "start": {
+            "event": "s03.enter"
+          },
+          "durationFrames": 48,
+          "params": {
+            "columns": 9
+          }
+        }
+      ]
     }
   ]
 }

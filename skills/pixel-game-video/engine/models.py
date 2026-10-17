@@ -56,7 +56,7 @@ class Shot(Model):
     id: Id
     durationFrames: PositiveFrames
     scene: Id
-    actor: Id = "actor.lead02.v1"
+    actor: Id | None = "actor.lead02.v1"
     params: dict[str, Any] = Field(default_factory=dict)
     objects: list[SceneObject] = Field(default_factory=list)
     events: list[Event] = Field(default_factory=list)

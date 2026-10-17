@@ -72,10 +72,18 @@ def _motion_params(recipe, params):
         "motion.object-reveal.v1": {"scaleFrom": (0.05, 1), "turns": (0, 4)},
         "motion.gold-burst.v1": {"x": (0, 1), "y": (0, 1)},
         "motion.shatter-reveal.v1": {"x": (0, 1), "y": (0, 1), "seed": (0, 2147483647)},
+        "motion.panel-slide.v1": {"distance": (0.1, 0.35)},
+        "motion.pixel-iris.v1": {"x": (0, 1), "y": (0, 1)},
+        "motion.focus-punch.v1": {"x": (0, 1), "y": (0, 1), "zoom": (3, 8)},
+        "motion.mosaic-pullback.v1": {"columns": (3, 9)},
     }
     if recipe not in rules:
         raise ValueError(f"motion executor unavailable: {recipe}")
     for key, value in params.items():
+        if recipe == "motion.panel-slide.v1" and key == "direction":
+            if value not in ("left", "right"):
+                raise ValueError("panel-slide.direction must be left or right")
+            continue
         if key not in rules[recipe]:
             raise ValueError(f"{recipe}: unsupported parameter {key}")
         lo, hi = rules[recipe][key]
@@ -83,6 +91,8 @@ def _motion_params(recipe, params):
             raise ValueError(f"{recipe}.{key}: expected number in [{lo}, {hi}]")
         if key == "seed" and type(value) is not int:
             raise ValueError("shatter seed must be an integer")
+        if key == "columns" and (type(value) is not int or value % 2 != 1):
+            raise ValueError("mosaic columns must be an odd integer from 3 to 9")
 
 
 def compile_project(project_root, skill_root=None, *, write=False):
@@ -94,6 +104,7 @@ def compile_project(project_root, skill_root=None, *, write=False):
     if project["authoringMode"] == "director":
         _source_integrity(root)
     catalogs = catalog(skill)
+    content_stage = catalogs["scenes"]["contentStage"]
     lookup = {name: {item["id"]: item for item in data["items"]} for name, data in catalogs.items()}
 
     def require(module, ident):
@@ -134,9 +145,11 @@ def compile_project(project_root, skill_root=None, *, write=False):
     spec.loader.exec_module(validator)
     for index, shot in enumerate(shots):
         require("scenes", shot["scene"])
-        require("library", shot["actor"])
-        if not shot["actor"].startswith("actor."):
-            raise ValueError("shot.actor must reference an actor")
+        shot["actor"] = shot.get("actor")
+        if shot["actor"] is not None:
+            require("library", shot["actor"])
+            if not shot["actor"].startswith("actor."):
+                raise ValueError("shot.actor must reference an actor or be null")
         unique((o["id"] for o in shot["objects"]), f"{shot['id']}.objects")
         for obj in shot["objects"]:
             require("library", obj["asset"])
@@ -148,7 +161,7 @@ def compile_project(project_root, skill_root=None, *, write=False):
         targets = {"scene", "actor"} | {o["id"] for o in shot["objects"]}
         intervals = {}
         for motion in shot["motions"]:
-            require("motion", motion["recipe"])
+            capability = require("motion", motion["recipe"])
             _motion_params(motion["recipe"], motion["params"])
             start = resolve(motion.pop("start"))
             end = start + motion.pop("durationFrames")
@@ -161,9 +174,26 @@ def compile_project(project_root, skill_root=None, *, write=False):
                 raise ValueError("object-reveal requires an object target")
             if recipe != "motion.object-reveal.v1" and motion["target"] != "scene":
                 raise ValueError(f"{recipe} requires target=scene")
-            if recipe == "motion.shatter-reveal.v1" and (index == 0 or start != shot["startFrame"]):
-                raise ValueError("shatter-reveal requires a previous shot and must start at shot.enter")
-            key = (recipe, motion["target"])
+            transition = capability.get("kind") == "transition"
+            if transition and (index == 0 or start != shot["startFrame"]):
+                raise ValueError(f"{recipe}: transition requires a previous shot and must start at shot.enter")
+            if capability.get("layer") == "content":
+                if end - start < 8:
+                    raise ValueError("content transition needs at least 8 frames for exit and entry")
+                if recipe == "motion.pixel-iris.v1":
+                    for axis, extent in (("x", "width"), ("y", "height")):
+                        value = motion["params"].get(axis, content_stage[axis] + content_stage[extent] / 2)
+                        if not content_stage[axis] <= value <= content_stage[axis] + content_stage[extent]:
+                            raise ValueError("pixel-iris focus must be inside the content stage")
+                half_width = .27 * project["height"] / project["width"] / 2
+                for owner in (shots[index - 1], shot):
+                    for obj in owner["objects"]:
+                        if not (content_stage["x"] <= obj["x"] - half_width and
+                                obj["x"] + half_width <= content_stage["x"] + content_stage["width"] and
+                                content_stage["y"] <= obj["y"] - .135 and
+                                obj["y"] + .135 <= content_stage["y"] + content_stage["height"]):
+                            raise ValueError(f"{owner['id']}.{obj['id']}: object outside content stage; reposition it or use another transition")
+            key = ("transition" if transition else recipe, motion["target"])
             if any(start < b and a < end for a, b in intervals.get(key, [])):
                 raise ValueError(f"overlapping motion on {motion['target']}: {recipe}")
             intervals.setdefault(key, []).append((start, end))
@@ -207,6 +237,7 @@ def compile_project(project_root, skill_root=None, *, write=False):
             runtime_hashes[name] = file_hash(skill / name)
     digest = hashlib.sha256(json.dumps({"inputs": source_hashes, "runtime": runtime_hashes}, sort_keys=True).encode()).hexdigest()
     resolved = {"contractVersion": 1, "inputHash": digest, "project": project,
+                "contentStage": content_stage,
                 "durationFrames": cursor, "durationSeconds": cursor / project["fps"],
                 "shots": shots, "events": events, "cues": cues, "audio": audio}
     if write:

@@ -146,11 +146,18 @@
           "type": "string"
         },
         "actor": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
           "default": "actor.lead02.v1",
-          "maxLength": 100,
-          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
-          "title": "Actor",
-          "type": "string"
+          "title": "Actor"
         },
         "params": {
           "additionalProperties": true,

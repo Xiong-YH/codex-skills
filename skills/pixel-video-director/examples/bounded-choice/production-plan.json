@@ -21,33 +21,66 @@
     },
     {
       "id": "s2",
-      "actor": "actor.lead02.v1",
+      "actor": null,
       "objects": [],
       "motions": [
         {
           "id": "reveal",
-          "recipe": "motion.shatter-reveal.v1",
+          "recipe": "motion.focus-punch.v1",
           "target": "scene",
           "start": {
             "event": "s2.enter",
             "offsetFrames": 0
           },
-          "durationFrames": 24,
-          "params": {}
+          "durationFrames": 36,
+          "params": {
+            "x": 0.65,
+            "y": 0.49,
+            "zoom": 5.8
+          }
         }
       ]
     },
     {
       "id": "s3",
-      "actor": "actor.lead02.v1",
+      "actor": null,
       "objects": [],
-      "motions": []
+      "motions": [
+        {
+          "id": "narrow",
+          "recipe": "motion.mosaic-pullback.v1",
+          "target": "scene",
+          "start": {
+            "event": "s3.enter",
+            "offsetFrames": 0
+          },
+          "durationFrames": 48,
+          "params": {
+            "columns": 9
+          }
+        }
+      ]
     },
     {
       "id": "s4",
-      "actor": "actor.lead02.v1",
+      "actor": null,
       "objects": [],
       "motions": [
+        {
+          "id": "resolve",
+          "recipe": "motion.focus-punch.v1",
+          "target": "scene",
+          "start": {
+            "event": "s4.enter",
+            "offsetFrames": 0
+          },
+          "durationFrames": 40,
+          "params": {
+            "x": 0.5,
+            "y": 0.413,
+            "zoom": 4.5
+          }
+        },
         {
           "id": "reward",
           "recipe": "motion.gold-burst.v1",
@@ -57,7 +90,10 @@
             "offsetFrames": 0
           },
           "durationFrames": 35,
-          "params": {}
+          "params": {
+            "x": 0.5,
+            "y": 0.413
+          }
         }
       ]
     }
@@ -81,6 +117,39 @@
     }
   ],
   "audio": [
+    {
+      "id": "steps-panel",
+      "sound": "extract",
+      "at": {
+        "event": "s2.enter",
+        "offsetFrames": 0
+      },
+      "level": 0.3,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "counter-panel",
+      "sound": "system-unfold",
+      "at": {
+        "event": "s3.enter",
+        "offsetFrames": 0
+      },
+      "level": 0.28,
+      "x": 0.65,
+      "variant": 0
+    },
+    {
+      "id": "result-panel",
+      "sound": "panel-open",
+      "at": {
+        "event": "s4.enter",
+        "offsetFrames": 0
+      },
+      "level": 0.32,
+      "x": 0.68,
+      "variant": 0
+    },
     {
       "id": "pick",
       "sound": "select",

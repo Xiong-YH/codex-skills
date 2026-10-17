@@ -76,8 +76,27 @@
     if(shot.params.detail)label(e,shot.params.detail,.65,.27,.026,e.colors.muted,.46);
   }
   const handlers={'scenes.steps.v1':steps,'scenes.counter.v1':counter,'scenes.choice.v1':choice,'scenes.assembly.v1':assembly,'scenes.focus.v1':focus};
-  P.scenes={eventFrame,performance(mouth,frame){const cue=mouth.find(c=>frame>=c.startFrame&&frame<c.endFrame);return cue?cue.pose:0;},draw(e,shot,frame){
+  function content(e,shot,frame){
     const handler=handlers[shot.scene];if(!handler)throw new Error('Unknown scene '+shot.scene);
-    P.style.background(e);P.library.actor(e,shot,frame);handler(e,shot,frame);P.library.objects(e,shot,frame);
+    const g=e.ctx;g.save();
+    // A shot without a presenter gives the mechanism the centre of the screen.
+    // Keep the authoring coordinates stable; this composition belongs to scenes.
+    if(!shot.actor){g.translate(e.width*.5,e.height*.40);g.scale(1.3,1.3);g.translate(-e.width*.65,-e.height*.48);}
+    handler(e,shot,frame);P.library.objects(e,shot,frame);g.restore();
+  }
+  P.scenes={eventFrame,performance(mouth,frame){const cue=mouth.find(c=>frame>=c.startFrame&&frame<c.endFrame);return cue?cue.pose:0;},
+  stageBounds(e,shot){
+    if(shot&&!shot.actor)return{x:e.width*.06,y:e.height*.08,width:e.width*.88,height:e.height*.70};
+    const s=e.resolved.contentStage;
+    if(!s)throw new Error('Missing compiled content stage; rebuild the project');
+    return {x:s.x*e.width,y:s.y*e.height,width:s.width*e.width,height:s.height*e.height};
+  },
+  drawLayer(e,shot,frame,layer){
+    if(layer==='background')P.style.background(e);
+    else if(layer==='actor')P.library.actor(e,shot,frame);
+    else if(layer==='content')content(e,shot,frame);
+    else throw new Error('Unknown scene layer '+layer);
+  },draw(e,shot,frame){
+    P.style.background(e);P.library.actor(e,shot,frame);content(e,shot,frame);
   }};
 })(globalThis.PixelVideo=globalThis.PixelVideo||{});

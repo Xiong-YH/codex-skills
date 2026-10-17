@@ -1,4 +1,8 @@
 {"module":"motion","items":[
+  {"id":"motion.focus-punch.v1","kind":"transition","layer":"world","title":"焦点急推换景 · 全景别冲击","target":"scene","params":{"x":[0,1],"y":[0,1],"zoom":[3,8]}},
+  {"id":"motion.mosaic-pullback.v1","kind":"transition","layer":"world","title":"场景卡墙后拉 · 锁定目标推入","target":"scene","params":{"columns":"odd integer 3–9"}},
+  {"id":"motion.panel-slide.v1","kind":"transition","layer":"content","title":"任务面板交接 · 主体与背景保持","target":"scene","params":{"direction":["left","right"],"distance":[0.1,0.35]}},
+  {"id":"motion.pixel-iris.v1","kind":"transition","layer":"content","title":"像素菱形收拢与结果揭示","target":"scene","params":{"x":[0,1],"y":[0,1]}},
   {"id":"motion.camera-push.v1","kind":"camera","title":"围绕共享焦点推进","target":"scene","params":{"scale":[1,1.25],"x":[0,1],"y":[0,1]}},
   {"id":"motion.shatter-reveal.v1","kind":"transition","title":"上一镜纹理碎裂揭示下一镜","target":"scene","params":{"x":[0,1],"y":[0,1],"seed":"integer"}},
   {"id":"motion.object-reveal.v1","kind":"object","title":"二维正面翻转放大","target":"object id","params":{"scaleFrom":[0.05,1],"turns":[0,4]}},

@@ -89,7 +89,7 @@
           "cueId": "c2",
           "start": {
             "event": "s2.enter",
-            "offsetFrames": 8
+            "offsetFrames": 40
           },
           "end": {
             "event": "s2.exit",
@@ -118,7 +118,7 @@
       "events": [
         {
           "id": "filter_start",
-          "frame": 30
+          "frame": 54
         },
         {
           "id": "filter_done",
@@ -131,7 +131,7 @@
           "cueId": "c3",
           "start": {
             "event": "s3.enter",
-            "offsetFrames": 8
+            "offsetFrames": 52
           },
           "end": {
             "event": "s3.exit",
@@ -184,7 +184,7 @@
           "cueId": "c4",
           "start": {
             "event": "s4.enter",
-            "offsetFrames": 8
+            "offsetFrames": 44
           },
           "end": {
             "event": "s4.exit",

@@ -68,6 +68,23 @@ class WorkflowTests(unittest.TestCase):
             handoff(self.project, self.foundation)
         self.assertEqual(target.read_bytes(), original)
 
+    def test_explicit_null_actor_handoffs_with_source_ownership(self):
+        self.change("production-plan.json", lambda d: d["shots"][0].update(actor=None))
+        handoff(self.project, self.foundation)
+        timeline = read_json(self.project / "video/timeline.json")
+        self.assertIn("actor", timeline["shots"][0])
+        self.assertIsNone(timeline["shots"][0]["actor"])
+        mapping = read_json(self.project / "video/source-map.json")
+        owner = next(m for m in mapping["mappings"] if m["generatedFile"] == "timeline.json"
+                     and m["jsonPointer"] == "/shots/0/actor")
+        self.assertEqual((owner["sourceFile"], owner["stableId"], owner["field"]),
+                         ("../production-plan.json", "s1", "/actor"))
+
+    def test_actor_choice_must_be_explicit(self):
+        self.change("production-plan.json", lambda d: d["shots"][0].pop("actor"))
+        with self.assertRaisesRegex(ValueError, "actor"):
+            load_sources(self.project)
+
     def test_invalid_capability_preserves_previous_generation(self):
         handoff(self.project, self.foundation)
         previous = (self.project / "video/timeline.json").read_bytes()
