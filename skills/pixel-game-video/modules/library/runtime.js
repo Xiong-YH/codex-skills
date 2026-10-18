@@ -75,18 +75,21 @@
     return canvas;
   }
   P.library = {
+    reference(e, id, x, baseline, height, options = {}) {
+      const image = e.assets[`${id}:reference`];
+      if (!image) throw new Error('Missing character reference ' + id);
+      const width = height * image.width / image.height, facing = options.facing || 1;
+      const g = e.ctx;
+      g.save(); g.translate(x, baseline); g.rotate(options.tilt || 0); g.scale(facing, 1);
+      g.imageSmoothingEnabled = false;
+      g.drawImage(image, -width / 2, -height, width, height); g.restore();
+      return {x: x + facing * width * .25, y: baseline - height * .25};
+    },
     actor(e, shot, frame) {
-      if (!shot.actor) return;
-      if(shot.scene==='scenes.cache-adventure.v1')return;
-      const pose = P.scenes.performance(e.mouth, frame), blinkTime = frame - Math.round(e.fps * 2.8);
-      const blink = blinkTime >= 0 && (blinkTime % Math.round(e.fps * 3.7)) < Math.max(1, Math.round(e.fps * .1)) ? 1 : 0;
-      const image = e.assets[`${shot.actor}:${blink}-${pose}`];
-      if (!image) throw new Error('Missing actor asset ' + shot.actor);
-      const placement=e.style.presenter||{};
-      const height = e.height * (placement.height??.40), width = height * 32 / 36;
-      const x = e.width * (placement.x??.20), base = e.height * (placement.baseline??.75);
-      e.ctx.imageSmoothingEnabled = false;
-      e.ctx.drawImage(image, x - width / 2, base - height * 33 / 36, width, height);
+      if (!shot.actor || shot.scene === 'scenes.cache-adventure.v1') return;
+      const placement = e.style.presenter || {};
+      P.library.reference(e, shot.actor, e.width * (placement.x ?? .20),
+        e.height * (placement.baseline ?? .75), e.height * (placement.height ?? .40));
     },
     prop(e, asset, x, y, size, transform) {
       const g = e.ctx, s = size || e.height * .24;

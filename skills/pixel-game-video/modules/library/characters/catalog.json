@@ -1,0 +1,249 @@
+{
+  "version": 3,
+  "catalog_type": "character_and_acting_reference",
+  "default_lead": "00-lead",
+  "generation_method": "built_in_image_gen",
+  "names_are_provisional": true,
+  "current_entries": [
+    {
+      "id": "00-lead",
+      "assetId": "actor.azong.v3",
+      "name": "阿棕",
+      "role": "主角 / 串讲者",
+      "appearance": "暖棕蓬发、圆润脸、友好方眼、薄荷色上衣与浅色内搭、深蓝裤鞋；无围巾。",
+      "framing": "full_body",
+      "master": "00-lead.png",
+      "sheet": "00-lead-actions-review.jpg",
+      "bio_card": "personas/00-lead.jpg",
+      "bio_json": "personas/00-lead.json",
+      "reference_ready": true,
+      "runtime_sprite_ready": false,
+      "actions": [
+        {
+          "id": "neutral",
+          "name": "待机／倾听",
+          "image": "actions/00-lead/neutral.png"
+        },
+        {
+          "id": "wave",
+          "name": "挥手",
+          "image": "actions/00-lead/wave.png"
+        },
+        {
+          "id": "talk",
+          "name": "口播／解释",
+          "image": "actions/00-lead/talk.png"
+        },
+        {
+          "id": "dazed-left",
+          "name": "迷糊左摇",
+          "image": "actions/00-lead/dazed-left.png"
+        },
+        {
+          "id": "dazed-right",
+          "name": "迷糊右摇",
+          "image": "actions/00-lead/dazed-right.png"
+        },
+        {
+          "id": "overwhelmed",
+          "name": "抱头／崩溃",
+          "image": "actions/00-lead/overwhelmed.png"
+        }
+      ]
+    },
+    {
+      "id": "01-ink",
+      "assetId": "actor.amo.v3",
+      "name": "阿墨",
+      "role": "配角 / 提问与质疑者",
+      "appearance": "墨色侧分发、长窄偏方下颌、细长半垂眼、平直粗眉、短而偏斜的嘴；靛蓝衬衫。",
+      "framing": "full_body",
+      "master": "01-ink.png",
+      "sheet": "01-ink-actions-review.jpg",
+      "bio_card": "personas/01-ink.jpg",
+      "bio_json": "personas/01-ink.json",
+      "reference_ready": true,
+      "runtime_sprite_ready": false,
+      "actions": [
+        {
+          "id": "neutral",
+          "name": "待机／倾听",
+          "image": "actions/01-ink/neutral.png"
+        },
+        {
+          "id": "wave",
+          "name": "挥手",
+          "image": "actions/01-ink/wave.png"
+        },
+        {
+          "id": "talk",
+          "name": "口播／解释",
+          "image": "actions/01-ink/talk.png"
+        },
+        {
+          "id": "dazed-left",
+          "name": "迷糊左摇",
+          "image": "actions/01-ink/dazed-left.png"
+        },
+        {
+          "id": "dazed-right",
+          "name": "迷糊右摇",
+          "image": "actions/01-ink/dazed-right.png"
+        },
+        {
+          "id": "overwhelmed",
+          "name": "抱头／崩溃",
+          "image": "actions/01-ink/overwhelmed.png"
+        }
+      ]
+    },
+    {
+      "id": "02-copper",
+      "assetId": "actor.lizi.v3",
+      "name": "栗子",
+      "role": "配角 / 拆解与演示者",
+      "appearance": "栗铜齐颌短发、心形/菱形脸、收尖下巴、上挑杏眼与弧眉、小而不对称的笑；梅紫外套。",
+      "framing": "full_body",
+      "master": "02-copper.png",
+      "sheet": "02-copper-actions-review.jpg",
+      "bio_card": "personas/02-copper.jpg",
+      "bio_json": "personas/02-copper.json",
+      "reference_ready": true,
+      "runtime_sprite_ready": false,
+      "actions": [
+        {
+          "id": "neutral",
+          "name": "待机／倾听",
+          "image": "actions/02-copper/neutral.png"
+        },
+        {
+          "id": "wave",
+          "name": "挥手",
+          "image": "actions/02-copper/wave.png"
+        },
+        {
+          "id": "talk",
+          "name": "口播／解释",
+          "image": "actions/02-copper/talk.png"
+        },
+        {
+          "id": "dazed-left",
+          "name": "迷糊左摇",
+          "image": "actions/02-copper/dazed-left.png"
+        },
+        {
+          "id": "dazed-right",
+          "name": "迷糊右摇",
+          "image": "actions/02-copper/dazed-right.png"
+        },
+        {
+          "id": "overwhelmed",
+          "name": "抱头／崩溃",
+          "image": "actions/02-copper/overwhelmed.png"
+        }
+      ]
+    },
+    {
+      "id": "03-glasses",
+      "assetId": "actor.laomai.v3",
+      "name": "老麦",
+      "role": "配角 / 核对与边界提醒者",
+      "appearance": "深灰卷发带浅灰鬓角、宽方柔角脸、较宽像素鼻、圆眼镜内细横眼、轻微眼下纹理；燕麦针织衫。",
+      "framing": "full_body",
+      "master": "03-glasses.png",
+      "sheet": "03-glasses-actions-review.jpg",
+      "bio_card": "personas/03-glasses.jpg",
+      "bio_json": "personas/03-glasses.json",
+      "reference_ready": true,
+      "runtime_sprite_ready": false,
+      "actions": [
+        {
+          "id": "neutral",
+          "name": "待机／倾听",
+          "image": "actions/03-glasses/neutral.png"
+        },
+        {
+          "id": "wave",
+          "name": "挥手",
+          "image": "actions/03-glasses/wave.png"
+        },
+        {
+          "id": "talk",
+          "name": "口播／解释",
+          "image": "actions/03-glasses/talk.png"
+        },
+        {
+          "id": "dazed-left",
+          "name": "迷糊左摇",
+          "image": "actions/03-glasses/dazed-left.png"
+        },
+        {
+          "id": "dazed-right",
+          "name": "迷糊右摇",
+          "image": "actions/03-glasses/dazed-right.png"
+        },
+        {
+          "id": "overwhelmed",
+          "name": "抱头／崩溃",
+          "image": "actions/03-glasses/overwhelmed.png"
+        }
+      ]
+    },
+    {
+      "id": "04-human-bust",
+      "assetId": "actor.chen.v3",
+      "name": "陈先生",
+      "role": "专题配角 / 虚构案例当事人",
+      "appearance": "约四十多岁的虚构成年男性，真实头身与五官结构，深发灰鬓、石墨外套与橄榄衬衫；仅半身。",
+      "framing": "half_body_only",
+      "master": "04-human-bust.png",
+      "sheet": "04-human-bust-actions-review.jpg",
+      "bio_card": "personas/04-human-bust.jpg",
+      "bio_json": "personas/04-human-bust.json",
+      "reference_ready": true,
+      "runtime_sprite_ready": false,
+      "actions": [
+        {
+          "id": "neutral",
+          "name": "待机／倾听",
+          "image": "actions/04-human-bust/neutral.png"
+        },
+        {
+          "id": "wave",
+          "name": "挥手",
+          "image": "actions/04-human-bust/wave.png"
+        },
+        {
+          "id": "talk",
+          "name": "口播／解释",
+          "image": "actions/04-human-bust/talk.png"
+        },
+        {
+          "id": "dazed-left",
+          "name": "迷糊左摇",
+          "image": "actions/04-human-bust/dazed-left.png"
+        },
+        {
+          "id": "dazed-right",
+          "name": "迷糊右摇",
+          "image": "actions/04-human-bust/dazed-right.png"
+        },
+        {
+          "id": "overwhelmed",
+          "name": "抱头／崩溃",
+          "image": "actions/04-human-bust/overwhelmed.png"
+        }
+      ]
+    }
+  ],
+  "usage_policy": "usage-policy.json",
+  "character_bible": "character-bible.json",
+  "action_guide": "action-guide.json",
+  "runtime_sprite_ready": false,
+  "approval": {
+    "status": "user_approved",
+    "date": "2026-10-19",
+    "scope": "当前五人形象、人设、六种动作参考及半身仿真人使用约束；不表示逐帧动画或透明清稿已完成。"
+  },
+  "previewMode": "reference-static"
+}

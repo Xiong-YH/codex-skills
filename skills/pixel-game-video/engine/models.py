@@ -52,15 +52,43 @@ class Motion(Model):
     params: dict[str, Any] = Field(default_factory=dict)
 
 
+class MediaSource(Model):
+    file: Annotated[str, Field(min_length=1)]
+    kind: Literal["image", "video"] = "image"
+    fit: Literal["cover", "contain"] = "cover"
+    anchorX: Unit = 0.5
+    anchorY: Unit = 0.5
+    dim: Annotated[float, Field(ge=0, le=0.85)] = 0.0
+    trimStartSeconds: Annotated[float, Field(ge=0)] = 0.0
+    shortage: Literal["error", "hold"] = "error"
+
+
+class Component(Model):
+    id: Id
+    kind: Literal["identity", "metric", "comparison", "annotation", "chapter",
+                  "flow", "timeline", "checklist", "hierarchy", "bars", "code", "takeaway"]
+    x: Unit
+    y: Unit
+    width: Annotated[float, Field(gt=0, le=1)]
+    height: Annotated[float, Field(gt=0, le=1)]
+    showEvent: Id = "enter"
+    focusEvent: Id | None = None
+    tone: Literal["accent", "gold", "danger", "secondary"] = "gold"
+    data: dict[str, Any]
+
+
 class Shot(Model):
     id: Id
     durationFrames: PositiveFrames
     scene: Id
-    actor: Id | None = "actor.lead02.v1"
+    actor: Id | None = "actor.azong.v3"
     params: dict[str, Any] = Field(default_factory=dict)
     objects: list[SceneObject] = Field(default_factory=list)
     events: list[Event] = Field(default_factory=list)
     motions: list[Motion] = Field(default_factory=list)
+    components: list[Component] = Field(default_factory=list)
+    background: MediaSource | None = None
+    replacement: MediaSource | None = None
 
 
 class Timeline(Model):

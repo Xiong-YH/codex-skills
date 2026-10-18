@@ -15,7 +15,7 @@
   "shots": [
     {
       "id": "s1",
-      "actor": "actor.lead02.v1",
+      "actor": "actor.azong.v3",
       "objects": [
         {
           "id": "cap",
@@ -57,7 +57,7 @@
     },
     {
       "id": "s2",
-      "actor": "actor.lead02.v1",
+      "actor": "actor.azong.v3",
       "objects": [
         {
           "id": "cap",
@@ -86,7 +86,7 @@
     },
     {
       "id": "s3",
-      "actor": "actor.lead02.v1",
+      "actor": "actor.azong.v3",
       "objects": [
         {
           "id": "laptop",
@@ -110,7 +110,7 @@
     },
     {
       "id": "s4",
-      "actor": "actor.lead02.v1",
+      "actor": "actor.azong.v3",
       "objects": [
         {
           "id": "goal",

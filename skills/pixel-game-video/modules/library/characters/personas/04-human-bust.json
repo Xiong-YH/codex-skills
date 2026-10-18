@@ -1,0 +1,89 @@
+{
+  "id": "04-human-bust",
+  "name": "陈先生",
+  "role": "专题配角 / 虚构案例当事人",
+  "appearance": "约四十多岁的虚构成年男性，真实头身与五官结构，深发灰鬓、石墨外套与橄榄衬衫；仅半身。",
+  "personality": "克制、专注，表达具体处境中的犹豫、取舍与压力。",
+  "narrative_job": "在以人为核心的关键场景中承担访谈、决策、人物观点或情绪转折。人物画像也可用于虚构案例身份卡。",
+  "speech_style": "具体、克制，讲个人处境，不替所有人下结论。",
+  "typical_line": "我当时更在意速度，后来才发现这一步不能省。",
+  "acting_signature": "视线转向对话者、低位手势、眉眼收紧、短暂低头；仅在剧情需要时表现迷糊或压力。",
+  "avoid": "默认常驻口播、全身出镜、代替实际历史人物或真实专家、给未经设定的身份附加权威。",
+  "framing": "half_body_only",
+  "fictional": true,
+  "historical_identity_note": "这是虚构人物。历史复刻应按具体人物另做身份对应的画像，不能将本素材改名当作真实历史人物。",
+  "master": "04-human-bust.png",
+  "sheet": "04-human-bust-actions-review.jpg",
+  "bio_card": "personas/04-human-bust.jpg",
+  "bio_json": "personas/04-human-bust.json",
+  "reference_ready": true,
+  "runtime_sprite_ready": false,
+  "actions": [
+    {
+      "id": "neutral",
+      "name": "待机／倾听",
+      "trigger": "进入段落、听对方说话、动作收束",
+      "movement": "双臂放松，视线从内容区缓慢回到对话者；轻微眨眼，脚底稳定。",
+      "end": "回到该角色基准姿态。",
+      "avoid": "持续上下浮动或机械摆头。",
+      "image": "actions/04-human-bust/neutral.png",
+      "prompt": "使用 04-human-bust.png 与该动作参考，FICTIONAL mature realistic human face, swept short dark hair with gray temples, graphite jacket and olive shirt, naturally human proportions, rich blocky pixel facial planes. Special-scene supporting character. WAIST-UP ONLY, no legs or shoes anywhere, never change to chibi. 双臂放松，视线从内容区缓慢回到对话者；轻微眨眼，脚底稳定。 回到该角色基准姿态。 维持像素画风、角色脸型和服装；背景与镜头保持稳定。 画面若涉及半身仿真人，仅用于人物画像与身份介绍、历史人物或事件复刻、以具体人物为核心的关键场景（决策、访谈、人物观点或情绪转折）。常规概念讲解、流程关系图解及连续口播使用像素主角或配角，不默认使用半身仿真人。"
+    },
+    {
+      "id": "wave",
+      "name": "挥手",
+      "trigger": "出场、回应或告别",
+      "movement": "一只手抬至脸侧，肘部自然弯曲；以腕部做一到两次小幅左右摆动，再收回。",
+      "end": "手臂自然落回待机位。",
+      "avoid": "整条手臂无关节摆动、手掌变形、脚底滑动。",
+      "image": "actions/04-human-bust/wave.png",
+      "prompt": "使用 04-human-bust.png 与该动作参考，FICTIONAL mature realistic human face, swept short dark hair with gray temples, graphite jacket and olive shirt, naturally human proportions, rich blocky pixel facial planes. Special-scene supporting character. WAIST-UP ONLY, no legs or shoes anywhere, never change to chibi. 一只手抬至脸侧，肘部自然弯曲；以腕部做一到两次小幅左右摆动，再收回。 手臂自然落回待机位。 维持像素画风、角色脸型和服装；背景与镜头保持稳定。 画面若涉及半身仿真人，仅用于人物画像与身份介绍、历史人物或事件复刻、以具体人物为核心的关键场景（决策、访谈、人物观点或情绪转折）。常规概念讲解、流程关系图解及连续口播使用像素主角或配角，不默认使用半身仿真人。"
+    },
+    {
+      "id": "talk",
+      "name": "口播／解释",
+      "trigger": "角色正在组织或说明本镜信息",
+      "movement": "闭嘴→小幅张嘴→中幅张嘴→闭嘴，眉眼与语意配合；低位摊手仅出现一次，身体重心保持稳定。",
+      "end": "句末闭嘴、手势收住。",
+      "avoid": "下巴过度伸缩、嘴型切换带动整脸变化、挂舌尖、把模拟口型说成真实音素对齐。",
+      "image": "actions/04-human-bust/talk.png",
+      "prompt": "使用 04-human-bust.png 与该动作参考，FICTIONAL mature realistic human face, swept short dark hair with gray temples, graphite jacket and olive shirt, naturally human proportions, rich blocky pixel facial planes. Special-scene supporting character. WAIST-UP ONLY, no legs or shoes anywhere, never change to chibi. 闭嘴→小幅张嘴→中幅张嘴→闭嘴，眉眼与语意配合；低位摊手仅出现一次，身体重心保持稳定。 句末闭嘴、手势收住。 维持像素画风、角色脸型和服装；背景与镜头保持稳定。 画面若涉及半身仿真人，仅用于人物画像与身份介绍、历史人物或事件复刻、以具体人物为核心的关键场景（决策、访谈、人物观点或情绪转折）。常规概念讲解、流程关系图解及连续口播使用像素主角或配角，不默认使用半身仿真人。"
+    },
+    {
+      "id": "dazed-left",
+      "name": "迷糊左摇",
+      "trigger": "信息太多、疲倦或想不明白的情节",
+      "movement": "作为左右摇头晃脑的左端参考。头轻倾向画面左侧约6–10度，眼睑下压、视线失焦，肩部以更小幅度反向倾斜。",
+      "end": "经中立位转向 dazed-right，或回到 neutral。",
+      "avoid": "整张人物图平移代替头肩动作、无缘由长时间循环、脖子拉伸。",
+      "image": "actions/04-human-bust/dazed-left.png",
+      "prompt": "使用 04-human-bust.png 与该动作参考，FICTIONAL mature realistic human face, swept short dark hair with gray temples, graphite jacket and olive shirt, naturally human proportions, rich blocky pixel facial planes. Special-scene supporting character. WAIST-UP ONLY, no legs or shoes anywhere, never change to chibi. 作为左右摇头晃脑的左端参考。头轻倾向画面左侧约6–10度，眼睑下压、视线失焦，肩部以更小幅度反向倾斜。 经中立位转向 dazed-right，或回到 neutral。 维持像素画风、角色脸型和服装；背景与镜头保持稳定。 画面若涉及半身仿真人，仅用于人物画像与身份介绍、历史人物或事件复刻、以具体人物为核心的关键场景（决策、访谈、人物观点或情绪转折）。常规概念讲解、流程关系图解及连续口播使用像素主角或配角，不默认使用半身仿真人。"
+    },
+    {
+      "id": "dazed-right",
+      "name": "迷糊右摇",
+      "trigger": "与 dazed-left 组成一次左右摇头晃脑",
+      "movement": "头经中立位轻倾向画面右侧约6–10度；眉眼和嘴维持迷糊表情，肩部反向小幅跟随。",
+      "end": "左右交替一轮后回正；不要自动无限循环。",
+      "avoid": "直接镜像造成衣服、头发或脸部身份翻转。",
+      "image": "actions/04-human-bust/dazed-right.png",
+      "prompt": "使用 04-human-bust.png 与该动作参考，FICTIONAL mature realistic human face, swept short dark hair with gray temples, graphite jacket and olive shirt, naturally human proportions, rich blocky pixel facial planes. Special-scene supporting character. WAIST-UP ONLY, no legs or shoes anywhere, never change to chibi. 头经中立位轻倾向画面右侧约6–10度；眉眼和嘴维持迷糊表情，肩部反向小幅跟随。 左右交替一轮后回正；不要自动无限循环。 维持像素画风、角色脸型和服装；背景与镜头保持稳定。 画面若涉及半身仿真人，仅用于人物画像与身份介绍、历史人物或事件复刻、以具体人物为核心的关键场景（决策、访谈、人物观点或情绪转折）。常规概念讲解、流程关系图解及连续口播使用像素主角或配角，不默认使用半身仿真人。"
+    },
+    {
+      "id": "overwhelmed",
+      "name": "抱头／崩溃",
+      "trigger": "通知或任务继续增加、错误反复出现、注意力被拉扯，冲突确实升级",
+      "movement": "视线先看向压力来源；皱眉眯眼，肩膀缩起，两手抬到头侧，嘴收紧；短暂小幅肩颈颤动后停住。",
+      "end": "保留一个可读的抱头姿态，再按情节放手或转入恢复。",
+      "avoid": "仍用微笑脸、全身抽动、手穿过头发、只加汗滴而没有身体表达。",
+      "image": "actions/04-human-bust/overwhelmed.png",
+      "prompt": "使用 04-human-bust.png 与该动作参考，FICTIONAL mature realistic human face, swept short dark hair with gray temples, graphite jacket and olive shirt, naturally human proportions, rich blocky pixel facial planes. Special-scene supporting character. WAIST-UP ONLY, no legs or shoes anywhere, never change to chibi. 视线先看向压力来源；皱眉眯眼，肩膀缩起，两手抬到头侧，嘴收紧；短暂小幅肩颈颤动后停住。 保留一个可读的抱头姿态，再按情节放手或转入恢复。 维持像素画风、角色脸型和服装；背景与镜头保持稳定。 画面若涉及半身仿真人，仅用于人物画像与身份介绍、历史人物或事件复刻、以具体人物为核心的关键场景（决策、访谈、人物观点或情绪转折）。常规概念讲解、流程关系图解及连续口播使用像素主角或配角，不默认使用半身仿真人。"
+    }
+  ],
+  "assetId": "actor.chen.v3",
+  "approval": {
+    "status": "user_approved",
+    "date": "2026-10-19",
+    "scope": "当前五人形象、人设、六种动作参考及半身仿真人使用约束；不表示逐帧动画或透明清稿已完成。"
+  }
+}

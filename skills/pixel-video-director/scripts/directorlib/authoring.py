@@ -64,6 +64,16 @@ def load_sources(project):
 
     for shot in shots.values():
         validate_labels(shot["params"], shot["id"] + ".params")
+        validate_labels(shot["components"], shot["id"] + ".components")
+        for component in shot['components']:
+            component_data = component.get('data', {})
+            for item in [component_data, *component_data.get('items', [])]:
+                fields = ('title', 'eyebrow', 'detail', 'label', 'unit', 'index', 'rootTitle', 'language', 'text')
+                if component.get('kind') != 'bars':
+                    fields += ('value',)
+                for field in fields:
+                    if field in item and (not isinstance(item[field], dict) or set(item[field]) != {'labelId'}):
+                        raise ValueError(f"{shot['id']}: component {field} must reference script.labels")
         events = unique(shot["events"], "id", f"{shot['id']}.events")
         for event in events.values():
             if event["id"] in ("enter", "exit") or event["frame"] >= shot["durationFrames"]:
@@ -144,6 +154,11 @@ def transform(sources):
         for field in ("id", "durationFrames", "scene", "events"):
             timeline_shot[field] = map_value("timeline.json", f"/shots/{i}/{field}", shot[field], "storyboard.json", sid, "/" + field)
         timeline_shot["params"] = scene_params(shot["params"], f"/shots/{i}/params", sid, "/params")
+        if shot['components']:
+            timeline_shot['components'] = scene_params(shot['components'], f'/shots/{i}/components', sid, '/components')
+        for field in ('background', 'replacement'):
+            if shot_plan[field] is not None:
+                timeline_shot[field] = map_value('timeline.json', f'/shots/{i}/{field}', shot_plan[field], 'production-plan.json', sid, '/' + field)
         for field in ("actor", "motions"):
             timeline_shot[field] = map_value("timeline.json", f"/shots/{i}/{field}", shot_plan[field], "production-plan.json", sid, "/" + field)
         assets = {a["id"]: a for a in shot_plan["objects"]}
@@ -198,11 +213,25 @@ def handoff(project, foundation=None):
                   "sourceHashes": {"../" + name: value for name, value in source_hashes(project).items()},
                   "mappings": mappings}
     media = {}
-    for cue in sources['production-plan.json']['narration']:
+    media_refs = list(sources['production-plan.json']['narration'])
+    visual_files = []
+    for shot in sources['production-plan.json']['shots']:
+        visual_files.extend(shot[field] for field in ('background', 'replacement') if shot[field])
+    for shot in sources['storyboard.json']['shots']:
+        for component in shot['components']:
+            data = component.get('data', {})
+            visual_files.extend({'file': item['image']} for item in [data, *data.get('items', [])] if item.get('image'))
+    from pathlib import PurePosixPath, PureWindowsPath
+    for item in visual_files:
+        relative = item['file']
+        if not isinstance(relative, str) or '\\' in relative or PureWindowsPath(relative).is_absolute() or PurePosixPath(relative).parts[:1] != ('media',) or '..' in PurePosixPath(relative).parts:
+            raise ValueError('Visual media must use a portable path inside media/')
+    media_refs.extend(visual_files)
+    for cue in media_refs:
         relative = Path(cue['file'])
         source = (project / relative).resolve()
         if relative.is_absolute() or not source.is_relative_to(project):
-            raise ValueError('Narration file must stay inside the authoring project')
+            raise ValueError('Media file must stay inside the authoring project')
         portable = source.relative_to(project).as_posix()
         media[portable] = source
         source_map['sourceHashes']['../' + portable] = hashlib.sha256(source.read_bytes()).hexdigest()
@@ -278,7 +307,7 @@ def impact(project, source=None, stable_id=None, field=None):
         name, sid = change["sourceFile"], change["stableId"]
         if name == "script.json":
             affected.update(s["id"] for s in board if not sid or any(c["cueId"] == sid for c in s["cues"])
-                            or references_label(s["params"], sid))
+                            or references_label(s["params"], sid) or references_label(s['components'], sid))
             categories.update(("content", "text", "visual"))
             components.update(("text", "mouth", "reading-duration"))
         elif name == "storyboard.json":
@@ -301,6 +330,23 @@ def impact(project, source=None, stable_id=None, field=None):
             affected.update(s["id"] for s in board)
             categories.add("content")
             components.add("creative-intent")
+    def snapshot_refs(value):
+        if isinstance(value, dict):
+            result = {value['sourceShot']} if isinstance(value.get('sourceShot'), str) else set()
+            result.update(value.get('sourceShots', []))
+            for child in value.values():
+                result.update(snapshot_refs(child))
+            return result
+        if isinstance(value, list):
+            return set().union(*(snapshot_refs(child) for child in value))
+        return set()
+
+    # Card snapshots inherit the source shot's visual changes, transitively.
+    while True:
+        dependent = {s['id'] for s in board if snapshot_refs(s) & affected}
+        if dependent <= affected:
+            break
+        affected.update(dependent)
     if stable_id and not affected:
         raise ValueError(f"没有找到受 {source}:{stable_id} 影响的镜头。")
     frame, ranges = 0, []

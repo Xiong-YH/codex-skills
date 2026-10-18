@@ -10,7 +10,9 @@ description: 制作和修改像素游戏感视频，按结构化镜头、素材�
 | 修改内容 | 按需读取 |
 | --- | --- |
 | 色板、字体、像素密度 | [style](modules/style/GUIDE.md) |
-| 人物、物体、表情素材 | [library](modules/library/GUIDE.md) |
+| 背景生成、风格样板、镜头素材替换 | [风格基调](modules/style/ART-DIRECTION.md) |
+| 卡片、流程、时间轴、清单、层级、数据、代码与结论 | [十二类组件与组合](modules/components/GUIDE.md)，`catalog components` |
+| 人物、物体、表情素材 | [library](modules/library/GUIDE.md)；当前五人人设与动作读 [已确认人物库](modules/library/CHARACTERS.md) |
 | 字幕、注释、标题、标签 | [text](modules/text/GUIDE.md) |
 | 转场选型与设计 | [转场库](modules/motion/TRANSITIONS.md)，选定后按链接读配方 |
 | 游戏感、操作反馈与局部细节 | [游戏反馈细节库](modules/scenes/GAME_FEEL.md)，按实际状态选择触点、运动和声音 |
@@ -25,6 +27,6 @@ description: 制作和修改像素游戏感视频，按结构化镜头、素材�
 - 素材、风格、配方通过稳定 ID 选择；未知能力先实现并核验，不能用文案假装已经执行。
 - 保留用户已确认的角色和表达方向。模板题材、片长只是示例。
 - 人物按镜头可选；`actor:null` 让场景或物体居中主导画面，不要求主角常驻。
-- 支持纯音效或项目内 PCM 旁白混音；嘴型仍是模拟，没有内置通用 TTS 或真实音素对齐。
+- 支持纯音效或项目内 PCM 旁白混音；当前人物以静态基准图预览，动作图为 AI 参考，尚无逐帧嘴型、骨骼、通用 TTS 或真实音素对齐。
 
 交付前检查实际 MP4、转场前后解码帧与听觉同步。技术核验不代替视听 review；未检查项保留 `not_reviewed`。用 `export-project` 交付带运行源码的独立快照。

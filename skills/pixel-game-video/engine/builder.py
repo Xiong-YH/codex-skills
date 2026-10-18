@@ -52,6 +52,8 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
         if not mime:
             raise ValueError('Unsupported style image type: ' + image_path.suffix)
         assets[ident] = 'data:' + mime + ';base64,' + base64.b64encode(image_path.read_bytes()).decode('ascii')
+    for key, item in resolved.get('media', {}).items():
+        assets[key] = 'data:' + item['mime'] + ';base64,' + base64.b64encode((project_root / item['file']).read_bytes()).decode('ascii')
     mouth = mouth_module.schedule(resolved['cues'], resolved['project']['fps'])
     audio_uri = None
     if not silent and resolved['project'].get('audioMode') != 'silent':
@@ -84,6 +86,7 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
     (output / 'mouth-timing.json').write_text(json.dumps({'mode':'text-timed rehearsal; no voice alignment','cues':mouth}, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     (output / 'build-report.json').write_text(json.dumps({'contractVersion':resolved['contractVersion'],'inputHash':resolved['inputHash'],
         'durationFrames':resolved['durationFrames'],'audioEnabled':audio_uri is not None,'actorVariants':library_asset_count,
+        'actorPreviewMode':'reference-static','actorMouthAnimation':False,'actorSkeletalAnimation':False,
         'styleAssets':len(style_assets),
         'mouthSegments':len(mouth),'preview':'film.html'}, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     return target

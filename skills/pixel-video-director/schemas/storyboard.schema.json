@@ -110,6 +110,17 @@
           "title": "Intent",
           "type": "string"
         },
+        "visual": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/VisualIntent"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "scene": {
           "title": "Scene",
           "type": "string"
@@ -143,6 +154,15 @@
           },
           "title": "Cues",
           "type": "array"
+        },
+        "components": {
+          "default": [],
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Components",
+          "type": "array"
         }
       },
       "required": [
@@ -152,6 +172,66 @@
         "scene"
       ],
       "title": "Shot",
+      "type": "object"
+    },
+    "VisualIntent": {
+      "additionalProperties": false,
+      "properties": {
+        "question": {
+          "minLength": 1,
+          "title": "Question",
+          "type": "string"
+        },
+        "form": {
+          "enum": [
+            "scene",
+            "process",
+            "identity",
+            "metric",
+            "comparison",
+            "annotation",
+            "chapter",
+            "flow",
+            "timeline",
+            "checklist",
+            "hierarchy",
+            "bars",
+            "code",
+            "takeaway"
+          ],
+          "title": "Form",
+          "type": "string"
+        },
+        "subject": {
+          "minLength": 1,
+          "title": "Subject",
+          "type": "string"
+        },
+        "action": {
+          "minLength": 1,
+          "title": "Action",
+          "type": "string"
+        },
+        "result": {
+          "minLength": 1,
+          "title": "Result",
+          "type": "string"
+        },
+        "continuity": {
+          "minLength": 1,
+          "title": "Continuity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "question",
+        "form",
+        "subject",
+        "action",
+        "result",
+        "continuity"
+      ],
+      "title": "VisualIntent",
       "type": "object"
     }
   },

@@ -1,6 +1,6 @@
 # 侧边口播
 
-`scenes.presenter-board.v1` 保留 library 的站立讲述人物，只有嘴型和眨眼；不调用 `actor-performance` 的活动动作。必须指定 actor，右侧图文在 content 层维护；整个场景仍可统一运镜。
+`scenes.presenter-board.v1` 保留 library 的站立讲述人物；当前 V3 以静态基准图预览，嘴型与眨眼尚未接入，不调用 `actor-performance`。必须指定 actor，右侧图文在 content 层维护；整个场景仍可统一运镜。
 
 params：`layout` 为 pair / hero / checklist，分别要求 2 项 / 1 项 / 1–3 项；`heading`、`kicker` 为短标题。每个 items 元素是 `{object,label,detail,event}`，object 引用本镜已有的物体 ID，event 引用本镜事件；每个物体只能引用一次，items 与 objects 完整对应。
 

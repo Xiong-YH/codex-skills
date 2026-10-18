@@ -31,7 +31,7 @@ class TransitionTests(unittest.TestCase):
         self.edit(lambda shots: shots[1].update(actor=None))
         result = compile_project(self.root)
         self.assertIsNone(result['shots'][1]['actor'])
-        self.assertEqual(result['shots'][0]['actor'], 'actor.lead02.v1')
+        self.assertEqual(result['shots'][0]['actor'], 'actor.azong.v3')
         self.assertEqual(result['durationFrames'], 720)
 
     def test_transition_requires_a_previous_shot_and_enter(self):
@@ -84,9 +84,9 @@ class TransitionTests(unittest.TestCase):
 
     def test_world_transitions_preserve_standing_presenter_selection(self):
         for recipe in ('motion.focus-punch.v1','motion.mosaic-pullback.v1'):
-            self.edit(lambda shots:shots[1].update(actor='actor.lead02.v1',motions=[self.motion(recipe)]))
+            self.edit(lambda shots:shots[1].update(actor='actor.azong.v3',motions=[self.motion(recipe)]))
             resolved=compile_project(self.root)
-            self.assertEqual(resolved['shots'][1]['actor'],'actor.lead02.v1')
+            self.assertEqual(resolved['shots'][1]['actor'],'actor.azong.v3')
 
     def test_incoming_focus_anchors_are_bounded(self):
         self.edit(lambda shots:shots[1].update(motions=[self.motion(params={'incomingX':.49,'incomingY':.49,'incomingZoom':4.4})]))

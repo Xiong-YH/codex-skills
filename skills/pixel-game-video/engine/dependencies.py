@@ -39,7 +39,7 @@ def actor_ids(resolved):
     if any(shot['scene'] == 'scenes.competition-routes.v1' and
            shot['params'].get('presentation') in ('cinematic', 'gameplay') and
            shot['params']['phase'] in ('question', 'training') for shot in resolved['shots']):
-        result.add('actor.lead02.v1')
+        result.add('actor.azong.v3')
     return result
 
 
@@ -50,6 +50,10 @@ def javascript_files(skill, resolved):
         style_root = (Path(skill) / 'modules/style').resolve()
         paths.append('style/' + inside(style_root, selected['runtime']).relative_to(style_root).as_posix())
     paths += ['text/runtime.js', 'library/runtime.js', 'motion/runtime.js', 'scenes/runtime.js']
+    if any(shot.get('background') or shot.get('replacement') or shot.get('components') for shot in resolved['shots']):
+        paths += ['scenes/media.js']
+    if any(shot.get('components') for shot in resolved['shots']):
+        paths += ['components/runtime.js']
     scenes = {shot['scene'] for shot in resolved['shots']}
     objects = {obj['asset'] for shot in resolved['shots'] for obj in shot.get('objects', [])}
     records = read(Path(skill) / 'modules/library/catalog.json')['items']
@@ -80,11 +84,11 @@ def runtime_files(skill, resolved):
     files.update(path.relative_to(skill).as_posix() for path in (skill / 'engine').glob('*.py'))
     files.update({'engine/player.html', 'engine/render_frames.cjs', 'scripts/video.py',
                   'requirements.txt', 'package.json', 'modules/library/prepare.py',
-                  'modules/scenes/contract.py', 'modules/scenes/performance.py',
+                  'modules/scenes/contract.py', 'modules/scenes/performance.py', 'modules/components/contract.py',
                   'modules/audio/narration.py'})
     # Catalogs are validation contracts; lock these even when only one entry is selected.
     files.update('modules/' + name + '/catalog.json'
-                 for name in ('style', 'library', 'text', 'motion', 'audio', 'scenes'))
+                 for name in ('style', 'library', 'text', 'motion', 'audio', 'scenes', 'components'))
     selected, style = selected_style(skill, resolved)
     files.add('modules/style/' + selected['file'])
     for relative in style.get('assets', {}).values():

@@ -58,15 +58,38 @@ class CuePlacement(Contract):
     end: Ref
 
 
+class VisualIntent(Contract):
+    question: str = Field(min_length=1)
+    form: Literal["scene", "process", "identity", "metric", "comparison", "annotation", "chapter",
+                  "flow", "timeline", "checklist", "hierarchy", "bars", "code", "takeaway"]
+    subject: str = Field(min_length=1)
+    action: str = Field(min_length=1)
+    result: str = Field(min_length=1)
+    continuity: str = Field(min_length=1)
+
+
+class MediaSource(Contract):
+    file: str = Field(min_length=1)
+    kind: Literal["image", "video"] = "image"
+    fit: Literal["cover", "contain"] = "cover"
+    anchorX: float = Field(default=0.5, ge=0, le=1)
+    anchorY: float = Field(default=0.5, ge=0, le=1)
+    dim: float = Field(default=0, ge=0, le=0.85)
+    trimStartSeconds: float = Field(default=0, ge=0)
+    shortage: Literal["error", "hold"] = "error"
+
+
 class Shot(Contract):
     id: str = Field(pattern=r"^[a-zA-Z][a-zA-Z0-9_-]*$")
     durationFrames: int = Field(gt=0)
     intent: str = Field(min_length=1)
+    visual: VisualIntent | None = None
     scene: str
     params: dict[str, Any] = {}
     events: list[Event] = []
     objects: list[ObjectPlacement] = []
     cues: list[CuePlacement] = []
+    components: list[dict[str, Any]] = []
 
 
 class Storyboard(Contract):
@@ -101,6 +124,8 @@ class ShotPlan(Contract):
     actor: str | None
     objects: list[AssetChoice] = []
     motions: list[Motion] = []
+    background: MediaSource | None = None
+    replacement: MediaSource | None = None
 
 
 class TextPlan(Contract):
@@ -179,7 +204,7 @@ class Issue(Contract):
     timeRange: TimeRange
     evidence: list[Evidence] = Field(min_length=1)
     expected: str = Field(min_length=1)
-    ownerModule: Literal["director", "style", "library", "text", "motion", "audio", "scenes", "engine"]
+    ownerModule: Literal["director", "style", "library", "text", "motion", "audio", "scenes", "components", "engine"]
     sourceRef: SourceRef
     status: Status = "failed"
 

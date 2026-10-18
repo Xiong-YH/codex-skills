@@ -78,6 +78,10 @@ def export_project(root, destination):
         media = target / cue['file']
         media.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(root / cue['file'], media)
+    for item in resolved.get('media', {}).values():
+        media = target / item['file']
+        media.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(root / item['file'], media)
     # Export a standalone direct snapshot; authoring sources are included separately.
     if resolved["project"]["authoringMode"] == "director":
         source_dir = destination / "authoring-sources"
@@ -102,7 +106,7 @@ def main(argv=None):
     subs = parser.add_subparsers(dest="command", required=True)
     subs.add_parser("doctor")
     cat = subs.add_parser("catalog")
-    cat.add_argument("module", nargs="?", choices=["style", "library", "text", "motion", "audio", "scenes"])
+    cat.add_argument("module", nargs="?", choices=["style", "library", "text", "motion", "audio", "scenes", "components"])
     init = subs.add_parser("init")
     init.add_argument("project", type=Path)
     init.add_argument("--title", default="像素视频示例")

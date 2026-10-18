@@ -1,0 +1,16 @@
+{
+  "items": [
+    {"id":"components.identity.v1","kind":"identity","status":"implemented","purpose":"名称、图像、简要特征；可承接前镜快照"},
+    {"id":"components.metric.v1","kind":"metric","status":"implemented","purpose":"事件驱动的数值变化与结论"},
+    {"id":"components.comparison.v1","kind":"comparison","status":"implemented","purpose":"两到三项同构对照；逐项显露或强调；可嵌入前镜快照"},
+    {"id":"components.annotation.v1","kind":"annotation","status":"implemented","purpose":"靠近实物的短标签与指向线"},
+    {"id":"components.chapter.v1","kind":"chapter","status":"implemented","purpose":"章节编号、主标题与内容承诺"},
+    {"id":"components.flow.v1","kind":"flow","status":"implemented","purpose":"两到五步流程与传递关系；事件推进当前步骤"},
+    {"id":"components.timeline.v1","kind":"timeline","status":"implemented","purpose":"三到五个时间节点；等距序列，标签解释阶段"},
+    {"id":"components.checklist.v1","kind":"checklist","status":"implemented","purpose":"两到五项检查条件；逐项勾选与完成计数"},
+    {"id":"components.hierarchy.v1","kind":"hierarchy","status":"implemented","purpose":"一个主体与两到四个分支；表示组成与从属"},
+    {"id":"components.bars.v1","kind":"bars","status":"implemented","purpose":"两到四项同尺度数值比较；零基线与显式上界"},
+    {"id":"components.code.v1","kind":"code","status":"implemented","purpose":"两到七行原样代码；按事件依次强调讲解行，不执行代码"},
+    {"id":"components.takeaway.v1","kind":"takeaway","status":"implemented","purpose":"开放式结论与原则；主句、语境与补充说明"}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "component-expansion",
+  "idea": "扩展七类信息组件并演示组合",
+  "audience": "视频创作者",
+  "takeaway": "根据关系选择结构，以主次组织组合",
+  "durationRangeSeconds": [
+    35,
+    35
+  ],
+  "constraints": [
+    "沿用已确认组件风格；背景可按镜头生成或替换",
+    "条形图使用明确标注的示意数据",
+    "静音演示；代码仅用于讲解，不执行"
+  ]
+}

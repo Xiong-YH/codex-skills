@@ -1,0 +1,87 @@
+{
+  "id": "02-copper",
+  "name": "栗子",
+  "role": "配角 / 拆解与演示者",
+  "appearance": "栗铜齐颌短发、心形/菱形脸、收尖下巴、上挑杏眼与弧眉、小而不对称的笑；梅紫外套。",
+  "personality": "清楚、利落，喜欢把问题变成可以观察和比较的步骤。",
+  "narrative_job": "演示一项操作、拆开条件、推动验证；让结论由可见结果得出。",
+  "speech_style": "先给观察点，再带着看变化，不堆术语。",
+  "typical_line": "我们只改这一个条件，再看结果有没有变。",
+  "acting_signature": "短促确认点头、低位摊手展示、视线沿对比两侧移动；遇到意外会停顿再看。",
+  "avoid": "只负责附和、无内容地指指点点、每次出场都增加道具。",
+  "framing": "full_body",
+  "master": "02-copper.png",
+  "sheet": "02-copper-actions-review.jpg",
+  "bio_card": "personas/02-copper.jpg",
+  "bio_json": "personas/02-copper.json",
+  "reference_ready": true,
+  "runtime_sprite_ready": false,
+  "actions": [
+    {
+      "id": "neutral",
+      "name": "待机／倾听",
+      "trigger": "进入段落、听对方说话、动作收束",
+      "movement": "双臂放松，视线从内容区缓慢回到对话者；轻微眨眼，脚底稳定。",
+      "end": "回到该角色基准姿态。",
+      "avoid": "持续上下浮动或机械摆头。",
+      "image": "actions/02-copper/neutral.png",
+      "prompt": "使用 02-copper.png 与该动作参考，Copper chin-length bob, HEART/DIAMOND face with tapered pointed stepped chin, slightly upturned ALMOND eyes and arched brows, compact asymmetrical confident smile; plum jacket, ivory top, slate trousers. An analytical practical supporting character. Do not turn face into lead's round face or use tall square eyes. 双臂放松，视线从内容区缓慢回到对话者；轻微眨眼，脚底稳定。 回到该角色基准姿态。 维持像素画风、角色脸型和服装；背景与镜头保持稳定。"
+    },
+    {
+      "id": "wave",
+      "name": "挥手",
+      "trigger": "出场、回应或告别",
+      "movement": "一只手抬至脸侧，肘部自然弯曲；以腕部做一到两次小幅左右摆动，再收回。",
+      "end": "手臂自然落回待机位。",
+      "avoid": "整条手臂无关节摆动、手掌变形、脚底滑动。",
+      "image": "actions/02-copper/wave.png",
+      "prompt": "使用 02-copper.png 与该动作参考，Copper chin-length bob, HEART/DIAMOND face with tapered pointed stepped chin, slightly upturned ALMOND eyes and arched brows, compact asymmetrical confident smile; plum jacket, ivory top, slate trousers. An analytical practical supporting character. Do not turn face into lead's round face or use tall square eyes. 一只手抬至脸侧，肘部自然弯曲；以腕部做一到两次小幅左右摆动，再收回。 手臂自然落回待机位。 维持像素画风、角色脸型和服装；背景与镜头保持稳定。"
+    },
+    {
+      "id": "talk",
+      "name": "口播／解释",
+      "trigger": "角色正在组织或说明本镜信息",
+      "movement": "闭嘴→小幅张嘴→中幅张嘴→闭嘴，眉眼与语意配合；低位摊手仅出现一次，身体重心保持稳定。",
+      "end": "句末闭嘴、手势收住。",
+      "avoid": "下巴过度伸缩、嘴型切换带动整脸变化、挂舌尖、把模拟口型说成真实音素对齐。",
+      "image": "actions/02-copper/talk.png",
+      "prompt": "使用 02-copper.png 与该动作参考，Copper chin-length bob, HEART/DIAMOND face with tapered pointed stepped chin, slightly upturned ALMOND eyes and arched brows, compact asymmetrical confident smile; plum jacket, ivory top, slate trousers. An analytical practical supporting character. Do not turn face into lead's round face or use tall square eyes. 闭嘴→小幅张嘴→中幅张嘴→闭嘴，眉眼与语意配合；低位摊手仅出现一次，身体重心保持稳定。 句末闭嘴、手势收住。 维持像素画风、角色脸型和服装；背景与镜头保持稳定。"
+    },
+    {
+      "id": "dazed-left",
+      "name": "迷糊左摇",
+      "trigger": "信息太多、疲倦或想不明白的情节",
+      "movement": "作为左右摇头晃脑的左端参考。头轻倾向画面左侧约6–10度，眼睑下压、视线失焦，肩部以更小幅度反向倾斜。",
+      "end": "经中立位转向 dazed-right，或回到 neutral。",
+      "avoid": "整张人物图平移代替头肩动作、无缘由长时间循环、脖子拉伸。",
+      "image": "actions/02-copper/dazed-left.png",
+      "prompt": "使用 02-copper.png 与该动作参考，Copper chin-length bob, HEART/DIAMOND face with tapered pointed stepped chin, slightly upturned ALMOND eyes and arched brows, compact asymmetrical confident smile; plum jacket, ivory top, slate trousers. An analytical practical supporting character. Do not turn face into lead's round face or use tall square eyes. 作为左右摇头晃脑的左端参考。头轻倾向画面左侧约6–10度，眼睑下压、视线失焦，肩部以更小幅度反向倾斜。 经中立位转向 dazed-right，或回到 neutral。 维持像素画风、角色脸型和服装；背景与镜头保持稳定。"
+    },
+    {
+      "id": "dazed-right",
+      "name": "迷糊右摇",
+      "trigger": "与 dazed-left 组成一次左右摇头晃脑",
+      "movement": "头经中立位轻倾向画面右侧约6–10度；眉眼和嘴维持迷糊表情，肩部反向小幅跟随。",
+      "end": "左右交替一轮后回正；不要自动无限循环。",
+      "avoid": "直接镜像造成衣服、头发或脸部身份翻转。",
+      "image": "actions/02-copper/dazed-right.png",
+      "prompt": "使用 02-copper.png 与该动作参考，Copper chin-length bob, HEART/DIAMOND face with tapered pointed stepped chin, slightly upturned ALMOND eyes and arched brows, compact asymmetrical confident smile; plum jacket, ivory top, slate trousers. An analytical practical supporting character. Do not turn face into lead's round face or use tall square eyes. 头经中立位轻倾向画面右侧约6–10度；眉眼和嘴维持迷糊表情，肩部反向小幅跟随。 左右交替一轮后回正；不要自动无限循环。 维持像素画风、角色脸型和服装；背景与镜头保持稳定。"
+    },
+    {
+      "id": "overwhelmed",
+      "name": "抱头／崩溃",
+      "trigger": "通知或任务继续增加、错误反复出现、注意力被拉扯，冲突确实升级",
+      "movement": "视线先看向压力来源；皱眉眯眼，肩膀缩起，两手抬到头侧，嘴收紧；短暂小幅肩颈颤动后停住。",
+      "end": "保留一个可读的抱头姿态，再按情节放手或转入恢复。",
+      "avoid": "仍用微笑脸、全身抽动、手穿过头发、只加汗滴而没有身体表达。",
+      "image": "actions/02-copper/overwhelmed.png",
+      "prompt": "使用 02-copper.png 与该动作参考，Copper chin-length bob, HEART/DIAMOND face with tapered pointed stepped chin, slightly upturned ALMOND eyes and arched brows, compact asymmetrical confident smile; plum jacket, ivory top, slate trousers. An analytical practical supporting character. Do not turn face into lead's round face or use tall square eyes. 视线先看向压力来源；皱眉眯眼，肩膀缩起，两手抬到头侧，嘴收紧；短暂小幅肩颈颤动后停住。 保留一个可读的抱头姿态，再按情节放手或转入恢复。 维持像素画风、角色脸型和服装；背景与镜头保持稳定。"
+    }
+  ],
+  "assetId": "actor.lizi.v3",
+  "approval": {
+    "status": "user_approved",
+    "date": "2026-10-19",
+    "scope": "当前五人形象、人设、六种动作参考及半身仿真人使用约束；不表示逐帧动画或透明清稿已完成。"
+  }
+}

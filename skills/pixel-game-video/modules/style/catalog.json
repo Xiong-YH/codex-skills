@@ -29,6 +29,12 @@
       "title": "像素竞赛 · 训练室、时间桌与工坊",
       "file": "pixel-competition.json",
       "runtime": "pixel-study.js"
+    },
+    {
+      "id": "style.pixel-editorial.v1",
+      "title": "像素图解 · 暖金组件与可变背景",
+      "file": "pixel-editorial.json",
+      "runtime": "pixel-editorial.js"
     }
   ]
 }

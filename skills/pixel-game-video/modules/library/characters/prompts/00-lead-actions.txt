@@ -1,0 +1,14 @@
+Use case: identity-preserve
+Asset type: SIX-POSE character action-reference sheet for future image-to-video generation; not a runtime sprite atlas.
+Input: the approved current character master, definitive identity lock. Use the character's six action references when available; no external screenshot is required.
+Identity invariants: Warm fluffy caramel-brown hair, ROUND full friendly face and large gentle square eyes, mint open short-sleeve shirt over cream crewneck, navy trousers and dark shoes; NO SCARF. This is the lead narrator, warm and curious. Preserve same head silhouette, face geometry, age, skin color, wardrobe, proportions and pixel rendering in all six images. Alter expression and joints only. The character should remain unmistakably the SAME individual.
+Layout: exactly THREE EQUAL COLUMNS by TWO EQUAL ROWS, six separate isolated FULL-BODY standing figures, one in each cell, consistent scale and view, all completely contained in their own cell with generous transparent margins between them. Wide landscape sheet; reading order left to right top row then left to right bottom row. No lines or dividers or text. Keep hands inside each cell.
+SIX REQUIRED POSES IN EXACT ORDER:
+1 TOP LEFT — neutral attentive resting pose, mouth closed, arms relaxed.
+2 TOP MIDDLE — friendly WAVE: one open hand raised beside face, elbow bent, palm visible, head a little upright, small smile. Other arm relaxed.
+3 TOP RIGHT — TALKING EXPLANATION: a clearly visible small dark open mouth, eyebrows engaged, one compact palm-up hand near lower chest/waist. No protruding tongue.
+4 BOTTOM LEFT — DAZED SWAY LEFT reference endpoint: head leans to viewer's left roughly 10 degrees, droopy unfocused eyes, slightly parted mouth, shoulders counter-tilt gently, arms loose. Feet stay planted and body balance readable.
+5 BOTTOM MIDDLE — DAZED SWAY RIGHT reference endpoint: the SAME dazed expression, head to viewer's right about 10 degrees, opposite gentle shoulder tilt. This must be visibly opposite to pose 4, not a duplicate. No stars or swirl symbols.
+6 BOTTOM RIGHT — OVERWHELMED: brows squeezed, tightly squinting eyes, tense zigzag mouth, shoulders rise, BOTH HANDS touching sides of hair/head, elbows out. Make pressure readable through squinting brows, raised shoulders, tense mouth and hands touching the head. Expressive cute frustrated overload, not just a smile with hands up; clear silhouette and readable emotion.
+Style: same crisp chunky pixel-illustration family as master, dark navy contour, stepped square clusters and warm-left/cool-right light. No scarf, props, scenery, UI, notifications, subtitles, text, labels, floor shadows, motion trails or new accessories. True alpha transparent background.
+Entire hair and both shoes must be visible in every cell, with hands not cropped.

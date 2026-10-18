@@ -1,14 +1,207 @@
-{"module":"library","items":[
-  {"id":"actor.lead02.v1","kind":"actor","title":"02 暖棕蓬发","path":"assets/02-brown-fluffy.png","nativeSize":[32,36],"anchor":[16,33],"sha256":"5a8e229ac5098c2c72f9b34c28f636c1bdecb76ee25adee2c8bc41303368a70d","expressions":"lead02"},
-  {"id":"prop.task-block.v1","kind":"prop","title":"任务方块","renderer":"task-block"},
-  {"id":"prop.book.v1","kind":"prop","title":"正面像素书封","renderer":"book","geometry":"2D front layer"},
-  {"id":"prop.core.v1","kind":"prop","title":"项目核心","renderer":"core"},
-  {"id":"prop.cache-terminal.v1","kind":"prop","title":"请求端终端","renderer":"computing"},
-  {"id":"prop.data-vault.v1","kind":"prop","title":"原始数据仓","renderer":"computing"},
-  {"id":"prop.cache-crate.v1","kind":"prop","title":"缓存副本盒","renderer":"computing"},
-  {"id":"prop.data-token.v1","kind":"prop","title":"同身份数据块","renderer":"computing"},
-  {"id":"prop.grad-cap.v1","kind":"prop","title":"学位帽与书籍","renderer":"education"},
-  {"id":"prop.work-case.v1","kind":"prop","title":"工作公文包","renderer":"education"},
-  {"id":"prop.project-laptop.v1","kind":"prop","title":"项目笔记本电脑","renderer":"education"},
-  {"id":"prop.goal-target.v1","kind":"prop","title":"目标与方向","renderer":"education"}
-]}
+{
+  "module": "library",
+  "items": [
+    {
+      "id": "actor.azong.v3",
+      "kind": "actor",
+      "title": "阿棕",
+      "role": "主角 / 串讲者",
+      "path": "characters/00-lead.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "previewBounds": [
+        294,
+        90,
+        962,
+        1198
+      ],
+      "anchor": "preview-bottom-center",
+      "sha256": "f876797f5f919ed0d0a4675bdc102a65e9a387e83620c198f646709a9d0e2f0a",
+      "expressions": "reference-static",
+      "framing": "full_body",
+      "previewReady": true,
+      "runtimeSpriteReady": false,
+      "referenceCatalog": "characters/catalog.json",
+      "usagePolicy": null
+    },
+    {
+      "id": "actor.amo.v3",
+      "kind": "actor",
+      "title": "阿墨",
+      "role": "配角 / 提问与质疑者",
+      "path": "characters/01-ink.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "previewBounds": [
+        313,
+        71,
+        931,
+        1202
+      ],
+      "anchor": "preview-bottom-center",
+      "sha256": "2f559cf37573fc9b66607244184f2f32cb86ca0e4c5a7eb1a735a3827f3b182c",
+      "expressions": "reference-static",
+      "framing": "full_body",
+      "previewReady": true,
+      "runtimeSpriteReady": false,
+      "referenceCatalog": "characters/catalog.json",
+      "usagePolicy": null
+    },
+    {
+      "id": "actor.lizi.v3",
+      "kind": "actor",
+      "title": "栗子",
+      "role": "配角 / 拆解与演示者",
+      "path": "characters/02-copper.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "previewBounds": [
+        301,
+        68,
+        966,
+        1198
+      ],
+      "anchor": "preview-bottom-center",
+      "sha256": "98fc616ec107492d45721e6d2bbb6b75c368dd54db3beaa0be66a4b85cfed2e4",
+      "expressions": "reference-static",
+      "framing": "full_body",
+      "previewReady": true,
+      "runtimeSpriteReady": false,
+      "referenceCatalog": "characters/catalog.json",
+      "usagePolicy": null
+    },
+    {
+      "id": "actor.laomai.v3",
+      "kind": "actor",
+      "title": "老麦",
+      "role": "配角 / 核对与边界提醒者",
+      "path": "characters/03-glasses.png",
+      "nativeSize": [
+        1254,
+        1254
+      ],
+      "previewBounds": [
+        307,
+        62,
+        924,
+        1213
+      ],
+      "anchor": "preview-bottom-center",
+      "sha256": "167fad75812ed9bda550692a79b7c9dedf1c8b97ef25670bb6f702a0c56b8ded",
+      "expressions": "reference-static",
+      "framing": "full_body",
+      "previewReady": true,
+      "runtimeSpriteReady": false,
+      "referenceCatalog": "characters/catalog.json",
+      "usagePolicy": null
+    },
+    {
+      "id": "actor.chen.v3",
+      "kind": "actor",
+      "title": "陈先生",
+      "role": "专题配角 / 虚构案例当事人",
+      "path": "characters/04-human-bust.png",
+      "nativeSize": [
+        1145,
+        1374
+      ],
+      "previewBounds": [
+        67,
+        51,
+        1104,
+        1374
+      ],
+      "anchor": "preview-bottom-center",
+      "sha256": "ef0701b12ac0b98f3bd63707c84c5695256ca625f22ec0414f8d1450f2842e10",
+      "expressions": "reference-static",
+      "framing": "half_body_only",
+      "previewReady": true,
+      "runtimeSpriteReady": false,
+      "referenceCatalog": "characters/catalog.json",
+      "usagePolicy": "characters/usage-policy.json"
+    },
+    {
+      "id": "prop.task-block.v1",
+      "kind": "prop",
+      "title": "任务方块",
+      "renderer": "task-block"
+    },
+    {
+      "id": "prop.book.v1",
+      "kind": "prop",
+      "title": "正面像素书封",
+      "renderer": "book",
+      "geometry": "2D front layer"
+    },
+    {
+      "id": "prop.core.v1",
+      "kind": "prop",
+      "title": "项目核心",
+      "renderer": "core"
+    },
+    {
+      "id": "prop.cache-terminal.v1",
+      "kind": "prop",
+      "title": "请求端终端",
+      "renderer": "computing"
+    },
+    {
+      "id": "prop.data-vault.v1",
+      "kind": "prop",
+      "title": "原始数据仓",
+      "renderer": "computing"
+    },
+    {
+      "id": "prop.cache-crate.v1",
+      "kind": "prop",
+      "title": "缓存副本盒",
+      "renderer": "computing"
+    },
+    {
+      "id": "prop.data-token.v1",
+      "kind": "prop",
+      "title": "同身份数据块",
+      "renderer": "computing"
+    },
+    {
+      "id": "prop.grad-cap.v1",
+      "kind": "prop",
+      "title": "学位帽与书籍",
+      "renderer": "education"
+    },
+    {
+      "id": "prop.work-case.v1",
+      "kind": "prop",
+      "title": "工作公文包",
+      "renderer": "education"
+    },
+    {
+      "id": "prop.project-laptop.v1",
+      "kind": "prop",
+      "title": "项目笔记本电脑",
+      "renderer": "education"
+    },
+    {
+      "id": "prop.goal-target.v1",
+      "kind": "prop",
+      "title": "目标与方向",
+      "renderer": "education"
+    }
+  ],
+  "characters": {
+    "catalog": "characters/catalog.json",
+    "guide": "CHARACTERS.md",
+    "default": "actor.azong.v3",
+    "approval": {
+      "status": "user_approved",
+      "date": "2026-10-19",
+      "scope": "当前五人形象、人设、六种动作参考及半身仿真人使用约束；不表示逐帧动画或透明清稿已完成。"
+    }
+  }
+}

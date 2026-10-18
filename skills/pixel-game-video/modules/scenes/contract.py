@@ -28,6 +28,7 @@ def validate(scene_id, params, events, objects):
             event(row['event'])
 
     allowed = {
+        'scenes.canvas.v1': set(),
         'scenes.document-highlight.v1': {'phase','environment','heading','kicker','labels','stageEvents'},
         'scenes.steps.v1': {'items'},
         'scenes.counter.v1': {'from', 'to', 'label', 'unit', 'startEvent', 'endEvent'},

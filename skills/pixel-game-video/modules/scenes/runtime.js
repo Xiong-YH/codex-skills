@@ -77,6 +77,7 @@
   }
   const handlers={'scenes.steps.v1':steps,'scenes.counter.v1':counter,'scenes.choice.v1':choice,'scenes.assembly.v1':assembly,'scenes.focus.v1':focus};
   function content(e,shot,frame){
+    if(shot.scene==='scenes.canvas.v1'){P.library.objects(e,shot,frame);return;}
     if(shot.scene==='scenes.document-highlight.v1'){P.documentHighlight.draw(e,shot,frame);return;}
     if(shot.scene==='scenes.competition-routes.v1'){P.competitionRoutes.draw({...e,includePresenter:false},shot,frame);return;}
     if(shot.scene==='scenes.study-routes.v1'){P.studyRoutes.draw(e,shot,frame);return;}
@@ -98,12 +99,20 @@
     return {x:s.x*e.width,y:s.y*e.height,width:s.width*e.width,height:s.height*e.height};
   },
   drawLayer(e,shot,frame,layer){
-    if(layer==='background')P.style.background(e,shot);
+    if(layer==='background'){if(shot.background)P.media.draw(e,shot.background);else P.style.background(e,shot);}
     else if(layer==='actor')P.library.actor(e,shot,frame);
-    else if(layer==='content')content(e,shot,frame);
+    else if(layer==='content'){
+      if(shot.replacement)P.media.draw(e,shot.replacement);else content(e,shot,frame);
+      if(shot.components?.length)P.components.draw(e,shot,frame);
+    }
     else throw new Error('Unknown scene layer '+layer);
   },draw(e,shot,frame){
     if(shot.scene==='scenes.competition-routes.v1'&&P.competitionRoutes.drawWorld(e,shot,frame))return;
-    P.style.background(e,shot);P.library.actor(e,shot,frame);content(e,shot,frame);
+    if(shot.replacement){P.media.draw(e,shot.replacement);}
+    else{
+      if(shot.background)P.media.draw(e,shot.background);else P.style.background(e,shot);
+      P.library.actor(e,shot,frame);content(e,shot,frame);
+    }
+    if(shot.components?.length)P.components.draw(e,shot,frame);
   }};
 })(globalThis.PixelVideo=globalThis.PixelVideo||{});

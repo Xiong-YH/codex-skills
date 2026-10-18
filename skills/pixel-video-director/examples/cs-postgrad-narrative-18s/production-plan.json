@@ -15,13 +15,13 @@
   "shots": [
     {
       "id": "s1",
-      "actor": "actor.lead02.v1",
+      "actor": "actor.azong.v3",
       "objects": [],
       "motions": []
     },
     {
       "id": "s2",
-      "actor": "actor.lead02.v1",
+      "actor": "actor.azong.v3",
       "objects": [],
       "motions": [
         {
@@ -41,7 +41,7 @@
     },
     {
       "id": "s3",
-      "actor": "actor.lead02.v1",
+      "actor": "actor.azong.v3",
       "objects": [],
       "motions": [
         {

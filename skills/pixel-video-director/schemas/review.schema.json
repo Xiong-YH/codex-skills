@@ -134,6 +134,7 @@
             "motion",
             "audio",
             "scenes",
+            "components",
             "engine"
           ],
           "title": "Ownermodule",

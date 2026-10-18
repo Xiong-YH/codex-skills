@@ -1,0 +1,376 @@
+{
+  "schemaVersion": 1,
+  "shots": [
+    {
+      "id": "s1",
+      "durationFrames": 240,
+      "intent": "形成观看预期",
+      "visual": {
+        "question": "这段内容如何组织？",
+        "form": "chapter",
+        "subject": "chapter组件",
+        "action": "章节编号与主标题显露并保持阅读",
+        "result": "形成观看预期",
+        "continuity": "保留主题色和对象身份，切换解释结构"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "begin",
+          "frame": 50
+        },
+        {
+          "id": "done",
+          "frame": 150
+        }
+      ],
+      "components": [
+        {
+          "id": "chapter",
+          "kind": "chapter",
+          "x": 0.16,
+          "y": 0.27,
+          "width": 0.72,
+          "height": 0.34,
+          "showEvent": "reveal",
+          "data": {
+            "index": {
+              "labelId": "l1"
+            },
+            "title": {
+              "labelId": "l2"
+            },
+            "detail": {
+              "labelId": "l3"
+            }
+          }
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c1",
+          "start": {
+            "event": "s1.enter",
+            "offsetFrames": 30
+          },
+          "end": {
+            "event": "s1.exit",
+            "offsetFrames": -12
+          }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "durationFrames": 240,
+      "intent": "理解共同基调与差异结构",
+      "visual": {
+        "question": "这是什么概念？",
+        "form": "identity",
+        "subject": "identity组件",
+        "action": "先识别名称，再阅读辅助特征",
+        "result": "理解共同基调与差异结构",
+        "continuity": "保留主题色和对象身份，切换解释结构"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "begin",
+          "frame": 50
+        },
+        {
+          "id": "done",
+          "frame": 150
+        }
+      ],
+      "components": [
+        {
+          "id": "identity",
+          "kind": "identity",
+          "x": 0.22,
+          "y": 0.23,
+          "width": 0.57,
+          "height": 0.43,
+          "showEvent": "reveal",
+          "data": {
+            "eyebrow": {
+              "labelId": "l4"
+            },
+            "title": {
+              "labelId": "l5"
+            },
+            "detail": {
+              "labelId": "l6"
+            }
+          }
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c2",
+          "start": {
+            "event": "s2.enter",
+            "offsetFrames": 30
+          },
+          "end": {
+            "event": "s2.exit",
+            "offsetFrames": -12
+          }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "durationFrames": 240,
+      "intent": "记住三个信息层级",
+      "visual": {
+        "question": "有多少层信息？",
+        "form": "metric",
+        "subject": "metric组件",
+        "action": "从零逐步增加到三，终值保持",
+        "result": "记住三个信息层级",
+        "continuity": "保留主题色和对象身份，切换解释结构"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "begin",
+          "frame": 50
+        },
+        {
+          "id": "done",
+          "frame": 150
+        }
+      ],
+      "components": [
+        {
+          "id": "metric",
+          "kind": "metric",
+          "x": 0.25,
+          "y": 0.22,
+          "width": 0.5,
+          "height": 0.46,
+          "showEvent": "reveal",
+          "data": {
+            "title": {
+              "labelId": "l7"
+            },
+            "from": 0,
+            "to": 3,
+            "unit": {
+              "labelId": "l8"
+            },
+            "startEvent": "begin",
+            "endEvent": "done",
+            "detail": {
+              "labelId": "l9"
+            }
+          },
+          "focusEvent": "done"
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c3",
+          "start": {
+            "event": "s3.enter",
+            "offsetFrames": 30
+          },
+          "end": {
+            "event": "s3.exit",
+            "offsetFrames": -12
+          }
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "durationFrames": 300,
+      "intent": "根据解释任务选择合适形式",
+      "visual": {
+        "question": "两种形式各适合什么？",
+        "form": "comparison",
+        "subject": "comparison组件",
+        "action": "先显露概念卡，再显露数值卡，保持相同列结构",
+        "result": "根据解释任务选择合适形式",
+        "continuity": "保留主题色和对象身份，切换解释结构"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "begin",
+          "frame": 50
+        },
+        {
+          "id": "done",
+          "frame": 150
+        }
+      ],
+      "components": [
+        {
+          "id": "comparison",
+          "kind": "comparison",
+          "x": 0.08,
+          "y": 0.17,
+          "width": 0.84,
+          "height": 0.57,
+          "showEvent": "reveal",
+          "data": {
+            "title": {
+              "labelId": "l10"
+            },
+            "items": [
+              {
+                "title": {
+                  "labelId": "l11"
+                },
+                "event": "begin",
+                "sourceShot": "s2",
+                "value": {
+                  "labelId": "l12"
+                },
+                "detail": {
+                  "labelId": "l13"
+                }
+              },
+              {
+                "title": {
+                  "labelId": "l14"
+                },
+                "event": "done",
+                "sourceShot": "s3",
+                "value": {
+                  "labelId": "l15"
+                },
+                "detail": {
+                  "labelId": "l16"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c4",
+          "start": {
+            "event": "s4.enter",
+            "offsetFrames": 30
+          },
+          "end": {
+            "event": "s4.exit",
+            "offsetFrames": -12
+          }
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "durationFrames": 240,
+      "intent": "知道标签与对象的对应关系",
+      "visual": {
+        "question": "标签对应哪个对象？",
+        "form": "annotation",
+        "subject": "annotation组件",
+        "action": "标注连接到图中实物，保持阅读",
+        "result": "知道标签与对象的对应关系",
+        "continuity": "以对象与标签的联系收束"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "objects": [
+        {
+          "id": "book",
+          "x": 0.5,
+          "y": 0.48
+        }
+      ],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "begin",
+          "frame": 50
+        },
+        {
+          "id": "done",
+          "frame": 150
+        }
+      ],
+      "components": [
+        {
+          "id": "annotation1",
+          "kind": "annotation",
+          "x": 0.12,
+          "y": 0.24,
+          "width": 0.23,
+          "height": 0.09,
+          "showEvent": "reveal",
+          "data": {
+            "label": {
+              "labelId": "l17"
+            },
+            "targetX": 0.5,
+            "targetY": 0.45
+          }
+        },
+        {
+          "id": "annotation2",
+          "kind": "annotation",
+          "x": 0.65,
+          "y": 0.55,
+          "width": 0.23,
+          "height": 0.09,
+          "showEvent": "reveal",
+          "data": {
+            "label": {
+              "labelId": "l18"
+            },
+            "targetX": 0.5,
+            "targetY": 0.54
+          },
+          "tone": "accent"
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c5",
+          "start": {
+            "event": "s5.enter",
+            "offsetFrames": 30
+          },
+          "end": {
+            "event": "s5.exit",
+            "offsetFrames": -12
+          }
+        }
+      ]
+    }
+  ]
+}

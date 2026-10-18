@@ -2,9 +2,11 @@
 
 人物按镜头显式选择：production-plan 中 `actor:null` 表示不出镜。场景、物体与景别可以主导画面，不要求主角常驻。
 
-先保留用户指定的人物职责。用户要求侧边站立口播时，稳定讲述使用原地站位与嘴型/眨眼，不改成跑动、取物或剧情表演。站立限制人物动作，不代表锁死其屏幕坐标；强转场可让整个房间、物体和人物统一改变景别，人物自然进出视野。连续背景不可裁成局部缩放窗口；字幕保持独立。局部交接只适用于独立图文或真实面板。延续本项目时，将 [已确认的表达方向](computing-voiceover.md) 中适用的约束带入 brief；具体样例不能覆盖用户的新要求。
+先保留用户指定的人物职责。用户要求侧边站立口播时，稳定讲述使用原地站位，按已实现能力选择表情；当前 V3 只有静态基准图与动作参考，嘴型/眨眼尚未接入。站立不代表锁死屏幕坐标；强转场可让整个房间、物体和人物统一改变景别，人物自然进出视野。连续背景不可裁成局部缩放窗口；字幕保持独立。局部交接只适用于独立图文或真实面板。延续本项目时，将 [已确认的表达方向](computing-voiceover.md) 中适用的约束带入 brief；具体样例不能覆盖用户的新要求。
 
 四个 JSON 源文件是可独立继续的阶段产物；JSON Schema 在 [schemas/](../schemas/)，运行合同源在 [models.py](../scripts/directorlib/models.py)。`python scripts/director.py check PROJECT` 检查格式与交叉引用。
+
+脚本阶段先读 [视觉表达方法](visual-system.md)。新分镜用 storyboard.shots[].visual 记录表达决定，components 记录组件结构/位置/事件，组件文字仍引用 script.labels。production-plan 的 background/replacement 选择项目素材，操作见 [素材替换](media-replacement.md)。旧工程 visual 可缺省，check 会列出缺项；新模板空值会阻止交接。
 
 | 文件 | 唯一拥有的内容 | 稳定标识 |
 | --- | --- | --- |
@@ -23,7 +25,7 @@
 
 时间只在 storyboard 定义：每镜自动有 enter/exit，本镜事件 frame 是局部整数帧；文字、运动和声音用 `{"event":"s1.choose","offsetFrames":0}` 引用。params 内的场景事件使用本镜 local ID（例如 `choose`）。坐标 x/y 为 0..1 画幅比例；输出规格当前遵循基础层已支持的 1920×1080、60 fps。
 
-script 中每个 cue 都要在 storyboard 放置一次，并在 production-plan.text 选择角色。字幕必须有拼音 phrases；它驱动模拟讲述嘴型，不代表真人配音对齐。新增标签要放进 script.labels，不能在 scene params 复制文字。一个完整句子若需更长阅读时间，回改 storyboard 的镜头时长和事件安排。
+script 中每个 cue 都要在 storyboard 放置一次，并在 production-plan.text 选择角色。字幕必须有拼音 phrases；它生成模拟讲述节奏计划，当前 V3 图片尚未据此产生嘴型，也不代表真人配音对齐。新增标签要放进 script.labels，不能在 scene params 复制文字。一个完整句子若需更长阅读时间，回改 storyboard 的镜头时长和事件安排。
 
 有已录制或合成的旁白时，production-plan 使用 `audioMode="narration+sfx"` 与 `narration:[{id,file,at,gain}]`。WAV 路径相对创作工程、48kHz/16-bit PCM；handoff 复制到 video/，同时绑定源素材与复制件哈希。先测语音长度，再安排字幕和动作；不能为压缩示例时长把旁白截断。没有旁白时保留 sfx-only/silent。
 

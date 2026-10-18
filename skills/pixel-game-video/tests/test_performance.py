@@ -1,4 +1,4 @@
-"""Guard the approved face and the release/rest part of simulated speech."""
+"""Guard approved reference artwork and the independent simulated speech plan."""
 import base64
 import io
 from pathlib import Path
@@ -14,35 +14,45 @@ from modules.scenes.performance import schedule
 
 
 class FacePerformanceTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.original = Image.open(SKILL / 'modules/library/assets/02-brown-fluffy.png').convert('RGBA')
-        cls.assets = {
-            key.rsplit(':', 1)[-1]: Image.open(io.BytesIO(base64.b64decode(uri.split(',')[1]))).convert('RGBA')
-            for key, uri in prepare(SKILL / 'modules/library').items()
-        }
+    def test_prepared_references_preserve_approved_pixels_and_actual_geometry(self):
+        import hashlib
+        import json
+        library = SKILL / 'modules/library'
+        records = [r for r in json.loads((library / 'catalog.json').read_text(encoding='utf-8'))['items']
+                   if r['kind'] == 'actor']
+        self.assertEqual(len(records), 5)
+        assets = prepare(library)
+        self.assertEqual(set(assets), {r['id'] + ':reference' for r in records})
+        for record in records:
+            source = library / record['path']
+            original = Image.open(source).convert('RGBA')
+            actual = Image.open(io.BytesIO(base64.b64decode(assets[record['id'] + ':reference'].split(',')[1]))).convert('RGBA')
+            expected = original.crop(record['previewBounds'])
+            self.assertEqual(actual.size, expected.size)
+            self.assertEqual(actual.tobytes(), expected.tobytes())
+            self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(), record['sha256'])
+            self.assertFalse(record['runtimeSpriteReady'])
 
-    def test_rest_is_original_and_face_edits_stay_inside_anchors(self):
-        self.assertEqual(self.assets['0-0'].tobytes(), self.original.tobytes())
-        for key, image in self.assets.items():
-            blink, _ = map(int, key.split('-'))
-            for y in range(36):
-                for x in range(32):
-                    mouth = 14 <= x <= 19 and 20 <= y <= 21
-                    eyelid = blink and 15 <= y <= 18 and (10 <= x <= 12 or 20 <= x <= 22)
-                    if not (mouth or eyelid):
-                        self.assertEqual(image.getpixel((x, y)), self.original.getpixel((x, y)), (key, x, y))
+    def test_selection_only_embeds_the_requested_character(self):
+        selected = prepare(SKILL / 'modules/library', {'actor.lizi.v3'})
+        self.assertEqual(set(selected), {'actor.lizi.v3:reference'})
+        self.assertEqual(prepare(SKILL / 'modules/library', set()), {})
 
-    def test_opening_has_no_detached_pink_tongue(self):
-        skin = self.original.getpixel((13, 20))
-        for shape in range(1, 5):
-            image = self.assets[f'0-{shape}']
-            opening = {(x, y) for y in (20, 21) for x in range(14, 20) if image.getpixel((x, y)) != skin}
-            colors = {image.getpixel(point) for point in opening}
-            self.assertEqual(len(colors), 1, 'A separate lower highlight reads as a hanging tongue')
-            self.assertLessEqual(max(x for x, _ in opening) - min(x for x, _ in opening) + 1, 4)
-            if any(y == 21 for _, y in opening):
-                self.assertEqual({x for x, y in opening if y == 20}, {x for x, y in opening if y == 21})
+    def test_modified_master_is_rejected(self):
+        import json
+        import shutil
+        import tempfile
+        library = SKILL / 'modules/library'
+        record = json.loads((library / 'catalog.json').read_text(encoding='utf-8'))['items'][0]
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            target = root / record['path']
+            target.parent.mkdir(parents=True)
+            shutil.copy2(library / record['path'], target)
+            target.write_bytes(target.read_bytes() + b'changed')
+            (root / 'catalog.json').write_text(json.dumps({'items':[record]}), encoding='utf-8')
+            with self.assertRaisesRegex(ValueError, 'Character bytes changed'):
+                prepare(root)
 
     def test_each_syllable_releases_and_long_vowels_do_not_freeze(self):
         for fps in (30, 60):

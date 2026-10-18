@@ -1,5 +1,7 @@
 # Review 与定向修复
 
+新工程同时对照 storyboard.visual 与 [视觉表达方法](visual-system.md) 审查：组件是否有阅读层级和对象关联、背景是否延续基调而符合本镜构图、人物是否自然融入空间。替换素材后核对裁切、源片段长度、字幕遮挡与原旁白；有效哈希只证明绑定了当前输入，不能证明审美合格。
+
 ```text
 python scripts/director.py review-init PROJECT --manifest PROJECT/video/outputs/film-verification/render-manifest.json
 python scripts/director.py review-check PROJECT

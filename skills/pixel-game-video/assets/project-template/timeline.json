@@ -4,7 +4,7 @@
       "id": "s01",
       "durationFrames": 240,
       "scene": "scenes.focus.v1",
-      "actor": "actor.lead02.v1",
+      "actor": "actor.azong.v3",
       "params": {
         "label": "寻找线索",
         "detail": "观察，再开始"

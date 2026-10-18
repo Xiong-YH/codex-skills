@@ -19,6 +19,75 @@
       "title": "AssetChoice",
       "type": "object"
     },
+    "MediaSource": {
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "minLength": 1,
+          "title": "File",
+          "type": "string"
+        },
+        "kind": {
+          "default": "image",
+          "enum": [
+            "image",
+            "video"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "fit": {
+          "default": "cover",
+          "enum": [
+            "cover",
+            "contain"
+          ],
+          "title": "Fit",
+          "type": "string"
+        },
+        "anchorX": {
+          "default": 0.5,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Anchorx",
+          "type": "number"
+        },
+        "anchorY": {
+          "default": 0.5,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Anchory",
+          "type": "number"
+        },
+        "dim": {
+          "default": 0,
+          "maximum": 0.85,
+          "minimum": 0,
+          "title": "Dim",
+          "type": "number"
+        },
+        "trimStartSeconds": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Trimstartseconds",
+          "type": "number"
+        },
+        "shortage": {
+          "default": "error",
+          "enum": [
+            "error",
+            "hold"
+          ],
+          "title": "Shortage",
+          "type": "string"
+        }
+      },
+      "required": [
+        "file"
+      ],
+      "title": "MediaSource",
+      "type": "object"
+    },
     "Motion": {
       "additionalProperties": false,
       "properties": {
@@ -180,6 +249,28 @@
           },
           "title": "Motions",
           "type": "array"
+        },
+        "background": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MediaSource"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "replacement": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MediaSource"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "required": [

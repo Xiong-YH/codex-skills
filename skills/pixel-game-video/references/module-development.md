@@ -4,6 +4,7 @@
 
 | 新增内容 | 修改位置 |
 | --- | --- |
+| 信息卡片与可复用组件 | modules/components；结构/状态合同、绘制器、catalog；配色字体归 style |
 | 风格预设 | modules/style/catalog.json 与风格实现 |
 | 人物/物体 | modules/library 素材、目录、来源元数据和解码器 |
 | 文字排版 | modules/text；不改变脚本、镜头总时长 |

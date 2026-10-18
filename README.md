@@ -19,6 +19,7 @@ flowchart TD
     M[motion 运镜与转场] --> F
     A[audio 音色与混音] --> F
     SC[scenes 游戏机制与表演] --> F
+    C[components 卡片与信息结构] --> F
     F --> O[HTML / MP4 / 核验证据]
     O --> R[review 绑定输入与成片哈希]
     R -->|按源映射修复| S
@@ -30,7 +31,9 @@ flowchart TD
 
 | 维度 | 已收纳内容与边界 |
 | --- | --- |
-| 风格与人物 | 精致偏暗的像素画面；计算机口播项目沿用暖棕蓬发角色、侧边站立讲述，人物可按镜头退场 |
+| 视觉方法与组件 | 脚本阶段明确解释任务；12类组件覆盖身份、数值、对比、标注、章节、流程、时间轴、清单、层级、条形比较、代码与结论，可按主次组合 |
+| 可变背景与片段替换 | 风格基调＋样板；项目图片/视频按镜头选择，素材变更参与哈希与导出，默认保留字幕和旁白时序 |
+| 风格与人物 | 精致偏暗的像素画面；[已确认 V3 人物库](skills/pixel-game-video/modules/library/CHARACTERS.md)保留无围巾主角、三位差异化像素配角和一位半身专题配角，含人设与30张动作参考；预览为静态基准图 |
 | 转场 | 12种方法：9种通用配方＋3种空间设计；后三种已在竞赛场景落地，尚非通用recipe |
 | 节奏与构图 | 定位→主运动→落稳→阅读；全画幅统一镜头、卡片保持固有比例，按旁白与信息量留停顿 |
 | 游戏反馈 | 焦点锁定、触点回弹、资源转移、状态确认、阶段进度、任务结算，共6类 |
@@ -40,6 +43,8 @@ flowchart TD
 竞赛视频沿用已获正向反馈的 V6 视觉／V8 音画基线。32秒、筹码数量和试练天数属于该片示例；人物、题材偏好按项目记录，不推广为全部技能的固定条件。本轮停止音效探索，以现有已确认内容准备输出。认可范围及撤回原因集中在 [迭代记录](skills/pixel-game-video/references/iteration-history.md)。
 
 设计转场从 [转场库](skills/pixel-game-video/modules/motion/TRANSITIONS.md) 进入：按交接关系查已实现配方和参考设计，明确实现状态，再安排动作与阅读节奏。
+
+新脚本先按 [视觉表达方法](skills/pixel-video-director/references/visual-system.md) 选择场景或组件，再安排主体变化。[组件体系](skills/pixel-game-video/modules/components/GUIDE.md) 维护共同风格下的十二类信息结构；[背景基调与样板](skills/pixel-game-video/modules/style/ART-DIRECTION.md) 用于创作新素材；[按镜头替换](skills/pixel-video-director/references/media-replacement.md) 提供可校验的导入入口。可运行源示例在 [基础五类](skills/pixel-video-director/examples/component-system/brief.json) 与 [新增七类及组合](skills/pixel-video-director/examples/component-expansion/brief.json)。
 
 增强局部游戏感从 [游戏反馈细节库](skills/pixel-game-video/modules/scenes/GAME_FEEL.md) 进入：收纳六类反馈及已获认可的竞赛视频实例，关联触发状态、动作、声音和验收；与转场分开维护。
 

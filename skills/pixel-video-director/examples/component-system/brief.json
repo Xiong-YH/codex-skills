@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "component-system",
+  "idea": "展示可复用的像素信息组件",
+  "audience": "视频创作者",
+  "takeaway": "共同风格规则下按任务选择组件",
+  "durationRangeSeconds": [
+    21,
+    21
+  ],
+  "constraints": [
+    "示例用静音，不代表声音已审",
+    "中性底便于检查组件；正式场所由分镜生成或替换",
+    "展示数据是结构示意，不是外部事实"
+  ]
+}

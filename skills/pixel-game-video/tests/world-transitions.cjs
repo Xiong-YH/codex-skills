@@ -14,8 +14,8 @@ function hasPresenter(canvas){const d=data(canvas);for(let i=0;i<d.length;i+=4)i
 let calls=0,frames=0;
 for(const recipe of ['motion.focus-punch.v1','motion.mosaic-pullback.v1']){
  const duration=recipe.includes('mosaic')?48:36;
- const shots=[{id:'old',startFrame:0,endFrame:60,durationFrames:60,actor:'actor.lead02.v1',motions:[]},
- {id:'next',startFrame:60,endFrame:120,durationFrames:60,actor:'actor.lead02.v1',motions:[{recipe,startFrame:60,endFrame:60+duration,params:recipe.includes('mosaic')?{columns:5}:{x:.5,y:.49,zoom:7,incomingX:.5,incomingY:.49,incomingZoom:5.5}}]}];
+ const shots=[{id:'old',startFrame:0,endFrame:60,durationFrames:60,actor:'actor.azong.v3',motions:[]},
+ {id:'next',startFrame:60,endFrame:120,durationFrames:60,actor:'actor.azong.v3',motions:[{recipe,startFrame:60,endFrame:60+duration,params:recipe.includes('mosaic')?{columns:5}:{x:.5,y:.49,zoom:7,incomingX:.5,incomingY:.49,incomingZoom:5.5}}]}];
  const resolved={project:{width,height,nativeWidth:320,fps:60},shots,durationFrames:120,cues:[]};
  const canvas=createCanvas(width,height),renderer=P.createRenderer({canvas,createCanvas,assets:{},mouth:[],resolved,style:{colors:{background:'#081427',ink:'#edf5f8',gold:'#ffc87a'}}});
  const original=P.motion.worldTransition;

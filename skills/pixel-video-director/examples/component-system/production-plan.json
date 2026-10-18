@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "id": "components-production",
+  "title": "像素组件体系",
+  "output": {
+    "fps": 60,
+    "width": 1920,
+    "height": 1080,
+    "nativeWidth": 320,
+    "nativeHeight": 180
+  },
+  "style": "style.pixel-editorial.v1",
+  "seed": 19,
+  "audioMode": "silent",
+  "shots": [
+    {
+      "id": "s1",
+      "actor": null,
+      "objects": [],
+      "motions": []
+    },
+    {
+      "id": "s2",
+      "actor": null,
+      "objects": [],
+      "motions": []
+    },
+    {
+      "id": "s3",
+      "actor": null,
+      "objects": [],
+      "motions": []
+    },
+    {
+      "id": "s4",
+      "actor": null,
+      "objects": [],
+      "motions": []
+    },
+    {
+      "id": "s5",
+      "actor": null,
+      "objects": [
+        {
+          "id": "book",
+          "asset": "prop.book.v1"
+        }
+      ],
+      "motions": []
+    }
+  ],
+  "text": [
+    {
+      "cueId": "c1",
+      "role": "subtitle",
+      "y": 0.88
+    },
+    {
+      "cueId": "c2",
+      "role": "subtitle",
+      "y": 0.88
+    },
+    {
+      "cueId": "c3",
+      "role": "subtitle",
+      "y": 0.88
+    },
+    {
+      "cueId": "c4",
+      "role": "subtitle",
+      "y": 0.88
+    },
+    {
+      "cueId": "c5",
+      "role": "subtitle",
+      "y": 0.88
+    }
+  ],
+  "audio": []
+}

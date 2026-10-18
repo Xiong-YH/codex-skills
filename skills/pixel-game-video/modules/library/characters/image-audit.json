@@ -1,0 +1,18 @@
+{
+  "approval": {
+    "status": "user_approved",
+    "date": "2026-10-19",
+    "scope": "当前五人形象、人设、六种动作参考及半身仿真人使用约束；不表示逐帧动画或透明清稿已完成。"
+  },
+  "masters": 5,
+  "actionReferences": 30,
+  "personaCards": 5,
+  "imagePixelsUnchanged": true,
+  "previewMode": "reference-static",
+  "mouthAnimation": false,
+  "skeletalAnimation": false,
+  "limitations": [
+    "动作图有半透明光晕和柔化边缘，合成前仍需清稿。",
+    "口播是单张参考姿态；没有逐帧嘴型、骨骼或音素对齐。"
+  ]
+}

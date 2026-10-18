@@ -10,6 +10,7 @@ try:
     from directorlib.common import SKILL_ROOT, foundation_root, write_json
     from directorlib.models import MODELS
     from directorlib.review import check_review, initialize_review
+    from directorlib.media import replace_media
 except ImportError as exc:
     raise SystemExit("缺少 Python 依赖，请运行 python -m pip install -r requirements.txt：" + str(exc))
 
@@ -43,6 +44,17 @@ def parser():
     review.add_argument("--foundation")
     schema = sub.add_parser("schema", help="从运行合同生成JSON Schema")
     schema.add_argument("--output", type=Path, default=SKILL_ROOT / "schemas")
+    media = sub.add_parser('replace-media', help='按镜头替换背景或画面，保留时序；自动交接并校验')
+    media.add_argument('project', type=Path)
+    media.add_argument('shot_id')
+    media.add_argument('--layer', choices=['background', 'replacement'], default='background')
+    choice = media.add_mutually_exclusive_group(required=True)
+    choice.add_argument('--file', type=Path)
+    choice.add_argument('--clear', action='store_true')
+    media.add_argument('--fit', choices=['cover', 'contain'], default='cover')
+    media.add_argument('--trim-start', type=float, default=0)
+    media.add_argument('--hold-last-frame', action='store_true')
+    media.add_argument('--foundation')
     return result
 
 
@@ -59,7 +71,11 @@ def main():
         elif args.command == "check":
             sources = load_sources(args.project)
             result = {"valid": True, "shots": len(sources["storyboard.json"]["shots"]),
-                      "cues": len(sources["script.json"]["cues"])}
+                      "cues": len(sources["script.json"]["cues"]),
+                      "visualIntentMissing": [s['id'] for s in sources['storyboard.json']['shots'] if not s['visual']]}
+        elif args.command == 'replace-media':
+            result = replace_media(args.project, args.shot_id, args.file, layer=args.layer, clear=args.clear,
+                                   fit=args.fit, trim_start=args.trim_start, hold=args.hold_last_frame, foundation=args.foundation)
         elif args.command == "handoff":
             result = handoff(args.project, args.foundation)
         elif args.command == "impact":

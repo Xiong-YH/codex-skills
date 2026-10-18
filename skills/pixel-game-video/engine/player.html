@@ -10,20 +10,41 @@ window.sceneFrameRate=payload.resolved.project.fps;
 window.sceneInputHash=payload.resolved.inputHash;
 window.sceneReady=(async()=>{
   const assets={};
-  await Promise.all(Object.entries(payload.assets).map(([key,src])=>new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>{assets[key]=image;resolve()};image.onerror=()=>reject(new Error('Asset could not load: '+key));image.src=src;})));
+  await Promise.all(Object.entries(payload.assets).map(([key,src])=>new Promise((resolve,reject)=>{
+    if(payload.resolved.media?.[key]?.kind==='video'){
+      const video=document.createElement('video');video.preload='auto';video.muted=true;video.playsInline=true;
+      video.onloadeddata=()=>{assets[key]=video;resolve()};video.onerror=()=>reject(new Error('Video could not load: '+key));video.src=src;video.load();
+    }else{const image=new Image();image.onload=()=>{assets[key]=image;resolve()};image.onerror=()=>reject(new Error('Asset could not load: '+key));image.src=src;}
+  })));
   const canvas=document.getElementById('film');
   const createCanvas=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c};
   const renderer=PixelVideo.createRenderer({canvas,createCanvas,assets,resolved:payload.resolved,mouth:payload.mouth,style:payload.style});
-  window.renderFrame=t=>renderer.draw(t);
-  renderFrame(0);
+  const videos=Object.entries(payload.resolved.media||{}).filter(([,item])=>item.kind==='video');
+  async function prepareVideos(t){
+    await Promise.all(videos.map(async([key,item])=>{
+      const video=assets[key],fps=payload.resolved.project.fps;
+      const local=Math.max(0,Math.min(item.shotEndFrame-item.shotStartFrame-1,Math.floor(t*fps+1e-6)-item.shotStartFrame))/fps;
+      const target=Math.min(item.durationSeconds-1/item.sourceFps,(item.trimStartSeconds||0)+local);
+      if(Math.abs(video.currentTime-target)<.00001)return;
+      await new Promise((resolve,reject)=>{
+        const timeout=setTimeout(()=>{clean();reject(new Error('Video seek timeout: '+key))},10000);
+        const clean=()=>{clearTimeout(timeout);video.removeEventListener('seeked',done);video.removeEventListener('error',fail)};
+        const done=()=>{clean();resolve()},fail=()=>{clean();reject(new Error('Video seek failed: '+key))};
+        video.addEventListener('seeked',done);video.addEventListener('error',fail);video.currentTime=Math.max(0,target);
+      });
+    }));
+  }
+  let renderQueue=Promise.resolve();
+  window.renderFrame=videos.length?t=>{renderQueue=renderQueue.catch(()=>{}).then(async()=>{await prepareVideos(t);return renderer.draw(t)});return renderQueue}:t=>renderer.draw(t);
+  await renderFrame(0);
   const audio=payload.audio?new Audio(payload.audio):null;
   let playing=false,position=0,started=0;
   const button=document.getElementById('play'),seek=document.getElementById('seek'),output=document.getElementById('time');
-  const update=t=>{position=Math.min(sceneDuration,Math.max(0,t));renderFrame(position);seek.value=position/sceneDuration;output.value=position.toFixed(2)+' / '+sceneDuration.toFixed(2)};
-  function tick(now){if(!playing)return;update(audio?audio.currentTime:(now-started)/1000);if(position>=sceneDuration||(audio&&audio.ended)){playing=false;button.textContent='播放';if(audio)audio.pause();return}requestAnimationFrame(tick)}
+  const update=async t=>{position=Math.min(sceneDuration,Math.max(0,t));await renderFrame(position);seek.value=position/sceneDuration;output.value=position.toFixed(2)+' / '+sceneDuration.toFixed(2)};
+  async function tick(now){if(!playing)return;await update(audio?audio.currentTime:(now-started)/1000);if(position>=sceneDuration||(audio&&audio.ended)){playing=false;button.textContent='播放';if(audio)audio.pause();return}requestAnimationFrame(tick)}
   button.onclick=async()=>{if(playing){playing=false;if(audio)audio.pause();button.textContent='播放';return}if(position>=sceneDuration-.02)position=0;if(audio){audio.currentTime=position;await audio.play()}started=performance.now()-position*1000;playing=true;button.textContent='暂停';requestAnimationFrame(tick)};
   seek.oninput=()=>{update(Number(seek.value)*sceneDuration);started=performance.now()-position*1000;if(audio)audio.currentTime=position};
   if(new URLSearchParams(location.search).has('render'))document.body.classList.add('render');
-  update(0);return true;
+  await update(0);return true;
 })();
 </script></body></html>

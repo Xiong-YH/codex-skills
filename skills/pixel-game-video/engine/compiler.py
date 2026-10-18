@@ -9,7 +9,7 @@ from .models import INPUT_MODELS
 from .dependencies import runtime_files
 
 SKILL_ROOT = Path(__file__).resolve().parents[1]
-MODULES = ("style", "library", "text", "motion", "audio", "scenes")
+MODULES = ("style", "library", "text", "motion", "audio", "scenes", "components")
 
 
 def read_json(path):
@@ -45,6 +45,10 @@ def _source_integrity(root):
         if hashes.get(name) != file_hash(root / name):
             owners = sorted({m["sourceFile"] for m in mapping.get("mappings", []) if m.get("generatedFile") == name})
             raise ValueError(f"director generated file changed: {name}; edit sources {owners} and run handoff")
+    for name, expected in hashes.items():
+        path = (root / name).resolve()
+        if not path.is_relative_to(root) or not path.is_file() or file_hash(path) != expected:
+            raise ValueError(f'director generated file changed: {name}; rerun handoff from sources')
     source_hashes = mapping.get("sourceHashes", {})
     if not source_hashes:
         raise ValueError("director source-map.json is missing sourceHashes; rerun handoff")
@@ -155,6 +159,9 @@ def compile_project(project_root, skill_root=None, *, write=False):
     spec = importlib.util.spec_from_file_location("pixel_scene_contract", validator_file)
     validator = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(validator)
+    component_spec = importlib.util.spec_from_file_location('pixel_components', skill / 'modules/components/contract.py')
+    component_validator = importlib.util.module_from_spec(component_spec)
+    component_spec.loader.exec_module(component_validator)
     for index, shot in enumerate(shots):
         scene = require("scenes", shot["scene"])
         shot["contentStage"] = scene.get("contentStage", content_stage)
@@ -170,6 +177,12 @@ def compile_project(project_root, skill_root=None, *, write=False):
                 raise ValueError("object IDs cannot be scene/actor; object assets must be props")
         _finite(shot["params"], shot["id"])
         validator.validate(shot["scene"], shot["params"], shot["events"], shot["objects"])
+        unique((c['id'] for c in shot['components']), shot['id'] + '.components')
+        for component in shot['components']:
+            require('components', 'components.' + component['kind'] + '.v1')
+            component_validator.validate(component, shot, {s['id'] for s in shots[:index]})
+        if (shot.get('background') or shot.get('replacement') or shot['components']) and shot['scene'] == 'scenes.competition-routes.v1' and shot['params'].get('presentation') in ('cinematic', 'gameplay'):
+            raise ValueError('Competition full-world staging owns its background; use a canvas shot for project media/components')
         if shot['scene']=='scenes.cache-adventure.v1' and shot['actor'] is None:
             raise ValueError('cache-adventure requires an actor for the physical actions')
         if shot['scene']=='scenes.presenter-board.v1' and shot['actor'] is None:
@@ -253,6 +266,11 @@ def compile_project(project_root, skill_root=None, *, write=False):
         cue["frame"] = frame
 
     source_hashes = {name: file_hash(root / name) for name in INPUT_MODELS}
+    from .media import compile_media
+    media = compile_media(root, shots, project['fps'])
+    source_hashes.update({item['file']: item['sha256'] for item in media.values()})
+    if any(item['kind'] == 'video' for item in media.values()) and any(m['recipe'] == 'motion.mosaic-pullback.v1' for s in shots for m in s['motions']):
+        raise ValueError('Video footage does not support the all-shots mosaic; use a cut or another transition')
     narration = inputs['audio.json']['narration']
     if bool(narration) != (project['audioMode'] == 'narration+sfx'):
         raise ValueError('Narration clips require audioMode=narration+sfx and vice versa')
@@ -280,7 +298,7 @@ def compile_project(project_root, skill_root=None, *, write=False):
     resolved = {"contractVersion": 1, "inputHash": digest, "project": project,
                 "contentStage": content_stage,
                 "durationFrames": cursor, "durationSeconds": cursor / project["fps"],
-                "shots": shots, "events": events, "cues": cues, "audio": audio, "narration": narration,
+                "shots": shots, "events": events, "cues": cues, "audio": audio, "narration": narration, "media": media,
                 "mix": {"speechDuck": inputs["audio.json"]["speechDuck"]}}
     if write:
         write_json(root / "build/resolved-timeline.json", resolved)

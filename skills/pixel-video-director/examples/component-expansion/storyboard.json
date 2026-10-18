@@ -1,0 +1,810 @@
+{
+  "schemaVersion": 1,
+  "shots": [
+    {
+      "id": "s1",
+      "durationFrames": 300,
+      "intent": "用节点与箭头说明处理顺序",
+      "visual": {
+        "question": "这一镜如何用流程链组织信息？",
+        "form": "flow",
+        "subject": "流程链",
+        "action": "依事件逐步推进关注对象，结束后保持结果",
+        "result": "用节点与箭头说明处理顺序",
+        "continuity": "延续基调，转到下一种信息结构"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        }
+      ],
+      "components": [
+        {
+          "id": "flow",
+          "kind": "flow",
+          "x": 0.08,
+          "y": 0.16,
+          "width": 0.84,
+          "height": 0.58,
+          "showEvent": "reveal",
+          "data": {
+            "title": {
+              "labelId": "l1"
+            },
+            "items": [
+              {
+                "title": {
+                  "labelId": "l2"
+                },
+                "event": "e1",
+                "detail": {
+                  "labelId": "l3"
+                }
+              },
+              {
+                "title": {
+                  "labelId": "l4"
+                },
+                "event": "e2",
+                "detail": {
+                  "labelId": "l5"
+                }
+              },
+              {
+                "title": {
+                  "labelId": "l6"
+                },
+                "event": "e3",
+                "detail": {
+                  "labelId": "l7"
+                }
+              },
+              {
+                "title": {
+                  "labelId": "l8"
+                },
+                "event": "e4",
+                "detail": {
+                  "labelId": "l9"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c1",
+          "start": {
+            "event": "s1.enter",
+            "offsetFrames": 20
+          },
+          "end": {
+            "event": "s1.exit",
+            "offsetFrames": -10
+          }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "durationFrames": 300,
+      "intent": "等距节点表达阶段次序，不代表持续时长",
+      "visual": {
+        "question": "这一镜如何用时间轴组织信息？",
+        "form": "timeline",
+        "subject": "时间轴",
+        "action": "依事件逐步推进关注对象，结束后保持结果",
+        "result": "等距节点表达阶段次序，不代表持续时长",
+        "continuity": "延续基调，转到下一种信息结构"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        }
+      ],
+      "components": [
+        {
+          "id": "timeline",
+          "kind": "timeline",
+          "x": 0.08,
+          "y": 0.16,
+          "width": 0.84,
+          "height": 0.58,
+          "showEvent": "reveal",
+          "data": {
+            "title": {
+              "labelId": "l10"
+            },
+            "items": [
+              {
+                "title": {
+                  "labelId": "l11"
+                },
+                "label": {
+                  "labelId": "l12"
+                },
+                "detail": {
+                  "labelId": "l13"
+                },
+                "event": "e1"
+              },
+              {
+                "title": {
+                  "labelId": "l14"
+                },
+                "label": {
+                  "labelId": "l15"
+                },
+                "detail": {
+                  "labelId": "l16"
+                },
+                "event": "e2"
+              },
+              {
+                "title": {
+                  "labelId": "l17"
+                },
+                "label": {
+                  "labelId": "l18"
+                },
+                "detail": {
+                  "labelId": "l19"
+                },
+                "event": "e3"
+              }
+            ]
+          }
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c2",
+          "start": {
+            "event": "s2.enter",
+            "offsetFrames": 20
+          },
+          "end": {
+            "event": "s2.exit",
+            "offsetFrames": -10
+          }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "durationFrames": 240,
+      "intent": "事件完成后勾选，结果保持可见",
+      "visual": {
+        "question": "这一镜如何用检查清单组织信息？",
+        "form": "checklist",
+        "subject": "检查清单",
+        "action": "依事件逐步推进关注对象，结束后保持结果",
+        "result": "事件完成后勾选，结果保持可见",
+        "continuity": "延续基调，转到下一种信息结构"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        }
+      ],
+      "components": [
+        {
+          "id": "checklist",
+          "kind": "checklist",
+          "x": 0.19,
+          "y": 0.16,
+          "width": 0.62,
+          "height": 0.59,
+          "showEvent": "reveal",
+          "data": {
+            "title": {
+              "labelId": "l20"
+            },
+            "items": [
+              {
+                "label": {
+                  "labelId": "l21"
+                },
+                "detail": {
+                  "labelId": "l22"
+                },
+                "event": "e1"
+              },
+              {
+                "label": {
+                  "labelId": "l23"
+                },
+                "detail": {
+                  "labelId": "l24"
+                },
+                "event": "e2"
+              },
+              {
+                "label": {
+                  "labelId": "l25"
+                },
+                "detail": {
+                  "labelId": "l26"
+                },
+                "event": "e3"
+              }
+            ]
+          }
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c3",
+          "start": {
+            "event": "s3.enter",
+            "offsetFrames": 20
+          },
+          "end": {
+            "event": "s3.exit",
+            "offsetFrames": -10
+          }
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "durationFrames": 240,
+      "intent": "由一个主体展开组成与职责",
+      "visual": {
+        "question": "这一镜如何用层级关系组织信息？",
+        "form": "hierarchy",
+        "subject": "层级关系",
+        "action": "依事件逐步推进关注对象，结束后保持结果",
+        "result": "由一个主体展开组成与职责",
+        "continuity": "延续基调，转到下一种信息结构"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        }
+      ],
+      "components": [
+        {
+          "id": "hierarchy",
+          "kind": "hierarchy",
+          "x": 0.08,
+          "y": 0.16,
+          "width": 0.84,
+          "height": 0.58,
+          "showEvent": "reveal",
+          "data": {
+            "title": {
+              "labelId": "l27"
+            },
+            "rootTitle": {
+              "labelId": "l28"
+            },
+            "detail": {
+              "labelId": "l29"
+            },
+            "items": [
+              {
+                "title": {
+                  "labelId": "l30"
+                },
+                "event": "e1",
+                "detail": {
+                  "labelId": "l31"
+                }
+              },
+              {
+                "title": {
+                  "labelId": "l32"
+                },
+                "event": "e2",
+                "detail": {
+                  "labelId": "l33"
+                }
+              },
+              {
+                "title": {
+                  "labelId": "l34"
+                },
+                "event": "e3",
+                "detail": {
+                  "labelId": "l35"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c4",
+          "start": {
+            "event": "s4.enter",
+            "offsetFrames": 20
+          },
+          "end": {
+            "event": "s4.exit",
+            "offsetFrames": -10
+          }
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "durationFrames": 240,
+      "intent": "演示数据，仅展示同尺度比较",
+      "visual": {
+        "question": "这一镜如何用条形比较组织信息？",
+        "form": "bars",
+        "subject": "条形比较",
+        "action": "依事件逐步推进关注对象，结束后保持结果",
+        "result": "演示数据，仅展示同尺度比较",
+        "continuity": "延续基调，转到下一种信息结构"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        },
+        {
+          "id": "end1",
+          "frame": 90
+        },
+        {
+          "id": "end2",
+          "frame": 140
+        },
+        {
+          "id": "end3",
+          "frame": 190
+        }
+      ],
+      "components": [
+        {
+          "id": "bars",
+          "kind": "bars",
+          "x": 0.08,
+          "y": 0.16,
+          "width": 0.84,
+          "height": 0.58,
+          "showEvent": "reveal",
+          "data": {
+            "title": {
+              "labelId": "l36"
+            },
+            "max": 100,
+            "unit": {
+              "labelId": "l37"
+            },
+            "items": [
+              {
+                "label": {
+                  "labelId": "l38"
+                },
+                "value": 36,
+                "event": "e1",
+                "endEvent": "end1"
+              },
+              {
+                "label": {
+                  "labelId": "l39"
+                },
+                "value": 62,
+                "event": "e2",
+                "endEvent": "end2"
+              },
+              {
+                "label": {
+                  "labelId": "l40"
+                },
+                "value": 84,
+                "event": "e3",
+                "endEvent": "end3"
+              }
+            ]
+          }
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c5",
+          "start": {
+            "event": "s5.enter",
+            "offsetFrames": 20
+          },
+          "end": {
+            "event": "s5.exit",
+            "offsetFrames": -10
+          }
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "durationFrames": 240,
+      "intent": "逐行强调讲解位置，片段不执行",
+      "visual": {
+        "question": "这一镜如何用代码讲解组织信息？",
+        "form": "code",
+        "subject": "代码讲解",
+        "action": "依事件逐步推进关注对象，结束后保持结果",
+        "result": "逐行强调讲解位置，片段不执行",
+        "continuity": "延续基调，转到下一种信息结构"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        }
+      ],
+      "components": [
+        {
+          "id": "code",
+          "kind": "code",
+          "x": 0.12,
+          "y": 0.17,
+          "width": 0.76,
+          "height": 0.57,
+          "showEvent": "reveal",
+          "data": {
+            "title": {
+              "labelId": "l41"
+            },
+            "language": {
+              "labelId": "l42"
+            },
+            "items": [
+              {
+                "text": {
+                  "labelId": "l43"
+                },
+                "event": "e1"
+              },
+              {
+                "text": {
+                  "labelId": "l44"
+                },
+                "event": "e2"
+              },
+              {
+                "text": {
+                  "labelId": "l45"
+                },
+                "event": "e3"
+              },
+              {
+                "text": {
+                  "labelId": "l46"
+                },
+                "event": "e4"
+              }
+            ]
+          }
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c6",
+          "start": {
+            "event": "s6.enter",
+            "offsetFrames": 20
+          },
+          "end": {
+            "event": "s6.exit",
+            "offsetFrames": -10
+          }
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "durationFrames": 240,
+      "intent": "以主句收束观点，辅助信息保持次级",
+      "visual": {
+        "question": "这一镜如何用结论卡组织信息？",
+        "form": "takeaway",
+        "subject": "结论卡",
+        "action": "显露主句并留出阅读时间",
+        "result": "以主句收束观点，辅助信息保持次级",
+        "continuity": "延续基调，转到下一种信息结构"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        }
+      ],
+      "components": [
+        {
+          "id": "takeaway",
+          "kind": "takeaway",
+          "x": 0.12,
+          "y": 0.22,
+          "width": 0.76,
+          "height": 0.49,
+          "showEvent": "reveal",
+          "data": {
+            "eyebrow": {
+              "labelId": "l47"
+            },
+            "title": {
+              "labelId": "l48"
+            },
+            "detail": {
+              "labelId": "l49"
+            }
+          }
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c7",
+          "start": {
+            "event": "s7.enter",
+            "offsetFrames": 20
+          },
+          "end": {
+            "event": "s7.exit",
+            "offsetFrames": -10
+          }
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "durationFrames": 300,
+      "intent": "流程说明怎么做，清单说明何时可以继续",
+      "visual": {
+        "question": "这一镜如何用组合示例组织信息？",
+        "form": "flow",
+        "subject": "组合示例",
+        "action": "依事件逐步推进关注对象，结束后保持结果",
+        "result": "流程说明怎么做，清单说明何时可以继续",
+        "continuity": "用组合方式回收各组件的职责"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "check1",
+          "frame": 160
+        },
+        {
+          "id": "check2",
+          "frame": 190
+        },
+        {
+          "id": "e3",
+          "frame": 240
+        }
+      ],
+      "components": [
+        {
+          "id": "path",
+          "kind": "flow",
+          "x": 0.06,
+          "y": 0.16,
+          "width": 0.56,
+          "height": 0.58,
+          "showEvent": "reveal",
+          "data": {
+            "title": {
+              "labelId": "l50"
+            },
+            "items": [
+              {
+                "title": {
+                  "labelId": "l51"
+                },
+                "event": "e1"
+              },
+              {
+                "title": {
+                  "labelId": "l52"
+                },
+                "event": "e2"
+              },
+              {
+                "title": {
+                  "labelId": "l53"
+                },
+                "event": "e3"
+              }
+            ]
+          }
+        },
+        {
+          "id": "gate",
+          "kind": "checklist",
+          "x": 0.66,
+          "y": 0.24,
+          "width": 0.28,
+          "height": 0.43,
+          "showEvent": "reveal",
+          "data": {
+            "title": {
+              "labelId": "l54"
+            },
+            "items": [
+              {
+                "label": {
+                  "labelId": "l55"
+                },
+                "event": "check1"
+              },
+              {
+                "label": {
+                  "labelId": "l56"
+                },
+                "event": "check2"
+              }
+            ]
+          }
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c8",
+          "start": {
+            "event": "s8.enter",
+            "offsetFrames": 20
+          },
+          "end": {
+            "event": "s8.exit",
+            "offsetFrames": -10
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -21,7 +21,16 @@
             "offsetFrames": -6
           }
         }
-      ]
+      ],
+      "visual": {
+        "question": "",
+        "form": "scene",
+        "subject": "",
+        "action": "",
+        "result": "",
+        "continuity": ""
+      },
+      "components": []
     }
   ]
 }

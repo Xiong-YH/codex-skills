@@ -49,7 +49,7 @@
     let t=e.propCache[key];if(!t)t=e.propCache[key]={canvas:e.createCanvas(e.width,e.height)};
     if(t.version!==version){const ne={...e,ctx:t.canvas.getContext('2d')};
       P.style.background(ne,{...shot,params:{...shot.params,environment:'workspace'}});
-      if(actor)P.library.actor(ne,{...shot,actor:'actor.lead02.v1'},frame);
+      if(actor)P.library.actor(ne,{...shot,actor:'actor.azong.v3'},frame);
       t.version=version;}
     return t.canvas;
   }
