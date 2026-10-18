@@ -1,0 +1,630 @@
+{
+  "version": 1,
+  "bank": "arcade-motion",
+  "sampleRate": 48000,
+  "channels": 2,
+  "sampleWidth": 2,
+  "origin": "Original synthesized electronic, drum and rebound layers",
+  "approval": {
+    "date": "2026-10-18",
+    "scope": "Six independent arcade-motion atoms, including their combined sound",
+    "feedback": "可以，挺好的，基于这个结论，我们沉淀一下 skill 内容吧",
+    "videoMixApproval": "separate review required"
+  },
+  "sourceManifestSha256": "bd107384a928f48ae8b5ab3699f9dd10081a85c546c7b0e2945224843dacf931",
+  "peakMethod": "4x interpolated estimate; not a certified true-peak measurement",
+  "estimatedPeakCeilingDbfs": -2,
+  "atoms": [
+    {
+      "id": "arcade-select",
+      "name": "选择",
+      "design": "轻触后回弹",
+      "variant": 0,
+      "envelopePoints": [
+        [
+          0,
+          1.1
+        ],
+        [
+          0.02,
+          1.1
+        ],
+        [
+          0.035,
+          0.74
+        ],
+        [
+          0.045,
+          0.76
+        ],
+        [
+          0.062,
+          1.04
+        ],
+        [
+          0.11,
+          0.8
+        ],
+        [
+          0.16,
+          0.65
+        ]
+      ],
+      "rebounds": {
+        "fields": [
+          "sourceStartSeconds",
+          "durationSeconds",
+          "destinationSeconds",
+          "gain",
+          "pan"
+        ],
+        "values": [
+          [
+            0,
+            0.045,
+            0.09,
+            0.15,
+            0.58
+          ]
+        ]
+      },
+      "additionalTrebleTrimDb": 0,
+      "files": {
+        "master": {
+          "file": "select.wav",
+          "durationSeconds": 0.202,
+          "activeRmsDbfs": -14.83,
+          "peakDbfs": -2.0,
+          "estimatedPeak4xDbfs": -2.0,
+          "monoActiveRmsDbfs": -14.83,
+          "energyAbove2500HzPercent": 2.09601,
+          "sha256": "eee6443a9b8d30e38d14db3ea2ca6c61239a06e823369f69a72ca7758de4d0dc"
+        },
+        "electronic": {
+          "file": "stems/select-electronic.wav",
+          "durationSeconds": 0.202,
+          "activeRmsDbfs": -14.62,
+          "peakDbfs": -3.97,
+          "estimatedPeak4xDbfs": -3.96,
+          "monoActiveRmsDbfs": -14.62,
+          "energyAbove2500HzPercent": 2.39674,
+          "sha256": "5a0533665802207bb90ca74343cc3ba7bb6de59d51fb3b0b4ea19756e8f748c3"
+        },
+        "drums": {
+          "file": "stems/select-drums.wav",
+          "durationSeconds": 0.202,
+          "activeRmsDbfs": -23.25,
+          "peakDbfs": -9.28,
+          "estimatedPeak4xDbfs": -9.28,
+          "monoActiveRmsDbfs": -23.25,
+          "energyAbove2500HzPercent": 0.0,
+          "sha256": "4bbeaa80edfe52201bb0110bb552ec60d52db17caac5d8d36621053c72adefc7"
+        },
+        "motion": {
+          "file": "stems/select-motion.wav",
+          "durationSeconds": 0.202,
+          "activeRmsDbfs": -31.11,
+          "peakDbfs": -20.17,
+          "estimatedPeak4xDbfs": -20.16,
+          "monoActiveRmsDbfs": -31.22,
+          "energyAbove2500HzPercent": 0.08025,
+          "sha256": "24909caf8041b50a687bc8afba6298da3f750d11923b773f09a07ba0b935c161"
+        }
+      }
+    },
+    {
+      "id": "arcade-pickup",
+      "name": "拾取",
+      "design": "轻起、重收，留一个小回跳",
+      "variant": 0,
+      "envelopePoints": [
+        [
+          0,
+          0.72
+        ],
+        [
+          0.044,
+          0.8
+        ],
+        [
+          0.068,
+          0.78
+        ],
+        [
+          0.093,
+          1.12
+        ],
+        [
+          0.14,
+          1.05
+        ],
+        [
+          0.22,
+          0.7
+        ],
+        [
+          0.36,
+          0.5
+        ]
+      ],
+      "rebounds": {
+        "fields": [
+          "sourceStartSeconds",
+          "durationSeconds",
+          "destinationSeconds",
+          "gain",
+          "pan"
+        ],
+        "values": [
+          [
+            0.093,
+            0.065,
+            0.18,
+            0.2,
+            0.65
+          ],
+          [
+            0.093,
+            0.05,
+            0.245,
+            0.09,
+            0.42
+          ]
+        ]
+      },
+      "additionalTrebleTrimDb": 1.8,
+      "files": {
+        "master": {
+          "file": "pickup.wav",
+          "durationSeconds": 0.42,
+          "activeRmsDbfs": -16.08,
+          "peakDbfs": -2.0,
+          "estimatedPeak4xDbfs": -2.0,
+          "monoActiveRmsDbfs": -15.77,
+          "energyAbove2500HzPercent": 3.00058,
+          "sha256": "f14930647772ac75b78acfed7ae669ae85db96302c8908a8ccfc128dd50267e4"
+        },
+        "electronic": {
+          "file": "stems/pickup-electronic.wav",
+          "durationSeconds": 0.42,
+          "activeRmsDbfs": -16.02,
+          "peakDbfs": -3.8,
+          "estimatedPeak4xDbfs": -3.8,
+          "monoActiveRmsDbfs": -16.02,
+          "energyAbove2500HzPercent": 3.75235,
+          "sha256": "be026f3942736b69883d0a3b1e79382d9f475a8812a5cfc62473281206150bd0"
+        },
+        "drums": {
+          "file": "stems/pickup-drums.wav",
+          "durationSeconds": 0.42,
+          "activeRmsDbfs": -22.02,
+          "peakDbfs": -9.5,
+          "estimatedPeak4xDbfs": -9.5,
+          "monoActiveRmsDbfs": -22.02,
+          "energyAbove2500HzPercent": 0.0,
+          "sha256": "0df67bcd85eb05f91665d43a6b252b3345eae19d85fb947bc92c161344e72db0"
+        },
+        "motion": {
+          "file": "stems/pickup-motion.wav",
+          "durationSeconds": 0.42,
+          "activeRmsDbfs": -29.56,
+          "peakDbfs": -16.28,
+          "estimatedPeak4xDbfs": -16.28,
+          "monoActiveRmsDbfs": -29.9,
+          "energyAbove2500HzPercent": 0.05519,
+          "sha256": "353cbc1766be773cabac14db9f973f359e16a0f9f5f31a3dd3bd133da96f5450"
+        }
+      }
+    },
+    {
+      "id": "arcade-seat",
+      "name": "落位",
+      "design": "重击、短顿、回弹",
+      "variant": 0,
+      "envelopePoints": [
+        [
+          0,
+          1.08
+        ],
+        [
+          0.025,
+          1.08
+        ],
+        [
+          0.042,
+          0.52
+        ],
+        [
+          0.057,
+          0.62
+        ],
+        [
+          0.075,
+          1.05
+        ],
+        [
+          0.14,
+          0.85
+        ],
+        [
+          0.45,
+          0.65
+        ]
+      ],
+      "rebounds": {
+        "fields": [
+          "sourceStartSeconds",
+          "durationSeconds",
+          "destinationSeconds",
+          "gain",
+          "pan"
+        ],
+        "values": [
+          [
+            0.065,
+            0.075,
+            0.13,
+            0.13,
+            0.46
+          ]
+        ]
+      },
+      "additionalTrebleTrimDb": 2.4,
+      "files": {
+        "master": {
+          "file": "seat.wav",
+          "durationSeconds": 0.42,
+          "activeRmsDbfs": -14.84,
+          "peakDbfs": -2.0,
+          "estimatedPeak4xDbfs": -2.0,
+          "monoActiveRmsDbfs": -14.84,
+          "energyAbove2500HzPercent": 4.02471,
+          "sha256": "3fcd30fcb55ceff3a99029869de3e0f6fa05cb7aa3c6f08c0de49e0a43153f38"
+        },
+        "electronic": {
+          "file": "stems/seat-electronic.wav",
+          "durationSeconds": 0.42,
+          "activeRmsDbfs": -17.59,
+          "peakDbfs": -4.47,
+          "estimatedPeak4xDbfs": -4.46,
+          "monoActiveRmsDbfs": -17.59,
+          "energyAbove2500HzPercent": 6.90785,
+          "sha256": "651bfc33517e404710d21109141af1a95a701044884787cd9f5eedfcab78b75e"
+        },
+        "drums": {
+          "file": "stems/seat-drums.wav",
+          "durationSeconds": 0.42,
+          "activeRmsDbfs": -19.77,
+          "peakDbfs": -8.26,
+          "estimatedPeak4xDbfs": -8.26,
+          "monoActiveRmsDbfs": -19.77,
+          "energyAbove2500HzPercent": 0.0,
+          "sha256": "4943c3aa5e08c3d2c6076df1cec2651ffd71be4ef51f0e8e33946a2076253c31"
+        },
+        "motion": {
+          "file": "stems/seat-motion.wav",
+          "durationSeconds": 0.42,
+          "activeRmsDbfs": -37.24,
+          "peakDbfs": -25.92,
+          "estimatedPeak4xDbfs": -25.91,
+          "monoActiveRmsDbfs": -37.27,
+          "energyAbove2500HzPercent": 0.00092,
+          "sha256": "850acec171bdd5857b5c8466e357c39c0bc61f50bfee09806dd74a3e96363e23"
+        }
+      }
+    },
+    {
+      "id": "arcade-launch",
+      "name": "展开",
+      "design": "蓄力递进，最后一拍释放",
+      "variant": 0,
+      "envelopePoints": [
+        [
+          0,
+          0.76
+        ],
+        [
+          0.06,
+          0.85
+        ],
+        [
+          0.115,
+          0.9
+        ],
+        [
+          0.17,
+          0.85
+        ],
+        [
+          0.215,
+          1.13
+        ],
+        [
+          0.25,
+          1.08
+        ],
+        [
+          0.35,
+          0.8
+        ],
+        [
+          0.56,
+          0.55
+        ]
+      ],
+      "rebounds": {
+        "fields": [
+          "sourceStartSeconds",
+          "durationSeconds",
+          "destinationSeconds",
+          "gain",
+          "pan"
+        ],
+        "values": [
+          [
+            0.175,
+            0.085,
+            0.285,
+            0.2,
+            0.62
+          ],
+          [
+            0.175,
+            0.075,
+            0.355,
+            0.11,
+            0.42
+          ]
+        ]
+      },
+      "additionalTrebleTrimDb": 0,
+      "files": {
+        "master": {
+          "file": "launch.wav",
+          "durationSeconds": 0.535,
+          "activeRmsDbfs": -16.44,
+          "peakDbfs": -2.01,
+          "estimatedPeak4xDbfs": -2.0,
+          "monoActiveRmsDbfs": -16.24,
+          "energyAbove2500HzPercent": 0.91574,
+          "sha256": "8df5256a013165c9fba945352d3c3b321f769285705b0c399f1454e9ec2748e2"
+        },
+        "electronic": {
+          "file": "stems/launch-electronic.wav",
+          "durationSeconds": 0.535,
+          "activeRmsDbfs": -17.25,
+          "peakDbfs": -4.34,
+          "estimatedPeak4xDbfs": -4.34,
+          "monoActiveRmsDbfs": -17.25,
+          "energyAbove2500HzPercent": 1.21758,
+          "sha256": "248dc1e64fbcd91553934961159d2db009790f80d6eb8374690b3800b5f6f01a"
+        },
+        "drums": {
+          "file": "stems/launch-drums.wav",
+          "durationSeconds": 0.535,
+          "activeRmsDbfs": -22.59,
+          "peakDbfs": -9.36,
+          "estimatedPeak4xDbfs": -9.36,
+          "monoActiveRmsDbfs": -22.59,
+          "energyAbove2500HzPercent": 0.0,
+          "sha256": "4d82134b229b074d37be09fca955289987a7d6c764390c41f3ec4426df339852"
+        },
+        "motion": {
+          "file": "stems/launch-motion.wav",
+          "durationSeconds": 0.535,
+          "activeRmsDbfs": -30.08,
+          "peakDbfs": -17.35,
+          "estimatedPeak4xDbfs": -17.35,
+          "monoActiveRmsDbfs": -30.29,
+          "energyAbove2500HzPercent": 0.03477,
+          "sha256": "f379acb804015e9b978b2c50c97c69ca6c2444eaa9a15db221a4c99b53d7f0ce"
+        }
+      }
+    },
+    {
+      "id": "arcade-reject",
+      "name": "受阻",
+      "design": "先顿住，再弹回来",
+      "variant": 0,
+      "envelopePoints": [
+        [
+          0,
+          1.05
+        ],
+        [
+          0.06,
+          0.8
+        ],
+        [
+          0.085,
+          0.55
+        ],
+        [
+          0.116,
+          0.55
+        ],
+        [
+          0.135,
+          1.08
+        ],
+        [
+          0.19,
+          0.85
+        ],
+        [
+          0.44,
+          0.65
+        ]
+      ],
+      "rebounds": {
+        "fields": [
+          "sourceStartSeconds",
+          "durationSeconds",
+          "destinationSeconds",
+          "gain",
+          "pan"
+        ],
+        "values": [
+          [
+            0.13,
+            0.075,
+            0.24,
+            0.16,
+            0.43
+          ]
+        ]
+      },
+      "additionalTrebleTrimDb": 0,
+      "files": {
+        "master": {
+          "file": "reject.wav",
+          "durationSeconds": 0.43,
+          "activeRmsDbfs": -16.54,
+          "peakDbfs": -2.0,
+          "estimatedPeak4xDbfs": -2.0,
+          "monoActiveRmsDbfs": -16.54,
+          "energyAbove2500HzPercent": 0.13163,
+          "sha256": "74f8f56782db5ce7529e9b5b91bf77177f05103d319dee617b47095632e1eec0"
+        },
+        "electronic": {
+          "file": "stems/reject-electronic.wav",
+          "durationSeconds": 0.43,
+          "activeRmsDbfs": -17.39,
+          "peakDbfs": -4.56,
+          "estimatedPeak4xDbfs": -4.56,
+          "monoActiveRmsDbfs": -17.39,
+          "energyAbove2500HzPercent": 0.17033,
+          "sha256": "e9d4fa206b88631bee5420c65952245349007ce7717972d5811c289348eee40a"
+        },
+        "drums": {
+          "file": "stems/reject-drums.wav",
+          "durationSeconds": 0.43,
+          "activeRmsDbfs": -21.92,
+          "peakDbfs": -9.76,
+          "estimatedPeak4xDbfs": -9.76,
+          "monoActiveRmsDbfs": -21.92,
+          "energyAbove2500HzPercent": 0.0,
+          "sha256": "3e0fe66a6646652888f568d9ecc5628f68f5a02c782b0517cb2fcaa0e241e625"
+        },
+        "motion": {
+          "file": "stems/reject-motion.wav",
+          "durationSeconds": 0.43,
+          "activeRmsDbfs": -32.32,
+          "peakDbfs": -20.59,
+          "estimatedPeak4xDbfs": -20.59,
+          "monoActiveRmsDbfs": -32.4,
+          "energyAbove2500HzPercent": 0.01425,
+          "sha256": "99bf92805e3e8aafbfac9488dc813bf60efa5c0467217dc45756453e81dc8aa1"
+        }
+      }
+    },
+    {
+      "id": "arcade-reward",
+      "name": "奖励",
+      "design": "轻重递进，收尾有重音和余弹",
+      "variant": 0,
+      "envelopePoints": [
+        [
+          0,
+          0.85
+        ],
+        [
+          0.1,
+          0.87
+        ],
+        [
+          0.18,
+          0.95
+        ],
+        [
+          0.225,
+          0.7
+        ],
+        [
+          0.275,
+          1.15
+        ],
+        [
+          0.35,
+          1.08
+        ],
+        [
+          0.47,
+          0.83
+        ],
+        [
+          0.85,
+          0.6
+        ]
+      ],
+      "rebounds": {
+        "fields": [
+          "sourceStartSeconds",
+          "durationSeconds",
+          "destinationSeconds",
+          "gain",
+          "pan"
+        ],
+        "values": [
+          [
+            0.275,
+            0.115,
+            0.425,
+            0.16,
+            0.64
+          ],
+          [
+            0.275,
+            0.1,
+            0.55,
+            0.09,
+            0.42
+          ]
+        ]
+      },
+      "additionalTrebleTrimDb": 0,
+      "files": {
+        "master": {
+          "file": "reward.wav",
+          "durationSeconds": 0.84,
+          "activeRmsDbfs": -16.21,
+          "peakDbfs": -2.0,
+          "estimatedPeak4xDbfs": -2.0,
+          "monoActiveRmsDbfs": -16.21,
+          "energyAbove2500HzPercent": 0.57975,
+          "sha256": "6668de1065602e4a5412d66dca9dc3edc780ce42ed7797958ddbb226d0ee6ac7"
+        },
+        "electronic": {
+          "file": "stems/reward-electronic.wav",
+          "durationSeconds": 0.84,
+          "activeRmsDbfs": -17.08,
+          "peakDbfs": -4.8,
+          "estimatedPeak4xDbfs": -4.79,
+          "monoActiveRmsDbfs": -17.08,
+          "energyAbove2500HzPercent": 0.73007,
+          "sha256": "292d4eb23bf618bdfd6916dd69c7f43f0cb0f7f08c3868d4cddf904ef69fbf4b"
+        },
+        "drums": {
+          "file": "stems/reward-drums.wav",
+          "durationSeconds": 0.84,
+          "activeRmsDbfs": -22.85,
+          "peakDbfs": -8.62,
+          "estimatedPeak4xDbfs": -8.62,
+          "monoActiveRmsDbfs": -22.85,
+          "energyAbove2500HzPercent": 1e-05,
+          "sha256": "483fe16ee45b48d74305ecf8aac2c7429bc72ed992c91a77604b9330564418d4"
+        },
+        "motion": {
+          "file": "stems/reward-motion.wav",
+          "durationSeconds": 0.84,
+          "activeRmsDbfs": -31.63,
+          "peakDbfs": -20.23,
+          "estimatedPeak4xDbfs": -20.22,
+          "monoActiveRmsDbfs": -31.91,
+          "energyAbove2500HzPercent": 0.00699,
+          "sha256": "ec56ea93360e8afee1f128f516d63a6e25e66b53c76a8f0b04f647235a973906"
+        }
+      }
+    }
+  ]
+}

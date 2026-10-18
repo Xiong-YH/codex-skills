@@ -139,6 +139,7 @@ class Plan(Contract):
     text: list[TextPlan] = Field(min_length=1)
     audio: list[Sound] = []
     narration: list[Narration] = []
+    speechDuck: float = Field(default=0.28, ge=0, le=1)
 
 
 class Evidence(Contract):

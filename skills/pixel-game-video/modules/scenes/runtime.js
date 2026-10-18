@@ -77,6 +77,8 @@
   }
   const handlers={'scenes.steps.v1':steps,'scenes.counter.v1':counter,'scenes.choice.v1':choice,'scenes.assembly.v1':assembly,'scenes.focus.v1':focus};
   function content(e,shot,frame){
+    if(shot.scene==='scenes.document-highlight.v1'){P.documentHighlight.draw(e,shot,frame);return;}
+    if(shot.scene==='scenes.competition-routes.v1'){P.competitionRoutes.draw({...e,includePresenter:false},shot,frame);return;}
     if(shot.scene==='scenes.study-routes.v1'){P.studyRoutes.draw(e,shot,frame);return;}
     if(shot.scene==='scenes.presenter-board.v1'){P.presenterBoard.draw(e,shot,frame);return;}
     if(shot.scene==='scenes.cache-adventure.v1'){P.cacheAdventure.draw(e,shot,frame);return;}
@@ -101,6 +103,7 @@
     else if(layer==='content')content(e,shot,frame);
     else throw new Error('Unknown scene layer '+layer);
   },draw(e,shot,frame){
+    if(shot.scene==='scenes.competition-routes.v1'&&P.competitionRoutes.drawWorld(e,shot,frame))return;
     P.style.background(e,shot);P.library.actor(e,shot,frame);content(e,shot,frame);
   }};
 })(globalThis.PixelVideo=globalThis.PixelVideo||{});

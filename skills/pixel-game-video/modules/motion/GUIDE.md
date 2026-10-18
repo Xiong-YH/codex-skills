@@ -2,12 +2,17 @@
 
 原 `pixel-motion-transitions` 已融入本模块，配方与执行器共用一份 ID。
 
+设计转场先读 [转场库](TRANSITIONS.md)：集中收纳可执行配方、参考设计与撤回项，按交接关系选型。参考设计的 `design.*` 不是可执行 recipe。
+
+局部操作反馈见 [游戏反馈细节库](../scenes/GAME_FEEL.md)。`game-feedback.js` 提供不拉伸物体的短弧线、位置回弹、角标和粒子辅助；触发事件、对象身份、数量和文案归场景，声音由 audio 引用同一事件。这些辅助不作为转场计数。
+
 | 配方 | 类型 | 维护说明 |
 | --- | --- | --- |
 | `motion.camera-push.v1` | 相机 | [共享焦点推进](recipes/camera-push.md) |
 | `motion.camera-track.v1` | 相机 | [有边界的横向跟拍与景别变化](recipes/camera-track.md) |
 | `motion.focus-punch.v1` | 强转场 | [焦点冲入切换](recipes/focus-punch.md) |
 | `motion.mosaic-pullback.v1` | 强转场 | [马赛克拉远](recipes/mosaic-pullback.md) |
+| `motion.match-dissolve.v1` | 转场 | [匹配主体与缓慢接续](recipes/match-dissolve.md) |
 | `motion.book-sweep.v1` / `motion.shelf-travel.v1` / `motion.scene-to-card.v1` | 叙事转场 | [书页、跨空间横移与场景图卡](recipes/narrative-handoffs.md) |
 | `motion.panel-slide.v1` | 转场 | [信息面板接续](recipes/panel-slide.md) |
 | `motion.pixel-iris.v1` | 转场 | [像素窗口展开](recipes/pixel-iris.md) |
@@ -18,13 +23,14 @@
 每项运动指定 ID、recipe、target、start 事件、durationFrames、params。
 相机、转场、特效使用 `target:"scene"`；物体动画引用镜头内 object ID。
 参数与可选范围见 `catalog.json`；通用执行器位于 `runtime.js`，书页/书架/图卡位于 `narrative-transitions.js`。
+三种卡片空间设计见 [空间接力设计](recipes/card-spatial-handoffs.md)，由当前竞赛场景实现；固定比例纹理归 scenes/competition-cards.js，全画幅相机与布局归 scenes/competition-cinematic.js。局部倾斜与 WebGL 实验已归档，历史依据见 [迭代记录](../../references/iteration-history.md)。
 所有坐标按画幅归一化；帧时间只由统一编译器解析。
 
 转场从新镜头 enter 开始，需要一个前镜头；占用新镜头时间，不能越出镜头。
 按交接关系选择：focus-punch 进入焦点、mosaic-pullback 表达个体与集合、书页/书架完成物体或场所承接、scene-to-card 回收前文。人物可通过 `actor:null` 退场。先确定前后镜要传递的内容，再选择配方；反复推拉同一背景不自动形成叙事推进。
 panel-slide、pixel-iris 是轻转场选项，仅替换右侧信息区，人物与背景保持稳定。
 人物站立约束肢体动作，运镜可改变整个房间与人物的景别。连续背景使用完整画幅的统一相机；人物可随镜头自然进出视野，字幕独立。局部交接用于独立图文或面板，不能裁断连续场景。stage 背景裁片配方已撤回，见 [失败说明](recipes/stage-transitions.md)。
-字幕新句和新旁白在转场结束后出现；传递焦点的主物体须在切入时已显露，后续机制事件再排在落位后。强转场可从 36–48 帧（60fps）起试。
+字幕新句和新旁白在转场结束后出现；传递焦点的主物体须在切入时已显露，后续机制事件再排在落位后。时长按实际旁白与动作阶段安排；各配方里的试用帧数不是节奏标准。
 碎屏保留给打破障碍等特殊剧情，不作为通用镜头切换。
 相机推进结束保持最终构图到镜头末，字幕保持独立。
 同镜头的转场不能互相重叠；其他同类运动在同一目标上不能重叠。

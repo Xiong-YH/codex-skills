@@ -5,6 +5,7 @@ import importlib.util
 import json
 import sys
 from pathlib import Path
+from .dependencies import actor_ids, javascript_files
 
 
 def load_module(name, path):
@@ -37,7 +38,7 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
     style = json.loads(preset_path.read_text(encoding='utf-8'))
     if style['id'] != selected['id']:
         raise ValueError('Style catalog and preset identity differ')
-    assets = prepare.prepare(modules / 'library')
+    assets = prepare.prepare(modules / 'library', actor_ids=actor_ids(resolved))
     library_asset_count = len(assets)
     style_assets = style.get('assets', {})
     if not isinstance(style_assets, dict):
@@ -70,13 +71,8 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
             if stale.is_file():
                 stale.unlink()
     payload = {'resolved': resolved, 'style': style, 'assets': assets, 'mouth': mouth, 'audio': audio_uri}
-    runtime = (style_root / 'runtime.js').read_text(encoding='utf-8')
-    if selected.get('runtime'):
-        runtime += '\n' + style_file(style_root, selected['runtime']).read_text(encoding='utf-8')
-    paths = ['text/runtime.js','library/runtime.js','library/computing.js','library/education.js','library/actor-performance.js',
-             'motion/runtime.js','motion/narrative-transitions.js','motion/staging.js','scenes/runtime.js','scenes/cache-journey.js','scenes/cache-adventure.js','scenes/presenter-board.js','scenes/study-routes.js']
-    runtime += '\n' + '\n'.join((modules / path).read_text(encoding='utf-8') for path in paths)
-    runtime += '\n' + (skill_root / 'engine' / 'player.js').read_text(encoding='utf-8')
+    runtime = '\n'.join((skill_root / path).read_text(encoding='utf-8')
+                         for path in javascript_files(skill_root, resolved))
     serialized = json.dumps(payload, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     template = (skill_root / 'engine' / 'player.html').read_text(encoding='utf-8')
     document = template.replace('__TITLE__', html.escape(resolved['project']['title']))

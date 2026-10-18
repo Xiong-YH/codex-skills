@@ -12,8 +12,10 @@ description: 制作和修改像素游戏感视频，按结构化镜头、素材�
 | 色板、字体、像素密度 | [style](modules/style/GUIDE.md) |
 | 人物、物体、表情素材 | [library](modules/library/GUIDE.md) |
 | 字幕、注释、标题、标签 | [text](modules/text/GUIDE.md) |
-| 相机、物体运动、转场、特效 | [motion](modules/motion/GUIDE.md) |
-| 音色、声像、事件音效 | [audio](modules/audio/GUIDE.md) |
+| 转场选型与设计 | [转场库](modules/motion/TRANSITIONS.md)，选定后按链接读配方 |
+| 游戏感、操作反馈与局部细节 | [游戏反馈细节库](modules/scenes/GAME_FEEL.md)，按实际状态选择触点、运动和声音 |
+| 相机、物体运动、转场执行、特效 | [motion](modules/motion/GUIDE.md) |
+| 音色、声像、事件音效 | [audio](modules/audio/GUIDE.md)；六种已确认街机音效、选型及认可状态见 [ARCADE](modules/audio/ARCADE.md) |
 | 游戏机制、嘴型、表演 | [scenes](modules/scenes/GUIDE.md) |
 
 从 `init PROJECT` 建轻量工程；编辑后运行 `validate`、`build`、`preview`、`render`。命令均为 `python scripts/video.py <命令> PROJECT`。依赖与环境配置见 [运行](references/runtime.md)，增加能力见 [模块维护](references/module-development.md)。

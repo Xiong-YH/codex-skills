@@ -10,8 +10,8 @@ paint(old,'#bd173e');paint(next,'#0e4ca8');
 old.getContext('2d').fillStyle='#ffff00';old.getContext('2d').fillRect(48,70,22,50);
 const data=c=>Buffer.from(c.getContext('2d').getImageData(0,0,w,h).data);
 let total=0;
-for(const recipe of ['motion.book-sweep.v1','motion.shelf-travel.v1','motion.scene-to-card.v1']){
- const duration=recipe.includes('shelf')?48:36,m={recipe,startFrame:60,endFrame:60+duration,params:{}};
+for(const recipe of ['motion.book-sweep.v1','motion.shelf-travel.v1','motion.scene-to-card.v1','motion.match-dissolve.v1']){
+ const duration=recipe.includes('match-dissolve')?72:recipe.includes('shelf')?48:36,m={recipe,startFrame:60,endFrame:60+duration,params:{}};
  const draw=f=>{e.ctx.clearRect(0,0,w,h);P.motion.worldTransition(e,old,next,m,f);return data(out)};
  assert.deepEqual(draw(60),data(old));assert.deepEqual(draw(60+duration-1),data(next));
  for(let f=60;f<60+duration;f++){

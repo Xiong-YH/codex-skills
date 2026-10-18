@@ -1,8 +1,200 @@
-{"module":"audio","items":[
-  {"id":"code-tap","maxVariant":2},{"id":"replicate","maxVariant":2},{"id":"select","maxVariant":2},
-  {"id":"focus-step","maxVariant":0},{"id":"lock","maxVariant":2},{"id":"panel-open","maxVariant":0},
-  {"id":"question-tick","maxVariant":2},{"id":"system-unfold","maxVariant":0},{"id":"node-connect","maxVariant":0},
-  {"id":"extract","maxVariant":0},{"id":"boundary-hit","maxVariant":2},{"id":"repair","maxVariant":1},
-  {"id":"verified","maxVariant":0},{"id":"compare","maxVariant":0},{"id":"commit","maxVariant":0},
-  {"id":"product-build","maxVariant":0},{"id":"stage-done","maxVariant":2},{"id":"product-ready","maxVariant":0},{"id":"complete","maxVariant":0}
-]}
+{
+  "module": "audio",
+  "items": [
+    {
+      "id": "code-tap",
+      "maxVariant": 2
+    },
+    {
+      "id": "replicate",
+      "maxVariant": 2
+    },
+    {
+      "id": "select",
+      "maxVariant": 2
+    },
+    {
+      "id": "focus-step",
+      "maxVariant": 0
+    },
+    {
+      "id": "lock",
+      "maxVariant": 2
+    },
+    {
+      "id": "panel-open",
+      "maxVariant": 0
+    },
+    {
+      "id": "question-tick",
+      "maxVariant": 2
+    },
+    {
+      "id": "system-unfold",
+      "maxVariant": 0
+    },
+    {
+      "id": "node-connect",
+      "maxVariant": 0
+    },
+    {
+      "id": "extract",
+      "maxVariant": 0
+    },
+    {
+      "id": "boundary-hit",
+      "maxVariant": 2
+    },
+    {
+      "id": "repair",
+      "maxVariant": 1
+    },
+    {
+      "id": "verified",
+      "maxVariant": 0
+    },
+    {
+      "id": "compare",
+      "maxVariant": 0
+    },
+    {
+      "id": "commit",
+      "maxVariant": 0
+    },
+    {
+      "id": "product-build",
+      "maxVariant": 0
+    },
+    {
+      "id": "stage-done",
+      "maxVariant": 2
+    },
+    {
+      "id": "product-ready",
+      "maxVariant": 0
+    },
+    {
+      "id": "complete",
+      "maxVariant": 0
+    },
+    {
+      "id": "arcade-select",
+      "maxVariant": 0,
+      "name": "选择",
+      "bank": "arcade-core",
+      "status": "user-approved",
+      "group": "基础触点",
+      "use": [
+        "选中确认",
+        "短触点"
+      ],
+      "avoid": [
+        "仅切换焦点",
+        "长阶段结算"
+      ],
+      "intensity": "light",
+      "durationSeconds": 0.202,
+      "anchorSeconds": 0,
+      "suggestedMinGapSeconds": 0.22
+    },
+    {
+      "id": "arcade-pickup",
+      "maxVariant": 0,
+      "name": "拾取",
+      "bank": "arcade-core",
+      "status": "user-approved",
+      "group": "基础触点",
+      "use": [
+        "拾取",
+        "资源离开原位"
+      ],
+      "avoid": [
+        "资源已经落位"
+      ],
+      "intensity": "medium",
+      "durationSeconds": 0.42,
+      "anchorSeconds": 0,
+      "suggestedMinGapSeconds": 0.4
+    },
+    {
+      "id": "arcade-seat",
+      "maxVariant": 0,
+      "name": "落位",
+      "bank": "arcade-core",
+      "status": "user-approved",
+      "group": "基础触点",
+      "use": [
+        "落槽",
+        "对象抵达",
+        "卡片归位"
+      ],
+      "avoid": [
+        "未到达就提前确认"
+      ],
+      "intensity": "medium",
+      "durationSeconds": 0.42,
+      "anchorSeconds": 0,
+      "suggestedMinGapSeconds": 0.4
+    },
+    {
+      "id": "arcade-launch",
+      "maxVariant": 0,
+      "name": "展开",
+      "bank": "arcade-core",
+      "status": "user-approved",
+      "group": "基础触点",
+      "use": [
+        "空间展开",
+        "启动释放"
+      ],
+      "avoid": [
+        "执行前蓄力",
+        "关闭面板"
+      ],
+      "intensity": "medium",
+      "durationSeconds": 0.535,
+      "anchorSeconds": 0,
+      "suggestedMinGapSeconds": 0.5
+    },
+    {
+      "id": "arcade-reject",
+      "maxVariant": 0,
+      "name": "受阻",
+      "bank": "arcade-core",
+      "status": "user-approved",
+      "group": "基础触点",
+      "use": [
+        "操作被阻止",
+        "碰壁",
+        "无效选择"
+      ],
+      "avoid": [
+        "只提醒且允许继续"
+      ],
+      "intensity": "medium",
+      "durationSeconds": 0.43,
+      "anchorSeconds": 0,
+      "suggestedMinGapSeconds": 0.55
+    },
+    {
+      "id": "arcade-reward",
+      "maxVariant": 0,
+      "name": "奖励",
+      "bank": "arcade-core",
+      "status": "user-approved",
+      "group": "基础触点",
+      "use": [
+        "任务完成",
+        "阶段结算"
+      ],
+      "avoid": [
+        "小进度刷新",
+        "仅解除门槛"
+      ],
+      "intensity": "strong",
+      "durationSeconds": 0.84,
+      "anchorSeconds": 0,
+      "suggestedMinGapSeconds": 0.9
+    }
+  ]
+}

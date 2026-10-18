@@ -27,4 +27,6 @@ script 中每个 cue 都要在 storyboard 放置一次，并在 production-plan.
 
 有已录制或合成的旁白时，production-plan 使用 `audioMode="narration+sfx"` 与 `narration:[{id,file,at,gain}]`。WAV 路径相对创作工程、48kHz/16-bit PCM；handoff 复制到 video/，同时绑定源素材与复制件哈希。先测语音长度，再安排字幕和动作；不能为压缩示例时长把旁白截断。没有旁白时保留 sfx-only/silent。
 
+production-plan 可用 `speechDuck` 设置旁白期间保留的音效比例，范围0–1，默认0.28；handoff 映射到 audio.json。与每个音效的 level 配合设计，旁白素材和 gain 可独立保持。
+
 `init PROJECT` 创建待填写模板，空字段会阻止交接。`init PROJECT --example` 复制可运行样例。`--idea` 只记录创意，写脚本和设计分镜仍由使用 skill 的 agent 完成，不把模板伪装成自动创作结果。

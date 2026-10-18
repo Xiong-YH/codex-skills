@@ -10,6 +10,9 @@ description: Turn an idea or existing script into a pixel game-style video throu
 | 当前任务 | 读取 | 执行产物 |
 | --- | --- | --- |
 | 新创意、脚本或分镜 | [创作合同](references/authoring.md)、[视觉叙事](references/visual-storytelling.md) | brief / script / storyboard / production-plan |
+| 转场选型或设计 | 按基础依赖定位其 `modules/motion/TRANSITIONS.md`，再读所选配方 | 写清交接主体、动作阶段与落稳后的讲解事件 |
+| 加强游戏感与操作反馈 | 按基础依赖定位其 `modules/scenes/GAME_FEEL.md` | 按状态选择细节，安排触点事件与声音，保留试用/认可状态 |
+| 音效设计与混音 | 按基础依赖定位其 `modules/audio/GUIDE.md`；街机＋鼓点读 `ARCADE.md` | 先确认独立声音原子，再设计项目事件、音量与旁白关系；已确认库可直接选用 |
 | 延续本项目的计算机知识口播 | [已确认的表达方向](references/computing-voiceover.md) | 将相关偏好带入 brief，按新主题设计画面 |
 | 交接、预览、出片 | [基础依赖与命令](references/handoff.md) | video/ 中的 VideoSpec 与成片 |
 | 审片、修改或继续已有工程 | [Review 与影响范围](references/review.md) | review.json 与定向源文件修改 |

@@ -12,5 +12,6 @@
   {"id":"motion.gold-burst.v1","kind":"effect","title":"局部单次金光爆发","target":"scene","params":{"x":[0,1],"y":[0,1]}},
   {"id":"motion.book-sweep.v1","kind":"transition","layer":"world","title":"整页铺屏与翻页换景","target":"scene","params":{"x":[0,1],"y":[0,1]}},
   {"id":"motion.shelf-travel.v1","kind":"transition","layer":"world","title":"前景书架遮挡与跨空间横移","target":"scene","params":{}},
-  {"id":"motion.scene-to-card.v1","kind":"transition","layer":"world","title":"完整场景收成路线卡","target":"scene","params":{"x":[0,0.9],"y":[0,0.9],"width":[0.1,0.8]}}
+  {"id":"motion.scene-to-card.v1","kind":"transition","layer":"world","title":"完整场景收成路线卡","target":"scene","params":{"x":[0,0.9],"y":[0,0.9],"width":[0.1,0.8]}},
+  {"id":"motion.match-dissolve.v1","kind":"transition","layer":"world","title":"主体匹配与完整场景缓慢接续","target":"scene","params":{}}
 ]}

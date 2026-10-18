@@ -36,6 +36,20 @@ class CacheNarrationTests(unittest.TestCase):
         self.assertFalse(np.any(mixed[:48000]));self.assertTrue(np.any(mixed[48000:60000]));self.assertFalse(np.any(mixed[60000:]))
         self.assertEqual(records[0]['startSample'],48000)
 
+    def test_duck_changes_sfx_only_and_releases_after_voice(self):
+        self.narrated();resolved=compile_project(self.root)
+        source=np.full((576000,2),.01)
+        voice,_=N.mix(resolved,self.root,np.zeros_like(source))
+        default,_=N.mix(resolved,self.root,source)
+        resolved['mix']['speechDuck']=.55
+        changed,records=N.mix(resolved,self.root,source)
+        voice_after,_=N.mix(resolved,self.root,np.zeros_like(source))
+        np.testing.assert_array_equal(voice,voice_after)
+        np.testing.assert_allclose((default-voice)[48000:60000],.0028,atol=1e-15)
+        np.testing.assert_allclose((changed-voice)[48000:60000],.0055,atol=1e-15)
+        np.testing.assert_allclose((changed-voice)[70000:71000],.01,atol=1e-15)
+        self.assertEqual(records[0]['startSample'],48000)
+
     def test_voice_escape_overflow_and_overlap_are_rejected(self):
         self.narrated(file='../outside.wav')
         with self.assertRaisesRegex(ValueError,'inside the project'):compile_project(self.root)

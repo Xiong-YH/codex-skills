@@ -102,6 +102,7 @@ class NarrationCue(Model):
 class Audio(Model):
     cues: list[AudioCue] = Field(default_factory=list)
     narration: list[NarrationCue] = Field(default_factory=list)
+    speechDuck: Unit = 0.28
 
 
 INPUT_MODELS = {

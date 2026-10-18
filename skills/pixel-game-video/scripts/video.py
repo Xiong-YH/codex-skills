@@ -61,6 +61,7 @@ def init_project(destination, title):
 
 def export_project(root, destination):
     from engine.compiler import compile_project, INPUT_MODELS, read_json, write_json
+    from engine.delivery import copy_skill
     resolved = compile_project(root)
     if destination.exists():
         raise ValueError(f"destination already exists: {destination}")
@@ -68,7 +69,7 @@ def export_project(root, destination):
         raise ValueError("export destination must be outside the source project and skill")
     destination.mkdir(parents=True)
     runtime = destination / "pixel-game-video"
-    shutil.copytree(SKILL_ROOT, runtime, ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "node_modules", "build", "work", "outputs", "tests"))
+    copy_skill(SKILL_ROOT, runtime, include_tests=False)
     target = destination / "project"
     target.mkdir()
     for name in INPUT_MODELS:

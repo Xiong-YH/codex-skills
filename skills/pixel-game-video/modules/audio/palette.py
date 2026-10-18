@@ -1,6 +1,7 @@
 """Contact, data, spring, magnetic, glass and fault materials around the approved G2 identity."""
 import numpy as np
 import game_audio as S
+import arcade
 
 RATE = S.RATE
 MATERIALS = {
@@ -13,6 +14,7 @@ MATERIALS = {
     'compare': 'paired tactile knocks', 'commit': 'snap + G2 latch',
     'product-build': 'assembly contacts + power pulse', 'stage-done': 'role-specific checkpoint',
     'product-ready': 'power-on response', 'complete': 'G2 reward + crystal layer',
+    **{item['id']: item['design'] for item in arcade.entries()},
 }
 
 
@@ -89,6 +91,8 @@ def fault(variant=0):
 
 
 def sound(kind, variant):
+    if kind.startswith('arcade-'):
+        return arcade.sound(kind, variant)
     if kind == 'code-tap':
         return S.combine(.085, [(0, contact(variant, 1600 + variant * 180), 1),
                                 (.011, contact(variant + 11, 900), .28)])

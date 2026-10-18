@@ -13,11 +13,13 @@ def encode(image):
     return 'data:image/png;base64,' + base64.b64encode(output.getvalue()).decode('ascii')
 
 
-def prepare(module_root: Path):
+def prepare(module_root: Path, actor_ids=None):
     records = json.loads((module_root / 'catalog.json').read_text(encoding='utf-8'))['items']
     assets = {}
     for record in records:
         if record['kind'] != 'actor':
+            continue
+        if actor_ids is not None and record['id'] not in actor_ids:
             continue
         path = module_root / record['path']
         if hashlib.sha256(path.read_bytes()).hexdigest() != record['sha256']:

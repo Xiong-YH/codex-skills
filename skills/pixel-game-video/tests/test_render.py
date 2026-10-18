@@ -8,10 +8,23 @@ import wave
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from engine.render import ENGINE, _audio_slice, _build_bindings, _hash, _key_frames, _read_contract, _verify, render
+from engine.render import ENGINE, _audio_slice, _build_bindings, _frame_selection, _hash, _key_frames, _read_contract, _verify, render
 
 
 class RenderContractTests(unittest.TestCase):
+    def test_large_frame_selection_preserves_indices_with_shallow_expression(self):
+        frames=[1,2,3,10]+list(range(20,900,3))
+        expression=_frame_selection(frames)
+        self.assertIn('between(n,1,3)',expression)
+        depth=maximum=0
+        for char in expression:
+            depth += (char=='(')-(char==')')
+            maximum=max(maximum,depth)
+        self.assertLess(maximum,16)
+        for n in range(905):
+            result=eval(expression,{'eq':lambda a,b:a==b,'between':lambda x,a,b:a<=x<=b,'n':n,'__builtins__':{}})
+            self.assertEqual(bool(result),n in frames)
+
     def setUp(self):
         self.scratch = tempfile.TemporaryDirectory()
         self.addCleanup(self.scratch.cleanup)

@@ -263,15 +263,35 @@ def _key_frames(resolved: dict, first: int, last: int) -> list[int]:
     return sorted(frame for frame in candidates if first <= frame < last)
 
 
+def _frame_selection(frames: list[int]) -> str:
+    """Compact consecutive frames and balance the expression for FFmpeg's parser."""
+    values = sorted(set(frames))
+    if not values:
+        return '0'
+    ranges, start, end = [], values[0], values[0]
+    for value in values[1:]:
+        if value == end + 1:
+            end = value
+        else:
+            ranges.append((start, end))
+            start = end = value
+    ranges.append((start, end))
+    terms = [f'eq(n,{a})' if a == b else f'between(n,{a},{b})' for a, b in ranges]
+    while len(terms) > 1:
+        terms = [f'({terms[i]}+{terms[i+1]})' if i + 1 < len(terms) else terms[i]
+                 for i in range(0, len(terms), 2)]
+    return terms[0]
+
+
 def _decode_stills(ffmpeg: str, video: Path, target: Path, resolved: dict, first: int, last: int) -> dict:
     from PIL import Image, ImageDraw
     config = resolved['project']
     width, height, fps = config['width'], config['height'], config['fps']
     source_frames = _key_frames(resolved, first, last)
-    selected = '+'.join(f'eq(n,{frame-first})' for frame in source_frames)
+    selected = _frame_selection([frame-first for frame in source_frames])
     # Select decoded frame indices in one pass, preserving every chosen frame.
     command = [ffmpeg, '-v', 'error', '-i', str(video), '-an', '-vf', f"select='{selected}'",
-               '-vsync', '0', '-pix_fmt', 'rgb24', '-f', 'rawvideo', 'pipe:1']
+               '-fps_mode', 'passthrough', '-pix_fmt', 'rgb24', '-f', 'rawvideo', 'pipe:1']
     stride = width * height * 3
     thumbnail_width = min(480, width)
     thumbnail_height = round(height * thumbnail_width / width)

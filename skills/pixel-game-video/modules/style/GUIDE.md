@@ -11,6 +11,7 @@
 | `assets/` | 风格拥有的背景图与生成来源记录 |
 | `pixel-computing.json`、`pixel-computing.js` | 工作台与机房的像素计算风格、镜头环境选择 |
 | `pixel-study.json`、`pixel-study.js` | 研途场景组：书桌、档案馆、工坊、俯视路线桌；480×270 背景网格 |
+| `pixel-competition.json` | 竞赛场景组：复用工作台、机房训练室、开发工坊与路线桌；沿用 pixel-study.js 的像素背景执行器 |
 
 `style.modern-pixel.v1` 使用日光浅青天空、青绿远景、暖沙平台与奶油信息卡；深青文字保证明亮背景上的对比。
 背景按天空、远山、近景、平台分层；云和地表纹理避开主体信息区，不使用满屏点阵作装饰。

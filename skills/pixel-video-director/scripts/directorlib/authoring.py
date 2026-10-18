@@ -169,6 +169,7 @@ def transform(sources):
             outputs["text.json"]["cues"].append(target)
     outputs["audio.json"]["cues"] = [map_value("audio.json", f"/cues/{i}", cue, "production-plan.json", cue["id"], "")
                                             for i, cue in enumerate(plan["audio"])]
+    outputs['audio.json']['speechDuck'] = map_value('audio.json', '/speechDuck', plan['speechDuck'], 'production-plan.json', plan['id'], '/speechDuck')
     if plan['narration']:
         outputs['audio.json']['narration'] = [map_value('audio.json', f'/narration/{i}', cue, 'production-plan.json', cue['id'], '') for i,cue in enumerate(plan['narration'])]
     return outputs, mappings

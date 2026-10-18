@@ -24,6 +24,7 @@ def mix(resolved, root, sfx):
     import numpy as np
     voice = np.zeros_like(sfx)
     duck = np.ones(len(sfx))
+    speech_duck = resolved.get('mix', {}).get('speechDuck', .28)
     records = []
     for cue in resolved.get('narration', []):
         path, info = inspect_clip(root, cue['file'])
@@ -40,8 +41,8 @@ def mix(resolved, root, sfx):
         voice[start:end] += data
         # A fixed speech-window duck avoids pumping between spoken syllables.
         before, after = max(0, start - 2400), min(len(duck), end + 5760)
-        duck[before:start] = np.minimum(duck[before:start], np.linspace(1, .28, start-before))
-        duck[start:end] = np.minimum(duck[start:end], .28)
-        duck[end:after] = np.minimum(duck[end:after], np.linspace(.28, 1, after-end))
+        duck[before:start] = np.minimum(duck[before:start], np.linspace(1, speech_duck, start-before))
+        duck[start:end] = np.minimum(duck[start:end], speech_duck)
+        duck[end:after] = np.minimum(duck[end:after], np.linspace(speech_duck, 1, after-end))
         records.append({**cue, 'startSample':start, 'endSample':end})
     return sfx * duck[:, None] + voice, records

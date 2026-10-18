@@ -1,4 +1,0 @@
-interface:
-  display_name: "现代像素口播视频"
-  short_description: "用纯代码制作现代像素讲解视频，串联任务、转场、自然嘴型与游戏音效"
-  default_prompt: "使用 $pixel-game-explainer，把我的主题做成这套现代像素游戏感讲解视频，保留小身体主角、高清文案和自然动嘴，只加音效。"

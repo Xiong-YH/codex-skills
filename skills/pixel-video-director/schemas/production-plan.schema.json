@@ -366,6 +366,13 @@
       },
       "title": "Narration",
       "type": "array"
+    },
+    "speechDuck": {
+      "default": 0.28,
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Speechduck",
+      "type": "number"
     }
   },
   "required": [

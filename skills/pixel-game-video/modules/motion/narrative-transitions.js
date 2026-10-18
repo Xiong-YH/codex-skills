@@ -70,7 +70,14 @@
     g.fillStyle=e.colors.accent;g.fillRect(-rw/2-e.pixel,-rh/2-e.pixel,rw+e.pixel*2,rh+e.pixel*2);
     g.drawImage(old,-rw/2,-rh/2,rw,rh);g.restore();
   }
-  const handlers={'motion.book-sweep.v1':book,'motion.shelf-travel.v1':shelf,'motion.scene-to-card.v1':card};
+  // Keep matched foreground geometry steady while complete rooms exchange.
+  // First/last fifths are holds, so the dissolve has preparation and a landing.
+  function matched(e,old,next,m,p){
+    const g=e.ctx,q=smooth((p-.20)/.60);
+    g.drawImage(old,0,0,e.width,e.height);
+    if(q>0){g.save();g.globalAlpha=q;g.drawImage(next,0,0,e.width,e.height);g.restore();}
+  }
+  const handlers={'motion.book-sweep.v1':book,'motion.shelf-travel.v1':shelf,'motion.scene-to-card.v1':card,'motion.match-dissolve.v1':matched};
   const prior=P.motion.worldTransition;
   P.motion.worldTransition=function(e,old,next,m,frame){
     const handler=handlers[m.recipe];if(!handler)return prior(e,old,next,m,frame);

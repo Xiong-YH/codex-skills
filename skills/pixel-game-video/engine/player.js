@@ -8,7 +8,7 @@
                 assets,resolved,mouth,createCanvas,propCache:{},fps:project.fps,seed:project.seed??1};
     const history=new Map(),contentHistory=new Map(),worldHistory=new Map();
     const contentRecipes=new Set(['motion.panel-slide.v1','motion.pixel-iris.v1']);
-    const worldRecipes=new Set(['motion.focus-punch.v1','motion.mosaic-pullback.v1','motion.book-sweep.v1','motion.shelf-travel.v1','motion.scene-to-card.v1']);
+    const worldRecipes=new Set(['motion.focus-punch.v1','motion.mosaic-pullback.v1','motion.book-sweep.v1','motion.shelf-travel.v1','motion.scene-to-card.v1','motion.match-dissolve.v1']);
     base.shotPreview=id=>{
       const index=resolved.shots.findIndex(s=>s.id===id);
       if(index<0)throw new Error('Unknown preview shot '+id);

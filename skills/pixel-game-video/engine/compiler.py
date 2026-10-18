@@ -6,6 +6,7 @@ import math
 from pathlib import Path
 
 from .models import INPUT_MODELS
+from .dependencies import runtime_files
 
 SKILL_ROOT = Path(__file__).resolve().parents[1]
 MODULES = ("style", "library", "text", "motion", "audio", "scenes")
@@ -82,6 +83,7 @@ def _motion_params(recipe, params):
         "motion.book-sweep.v1": {"x": (0, 1), "y": (0, 1)},
         "motion.shelf-travel.v1": {},
         "motion.scene-to-card.v1": {"x": (0, .9), "y": (0, .9), "width": (.1, .8)},
+        "motion.match-dissolve.v1": {},
     }
     if recipe not in rules:
         raise ValueError(f"motion executor unavailable: {recipe}")
@@ -172,9 +174,11 @@ def compile_project(project_root, skill_root=None, *, write=False):
             raise ValueError('cache-adventure requires an actor for the physical actions')
         if shot['scene']=='scenes.presenter-board.v1' and shot['actor'] is None:
             raise ValueError('presenter-board requires a presenter actor')
-        if shot['scene']=='scenes.study-routes.v1':
-            if project['style']!='style.pixel-study.v1':
-                raise ValueError('study-routes requires style.pixel-study.v1 for its environments')
+        route_styles={'scenes.study-routes.v1':'style.pixel-study.v1',
+                      'scenes.competition-routes.v1':'style.pixel-competition.v1'}
+        if shot['scene'] in route_styles:
+            if project['style']!=route_styles[shot['scene']]:
+                raise ValueError(f"{shot['scene']} requires {route_styles[shot['scene']]} for its environments")
             previous_ids={s['id'] for s in shots[:index]}
             if any(ident not in previous_ids for ident in shot['params']['sourceShots']):
                 raise ValueError('study-routes preview sources must refer to preceding shots')
@@ -270,19 +274,14 @@ def compile_project(project_root, skill_root=None, *, write=False):
         relative = path.relative_to(root).as_posix()
         cue.update(file=relative, frame=frame, **info)
         source_hashes[relative] = info['sha256']
-    runtime_hashes = {}
-    for folder in ("engine", "modules", "scripts"):
-        for path in sorted((skill / folder).rglob("*")):
-            if path.is_file() and "__pycache__" not in path.parts and path.suffix not in (".pyc", ".md"):
-                runtime_hashes[path.relative_to(skill).as_posix()] = file_hash(path)
-    for name in ("requirements.txt", "package.json"):
-        if (skill / name).exists():
-            runtime_hashes[name] = file_hash(skill / name)
+    used = {"project": project, "shots": shots, "audio": audio}
+    runtime_hashes = {name: file_hash(skill / name) for name in runtime_files(skill, used)}
     digest = hashlib.sha256(json.dumps({"inputs": source_hashes, "runtime": runtime_hashes}, sort_keys=True).encode()).hexdigest()
     resolved = {"contractVersion": 1, "inputHash": digest, "project": project,
                 "contentStage": content_stage,
                 "durationFrames": cursor, "durationSeconds": cursor / project["fps"],
-                "shots": shots, "events": events, "cues": cues, "audio": audio, "narration": narration}
+                "shots": shots, "events": events, "cues": cues, "audio": audio, "narration": narration,
+                "mix": {"speechDuck": inputs["audio.json"]["speechDuck"]}}
     if write:
         write_json(root / "build/resolved-timeline.json", resolved)
         write_json(root / "build/project-lock.json", {"contractVersion": 1, "inputHash": digest,

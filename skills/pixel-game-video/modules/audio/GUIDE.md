@@ -1,28 +1,26 @@
 # 游戏音效
 
-保留已确认 G2 赛博竞技音色，默认无人声、无音乐；声音跟随可见事件。
+声音绑定可见事件。[游戏音效选型库](ARCADE.md)包含已确认的6种街机＋鼓点基础动作。AI按语义、显著程度、主触点与间隔选型；后续扩展与蓄力候选未获认可，已退出可选库。原有19类G2材质仍可用于其他项目；完整25类／40个可用组合见 [catalog.json](catalog.json)。默认无旁白、无背景音乐。
 
-| 文件 | 维护内容 |
+| 文件 | 职责 |
 | --- | --- |
-| `catalog.json` | 音效 ID 和 variant 上限 |
-| `game_audio.py` | 音符、包络、立体声写入 |
-| `palette.py` | 十九类动作材质与音色 |
-| `mixer.py` | 编译后帧事件混音、报告 |
-| `narration.py` | 项目内 PCM 旁白校验、事件对齐与音效压低 |
-| `preview.py` | 独立生成音色试听 WAV |
+| `catalog.json` / `palette.py` | 稳定ID、variant上限、音色选择与旧G2合成 |
+| `arcade.py` / `assets/arcade-motion/` | 六个已确认母版、三层素材、设计参数与哈希 |
+| `game_audio.py` | 合成基础、单声道放置、PCM写入 |
+| `mixer.py` | 事件混音、保留原生立体声、混音报告 |
+| `narration.py` | 项目内PCM旁白校验、对齐、平滑压低音效 |
+| `preview.py` / `preview.html` | 独立试听；`--bank arcade`或`arcade-core`导出已确认的六种及分层 |
 
-输入 cue：`id / sound / at(event+offsetFrames) / level / x / variant`。
-`x` 是 0–1 的画幅横坐标，只做轻度声像展开；音量保持作者的相对关系。
-机械触点用于选择；玻璃用于连接修复；电路故障用于异常；完成才加奖励层。
-同类小变化用 variant，不同语义先换材质。
+## 事件与混音
 
-`python modules/audio/preview.py --out <临时目录>` 生成每个音色及试听索引。
-`--silent` 或项目 silent 模式不生成、内嵌或复用旧音轨。
-WAV 为 48 kHz 双声道，长度按完整视频帧数计算；尾音在片尾截断。
-`sfx-events.json` 记录事件帧、采样点、音头长度、峰值和 RMS。
+输入cue为 `id / sound / at(event+offsetFrames) / level / x / variant`。`x`为0–1横坐标，只做轻度声像平衡。声音跟随选择、抵达、受阻或完成；配合 [游戏反馈细节](../scenes/GAME_FEEL.md) 按阶段发声，不为每个粒子配音。
 
-旁白模式为 `project.audioMode="narration+sfx"`，在 audio.json 的 `narration` 数组中配置 `id/file/at/gain`。file 是工程内相对路径，WAV 必须为 48kHz、16-bit、单或双声道 PCM；剪辑不得重叠或超出成片。录音和合成语音都作为外部素材导入，不内置 TTS 服务。
-旁白文件参与输入哈希，修改后须重建；独立导出携带源 WAV。语音窗口自动压低音效，音效仍引用同一事件，混音报告记录每段采样范围。字幕按脚本事件安排，接入旁白不等于完成音素或嘴型对齐。
+街机母版已定音色和力度，混音器保留双声道与原始电平；旧G2单声道保留既有归一化和声像逻辑。两者再经事件level、旁白压低和总线处理。混音WAV为48kHz双声道，按视频帧数定长；片尾截断尾音，需预留奖励音的结束时间。`sfx-events.json`记录事件帧、采样点、时长、电平策略、旁白范围和最终峰值／RMS。
 
-验收：听实际视频并检查关键动作同步；无削波、长气音或无理由的连续提示音。
-嘴型独立于音效波形，见 [scenes](../scenes/GUIDE.md)。
+## 旁白与验收
+
+`project.audioMode="narration+sfx"`启用旁白；`audio.json.narration`填写 `id/file/at/gain`。file须为项目内相对路径，48kHz、16-bit、单或双声道PCM；旁白不得重叠或超出成片。录音／合成语音作为外部素材导入，skill不内置TTS。旁白参与输入哈希，独立导出携带WAV；嘴型与字幕仍按事件安排。
+
+`audio.json.speechDuck`为旁白期间音效保留比例，0–1，缺省0.28；director在production-plan同名字段设置。它与cue.level都由项目混音决定，已确认音色不代表已确认成片音量。`--silent`或silent模式不生成、内嵌或复用音轨。
+
+先独立试听声音原子，再听实际MP4检查同步、音量、清晰度和密度。技术指标与用户反馈分别记录，未主观检查的项保留 `not_reviewed`。嘴型能力见 [scenes](../scenes/GUIDE.md)。

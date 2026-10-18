@@ -23,6 +23,12 @@
       "title": "像素研途 · 档案馆、开发工坊与路线桌",
       "file": "pixel-study.json",
       "runtime": "pixel-study.js"
+    },
+    {
+      "id": "style.pixel-competition.v1",
+      "title": "像素竞赛 · 训练室、时间桌与工坊",
+      "file": "pixel-competition.json",
+      "runtime": "pixel-study.js"
     }
   ]
 }
