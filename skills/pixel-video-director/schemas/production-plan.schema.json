@@ -397,6 +397,15 @@
       "title": "Schemaversion",
       "type": "integer"
     },
+    "renderBackend": {
+      "default": "canvas",
+      "enum": [
+        "canvas",
+        "remotion"
+      ],
+      "title": "Renderbackend",
+      "type": "string"
+    },
     "id": {
       "title": "Id",
       "type": "string"

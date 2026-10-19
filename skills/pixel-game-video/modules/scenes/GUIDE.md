@@ -6,8 +6,8 @@
 
 | 场景 | params | 可见变化 |
 | --- | --- | --- |
+| `scenes.focus-desk.v1` | `phase,heading,labels[3],startEvent,completeEvent`；详见 [Remotion](../../references/remotion.md) | 仅原生 React 后端：待办拥挤、选一件/暂存、展开连续工作空间 |
 | `scenes.canvas.v1` | 无；使用 shot.components / background / replacement | 自由组合组件、道具与项目素材，参见 [组件](../components/GUIDE.md) |
-| `scenes.document-highlight.v1` | [文档高亮](document-highlight.md) | 脱敏、索引与文档范围错位、校验失败、近邻查找与高亮确认 |
 | `scenes.steps.v1` | `items:[{label,event}]`，1–5 项 | 事件后逐项完成 |
 | `scenes.counter.v1` | `from,to` 安全整数；`label?,unit?,startEvent,endEvent` | 固定场景内计数与进度 |
 | `scenes.choice.v1` | `options,selectedIndex,selectEvent`，2–3 项 | 选择发生后突出方案 |
@@ -20,7 +20,7 @@
 | `scenes.competition-routes.v1` | [竞赛与投入选择](competition-routes.md) | 算法节点、时间格、试练日历、项目交付与真实镜头卡 |
 
 所有 params 中 event 均为本镜头局部 ID，可用 `enter`；`exit` 是不可见的右边界，不能触发状态动作。
-`contract.py` 校验参数与事件引用；`runtime.js` 只消费编译结果。
+`contract.py` 校验参数与事件引用；Canvas `runtime.js` 和原生 Remotion 组件只消费编译结果。场景目录的 `backends` 限定执行器，缺省为 Canvas；未知后端不会静默回退。
 计数 from/to 为 JavaScript 安全整数（绝对值 ≤ 2⁵³−1）；startEvent 早于 endEvent，终值在 endEvent 精确到达并保持。
 状态持久到镜头结束；已完成步骤不因帧随机数而跳回。
 

@@ -28,8 +28,8 @@ def validate(scene_id, params, events, objects):
             event(row['event'])
 
     allowed = {
+        'scenes.focus-desk.v1': {'phase', 'heading', 'labels', 'startEvent', 'completeEvent'},
         'scenes.canvas.v1': set(),
-        'scenes.document-highlight.v1': {'phase','environment','heading','kicker','labels','stageEvents'},
         'scenes.steps.v1': {'items'},
         'scenes.counter.v1': {'from', 'to', 'label', 'unit', 'startEvent', 'endEvent'},
         'scenes.choice.v1': {'options', 'selectedIndex', 'selectEvent'},
@@ -46,28 +46,7 @@ def validate(scene_id, params, events, objects):
     extras = set(params) - allowed[scene_id]
     if extras:
         raise ValueError(f'{scene_id}: unsupported parameters {sorted(extras)}')
-    if scene_id == 'scenes.document-highlight.v1':
-        phases = {'intro','task','mask','pipeline','exception','structure','drift','verify','match','search','success','reflection','summary'}
-        if params.get('phase') not in phases:
-            raise ValueError('document-highlight: unknown phase')
-        if params.get('environment') not in {'workspace','workshop','atlas'}:
-            raise ValueError('document-highlight: unknown environment')
-        if objects:
-            raise ValueError('document-highlight owns its document and index layout')
-        label(params.get('heading'),'heading');label(params.get('kicker'),'kicker')
-        labels = params.get('labels')
-        keys = {'target','identity','backend','frontend','preview','contract','search','locate','range','highlight','plain','document','break','page','table','hidden','theory','actual','mismatch','check','yes','no','previous','next','found','success','normal','experience','why','fallback','limit','interview','candidate','question','rawPhone','rawIdentity'}
-        if not isinstance(labels,dict) or set(labels) != keys:
-            raise ValueError('document-highlight: complete label set required')
-        for key,value in labels.items(): label(value,key)
-        stages = params.get('stageEvents')
-        if not isinstance(stages,list) or not 1 <= len(stages) <= 8:
-            raise ValueError('document-highlight: 1–8 stage events required')
-        for value in stages: event(value)
-        frames = [event_frames.get(value) for value in stages]
-        if all(value is not None for value in frames) and any(b <= a for a,b in zip(frames,frames[1:])):
-            raise ValueError('document-highlight: stages must be in strictly increasing order')
-    elif scene_id in ('scenes.study-routes.v1','scenes.competition-routes.v1'):
+    if scene_id in ('scenes.study-routes.v1','scenes.competition-routes.v1'):
         environments=({'question':'workspace','research':'research','practice':'workshop','decision':'atlas'}
                       if scene_id=='scenes.study-routes.v1' else
                       {'question':'workspace','training':'training','cost':'atlas','project':'workshop','trial':'atlas','decision':'atlas'})
@@ -174,6 +153,22 @@ def validate(scene_id, params, events, objects):
             event(params.get(key));order.append(event_frames.get(params[key]))
         if all(v is not None for v in order) and not order[0]<order[1]<order[2]:
             raise ValueError('cache-journey requires start < arrive < complete')
+    elif scene_id == 'scenes.focus-desk.v1':
+        if params.get('phase') not in ('overload', 'choose', 'focus'):
+            raise ValueError('focus-desk: unknown phase')
+        label(params.get('heading'), 'heading')
+        labels = params.get('labels')
+        if not isinstance(labels, list) or len(labels) != 3:
+            raise ValueError('focus-desk requires exactly three labels')
+        for value in labels:
+            label(value, 'labels')
+        for key in ('startEvent', 'completeEvent'):
+            event(params.get(key))
+        start, end = (event_frames.get(params[key]) for key in ('startEvent', 'completeEvent'))
+        if start is not None and end is not None and not start < end:
+            raise ValueError('focus-desk requires startEvent < completeEvent')
+        if objects:
+            raise ValueError('focus-desk owns its props; objects must be empty')
     elif scene_id == 'scenes.steps.v1':
         parts('items', 1)
     elif scene_id == 'scenes.assembly.v1':

@@ -1,0 +1,21 @@
+{
+  "cues": [
+    {
+      "id": "line1",
+      "role": "subtitle",
+      "text": "先选一件，把其余待办放到一边。",
+      "phrases": [
+        "xian xuan yi jian",
+        "ba qi yu dai ban fang dao yi bian"
+      ],
+      "start": {
+        "event": "s01.enter",
+        "offsetFrames": 12
+      },
+      "end": {
+        "event": "s01.exit",
+        "offsetFrames": -12
+      }
+    }
+  ]
+}
