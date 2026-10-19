@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "shotId": "s1",
+  "output": "media/whole-illustration.mp4",
+  "states": [
+    {
+      "event": "enter",
+      "file": "media/01-tired.png"
+    },
+    {
+      "event": "hands_rise",
+      "file": "media/02-hands-rising.png"
+    },
+    {
+      "event": "hold_head",
+      "file": "media/03-overwhelmed.png"
+    },
+    {
+      "event": "lower_head",
+      "file": "media/04-lowering.png"
+    },
+    {
+      "event": "slump",
+      "file": "media/05-slumped.png"
+    },
+    {
+      "event": "focus",
+      "file": "media/06-focused.png"
+    },
+    {
+      "event": "blink",
+      "file": "media/07-focused-blink.png"
+    },
+    {
+      "event": "eyes_open",
+      "file": "media/06-focused.png"
+    }
+  ]
+}

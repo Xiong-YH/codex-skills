@@ -7,6 +7,7 @@
 | 场景 | params | 可见变化 |
 | --- | --- | --- |
 | `scenes.canvas.v1` | 无；使用 shot.components / background / replacement | 自由组合组件、道具与项目素材，参见 [组件](../components/GUIDE.md) |
+| 完整情境插画（使用 `scenes.canvas.v1` replacement） | [完整插画进入视频](whole-illustration.md) | 风格与演绎方法参考，按脚本选择是否采用、主配角和承接；不固定结构。旧拆头试样已撤回 |
 | `scenes.document-highlight.v1` | [文档高亮](document-highlight.md) | 脱敏、索引与文档范围错位、校验失败、近邻查找与高亮确认 |
 | `scenes.steps.v1` | `items:[{label,event}]`，1–5 项 | 事件后逐项完成 |
 | `scenes.counter.v1` | `from,to` 安全整数；`label?,unit?,startEvent,endEvent` | 固定场景内计数与进度 |
@@ -24,7 +25,7 @@
 计数 from/to 为 JavaScript 安全整数（绝对值 ≤ 2⁵³−1）；startEvent 早于 endEvent，终值在 endEvent 精确到达并保持。
 状态持久到镜头结束；已完成步骤不因帧随机数而跳回。
 
-`performance.py` 保留文案节奏的模拟计划，不是真实人声或音素强制对齐。当前 V3 人物没有对齐口型图集，预览为静态基准图，不消费此计划生成嘴型。口型图像与适配归素材库，字幕排版归文字模块。
+`performance.py` 保留文案节奏的模拟计划，不是真实人声或音素强制对齐；V3 静态基准图不消费此计划产生嘴型。插画片段中的完整姿态按项目镜头事件编排；不要恢复已撤回的拆头/躯干适配。字幕排版归文字模块。
 
 新增场景必须有参数合同、事件驱动的状态、运行实现和关键帧样例。
 原互动卡配方见 [interaction-card.md](interaction-card.md)，当前未注册执行器，不可当作已实现能力使用。

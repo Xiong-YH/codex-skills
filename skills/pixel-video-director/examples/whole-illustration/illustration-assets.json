@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "technique": "Whole-frame key-pose illustration",
+  "status": "trial-not-user-approved",
+  "images": {
+    "01-tired.png": {
+      "sha256": "a9f8187a56aca9a831b616b88149b843feeb5c910d845d75241e5e4a4ffd4233"
+    },
+    "02-hands-rising.png": {
+      "sha256": "4e042851b934f2606cd6c62f791b602332029aa25a436fdd4a0faabedc1e7ed5"
+    },
+    "03-overwhelmed.png": {
+      "sha256": "c6d25829a3f81e26eca32c5039ca1542a0d890beae89a209a2ff21b82b4b8fd8"
+    },
+    "04-lowering.png": {
+      "sha256": "d823fb54a5ba69da1389d3f3741a65d0646e1e9c602950c229cb39d580b6b328"
+    },
+    "05-slumped.png": {
+      "sha256": "82f482908aeefb5bda950c9418691932a8d82a83e2a186e095ab82de1b6336a0"
+    },
+    "06-focused.png": {
+      "sha256": "1ffb81bb4449d3b7e4b6bab623cf361fef53e729b45eccf91c8010149047c725"
+    },
+    "07-focused-blink.png": {
+      "sha256": "9c9bcac222d2f4c01e401bed602903094e3b2ddfe0c73cd6b6fb7a5de2e2849a"
+    }
+  },
+  "note": "Source PNG bytes preserved. Neck, shoulders, torso, arms and scene drawn together. User reference is staging inspiration, not a runtime dependency."
+}

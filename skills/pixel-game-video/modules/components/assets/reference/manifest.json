@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 1,
+  "source": "Actual canvas output from the current pixel-game-video engine",
+  "inputHash": "15f1fc22e11cbb214dc70ccc0ee71bb9d6c3b4295eeb6cfa94f9ea412b6a75f6",
+  "style": "style.pixel-editorial.v1",
+  "sourceDimensions": [
+    1920,
+    1080
+  ],
+  "sourceHashes": {
+    "examples/guide/project.json": "34338d4c59435ca29a47c5b4cfea0293fcf4bfef50dd0b08c405bb254c81000c",
+    "examples/guide/timeline.json": "3e21893d1847b75eae6113522517e79694606d65c48a968657846a6947921d79",
+    "examples/guide/text.json": "2a99983d6d37ef96ffd2237d90ec2df556c57e36fd669ecc57c9d4f9f1f7e1f5",
+    "examples/guide/audio.json": "2a99983d6d37ef96ffd2237d90ec2df556c57e36fd669ecc57c9d4f9f1f7e1f5",
+    "examples/guide/gallery.json": "4ed70eb75b453bed27bde4020a709f96ebb8ed5d53b70fbca532bfb095e50f3a",
+    "examples/guide/media/azong.png": "f876797f5f919ed0d0a4675bdc102a65e9a387e83620c198f646709a9d0e2f0a"
+  },
+  "runtimeSha256": "02d65a7dad9b623b2484253666fb8b717bde68d34d0f82fc527fccda658ebcaa",
+  "browser": "154.0.4258.62",
+  "pageErrors": [],
+  "framesExercised": 3360,
+  "captures": [
+    {
+      "id": "identity",
+      "title": "身份卡",
+      "detail": "名称、图像与简要特征",
+      "shotId": "identity",
+      "localFrame": 215,
+      "states": [],
+      "group": "component"
+    },
+    {
+      "id": "metric",
+      "title": "数值卡",
+      "detail": "从 0 到 3，终值保持",
+      "shotId": "metric",
+      "localFrame": 215,
+      "states": [
+        {
+          "frame": 30,
+          "label": "起点 · 0 层"
+        },
+        {
+          "frame": 80,
+          "label": "变化中"
+        },
+        {
+          "frame": 215,
+          "label": "终值 · 3 层"
+        }
+      ],
+      "group": "component"
+    },
+    {
+      "id": "comparison",
+      "title": "对比组",
+      "detail": "同构对照，可嵌入前镜真实快照",
+      "shotId": "comparison",
+      "localFrame": 215,
+      "states": [],
+      "group": "component"
+    },
+    {
+      "id": "annotation",
+      "title": "指向标注",
+      "detail": "短标签与引线连接到实物",
+      "shotId": "annotation",
+      "localFrame": 215,
+      "states": [],
+      "group": "component"
+    },
+    {
+      "id": "chapter",
+      "title": "章节标题",
+      "detail": "编号、主题与内容承诺",
+      "shotId": "chapter",
+      "localFrame": 215,
+      "states": [],
+      "group": "component"
+    },
+    {
+      "id": "flow",
+      "title": "流程链",
+      "detail": "依次点亮当前步骤，结果保持",
+      "shotId": "flow",
+      "localFrame": 215,
+      "states": [
+        {
+          "frame": 48,
+          "label": "第一步"
+        },
+        {
+          "frame": 108,
+          "label": "第二步"
+        },
+        {
+          "frame": 215,
+          "label": "完整流程"
+        }
+      ],
+      "group": "component"
+    },
+    {
+      "id": "timeline",
+      "title": "时间轴",
+      "detail": "等距阶段节点，表示先后顺序",
+      "shotId": "timeline",
+      "localFrame": 215,
+      "states": [],
+      "group": "component"
+    },
+    {
+      "id": "checklist",
+      "title": "检查清单",
+      "detail": "条件满足后累计勾选与计数",
+      "shotId": "checklist",
+      "localFrame": 215,
+      "states": [
+        {
+          "frame": 25,
+          "label": "未完成 · 0 / 3"
+        },
+        {
+          "frame": 90,
+          "label": "部分完成 · 2 / 3"
+        },
+        {
+          "frame": 215,
+          "label": "完成 · 3 / 3"
+        }
+      ],
+      "group": "component"
+    },
+    {
+      "id": "hierarchy",
+      "title": "层级结构",
+      "detail": "一个主体展开少量组成与职责",
+      "shotId": "hierarchy",
+      "localFrame": 215,
+      "states": [],
+      "group": "component"
+    },
+    {
+      "id": "bars",
+      "title": "条形比较",
+      "detail": "相同尺度、零起点；数值为示意",
+      "shotId": "bars",
+      "localFrame": 215,
+      "states": [],
+      "group": "component"
+    },
+    {
+      "id": "code",
+      "title": "代码讲解",
+      "detail": "保留缩进，逐行强调，不执行代码",
+      "shotId": "code",
+      "localFrame": 215,
+      "states": [
+        {
+          "frame": 48,
+          "label": "强调第一行"
+        },
+        {
+          "frame": 98,
+          "label": "强调第二行"
+        },
+        {
+          "frame": 150,
+          "label": "强调第三行"
+        }
+      ],
+      "group": "component"
+    },
+    {
+      "id": "takeaway",
+      "title": "结论组件",
+      "detail": "以开放式主句收束，保留场景空间",
+      "shotId": "takeaway",
+      "localFrame": 215,
+      "states": [],
+      "group": "component"
+    },
+    {
+      "id": "flow-checklist",
+      "title": "流程 + 清单",
+      "detail": "主流程与执行条件相互补充",
+      "shotId": "flow-checklist",
+      "localFrame": 215,
+      "states": [],
+      "group": "combination"
+    },
+    {
+      "id": "code-annotation",
+      "title": "代码 + 标注",
+      "detail": "主讲解行与指认信息分清主次",
+      "shotId": "code-annotation",
+      "localFrame": 98,
+      "states": [],
+      "group": "combination"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "assets/reference/identity.jpg",
+      "sha256": "6eb2b38f4e917e17e7915f432ef5025bb59a59c8476a8d6a8d33c5235ee066e9"
+    },
+    {
+      "file": "assets/reference/metric.jpg",
+      "sha256": "b35f7d5080636baf040d88c8781becc3043a762e86d9838255aa7694618abedd"
+    },
+    {
+      "file": "assets/reference/metric-states.jpg",
+      "sha256": "162168320f1f67109e790723a07b5bb3e89281b61bd9ba5162e97cc9e69eb532"
+    },
+    {
+      "file": "assets/reference/comparison.jpg",
+      "sha256": "a9515dd8e9a88ec9fcdc4ebd813cf23b598c264b7eb8564b7f1afdda5b0ce8d8"
+    },
+    {
+      "file": "assets/reference/annotation.jpg",
+      "sha256": "9509c8cd4e7ca50d47445bfb0340eb2e8f84eef446e3e2183c4cff74353d65bb"
+    },
+    {
+      "file": "assets/reference/chapter.jpg",
+      "sha256": "e8f94a69d0317d6b312f26478021f8b0eb55db19b92463bdca2f5ccad872d38c"
+    },
+    {
+      "file": "assets/reference/flow.jpg",
+      "sha256": "b52eebf8771043e4258af3901e89a1d703e8c8ec64fbb3c0d879e42ad98636f2"
+    },
+    {
+      "file": "assets/reference/flow-states.jpg",
+      "sha256": "0297c0dd7752d37ce45bb3bcaa21be568c0eef56c89a1bc84f73c08850110947"
+    },
+    {
+      "file": "assets/reference/timeline.jpg",
+      "sha256": "18579fc30843a07144d6da68aa9ecf93f2017543579b678aca25933383ec4f1d"
+    },
+    {
+      "file": "assets/reference/checklist.jpg",
+      "sha256": "3bbd9e214b7fc0644ad925fca4e559d3cc6c13c7b1b854a8aec880c6d71c1113"
+    },
+    {
+      "file": "assets/reference/checklist-states.jpg",
+      "sha256": "6c94bc1d5dd2a98547565897349effe0300a0c87da163fc5a73eff77186f642c"
+    },
+    {
+      "file": "assets/reference/hierarchy.jpg",
+      "sha256": "f525eefac05b18290db9afacfc4d648c2558cdb4d56863523be29a14c356809f"
+    },
+    {
+      "file": "assets/reference/bars.jpg",
+      "sha256": "c33ff2b4e046318f2fe315a3a75c36573837685f1cee221e554454618368656e"
+    },
+    {
+      "file": "assets/reference/code.jpg",
+      "sha256": "0e7bb7eca5419df7ecadb13c5f9550946641f2c7ba43c492d51cf65aec125c02"
+    },
+    {
+      "file": "assets/reference/code-states.jpg",
+      "sha256": "7680b5d342c8ba8cd0f813f6d49a6a346cdc658dc9e3c4e9f414ffabaa2e1fd9"
+    },
+    {
+      "file": "assets/reference/takeaway.jpg",
+      "sha256": "5751cf3e6a6846a7c8d6651b82fa1e230ae9649a60351b7ea22642d0aea67a9d"
+    },
+    {
+      "file": "assets/reference/flow-checklist.jpg",
+      "sha256": "a26c70265596682b9c5a2209079016927fe507799fcc5a9c802d98b3c6df48ac"
+    },
+    {
+      "file": "assets/reference/code-annotation.jpg",
+      "sha256": "950fdcb8b1061151558b3c0b2be1190c0ee6d31fb7dfe1ab02f506bf4a176d8f"
+    },
+    {
+      "file": "assets/reference/overview.jpg",
+      "sha256": "11559bd61b4866870cc1730d5e75a7dd015c5f95f115914544dc29eacb137963"
+    }
+  ],
+  "note": "State strips are sampled states; no claim of continuous motion/audio review. Neutral plate is for documentation comparison, not a project default."
+}

@@ -8,6 +8,12 @@
   },
   "items": [
     {
+      "id": "scenes.character-illustration.v1",
+      "title": "已撤回：拆头/躯干动画试样",
+      "status": "unavailable",
+      "reason": "User rejected disconnected anatomy and proportions; use whole illustration footage through scenes.canvas.v1 replacement."
+    },
+    {
       "id": "scenes.canvas.v1",
       "title": "项目画布与信息组件",
       "params": "No params; shot components and project media own the composition"

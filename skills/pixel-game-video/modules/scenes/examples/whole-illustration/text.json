@@ -1,0 +1,87 @@
+{
+  "cues": [
+    {
+      "id": "c1_1",
+      "text": "AI全栈路线怎么走？",
+      "phrases": [
+        "AI quan zhan lu xian zen me zou ？"
+      ],
+      "start": {
+        "event": "s1.speech1",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s1.end1",
+        "offsetFrames": 0
+      },
+      "role": "subtitle",
+      "y": 0.885
+    },
+    {
+      "id": "c1_2",
+      "text": "拿一个知识库问答项目，边做边学。",
+      "phrases": [
+        "na yi ge zhi shi ku wen da xiang mu ， bian zuo bian xue 。"
+      ],
+      "start": {
+        "event": "s1.speech2",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s1.end2",
+        "offsetFrames": 0
+      },
+      "role": "subtitle",
+      "y": 0.885
+    },
+    {
+      "id": "intro_title",
+      "text": "AI 全栈路线怎么走？",
+      "phrases": [],
+      "start": {
+        "event": "s1.enter",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s1.exit",
+        "offsetFrames": 0
+      },
+      "role": "title",
+      "x": 0.5,
+      "y": 0.105
+    },
+    {
+      "id": "focus_principle",
+      "text": "先做通一个项目",
+      "phrases": [],
+      "start": {
+        "event": "s1.focus",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s1.exit",
+        "offsetFrames": 0
+      },
+      "role": "label",
+      "x": 0.82,
+      "y": 0.21
+    },
+    {
+      "id": "c6_1",
+      "text": "每学一层，就让项目多跑通一步。",
+      "phrases": [
+        "mei xue yi ceng ， jiu rang xiang mu duo pao tong yi bu 。"
+      ],
+      "start": {
+        "event": "s6.speech1",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s6.end1",
+        "offsetFrames": 0
+      },
+      "role": "subtitle",
+      "y": 0.885
+    }
+  ]
+}

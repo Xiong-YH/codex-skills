@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "source": "Actual canvas output of the standalone whole-illustration example",
+  "inputHash": "69b2d039c73aa5db1d96ad5fd8fcbdd52429b357800dd397870d744baa923263",
+  "sourceHashes": {
+    "project.json": "9862d4cedefc6df047cb6f32fe5c89555d1c5761af2b1580a532b486a6e4a49c",
+    "timeline.json": "4e6eacc22a04fe2e7aa834df0a7ef86f5beabeabd3c9b05e0e78f0cedc683d2a",
+    "text.json": "93302eb62790410395601d096eaa4dafbee6d0ea37723d1fada808baf7b898d5",
+    "audio.json": "66e076b4028c58acdb57651de47b4e9d2855d1b3f5f9ed473d678045a748f3be",
+    "media/whole-illustration.mp4": "7898721bbc8d47733296779fcd44ac71f371917975ea4e4b946238e26c7c6dff",
+    "media/route-atlas-v1.png": "2ee6266236f6a6e4bcc55e95c1e1fe3820f49fb92573eb062b94ff02de56fc1e",
+    "media/s1-c1.wav": "12423decaded19776cf2dbffd610941ca1a73bb649e21a96c50efb56d3ff29ef",
+    "media/s1-c2.wav": "7781883d6a825278184644d498a37aac8339726df8842539c95a374f765b8465",
+    "media/s6-c1.wav": "b5a42232584ffb051294082a9ab886302eb523086560a0eb54177cef7aab837b"
+  },
+  "runtimeSha256": "1a69a5b75b164f46928d184ed0c126f39b2f8174977ca5c240ab2de2a5b374b0",
+  "browser": "154.0.4258.62",
+  "framesExercised": 504,
+  "pageErrors": [],
+  "captures": [
+    {
+      "event": "enter",
+      "label": "分心疲惫",
+      "frame": 30,
+      "file": "enter.jpg",
+      "sha256": "665e64b7d7aea92e253a4713e74ddd9409ec203f6677770d22d03a1cf3ecc75f"
+    },
+    {
+      "event": "hold_head",
+      "label": "抬手抱头",
+      "frame": 55,
+      "file": "hold_head.jpg",
+      "sha256": "645722ba0ad11a95a95e9bae08d9cfe8104b1f7a2b3e9afd86563124915b0365"
+    },
+    {
+      "event": "slump",
+      "label": "俯身趴下",
+      "frame": 109,
+      "file": "slump.jpg",
+      "sha256": "9acc4bb499660121ec0aeaa713a0457d998b559c28fe8f33232d16851b6c4ac5"
+    },
+    {
+      "event": "focus",
+      "label": "回到项目",
+      "frame": 145,
+      "file": "focus.jpg",
+      "sha256": "35350e1ba11672f984387fc0785a06baa4d99381065a50615873aafe07757217"
+    }
+  ],
+  "overview": {
+    "file": "states.jpg",
+    "sha256": "cb6f4daeeca579e447f8360dac4d7ca48e01c3714b8312275f1394eaf0c2ac70"
+  },
+  "note": "Whole-frame key-pose limited animation. New art is not user approved; stills do not certify continuous motion or listening quality."
+}

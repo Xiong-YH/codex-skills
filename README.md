@@ -27,13 +27,24 @@ flowchart TD
 
 基础工程只维护四份 JSON，不复制整个引擎。运镜、配色和音效各在自己的模块维护，两个 `SKILL.md` 只保留使用入口和按需链接。
 
+## 本系列要求与经验入口
+
+| 要查什么 | 记录位置 |
+| --- | --- |
+| 仓库维护边界与文件约定 | [AGENTS.md](AGENTS.md) |
+| 本系列当前有效的画风、人物、表演、场景与制作要求 | [上层要求与经验](skills/pixel-video-director/references/computing-voiceover.md)；新片和修改任务从这里带入 brief |
+| 人物动态、情境插画的参考拆解与镜头写法 | [人物动态与情境插画](skills/pixel-video-director/references/character-illustration.md)；[基础层看图与运行指南](skills/pixel-game-video/modules/scenes/character-illustration.md) |
+| 历史用户反馈、认可范围与撤回原因 | [迭代记录](skills/pixel-game-video/references/iteration-history.md) |
+
+反馈按日期、原话、适用范围、采用规则、相关模块与实现/验收状态积累。项目要求与模块能力分别维护，历史实现限制不替代当前用户要求；本系列偏好也不推广为其他独立 skill 的默认值。
+
 ## 当前交付基线
 
 | 维度 | 已收纳内容与边界 |
 | --- | --- |
 | 视觉方法与组件 | 脚本阶段明确解释任务；12类组件覆盖身份、数值、对比、标注、章节、流程、时间轴、清单、层级、条形比较、代码与结论，可按主次组合 |
 | 可变背景与片段替换 | 风格基调＋样板；项目图片/视频按镜头选择，素材变更参与哈希与导出，默认保留字幕和旁白时序 |
-| 风格与人物 | 精致偏暗的像素画面；[已确认 V3 人物库](skills/pixel-game-video/modules/library/CHARACTERS.md)保留无围巾主角、三位差异化像素配角和一位半身专题配角，含人设与30张动作参考；预览为静态基准图 |
+| 风格与人物 | [已确认 V3 人物库](skills/pixel-game-video/modules/library/CHARACTERS.md)保留五人、人设和30张动作参考；采用完整人物/场景制作新姿态。旧拆头试样已被否定并撤回，新完整插画仍待用户反馈 |
 | 转场 | 12种方法：9种通用配方＋3种空间设计；后三种已在竞赛场景落地，尚非通用recipe |
 | 节奏与构图 | 定位→主运动→落稳→阅读；全画幅统一镜头、卡片保持固有比例，按旁白与信息量留停顿 |
 | 游戏反馈 | 焦点锁定、触点回弹、资源转移、状态确认、阶段进度、任务结算，共6类 |
@@ -44,7 +55,9 @@ flowchart TD
 
 设计转场从 [转场库](skills/pixel-game-video/modules/motion/TRANSITIONS.md) 进入：按交接关系查已实现配方和参考设计，明确实现状态，再安排动作与阅读节奏。
 
-新脚本先按 [视觉表达方法](skills/pixel-video-director/references/visual-system.md) 选择场景或组件，再安排主体变化。[组件体系](skills/pixel-game-video/modules/components/GUIDE.md) 维护共同风格下的十二类信息结构；[背景基调与样板](skills/pixel-game-video/modules/style/ART-DIRECTION.md) 用于创作新素材；[按镜头替换](skills/pixel-video-director/references/media-replacement.md) 提供可校验的导入入口。可运行源示例在 [基础五类](skills/pixel-video-director/examples/component-system/brief.json) 与 [新增七类及组合](skills/pixel-video-director/examples/component-expansion/brief.json)。
+新脚本先按 [视觉表达方法](skills/pixel-video-director/references/visual-system.md) 选择场景或组件，再安排主体变化。[组件体系看图指南](skills/pixel-game-video/modules/components/GUIDE.md) 提供十二类信息结构的实渲染总览、逐类大图、状态对照与组合参考，图片对应的独立示例随基础 skill 分发；[背景基调与样板](skills/pixel-game-video/modules/style/ART-DIRECTION.md) 用于创作新素材；[按镜头替换](skills/pixel-video-director/references/media-replacement.md) 提供可校验的导入入口。导演创作源示例在 [基础五类](skills/pixel-video-director/examples/component-system/brief.json) 与 [新增七类及组合](skills/pixel-video-director/examples/component-expansion/brief.json)。
+
+[完整插画进入视频](skills/pixel-game-video/modules/scenes/whole-illustration.md) 保留完整场景状态对照与8.4秒独立样例。导演层维护镜头事件、插画原图与提示词，编排脚本生成片段、同步脚本生成基础层快照并记录哈希；基础层按既有 replacement 合同运行，核心入口只路由。旧拆头拼身试样撤回，不继续作为推荐案例。
 
 增强局部游戏感从 [游戏反馈细节库](skills/pixel-game-video/modules/scenes/GAME_FEEL.md) 进入：收纳六类反馈及已获认可的竞赛视频实例，关联触发状态、动作、声音和验收；与转场分开维护。
 

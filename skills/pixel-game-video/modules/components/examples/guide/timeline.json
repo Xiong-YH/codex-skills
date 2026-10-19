@@ -1,0 +1,1057 @@
+{
+  "shots": [
+    {
+      "id": "identity",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        },
+        {
+          "id": "finish1",
+          "frame": 70
+        },
+        {
+          "id": "finish2",
+          "frame": 120
+        },
+        {
+          "id": "finish3",
+          "frame": 170
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "identity",
+          "kind": "identity",
+          "x": 0.2,
+          "y": 0.18,
+          "width": 0.6,
+          "height": 0.58,
+          "showEvent": "reveal",
+          "tone": "gold",
+          "data": {
+            "eyebrow": "讲述者 · CHARACTER",
+            "title": "阿棕",
+            "detail": "提问 · 串讲 · 观点收束",
+            "image": "media/azong.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "metric",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        },
+        {
+          "id": "finish1",
+          "frame": 70
+        },
+        {
+          "id": "finish2",
+          "frame": 120
+        },
+        {
+          "id": "finish3",
+          "frame": 170
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "metric",
+          "kind": "metric",
+          "x": 0.25,
+          "y": 0.19,
+          "width": 0.5,
+          "height": 0.55,
+          "showEvent": "reveal",
+          "tone": "gold",
+          "data": {
+            "title": "信息层级",
+            "from": 0,
+            "to": 3,
+            "unit": "层",
+            "detail": "主句 · 证据 · 补充说明",
+            "startEvent": "e1",
+            "endEvent": "e3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "comparison",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        },
+        {
+          "id": "finish1",
+          "frame": 70
+        },
+        {
+          "id": "finish2",
+          "frame": 120
+        },
+        {
+          "id": "finish3",
+          "frame": 170
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "comparison",
+          "kind": "comparison",
+          "x": 0.08,
+          "y": 0.15,
+          "width": 0.84,
+          "height": 0.62,
+          "showEvent": "reveal",
+          "tone": "gold",
+          "data": {
+            "title": "同一主题，选择不同解释形式",
+            "items": [
+              {
+                "title": "介绍对象",
+                "event": "e1",
+                "sourceShot": "identity",
+                "value": "身份卡",
+                "detail": "这个人是谁？"
+              },
+              {
+                "title": "解释数量",
+                "event": "e2",
+                "sourceShot": "metric",
+                "value": "数值卡",
+                "detail": "一共有多少？"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "annotation",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [
+        {
+          "id": "book",
+          "asset": "prop.book.v1",
+          "x": 0.5,
+          "y": 0.48
+        }
+      ],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        },
+        {
+          "id": "finish1",
+          "frame": 70
+        },
+        {
+          "id": "finish2",
+          "frame": 120
+        },
+        {
+          "id": "finish3",
+          "frame": 170
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "name",
+          "kind": "annotation",
+          "x": 0.12,
+          "y": 0.22,
+          "width": 0.25,
+          "height": 0.1,
+          "showEvent": "reveal",
+          "tone": "gold",
+          "data": {
+            "label": "像素书封",
+            "targetX": 0.46,
+            "targetY": 0.44
+          }
+        },
+        {
+          "id": "edge",
+          "kind": "annotation",
+          "x": 0.65,
+          "y": 0.56,
+          "width": 0.24,
+          "height": 0.1,
+          "showEvent": "reveal",
+          "tone": "accent",
+          "data": {
+            "label": "底部边缘",
+            "targetX": 0.52,
+            "targetY": 0.57
+          }
+        }
+      ]
+    },
+    {
+      "id": "chapter",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        },
+        {
+          "id": "finish1",
+          "frame": 70
+        },
+        {
+          "id": "finish2",
+          "frame": 120
+        },
+        {
+          "id": "finish3",
+          "frame": 170
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "chapter",
+          "kind": "chapter",
+          "x": 0.15,
+          "y": 0.26,
+          "width": 0.72,
+          "height": 0.34,
+          "showEvent": "reveal",
+          "tone": "gold",
+          "data": {
+            "index": "02",
+            "title": "从接口到数据",
+            "detail": "这一节，跑通一次完整请求"
+          }
+        }
+      ]
+    },
+    {
+      "id": "flow",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        },
+        {
+          "id": "finish1",
+          "frame": 70
+        },
+        {
+          "id": "finish2",
+          "frame": 120
+        },
+        {
+          "id": "finish3",
+          "frame": 170
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "flow",
+          "kind": "flow",
+          "x": 0.07,
+          "y": 0.16,
+          "width": 0.86,
+          "height": 0.61,
+          "showEvent": "reveal",
+          "tone": "accent",
+          "data": {
+            "title": "一次问答，经过哪几步？",
+            "items": [
+              {
+                "title": "输入问题",
+                "event": "e1",
+                "detail": "用户输入"
+              },
+              {
+                "title": "检索资料",
+                "event": "e2",
+                "detail": "找到相关片段"
+              },
+              {
+                "title": "模型生成",
+                "event": "e3",
+                "detail": "结合上下文"
+              },
+              {
+                "title": "返回答案",
+                "event": "e4",
+                "detail": "展示与引用"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "timeline",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        },
+        {
+          "id": "finish1",
+          "frame": 70
+        },
+        {
+          "id": "finish2",
+          "frame": 120
+        },
+        {
+          "id": "finish3",
+          "frame": 170
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "timeline",
+          "kind": "timeline",
+          "x": 0.08,
+          "y": 0.16,
+          "width": 0.84,
+          "height": 0.6,
+          "showEvent": "reveal",
+          "tone": "accent",
+          "data": {
+            "title": "用项目串起学习顺序",
+            "items": [
+              {
+                "label": "阶段一",
+                "title": "前端",
+                "detail": "先把页面做出来",
+                "event": "e1"
+              },
+              {
+                "label": "阶段二",
+                "title": "后端",
+                "detail": "接口连上数据库",
+                "event": "e2"
+              },
+              {
+                "label": "阶段三",
+                "title": "AI 应用",
+                "detail": "模型接入与评测",
+                "event": "e3"
+              },
+              {
+                "label": "阶段四",
+                "title": "上线",
+                "detail": "部署并收集反馈",
+                "event": "e4"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "checklist",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        },
+        {
+          "id": "finish1",
+          "frame": 70
+        },
+        {
+          "id": "finish2",
+          "frame": 120
+        },
+        {
+          "id": "finish3",
+          "frame": 170
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "checklist",
+          "kind": "checklist",
+          "x": 0.21,
+          "y": 0.15,
+          "width": 0.58,
+          "height": 0.62,
+          "showEvent": "reveal",
+          "tone": "accent",
+          "data": {
+            "title": "交付前，核对这三项",
+            "items": [
+              {
+                "label": "核心功能可用",
+                "detail": "用实际输入跑通主要路径",
+                "event": "e1"
+              },
+              {
+                "label": "异常情况可恢复",
+                "detail": "报错后仍能继续操作",
+                "event": "e2"
+              },
+              {
+                "label": "结果可以追溯",
+                "detail": "保留记录与必要证据",
+                "event": "e3"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "hierarchy",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        },
+        {
+          "id": "finish1",
+          "frame": 70
+        },
+        {
+          "id": "finish2",
+          "frame": 120
+        },
+        {
+          "id": "finish3",
+          "frame": 170
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "hierarchy",
+          "kind": "hierarchy",
+          "x": 0.08,
+          "y": 0.16,
+          "width": 0.84,
+          "height": 0.6,
+          "showEvent": "reveal",
+          "tone": "gold",
+          "data": {
+            "title": "一个问答项目，由哪些模块组成？",
+            "rootTitle": "问答应用",
+            "detail": "职责分开",
+            "items": [
+              {
+                "title": "前端交互",
+                "event": "e1",
+                "detail": "接收问题，展示回答"
+              },
+              {
+                "title": "后端服务",
+                "event": "e2",
+                "detail": "鉴权、接口与数据"
+              },
+              {
+                "title": "AI 能力",
+                "event": "e3",
+                "detail": "提示词、检索与生成"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "bars",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        },
+        {
+          "id": "finish1",
+          "frame": 70
+        },
+        {
+          "id": "finish2",
+          "frame": 120
+        },
+        {
+          "id": "finish3",
+          "frame": 170
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "bars",
+          "kind": "bars",
+          "x": 0.1,
+          "y": 0.16,
+          "width": 0.8,
+          "height": 0.6,
+          "showEvent": "reveal",
+          "tone": "secondary",
+          "data": {
+            "title": "同一尺度下比较结果｜示意数据",
+            "max": 100,
+            "unit": "分",
+            "items": [
+              {
+                "label": "方案 A",
+                "value": 36,
+                "event": "e1",
+                "endEvent": "finish1"
+              },
+              {
+                "label": "方案 B",
+                "value": 62,
+                "event": "e2",
+                "endEvent": "finish2"
+              },
+              {
+                "label": "方案 C",
+                "value": 84,
+                "event": "e3",
+                "endEvent": "finish3"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "code",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        },
+        {
+          "id": "finish1",
+          "frame": 70
+        },
+        {
+          "id": "finish2",
+          "frame": 120
+        },
+        {
+          "id": "finish3",
+          "frame": 170
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "code",
+          "kind": "code",
+          "x": 0.13,
+          "y": 0.18,
+          "width": 0.74,
+          "height": 0.55,
+          "showEvent": "reveal",
+          "tone": "accent",
+          "data": {
+            "title": "先校验，再应用",
+            "language": "JavaScript",
+            "items": [
+              {
+                "text": "const range = locate(target);",
+                "event": "e1"
+              },
+              {
+                "text": "const valid = verify(range);",
+                "event": "e2"
+              },
+              {
+                "text": "if (valid) highlight(range);",
+                "event": "e3"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "takeaway",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        },
+        {
+          "id": "finish1",
+          "frame": 70
+        },
+        {
+          "id": "finish2",
+          "frame": 120
+        },
+        {
+          "id": "finish3",
+          "frame": 170
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "takeaway",
+          "kind": "takeaway",
+          "x": 0.17,
+          "y": 0.25,
+          "width": 0.72,
+          "height": 0.4,
+          "showEvent": "reveal",
+          "tone": "gold",
+          "data": {
+            "eyebrow": "记住这个原则",
+            "title": "学一层，跑通一步",
+            "detail": "把新知识，变成项目中能验证的增量"
+          }
+        }
+      ]
+    },
+    {
+      "id": "flow-checklist",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        },
+        {
+          "id": "finish1",
+          "frame": 70
+        },
+        {
+          "id": "finish2",
+          "frame": 120
+        },
+        {
+          "id": "finish3",
+          "frame": 170
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "path",
+          "kind": "flow",
+          "x": 0.06,
+          "y": 0.17,
+          "width": 0.55,
+          "height": 0.57,
+          "showEvent": "reveal",
+          "tone": "accent",
+          "data": {
+            "title": "处理路径",
+            "items": [
+              {
+                "title": "定位",
+                "event": "e1"
+              },
+              {
+                "title": "校验",
+                "event": "e2"
+              },
+              {
+                "title": "应用",
+                "event": "e3"
+              }
+            ]
+          }
+        },
+        {
+          "id": "gate",
+          "kind": "checklist",
+          "x": 0.65,
+          "y": 0.23,
+          "width": 0.29,
+          "height": 0.44,
+          "showEvent": "reveal",
+          "tone": "gold",
+          "data": {
+            "title": "执行条件",
+            "items": [
+              {
+                "label": "内容一致",
+                "event": "e2"
+              },
+              {
+                "label": "范围有效",
+                "event": "e3"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "code-annotation",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "e1",
+          "frame": 30
+        },
+        {
+          "id": "e2",
+          "frame": 80
+        },
+        {
+          "id": "e3",
+          "frame": 130
+        },
+        {
+          "id": "e4",
+          "frame": 180
+        },
+        {
+          "id": "finish1",
+          "frame": 70
+        },
+        {
+          "id": "finish2",
+          "frame": 120
+        },
+        {
+          "id": "finish3",
+          "frame": 170
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "code",
+          "kind": "code",
+          "x": 0.07,
+          "y": 0.24,
+          "width": 0.65,
+          "height": 0.48,
+          "showEvent": "reveal",
+          "tone": "accent",
+          "data": {
+            "title": "读取文件并返回内容",
+            "language": "JavaScript",
+            "items": [
+              {
+                "text": "const file = pickFile();",
+                "event": "e1"
+              },
+              {
+                "text": "const text = await read(file);",
+                "event": "e2"
+              },
+              {
+                "text": "return text.trim();",
+                "event": "e3"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pointer",
+          "kind": "annotation",
+          "x": 0.77,
+          "y": 0.455,
+          "width": 0.19,
+          "height": 0.1,
+          "showEvent": "reveal",
+          "tone": "gold",
+          "data": {
+            "label": "当前讲解行",
+            "targetX": 0.69,
+            "targetY": 0.505
+          }
+        }
+      ]
+    }
+  ]
+}
