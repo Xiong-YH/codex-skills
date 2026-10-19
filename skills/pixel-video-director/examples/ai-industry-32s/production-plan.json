@@ -1,0 +1,400 @@
+{
+  "schemaVersion": 1,
+  "id": "ai-industry-production",
+  "title": "AI 是否摧毁了计算机行业？",
+  "output": {
+    "fps": 60,
+    "width": 1920,
+    "height": 1080,
+    "nativeWidth": 320,
+    "nativeHeight": 180
+  },
+  "style": "style.pixel-study.v1",
+  "seed": 20,
+  "audioMode": "narration+sfx",
+  "shots": [
+    {
+      "id": "s1",
+      "actor": "actor.amo.v3",
+      "objects": [],
+      "motions": [],
+      "background": {
+        "file": "media/s1-scene.mp4",
+        "kind": "video",
+        "fit": "cover",
+        "dim": 0
+      }
+    },
+    {
+      "id": "s2",
+      "actor": "actor.azong.v3",
+      "objects": [],
+      "motions": [],
+      "background": {
+        "file": "media/s2-scene.mp4",
+        "kind": "video",
+        "fit": "cover",
+        "dim": 0
+      }
+    },
+    {
+      "id": "s3",
+      "actor": null,
+      "objects": [],
+      "motions": [
+        {
+          "id": "code-into-app",
+          "recipe": "motion.focus-punch.v1",
+          "target": "scene",
+          "start": {
+            "event": "s3.enter"
+          },
+          "durationFrames": 24,
+          "params": {
+            "x": 0.86,
+            "y": 0.52,
+            "zoom": 3,
+            "incomingX": 0.5,
+            "incomingY": 0.45,
+            "incomingZoom": 1.08
+          }
+        }
+      ],
+      "background": {
+        "file": "media/s3-scene.mp4",
+        "kind": "video",
+        "fit": "cover",
+        "dim": 0
+      }
+    },
+    {
+      "id": "s4",
+      "actor": null,
+      "objects": [],
+      "motions": [],
+      "background": {
+        "file": "media/s4-scene.mp4",
+        "kind": "video",
+        "fit": "cover",
+        "dim": 0
+      }
+    },
+    {
+      "id": "s5",
+      "actor": "actor.azong.v3",
+      "objects": [],
+      "motions": [],
+      "background": {
+        "file": "media/s5-scene.mp4",
+        "kind": "video",
+        "fit": "cover",
+        "dim": 0
+      }
+    },
+    {
+      "id": "s6",
+      "actor": "actor.azong.v3",
+      "objects": [],
+      "motions": [],
+      "background": {
+        "file": "media/s6-scene.mp4",
+        "kind": "video",
+        "fit": "cover",
+        "dim": 0
+      }
+    }
+  ],
+  "text": [
+    {
+      "cueId": "c1_1",
+      "role": "subtitle",
+      "y": 0.9
+    },
+    {
+      "cueId": "c2_1",
+      "role": "subtitle",
+      "y": 0.9
+    },
+    {
+      "cueId": "c2_2",
+      "role": "subtitle",
+      "y": 0.9
+    },
+    {
+      "cueId": "c3_1",
+      "role": "subtitle",
+      "y": 0.9
+    },
+    {
+      "cueId": "c3_2",
+      "role": "subtitle",
+      "y": 0.9
+    },
+    {
+      "cueId": "c4_1",
+      "role": "subtitle",
+      "y": 0.9
+    },
+    {
+      "cueId": "c4_2",
+      "role": "subtitle",
+      "y": 0.9
+    },
+    {
+      "cueId": "c4_3",
+      "role": "subtitle",
+      "y": 0.9
+    },
+    {
+      "cueId": "c5_1",
+      "role": "subtitle",
+      "y": 0.9
+    },
+    {
+      "cueId": "c5_2",
+      "role": "subtitle",
+      "y": 0.9
+    },
+    {
+      "cueId": "c6_1",
+      "role": "subtitle",
+      "y": 0.9
+    },
+    {
+      "cueId": "c6_2",
+      "role": "subtitle",
+      "y": 0.9
+    }
+  ],
+  "audio": [
+    {
+      "id": "s1_sound0",
+      "sound": "arcade-select",
+      "at": {
+        "event": "s1.question"
+      },
+      "level": 0.15,
+      "x": 0.6,
+      "variant": 0
+    },
+    {
+      "id": "s2_sound0",
+      "sound": "arcade-pickup",
+      "at": {
+        "event": "s2.task1"
+      },
+      "level": 0.2,
+      "x": 0.6,
+      "variant": 0
+    },
+    {
+      "id": "s2_sound1",
+      "sound": "arcade-pickup",
+      "at": {
+        "event": "s2.task2"
+      },
+      "level": 0.17,
+      "x": 0.6,
+      "variant": 0
+    },
+    {
+      "id": "s2_sound2",
+      "sound": "arcade-seat",
+      "at": {
+        "event": "s2.settle"
+      },
+      "level": 0.19,
+      "x": 0.6,
+      "variant": 0
+    },
+    {
+      "id": "s3_sound0",
+      "sound": "arcade-select",
+      "at": {
+        "event": "s3.click"
+      },
+      "level": 0.15,
+      "x": 0.6,
+      "variant": 0
+    },
+    {
+      "id": "s3_sound1",
+      "sound": "arcade-reject",
+      "at": {
+        "event": "s3.duplicate"
+      },
+      "level": 0.25,
+      "x": 0.6,
+      "variant": 0
+    },
+    {
+      "id": "s4_sound0",
+      "sound": "arcade-select",
+      "at": {
+        "event": "s4.need"
+      },
+      "level": 0.13,
+      "x": 0.6,
+      "variant": 0
+    },
+    {
+      "id": "s4_sound1",
+      "sound": "arcade-select",
+      "at": {
+        "event": "s4.data"
+      },
+      "level": 0.13,
+      "x": 0.6,
+      "variant": 0
+    },
+    {
+      "id": "s4_sound2",
+      "sound": "arcade-select",
+      "at": {
+        "event": "s4.debug"
+      },
+      "level": 0.13,
+      "x": 0.6,
+      "variant": 0
+    },
+    {
+      "id": "s5_sound0",
+      "sound": "arcade-seat",
+      "at": {
+        "event": "s5.fix"
+      },
+      "level": 0.16,
+      "x": 0.6,
+      "variant": 0
+    },
+    {
+      "id": "s5_sound1",
+      "sound": "arcade-select",
+      "at": {
+        "event": "s5.check1"
+      },
+      "level": 0.14,
+      "x": 0.6,
+      "variant": 0
+    },
+    {
+      "id": "s5_sound2",
+      "sound": "arcade-reward",
+      "at": {
+        "event": "s5.check2"
+      },
+      "level": 0.2,
+      "x": 0.6,
+      "variant": 0
+    },
+    {
+      "id": "s6_sound0",
+      "sound": "arcade-seat",
+      "at": {
+        "event": "s6.result"
+      },
+      "level": 0.18,
+      "x": 0.6,
+      "variant": 0
+    }
+  ],
+  "narration": [
+    {
+      "id": "narration_c1_1",
+      "file": "media/s1-c1.wav",
+      "at": {
+        "event": "s1.voice1"
+      },
+      "gain": 0.94
+    },
+    {
+      "id": "narration_c2_1",
+      "file": "media/s2-c1.wav",
+      "at": {
+        "event": "s2.voice1"
+      },
+      "gain": 0.94
+    },
+    {
+      "id": "narration_c2_2",
+      "file": "media/s2-c2.wav",
+      "at": {
+        "event": "s2.voice2"
+      },
+      "gain": 0.94
+    },
+    {
+      "id": "narration_c3_1",
+      "file": "media/s3-c1.wav",
+      "at": {
+        "event": "s3.voice1"
+      },
+      "gain": 0.94
+    },
+    {
+      "id": "narration_c3_2",
+      "file": "media/s3-c2.wav",
+      "at": {
+        "event": "s3.voice2"
+      },
+      "gain": 0.94
+    },
+    {
+      "id": "narration_c4_1",
+      "file": "media/s4-c1.wav",
+      "at": {
+        "event": "s4.voice1"
+      },
+      "gain": 0.94
+    },
+    {
+      "id": "narration_c4_2",
+      "file": "media/s4-c2.wav",
+      "at": {
+        "event": "s4.voice2"
+      },
+      "gain": 0.94
+    },
+    {
+      "id": "narration_c4_3",
+      "file": "media/s4-c3.wav",
+      "at": {
+        "event": "s4.voice3"
+      },
+      "gain": 0.94
+    },
+    {
+      "id": "narration_c5_1",
+      "file": "media/s5-c1.wav",
+      "at": {
+        "event": "s5.voice1"
+      },
+      "gain": 0.94
+    },
+    {
+      "id": "narration_c5_2",
+      "file": "media/s5-c2.wav",
+      "at": {
+        "event": "s5.voice2"
+      },
+      "gain": 0.94
+    },
+    {
+      "id": "narration_c6_1",
+      "file": "media/s6-c1.wav",
+      "at": {
+        "event": "s6.voice1"
+      },
+      "gain": 0.94
+    },
+    {
+      "id": "narration_c6_2",
+      "file": "media/s6-c2.wav",
+      "at": {
+        "event": "s6.voice2"
+      },
+      "gain": 0.94
+    }
+  ],
+  "speechDuck": 0.24
+}

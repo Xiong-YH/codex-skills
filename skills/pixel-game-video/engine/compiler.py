@@ -155,6 +155,18 @@ def compile_project(project_root, skill_root=None, *, write=False):
             raise ValueError(f"unknown event reference: {ref['event']}")
         return events[ref["event"]] + ref.get("offsetFrames", 0)
 
+    progress = inputs['timeline.json'].get('progress')
+    if progress:
+        previous = -1
+        for node in progress['nodes']:
+            frame = resolve(node.pop('at'))
+            if not previous < frame < cursor:
+                raise ValueError('Progress nodes must be strictly ordered inside the video')
+            node['frame'] = frame
+            previous = frame
+        if progress['nodes'][0]['frame'] != 0:
+            raise ValueError('Narrative progress must begin at video frame zero')
+
     validator_file = skill / "modules/scenes/contract.py"
     spec = importlib.util.spec_from_file_location("pixel_scene_contract", validator_file)
     validator = importlib.util.module_from_spec(spec)
@@ -170,6 +182,17 @@ def compile_project(project_root, skill_root=None, *, write=False):
             require("library", shot["actor"])
             if not shot["actor"].startswith("actor."):
                 raise ValueError("shot.actor must reference an actor or be null")
+        if shot['performance'] and (shot['actor'] is None or shot.get('replacement')):
+            raise ValueError('Actor performance requires a visible actor and no replacement footage')
+        if shot['performance'] and shot['scene'] in ('scenes.cache-adventure.v1','scenes.competition-routes.v1'):
+            raise ValueError('This scene owns its presenter; use canvas for event-keyed performance')
+        end_previous = shot['startFrame']
+        for pose in shot['performance']:
+            start, end = resolve(pose.pop('start')), resolve(pose.pop('end'))
+            if not end_previous <= start < end <= shot['endFrame']:
+                raise ValueError('Actor poses must be ordered, nonoverlapping and inside their shot')
+            pose.update(startFrame=start, endFrame=end)
+            end_previous = end
         unique((o["id"] for o in shot["objects"]), f"{shot['id']}.objects")
         for obj in shot["objects"]:
             require("library", obj["asset"])
@@ -292,7 +315,7 @@ def compile_project(project_root, skill_root=None, *, write=False):
         relative = path.relative_to(root).as_posix()
         cue.update(file=relative, frame=frame, **info)
         source_hashes[relative] = info['sha256']
-    used = {"project": project, "shots": shots, "audio": audio}
+    used = {"project": project, "shots": shots, "audio": audio, 'progress': progress}
     runtime_hashes = {name: file_hash(skill / name) for name in runtime_files(skill, used)}
     digest = hashlib.sha256(json.dumps({"inputs": source_hashes, "runtime": runtime_hashes}, sort_keys=True).encode()).hexdigest()
     resolved = {"contractVersion": 1, "inputHash": digest, "project": project,
@@ -300,6 +323,8 @@ def compile_project(project_root, skill_root=None, *, write=False):
                 "durationFrames": cursor, "durationSeconds": cursor / project["fps"],
                 "shots": shots, "events": events, "cues": cues, "audio": audio, "narration": narration, "media": media,
                 "mix": {"speechDuck": inputs["audio.json"]["speechDuck"]}}
+    if progress:
+        resolved['progress'] = progress
     if write:
         write_json(root / "build/resolved-timeline.json", resolved)
         write_json(root / "build/project-lock.json", {"contractVersion": 1, "inputHash": digest,

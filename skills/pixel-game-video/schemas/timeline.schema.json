@@ -1,5 +1,35 @@
 {
   "$defs": {
+    "ActorPose": {
+      "additionalProperties": false,
+      "properties": {
+        "pose": {
+          "enum": [
+            "neutral",
+            "wave",
+            "talk",
+            "dazed-left",
+            "dazed-right",
+            "overwhelmed"
+          ],
+          "title": "Pose",
+          "type": "string"
+        },
+        "start": {
+          "$ref": "#/$defs/FrameRef"
+        },
+        "end": {
+          "$ref": "#/$defs/FrameRef"
+        }
+      },
+      "required": [
+        "pose",
+        "start",
+        "end"
+      ],
+      "title": "ActorPose",
+      "type": "object"
+    },
     "Component": {
       "additionalProperties": false,
       "properties": {
@@ -258,6 +288,45 @@
       "title": "Motion",
       "type": "object"
     },
+    "NarrativeProgress": {
+      "additionalProperties": false,
+      "properties": {
+        "nodes": {
+          "items": {
+            "$ref": "#/$defs/ProgressNode"
+          },
+          "maxItems": 8,
+          "minItems": 2,
+          "title": "Nodes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "nodes"
+      ],
+      "title": "NarrativeProgress",
+      "type": "object"
+    },
+    "ProgressNode": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "maxLength": 12,
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "at": {
+          "$ref": "#/$defs/FrameRef"
+        }
+      },
+      "required": [
+        "label",
+        "at"
+      ],
+      "title": "ProgressNode",
+      "type": "object"
+    },
     "SceneObject": {
       "additionalProperties": false,
       "properties": {
@@ -383,6 +452,13 @@
             }
           ],
           "default": null
+        },
+        "performance": {
+          "items": {
+            "$ref": "#/$defs/ActorPose"
+          },
+          "title": "Performance",
+          "type": "array"
         }
       },
       "required": [
@@ -404,6 +480,17 @@
       "minItems": 1,
       "title": "Shots",
       "type": "array"
+    },
+    "progress": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/NarrativeProgress"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
     }
   },
   "required": [

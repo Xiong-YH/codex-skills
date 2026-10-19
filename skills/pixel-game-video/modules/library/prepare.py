@@ -13,7 +13,7 @@ def encode(image):
     return 'data:image/png;base64,' + base64.b64encode(output.getvalue()).decode('ascii')
 
 
-def prepare(module_root: Path, actor_ids=None):
+def prepare(module_root: Path, actor_ids=None, actions=None):
     module_root = Path(module_root).resolve()
     records = json.loads((module_root / 'catalog.json').read_text(encoding='utf-8'))['items']
     assets = {}
@@ -33,4 +33,16 @@ def prepare(module_root: Path, actor_ids=None):
             raise ValueError('Character preview bounds must fit the source image')
         # Framing only: no facial edits, alpha cleanup or generated variants.
         assets[f"{record['id']}:reference"] = encode(original.crop((left, top, right, bottom)))
+    if actions:
+        manifest = json.loads((module_root / 'characters/performance.json').read_text(encoding='utf-8'))
+        for actor, poses in actions.items():
+            for pose in poses:
+                record = manifest['actors'][actor][pose]
+                path = (module_root / record['file']).resolve()
+                if not path.is_relative_to(module_root) or hashlib.sha256(path.read_bytes()).hexdigest() != record['sha256']:
+                    raise ValueError(f'Character pose bytes changed: {actor}.{pose}')
+                original = Image.open(path).convert('RGBA')
+                if list(original.size) != record['nativeSize']:
+                    raise ValueError('Character pose size changed')
+                assets[f'{actor}:pose:{pose}'] = encode(original)
     return assets

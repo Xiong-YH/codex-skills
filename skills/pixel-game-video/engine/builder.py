@@ -5,7 +5,7 @@ import importlib.util
 import json
 import sys
 from pathlib import Path
-from .dependencies import actor_ids, javascript_files
+from .dependencies import actor_ids, actor_actions, javascript_files
 
 
 def load_module(name, path):
@@ -38,7 +38,8 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
     style = json.loads(preset_path.read_text(encoding='utf-8'))
     if style['id'] != selected['id']:
         raise ValueError('Style catalog and preset identity differ')
-    assets = prepare.prepare(modules / 'library', actor_ids=actor_ids(resolved))
+    actions = actor_actions(resolved)
+    assets = prepare.prepare(modules / 'library', actor_ids=actor_ids(resolved), actions=actions)
     library_asset_count = len(assets)
     style_assets = style.get('assets', {})
     if not isinstance(style_assets, dict):
@@ -72,6 +73,9 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
             stale = output / name
             if stale.is_file():
                 stale.unlink()
+    if actions:
+        manifest = json.loads((modules / 'library/characters/performance.json').read_text(encoding='utf-8'))
+        resolved['actorPoseLayout'] = {actor:{pose:manifest['actors'][actor][pose] for pose in poses} for actor,poses in actions.items()}
     payload = {'resolved': resolved, 'style': style, 'assets': assets, 'mouth': mouth, 'audio': audio_uri}
     runtime = '\n'.join((skill_root / path).read_text(encoding='utf-8')
                          for path in javascript_files(skill_root, resolved))
@@ -86,7 +90,7 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
     (output / 'mouth-timing.json').write_text(json.dumps({'mode':'text-timed rehearsal; no voice alignment','cues':mouth}, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     (output / 'build-report.json').write_text(json.dumps({'contractVersion':resolved['contractVersion'],'inputHash':resolved['inputHash'],
         'durationFrames':resolved['durationFrames'],'audioEnabled':audio_uri is not None,'actorVariants':library_asset_count,
-        'actorPreviewMode':'reference-static','actorMouthAnimation':False,'actorSkeletalAnimation':False,
+        'actorPreviewMode':'event-poses' if actions else 'reference-static','actorMouthAnimation':False,'actorSkeletalAnimation':False,
         'styleAssets':len(style_assets),
         'mouthSegments':len(mouth),'preview':'film.html'}, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     return target

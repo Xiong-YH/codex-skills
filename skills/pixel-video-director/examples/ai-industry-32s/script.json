@@ -1,0 +1,307 @@
+{
+  "schemaVersion": 1,
+  "cues": [
+    {
+      "id": "c1_1",
+      "text": "AI，真的把计算机行业干没了吗？",
+      "phrases": [
+        "AI， zhen de ba ji suan ji hang ye gan mei le ma ？"
+      ],
+      "meaning": "AI，真的把计算机行业干没了吗？"
+    },
+    {
+      "id": "c2_1",
+      "text": "它能批量写代码，",
+      "phrases": [
+        "ta neng pi liang xie dai ma ，"
+      ],
+      "meaning": "它能批量写代码，"
+    },
+    {
+      "id": "c2_2",
+      "text": "一些重复工作，确实在被压缩。",
+      "phrases": [
+        "yi xie chong fu gong zuo ， que shi zai bei ya suo 。"
+      ],
+      "meaning": "一些重复工作，确实在被压缩。"
+    },
+    {
+      "id": "c3_1",
+      "text": "但代码生成了，",
+      "phrases": [
+        "dan dai ma sheng cheng le ，"
+      ],
+      "meaning": "但代码生成了，"
+    },
+    {
+      "id": "c3_2",
+      "text": "不代表产品就能用了。",
+      "phrases": [
+        "bu dai biao chan pin jiu neng yong le 。"
+      ],
+      "meaning": "不代表产品就能用了。"
+    },
+    {
+      "id": "c4_1",
+      "text": "需求谁来定？",
+      "phrases": [
+        "xu qiu shui lai ding ？"
+      ],
+      "meaning": "需求谁来定？"
+    },
+    {
+      "id": "c4_2",
+      "text": "数据怎么保？",
+      "phrases": [
+        "shu ju zen me bao ？"
+      ],
+      "meaning": "数据怎么保？"
+    },
+    {
+      "id": "c4_3",
+      "text": "系统出错，谁来查？",
+      "phrases": [
+        "xi tong chu cuo ， shui lai cha ？"
+      ],
+      "meaning": "系统出错，谁来查？"
+    },
+    {
+      "id": "c5_1",
+      "text": "这些工作，AI也能帮忙，",
+      "phrases": [
+        "zhe xie gong zuo ，AI ye neng bang mang ，"
+      ],
+      "meaning": "这些工作，AI也能帮忙，"
+    },
+    {
+      "id": "c5_2",
+      "text": "但结果仍要验证。",
+      "phrases": [
+        "dan jie guo reng yao yan zheng 。"
+      ],
+      "meaning": "但结果仍要验证。"
+    },
+    {
+      "id": "c6_1",
+      "text": "我的判断：行业正在重组。",
+      "phrases": [
+        "wo de pan duan ： hang ye zheng zai chong zu 。"
+      ],
+      "meaning": "我的判断：行业正在重组。"
+    },
+    {
+      "id": "c6_2",
+      "text": "会生成代码，也得能交付结果。",
+      "phrases": [
+        "hui sheng cheng dai ma ， ye de neng jiao fu jie guo 。"
+      ],
+      "meaning": "会生成代码，也得能交付结果。"
+    }
+  ],
+  "labels": [
+    {
+      "id": "series",
+      "text": "计算机观察室"
+    },
+    {
+      "id": "topic",
+      "text": "AI 是否摧毁了"
+    },
+    {
+      "id": "topic2",
+      "text": "计算机行业？"
+    },
+    {
+      "id": "amo",
+      "text": "阿墨 · 提问"
+    },
+    {
+      "id": "azong",
+      "text": "阿棕 · 讲述"
+    },
+    {
+      "id": "generated",
+      "text": "代码正在生成"
+    },
+    {
+      "id": "tasks",
+      "text": "重复任务"
+    },
+    {
+      "id": "template",
+      "text": "页面模板"
+    },
+    {
+      "id": "format",
+      "text": "格式转换"
+    },
+    {
+      "id": "boilerplate",
+      "text": "重复样板"
+    },
+    {
+      "id": "ai",
+      "text": "AI"
+    },
+    {
+      "id": "code",
+      "text": "代码文件"
+    },
+    {
+      "id": "compress",
+      "text": "重复工作被压缩"
+    },
+    {
+      "id": "generatedDone",
+      "text": "代码生成了"
+    },
+    {
+      "id": "productQuestion",
+      "text": "产品能用了吗？"
+    },
+    {
+      "id": "app",
+      "text": "订单应用"
+    },
+    {
+      "id": "submit",
+      "text": "提交订单"
+    },
+    {
+      "id": "order",
+      "text": "订单 #001"
+    },
+    {
+      "id": "duplicate",
+      "text": "同一次提交，出现两笔订单"
+    },
+    {
+      "id": "demo",
+      "text": "虚构订单情境 · 示意"
+    },
+    {
+      "id": "requirements",
+      "text": "需求"
+    },
+    {
+      "id": "data",
+      "text": "数据"
+    },
+    {
+      "id": "debug",
+      "text": "排错"
+    },
+    {
+      "id": "requirementsDetail",
+      "text": "明确要做什么"
+    },
+    {
+      "id": "dataDetail",
+      "text": "检查访问权限"
+    },
+    {
+      "id": "debugDetail",
+      "text": "定位故障原因"
+    },
+    {
+      "id": "responsibility",
+      "text": "代码之外，还有系统问题"
+    },
+    {
+      "id": "repair",
+      "text": "AI 提供修复方案"
+    },
+    {
+      "id": "test",
+      "text": "验证结果"
+    },
+    {
+      "id": "case1",
+      "text": "一次提交 → 一笔订单"
+    },
+    {
+      "id": "case2",
+      "text": "重复请求 → 不重复创建"
+    },
+    {
+      "id": "pass",
+      "text": "验证通过"
+    },
+    {
+      "id": "waiting",
+      "text": "等待验证"
+    },
+    {
+      "id": "fix",
+      "text": "加入重复请求检查"
+    },
+    {
+      "id": "ending",
+      "text": "行业正在重组"
+    },
+    {
+      "id": "delivery",
+      "text": "生成之后，还要交付。"
+    },
+    {
+      "id": "tests",
+      "text": "测试"
+    },
+    {
+      "id": "running",
+      "text": "运行"
+    },
+    {
+      "id": "correct",
+      "text": "用户收到正确订单"
+    },
+    {
+      "id": "one",
+      "text": "一笔订单"
+    },
+    {
+      "id": "compile",
+      "text": "生成"
+    },
+    {
+      "id": "verify",
+      "text": "验证"
+    },
+    {
+      "id": "deliver",
+      "text": "交付"
+    },
+    {
+      "id": "outline",
+      "text": "问题 → 生成 → 故障 → 验证 → 交付"
+    },
+    {
+      "id": "singleSubmit",
+      "text": "同一次提交"
+    },
+    {
+      "id": "progress1",
+      "text": "疑问"
+    },
+    {
+      "id": "progress2",
+      "text": "工作变化"
+    },
+    {
+      "id": "progress3",
+      "text": "产品问题"
+    },
+    {
+      "id": "progress4",
+      "text": "系统职责"
+    },
+    {
+      "id": "progress5",
+      "text": "验证"
+    },
+    {
+      "id": "progress6",
+      "text": "交付"
+    }
+  ]
+}

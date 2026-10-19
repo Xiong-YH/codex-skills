@@ -87,6 +87,7 @@
     },
     actor(e, shot, frame) {
       if (!shot.actor || shot.scene === 'scenes.cache-adventure.v1') return;
+      if (shot.performance?.length && P.presenterActions) return P.presenterActions.draw(e,shot,frame);
       const placement = e.style.presenter || {};
       P.library.reference(e, shot.actor, e.width * (placement.x ?? .20),
         e.height * (placement.baseline ?? .75), e.height * (placement.height ?? .40));

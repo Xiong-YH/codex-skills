@@ -31,3 +31,6 @@ description: Turn an idea or existing script into a pixel game-style video throu
 信息组件源例：[基础五类](examples/component-system/brief.json)、[新增七类与组合](examples/component-expansion/brief.json)。从表达关系选型，不把示例的排列、题材或背景作为固定模板。
 
 跨空间叙事实例：[18 秒考研口播](examples/cs-postgrad-narrative-18s/)。复用其设计方法，题材、时长与转场组合按新工程决定。
+
+
+插图与人物表演实例：[32 秒 AI 行业短片](examples/ai-industry-32s/)。包含实际像素插图、事件驱动姿态、固定叙事节点进度条与可再生成的项目素材；生成插图需实际调用图像工具，不能用流程图代替已要求的插图。

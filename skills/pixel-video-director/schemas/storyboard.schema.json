@@ -163,6 +163,15 @@
           },
           "title": "Components",
           "type": "array"
+        },
+        "performance": {
+          "default": [],
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Performance",
+          "type": "array"
         }
       },
       "required": [
@@ -250,6 +259,19 @@
       "minItems": 1,
       "title": "Shots",
       "type": "array"
+    },
+    "progress": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Progress"
     }
   },
   "required": [
