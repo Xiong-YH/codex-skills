@@ -1,5 +1,7 @@
 # 创作合同
 
+只交付视觉方案时，可先按 [视觉分镜与工程映射](visual-storyboard.md) 输出设计稿，不强制创建四份 JSON 或调用基础层。用户要求制作、交接或继续已有工程时，以下源文件与时间规则保持唯一；设计稿不新增模型字段或运行时间线。
+
 人物按镜头显式选择：production-plan 中 `actor:null` 表示不叠加库人物，完整插画或片段内部仍可自带人物。不是所有画面都要有小人；场景、物体与组件可以独立主导画面。
 
 在分镜 `visual.subject/action` 写明人物职责：主角出镜口播、按剧情选择主角/配角演绎，或无人镜头。口播应有与话语呼应的嘴形、表情和停顿；情境角色不必跟随旁白张嘴。插图集合只参考风格与演绎方法，是否采用及结构、镜头顺序和构图均由本片脚本决定，不把样例当必用模板。
@@ -15,9 +17,11 @@
 | brief.json | 创意、受众、核心观点、时长范围、明确约束 | id |
 | script.json | 字幕 text、讲解 phrases、句子含义 meaning，以及场景 labels | cues[].id / labels[].id |
 | storyboard.json | 镜头顺序与 durationFrames、表达意图、场景机制、物体位置、事件、文字时间 | shots[].id / events[].id / objects[].id / cues[].cueId |
-| production-plan.json | 标题、输出规格、风格、人物与道具素材、文字角色、运镜和声音选择 | id / shots[].id / text[].cueId / audio[].id |
+| production-plan.json | 标题、输出规格、renderBackend、风格、人物与道具素材、文字角色、运镜和声音选择 | id / shots[].id / text[].cueId / audio[].id |
 
 文字用短句表达一个意思，游戏状态变化承载因果；转场服务焦点交接。不是每镜都需要运镜或音效。保留用户指定角色与表现方向。
+
+`production-plan.renderBackend` 缺省为 `canvas`；显式选 `remotion` 时由 handoff 透传到 project，不复制时间表。先查看基础层 `references/remotion.md` 的能力边界；[12 秒书桌示例](../examples/remotion-focus-desk/README.md) 演示同一套源文件如何交给原生 React 执行器。Remotion 默认进入 Studio 审片，用户需要成片导出时再 render。
 
 `script.labels` 管理场景内短标签；storyboard 的 params 用 `{"labelId":"goal"}` 引用。handoff 把引用解析成基础合同字符串，源映射仍指向 script。例如：
 

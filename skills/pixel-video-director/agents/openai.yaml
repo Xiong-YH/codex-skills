@@ -1,4 +1,4 @@
 interface:
   display_name: "像素视频导演"
-  short_description: "从创意、脚本和分镜生成像素游戏感视频，并按可追溯证据完成审片和定向修复"
-  default_prompt: "使用 $pixel-video-director 把我的创意整理成脚本、分镜和可执行制作工程，调用基础 skill 出片并完成 Review。"
+  short_description: "把文案演成有构图光影、运镜转场的像素分镜，按需交接制作、出片和审片"
+  default_prompt: "使用 $pixel-video-director，把我的文案设计成具体画面，写出主体动作、构图光影、运镜与转场；需要出片时再交接制作工程并完成 Review。"

@@ -7,6 +7,8 @@ description: 制作和修改像素游戏感视频，按结构化镜头、素材�
 
 把制作决策写入四份 VideoSpec JSON；运行代码完成时间线编译与合成。先读 [制作合同](references/contract.md)，运行 `python scripts/video.py catalog` 选择已实现的能力。
 
+默认 `renderBackend=canvas`。需要原生 React 场景时读 [Remotion 后端](references/remotion.md)，显式选择 `remotion`；当前只支持书桌场景与指定运镜。Remotion 先用 `studio PROJECT` 交互预览，用户需要导出时再运行 `preview` 或 `render`。
+
 | 修改内容 | 按需读取 |
 | --- | --- |
 | 色板、字体、像素密度 | [style](modules/style/GUIDE.md) |

@@ -154,6 +154,7 @@ class Narration(Contract):
 
 class Plan(Contract):
     schemaVersion: Literal[1] = 1
+    renderBackend: Literal["canvas", "remotion"] = "canvas"
     id: str
     title: str = Field(min_length=1)
     output: Output

@@ -78,7 +78,6 @@
   const handlers={'scenes.steps.v1':steps,'scenes.counter.v1':counter,'scenes.choice.v1':choice,'scenes.assembly.v1':assembly,'scenes.focus.v1':focus};
   function content(e,shot,frame){
     if(shot.scene==='scenes.canvas.v1'){P.library.objects(e,shot,frame);return;}
-    if(shot.scene==='scenes.document-highlight.v1'){P.documentHighlight.draw(e,shot,frame);return;}
     if(shot.scene==='scenes.competition-routes.v1'){P.competitionRoutes.draw({...e,includePresenter:false},shot,frame);return;}
     if(shot.scene==='scenes.study-routes.v1'){P.studyRoutes.draw(e,shot,frame);return;}
     if(shot.scene==='scenes.presenter-board.v1'){P.presenterBoard.draw(e,shot,frame);return;}

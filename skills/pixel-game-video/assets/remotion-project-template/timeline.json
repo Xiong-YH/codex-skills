@@ -1,0 +1,52 @@
+{
+  "shots": [
+    {
+      "id": "s01",
+      "durationFrames": 240,
+      "scene": "scenes.focus-desk.v1",
+      "actor": "actor.azong.v3",
+      "params": {
+        "phase": "choose",
+        "heading": "先选一件",
+        "labels": [
+          "写方案",
+          "回消息",
+          "查资料"
+        ],
+        "startEvent": "choose",
+        "completeEvent": "parked"
+      },
+      "events": [
+        {
+          "id": "choose",
+          "frame": 48
+        },
+        {
+          "id": "parked",
+          "frame": 144
+        }
+      ],
+      "objects": [],
+      "motions": [
+        {
+          "id": "track",
+          "recipe": "motion.camera-track.v1",
+          "target": "scene",
+          "start": {
+            "event": "s01.enter",
+            "offsetFrames": 12
+          },
+          "durationFrames": 144,
+          "params": {
+            "scaleFrom": 1.0,
+            "scaleTo": 1.08,
+            "xFrom": 0.5,
+            "xTo": 0.54,
+            "yFrom": 0.5,
+            "yTo": 0.52
+          }
+        }
+      ]
+    }
+  ]
+}

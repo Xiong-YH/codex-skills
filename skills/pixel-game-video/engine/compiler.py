@@ -164,6 +164,8 @@ def compile_project(project_root, skill_root=None, *, write=False):
     component_spec.loader.exec_module(component_validator)
     for index, shot in enumerate(shots):
         scene = require("scenes", shot["scene"])
+        if project['renderBackend'] not in scene.get('backends', ['canvas']):
+            raise ValueError(f"{shot['scene']} is not available for renderBackend={project['renderBackend']}")
         shot["contentStage"] = scene.get("contentStage", content_stage)
         shot["actor"] = shot.get("actor")
         if shot["actor"] is not None:
@@ -238,6 +240,8 @@ def compile_project(project_root, skill_root=None, *, write=False):
             intervals.setdefault(key, []).append((start, end))
             motion.update(startFrame=start, endFrame=end)
 
+    from .backend_caps import validate as validate_backend
+    validate_backend(project, shots)
     cues = inputs["text.json"]["cues"]
     unique((c["id"] for c in cues), "text cues")
     subtitles = []

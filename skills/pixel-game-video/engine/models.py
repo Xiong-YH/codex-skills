@@ -15,6 +15,7 @@ class Model(BaseModel):
 class Project(Model):
     schemaVersion: Literal[1] = 1
     authoringMode: Literal["direct", "director"] = "direct"
+    renderBackend: Literal["canvas", "remotion"] = "canvas"
     title: Annotated[str, Field(min_length=1, max_length=120)]
     fps: Literal[30, 60] = 60
     width: Literal[1920] = 1920

@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "shots": [
+    {
+      "id": "s1",
+      "durationFrames": 240,
+      "intent": "让三项待办从桌面不同方向挤入同一工作区域，建立同时开工造成的拥挤。",
+      "visual": {
+        "question": "为什么事情越多，越难开始？",
+        "form": "scene",
+        "subject": "侧站的阿棕与一张放着计划本的工作桌",
+        "action": "三张写有任务的纸从分散位置进入桌面，互相争夺中心；镜头小幅接近桌面后落稳。",
+        "result": "观众看见工作空间被同时到来的任务占满，而非只读到忙碌两个字。",
+        "continuity": "计划本留在桌上，第二镜以它的书页铺屏换景；三张任务纸的文字与身份延续。"
+      },
+      "scene": "scenes.focus-desk.v1",
+      "params": {
+        "phase": "overload",
+        "heading": {"labelId": "overloadHeading"},
+        "labels": [{"labelId": "mainTask"}, {"labelId": "messageTask"}, {"labelId": "researchTask"}],
+        "startEvent": "gather",
+        "completeEvent": "scattered"
+      },
+      "events": [{"id": "gather", "frame": 36}, {"id": "scattered", "frame": 126}],
+      "objects": [],
+      "cues": [{"cueId": "c1", "start": {"event": "s1.enter", "offsetFrames": 12}, "end": {"event": "s1.exit", "offsetFrames": -12}}]
+    },
+    {
+      "id": "s2",
+      "durationFrames": 240,
+      "intent": "书页换景结束后只移动待办，让写方案留在中心，另外两项进入侧边暂存区。",
+      "visual": {
+        "question": "怎样从三件事中选出第一件？",
+        "form": "scene",
+        "subject": "同一书桌上的三张任务纸与侧边暂存区",
+        "action": "计划本的书页铺满画幅后扫离；写方案停留在暖光中心，其余任务纸向侧边收拢。",
+        "result": "观众能分别指出主任务与暂存任务，明白暂存不是丢弃。",
+        "continuity": "中心写方案的位置交给第三镜；第二镜完成后保留 90 帧稳定状态。"
+      },
+      "scene": "scenes.focus-desk.v1",
+      "params": {
+        "phase": "choose",
+        "heading": {"labelId": "chooseHeading"},
+        "labels": [{"labelId": "mainTask"}, {"labelId": "messageTask"}, {"labelId": "researchTask"}],
+        "startEvent": "choose",
+        "completeEvent": "parked"
+      },
+      "events": [{"id": "choose", "frame": 64}, {"id": "parked", "frame": 150}],
+      "objects": [],
+      "cues": [{"cueId": "c2", "start": {"event": "s2.enter", "offsetFrames": 60}, "end": {"event": "s2.exit", "offsetFrames": -12}}]
+    },
+    {
+      "id": "s3",
+      "durationFrames": 240,
+      "intent": "延续主任务的位置，把空出来的区域展开成连续工作空间，最后保持可阅读构图。",
+      "visual": {
+        "question": "选完以后，怎样让注意力留下来？",
+        "form": "scene",
+        "subject": "一张主任务纸、被清空的桌面与侧边暂存的两张任务纸",
+        "action": "暖光覆盖的连续区域向主任务展开，镜头从任务近景缓慢放宽；主角仍侧站，不新增表演。",
+        "result": "观众看见任务获得一整块连续空间，并有时间读完结论。",
+        "continuity": "以保持稳定的桌面收尾；主任务身份不变，暂存事项仍可见。"
+      },
+      "scene": "scenes.focus-desk.v1",
+      "params": {
+        "phase": "focus",
+        "heading": {"labelId": "focusHeading"},
+        "labels": [{"labelId": "mainTask"}, {"labelId": "messageTask"}, {"labelId": "researchTask"}],
+        "startEvent": "clear",
+        "completeEvent": "ready"
+      },
+      "events": [{"id": "clear", "frame": 48}, {"id": "ready", "frame": 146}],
+      "objects": [],
+      "cues": [{"cueId": "c3", "start": {"event": "s3.enter", "offsetFrames": 52}, "end": {"event": "s3.exit", "offsetFrames": -12}}]
+    }
+  ]
+}

@@ -3,7 +3,7 @@ from pathlib import Path
 import shutil
 
 
-EXCLUDED_PARTS = {'__pycache__', 'node_modules', '.venv', 'work', 'build', 'outputs',
+EXCLUDED_PARTS = {'__pycache__', 'node_modules', '.venv', '.cache', '.remotion', 'work', 'build', 'outputs',
                   '.git', 'sfx-bank', 'arcade-expanded', 'arcade-charge'}
 EXCLUDED_SUFFIXES = {'.pyc', '.pyo', '.log', '.exe', '.dll', '.so', '.dylib'}
 

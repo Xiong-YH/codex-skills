@@ -1,11 +1,15 @@
 # Codex Skills
 
-像素游戏感视频体系。日常使用两个 skill，运镜转场已融入基础制作模块。
+像素游戏感视频体系。日常使用两个 skill：导演负责画面设计与制作统筹，基础 skill 负责执行；运镜转场的实现维护在基础制作模块。
 
 | Skill | 职责 |
 | --- | --- |
-| [pixel-game-video](skills/pixel-game-video/SKILL.md) | 按结构化工程制作视频；维护风格、素材、文字、运动、声音和场景，构建 HTML、MP4 与技术证据 |
-| [pixel-video-director](skills/pixel-video-director/SKILL.md) | 从创意到脚本、分镜、制作交接、review 和定向修复；调用基础 skill |
+| [pixel-game-video](skills/pixel-game-video/SKILL.md) | 按结构化工程制作视频；默认 Canvas，支持有限原生 Remotion 场景，维护素材、运动、声音与技术证据 |
+| [pixel-video-director](skills/pixel-video-director/SKILL.md) | 把文案设计成可见动作、构图光影、运镜与语义转场；可只交付分镜，或继续制作交接、review 和定向修复 |
+
+画面叙事方法已整合进导演技能，包括视觉母题、光影与尺度、镜头和主体运动的区分、前后场景的语义承接。参考片的黑金配色、人物和 RPG 界面按新主题选择；[《深度工作》观片案例](skills/pixel-video-director/references/deep-work-case.md)仅是学习笔记，不代表基础层已实现其中所有效果。
+
+> 使用 $pixel-video-director，先把这段文案演成具体画面，写出主体动作、构图光影、运镜、前后转场和需要准备的素材，只交付视觉分镜。
 
 ```mermaid
 flowchart TD
@@ -25,7 +29,9 @@ flowchart TD
     R -->|按源映射修复| S
 ```
 
-基础工程只维护四份 JSON，不复制整个引擎。运镜、配色和音效各在自己的模块维护，两个 `SKILL.md` 只保留使用入口和按需链接。
+基础工程只维护四份 JSON，不复制整个引擎。运镜、配色和音效各在自己的模块维护，两个 `SKILL.md` 只保留使用入口和按需链接。纯视觉方案按 [分镜交接与工程映射](skills/pixel-video-director/references/visual-storyboard.md)编写；进入工程后，时间统一由 storyboard.json 维护。
+
+Remotion 接在基础执行层：导演与 VideoSpec 保持原有职责，`renderBackend=remotion` 选择原生 React 场景，由同一份编译时间线驱动。当前试作支持书桌场景、整体相机轨迹和书页遮挡转场，尚未迁移 Canvas 的组件与其他场景。用 [12 秒书桌样例](skills/pixel-video-director/examples/remotion-focus-desk/README.md) 进入 Studio，安装与边界见 [Remotion 说明](skills/pixel-game-video/references/remotion.md)。
 
 ## 本系列要求与经验入口
 

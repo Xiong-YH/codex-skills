@@ -138,7 +138,7 @@ def transform(sources):
         return map_value("timeline.json", pointer, value, "storyboard.json", sid, field)
 
     project = outputs["project.json"]
-    for field in ("schemaVersion", "title", "style", "seed", "audioMode"):
+    for field in ("schemaVersion", "renderBackend", "title", "style", "seed", "audioMode"):
         project[field] = map_value("project.json", "/" + field, plan[field], "production-plan.json", plan["id"], "/" + field)
     project["authoringMode"] = map_value("project.json", "/authoringMode", "director", "production-plan.json", plan["id"], "/$generated/authoringMode")
     for field, value in plan["output"].items():

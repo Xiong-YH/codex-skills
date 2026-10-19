@@ -25,7 +25,7 @@ def build(root):
     return resolved
 
 
-def doctor():
+def doctor(backend='canvas'):
     result = {"python": sys.version.split()[0], "packages": {}}
     for name in ("pydantic", "numpy", "PIL"):
         result["packages"][name] = importlib.util.find_spec(name) is not None
@@ -35,7 +35,10 @@ def doctor():
         result["executables"][name] = bool(chosen and (Path(chosen).is_file() or shutil.which(chosen)))
     result["browserConfigured"] = bool(os.environ.get("PIXEL_BROWSER_EXECUTABLE"))
     node = os.environ.get("PIXEL_NODE") or shutil.which("node")
-    if node:
+    if backend == 'remotion':
+        from engine.remotion_backend import doctor as doctor_remotion
+        result['remotion'] = doctor_remotion()
+    elif node:
         env = os.environ.copy()
         if env.get("PIXEL_NODE_MODULES"):
             env["NODE_PATH"] = env["PIXEL_NODE_MODULES"]
@@ -43,18 +46,22 @@ def doctor():
         result["playwright"] = check.returncode == 0
     else:
         result["playwright"] = False
-    result["ready"] = all(result["packages"].values()) and all(result["executables"].values()) and result["playwright"]
+    result['renderBackend'] = backend
+    renderer_ready = result['remotion']['ready'] if backend == 'remotion' else result['playwright']
+    result["ready"] = all(result["packages"].values()) and all(result["executables"].values()) and renderer_ready
     result["note"] = "Read references/runtime.md. A configured runtime still needs a real render to verify browser, fonts, encoder and audio."
     return result
 
 
-def init_project(destination, title):
+def init_project(destination, title, backend='canvas'):
     if destination.exists():
         raise ValueError(f"destination already exists: {destination}")
-    shutil.copytree(SKILL_ROOT / "assets/project-template", destination)
+    template = 'remotion-project-template' if backend == 'remotion' else 'project-template'
+    shutil.copytree(SKILL_ROOT / 'assets' / template, destination)
     from engine.compiler import read_json, write_json
     project = read_json(destination / "project.json")
     project["title"] = title
+    project['renderBackend'] = backend
     write_json(destination / "project.json", project)
     return {"project": str(destination), "mode": "direct", "note": "Replace example content; duration and theme are editable."}
 
@@ -97,22 +104,26 @@ def export_project(root, destination):
         project["authoringMode"] = "direct"
         write_json(target / "project.json", project)
     write_json(destination / "export-manifest.json", {"sourceInputHash": resolved["inputHash"], "mode": "standalone-direct-snapshot", "runtime": "pixel-game-video", "project": "project"})
-    (destination / "RUN.md").write_text("# Standalone video snapshot\n\nInstall dependencies in pixel-game-video/requirements.txt and package.json; configure browser and FFmpeg as described in pixel-game-video/references/runtime.md.\n\nRun `python pixel-game-video/scripts/video.py render project`. The export bundles source/assets, not runtime binaries or fonts. Director sources, when present, are preserved under authoring-sources; this project is an editable direct snapshot.\n", encoding="utf-8")
+    npm_directory = 'pixel-game-video/engine/remotion' if resolved['project']['renderBackend'] == 'remotion' else 'pixel-game-video'
+    npm_install = 'npm ci' if resolved['project']['renderBackend'] == 'remotion' else 'npm install'
+    (destination / "RUN.md").write_text(f"# Standalone video snapshot\n\nInstall Python dependencies in pixel-game-video/requirements.txt and run `{npm_install}` in {npm_directory}; configure browser and FFmpeg as described in pixel-game-video/references/runtime.md.\n\nBuild with `python pixel-game-video/scripts/video.py build project`. Remotion projects can preview with `python pixel-game-video/scripts/video.py studio project`; export an MP4 when needed with `python pixel-game-video/scripts/video.py render project`. The export bundles source/assets, not runtime binaries or fonts. Director sources, when present, are preserved under authoring-sources; this project is an editable direct snapshot.\n", encoding="utf-8")
     return {"exported": str(destination), "sourceInputHash": resolved["inputHash"]}
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     subs = parser.add_subparsers(dest="command", required=True)
-    subs.add_parser("doctor")
+    doctor_parser = subs.add_parser("doctor")
+    doctor_parser.add_argument('--backend', choices=['canvas', 'remotion'], default='canvas')
     cat = subs.add_parser("catalog")
     cat.add_argument("module", nargs="?", choices=["style", "library", "text", "motion", "audio", "scenes", "components"])
     init = subs.add_parser("init")
     init.add_argument("project", type=Path)
     init.add_argument("--title", default="像素视频示例")
+    init.add_argument('--backend', choices=['canvas', 'remotion'], default='canvas')
     schema = subs.add_parser("schemas")
     schema.add_argument("--output", type=Path, default=SKILL_ROOT / "schemas")
-    for name in ("validate", "build", "preview", "render", "inspect", "export-project"):
+    for name in ("validate", "build", "studio", "preview", "render", "inspect", "export-project"):
         command = subs.add_parser(name)
         command.add_argument("project", type=Path)
         if name in ("preview", "render"):
@@ -126,7 +137,7 @@ def main(argv=None):
             command.add_argument("--name", default="film")
     args = parser.parse_args(argv)
     if args.command == "doctor":
-        result = doctor()
+        result = doctor(args.backend)
         emit(result)
         return 0 if result["ready"] else 1
     from engine.compiler import catalog, compile_project, read_json, write_json
@@ -139,7 +150,7 @@ def main(argv=None):
             write_json(args.output / name.replace(".json", ".schema.json"), model.model_json_schema())
         emit({"schemas": str(args.output)})
     elif args.command == "init":
-        emit(init_project(args.project.resolve(), args.title))
+        emit(init_project(args.project.resolve(), args.title, args.backend))
     elif args.command == "export-project":
         emit(export_project(args.project.resolve(), args.destination.resolve()))
     elif args.command == "inspect":
@@ -154,7 +165,14 @@ def main(argv=None):
         root = args.project.resolve()
         data = build(root)
         if args.command == "build":
-            emit({"built": str(root / "build/film.html"), "inputHash": data["inputHash"]})
+            artifact = 'remotion-build.json' if data['project']['renderBackend'] == 'remotion' else 'film.html'
+            emit({"built": str(root / 'build' / artifact), 'renderBackend': data['project']['renderBackend'], "inputHash": data["inputHash"]})
+        elif args.command == 'studio':
+            if data['project']['renderBackend'] != 'remotion':
+                raise ValueError('studio requires project.renderBackend=remotion; Canvas projects use build/film.html')
+            from engine.remotion_backend import studio
+            process = studio(root)
+            return process.wait()
         else:
             from engine.render import render
             end = args.end_frame
