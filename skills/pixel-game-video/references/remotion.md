@@ -25,7 +25,7 @@ Node 依赖锁定 Remotion 4.0.534、React 19.2.0，存于 `engine/remotion/pack
 
 明确需要 MP4 时运行 `python scripts/video.py render PROJECT`；需要片段 MP4 时使用 `preview PROJECT --start-frame FIRST --end-frame LAST`。二者沿用现有 FFmpeg 编码、音轨切片、解码帧及媒体核验。区间始终为 `[FIRST,LAST)`，输出帧编号从零开始；Studio 中音轨只挂载一次。
 
-需要直接编辑时运行 `python scripts/video.py workbench PROJECT --port 5208 --no-open`。Studio 的播放头不是保存剪辑的入口；工作台通过 props/schema 改画面参数、通过片段改镜头和独立音效，另存项目 JSON，并从当前项目导出。当前工作台接入范围为本页原生场景与 sfx-only/silent，暂拒绝独立 `role=title` cue；镜头 `heading` 仍可编辑。旁白/BGM 与 title cue 的原 Remotion 构建、导出不受影响。工作台导出在 `workbench/exports/` 保留与 MP4 同名的 `.project.json`，用「导出版本 JSON」下载该次提交的时间线，随成片一起交付。
+需要直接编辑时运行 `python scripts/video.py workbench PROJECT --port 5208 --no-open`。Studio 的播放头不是保存剪辑的入口；工作台通过 props/schema 改画面参数、通过片段改镜头和独立音效，另存项目 JSON，并从当前项目导出。当前工作台接入本页原生书桌场景，支持独立音效、PCM 旁白和 BGM，分轨须通过本次 PCM 重组检查；压低与 master 包络按源版本烘焙，编辑后需重新听音。暂拒绝独立 `role=title` cue；镜头 `heading` 仍可编辑。工作台导出在 `workbench/exports/` 保留与 MP4 同名的 `.project.json`，用「导出版本 JSON」下载该次提交的时间线，随成片一起交付。
 
 ## 当前能力
 

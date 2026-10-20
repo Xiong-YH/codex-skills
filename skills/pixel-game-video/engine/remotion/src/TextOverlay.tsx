@@ -18,7 +18,7 @@ export const CueText: React.FC<CueTextProps> = ({payload, cue, color, fontSize})
   const size = fontSize ?? height * (style.textRoles?.[cue.role] ?? 0.03);
   useLayoutEffect(() => {
     let live = true;
-    document.fonts.ready.then(() => {
+    document.fonts.ready.then(() => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())))).then(() => {
       if (!live || !node.current || !text.current) return;
       const box = node.current;
       const content = text.current;
@@ -30,7 +30,7 @@ export const CueText: React.FC<CueTextProps> = ({payload, cue, color, fontSize})
       const safeTop = height * (style.safeArea?.top ?? 0.06);
       const safeBottom = height * (1 - (style.safeArea?.bottom ?? 0.07));
       if (box.clientWidth < size || content.scrollWidth > content.clientWidth + 1 || top < safeTop || bottom > safeBottom) {
-        cancelRender(new Error(`Text ${cue.id} exceeds the safe area: shorten it, split the cue, or adjust x/y.`));
+        cancelRender(new Error(`Text ${cue.id} exceeds the safe area: shorten it, split the cue, or adjust x/y. width=${box.clientWidth}, textWidth=${content.scrollWidth}/${content.clientWidth}, lines=${lines}, bounds=${top}/${bottom}, safe=${safeTop}/${safeBottom}`));
         return;
       }
       if (subtitle && lines > 2) {

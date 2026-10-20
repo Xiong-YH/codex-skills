@@ -73,12 +73,15 @@ const ExportButton: React.FC<{kind?: "mp4" | "jianying"}> = ({kind = "mp4"}) => 
       const j = await r.json();
       if (!r.ok) throw new Error(j.error ?? t("export.startFailed"));
       setJob({ id: j.id, status: "running", progress: 0 });
-      poll(j.id);
     } catch (error) {
       setJob({ id: "", status: "error", progress: 0, lastLine: error instanceof Error ? error.message : String(error) });
     }
   };
-  useEffect(() => () => window.clearInterval(timer.current), []);
+  // Restart polling after a development refresh that preserves the active job.
+  useEffect(() => {
+    if (job?.id && job.status === "running") poll(job.id);
+    return () => window.clearInterval(timer.current);
+  }, [job?.id]);
   return <>
     {job?.status === "done" && <a className="btn" href={job.downloadUrl ?? `/api/export/${job.id}/download`}>{kind === "jianying" ? "下载剪映 ZIP" : "下载 MP4"}</a>}
     {job?.projectUrl && <a className="btn" href={job.projectUrl}>导出版本 JSON</a>}

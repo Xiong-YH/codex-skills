@@ -109,25 +109,36 @@ class WorkbenchBridgeTests(unittest.TestCase):
         self.assertLessEqual(int(np.abs(original - rebuilt).max()), 1)
         self.assertLessEqual(status['audioReport']['maxAbsPcmError'], 1)
 
-    def test_bgm_build_survives_even_when_workbench_is_not_supported(self):
-        media = self.project / 'music.wav'
-        with wave.open(str(media), 'wb') as audio:
-            audio.setnchannels(2)
-            audio.setsampwidth(2)
-            audio.setframerate(48000)
-            audio.writeframes(bytes(4800 * 4))
-        self.change('project.json', lambda p: p.update(audioMode='sfx-only'))
-        write_json(self.project / 'audio.json', {'cues': [], 'bgm': {
-            'file': 'music.wav', 'at': {'event': 's01.enter'}, 'end': {'event': 's01.exit'},
-            'gain': .18, 'loop': True,
-        }})
+    def test_narration_bgm_and_overlapping_sfx_recompose_exactly(self):
+        tone = (np.sin(np.arange(24000) * 2 * np.pi * 220 / 48000) * 12000).astype('<i2')
+        for name in ('voice.wav', 'music.wav'):
+            with wave.open(str(self.project / name), 'wb') as audio:
+                audio.setparams((2, 2, 48000, 0, 'NONE', 'not compressed'))
+                audio.writeframes(np.stack([tone, tone], axis=1).tobytes())
+        self.change('project.json', lambda p: p.update(audioMode='narration+sfx'))
+        write_json(self.project / 'audio.json', {'cues': [
+            {'id': 'choose', 'sound': 'arcade-select', 'at': {'event': 's01.choose'}, 'level': .22},
+            {'id': 'seat', 'sound': 'arcade-seat', 'at': {'event': 's01.choose'}, 'level': .18},
+        ], 'narration': [{'id': 'voice', 'file': 'voice.wav', 'at': {'event': 's01.choose'}, 'gain': .9}],
+            'bgm': {'file': 'music.wav', 'at': {'event': 's01.enter'}, 'end': {'event': 's01.exit'},
+                    'gain': .18, 'loop': True}})
         resolved, status = self.build()
-        self.assertFalse(status['supported'])
-        self.assertIn('Narration/BGM', status['reason'])
-        self.assertTrue((self.project / 'build/remotion/public/animation.wav').is_file())
+        self.assertTrue(status['supported'], status.get('reason'))
+        manifest = status['manifest']
+        self.assertEqual([len(manifest[k]) for k in ('sfx', 'narration', 'bgm')], [2, 1, 1])
+        public = self.project / 'build/remotion/public'
+        original = pcm(public / 'animation.wav')
+        rebuilt = np.zeros_like(original)
+        for kind in ('sfx', 'narration', 'bgm'):
+            for cue in manifest[kind]:
+                part = pcm(public / cue['src'])
+                start = round(cue['from'] / resolved['project']['fps'] * 48000)
+                rebuilt[start:start + len(part)] += part
+                self.assertEqual(cue['volume'], 1)
+        self.assertEqual(int(np.abs(original - rebuilt).max()), 0)
+        self.assertEqual(status['audioReport']['maxAbsPcmError'], 0)
+        require_supported(self.project, resolved)
         verify_build(self.project, resolved)
-        with self.assertRaisesRegex(ValueError, 'Narration/BGM'):
-            require_supported(self.project, resolved)
 
     def test_changed_source_cannot_open_stale_workbench(self):
         self.build()

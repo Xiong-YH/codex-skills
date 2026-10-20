@@ -35,8 +35,6 @@ def support_error(resolved: dict) -> str | None:
     if any(motion['recipe'] == 'motion.book-sweep.v1' and index == 0
            for index, shot in enumerate(resolved['shots']) for motion in shot['motions']):
         return 'A workbench book-sweep transition requires a preceding focus-desk shot.'
-    if resolved.get('narration') or resolved.get('bgm'):
-        return 'Narration/BGM builds remain supported, but this workbench bridge currently accepts only silent or SFX-only projects.'
     if any(cue['role'] == 'title' for cue in resolved.get('cues', [])):
         return ('Standalone title cues are not supported by this workbench bridge yet; use each focus-desk '
                 "shot's editable heading. Normal Remotion builds still support title cues.")
@@ -163,6 +161,81 @@ def _split_audio(root: Path, skill: Path, resolved: dict, public: Path) -> tuple
         sys.path.remove(str(directory))
 
 
+
+def _split_speech_music(root: Path, skill: Path, resolved: dict, public: Path) -> tuple[dict, dict]:
+    """Split the current mix using a shared master envelope, then conserve PCM.
+
+    Ducking and mastering are frozen at the authored mix. Subsequent edits move
+    or scale these stems; they do not dynamically re-duck the other tracks.
+    """
+    import numpy as np
+    directory = str(skill / 'modules/audio')
+    sys.path.insert(0, directory)
+    try:
+        import mixer, narration, music
+        original = _pcm(public / 'animation.wav')
+        samples, fps = len(original), resolved['project']['fps']
+        stems = []
+        intervals = [(round(v['frame'] / fps * 48000), round(v['frame'] / fps * 48000) + v['samples'])
+                     for v in resolved.get('narration', [])]
+        duck = narration.duck_envelope(samples, intervals, resolved.get('mix', {}).get('speechDuck', .28))
+        for event in resolved.get('audio', []):
+            single = {**resolved, 'audio': [event]}
+            raw, records = mixer.render_sfx(single)
+            start = round(event['frame'] / fps * 48000)
+            end = min(samples, start + records[0]['durationSamples'])
+            stems.append(('sfx', event['id'], start, end, raw * duck[:, None]))
+        for cue in resolved.get('narration', []):
+            single = {**resolved, 'narration': [cue]}
+            raw, _ = narration.mix(single, root, np.zeros((samples, 2)))
+            start = round(cue['frame'] / fps * 48000)
+            stems.append(('narration', cue['id'], start, start + cue['samples'], raw))
+        if resolved.get('bgm'):
+            raw, _ = music.render(resolved, root, samples)
+            cue = resolved['bgm']
+            stems.append(('bgm', cue.get('id', 'bgm'), round(cue['frame'] / fps * 48000),
+                          round(cue['endFrame'] / fps * 48000), raw))
+        groups = {'sfx': [], 'narration': [], 'bgm': []}
+        if not stems:
+            return groups, {'maxAbsPcmError': int(np.abs(original).max()), 'events': [], 'empty': True}
+        total = sum(stem[4] for stem in stems)
+        gain = resolved.get('mix', {}).get('masterGain', .8)
+        factor = np.full_like(total, gain)
+        np.divide(.8 * np.tanh(total * gain / .8), total, out=factor, where=total != 0)
+        quantized = [np.rint(stem[4] * factor * 32767).astype('int32') for stem in stems]
+        residual = original - sum(quantized)
+        # Assign rounding remainder to the largest active contribution at each
+        # sample/channel, without introducing sound outside a stem's interval.
+        owner = np.argmax(np.stack([np.abs(stem[4]) for stem in stems]), axis=0)
+        for index, pcm in enumerate(quantized):
+            pcm += np.where(owner == index, residual, 0)
+        reconstructed = np.zeros_like(original)
+        records = []
+        for index, ((kind, ident, start, end, _), pcm) in enumerate(zip(stems, quantized)):
+            part = pcm[start:end]
+            if part.size and (part.min() < -32768 or part.max() > 32767):
+                raise ValueError('Independent workbench stem exceeds PCM limits; lower source levels.')
+            safe = re.sub(r'[^A-Za-z0-9_.-]+', '-', ident).strip('-') or 'audio'
+            relative = f'audio/{kind}/{index + 1:02d}-{safe}.wav'
+            path = public / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with wave.open(str(path), 'wb') as stream:
+                stream.setparams((2, 2, 48000, 0, 'NONE', 'not compressed'))
+                stream.writeframes(part.astype('<i2').tobytes())
+            reconstructed[start:end] += _pcm(path)
+            groups[kind].append({'from': start * fps // 48000,
+                                 'duration': max(1, math.ceil((end - start) / 48000 * fps)),
+                                 'src': relative, 'volume': 1, 'label': ident})
+            records.append({'id': ident, 'kind': kind, 'src': relative, 'sample': start, 'samples': end - start})
+        difference = np.abs(reconstructed - original)
+        return groups, {'sampleRate': 48000, 'channels': 2, 'events': records,
+                        'maxAbsPcmError': int(difference.max()), 'empty': False,
+                        'gainPolicy': 'shared-master-envelope-with-PCM-rounding-conservation',
+                        'editPolicy': 'Source ducking/fades/master envelope are baked; edits do not dynamically re-duck other clips.'}
+    finally:
+        sys.path.remove(directory)
+
+
 def generate(project_root: Path | str, resolved: dict, payload: dict, skill_root: Path | str) -> dict:
     root, skill = Path(project_root).resolve(), Path(skill_root).resolve()
     output = root / 'build'
@@ -176,6 +249,9 @@ def generate(project_root: Path | str, resolved: dict, payload: dict, skill_root
     manifest = _visual_manifest(resolved, payload)
     if payload.get('audio') is None:
         audio = {'sampleRate': 48000, 'channels': 2, 'events': [], 'maxAbsPcmError': 0, 'empty': True}
+    elif resolved.get('narration') or resolved.get('bgm'):
+        groups, audio = _split_speech_music(root, skill, resolved, generated / 'public')
+        manifest.update(groups)
     else:
         manifest['sfx'], audio = _split_audio(root, skill, resolved, generated / 'public')
     status['audioReport'] = audio

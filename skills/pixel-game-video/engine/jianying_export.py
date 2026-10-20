@@ -76,7 +76,7 @@ def default_project(manifest: dict) -> dict:
                           'label': unit.get('label', unit['id'])})
         if clips:
             tracks.append({'id': kind, 'name': kind, 'clips': clips})
-    for key in ('bgm', 'sfx'):
+    for key in ('bgm', 'sfx', 'narration'):
         clips = []
         for index, audio in enumerate(manifest.get(key, [])):
             start = max(0, round(audio['from']))

@@ -64,6 +64,20 @@ test('manifest import preserves 60fps timing, visual layers and independent over
   assert.doesNotThrow(()=>validateProject(p));
 });
 
+test('narration, music and effects import as independently editable tracks', () => {
+  const m={name:'speech',fps:60,width:1920,height:1080,total:1800,shots:[],
+    narration:[{from:24,duration:1663,src:'audio/narration/voice.wav',volume:1}],
+    bgm:[{from:0,duration:1800,src:'audio/bgm/music.wav',volume:1}],
+    sfx:[{from:100,duration:30,src:'audio/sfx/select.wav',volume:1}]};
+  const p=buildProjectFromManifest(m);
+  assert.equal(p.tracks.length,3);
+  assert.deepEqual(p.tracks.map(t=>t.clips[0].props.file),
+    ['audio/narration/voice.wav','audio/bgm/music.wav','audio/sfx/select.wav']);
+  assert.deepEqual(p.tracks.map(t=>t.clips[0].start),[24,0,100]);
+  const changed=buildProjectFromManifest({...m,narration:[{...m.narration[0],from:25}]});
+  assert.notEqual(changed.source,p.source,'unversioned narration edits must change manifest identity');
+});
+
 // Exercise the real library -> registry -> store.addClip path with browser storage isolated in Node.
 const fixture = fileURLToPath(new URL('./fixtures/workbench.ts', import.meta.url));
 const storeBundleFile = new URL('./.bundle-library-store.mjs', import.meta.url);

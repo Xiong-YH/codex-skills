@@ -82,6 +82,7 @@ export const buildProjectFromManifest = (m: WorkbenchManifest): ProjectData => {
     // tracks[0] 为最上层，对应原片 z 序：转场 > 字幕 > 叠加层 > 镜头（缺省序，清单 order 可改）
     ...upper,
     ...(unitTrack("shot", t("track.shots")) ? [unitTrack("shot", t("track.shots"))!] : []),
+    ...(m.narration?.length ? packAudio(m.narration, "旁白", m.total, m.total) : []),
     ...(m.bgm?.length ? packAudio(m.bgm, t("track.music"), m.total, m.total) : []),
     ...(m.sfx?.length ? packAudio(m.sfx, t("track.sfx"), 90, m.total) : []),
   ];

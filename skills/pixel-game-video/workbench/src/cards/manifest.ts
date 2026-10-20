@@ -68,6 +68,7 @@ export type WorkbenchManifest = {
   /** 全片常驻叠加层（网格 / 暗角 / 水印…） */
   overlays?: ManifestUnit[];
   sfx?: ManifestAudio[];
+  narration?: ManifestAudio[];
   bgm?: ManifestAudio[];
   /** 叠加各层的 z 序（从上到下）；缺省 transitions > captions > overlays，与 Ink Press 模板一致 */
   order?: ("transitions" | "captions" | "overlays")[];
@@ -149,6 +150,7 @@ const canonical = (m: WorkbenchManifest): string => {
     ...UNIT_KINDS.flatMap((kind) => unitsOf(m, kind).map(unit)),
     ...(m.sfx ?? []).map((a) => audio("sfx", a)),
     ...(m.bgm ?? []).map((a) => audio("bgm", a)),
+    ...(m.narration ?? []).map((a) => audio("narration", a)),
   ].join("\n");
 };
 

@@ -36,11 +36,11 @@ handoff 将四份创作源合成为 `video/{project,timeline,text,audio}.json`�
 
 制作前按已定位基础 skill 的 `references/production-workflow.md` 执行；Remotion 能力边界读其 `references/remotion.md`。导演层负责把剪辑决定写进创作源，基础层负责按编译结果执行：
 
-1. 在 storyboard 确定镜头顺序、`durationFrames`、场景机制与参数、动作事件和文字区间；script 保存文案与短标签，production-plan 选择人物、素材、运镜转场和声音，并引用同一批事件。有旁白时先测长度，再安排镜头和阅读停顿。
+1. 在 storyboard 确定镜头顺序、`durationFrames`、场景机制与参数、动作事件和文字区间；script 保存文案与短标签，production-plan 选择人物、素材、运镜转场和声音，并引用同一批事件。先按脚本完成工作台粗剪；有现成旁白时作为素材导入，再按实长精调字幕、镜头和阅读停顿。配音生成不在本交接流程内。
 2. `check`、`handoff` 后由基础层编译唯一整数帧时间线。显式选择 Remotion 时按该结果建立镜头 `Sequence`；Canvas 也使用同一编译时间线。场景、字幕和声音共用编译结果，不再另写 `SHOTS` 或秒数表。
 3. 使用所选后端连续预览全片并听音：Remotion 在 Studio 的 `PixelFilm` 查看；Canvas 检查构建后的 `build/film.html`，按基础运行说明生成所需预览。检查主体状态变化、转场承接、字幕起止和声音落点。修改时沿源映射回改创作源，再 handoff、build、刷新预览；播放头操作不会保存剪辑决定。
 4. 用户需要 MP4 时，从当前有效构建 render，并按 [Review](review.md) 查看实际成片、解码帧和听音。额外后期裁切、变速或移动声音需要同步回创作源，不能只改 MP4 后声称 Studio 已更新。
-5. 用户需要在浏览器内改文案、调整镜头或音效时，读取基础 skill 的 `references/workbench.md`，运行 `python FOUNDATION/scripts/video.py workbench PROJECT/video --port 5208 --no-open`。当前接入范围为原生 Remotion 书桌场景与事件音效/静音工程，暂拒绝独立 `role=title` cue，镜头 `heading` 仍可编辑；Canvas 默认与旁白/BGM、title cue 的原制作流程不变，不能把能力目录当成工作台全部可用。
+5. 用户需要在浏览器内改文案、调整镜头或音效时，读取基础 skill 的 `references/workbench.md`，运行 `python FOUNDATION/scripts/video.py workbench PROJECT/video --port 5208 --no-open`。当前接入原生 Remotion 书桌场景及其独立音效、PCM 旁白和 BGM，初始分轨须通过本次 PCM 重组检查；编辑音轨不会动态重算其他轨道的压低，需重新听音。暂拒绝独立 `role=title` cue，镜头 `heading` 仍可编辑；Canvas 尚未接入。
 6. 首次工作台清单从同一编译 payload 派生，镜头、文字、转场与独立音效不得另抄时间表；props/schema 暴露实际画面参数。先对未编辑导入与原合成做 parity，再实测 UI 改文案、调镜头/音效、保存刷新、下载/重导入项目 JSON 和成片导出。主动打开工作台并给出实际地址。
 7. 使用基础 `export-project` 交付含输入、源码、工作台与资产的 direct 快照；另存导演创作源、源映射和 Review。工作台编辑的分支交付 MP4 与「导出版本 JSON」下载的同名 `.project.json`；后者在基础 skill 的 `workbench/exports/` 持久保存，绑定该次导出提交的时间线。导出后继续编辑时，「保存工程 JSON」得到的当前状态可能属于更新版本，不能与旧 MP4 混配。浏览器自动保存不能代替交付。用户需要剪映草稿时，再读基础 skill 的 `references/jianying-export.md`；从当前工作台分支导出干净底片、分镜片段、原生字幕与独立音效。主标题与内部动画烘焙，安装是独立步骤；未在目标剪映打开时不能声称应用内验收通过。
 

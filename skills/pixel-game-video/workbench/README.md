@@ -16,7 +16,7 @@ Visit `http://127.0.0.1:5208/?import=project`. Omit `--no-open` to open a browse
 
 The project must contain `src/workbench.ts` (or `.tsx`) exporting `WORKBENCH`, and its media in `public/`. The foundation build command generates the manifest and source units. A manual source project can use the structurally typed interface in `src/cards/manifest.ts`; it need not import this workbench package.
 
-The foundation bridge currently accepts native focus-desk scenes with silent or SFX-only audio. It rejects narration, BGM and standalone `role=title` cues; the original Remotion build and export still support those inputs. Each shot's `heading`, title style and task labels remain editable in the inspector. This bridge restriction does not remove the workbench's native text/title cards.
+The foundation bridge accepts native focus-desk scenes with independent SFX, narration and BGM after exact PCM reconstruction checks. Ducking/fades/master envelopes are baked from the source mix and do not dynamically follow later edits. It rejects standalone `role=title` cues; the original Remotion build and export still support those inputs. Each shot's `heading`, title style and task labels remain editable in the inspector. This bridge restriction does not remove the workbench's native text/title cards.
 
 The `proj` and `public/*` links, generated local media indexes, dependencies, cache and output videos are local runtime state excluded by `.gitignore`. They can be recreated by the open script. Never copy those links into a deliverable instead of copying the actual project assets.
 

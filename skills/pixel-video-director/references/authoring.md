@@ -41,9 +41,9 @@
 
 script 中每个 cue 都要在 storyboard 放置一次，并在 production-plan.text 选择角色。字幕必须有拼音 phrases；它生成模拟讲述节奏计划，当前 V3 图片尚未据此产生嘴型，也不代表真人配音对齐。新增标签要放进 script.labels，不能在 scene params 复制文字。一个完整句子若需更长阅读时间，回改 storyboard 的镜头时长和事件安排。
 
-有已录制或合成的旁白时，production-plan 使用 `audioMode="narration+sfx"` 与 `narration:[{id,file,at,gain}]`。WAV 路径相对创作工程、48kHz/16-bit PCM；handoff 复制到 video/，同时绑定源素材与复制件哈希。先测语音长度，再安排字幕和动作；不能为压缩示例时长把旁白截断。没有旁白时保留 sfx-only/silent。
+有已录制或合成的旁白时，production-plan 使用 `audioMode="narration+sfx"` 与 `narration:[{id,file,at,gain}]`。WAV 路径相对创作工程、48kHz/16-bit PCM；handoff 复制到 video/，同时绑定源素材与复制件哈希。导入后按实际语音区间精调字幕和动作；不能为压缩示例时长把旁白截断。没有旁白时保留 sfx-only/silent。
 
-本计算机口播系列默认直接从剪映专业版的文本朗读生成“解说小帅”旁白；按基础依赖定位 `modules/audio/JIANYING.md` 操作、导出并转项目 PCM，不把试听 MP3 当作当前台词，也不要求用户另找其他音色。
+配音生成已移出制作流程，不自动打开剪映或调用其他 TTS。先完成脚本、分镜与工作台粗剪；已有旁白可作为素材导入，需要生成新配音时另行确定处理方式。没有旁白不阻塞画面制作。
 
 production-plan 可用 `speechDuck` 设置旁白期间保留的音效比例，范围0–1，默认0.28；handoff 映射到 audio.json。与每个音效的 level 配合设计，旁白素材和 gain 可独立保持。
 

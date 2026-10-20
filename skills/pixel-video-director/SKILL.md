@@ -21,7 +21,7 @@ description: 把创意或既有文案转成像素视频的可见动作、构图�
 | 学习《深度工作》参考片的画面方法 | [参考片观察](references/deep-work-case.md) | 迁移母题、光影、尺度与语义承接；新主题重新选择人物、道具和场所 |
 | 加强游戏感与操作反馈 | 按基础依赖定位其 `modules/scenes/GAME_FEEL.md` | 按状态选择细节，安排触点事件与声音，保留试用/认可状态 |
 | 音效、配乐与混音 | 按基础依赖定位其 `modules/audio/GUIDE.md`；街机＋鼓点读 `ARCADE.md`；延续计算机口播系列时读 [配乐要求](references/computing-voiceover.md#配乐要求) | 先确认声音素材，再设计项目事件、音量与旁白关系；按本项目已确认要求选择配乐 |
-| 旁白音色与配音 | 按基础依赖定位 `modules/audio/VOICES.md` 与 `modules/audio/JIANYING.md` | 计算机口播系列默认“解说小帅”；将音色与参考 ID 带入 brief，直接操作剪映专业版原生文本朗读生成当前台词，再测时长和交接 |
+| 已有旁白导入与混音 | 按基础依赖定位 `modules/audio/GUIDE.md` | 有现成音频时导入工作台并对齐；制作流程不自动生成配音或打开剪映 |
 | 延续本项目的计算机知识口播、积累制作经验 | [本系列要求](references/computing-voiceover.md)；人物/情境镜头再读 [情境插画方向](references/character-illustration.md) | 将当前要求带入 brief，分别落实固定姿势口型、情境演绎与能力缺口；不能以静态图配旁白代替口播 |
 | 工程内剪辑、预览、出片与可编辑交付 | [基础依赖与交接流程](references/handoff.md)；需要可视化编辑时读基础 skill 的 `references/workbench.md` | 同一事件时间线驱动的 VideoSpec、所选后端预览、工作台多轨项目与按需成片 |
 | 审片、修改或继续已有工程 | [Review 与影响范围](references/review.md) | review.json 与定向源文件修改 |
