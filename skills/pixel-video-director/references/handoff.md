@@ -1,5 +1,7 @@
 # 基础依赖与交接
 
+本流程适用于工程交接与制作。只做视觉分镜时按 [设计稿与源文件映射](visual-storyboard.md) 交付，进入本流程后再定位基础依赖。
+
 需 Python 3.10+ 与 [requirements.txt](../requirements.txt)。渲染依赖由 pixel-game-video 自己的 doctor 检查。
 
 定位顺序：显式 `--foundation` → `PIXEL_VIDEO_SKILL` → 同级 `pixel-game-video/` → `$CODEX_HOME/skills/pixel-game-video`（未设置则 `~/.codex/skills/`）。显式目录无效时直接报错，不换到另一份版本。独立安装 director 时，同时安装基础 skill 或配置该路径。
@@ -27,3 +29,5 @@ handoff 将四份创作源合成为 `video/{project,timeline,text,audio}.json`�
 再次交接前检查生成文件哈希。被手改时，先对照映射把修改回写源文件，再恢复生成文件到上次交接版本；不能用 handoff 强制覆盖丢掉更改。`.director-state.json` 记录上次交接的源快照，供 impact 比较。项目迁移时一起保留源文件、映射与 Review。
 
 基础层独立工程可使用 `authoringMode=direct` 直接编写 VideoSpec；director 不复制基础引擎、素材或运镜规则。
+
+`production-plan.renderBackend` 透传到基础 project。使用 Remotion 时，先运行 `python FOUNDATION/scripts/video.py doctor --backend remotion`，交接后运行 `python FOUNDATION/scripts/video.py studio PROJECT/video`。它仍使用 storyboard 的帧数、事件与文字区间；不会重排时长以适配组件。原生样例见 [remotion-focus-desk](../examples/remotion-focus-desk/README.md)，实际可用场景/配方以基础层校验为准。

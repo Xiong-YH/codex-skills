@@ -8,14 +8,15 @@
   },
   "items": [
     {
+      "id": "scenes.focus-desk.v1",
+      "title": "原生 Remotion · 待办归拢与连续投入",
+      "backends": ["remotion"],
+      "params": "phase: overload/choose/focus; heading; labels[3] (first is the priority); startEvent < completeEvent; Remotion only"
+    },
+    {
       "id": "scenes.canvas.v1",
       "title": "项目画布与信息组件",
       "params": "No params; shot components and project media own the composition"
-    },
-    {
-      "id": "scenes.document-highlight.v1",
-      "title": "文档脱敏、位置偏移与校验兜底",
-      "params": "phase,environment,heading,kicker,labels,stageEvents; illustrative document coordinates"
     },
     {
       "id": "scenes.steps.v1",

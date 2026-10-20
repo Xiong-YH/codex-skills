@@ -17,7 +17,17 @@
 | 顶部导航 | 实心矩形进度条按叙事脉络从左向右推进 | 轨道与填充均为有厚度的矩形，阶段用短标签和矩形内分隔线表示；不使用细线串点、悬浮节点、页码或系列名 |
 | 游戏反馈细节 | 竞赛 V6 的选中、回弹、筹码转移、确认、阶段进度和结算获得认可 | 按状态复用基础层 `modules/scenes/GAME_FEEL.md`，保留已认可的视觉节奏 |
 | 音效 | 已确认街机电子主体＋鼓点＋轻重／切分／回弹的六种声音原子 | 先读基础层 `modules/audio/ARCADE.md`，用 `arcade-select/pickup/seat/launch/reject/reward` 按可见动作选择；新项目另调音量和密度 |
+| 配乐 | 使用 Kevin MacLeod 的 [《Chill Wave》](https://kevinmacleod.bandcamp.com/track/chill-wave) | 将指定曲目与来源写入 brief；配乐低于旁白，保留关键音效辨识度，具体混音与署名见下方要求 |
 | 维护 | 小入口、独立模块、结构化创作源 | 风格、人物物体、文字、运动、音频、场景分别维护；参数与文案不堆成一大段 prompt |
+
+## 配乐要求
+
+2026-10-20，用户指定本系列 BGM 为 Kevin MacLeod 的 [《Chill Wave》](https://kevinmacleod.bandcamp.com/track/chill-wave)。除非用户另行指定，延续本项目时使用该曲；它是选定曲目，不只是风格参考。曲目选择属于本系列偏好，不改变基础 skill 的通用默认值。
+
+- 在 brief 中记录曲名、作者、来源链接和配乐要求；实际使用的音频文件随项目记录，不把网页链接当作已取得的音频素材。
+- 旁白保持清楚，BGM 作为底层氛围；配合六种已确认音效调整音量和密度。开头与结尾平滑淡入淡出，截取或循环按片长安排，接点需实际听音核验。
+- 该 Bandcamp 曲目页链接的许可为 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)。发布时保留曲名、作者、曲目来源与许可链接；如有截取、循环或混音，注明实际修改。可在发布说明中写：`配乐：Chill Wave — Kevin MacLeod；来源与许可见链接；音频修改按本片实际情况注明。`
+- 制作时通过基础层 `import-bgm PROJECT` 将内置原曲导入创作工程，再把输出配置写入 `production-plan.bgm`。本系列初始使用 `gain=0.18`、`speechDuck=0.25`，60fps 下淡入60帧、淡出90帧；按片长与实际听感调整。handoff 后 Canvas 与 Remotion 共用配乐混音，流程见基础层 `modules/audio/MUSIC.md`；新配置不继承旧成片的听音认可。
 
 ## 本轮纠偏的具体依据
 

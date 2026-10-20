@@ -58,11 +58,26 @@ def _version(executable: str) -> str:
     return result.splitlines()[0].strip() if result else 'unknown'
 
 
+def _build_artifact(root: Path, resolved: dict) -> Path:
+    backend = resolved.get('project', {}).get('renderBackend', 'canvas')
+    if backend not in ('canvas', 'remotion'):
+        raise ValueError('Unknown compiled renderBackend; rebuild from valid project inputs.')
+    if backend == 'remotion':
+        from .remotion_backend import verify_build
+        verify_build(root, resolved)
+        return root / 'build' / 'remotion-build.json'
+    artifact = root / 'build' / 'film.html'
+    if not artifact.is_file():
+        raise ValueError('Missing built film.html; run build before render.')
+    return artifact
+
+
 def _read_contract(root: Path, start_frame: int, end_frame: int | None) -> tuple[dict, int]:
     timeline = root / 'build' / 'resolved-timeline.json'
-    if not timeline.is_file() or not (root / 'build' / 'film.html').is_file():
-        raise ValueError('Missing built timeline or film.html; run build before render.')
+    if not timeline.is_file():
+        raise ValueError('Missing built timeline; run build before render.')
     resolved = json.loads(timeline.read_text(encoding='utf-8'))
+    _build_artifact(root, resolved)
     project = resolved.get('project', {})
     for key in ('width', 'height', 'fps'):
         value = project.get(key)
@@ -87,12 +102,14 @@ def _read_contract(root: Path, start_frame: int, end_frame: int | None) -> tuple
 
 def _build_bindings(root: Path, input_hash: str) -> dict:
     """Check the compiled lock against today's source/runtime, without recompiling."""
+    root = root.resolve()
     lock_path = root / 'build' / 'project-lock.json'
     if not lock_path.is_file():
         return {'buildLock': False, 'currentSourceFiles': False, 'currentRuntimeFiles': False}
     lock = json.loads(lock_path.read_text(encoding='utf-8'))
 
     def matches(base: Path, entries: dict) -> bool:
+        base = base.resolve()
         if not entries:
             return False
         for relative, expected in entries.items():
@@ -336,18 +353,23 @@ def _decode_stills(ffmpeg: str, video: Path, target: Path, resolved: dict, first
 
 def render(project_root: Path | str, *, name: str = 'film', start_frame: int = 0,
            end_frame: int | None = None, silent: bool = False, overwrite: bool = False,
-           backend: str = 'browser') -> Path:
+           backend: str | None = None) -> Path:
     """Render [start_frame, end_frame), returning the technically verified MP4.
 
     Configure external dependencies with PIXEL_NODE, PIXEL_NODE_MODULES,
     PIXEL_BROWSER_EXECUTABLE, PIXEL_FFMPEG and PIXEL_FFPROBE. No automatic installs.
     """
-    if backend != 'browser':
-        raise ValueError('Supported renderer backend: browser. Other backends are not yet validated.')
+    if backend not in (None, 'browser', 'remotion'):
+        raise ValueError('Supported renderer backends: browser, remotion.')
     if not isinstance(name, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]*', name):
         raise ValueError('name must contain only letters, numbers, underscores, and hyphens.')
     root = Path(project_root).resolve()
     resolved, last = _read_contract(root, start_frame, end_frame)
+    selected_backend = 'remotion' if resolved['project'].get('renderBackend', 'canvas') == 'remotion' else 'browser'
+    if backend is not None and backend != selected_backend:
+        raise ValueError('Renderer backend must match project.renderBackend; update the source project and rebuild.')
+    backend = selected_backend
+    artifact = _build_artifact(root, resolved)
     bindings = _build_bindings(root, resolved['inputHash'])
     if not all(bindings.values()):
         raise ValueError('Built project lock is missing or source/runtime changed; rebuild before render.')
@@ -365,17 +387,25 @@ def render(project_root: Path | str, *, name: str = 'film', start_frame: int = 0
     frames = work / 'frames'
     audio = None if silent else work / 'audio-slice.wav'
     audio_info = None if silent else _audio_slice(root / 'build' / 'animation-sfx.wav', audio, start_frame, last, config['fps'])
-    subprocess.run([node, str(ENGINE / 'render_frames.cjs'), str(root), str(frames), str(start_frame), str(last)], check=True,
-                   creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0)
-    metrics = json.loads((frames / 'render-metrics.json').read_text(encoding='utf-8'))
+    if backend == 'remotion':
+        from .remotion_backend import render_frames
+        metrics = render_frames(root, frames, start_frame, last)
+    else:
+        subprocess.run([node, str(ENGINE / 'render_frames.cjs'), str(root), str(frames), str(start_frame), str(last)], check=True,
+                       creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0)
+        metrics = json.loads((frames / 'render-metrics.json').read_text(encoding='utf-8'))
     staged_video = work / 'encoded.mp4'
     codec = _encode(ffmpeg, frames, staged_video, audio, config, frame_count, work)
     metadata = _verify(ffprobe, staged_video, config, frame_count, silent)
     video_hash = _hash(staged_video)
     environment = {'system': platform.system(), 'release': platform.release(), 'machine': platform.machine(),
                    'python': platform.python_version(), 'node': metrics['nodeVersion'],
-                   'playwright': metrics['playwrightVersion'], 'browser': metrics['browserVersion'],
+                   'browser': metrics['browserVersion'],
                    'ffmpeg': _version(ffmpeg), 'ffprobe': _version(ffprobe), 'videoEncoder': codec}
+    if backend == 'remotion':
+        environment['remotion'] = metrics['remotionVersion']
+    else:
+        environment['playwright'] = metrics['playwrightVersion']
     source_range = {'startFrame': start_frame, 'endFrame': last, 'durationFrames': frame_count, 'fps': config['fps'],
                     'startSeconds': start_frame / config['fps'], 'endSeconds': last / config['fps']}
     metadata.update({'inputHash': resolved['inputHash'], 'videoSha256': video_hash,
@@ -391,7 +421,8 @@ def render(project_root: Path | str, *, name: str = 'film', start_frame: int = 0
                 'inputHash': resolved['inputHash'], 'videoSha256': video_hash,
                 'video': output.relative_to(root).as_posix(), 'backend': backend, 'sourceRange': source_range,
                 'environment': environment, 'audioSlice': audio_info, 'review': {'visual': 'not_reviewed', 'audio': 'not_applicable' if silent else 'not_reviewed'},
-                'buildSha256': _hash(root / 'build' / 'film.html'), 'timelineSha256': _hash(root / 'build' / 'resolved-timeline.json'),
+                'buildArtifact': artifact.relative_to(root).as_posix(),
+                'buildSha256': _hash(artifact), 'timelineSha256': _hash(root / 'build' / 'resolved-timeline.json'),
                 **decoded}
     _json(staged_verification / 'metadata.json', metadata)
     _json(staged_verification / 'render-manifest.json', manifest)
@@ -419,6 +450,7 @@ def inspect(project_root: Path | str, *, name: str = 'film') -> dict:
     manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
     source_range = manifest['sourceRange']
     resolved, last = _read_contract(root, source_range['startFrame'], source_range['endFrame'])
+    artifact = _build_artifact(root, resolved)
     silent = manifest.get('audioSlice') is None
     report = _verify(_executable('PIXEL_FFPROBE', 'ffprobe'), video, resolved['project'],
                      last - source_range['startFrame'], silent)
@@ -426,9 +458,11 @@ def inspect(project_root: Path | str, *, name: str = 'film') -> dict:
     report['checks'].update({
         'videoHash': current_hash == manifest.get('videoSha256'),
         'compiledInputHash': resolved['inputHash'] == manifest.get('inputHash'),
-        'buildHash': _hash(root / 'build' / 'film.html') == manifest.get('buildSha256'),
+        'buildHash': _hash(artifact) == manifest.get('buildSha256'),
+        'buildArtifact': artifact.relative_to(root).as_posix() == manifest.get('buildArtifact', 'build/film.html'),
         'timelineHash': _hash(root / 'build' / 'resolved-timeline.json') == manifest.get('timelineSha256'),
         'sourceFrameRate': resolved['project']['fps'] == source_range.get('fps'),
+        'rendererBackend': manifest.get('backend') == ('remotion' if resolved['project'].get('renderBackend', 'canvas') == 'remotion' else 'browser'),
         **_build_bindings(root, resolved['inputHash']),
     })
     report.update({'technicalStatus': 'passed' if all(report['checks'].values()) else 'failed',

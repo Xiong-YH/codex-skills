@@ -23,6 +23,9 @@ def style_file(style_root, relative):
 
 
 def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) -> Path:
+    if resolved['project'].get('renderBackend', 'canvas') == 'remotion':
+        from .remotion_backend import build as build_remotion
+        return build_remotion(project_root, resolved, skill_root, silent=silent)
     project_root, skill_root = Path(project_root), Path(skill_root)
     output = project_root / 'build'
     output.mkdir(parents=True, exist_ok=True)

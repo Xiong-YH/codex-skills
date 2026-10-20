@@ -35,6 +35,12 @@ def render(resolved, output, project_root=None):
     samples = len(mixed)
     import narration
     mixed, voices = narration.mix(resolved, project_root, mixed)
+    bgm = None
+    if resolved.get('bgm'):
+        import music
+        bed, bgm = music.render(resolved, project_root, samples)
+        # Narration ducks SFX only. The music bed has its own speech envelope.
+        mixed += bed
     options = resolved.get('mix') or {}
     gain = options.get('masterGain', .8)
     mastered = .8 * np.tanh(mixed * gain / .8)
@@ -43,9 +49,9 @@ def render(resolved, output, project_root=None):
     peak = float(np.max(np.abs(mastered))) if samples else 0
     rms = float(np.sqrt(np.mean(mastered ** 2))) if samples else 0
     report = {'sampleRate': S.RATE, 'channels': 2, 'samples': samples, 'durationSeconds': samples / S.RATE,
-              'source': 'Arcade PCM / procedural G2 plus optional project PCM narration', 'voiceover': bool(voices), 'musicBed': False,
+              'source': 'Arcade PCM / procedural G2 plus optional project PCM narration and music', 'voiceover': bool(voices), 'musicBed': bool(bgm),
               'speechDuck': options.get('speechDuck', .28),
               'peakDbfs': round(20 * np.log10(peak), 3) if peak else None,
-              'rmsDbfs': round(20 * np.log10(rms), 3) if rms else None, 'events': records, 'narration': voices}
+              'rmsDbfs': round(20 * np.log10(rms), 3) if rms else None, 'events': records, 'narration': voices, 'bgm': bgm}
     (output / 'sfx-events.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     return output / 'animation-sfx.wav'

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "cues": [
+    {
+      "id": "c1",
+      "text": "事情太多，先别同时开始。",
+      "phrases": ["shi qing tai duo", "xian bie tong shi kai shi"],
+      "meaning": "让多项任务同时抢占桌面，观众先感到拥挤和注意力被拉扯。"
+    },
+    {
+      "id": "c2",
+      "text": "挑出一件，其余暂时放一边。",
+      "phrases": ["tiao chu yi jian", "qi yu zan shi fang yi bian"],
+      "meaning": "保留一个明确任务，把另外两项送入暂存区，呈现选择的动作及结果。"
+    },
+    {
+      "id": "c3",
+      "text": "留一整段时间，把这一件做完。",
+      "phrases": ["liu yi zheng duan shi jian", "ba zhe yi jian zuo wan"],
+      "meaning": "从选中任务延伸出清晰、连续的工作区域，并在落稳后停留阅读。"
+    }
+  ],
+  "labels": [
+    {"id": "overloadHeading", "text": "同时开始，处处打断"},
+    {"id": "chooseHeading", "text": "先选最重要的一件"},
+    {"id": "focusHeading", "text": "把连续时间留给它"},
+    {"id": "mainTask", "text": "写方案"},
+    {"id": "messageTask", "text": "回消息"},
+    {"id": "researchTask", "text": "查资料"}
+  ]
+}

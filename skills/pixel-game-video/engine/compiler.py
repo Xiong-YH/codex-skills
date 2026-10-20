@@ -176,6 +176,8 @@ def compile_project(project_root, skill_root=None, *, write=False):
     component_spec.loader.exec_module(component_validator)
     for index, shot in enumerate(shots):
         scene = require("scenes", shot["scene"])
+        if project['renderBackend'] not in scene.get('backends', ['canvas']):
+            raise ValueError(f"{shot['scene']} is not available for renderBackend={project['renderBackend']}")
         shot["contentStage"] = scene.get("contentStage", content_stage)
         shot["actor"] = shot.get("actor")
         if shot["actor"] is not None:
@@ -261,6 +263,8 @@ def compile_project(project_root, skill_root=None, *, write=False):
             intervals.setdefault(key, []).append((start, end))
             motion.update(startFrame=start, endFrame=end)
 
+    from .backend_caps import validate as validate_backend
+    validate_backend(project, shots, progress=progress)
     cues = inputs["text.json"]["cues"]
     unique((c["id"] for c in cues), "text cues")
     subtitles = []
@@ -315,13 +319,34 @@ def compile_project(project_root, skill_root=None, *, write=False):
         relative = path.relative_to(root).as_posix()
         cue.update(file=relative, frame=frame, **info)
         source_hashes[relative] = info['sha256']
-    used = {"project": project, "shots": shots, "audio": audio, 'progress': progress}
+    bgm = inputs['audio.json'].get('bgm')
+    if bgm:
+        if project['audioMode'] == 'silent':
+            raise ValueError('BGM requires a non-silent audioMode')
+        start, end = resolve(bgm.pop('at')), resolve(bgm.pop('end'))
+        if not 0 <= start < end <= cursor:
+            raise ValueError('BGM interval must stay inside the video')
+        if bgm['fadeInFrames'] + bgm['fadeOutFrames'] > end - start:
+            raise ValueError('BGM fades must fit inside its interval')
+        path, info = narration_module.inspect_clip(root, bgm['file'], label='BGM')
+        trim_sample = round(bgm['trimStartSeconds'] * 48000)
+        available = info['samples'] - trim_sample
+        length = round(end / project['fps'] * 48000) - round(start / project['fps'] * 48000)
+        if available <= 0:
+            raise ValueError('BGM trim starts beyond its audio source')
+        if not bgm['loop'] and available < length:
+            raise ValueError('BGM source is too short; enable loop or shorten its interval')
+        relative = path.relative_to(root).as_posix()
+        bgm.update(file=relative, frame=start, endFrame=end, **info)
+        source_hashes[relative] = info['sha256']
+    used = {"project": project, "shots": shots, "audio": audio, 'progress': progress, 'bgm': bgm}
     runtime_hashes = {name: file_hash(skill / name) for name in runtime_files(skill, used)}
     digest = hashlib.sha256(json.dumps({"inputs": source_hashes, "runtime": runtime_hashes}, sort_keys=True).encode()).hexdigest()
     resolved = {"contractVersion": 1, "inputHash": digest, "project": project,
                 "contentStage": content_stage,
                 "durationFrames": cursor, "durationSeconds": cursor / project["fps"],
                 "shots": shots, "events": events, "cues": cues, "audio": audio, "narration": narration, "media": media,
+                "bgm": bgm,
                 "mix": {"speechDuck": inputs["audio.json"]["speechDuck"]}}
     if progress:
         resolved['progress'] = progress

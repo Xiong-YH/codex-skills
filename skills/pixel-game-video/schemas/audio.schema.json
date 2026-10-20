@@ -47,6 +47,98 @@
       "title": "AudioCue",
       "type": "object"
     },
+    "Bgm": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "default": "bgm",
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "file": {
+          "minLength": 1,
+          "title": "File",
+          "type": "string"
+        },
+        "at": {
+          "$ref": "#/$defs/FrameRef"
+        },
+        "end": {
+          "$ref": "#/$defs/FrameRef"
+        },
+        "gain": {
+          "default": 0.18,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Gain",
+          "type": "number"
+        },
+        "loop": {
+          "default": true,
+          "title": "Loop",
+          "type": "boolean"
+        },
+        "trimStartSeconds": {
+          "default": 0.0,
+          "minimum": 0,
+          "title": "Trimstartseconds",
+          "type": "number"
+        },
+        "fadeInFrames": {
+          "default": 60,
+          "minimum": 0,
+          "title": "Fadeinframes",
+          "type": "integer"
+        },
+        "fadeOutFrames": {
+          "default": 90,
+          "minimum": 0,
+          "title": "Fadeoutframes",
+          "type": "integer"
+        },
+        "speechDuck": {
+          "default": 0.25,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Speechduck",
+          "type": "number"
+        },
+        "title": {
+          "default": "",
+          "title": "Title",
+          "type": "string"
+        },
+        "artist": {
+          "default": "",
+          "title": "Artist",
+          "type": "string"
+        },
+        "sourceUrl": {
+          "default": "",
+          "title": "Sourceurl",
+          "type": "string"
+        },
+        "licenseUrl": {
+          "default": "",
+          "title": "Licenseurl",
+          "type": "string"
+        },
+        "changes": {
+          "default": "",
+          "title": "Changes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "file",
+        "at",
+        "end"
+      ],
+      "title": "Bgm",
+      "type": "object"
+    },
     "FrameRef": {
       "additionalProperties": false,
       "properties": {
@@ -124,6 +216,17 @@
       "minimum": 0,
       "title": "Speechduck",
       "type": "number"
+    },
+    "bgm": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Bgm"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
     }
   },
   "title": "Audio",

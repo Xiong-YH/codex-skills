@@ -160,8 +160,27 @@ class Narration(Contract):
     gain: float = Field(default=0.9, ge=0, le=1)
 
 
+class Bgm(Contract):
+    id: str = Field(default="bgm", pattern=r"^[A-Za-z][A-Za-z0-9_.-]*$", max_length=100)
+    file: str = Field(min_length=1)
+    at: Ref
+    end: Ref
+    gain: float = Field(default=0.18, ge=0, le=1)
+    loop: bool = True
+    trimStartSeconds: float = Field(default=0, ge=0)
+    fadeInFrames: int = Field(default=60, ge=0)
+    fadeOutFrames: int = Field(default=90, ge=0)
+    speechDuck: float = Field(default=0.25, ge=0, le=1)
+    title: str = ""
+    artist: str = ""
+    sourceUrl: str = ""
+    licenseUrl: str = ""
+    changes: str = ""
+
+
 class Plan(Contract):
     schemaVersion: Literal[1] = 1
+    renderBackend: Literal["canvas", "remotion"] = "canvas"
     id: str
     title: str = Field(min_length=1)
     output: Output
@@ -172,6 +191,7 @@ class Plan(Contract):
     text: list[TextPlan] = Field(min_length=1)
     audio: list[Sound] = []
     narration: list[Narration] = []
+    bgm: Bgm | None = None
     speechDuck: float = Field(default=0.28, ge=0, le=1)
 
 

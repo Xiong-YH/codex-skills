@@ -4,7 +4,6 @@ from pathlib import Path
 
 
 SCENE_SCRIPTS = {
-    'scenes.document-highlight.v1': ['scenes/document-highlight.js'],
     'scenes.cache-journey.v1': ['library/computing.js', 'scenes/cache-journey.js'],
     'scenes.cache-adventure.v1': ['library/computing.js', 'library/actor-performance.js',
                                   'motion/staging.js', 'scenes/cache-journey.js', 'scenes/cache-adventure.js'],
@@ -92,10 +91,18 @@ def javascript_files(skill, resolved):
 
 def runtime_files(skill, resolved):
     skill = Path(skill)
-    files = set(javascript_files(skill, resolved))
-    files.update(path.relative_to(skill).as_posix() for path in (skill / 'engine').glob('*.py'))
-    files.update({'engine/player.html', 'engine/render_frames.cjs', 'scripts/video.py',
-                  'requirements.txt', 'package.json', 'modules/library/prepare.py',
+    remotion = resolved['project'].get('renderBackend', 'canvas') == 'remotion'
+    files = set() if remotion else set(javascript_files(skill, resolved))
+    files.update(path.relative_to(skill).as_posix() for path in (skill / 'engine').glob('*.py')
+                 if remotion or path.name != 'remotion_backend.py')
+    if remotion:
+        backend_root = skill / 'engine/remotion'
+        files.update(path.relative_to(skill).as_posix() for path in backend_root.rglob('*')
+                     if path.is_file() and not set(path.relative_to(backend_root).parts) &
+                     {'node_modules', '.cache', '.remotion', 'build', 'outputs', '__pycache__'})
+    else:
+        files.update({'engine/player.html', 'engine/render_frames.cjs', 'package.json'})
+    files.update({'scripts/video.py', 'requirements.txt', 'modules/library/prepare.py',
                   'modules/scenes/contract.py', 'modules/scenes/performance.py', 'modules/components/contract.py',
                   'modules/audio/narration.py'})
     # Catalogs are validation contracts; lock these even when only one entry is selected.
@@ -119,6 +126,8 @@ def runtime_files(skill, resolved):
     if resolved['project'].get('audioMode') != 'silent':
         files.update('modules/audio/' + name for name in
                      ('mixer.py', 'palette.py', 'game_audio.py', 'arcade.py'))
+        if resolved.get('bgm'):
+            files.add('modules/audio/music.py')
         manifest = 'modules/audio/assets/arcade-motion/manifest.json'
         files.add(manifest)  # palette reads the bank's semantic metadata at import time.
         sounds = {cue['sound'] for cue in resolved.get('audio', [])}

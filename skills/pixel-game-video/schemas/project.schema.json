@@ -16,6 +16,15 @@
       "title": "Authoringmode",
       "type": "string"
     },
+    "renderBackend": {
+      "default": "canvas",
+      "enum": [
+        "canvas",
+        "remotion"
+      ],
+      "title": "Renderbackend",
+      "type": "string"
+    },
     "title": {
       "maxLength": 120,
       "minLength": 1,
