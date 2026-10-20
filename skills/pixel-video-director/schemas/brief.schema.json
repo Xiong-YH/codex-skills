@@ -1,4 +1,30 @@
 {
+  "$defs": {
+    "SingleNarratorPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "narrator": {
+          "minLength": 1,
+          "title": "Narrator",
+          "type": "string"
+        },
+        "hiddenCharacterNames": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Hiddencharacternames",
+          "type": "array"
+        }
+      },
+      "required": [
+        "narrator",
+        "hiddenCharacterNames"
+      ],
+      "title": "SingleNarratorPolicy",
+      "type": "object"
+    }
+  },
   "additionalProperties": false,
   "properties": {
     "schemaVersion": {
@@ -43,6 +69,17 @@
       },
       "title": "Constraints",
       "type": "array"
+    },
+    "singleNarrator": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SingleNarratorPolicy"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
     }
   },
   "required": [

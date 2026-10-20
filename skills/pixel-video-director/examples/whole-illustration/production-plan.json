@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "id": "whole-illustration-plan",
+  "title": "完整情境插画｜通知干扰到项目驱动",
+  "output": {
+    "fps": 60,
+    "width": 1920,
+    "height": 1080,
+    "nativeWidth": 320,
+    "nativeHeight": 180
+  },
+  "style": "style.pixel-study.v1",
+  "seed": 19,
+  "audioMode": "narration+sfx",
+  "shots": [
+    {
+      "id": "s1",
+      "actor": null,
+      "objects": [],
+      "motions": [],
+      "replacement": {
+        "file": "media/whole-illustration.mp4",
+        "kind": "video",
+        "fit": "cover"
+      }
+    },
+    {
+      "id": "s6",
+      "actor": null,
+      "objects": [],
+      "motions": [],
+      "background": {
+        "file": "media/route-atlas-v1.png",
+        "kind": "image",
+        "dim": 0.26
+      }
+    }
+  ],
+  "text": [
+    {
+      "cueId": "c1_1",
+      "role": "subtitle",
+      "y": 0.885
+    },
+    {
+      "cueId": "c1_2",
+      "role": "subtitle",
+      "y": 0.885
+    },
+    {
+      "cueId": "c6_1",
+      "role": "subtitle",
+      "y": 0.885
+    },
+    {
+      "cueId": "intro_title",
+      "role": "title",
+      "x": 0.5,
+      "y": 0.105
+    },
+    {
+      "cueId": "focus_principle",
+      "role": "label",
+      "x": 0.82,
+      "y": 0.21
+    }
+  ],
+  "audio": [
+    {
+      "id": "sfx_s6_1",
+      "sound": "arcade-select",
+      "at": {
+        "event": "s6.e1"
+      },
+      "level": 0.23,
+      "x": 0.5,
+      "variant": 0
+    },
+    {
+      "id": "sfx_s6_2",
+      "sound": "arcade-select",
+      "at": {
+        "event": "s6.e2"
+      },
+      "level": 0.23,
+      "x": 0.5,
+      "variant": 0
+    },
+    {
+      "id": "sfx_s6_3",
+      "sound": "arcade-reward",
+      "at": {
+        "event": "s6.e3"
+      },
+      "level": 0.3,
+      "x": 0.5,
+      "variant": 0
+    },
+    {
+      "id": "overload",
+      "sound": "arcade-reject",
+      "at": {
+        "event": "s1.hold_head"
+      },
+      "level": 0.12,
+      "x": 0.5,
+      "variant": 0
+    },
+    {
+      "id": "focus-return",
+      "sound": "arcade-select",
+      "at": {
+        "event": "s1.focus"
+      },
+      "level": 0.12,
+      "x": 0.5,
+      "variant": 0
+    }
+  ],
+  "narration": [
+    {
+      "id": "voice_c1_1",
+      "file": "media/s1-c1.wav",
+      "at": {
+        "event": "s1.speech1"
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice_c1_2",
+      "file": "media/s1-c2.wav",
+      "at": {
+        "event": "s1.speech2"
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice_c6_1",
+      "file": "media/s6-c1.wav",
+      "at": {
+        "event": "s6.speech1"
+      },
+      "gain": 0.9
+    }
+  ],
+  "speechDuck": 0.25
+}

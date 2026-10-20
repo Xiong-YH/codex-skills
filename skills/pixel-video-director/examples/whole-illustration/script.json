@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "cues": [
+    {
+      "id": "c1_1",
+      "text": "AI全栈路线怎么走？",
+      "phrases": [
+        "AI quan zhan lu xian zen me zou ？"
+      ],
+      "meaning": "AI全栈路线怎么走？"
+    },
+    {
+      "id": "c1_2",
+      "text": "拿一个知识库问答项目，边做边学。",
+      "phrases": [
+        "na yi ge zhi shi ku wen da xiang mu ， bian zuo bian xue 。"
+      ],
+      "meaning": "拿一个知识库问答项目，边做边学。"
+    },
+    {
+      "id": "c6_1",
+      "text": "每学一层，就让项目多跑通一步。",
+      "phrases": [
+        "mei xue yi ceng ， jiu rang xiang mu duo pao tong yi bu 。"
+      ],
+      "meaning": "每学一层，就让项目多跑通一步。"
+    },
+    {
+      "id": "intro_title",
+      "text": "AI 全栈路线怎么走？",
+      "phrases": [],
+      "meaning": "影片主题"
+    },
+    {
+      "id": "focus_principle",
+      "text": "先做通一个项目",
+      "phrases": [],
+      "meaning": "收拢学习目标"
+    }
+  ],
+  "labels": [
+    {
+      "id": "l1",
+      "text": "AI APPLICATION DEVELOPER"
+    },
+    {
+      "id": "l2",
+      "text": "AI 全栈路线\n怎么走？"
+    },
+    {
+      "id": "l3",
+      "text": "用一个知识库问答项目，贯穿整条路线"
+    },
+    {
+      "id": "l4",
+      "text": "01 前端｜从网页基础到 React"
+    },
+    {
+      "id": "l5",
+      "text": "问答页"
+    },
+    {
+      "id": "l6",
+      "text": "能交互"
+    },
+    {
+      "id": "l7",
+      "text": "HTML / CSS / JavaScript"
+    },
+    {
+      "id": "l8",
+      "text": "结构 · 样式 · 交互"
+    },
+    {
+      "id": "l9",
+      "text": "React + TypeScript"
+    },
+    {
+      "id": "l10",
+      "text": "输入问题 · 展示回答"
+    },
+    {
+      "id": "l11",
+      "text": "Git + 浏览器调试"
+    },
+    {
+      "id": "l12",
+      "text": "保存版本 · 解决报错"
+    },
+    {
+      "id": "l13",
+      "text": "02 后端｜Python + FastAPI + SQL"
+    },
+    {
+      "id": "l14",
+      "text": "页面"
+    },
+    {
+      "id": "l15",
+      "text": "发起请求"
+    },
+    {
+      "id": "l16",
+      "text": "后端接口"
+    },
+    {
+      "id": "l17",
+      "text": "鉴权 / 错误处理"
+    },
+    {
+      "id": "l18",
+      "text": "数据库"
+    },
+    {
+      "id": "l19",
+      "text": "保存 / 查询"
+    },
+    {
+      "id": "l20",
+      "text": "04 上线｜用结果检验作品"
+    },
+    {
+      "id": "l21",
+      "text": "回答是否可靠"
+    },
+    {
+      "id": "l22",
+      "text": "固定测试集 · 检查引用与失败"
+    },
+    {
+      "id": "l23",
+      "text": "延迟与成本是否可控"
+    },
+    {
+      "id": "l24",
+      "text": "记录响应时间 · 跟踪调用费用"
+    },
+    {
+      "id": "l25",
+      "text": "部署后是否可用"
+    },
+    {
+      "id": "l26",
+      "text": "日志 · 异常处理 · 真实试用"
+    },
+    {
+      "id": "l27",
+      "text": "把知识，连成一条能运行的链"
+    },
+    {
+      "id": "l28",
+      "text": "01"
+    },
+    {
+      "id": "l29",
+      "text": "前端"
+    },
+    {
+      "id": "l30",
+      "text": "02"
+    },
+    {
+      "id": "l31",
+      "text": "后端"
+    },
+    {
+      "id": "l32",
+      "text": "03"
+    },
+    {
+      "id": "l33",
+      "text": "AI"
+    },
+    {
+      "id": "l34",
+      "text": "04"
+    },
+    {
+      "id": "l35",
+      "text": "上线"
+    },
+    {
+      "id": "l36",
+      "text": "项目驱动 · 逐层交付"
+    },
+    {
+      "id": "l37",
+      "text": "学一层，跑通一步"
+    },
+    {
+      "id": "l38",
+      "text": "页面 → 数据 → 智能 → 真实用户"
+    },
+    {
+      "id": "l39",
+      "text": "提示词"
+    },
+    {
+      "id": "l40",
+      "text": "流式输出"
+    },
+    {
+      "id": "l41",
+      "text": "资料检索"
+    },
+    {
+      "id": "l42",
+      "text": "有私有资料，再加 RAG"
+    }
+  ]
+}

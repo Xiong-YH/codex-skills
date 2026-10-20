@@ -2,13 +2,23 @@
 
 只交付视觉方案时，可先按 [视觉分镜与工程映射](visual-storyboard.md) 输出设计稿，不强制创建四份 JSON 或调用基础层。用户要求制作、交接或继续已有工程时，以下源文件与时间规则保持唯一；设计稿不新增模型字段或运行时间线。
 
-人物按镜头显式选择：production-plan 中 `actor:null` 表示不出镜。场景、物体与景别可以主导画面，不要求主角常驻。
+人物按镜头显式选择：production-plan 中 `actor:null` 表示不叠加库人物，完整插画或片段内部仍可自带人物。不是所有画面都要有小人；场景、物体与组件可以独立主导画面。
 
-先保留用户指定的人物职责。用户要求侧边站立口播时，稳定讲述使用原地站位，按已实现能力选择表情；Canvas 通用人物层可按事件切换 V3 离散姿态，Remotion 当前仍使用静态基准图，音素嘴型/眨眼尚未接入。站立不代表锁死屏幕坐标；强转场可让整个房间、物体和人物统一改变景别，人物自然进出视野。连续背景不可裁成局部缩放窗口；字幕保持独立。局部交接只适用于独立图文或真实面板。延续本项目时，将 [已确认的表达方向](computing-voiceover.md) 中适用的约束带入 brief；具体样例不能覆盖用户的新要求。
+先区分讲述者与插图角色：production-plan.shots[].actor 是侧边讲述者槽位；“第一镜放配角”只决定画面内容，不自动更换讲述者或给配角分配台词。配角通过项目插图/场景素材出现，不自动复制成第二个侧边主持人。角色 ID 和库内姓名供内部选材，不能自动生成姓名条。计算机口播系列的当前规则按 [已确认的表达方向](computing-voiceover.md) 带入 brief；历史样例不能覆盖新要求。
+
+该系列全片由一个主角承担旁白，包括开场疑问；口播期间保持同一身体、头部、手臂与站位，只做局部开闭嘴。当前整图姿态执行器不能满足局部口型要求；需要同一底图的开闭嘴素材与实际适配，不能用四五种全身动作替代。站位固定不限制完整场景的合理运镜；连续背景不可裁成局部缩放窗口，字幕和顶部矩形进度条保持独立。
+
+系列工程在 brief.singleNarrator 声明 narrator 素材 ID 和 hiddenCharacterNames。check/handoff 会拒绝侧边讲述者换成配角、全身 performance 序列，以及字幕/标签泄露内部姓名。此结构校验不能替代对插图烘焙文字、真实声源和局部嘴型的视听检查。Canvas 支持剧情用途的事件姿态与顶部进度，Remotion 尚不支持这两项，会在交接校验时拒绝；Remotion 当前人物使用静态基准图，局部嘴型尚未接入。
+
+在分镜 `visual.subject/action` 写明口播讲述、情境演绎或无人镜头的职责。本系列有人的情境插画按 [主角优先](character-illustration.md#插画选角主角优先) 选角，多人或明确条件需要时再安排配角，情境角色不必跟随旁白张嘴；插图集合只参考风格与演绎方法，不作为必用模板。完整人物与场景先成立，再制作情境关键姿态；完整插画按 replacement 接入，见 [情境插画](character-illustration.md)。拆头拼身试样已撤回。
+
+本系列先按 [片段分类](character-illustration.md#先分片段类别再安排声音) 区分普通内容与特殊插画，声音独立安排。选为插画的镜头须是整屏完整情境，不同时安排侧边主持人、标题栏或右侧配图窗口，详见 [镜头形态与验收](character-illustration.md#本系列的插画镜头整屏情境)。即使 production-plan 已写 `actor:null`，也须检查 replacement 媒体内部的最终构图，避免把主持人和侧栏预先烘焙进视频后绕过结构校验。普通操作演示使用完整画面或关闭主持人，不因此成为插画。
+
+插画的 [具体配套讲解](character-illustration.md#插画必须有具体配套讲解) 写入 script.cues，并在 storyboard 放置对应字幕事件、production-plan.text 指定字幕角色。`sfx-only` 或无人声只影响音频，不得据此删除插画讲解字幕；画面含义、文案和阅读时段要能相互对应，不新增模型字段。
 
 四个 JSON 源文件是可独立继续的阶段产物；JSON Schema 在 [schemas/](../schemas/)，运行合同源在 [models.py](../scripts/directorlib/models.py)。`python scripts/director.py check PROJECT` 检查格式与交叉引用。
 
-脚本阶段先读 [视觉表达方法](visual-system.md)。新分镜用 storyboard.shots[].visual 记录表达决定，components 记录组件结构/位置/事件，组件文字仍引用 script.labels。production-plan 的 background/replacement 选择项目素材，操作见 [素材替换](media-replacement.md)。旧工程 visual 可缺省，check 会列出缺项；新模板空值会阻止交接。
+脚本阶段先读 [视觉表达方法](visual-system.md)，对用户交付按 [脚本标注](visual-storyboard.md#脚本中的呈现类型标注) 分别写明片段类别、画面呈现和声音安排，不将旁白或组件与插画混作同层级类别；本系列插画按 [片段设计要求](character-illustration.md#从脚本到插画片段) 写出可制作的状态、动作与承接。新分镜用 storyboard.shots[].visual 记录表达决定，components 记录组件结构/位置/事件，组件文字仍引用 script.labels。production-plan 的 background/replacement 选择项目素材，操作见 [素材替换](media-replacement.md)。旧工程 visual 可缺省，check 会列出缺项；新模板空值会阻止交接。
 
 | 文件 | 唯一拥有的内容 | 稳定标识 |
 | --- | --- | --- |

@@ -33,13 +33,29 @@ flowchart TD
 
 Remotion 接在基础执行层：导演与 VideoSpec 保持原有职责，`renderBackend=remotion` 选择原生 React 场景，由同一份编译时间线驱动。当前试作支持书桌场景、整体相机轨迹和书页遮挡转场，尚未迁移 Canvas 的组件与其他场景。用 [12 秒书桌样例](skills/pixel-video-director/examples/remotion-focus-desk/README.md) 进入 Studio，安装与边界见 [Remotion 说明](skills/pixel-game-video/references/remotion.md)。
 
+## 要求与经验入口
+
+制作、续作或复盘先读 [制作总则与经验入口](skills/pixel-game-video/references/production-principles.md)，再按范围读取下列记录。两个视频 skill 均已接入此入口。
+
+| 记录 | 管什么 |
+| --- | --- |
+| [仓库维护约定](AGENTS.md) | 文件归属、技能独立与维护验证 |
+| [制作总则](skills/pixel-game-video/references/production-principles.md) | 通用制作原则、要求层级与经验沉淀方法 |
+| [计算机口播系列偏好](skills/pixel-video-director/references/computing-voiceover.md) | 这个系列的画风、人物职责、背景、叙事与声音方向 |
+| [情境插画参考与创作源](skills/pixel-video-director/references/character-illustration.md) | 完整情境插画、文案改编、原图与提示词；[基础层看图与运行指南](skills/pixel-game-video/modules/scenes/whole-illustration.md) |
+| 每片的 brief.json / review.json | 本片目标、时长、约束及实际审片证据 |
+| [迭代记录](skills/pixel-game-video/references/iteration-history.md) | 历次反馈、有效方法、失败和撤回原因，保留各自适用范围 |
+
+新经验记录现象、结论、范围、状态与证据；更新当前生效的要求，同时保留历史。用户的新要求优先，单片示例不自动升级为通用默认，历史认可不代替本次验证。
+
 ## 当前交付基线
 
 | 维度 | 已收纳内容与边界 |
 | --- | --- |
 | 视觉方法与组件 | 脚本阶段明确解释任务；12类组件覆盖身份、数值、对比、标注、章节、流程、时间轴、清单、层级、条形比较、代码与结论，可按主次组合 |
-| 可变背景与片段替换 | 风格基调＋样板；项目图片/视频按镜头选择，素材变更参与哈希与导出，默认保留字幕和旁白时序 |
+| 可变背景与片段替换 | 按内容先设计空间与尺度，再复用或制作项目素材；样板只作质感参考，已有房间不构成场所菜单。素材变更参与哈希与导出，默认保留字幕和旁白时序 |
 | 风格与人物 | 精致偏暗的像素画面；[已确认 V3 人物库](skills/pixel-game-video/modules/library/CHARACTERS.md)保留无围巾主角、三位差异化像素配角和一位半身专题配角，含人设与30张动作参考；Canvas 通用人物层可按事件切换姿态，Remotion 当前使用静态基准图 |
+| 完整情境插画 | 7张完整场景姿态、生成提示词与独立样例；拆头试样已撤回，新插画仍待用户审美反馈 |
 | 转场 | 12种方法：9种通用配方＋3种空间设计；后三种已在竞赛场景落地，尚非通用recipe |
 | 节奏与构图 | 定位→主运动→落稳→阅读；全画幅统一镜头、卡片保持固有比例，按旁白与信息量留停顿 |
 | 游戏反馈 | 焦点锁定、触点回弹、资源转移、状态确认、阶段进度、任务结算，共6类 |
@@ -51,7 +67,9 @@ Remotion 接在基础执行层：导演与 VideoSpec 保持原有职责，`rende
 
 设计转场从 [转场库](skills/pixel-game-video/modules/motion/TRANSITIONS.md) 进入：按交接关系查已实现配方和参考设计，明确实现状态，再安排动作与阅读节奏。
 
-新脚本先按 [视觉表达方法](skills/pixel-video-director/references/visual-system.md) 选择场景或组件，再安排主体变化。[组件体系](skills/pixel-game-video/modules/components/GUIDE.md) 维护共同风格下的十二类信息结构；[背景基调与样板](skills/pixel-game-video/modules/style/ART-DIRECTION.md) 用于创作新素材；[按镜头替换](skills/pixel-video-director/references/media-replacement.md) 提供可校验的导入入口。可运行源示例在 [基础五类](skills/pixel-video-director/examples/component-system/brief.json) 与 [新增七类及组合](skills/pixel-video-director/examples/component-expansion/brief.json)。
+新脚本先按 [视觉表达方法](skills/pixel-video-director/references/visual-system.md) 选择场景或组件，再安排主体变化。[组件体系看图指南](skills/pixel-game-video/modules/components/GUIDE.md) 提供十二类信息结构的实渲染总览、逐类大图、状态对照与组合参考，图片对应的独立示例随基础 skill 分发；[背景基调与样板](skills/pixel-game-video/modules/style/ART-DIRECTION.md) 用于创作新素材；[按镜头替换](skills/pixel-video-director/references/media-replacement.md) 提供可校验的导入入口。导演创作源示例在 [基础五类](skills/pixel-video-director/examples/component-system/brief.json) 与 [新增七类及组合](skills/pixel-video-director/examples/component-expansion/brief.json)。
+
+[完整插画进入视频](skills/pixel-game-video/modules/scenes/whole-illustration.md) 保留完整场景状态对照与8.4秒独立样例。导演层维护镜头事件、插画原图与提示词，编排脚本生成片段、同步脚本生成基础层快照并记录哈希；基础层按既有 replacement 合同运行，核心入口只路由。旧拆头拼身试样撤回，不继续作为推荐案例。
 
 增强局部游戏感从 [游戏反馈细节库](skills/pixel-game-video/modules/scenes/GAME_FEEL.md) 进入：收纳六类反馈及已获认可的竞赛视频实例，关联触发状态、动作、声音和验收；与转场分开维护。
 
