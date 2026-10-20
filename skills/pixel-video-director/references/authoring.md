@@ -10,11 +10,15 @@
 
 系列工程在 brief.singleNarrator 声明 narrator 素材 ID 和 hiddenCharacterNames。check/handoff 会拒绝侧边讲述者换成配角、全身 performance 序列，以及字幕/标签泄露内部姓名。此结构校验不能替代对插图烘焙文字、真实声源和局部嘴型的视听检查。Canvas 支持剧情用途的事件姿态与顶部进度，Remotion 尚不支持这两项，会在交接校验时拒绝；Remotion 当前人物使用静态基准图，局部嘴型尚未接入。
 
-在分镜 `visual.subject/action` 写明口播讲述、情境演绎或无人镜头的职责。情境插图按剧情选择主角或配角，情境角色不必跟随旁白张嘴；插图集合只参考风格与演绎方法，不作为必用模板。完整人物与场景先成立，再制作情境关键姿态；完整插画按 replacement 接入，见 [情境插画](character-illustration.md)。拆头拼身试样已撤回。
+在分镜 `visual.subject/action` 写明口播讲述、情境演绎或无人镜头的职责。本系列有人的情境插画按 [主角优先](character-illustration.md#插画选角主角优先) 选角，多人或明确条件需要时再安排配角，情境角色不必跟随旁白张嘴；插图集合只参考风格与演绎方法，不作为必用模板。完整人物与场景先成立，再制作情境关键姿态；完整插画按 replacement 接入，见 [情境插画](character-illustration.md)。拆头拼身试样已撤回。
+
+本系列先按 [片段分类](character-illustration.md#先分片段类别再安排声音) 区分普通内容与特殊插画，声音独立安排。选为插画的镜头须是整屏完整情境，不同时安排侧边主持人、标题栏或右侧配图窗口，详见 [镜头形态与验收](character-illustration.md#本系列的插画镜头整屏情境)。即使 production-plan 已写 `actor:null`，也须检查 replacement 媒体内部的最终构图，避免把主持人和侧栏预先烘焙进视频后绕过结构校验。普通操作演示使用完整画面或关闭主持人，不因此成为插画。
+
+插画的 [具体配套讲解](character-illustration.md#插画必须有具体配套讲解) 写入 script.cues，并在 storyboard 放置对应字幕事件、production-plan.text 指定字幕角色。`sfx-only` 或无人声只影响音频，不得据此删除插画讲解字幕；画面含义、文案和阅读时段要能相互对应，不新增模型字段。
 
 四个 JSON 源文件是可独立继续的阶段产物；JSON Schema 在 [schemas/](../schemas/)，运行合同源在 [models.py](../scripts/directorlib/models.py)。`python scripts/director.py check PROJECT` 检查格式与交叉引用。
 
-脚本阶段先读 [视觉表达方法](visual-system.md)。新分镜用 storyboard.shots[].visual 记录表达决定，components 记录组件结构/位置/事件，组件文字仍引用 script.labels。production-plan 的 background/replacement 选择项目素材，操作见 [素材替换](media-replacement.md)。旧工程 visual 可缺省，check 会列出缺项；新模板空值会阻止交接。
+脚本阶段先读 [视觉表达方法](visual-system.md)，对用户交付按 [脚本标注](visual-storyboard.md#脚本中的呈现类型标注) 分别写明片段类别、画面呈现和声音安排，不将旁白或组件与插画混作同层级类别；本系列插画按 [片段设计要求](character-illustration.md#从脚本到插画片段) 写出可制作的状态、动作与承接。新分镜用 storyboard.shots[].visual 记录表达决定，components 记录组件结构/位置/事件，组件文字仍引用 script.labels。production-plan 的 background/replacement 选择项目素材，操作见 [素材替换](media-replacement.md)。旧工程 visual 可缺省，check 会列出缺项；新模板空值会阻止交接。
 
 | 文件 | 唯一拥有的内容 | 稳定标识 |
 | --- | --- | --- |

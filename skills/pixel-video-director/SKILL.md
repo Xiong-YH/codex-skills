@@ -7,12 +7,12 @@ description: 把创意或既有文案转成像素视频的可见动作、构图�
 
 把观点设计成观众看得懂的画面，再写入可编辑工程、调用基础 skill 出片，并按证据回改。用户只要视觉方案或分镜时，交付设计即可；需要制作时再进入工程与基础依赖流程。
 
-插图集合仅供参考风格与演绎方法，是否使用由脚本决定；不照搬其故事结构、镜头顺序或构图。每镜可有人或无人；主角可承担有说话感的口播，情境插画按剧情选主角或配角，具体边界见 [人物出镜与参考用法](references/character-illustration.md)。
+插图集合仅供参考风格与演绎方法，是否使用由脚本决定；不照搬其故事结构、镜头顺序或构图。每镜可有人或无人。延续本计算机口播系列时，先区分“普通内容片段”和“插画（特殊片段）”：普通内容可用纯画面＋组件或主角讲述；插画须单独设计为铺满画幅的完整情境，主要图片元素表达含义，同时必须配套具体讲解，无人声时保留讲解字幕。插画人物优先由主角小棕承担；多人情境或脚本明确的身份、剧情条件需要时再选配角。有无旁白另行安排，不把全屏、有人物或正常操作演示直接改称插画。分类、选角、讲解与制作验收见 [插画规范](references/character-illustration.md)。
 
 | 当前任务 | 读取 | 执行产物 |
 | --- | --- | --- |
 | 开始制作、续作或复盘 | 按 [基础依赖](references/handoff.md) 定位其 `references/production-principles.md`，再读当前项目要求 | 确认适用的通用原则、系列偏好和单片限制；新经验回到所属记录 |
-| 新创意、脚本或分镜 | [创作合同](references/authoring.md)、[视觉表达方法](references/visual-system.md)、[视觉叙事](references/visual-storytelling.md) | 先确定信息关系、组件/场景和主体变化，按范围交付分镜；需要制作时写四份创作源 |
+| 新创意、脚本或分镜 | [创作合同](references/authoring.md)、[视觉表达方法](references/visual-system.md)、[视觉叙事](references/visual-storytelling.md)、[脚本呈现标注](references/visual-storyboard.md#脚本中的呈现类型标注)；本计算机口播系列另读 [情境插画规范](references/character-illustration.md) | 分别标注片段类别、画面呈现和声音安排；插画作为特殊片段单独设计整屏完整情境，不把整段普通讲解改标为插画；需要制作时写四份创作源 |
 | 只做画面方案、加强画面感或局部接镜 | [视觉表达方法](references/visual-system.md)、[视觉叙事](references/visual-storytelling.md)、[视觉分镜与工程映射](references/visual-storyboard.md) | 交付主体状态变化、构图光影、运镜、前后承接与素材需求；已有工程沿用其源文件 |
 | 背景设计、生成、用户素材或局部替换 | [视觉表达方法](references/visual-system.md)、基础层 `modules/style/ART-DIRECTION.md`、[素材替换](references/media-replacement.md) | 先按内容构思空间与尺度，再复用或制作素材；样板只作质感参考 |
 | 选人物、人设或动作表演 | 按基础依赖定位 `modules/library/CHARACTERS.md` | 当前五人角色分工、动作参考与半身仿真人使用范围；能力状态以素材库为准 |
