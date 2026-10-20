@@ -8,6 +8,11 @@ class Contract(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True, allow_inf_nan=False)
 
 
+class SingleNarratorPolicy(Contract):
+    narrator: str = Field(min_length=1)
+    hiddenCharacterNames: list[str] = Field(min_length=1)
+
+
 class Brief(Contract):
     schemaVersion: Literal[1] = 1
     id: str = Field(min_length=1)
@@ -16,6 +21,7 @@ class Brief(Contract):
     takeaway: str = Field(min_length=1)
     durationRangeSeconds: list[float] = Field(min_length=2, max_length=2)
     constraints: list[str] = []
+    singleNarrator: SingleNarratorPolicy | None = None
 
 
 class Cue(Contract):

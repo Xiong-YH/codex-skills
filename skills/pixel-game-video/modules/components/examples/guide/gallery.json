@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "title": "12 类像素信息组件",
+  "note": "Screenshots from the current engine. Neutral background is used only for component comparison, not as a default video setting. State strips are sampled frames, not animation playback evidence.",
+  "entries": [
+    {
+      "id": "identity",
+      "title": "身份卡",
+      "detail": "名称、图像与简要特征",
+      "shotId": "identity",
+      "localFrame": 215,
+      "states": [],
+      "group": "component"
+    },
+    {
+      "id": "metric",
+      "title": "数值卡",
+      "detail": "从 0 到 3，终值保持",
+      "shotId": "metric",
+      "localFrame": 215,
+      "states": [
+        {
+          "frame": 30,
+          "label": "起点 · 0 层"
+        },
+        {
+          "frame": 80,
+          "label": "变化中"
+        },
+        {
+          "frame": 215,
+          "label": "终值 · 3 层"
+        }
+      ],
+      "group": "component"
+    },
+    {
+      "id": "comparison",
+      "title": "对比组",
+      "detail": "同构对照，可嵌入前镜真实快照",
+      "shotId": "comparison",
+      "localFrame": 215,
+      "states": [],
+      "group": "component"
+    },
+    {
+      "id": "annotation",
+      "title": "指向标注",
+      "detail": "短标签与引线连接到实物",
+      "shotId": "annotation",
+      "localFrame": 215,
+      "states": [],
+      "group": "component"
+    },
+    {
+      "id": "chapter",
+      "title": "章节标题",
+      "detail": "编号、主题与内容承诺",
+      "shotId": "chapter",
+      "localFrame": 215,
+      "states": [],
+      "group": "component"
+    },
+    {
+      "id": "flow",
+      "title": "流程链",
+      "detail": "依次点亮当前步骤，结果保持",
+      "shotId": "flow",
+      "localFrame": 215,
+      "states": [
+        {
+          "frame": 48,
+          "label": "第一步"
+        },
+        {
+          "frame": 108,
+          "label": "第二步"
+        },
+        {
+          "frame": 215,
+          "label": "完整流程"
+        }
+      ],
+      "group": "component"
+    },
+    {
+      "id": "timeline",
+      "title": "时间轴",
+      "detail": "等距阶段节点，表示先后顺序",
+      "shotId": "timeline",
+      "localFrame": 215,
+      "states": [],
+      "group": "component"
+    },
+    {
+      "id": "checklist",
+      "title": "检查清单",
+      "detail": "条件满足后累计勾选与计数",
+      "shotId": "checklist",
+      "localFrame": 215,
+      "states": [
+        {
+          "frame": 25,
+          "label": "未完成 · 0 / 3"
+        },
+        {
+          "frame": 90,
+          "label": "部分完成 · 2 / 3"
+        },
+        {
+          "frame": 215,
+          "label": "完成 · 3 / 3"
+        }
+      ],
+      "group": "component"
+    },
+    {
+      "id": "hierarchy",
+      "title": "层级结构",
+      "detail": "一个主体展开少量组成与职责",
+      "shotId": "hierarchy",
+      "localFrame": 215,
+      "states": [],
+      "group": "component"
+    },
+    {
+      "id": "bars",
+      "title": "条形比较",
+      "detail": "相同尺度、零起点；数值为示意",
+      "shotId": "bars",
+      "localFrame": 215,
+      "states": [],
+      "group": "component"
+    },
+    {
+      "id": "code",
+      "title": "代码讲解",
+      "detail": "保留缩进，逐行强调，不执行代码",
+      "shotId": "code",
+      "localFrame": 215,
+      "states": [
+        {
+          "frame": 48,
+          "label": "强调第一行"
+        },
+        {
+          "frame": 98,
+          "label": "强调第二行"
+        },
+        {
+          "frame": 150,
+          "label": "强调第三行"
+        }
+      ],
+      "group": "component"
+    },
+    {
+      "id": "takeaway",
+      "title": "结论组件",
+      "detail": "以开放式主句收束，保留场景空间",
+      "shotId": "takeaway",
+      "localFrame": 215,
+      "states": [],
+      "group": "component"
+    },
+    {
+      "id": "flow-checklist",
+      "title": "流程 + 清单",
+      "detail": "主流程与执行条件相互补充",
+      "shotId": "flow-checklist",
+      "localFrame": 215,
+      "states": [],
+      "group": "combination"
+    },
+    {
+      "id": "code-annotation",
+      "title": "代码 + 标注",
+      "detail": "主讲解行与指认信息分清主次",
+      "shotId": "code-annotation",
+      "localFrame": 98,
+      "states": [],
+      "group": "combination"
+    }
+  ]
+}

@@ -40,5 +40,17 @@
     "continuousVisual": "not_reviewed",
     "listening": "not_reviewed"
   },
-  "scope": "This is a dated validation record for this exact local production, not approval of future edits or other platforms."
+  "scope": "This is a dated validation record for this exact local production, not approval of future edits or other platforms.",
+  "subsequentUserFeedback": {
+    "date": "2026-10-20",
+    "status": "presenter_and_navigation_design_withdrawn",
+    "requirements": [
+      "Do not display internal character names",
+      "Use solid rectangular progress fill",
+      "Keep one fixed presenter pose and animate only the mouth",
+      "Use a single narrator; supporting characters belong in illustration scenes"
+    ],
+    "cause": "Supporting-character presence in the opening was incorrectly expanded into a narrator handoff; full-body pose swaps were mistaken for suitable speaking animation.",
+    "reuseScope": "Illustration assets and historical technical evidence only. This record does not approve the narrator, captions, motion or old navigation design."
+  }
 }
