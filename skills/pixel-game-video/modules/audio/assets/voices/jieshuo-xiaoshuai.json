@@ -1,0 +1,17 @@
+{
+  "id": "voice.jieshuo-xiaoshuai.v1",
+  "name": "解说小帅",
+  "defaultFor": ["computing-voiceover"],
+  "status": "user-selected-default",
+  "selectedOn": "2026-10-20",
+  "source": "user-provided",
+  "originalFilename": "解说小帅-demo.mp3",
+  "sampleFile": "jieshuo-xiaoshuai-demo.mp3",
+  "sampleRole": "voice-reference",
+  "sha256": "26343d615ab8d44669911560f8be1da718e20f90c5a8113842b6cbbcfdb70bbb",
+  "bytes": 431383,
+  "durationSeconds": 17.972208,
+  "codec": "mp3",
+  "sampleRate": 44100,
+  "channels": 2
+}
