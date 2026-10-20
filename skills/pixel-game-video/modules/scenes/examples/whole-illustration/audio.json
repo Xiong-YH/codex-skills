@@ -1,0 +1,89 @@
+{
+  "cues": [
+    {
+      "id": "sfx_s6_1",
+      "sound": "arcade-select",
+      "at": {
+        "event": "s6.e1",
+        "offsetFrames": 0
+      },
+      "level": 0.23,
+      "x": 0.5,
+      "variant": 0
+    },
+    {
+      "id": "sfx_s6_2",
+      "sound": "arcade-select",
+      "at": {
+        "event": "s6.e2",
+        "offsetFrames": 0
+      },
+      "level": 0.23,
+      "x": 0.5,
+      "variant": 0
+    },
+    {
+      "id": "sfx_s6_3",
+      "sound": "arcade-reward",
+      "at": {
+        "event": "s6.e3",
+        "offsetFrames": 0
+      },
+      "level": 0.3,
+      "x": 0.5,
+      "variant": 0
+    },
+    {
+      "id": "overload",
+      "sound": "arcade-reject",
+      "at": {
+        "event": "s1.hold_head",
+        "offsetFrames": 0
+      },
+      "level": 0.12,
+      "x": 0.5,
+      "variant": 0
+    },
+    {
+      "id": "focus-return",
+      "sound": "arcade-select",
+      "at": {
+        "event": "s1.focus",
+        "offsetFrames": 0
+      },
+      "level": 0.12,
+      "x": 0.5,
+      "variant": 0
+    }
+  ],
+  "speechDuck": 0.25,
+  "narration": [
+    {
+      "id": "voice_c1_1",
+      "file": "media/s1-c1.wav",
+      "at": {
+        "event": "s1.speech1",
+        "offsetFrames": 0
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice_c1_2",
+      "file": "media/s1-c2.wav",
+      "at": {
+        "event": "s1.speech2",
+        "offsetFrames": 0
+      },
+      "gain": 0.9
+    },
+    {
+      "id": "voice_c6_1",
+      "file": "media/s6-c1.wav",
+      "at": {
+        "event": "s6.speech1",
+        "offsetFrames": 0
+      },
+      "gain": 0.9
+    }
+  ]
+}

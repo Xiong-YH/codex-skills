@@ -1,0 +1,182 @@
+{
+  "shots": [
+    {
+      "id": "s1",
+      "durationFrames": 302,
+      "scene": "scenes.canvas.v1",
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "speech1",
+          "frame": 12
+        },
+        {
+          "id": "end1",
+          "frame": 112
+        },
+        {
+          "id": "speech2",
+          "frame": 118
+        },
+        {
+          "id": "end2",
+          "frame": 282
+        },
+        {
+          "id": "e1",
+          "frame": 24
+        },
+        {
+          "id": "e2",
+          "frame": 118
+        },
+        {
+          "id": "e3",
+          "frame": 166
+        },
+        {
+          "id": "hands_rise",
+          "frame": 42
+        },
+        {
+          "id": "hold_head",
+          "frame": 54
+        },
+        {
+          "id": "lower_head",
+          "frame": 96
+        },
+        {
+          "id": "slump",
+          "frame": 108
+        },
+        {
+          "id": "focus",
+          "frame": 144
+        },
+        {
+          "id": "blink",
+          "frame": 218
+        },
+        {
+          "id": "eyes_open",
+          "frame": 228
+        }
+      ],
+      "params": {},
+      "replacement": {
+        "file": "media/whole-illustration.mp4",
+        "kind": "video",
+        "fit": "cover",
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "dim": 0,
+        "trimStartSeconds": 0,
+        "shortage": "error"
+      },
+      "actor": null,
+      "motions": [],
+      "objects": []
+    },
+    {
+      "id": "s6",
+      "durationFrames": 202,
+      "scene": "scenes.canvas.v1",
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 28
+        },
+        {
+          "id": "speech1",
+          "frame": 28
+        },
+        {
+          "id": "end1",
+          "frame": 182
+        },
+        {
+          "id": "e1",
+          "frame": 48
+        },
+        {
+          "id": "e2",
+          "frame": 72
+        },
+        {
+          "id": "e3",
+          "frame": 96
+        }
+      ],
+      "params": {},
+      "components": [
+        {
+          "id": "timeline",
+          "kind": "timeline",
+          "x": 0.1,
+          "y": 0.12,
+          "width": 0.8,
+          "height": 0.33,
+          "showEvent": "reveal",
+          "tone": "accent",
+          "data": {
+            "title": "把知识，连成一条能运行的链",
+            "items": [
+              {
+                "label": "01",
+                "title": "前端",
+                "event": "reveal"
+              },
+              {
+                "label": "02",
+                "title": "后端",
+                "event": "e1"
+              },
+              {
+                "label": "03",
+                "title": "AI",
+                "event": "e2"
+              },
+              {
+                "label": "04",
+                "title": "上线",
+                "event": "e3"
+              }
+            ]
+          }
+        },
+        {
+          "id": "takeaway",
+          "kind": "takeaway",
+          "x": 0.16,
+          "y": 0.51,
+          "width": 0.76,
+          "height": 0.24,
+          "showEvent": "reveal",
+          "tone": "gold",
+          "data": {
+            "eyebrow": "项目驱动 · 逐层交付",
+            "title": "学一层，跑通一步",
+            "detail": "页面 → 数据 → 智能 → 真实用户"
+          }
+        }
+      ],
+      "background": {
+        "file": "media/route-atlas-v1.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "dim": 0.26,
+        "trimStartSeconds": 0,
+        "shortage": "error"
+      },
+      "actor": null,
+      "motions": [],
+      "objects": []
+    }
+  ]
+}

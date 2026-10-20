@@ -7,6 +7,8 @@ description: 把创意或既有文案转成像素视频的可见动作、构图�
 
 把观点设计成观众看得懂的画面，再写入可编辑工程、调用基础 skill 出片，并按证据回改。用户只要视觉方案或分镜时，交付设计即可；需要制作时再进入工程与基础依赖流程。
 
+插图集合仅供参考风格与演绎方法，是否使用由脚本决定；不照搬其故事结构、镜头顺序或构图。每镜可有人或无人；主角可承担有说话感的口播，情境插画按剧情选主角或配角，具体边界见 [人物出镜与参考用法](references/character-illustration.md)。
+
 | 当前任务 | 读取 | 执行产物 |
 | --- | --- | --- |
 | 开始制作、续作或复盘 | 按 [基础依赖](references/handoff.md) 定位其 `references/production-principles.md`，再读当前项目要求 | 确认适用的通用原则、系列偏好和单片限制；新经验回到所属记录 |
@@ -14,12 +16,13 @@ description: 把创意或既有文案转成像素视频的可见动作、构图�
 | 只做画面方案、加强画面感或局部接镜 | [视觉表达方法](references/visual-system.md)、[视觉叙事](references/visual-storytelling.md)、[视觉分镜与工程映射](references/visual-storyboard.md) | 交付主体状态变化、构图光影、运镜、前后承接与素材需求；已有工程沿用其源文件 |
 | 背景设计、生成、用户素材或局部替换 | [视觉表达方法](references/visual-system.md)、基础层 `modules/style/ART-DIRECTION.md`、[素材替换](references/media-replacement.md) | 先按内容构思空间与尺度，再复用或制作素材；样板只作质感参考 |
 | 选人物、人设或动作表演 | 按基础依赖定位 `modules/library/CHARACTERS.md` | 当前五人角色分工、动作参考与半身仿真人使用范围；能力状态以素材库为准 |
+| 人物动态、文案情境演绎 | [动态与插画方向](references/character-illustration.md)、[完整插画镜头脚本](examples/whole-illustration/storyboard.json)；基础层 `modules/scenes/whole-illustration.md` | 先做对完整人物与情境，再制作相邻姿态与事件；禁止沿用拆头拼身试样 |
 | 转场选型或设计 | [视觉叙事](references/visual-storytelling.md)；实现时按基础依赖定位其 `modules/motion/TRANSITIONS.md`，再读所选配方 | 写清前镜交出、后镜接住、动作阶段与落稳后的讲解事件 |
 | 学习《深度工作》参考片的画面方法 | [参考片观察](references/deep-work-case.md) | 迁移母题、光影、尺度与语义承接；新主题重新选择人物、道具和场所 |
 | 加强游戏感与操作反馈 | 按基础依赖定位其 `modules/scenes/GAME_FEEL.md` | 按状态选择细节，安排触点事件与声音，保留试用/认可状态 |
 | 音效、配乐与混音 | 按基础依赖定位其 `modules/audio/GUIDE.md`；街机＋鼓点读 `ARCADE.md`；延续计算机口播系列时读 [配乐要求](references/computing-voiceover.md#配乐要求) | 先确认声音素材，再设计项目事件、音量与旁白关系；按本项目已确认要求选择配乐 |
 | 旁白音色与配音 | 按基础依赖定位 `modules/audio/VOICES.md` 与 `modules/audio/JIANYING.md` | 计算机口播系列默认“解说小帅”；将音色与参考 ID 带入 brief，直接操作剪映专业版原生文本朗读生成当前台词，再测时长和交接 |
-| 延续本项目的计算机知识口播 | [已确认的表达方向](references/computing-voiceover.md) | 将相关偏好带入 brief，按新主题设计画面 |
+| 延续本项目的计算机知识口播、积累制作经验 | [本系列要求](references/computing-voiceover.md)；人物/情境镜头再读 [情境插画方向](references/character-illustration.md) | 将当前要求带入 brief，分别落实固定姿势口型、情境演绎与能力缺口；不能以静态图配旁白代替口播 |
 | 交接、预览、出片 | [基础依赖与命令](references/handoff.md) | video/ 中的 VideoSpec 与成片 |
 | 审片、修改或继续已有工程 | [Review 与影响范围](references/review.md) | review.json 与定向源文件修改 |
 
@@ -36,6 +39,8 @@ description: 把创意或既有文案转成像素视频的可见动作、构图�
 执行入口：[scripts/director.py](scripts/director.py)。结构模板在 [assets/templates/](assets/templates/)，完整样例：[12 秒选择机制](examples/bounded-choice/)、[缓存示意](examples/cache-journey/)、[缓存人物表演](examples/cache-adventure/)。样例主题与时长不是全局默认值。
 
 信息组件源例：[基础五类](examples/component-system/brief.json)、[新增七类与组合](examples/component-expansion/brief.json)。从表达关系选型，不把示例的排列、题材或背景作为固定模板。
+
+人物演绎源例：[8.4秒完整插画与总结](examples/whole-illustration/brief.json)，含分心、抱头、趴下与回到项目。`scripts/render-illustration.py` 按 storyboard 事件编排完整画面，`scripts/sync-illustration-example.py` 生成基础层独立快照；两者的 `--check` 拒绝旧衍生物。旧拆头双样例已被用户否定并撤回，新插画尚待用户反馈。
 
 跨空间叙事实例：[18 秒考研口播](examples/cs-postgrad-narrative-18s/)。复用其设计方法，题材、时长与转场组合按新工程决定。
 

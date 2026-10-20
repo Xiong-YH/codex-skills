@@ -26,6 +26,11 @@ class ContractTests(unittest.TestCase):
         fn(data)
         write_json(self.root / file, data)
 
+    def test_rejected_character_parts_scene_cannot_be_selected(self):
+        self.change('timeline.json',lambda data:data['shots'][0].update(scene='scenes.character-illustration.v1'))
+        with self.assertRaisesRegex(ValueError,'unavailable capability'):
+            compile_project(self.root)
+
     def test_events_move_text_audio_and_motion_together(self):
         before_bytes = {p.name: p.read_bytes() for p in self.root.glob("*.json")}
         before = compile_project(self.root)

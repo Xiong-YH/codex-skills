@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "sourcePackage": "pixel-video-director",
+  "sourceExample": "examples/whole-illustration",
+  "sourceHashes": {
+    "brief.json": "953d1058d30dbd516ce750673a169ecf7692d8d9eb7cd4fcc2c65e13e11b9c68",
+    "generation-prompts.json": "255b53d54e267fd813bbc7b8d2720310341c5789c64aa6d0090ed0d8dbc7f22c",
+    "illustration-assets.json": "3ab6e942d2ce7edad5972bec4172d6fd568f0bda6b2a09b7e961efe321c72c34",
+    "illustration-plan.json": "aae69a8864fc175340b33297314865bc9967c51376bfa18c303717d052b1aed2",
+    "media/01-tired.png": "a9f8187a56aca9a831b616b88149b843feeb5c910d845d75241e5e4a4ffd4233",
+    "media/02-hands-rising.png": "4e042851b934f2606cd6c62f791b602332029aa25a436fdd4a0faabedc1e7ed5",
+    "media/03-overwhelmed.png": "c6d25829a3f81e26eca32c5039ca1542a0d890beae89a209a2ff21b82b4b8fd8",
+    "media/04-lowering.png": "d823fb54a5ba69da1389d3f3741a65d0646e1e9c602950c229cb39d580b6b328",
+    "media/05-slumped.png": "82f482908aeefb5bda950c9418691932a8d82a83e2a186e095ab82de1b6336a0",
+    "media/06-focused.png": "1ffb81bb4449d3b7e4b6bab623cf361fef53e729b45eccf91c8010149047c725",
+    "media/07-focused-blink.png": "9c9bcac222d2f4c01e401bed602903094e3b2ddfe0c73cd6b6fb7a5de2e2849a",
+    "media/narration-source.json": "77f290e2b945a904962c7e69a20343530eb3a9d4ea9105a5857cff17e6b1eef2",
+    "media/route-atlas-v1.png": "2ee6266236f6a6e4bcc55e95c1e1fe3820f49fb92573eb062b94ff02de56fc1e",
+    "media/s1-c1.wav": "12423decaded19776cf2dbffd610941ca1a73bb649e21a96c50efb56d3ff29ef",
+    "media/s1-c2.wav": "7781883d6a825278184644d498a37aac8339726df8842539c95a374f765b8465",
+    "media/s6-c1.wav": "b5a42232584ffb051294082a9ab886302eb523086560a0eb54177cef7aab837b",
+    "media/whole-illustration.illustration.json": "02d63669f9b12510e396c1ac1b812292b813c3695b901cfcf6b53894d1085511",
+    "media/whole-illustration.mp4": "7898721bbc8d47733296779fcd44ac71f371917975ea4e4b946238e26c7c6dff",
+    "production-plan.json": "483a4c3090313a18ccbfad64cb94d890035bfd3ad3c04c36632c3c484cca7feb",
+    "script.json": "fe8db836527b7ef977628fcf039346d751914dbbb61adc4d0f0f6914e54a4aca",
+    "storyboard.json": "ee2ce3020ef02f883d35039fa5c0fccb5ac93b9ac759ca75a30b14c7f4647cbd"
+  },
+  "generatedHashes": {
+    "project.json": "c15a6e128a75b7db8902ddb366b56cc41059241468c530b45b45c290c2e5ef07",
+    "timeline.json": "4e6eacc22a04fe2e7aa834df0a7ef86f5beabeabd3c9b05e0e78f0cedc683d2a",
+    "text.json": "93302eb62790410395601d096eaa4dafbee6d0ea37723d1fada808baf7b898d5",
+    "audio.json": "66e076b4028c58acdb57651de47b4e9d2855d1b3f5f9ed473d678045a748f3be",
+    "media/route-atlas-v1.png": "2ee6266236f6a6e4bcc55e95c1e1fe3820f49fb92573eb062b94ff02de56fc1e",
+    "media/s1-c1.wav": "12423decaded19776cf2dbffd610941ca1a73bb649e21a96c50efb56d3ff29ef",
+    "media/s1-c2.wav": "7781883d6a825278184644d498a37aac8339726df8842539c95a374f765b8465",
+    "media/s6-c1.wav": "b5a42232584ffb051294082a9ab886302eb523086560a0eb54177cef7aab837b",
+    "media/whole-illustration.mp4": "7898721bbc8d47733296779fcd44ac71f371917975ea4e4b946238e26c7c6dff"
+  },
+  "note": "Standalone direct snapshot; runs without director or original image generation services."
+}

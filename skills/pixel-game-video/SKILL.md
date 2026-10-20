@@ -21,7 +21,7 @@ description: 制作和修改像素游戏感视频，按结构化镜头、素材�
 | 相机、物体运动、转场执行、特效 | [motion](modules/motion/GUIDE.md) |
 | 音色、声像、事件音效与配乐 | [audio](modules/audio/GUIDE.md)；六种已确认街机音效见 [ARCADE](modules/audio/ARCADE.md)；Chill Wave 导入、音量、淡化与旁白压低见 [配乐](modules/audio/MUSIC.md) |
 | 旁白音色与配音 | [旁白音色](modules/audio/VOICES.md)；计算机口播系列默认“解说小帅”，按 [剪映专业版文本朗读](modules/audio/JIANYING.md) 直接生成当前文案，再导入项目 PCM 旁白 |
-| 游戏机制、嘴型、表演 | [scenes](modules/scenes/GUIDE.md) |
+| 游戏机制、人物表演与情境插画 | [scenes](modules/scenes/GUIDE.md)；[完整插画进入视频](modules/scenes/whole-illustration.md)，含实渲染图与独立样例 |
 
 从 `init PROJECT` 建轻量工程；编辑后运行 `validate`、`build`、`preview`、`render`。命令均为 `python scripts/video.py <命令> PROJECT`。依赖与环境配置见 [运行](references/runtime.md)，增加能力见 [模块维护](references/module-development.md)。
 
@@ -29,7 +29,8 @@ description: 制作和修改像素游戏感视频，按结构化镜头、素材�
 - `authoringMode=director` 的四份输入是生成物；按 `source-map.json` 回改创作源，再 handoff。
 - 素材、风格、配方通过稳定 ID 选择；未知能力先实现并核验，不能用文案假装已经执行。
 - 保留用户已确认的角色和表达方向。模板题材、片长只是示例。
-- 人物按镜头可选；`actor:null` 让场景或物体居中主导画面，不要求主角常驻。
+- 人物按镜头可选，不要求每个画面有小人。`actor:null` 不叠加库人物，完整插画/片段本身仍可含人物；无人镜头可由场景、物体或组件主导。
+- 插图集合参考风格与演绎方法，按脚本选择，不照搬样例结构、构图或固定动作。情境角色按剧情选择；口播与情境表演分别准备和验收，适用项目的固定姿势口播要求不能被情境动作覆盖。人物形体与场景接触先成立，不沿用已被否定的拆头拼身试样。
 - 支持事件音效、项目内 PCM 旁白与可选 BGM 混音；Canvas 的[事件姿态序列](modules/library/PRESENTER-ACTIONS.md) 供剧情表演使用，不能用全身图轮换模拟固定姿势口播；局部开闭嘴需先补齐同姿势口型素材与适配。Canvas 全片可用 [实心矩形叙事进度条](modules/text/NARRATIVE-PROGRESS.md)。Remotion 尚不支持这两项，会在编译时拒绝。尚无音素对齐、骨骼或通用 TTS。
 
 交付前检查实际 MP4、转场前后解码帧与听觉同步。技术核验不代替视听 review；未检查项保留 `not_reviewed`。用 `export-project` 交付带运行源码的独立快照。

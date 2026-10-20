@@ -8,9 +8,17 @@
   },
   "items": [
     {
+      "id": "scenes.character-illustration.v1",
+      "title": "已撤回：拆头/躯干动画试样",
+      "status": "unavailable",
+      "reason": "User rejected disconnected anatomy and proportions; use whole illustration footage through scenes.canvas.v1 replacement."
+    },
+    {
       "id": "scenes.focus-desk.v1",
       "title": "原生 Remotion · 待办归拢与连续投入",
-      "backends": ["remotion"],
+      "backends": [
+        "remotion"
+      ],
       "params": "phase: overload/choose/focus; heading; labels[3] (first is the priority); startEvent < completeEvent; Remotion only"
     },
     {

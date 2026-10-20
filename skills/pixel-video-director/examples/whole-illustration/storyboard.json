@@ -1,0 +1,251 @@
+{
+  "schemaVersion": 1,
+  "shots": [
+    {
+      "id": "s1",
+      "durationFrames": 302,
+      "intent": "以项目串联学习，而非只收藏技术名词",
+      "visual": {
+        "question": "面对 AI 全栈的学习路线，如何避免被工具淹没？",
+        "form": "scene",
+        "subject": "同一书桌前的完整阿棕与分心设备",
+        "action": "设备消息干扰，人物抬手、抱头、俯身、趴下，再关掉干扰回到同一个问答项目；眨眼使用整幅姿态帧",
+        "result": "先收拢注意力，用一个项目串起学习路线",
+        "continuity": "从情境插画切回前端、后端、AI 和上线的结构讲解"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 12
+        },
+        {
+          "id": "speech1",
+          "frame": 12
+        },
+        {
+          "id": "end1",
+          "frame": 112
+        },
+        {
+          "id": "speech2",
+          "frame": 118
+        },
+        {
+          "id": "end2",
+          "frame": 282
+        },
+        {
+          "id": "e1",
+          "frame": 24
+        },
+        {
+          "id": "e2",
+          "frame": 118
+        },
+        {
+          "id": "e3",
+          "frame": 166
+        },
+        {
+          "id": "hands_rise",
+          "frame": 42
+        },
+        {
+          "id": "hold_head",
+          "frame": 54
+        },
+        {
+          "id": "lower_head",
+          "frame": 96
+        },
+        {
+          "id": "slump",
+          "frame": 108
+        },
+        {
+          "id": "focus",
+          "frame": 144
+        },
+        {
+          "id": "blink",
+          "frame": 218
+        },
+        {
+          "id": "eyes_open",
+          "frame": 228
+        }
+      ],
+      "components": [],
+      "cues": [
+        {
+          "cueId": "c1_1",
+          "start": {
+            "event": "s1.speech1"
+          },
+          "end": {
+            "event": "s1.end1"
+          }
+        },
+        {
+          "cueId": "c1_2",
+          "start": {
+            "event": "s1.speech2"
+          },
+          "end": {
+            "event": "s1.end2"
+          }
+        },
+        {
+          "cueId": "intro_title",
+          "start": {
+            "event": "s1.enter"
+          },
+          "end": {
+            "event": "s1.exit"
+          }
+        },
+        {
+          "cueId": "focus_principle",
+          "start": {
+            "event": "s1.focus"
+          },
+          "end": {
+            "event": "s1.exit"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "durationFrames": 202,
+      "intent": "每学一层，都交付一个能跑通的增量",
+      "visual": {
+        "question": "如何判断自己真的学会了？",
+        "form": "timeline",
+        "subject": "从前端到上线的四阶段路线",
+        "action": "点亮路线，结尾保持可执行的原则",
+        "result": "每学一层，都交付一个能跑通的增量",
+        "continuity": "回收开头的同一个知识库问答项目"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 28
+        },
+        {
+          "id": "speech1",
+          "frame": 28
+        },
+        {
+          "id": "end1",
+          "frame": 182
+        },
+        {
+          "id": "e1",
+          "frame": 48
+        },
+        {
+          "id": "e2",
+          "frame": 72
+        },
+        {
+          "id": "e3",
+          "frame": 96
+        }
+      ],
+      "components": [
+        {
+          "id": "timeline",
+          "kind": "timeline",
+          "x": 0.1,
+          "y": 0.12,
+          "width": 0.8,
+          "height": 0.33,
+          "showEvent": "reveal",
+          "tone": "accent",
+          "data": {
+            "title": {
+              "labelId": "l27"
+            },
+            "items": [
+              {
+                "label": {
+                  "labelId": "l28"
+                },
+                "title": {
+                  "labelId": "l29"
+                },
+                "event": "reveal"
+              },
+              {
+                "label": {
+                  "labelId": "l30"
+                },
+                "title": {
+                  "labelId": "l31"
+                },
+                "event": "e1"
+              },
+              {
+                "label": {
+                  "labelId": "l32"
+                },
+                "title": {
+                  "labelId": "l33"
+                },
+                "event": "e2"
+              },
+              {
+                "label": {
+                  "labelId": "l34"
+                },
+                "title": {
+                  "labelId": "l35"
+                },
+                "event": "e3"
+              }
+            ]
+          }
+        },
+        {
+          "id": "takeaway",
+          "kind": "takeaway",
+          "x": 0.16,
+          "y": 0.51,
+          "width": 0.76,
+          "height": 0.24,
+          "showEvent": "reveal",
+          "tone": "gold",
+          "data": {
+            "eyebrow": {
+              "labelId": "l36"
+            },
+            "title": {
+              "labelId": "l37"
+            },
+            "detail": {
+              "labelId": "l38"
+            }
+          }
+        }
+      ],
+      "cues": [
+        {
+          "cueId": "c6_1",
+          "start": {
+            "event": "s6.speech1"
+          },
+          "end": {
+            "event": "s6.end1"
+          }
+        }
+      ]
+    }
+  ]
+}
