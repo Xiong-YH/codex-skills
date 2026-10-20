@@ -96,6 +96,21 @@ def load_sources(project):
             raise ValueError(f"字幕 {cue_id} 缺少 phrases；模拟讲述嘴型需要脚本短句。")
     if plan["audioMode"] == "silent" and plan["audio"]:
         raise ValueError("silent 模式不能同时安排音效，请回改 production-plan.audio。")
+    if plan["audioMode"] == "silent" and plan["bgm"] is not None:
+        raise ValueError("silent 模式不能同时安排配乐，请回改 production-plan.bgm。")
+    if plan["bgm"] is not None:
+        bgm_id = plan["bgm"]["id"]
+
+        def uses_bgm_id(value):
+            if isinstance(value, dict):
+                return (value.get("id") == bgm_id or value.get("cueId") == bgm_id
+                        or any(uses_bgm_id(child) for child in value.values()))
+            if isinstance(value, list):
+                return any(uses_bgm_id(child) for child in value)
+            return False
+
+        if uses_bgm_id({key: value for key, value in plan.items() if key != "bgm"}):
+            raise ValueError("production-plan.bgm.id 必须能唯一定位配乐，不能与其他对象的 id/cueId 重复。")
     unique(plan["audio"], "id", "production-plan.audio")
     unique(plan['narration'], 'id', 'production-plan.narration')
     if bool(plan['narration']) != (plan['audioMode'] == 'narration+sfx'):
@@ -191,6 +206,8 @@ def transform(sources):
     outputs['audio.json']['speechDuck'] = map_value('audio.json', '/speechDuck', plan['speechDuck'], 'production-plan.json', plan['id'], '/speechDuck')
     if plan['narration']:
         outputs['audio.json']['narration'] = [map_value('audio.json', f'/narration/{i}', cue, 'production-plan.json', cue['id'], '') for i,cue in enumerate(plan['narration'])]
+    if plan['bgm'] is not None:
+        outputs['audio.json']['bgm'] = map_value('audio.json', '/bgm', plan['bgm'], 'production-plan.json', plan['bgm']['id'], '')
     return outputs, mappings
 
 
@@ -218,6 +235,8 @@ def handoff(project, foundation=None):
                   "mappings": mappings}
     media = {}
     media_refs = list(sources['production-plan.json']['narration'])
+    if sources['production-plan.json']['bgm'] is not None:
+        media_refs.append(sources['production-plan.json']['bgm'])
     visual_files = []
     for shot in sources['production-plan.json']['shots']:
         visual_files.extend(shot[field] for field in ('background', 'replacement') if shot[field])

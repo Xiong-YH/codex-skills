@@ -126,6 +126,8 @@ def runtime_files(skill, resolved):
     if resolved['project'].get('audioMode') != 'silent':
         files.update('modules/audio/' + name for name in
                      ('mixer.py', 'palette.py', 'game_audio.py', 'arcade.py'))
+        if resolved.get('bgm'):
+            files.add('modules/audio/music.py')
         manifest = 'modules/audio/assets/arcade-motion/manifest.json'
         files.add(manifest)  # palette reads the bank's semantic metadata at import time.
         sounds = {cue['sound'] for cue in resolved.get('audio', [])}

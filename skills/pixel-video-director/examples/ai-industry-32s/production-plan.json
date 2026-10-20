@@ -396,5 +396,26 @@
       "gain": 0.94
     }
   ],
-  "speechDuck": 0.24
+  "speechDuck": 0.24,
+  "bgm": {
+    "id": "bgm-chill-wave",
+    "file": "media/chill-wave.wav",
+    "at": {
+      "event": "s1.enter"
+    },
+    "end": {
+      "event": "s6.exit"
+    },
+    "gain": 0.18,
+    "loop": true,
+    "trimStartSeconds": 0.0,
+    "fadeInFrames": 60,
+    "fadeOutFrames": 90,
+    "speechDuck": 0.25,
+    "title": "Chill Wave",
+    "artist": "Kevin MacLeod",
+    "sourceUrl": "https://kevinmacleod.bandcamp.com/track/chill-wave",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "changes": "Trimmed to video duration, faded and mixed with narration and sound effects."
+  }
 }

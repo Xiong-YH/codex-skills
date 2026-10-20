@@ -145,10 +145,29 @@ class NarrationCue(Model):
     gain: Unit = 0.9
 
 
+class Bgm(Model):
+    id: Id = "bgm"
+    file: Annotated[str, Field(min_length=1)]
+    at: FrameRef
+    end: FrameRef
+    gain: Unit = 0.18
+    loop: bool = True
+    trimStartSeconds: Annotated[float, Field(ge=0)] = 0.0
+    fadeInFrames: Annotated[int, Field(ge=0)] = 60
+    fadeOutFrames: Annotated[int, Field(ge=0)] = 90
+    speechDuck: Unit = 0.25
+    title: str = ""
+    artist: str = ""
+    sourceUrl: str = ""
+    licenseUrl: str = ""
+    changes: str = ""
+
+
 class Audio(Model):
     cues: list[AudioCue] = Field(default_factory=list)
     narration: list[NarrationCue] = Field(default_factory=list)
     speechDuck: Unit = 0.28
+    bgm: Bgm | None = None
 
 
 INPUT_MODELS = {

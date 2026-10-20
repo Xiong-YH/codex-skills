@@ -1,0 +1,19 @@
+{
+  "title": "Chill Wave",
+  "artist": "Kevin MacLeod",
+  "file": "chill-wave.mp3",
+  "isrc": "USUAN1600048",
+  "sourceUrl": "https://kevinmacleod.bandcamp.com/track/chill-wave",
+  "downloadUrl": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Chill%20Wave.mp3",
+  "authorPage": "https://www.incompetech.com/music/royalty-free/index.html?isrc=USUAN1600048",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "sha256": "7f07fbf89860959ff527f7b74606146dd0b0de263739989a70ce712c7c361614",
+  "bytes": 7684325,
+  "durationSeconds": 240.065313,
+  "sampleRate": 44100,
+  "channels": 2,
+  "retrievedOn": "2026-10-20",
+  "changes": "None; original MP3 from the author's download endpoint.",
+  "attribution": "Chill Wave by Kevin MacLeod (incompetech.com), licensed under CC BY 4.0: https://creativecommons.org/licenses/by/4.0/"
+}

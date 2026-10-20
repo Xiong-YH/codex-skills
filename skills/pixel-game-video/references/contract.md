@@ -7,7 +7,7 @@
 | project.json | 标题、编写模式、画幅、帧率、风格、种子、声音模式、renderBackend |
 | timeline.json | 镜头时长、场景、人物/物体引用、组件、项目背景/替换素材、事件、运镜 |
 | text.json | 字幕、注释、标题、标签及讲解短句 |
-| audio.json | 音色、强度、声像和事件绑定 |
+| audio.json | 音效、旁白、可选配乐、增益与事件绑定 |
 
 看 `assets/project-template/` 的 Canvas 实例及 `assets/remotion-project-template/` 的原生 React 实例。所有坐标 x/y 为画幅归一化的 0..1；Canvas 世界图层在 320×180 绘制，文字在 1920×1080 绘制；Remotion 在同一输出画幅用 SVG/HTML 绘制像素形体。当前只接受这一尺寸组合，fps 可为 30 或 60；实际测试范围见运行说明。
 
@@ -22,6 +22,8 @@
 `build/resolved-timeline.json` 是唯一运行时间线；`build/project-lock.json` 记录四份输入与运行代码/素材哈希。生成物不可作为下一轮编写源。
 
 direct 工程可以编辑四份输入。director 工程通过源映射验证四份生成文件和创作源的哈希；任意手改/上游变更会要求重新 handoff。
+
+可选 `audio.bgm` 使用项目 PCM WAV，`at/end` 引用同一条事件时间线；支持独立音量、首尾淡化、音源截取/循环与旁白期间压低。素材、参数参与输入哈希并随独立工程导出；配置与署名见 [配乐工作流](../modules/audio/MUSIC.md)。
 
 镜头 `actor:null` 表示人物不出镜；Canvas 机制采用居中放大的构图，Remotion 书桌保留场景固定布局。省略 actor 则沿用默认人物。全景转场作用于整幅场景，字幕独立；轻面板转场限于 scenes 目录定义的内容舞台。
 

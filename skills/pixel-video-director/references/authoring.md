@@ -35,4 +35,12 @@ script 中每个 cue 都要在 storyboard 放置一次，并在 production-plan.
 
 production-plan 可用 `speechDuck` 设置旁白期间保留的音效比例，范围0–1，默认0.28；handoff 映射到 audio.json。与每个音效的 level 配合设计，旁白素材和 gain 可独立保持。
 
+配乐使用可选的 `production-plan.bgm` 单对象；不配乐时省略或设为 `null`。`file` 是创作工程内的 48kHz/16-bit PCM WAV，`at` 与 `end` 必须引用 storyboard 事件，区间遵循 `[at,end)`，不能另写配乐秒数表。例如：
+
+```json
+{"bgm":{"id":"bgm","file":"media/music.wav","at":{"event":"s1.enter"},"end":{"event":"s4.exit"},"gain":0.18,"loop":true,"trimStartSeconds":0,"fadeInFrames":60,"fadeOutFrames":90,"speechDuck":0.25}}
+```
+
+`id` 缺省为 `bgm`，须与 production-plan 的其他对象 ID 区分，保证源映射可唯一定位；`gain` 与配乐自己的 `speechDuck` 范围为 0–1，默认分别为 0.18、0.25；后者设置旁白期间保留的配乐比例，与音效的顶层 `speechDuck` 分开。`loop` 默认 true；`trimStartSeconds` 默认 0；淡入/淡出为非负整数帧，默认 60/90。片段不足时可循环，关闭循环则需有足够素材覆盖所选区间。`title`、`artist`、`sourceUrl`、`licenseUrl`、`changes` 是可选署名记录，缺省为空串，按实际素材来源填写。handoff 原样传给 audio.json，复制配乐 WAV 并绑定源文件、复制件与生成参数哈希；沿源映射回改 BGM 对象。`silent` 模式拒绝显式配乐。
+
 `init PROJECT` 创建待填写模板，空字段会阻止交接。`init PROJECT --example` 复制可运行样例。`--idea` 只记录创意，写脚本和设计分镜仍由使用 skill 的 agent 完成，不把模板伪装成自动创作结果。

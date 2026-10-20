@@ -85,6 +85,10 @@ def export_project(root, destination):
         media = target / cue['file']
         media.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(root / cue['file'], media)
+    if resolved.get('bgm'):
+        media = target / resolved['bgm']['file']
+        media.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(root / resolved['bgm']['file'], media)
     for item in resolved.get('media', {}).values():
         media = target / item['file']
         media.parent.mkdir(parents=True, exist_ok=True)
@@ -121,6 +125,10 @@ def main(argv=None):
     init.add_argument("project", type=Path)
     init.add_argument("--title", default="像素视频示例")
     init.add_argument('--backend', choices=['canvas', 'remotion'], default='canvas')
+    music = subs.add_parser('import-bgm', help='Import bundled Chill Wave or a local audio file as project PCM WAV')
+    music.add_argument('project', type=Path)
+    music.add_argument('--source', type=Path, help='Local audio source; defaults to the bundled Chill Wave')
+    music.add_argument('--overwrite', action='store_true')
     schema = subs.add_parser("schemas")
     schema.add_argument("--output", type=Path, default=SKILL_ROOT / "schemas")
     for name in ("validate", "build", "studio", "preview", "render", "inspect", "export-project"):
@@ -151,6 +159,11 @@ def main(argv=None):
         emit({"schemas": str(args.output)})
     elif args.command == "init":
         emit(init_project(args.project.resolve(), args.title, args.backend))
+    elif args.command == 'import-bgm':
+        spec = importlib.util.spec_from_file_location('pixel_import_bgm', SKILL_ROOT / 'modules/audio/import_bgm.py')
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        emit(module.import_bgm(args.project, args.source, overwrite=args.overwrite))
     elif args.command == "export-project":
         emit(export_project(args.project.resolve(), args.destination.resolve()))
     elif args.command == "inspect":

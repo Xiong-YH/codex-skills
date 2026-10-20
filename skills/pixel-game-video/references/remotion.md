@@ -35,7 +35,7 @@ Node 依赖锁定 Remotion 4.0.534、React 19.2.0，存于 `engine/remotion/pack
 | 人物 | `actor.azong.v3` 静态基准图或 `actor:null` |
 | 运镜 | `motion.camera-track.v1`，房间、物体与人物整体平移/缩放 |
 | 转场 | `motion.book-sweep.v1`，以前镜末态起步，书页全遮挡时切换到后镜 |
-| 文字/声音 | 编译后的四类文字角色；现有音效/PCM 旁白混音或 silent |
+| 文字/声音 | 编译后的四类文字角色；音效、PCM 旁白与可选 BGM 共用混音，支持配乐音量、淡化及旁白压低；或 silent |
 
 scene params 必须提供 `heading`、恰好三项 `labels`（第一项是主任务）、`startEvent` 与 `completeEvent`。事件引用本镜 local ID，必须前后有序且早于 exit；动作开始前保持初态，完成后保持终态。字符串上限属于输入合同，实际排版仍需检查长文本与字体。
 
