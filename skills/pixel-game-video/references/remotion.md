@@ -39,7 +39,7 @@ Node 依赖锁定 Remotion 4.0.534、React 19.2.0，存于 `engine/remotion/pack
 
 scene params 必须提供 `heading`、恰好三项 `labels`（第一项是主任务）、`startEvent` 与 `completeEvent`。事件引用本镜 local ID，必须前后有序且早于 exit；动作开始前保持初态，完成后保持终态。字符串上限属于输入合同，实际排版仍需检查长文本与字体。
 
-当前场景拥有固定桌面道具，不接受额外 `objects`、十二类 `components`、项目 `background/replacement`；其他风格、人物、场景和 motion 会明确报错。需要扩展时补原生执行器和验证，再扩大能力白名单。不能把可用目录 ID 等同于两种后端都已实现。
+当前场景拥有固定桌面道具，不接受额外 `objects`、十二类 `components`、项目 `background/replacement`；Canvas 的 `shot.performance` 事件姿态和 `timeline.progress` 叙事进度条尚未接入，也会在编译时拒绝。其他风格、人物、场景和 motion 会明确报错。需要扩展时补原生执行器和验证，再扩大能力白名单。不能把可用目录 ID 等同于两种后端都已实现。
 
 ## 构建与可迁移性
 

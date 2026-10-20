@@ -1,0 +1,527 @@
+{
+  "version": 1,
+  "mode": "event-keyed reference poses; no skeletal or phoneme animation",
+  "framing": "Original pixels/alpha preserved; silhouette bounds and foot anchors are layout metadata only.",
+  "actors": {
+    "actor.azong.v3": {
+      "neutral": {
+        "file": "characters/actions/00-lead/neutral.png",
+        "sha256": "29133a79a638699acba84f72a36bc568748f4aa7be44fc9ba7ed28bb8bc9fe87",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          152,
+          10,
+          435,
+          493
+        ],
+        "footX": 299.5,
+        "footY": 493,
+        "referenceHeight": 483
+      },
+      "wave": {
+        "file": "characters/actions/00-lead/wave.png",
+        "sha256": "613c97f314f732e0cebbdaa977003dcc127d882c11f44842ca8c0b27e9aedccd",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          96,
+          9,
+          385,
+          493
+        ],
+        "footX": 256.0,
+        "footY": 493,
+        "referenceHeight": 483
+      },
+      "talk": {
+        "file": "characters/actions/00-lead/talk.png",
+        "sha256": "e19db3b0efb222cc3b1fe2411bf046cd38fff5effcaa164e0441e85926c601f1",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          77,
+          10,
+          363,
+          493
+        ],
+        "footX": 243.5,
+        "footY": 493,
+        "referenceHeight": 483
+      },
+      "dazed-left": {
+        "file": "characters/actions/00-lead/dazed-left.png",
+        "sha256": "320476ae95545b014e08dc066a0590772c4af09f7b0101d498c377e0e3463ef3",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          139,
+          5,
+          423,
+          491
+        ],
+        "footX": 326.0,
+        "footY": 491,
+        "referenceHeight": 483
+      },
+      "dazed-right": {
+        "file": "characters/actions/00-lead/dazed-right.png",
+        "sha256": "4033d927a9a53505fd13a550c4fcc4de68f446c8a2635d0b2b88119fd1cfe0c4",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          139,
+          4,
+          423,
+          491
+        ],
+        "footX": 240.5,
+        "footY": 491,
+        "referenceHeight": 483
+      },
+      "overwhelmed": {
+        "file": "characters/actions/00-lead/overwhelmed.png",
+        "sha256": "15fd6cebbf35c58a33e77a315f950c90b7d58ec3b7efbb55a3e296c0315a96cc",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          82,
+          11,
+          393,
+          493
+        ],
+        "footX": 239.5,
+        "footY": 493,
+        "referenceHeight": 483
+      }
+    },
+    "actor.amo.v3": {
+      "neutral": {
+        "file": "characters/actions/01-ink/neutral.png",
+        "sha256": "e2668bad65a7d36ffb52f7efc48fdde63ce6276a91c4df7db2c0924029ed7a12",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          157,
+          12,
+          398,
+          490
+        ],
+        "footX": 289.5,
+        "footY": 490,
+        "referenceHeight": 478
+      },
+      "wave": {
+        "file": "characters/actions/01-ink/wave.png",
+        "sha256": "420d8f5e111420c165b52b8d2cac1b343520481662ee9f4732a78b00c2a2fea8",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          112,
+          15,
+          364,
+          490
+        ],
+        "footX": 256.5,
+        "footY": 490,
+        "referenceHeight": 478
+      },
+      "talk": {
+        "file": "characters/actions/01-ink/talk.png",
+        "sha256": "43c7bd7518aa3fb4ad795c48bc9399708dc4eae79ce0c58cf173401eb43029ae",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          93,
+          12,
+          361,
+          490
+        ],
+        "footX": 233.0,
+        "footY": 490,
+        "referenceHeight": 478
+      },
+      "dazed-left": {
+        "file": "characters/actions/01-ink/dazed-left.png",
+        "sha256": "56dabec7ba6e37065640ad4d2db7e0b9c8774b673aa6958e276e0a1ea1fd715f",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          118,
+          3,
+          398,
+          484
+        ],
+        "footX": 298.5,
+        "footY": 484,
+        "referenceHeight": 478
+      },
+      "dazed-right": {
+        "file": "characters/actions/01-ink/dazed-right.png",
+        "sha256": "7520d313629deea0b53fd8e65fa582bcbdc8f52283cf0fa9c5d4b4d6b8d299d0",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          148,
+          13,
+          420,
+          484
+        ],
+        "footX": 251.5,
+        "footY": 484,
+        "referenceHeight": 478
+      },
+      "overwhelmed": {
+        "file": "characters/actions/01-ink/overwhelmed.png",
+        "sha256": "ab86f078ec0fe1ff5ecf9f74f2f9621abfbf79af7c8d4e0309dfae6dda8539f4",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          109,
+          4,
+          373,
+          484
+        ],
+        "footX": 248.5,
+        "footY": 484,
+        "referenceHeight": 478
+      }
+    },
+    "actor.lizi.v3": {
+      "neutral": {
+        "file": "characters/actions/02-copper/neutral.png",
+        "sha256": "49b2ef1d995326b0ccb03b6ceb01519b8dd6a9891b0f0ee67a932b725b46a8da",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          133,
+          17,
+          405,
+          498
+        ],
+        "footX": 261.0,
+        "footY": 498,
+        "referenceHeight": 481
+      },
+      "wave": {
+        "file": "characters/actions/02-copper/wave.png",
+        "sha256": "d241e9c7fa966dc5f1b48b322ad35fcff05deef608b7634b0d85c8919621e98d",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          124,
+          17,
+          405,
+          498
+        ],
+        "footX": 253.0,
+        "footY": 498,
+        "referenceHeight": 481
+      },
+      "talk": {
+        "file": "characters/actions/02-copper/talk.png",
+        "sha256": "5270cc85b01986b9cfc55f8673e5c60ca3a7dbfa14761930a8356aaa760404f5",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          93,
+          17,
+          368,
+          498
+        ],
+        "footX": 231.0,
+        "footY": 498,
+        "referenceHeight": 481
+      },
+      "dazed-left": {
+        "file": "characters/actions/02-copper/dazed-left.png",
+        "sha256": "ea8ab291a011838995949d7e4db47e0758e2038a01b50df5180142f97c68e28b",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          119,
+          13,
+          400,
+          482
+        ],
+        "footX": 278.5,
+        "footY": 482,
+        "referenceHeight": 481
+      },
+      "dazed-right": {
+        "file": "characters/actions/02-copper/dazed-right.png",
+        "sha256": "dd1f7ff6e067de720018825151a01145fa51dcc479da021d03c316a1be75b528",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          146,
+          7,
+          413,
+          482
+        ],
+        "footX": 284.0,
+        "footY": 482,
+        "referenceHeight": 481
+      },
+      "overwhelmed": {
+        "file": "characters/actions/02-copper/overwhelmed.png",
+        "sha256": "6edc786ccb16eccf97ead9a3f8678ab5020b1d181200e05e5a06b285367c5407",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          93,
+          6,
+          393,
+          482
+        ],
+        "footX": 244.0,
+        "footY": 482,
+        "referenceHeight": 481
+      }
+    },
+    "actor.laomai.v3": {
+      "neutral": {
+        "file": "characters/actions/03-glasses/neutral.png",
+        "sha256": "042b651517ddfdf85fbbd724bbe06112106038960bc39551b354fc1548193b12",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          153,
+          14,
+          406,
+          510
+        ],
+        "footX": 286.0,
+        "footY": 510,
+        "referenceHeight": 496
+      },
+      "wave": {
+        "file": "characters/actions/03-glasses/wave.png",
+        "sha256": "a565742879b932b3b8593d85c1fa49c2f343576926b31a4692a43971d27f4b61",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          108,
+          9,
+          406,
+          509
+        ],
+        "footX": 254.5,
+        "footY": 509,
+        "referenceHeight": 496
+      },
+      "talk": {
+        "file": "characters/actions/03-glasses/talk.png",
+        "sha256": "8ae9da5a5c541bb0427576898b8ba40fd27537a7e63a075aae548289c0c50da1",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          86,
+          14,
+          344,
+          510
+        ],
+        "footX": 235.0,
+        "footY": 510,
+        "referenceHeight": 496
+      },
+      "dazed-left": {
+        "file": "characters/actions/03-glasses/dazed-left.png",
+        "sha256": "ad37bf96b7dd54312a84bce4030868c9cfe353964f83c06d64ba5502bf94a5a6",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          139,
+          10,
+          407,
+          495
+        ],
+        "footX": 300.5,
+        "footY": 495,
+        "referenceHeight": 496
+      },
+      "dazed-right": {
+        "file": "characters/actions/03-glasses/dazed-right.png",
+        "sha256": "ff56971dcf1a99bc60ec8cf5259738a1c1cc3e215305d8cc70b0bc3d5dbb3873",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          142,
+          10,
+          406,
+          495
+        ],
+        "footX": 254.0,
+        "footY": 495,
+        "referenceHeight": 496
+      },
+      "overwhelmed": {
+        "file": "characters/actions/03-glasses/overwhelmed.png",
+        "sha256": "068260f0b381670a797a961d112387eb3b2549c468180cc5ed4de6c85417a4a7",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          91,
+          11,
+          388,
+          495
+        ],
+        "footX": 242.0,
+        "footY": 495,
+        "referenceHeight": 496
+      }
+    },
+    "actor.chen.v3": {
+      "neutral": {
+        "file": "characters/actions/04-human-bust/neutral.png",
+        "sha256": "5383bd4b0b6a1dc979e61b570f85b819150cc95d1ffa48d7070c9c5013410825",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          36,
+          14,
+          496,
+          506
+        ],
+        "footX": 270.5,
+        "footY": 506,
+        "referenceHeight": 492
+      },
+      "wave": {
+        "file": "characters/actions/04-human-bust/wave.png",
+        "sha256": "047414dfd032e54bccb47ec0c011af6e8022d437257e608e84ceae539b310b6e",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          9,
+          16,
+          510,
+          504
+        ],
+        "footX": 326.0,
+        "footY": 504,
+        "referenceHeight": 492
+      },
+      "talk": {
+        "file": "characters/actions/04-human-bust/talk.png",
+        "sha256": "24ed3b6b1929885b2ec15648cda437ba9500a5ff885ba35846dff33345936ffa",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          19,
+          16,
+          476,
+          504
+        ],
+        "footX": 247.0,
+        "footY": 504,
+        "referenceHeight": 492
+      },
+      "dazed-left": {
+        "file": "characters/actions/04-human-bust/dazed-left.png",
+        "sha256": "3cad40d2e5ec8c6c1c2a0a0f0fc630a41e642cdc2635c81103399c2a8c88a431",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          36,
+          9,
+          501,
+          491
+        ],
+        "footX": 269.0,
+        "footY": 491,
+        "referenceHeight": 492
+      },
+      "dazed-right": {
+        "file": "characters/actions/04-human-bust/dazed-right.png",
+        "sha256": "00a5af001efa9fdc7d7fe1aa51fd1bfe0124b011b59ef40983a7461b0591940e",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          32,
+          9,
+          512,
+          491
+        ],
+        "footX": 265.5,
+        "footY": 491,
+        "referenceHeight": 492
+      },
+      "overwhelmed": {
+        "file": "characters/actions/04-human-bust/overwhelmed.png",
+        "sha256": "fbf61f3852639ccdfd53d6fe02006ed7838ee3989de1ece0bb2e29cce69c790f",
+        "nativeSize": [
+          512,
+          512
+        ],
+        "bounds": [
+          0,
+          9,
+          502,
+          491
+        ],
+        "footX": 258.5,
+        "footY": 491,
+        "referenceHeight": 492
+      }
+    }
+  }
+}

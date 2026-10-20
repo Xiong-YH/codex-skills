@@ -42,6 +42,14 @@ def actor_ids(resolved):
     return result
 
 
+def actor_actions(resolved):
+    result = {}
+    for shot in resolved['shots']:
+        if shot.get('performance'):
+            result.setdefault(shot['actor'], set()).update(['neutral', *(p['pose'] for p in shot['performance'])])
+    return result
+
+
 def javascript_files(skill, resolved):
     selected, _ = selected_style(skill, resolved)
     paths = ['style/runtime.js']
@@ -49,6 +57,10 @@ def javascript_files(skill, resolved):
         style_root = (Path(skill) / 'modules/style').resolve()
         paths.append('style/' + inside(style_root, selected['runtime']).relative_to(style_root).as_posix())
     paths += ['text/runtime.js', 'library/runtime.js', 'motion/runtime.js', 'scenes/runtime.js']
+    if actor_actions(resolved):
+        paths.append('library/presenter-actions.js')
+    if resolved.get('progress'):
+        paths.append('text/narrative-progress.js')
     if any(shot.get('background') or shot.get('replacement') or shot.get('components') for shot in resolved['shots']):
         paths += ['scenes/media.js']
     if any(shot.get('components') for shot in resolved['shots']):
@@ -103,6 +115,14 @@ def runtime_files(skill, resolved):
     for item in read(skill / 'modules/library/catalog.json')['items']:
         if item['id'] in actor_ids(resolved):
             files.add('modules/library/' + item['path'])
+    actions = actor_actions(resolved)
+    if actions:
+        manifest = 'modules/library/characters/performance.json'
+        files.add(manifest)
+        for actor, poses in actions.items():
+            for pose in poses:
+                relative = read(skill / manifest)['actors'][actor][pose]['file']
+                files.add(inside(skill / 'modules/library', relative).relative_to(skill).as_posix())
     if resolved['project'].get('audioMode') != 'silent':
         files.update('modules/audio/' + name for name in
                      ('mixer.py', 'palette.py', 'game_audio.py', 'arcade.py'))

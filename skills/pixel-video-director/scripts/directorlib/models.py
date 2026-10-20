@@ -90,11 +90,13 @@ class Shot(Contract):
     objects: list[ObjectPlacement] = []
     cues: list[CuePlacement] = []
     components: list[dict[str, Any]] = []
+    performance: list[dict[str, Any]] = []
 
 
 class Storyboard(Contract):
     schemaVersion: Literal[1] = 1
     shots: list[Shot] = Field(min_length=1)
+    progress: dict[str, Any] | None = None
 
 
 class Output(Contract):

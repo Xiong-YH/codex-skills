@@ -78,6 +78,21 @@ class Component(Model):
     data: dict[str, Any]
 
 
+class ActorPose(Model):
+    pose: Literal['neutral', 'wave', 'talk', 'dazed-left', 'dazed-right', 'overwhelmed']
+    start: FrameRef
+    end: FrameRef
+
+
+class ProgressNode(Model):
+    label: Annotated[str, Field(min_length=1, max_length=12)]
+    at: FrameRef
+
+
+class NarrativeProgress(Model):
+    nodes: Annotated[list[ProgressNode], Field(min_length=2, max_length=8)]
+
+
 class Shot(Model):
     id: Id
     durationFrames: PositiveFrames
@@ -90,10 +105,12 @@ class Shot(Model):
     components: list[Component] = Field(default_factory=list)
     background: MediaSource | None = None
     replacement: MediaSource | None = None
+    performance: list[ActorPose] = Field(default_factory=list)
 
 
 class Timeline(Model):
     shots: Annotated[list[Shot], Field(min_length=1, max_length=500)]
+    progress: NarrativeProgress | None = None
 
 
 class TextCue(Model):

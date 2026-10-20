@@ -1,0 +1,24 @@
+{
+  "tool": "built-in image_gen",
+  "generatedDate": "2026-10-20",
+  "assets": [
+    {
+      "file": "ai-workshop.png",
+      "purpose": "重复任务进入AI工具、生成代码的实体工坊插图"
+    },
+    {
+      "file": "duplicate-dispatch.png",
+      "purpose": "一笔请求产生重复订单的分拣装置插图"
+    },
+    {
+      "file": "validation-workshop.png",
+      "purpose": "验证、排重与可靠交付的检验工坊插图"
+    }
+  ],
+  "commonPrompt": "Refined 16:9 32-bit pixel-art narrative illustration, tangible miniature workshop, navy shadows, amber lamps and mint accents. Main objects on the right two thirds, quiet left presenter space, top progress and bottom subtitle space. No text, logos, diagrams, UI cards or city skyline.",
+  "assetPrompts": {
+    "ai-workshop.png": "Mechanical assistant transforms paper task cards into glowing circuit boards at a brass and walnut workbench.",
+    "duplicate-dispatch.png": "One golden parcel enters a mechanical gate and splits into two identical outgoing parcels on separate conveyors.",
+    "validation-workshop.png": "A parcel passes under a mint-lit inspection lens and travels to a warm doorway; circuit board and oscilloscope nearby."
+  }
+}

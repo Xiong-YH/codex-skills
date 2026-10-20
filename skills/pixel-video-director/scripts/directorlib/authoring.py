@@ -147,6 +147,8 @@ def transform(sources):
     plan_lookup = {s["id"]: s for s in plan["shots"]}
     appearance = {t["cueId"]: t for t in plan["text"]}
     outputs["timeline.json"]["shots"] = []
+    if board.get('progress'):
+        outputs['timeline.json']['progress'] = scene_params(board['progress'], '/progress', 'progress', '/progress')
     outputs["text.json"]["cues"] = []
     for i, shot in enumerate(board["shots"]):
         sid, shot_plan = shot["id"], plan_lookup[shot["id"]]
@@ -156,6 +158,8 @@ def transform(sources):
         timeline_shot["params"] = scene_params(shot["params"], f"/shots/{i}/params", sid, "/params")
         if shot['components']:
             timeline_shot['components'] = scene_params(shot['components'], f'/shots/{i}/components', sid, '/components')
+        if shot.get('performance'):
+            timeline_shot['performance'] = map_value('timeline.json',f'/shots/{i}/performance',shot['performance'],'storyboard.json',sid,'/performance')
         for field in ('background', 'replacement'):
             if shot_plan[field] is not None:
                 timeline_shot[field] = map_value('timeline.json', f'/shots/{i}/{field}', shot_plan[field], 'production-plan.json', sid, '/' + field)

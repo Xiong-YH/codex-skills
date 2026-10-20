@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-20",
+  "platform": "Windows 11",
+  "durationSeconds": 32,
+  "decodedFrames": 1920,
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 60,
+  "videoSha256": "8a20835b68aeb1b462bb4bcf6cc22861a5c5b76e450f8d7a0494afff284a2262",
+  "technicalStatus": "passed",
+  "pythonTests": {
+    "foundation": 77,
+    "director": 20
+  },
+  "stagedSnapshot": "New tests passed, all six scene media regenerated, director handoff and foundation build succeeded using only staged files.",
+  "browser": {
+    "poseChanges": true,
+    "seekDeterminism": true,
+    "nodes": 6,
+    "pageErrors": []
+  },
+  "automaticPlayback": {
+    "ended": true,
+    "duration": 32,
+    "quality": {
+      "totalVideoFrames": 1920,
+      "droppedVideoFrames": 8
+    },
+    "muted": true
+  },
+  "decodedFrameReview": [
+    "12 subtitle samples",
+    "six stable compositions",
+    "transition samples",
+    "four actual pose samples"
+  ],
+  "subjectiveReview": {
+    "continuousVisual": "not_reviewed",
+    "listening": "not_reviewed"
+  },
+  "scope": "This is a dated validation record for this exact local production, not approval of future edits or other platforms."
+}

@@ -1,0 +1,4 @@
+video/
+.director-state.json
+evidence/
+review*.json

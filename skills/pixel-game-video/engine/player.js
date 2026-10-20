@@ -91,6 +91,7 @@
         }
       }
       P.motion.effects(e,shot.motions||[],frame);
+      if(resolved.progress)P.narrativeProgress.draw(e,frame);
       P.text.overlays(e,resolved.cues,frame);
       return canvas;
     }};

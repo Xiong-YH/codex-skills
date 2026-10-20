@@ -1,0 +1,739 @@
+{
+  "schemaVersion": 1,
+  "shots": [
+    {
+      "id": "s1",
+      "durationFrames": 240,
+      "intent": "建立对行业变化的疑问",
+      "visual": {
+        "question": "AI 是否让整个行业失去价值？",
+        "form": "scene",
+        "subject": "主题像素插图与物体状态：开发工坊中阿墨侧边站立，右侧屏幕快速填入代码",
+        "action": "代码生成，疑问显露；保持房间完整和人物站位；有出镜角色时按performance事件切换姿态，脚底锚点保持；顶部叙事进度独立于场景。",
+        "result": "建立对行业变化的疑问",
+        "continuity": "同一工坊屏幕交给阿棕解释"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 6
+        },
+        {
+          "id": "voice1",
+          "frame": 12
+        },
+        {
+          "id": "end1",
+          "frame": 185
+        },
+        {
+          "id": "generate",
+          "frame": 24
+        },
+        {
+          "id": "question",
+          "frame": 78
+        },
+        {
+          "id": "gesture1start",
+          "frame": 18
+        },
+        {
+          "id": "gesture1end",
+          "frame": 60
+        },
+        {
+          "id": "gesture2start",
+          "frame": 60
+        },
+        {
+          "id": "gesture2end",
+          "frame": 91
+        },
+        {
+          "id": "gesture3start",
+          "frame": 105
+        },
+        {
+          "id": "gesture3end",
+          "frame": 135
+        },
+        {
+          "id": "gesture4start",
+          "frame": 135
+        },
+        {
+          "id": "gesture4end",
+          "frame": 185
+        }
+      ],
+      "objects": [],
+      "components": [],
+      "cues": [
+        {
+          "cueId": "c1_1",
+          "start": {
+            "event": "s1.voice1"
+          },
+          "end": {
+            "event": "s1.end1"
+          }
+        }
+      ],
+      "performance": [
+        {
+          "pose": "talk",
+          "start": {
+            "event": "s1.gesture1start"
+          },
+          "end": {
+            "event": "s1.gesture1end"
+          }
+        },
+        {
+          "pose": "dazed-left",
+          "start": {
+            "event": "s1.gesture2start"
+          },
+          "end": {
+            "event": "s1.gesture2end"
+          }
+        },
+        {
+          "pose": "dazed-right",
+          "start": {
+            "event": "s1.gesture3start"
+          },
+          "end": {
+            "event": "s1.gesture3end"
+          }
+        },
+        {
+          "pose": "talk",
+          "start": {
+            "event": "s1.gesture4start"
+          },
+          "end": {
+            "event": "s1.gesture4end"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "durationFrames": 300,
+      "intent": "重复任务的处理方式发生变化",
+      "visual": {
+        "question": "哪些工作受到直接冲击？",
+        "form": "process",
+        "subject": "主题像素插图与物体状态：同一工坊中的任务块、AI 工具与代码文件",
+        "action": "任务进入工具，队列变短，代码文件逐个落位；有出镜角色时按performance事件切换姿态，脚底锚点保持；顶部叙事进度独立于场景。",
+        "result": "重复任务的处理方式发生变化",
+        "continuity": "跟随生成的代码文件进入订单应用"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 6
+        },
+        {
+          "id": "voice1",
+          "frame": 18
+        },
+        {
+          "id": "end1",
+          "frame": 112
+        },
+        {
+          "id": "voice2",
+          "frame": 118
+        },
+        {
+          "id": "end2",
+          "frame": 285
+        },
+        {
+          "id": "task1",
+          "frame": 32
+        },
+        {
+          "id": "task2",
+          "frame": 84
+        },
+        {
+          "id": "task3",
+          "frame": 136
+        },
+        {
+          "id": "settle",
+          "frame": 180
+        },
+        {
+          "id": "gesture1start",
+          "frame": 0
+        },
+        {
+          "id": "gesture1end",
+          "frame": 18
+        },
+        {
+          "id": "gesture2start",
+          "frame": 18
+        },
+        {
+          "id": "gesture2end",
+          "frame": 80
+        },
+        {
+          "id": "gesture3start",
+          "frame": 118
+        },
+        {
+          "id": "gesture3end",
+          "frame": 180
+        },
+        {
+          "id": "gesture4start",
+          "frame": 220
+        },
+        {
+          "id": "gesture4end",
+          "frame": 285
+        }
+      ],
+      "objects": [],
+      "components": [],
+      "cues": [
+        {
+          "cueId": "c2_1",
+          "start": {
+            "event": "s2.voice1"
+          },
+          "end": {
+            "event": "s2.end1"
+          }
+        },
+        {
+          "cueId": "c2_2",
+          "start": {
+            "event": "s2.voice2"
+          },
+          "end": {
+            "event": "s2.end2"
+          }
+        }
+      ],
+      "performance": [
+        {
+          "pose": "wave",
+          "start": {
+            "event": "s2.gesture1start"
+          },
+          "end": {
+            "event": "s2.gesture1end"
+          }
+        },
+        {
+          "pose": "talk",
+          "start": {
+            "event": "s2.gesture2start"
+          },
+          "end": {
+            "event": "s2.gesture2end"
+          }
+        },
+        {
+          "pose": "talk",
+          "start": {
+            "event": "s2.gesture3start"
+          },
+          "end": {
+            "event": "s2.gesture3end"
+          }
+        },
+        {
+          "pose": "talk",
+          "start": {
+            "event": "s2.gesture4start"
+          },
+          "end": {
+            "event": "s2.gesture4end"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "durationFrames": 300,
+      "intent": "代码生成不等于可交付的产品",
+      "visual": {
+        "question": "生成代码等于产品可用吗？",
+        "form": "scene",
+        "subject": "主题像素插图与物体状态：放大的订单应用界面；同一青绿代码文件标识",
+        "action": "一次提交后出现两张同号订单，警示保持；有出镜角色时按performance事件切换姿态，脚底锚点保持；顶部叙事进度独立于场景。",
+        "result": "代码生成不等于可交付的产品",
+        "continuity": "同一订单应用成为需求、数据、排错的中心"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 6
+        },
+        {
+          "id": "voice1",
+          "frame": 30
+        },
+        {
+          "id": "end1",
+          "frame": 119
+        },
+        {
+          "id": "voice2",
+          "frame": 157
+        },
+        {
+          "id": "end2",
+          "frame": 275
+        },
+        {
+          "id": "file",
+          "frame": 18
+        },
+        {
+          "id": "click",
+          "frame": 165
+        },
+        {
+          "id": "duplicate",
+          "frame": 191
+        }
+      ],
+      "objects": [],
+      "components": [],
+      "cues": [
+        {
+          "cueId": "c3_1",
+          "start": {
+            "event": "s3.voice1"
+          },
+          "end": {
+            "event": "s3.end1"
+          }
+        },
+        {
+          "cueId": "c3_2",
+          "start": {
+            "event": "s3.voice2"
+          },
+          "end": {
+            "event": "s3.end2"
+          }
+        }
+      ],
+      "performance": []
+    },
+    {
+      "id": "s4",
+      "durationFrames": 420,
+      "intent": "系统还包含需求、数据和排错问题",
+      "visual": {
+        "question": "代码之外还要解决什么？",
+        "form": "hierarchy",
+        "subject": "主题像素插图与物体状态：围绕同一应用的需求单、数据锁、故障链路",
+        "action": "按三句提问依次显露并突出；连接线避开标签；有出镜角色时按performance事件切换姿态，脚底锚点保持；顶部叙事进度独立于场景。",
+        "result": "系统还包含需求、数据和排错问题",
+        "continuity": "排错焦点交给修复和测试"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 6
+        },
+        {
+          "id": "voice1",
+          "frame": 18
+        },
+        {
+          "id": "end1",
+          "frame": 98
+        },
+        {
+          "id": "voice2",
+          "frame": 146
+        },
+        {
+          "id": "end2",
+          "frame": 219
+        },
+        {
+          "id": "voice3",
+          "frame": 267
+        },
+        {
+          "id": "end3",
+          "frame": 395
+        },
+        {
+          "id": "need",
+          "frame": 30
+        },
+        {
+          "id": "data",
+          "frame": 158
+        },
+        {
+          "id": "debug",
+          "frame": 281
+        }
+      ],
+      "objects": [],
+      "components": [],
+      "cues": [
+        {
+          "cueId": "c4_1",
+          "start": {
+            "event": "s4.voice1"
+          },
+          "end": {
+            "event": "s4.end1"
+          }
+        },
+        {
+          "cueId": "c4_2",
+          "start": {
+            "event": "s4.voice2"
+          },
+          "end": {
+            "event": "s4.end2"
+          }
+        },
+        {
+          "cueId": "c4_3",
+          "start": {
+            "event": "s4.voice3"
+          },
+          "end": {
+            "event": "s4.end3"
+          }
+        }
+      ],
+      "performance": []
+    },
+    {
+      "id": "s5",
+      "durationFrames": 300,
+      "intent": "AI 可参与这些工作，结果需要验证",
+      "visual": {
+        "question": "AI 能帮忙后怎样确认结果？",
+        "form": "checklist",
+        "subject": "主题像素插图与物体状态：修复后的代码文件与订单验证区域，阿棕侧边站立",
+        "action": "修复方案进入验证流程，两项验证顺序通过；有出镜角色时按performance事件切换姿态，脚底锚点保持；顶部叙事进度独立于场景。",
+        "result": "AI 可参与这些工作，结果需要验证",
+        "continuity": "验证过的同一应用交给最终用户"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 6
+        },
+        {
+          "id": "voice1",
+          "frame": 18
+        },
+        {
+          "id": "end1",
+          "frame": 159
+        },
+        {
+          "id": "voice2",
+          "frame": 179
+        },
+        {
+          "id": "end2",
+          "frame": 275
+        },
+        {
+          "id": "fix",
+          "frame": 30
+        },
+        {
+          "id": "test",
+          "frame": 167
+        },
+        {
+          "id": "check1",
+          "frame": 199
+        },
+        {
+          "id": "check2",
+          "frame": 235
+        },
+        {
+          "id": "gesture1start",
+          "frame": 18
+        },
+        {
+          "id": "gesture1end",
+          "frame": 90
+        },
+        {
+          "id": "gesture2start",
+          "frame": 179
+        },
+        {
+          "id": "gesture2end",
+          "frame": 235
+        },
+        {
+          "id": "gesture3start",
+          "frame": 235
+        },
+        {
+          "id": "gesture3end",
+          "frame": 275
+        }
+      ],
+      "objects": [],
+      "components": [],
+      "cues": [
+        {
+          "cueId": "c5_1",
+          "start": {
+            "event": "s5.voice1"
+          },
+          "end": {
+            "event": "s5.end1"
+          }
+        },
+        {
+          "cueId": "c5_2",
+          "start": {
+            "event": "s5.voice2"
+          },
+          "end": {
+            "event": "s5.end2"
+          }
+        }
+      ],
+      "performance": [
+        {
+          "pose": "talk",
+          "start": {
+            "event": "s5.gesture1start"
+          },
+          "end": {
+            "event": "s5.gesture1end"
+          }
+        },
+        {
+          "pose": "talk",
+          "start": {
+            "event": "s5.gesture2start"
+          },
+          "end": {
+            "event": "s5.gesture2end"
+          }
+        },
+        {
+          "pose": "wave",
+          "start": {
+            "event": "s5.gesture3start"
+          },
+          "end": {
+            "event": "s5.gesture3end"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "durationFrames": 360,
+      "intent": "行业分工重组，交付结果仍是核心目标",
+      "visual": {
+        "question": "如何概括行业变化？",
+        "form": "takeaway",
+        "subject": "主题像素插图与物体状态：回到完整工坊，阿棕与生成、验证、交付的链条",
+        "action": "前镜代码与测试状态进入运行应用，正确订单落位；有出镜角色时按performance事件切换姿态，脚底锚点保持；顶部叙事进度独立于场景。",
+        "result": "行业分工重组，交付结果仍是核心目标",
+        "continuity": "回收开头的代码生成屏幕，以用户结果收束"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {},
+      "events": [
+        {
+          "id": "reveal",
+          "frame": 6
+        },
+        {
+          "id": "voice1",
+          "frame": 18
+        },
+        {
+          "id": "end1",
+          "frame": 169
+        },
+        {
+          "id": "voice2",
+          "frame": 175
+        },
+        {
+          "id": "end2",
+          "frame": 344
+        },
+        {
+          "id": "generate",
+          "frame": 28
+        },
+        {
+          "id": "verify",
+          "frame": 68
+        },
+        {
+          "id": "deliver",
+          "frame": 110
+        },
+        {
+          "id": "result",
+          "frame": 207
+        },
+        {
+          "id": "gesture1start",
+          "frame": 18
+        },
+        {
+          "id": "gesture1end",
+          "frame": 169
+        },
+        {
+          "id": "gesture2start",
+          "frame": 175
+        },
+        {
+          "id": "gesture2end",
+          "frame": 280
+        },
+        {
+          "id": "gesture3start",
+          "frame": 280
+        },
+        {
+          "id": "gesture3end",
+          "frame": 328
+        }
+      ],
+      "objects": [],
+      "components": [],
+      "cues": [
+        {
+          "cueId": "c6_1",
+          "start": {
+            "event": "s6.voice1"
+          },
+          "end": {
+            "event": "s6.end1"
+          }
+        },
+        {
+          "cueId": "c6_2",
+          "start": {
+            "event": "s6.voice2"
+          },
+          "end": {
+            "event": "s6.end2"
+          }
+        }
+      ],
+      "performance": [
+        {
+          "pose": "talk",
+          "start": {
+            "event": "s6.gesture1start"
+          },
+          "end": {
+            "event": "s6.gesture1end"
+          }
+        },
+        {
+          "pose": "talk",
+          "start": {
+            "event": "s6.gesture2start"
+          },
+          "end": {
+            "event": "s6.gesture2end"
+          }
+        },
+        {
+          "pose": "wave",
+          "start": {
+            "event": "s6.gesture3start"
+          },
+          "end": {
+            "event": "s6.gesture3end"
+          }
+        }
+      ]
+    }
+  ],
+  "progress": {
+    "nodes": [
+      {
+        "label": {
+          "labelId": "progress1"
+        },
+        "at": {
+          "event": "s1.enter"
+        }
+      },
+      {
+        "label": {
+          "labelId": "progress2"
+        },
+        "at": {
+          "event": "s2.enter"
+        }
+      },
+      {
+        "label": {
+          "labelId": "progress3"
+        },
+        "at": {
+          "event": "s3.enter"
+        }
+      },
+      {
+        "label": {
+          "labelId": "progress4"
+        },
+        "at": {
+          "event": "s4.enter"
+        }
+      },
+      {
+        "label": {
+          "labelId": "progress5"
+        },
+        "at": {
+          "event": "s5.enter"
+        }
+      },
+      {
+        "label": {
+          "labelId": "progress6"
+        },
+        "at": {
+          "event": "s6.enter"
+        }
+      }
+    ]
+  }
+}

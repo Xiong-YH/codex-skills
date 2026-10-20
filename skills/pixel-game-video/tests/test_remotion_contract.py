@@ -154,6 +154,23 @@ class RemotionContractTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "owns its props|Remotion.*composition"):
                     compile_project(self.project)
 
+    def test_canvas_presenter_performance_is_rejected_by_remotion(self):
+        self.remotion_project()
+        self.change("timeline.json", lambda d: d["shots"][0].update(performance=[
+            {"pose": "talk", "start": {"event": "s1.start"}, "end": {"event": "s1.done"}}
+        ]))
+        with self.assertRaisesRegex(ValueError, "Remotion actor performance is not supported"):
+            compile_project(self.project)
+
+    def test_canvas_narrative_progress_is_rejected_by_remotion(self):
+        self.remotion_project()
+        self.change("timeline.json", lambda d: d.update(progress={"nodes": [
+            {"label": "问题", "at": {"event": "s1.enter"}},
+            {"label": "选择", "at": {"event": "s2.enter"}}
+        ]}))
+        with self.assertRaisesRegex(ValueError, "Remotion narrative progress is not supported"):
+            compile_project(self.project)
+
     def test_focus_desk_rejects_invalid_labels_phase_and_action_order(self):
         patches = [{"phase": "unknown"}, {"heading": " "}, {"heading": "字" * 49},
                    {"labels": ["一", "二"]}, {"labels": ["一", "二", 3]},
