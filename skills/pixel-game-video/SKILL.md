@@ -20,7 +20,7 @@ description: 制作和修改像素游戏感视频，按结构化镜头、素材�
 | 游戏感、操作反馈与局部细节 | [游戏反馈细节库](modules/scenes/GAME_FEEL.md)，按实际状态选择触点、运动和声音 |
 | 相机、物体运动、转场执行、特效 | [motion](modules/motion/GUIDE.md) |
 | 音色、声像、事件音效与配乐 | [audio](modules/audio/GUIDE.md)；六种已确认街机音效见 [ARCADE](modules/audio/ARCADE.md)；Chill Wave 导入、音量、淡化与旁白压低见 [配乐](modules/audio/MUSIC.md) |
-| 旁白音色与试听参考 | [旁白音色](modules/audio/VOICES.md)；计算机口播系列默认“解说小帅”，新文案需外部生成旁白后导入 |
+| 旁白音色与配音 | [旁白音色](modules/audio/VOICES.md)；计算机口播系列默认“解说小帅”，按 [剪映专业版文本朗读](modules/audio/JIANYING.md) 直接生成当前文案，再导入项目 PCM 旁白 |
 | 游戏机制、嘴型、表演 | [scenes](modules/scenes/GUIDE.md) |
 
 从 `init PROJECT` 建轻量工程；编辑后运行 `validate`、`build`、`preview`、`render`。命令均为 `python scripts/video.py <命令> PROJECT`。依赖与环境配置见 [运行](references/runtime.md)，增加能力见 [模块维护](references/module-development.md)。

@@ -20,9 +20,9 @@
 
 ## 旁白与验收
 
-本计算机口播系列的默认旁白音色为用户选定的“解说小帅”，原始试听与使用范围见 [旁白音色](VOICES.md)。其他项目按用户要求选声；音色参考不代替当前文案的旁白录音。
+本计算机口播系列的默认旁白音色为用户选定的“解说小帅”，通过 [剪映专业版原生文本朗读](JIANYING.md) 直接生成当前文案，原始试听与使用范围见 [旁白音色](VOICES.md)。其他项目按用户要求选声；音色参考不代替当前文案的旁白录音。
 
-`project.audioMode="narration+sfx"`启用旁白；`audio.json.narration`填写 `id/file/at/gain`。file须为项目内相对路径，48kHz、16-bit、单或双声道PCM；旁白不得重叠或超出成片。录音／合成语音作为外部素材导入，skill不内置TTS。旁白参与输入哈希，独立导出携带WAV；嘴型与字幕仍按事件安排。
+`project.audioMode="narration+sfx"`启用旁白；`audio.json.narration`填写 `id/file/at/gain`。file须为项目内相对路径，48kHz、16-bit、单或双声道PCM；旁白不得重叠或超出成片。剪映生成的旁白或用户提供的录音作为项目素材导入；基础引擎负责 PCM 混音，未接公开 TTS API 或声线克隆。旁白参与输入哈希，独立导出携带WAV；嘴型与字幕仍按事件安排。
 
 `audio.json.speechDuck`为旁白期间音效保留比例，0–1，缺省0.28；director在production-plan同名字段设置。它与cue.level都由项目混音决定，已确认音色不代表已确认成片音量。`--silent`或silent模式不生成、内嵌或复用音轨。
 

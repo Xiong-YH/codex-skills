@@ -13,5 +13,24 @@
   "durationSeconds": 17.972208,
   "codec": "mp3",
   "sampleRate": 44100,
-  "channels": 2
+  "channels": 2,
+  "synthesis": {
+    "provider": "剪映专业版",
+    "appBundleId": "com.lemon.lvpro",
+    "method": "native-desktop-text-reading-ui",
+    "voiceName": "解说小帅",
+    "voiceLabel": "中文·平淡",
+    "apiVoiceId": null,
+    "verifiedOn": "2026-10-20",
+    "verifiedPlatform": "macOS",
+    "status": "generated-and-exported",
+    "sampleFile": "jieshuo-xiaoshuai-generated.mp3",
+    "text": "这段旁白由剪映的解说小帅生成。接下来的视频，默认使用这个音色，配合轻柔的背景音乐，让每一句讲解都清楚自然。",
+    "sha256": "1c50b1c09aa0b39644a218f2562bd6b96944340e703b5700fbbeb0e24ef157f2",
+    "bytes": 240794,
+    "durationSeconds": 10.031,
+    "codec": "mp3",
+    "sampleRate": 44100,
+    "channels": 2
+  }
 }
