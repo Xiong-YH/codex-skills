@@ -42,6 +42,17 @@ def load_sources(project):
     text = unique(plan["text"], "cueId", "production-plan.text")
     if shots.keys() != plans.keys():
         raise ValueError("storyboard 与 production-plan 的 shot ID 必须完全一致。")
+    policy = brief.get('singleNarrator')
+    if policy:
+        for shot_id, shot_plan in plans.items():
+            if shot_plan['actor'] not in (None, policy['narrator']):
+                raise ValueError(f'{shot_id}: single-narrator presenter must be {policy["narrator"]}; supporting characters belong in illustration media, not the actor slot')
+        for shot in shots.values():
+            if shot['performance']:
+                raise ValueError(f'{shot["id"]}: single-narrator speech keeps one fixed pose; whole-body performance switching is not a mouth animation')
+        for entry in [*script['cues'], *script['labels']]:
+            if any(name and name in entry['text'] for name in policy['hiddenCharacterNames']):
+                raise ValueError(f'{entry["id"]}: internal character names cannot appear in displayed or spoken text')
     used_cues = []
 
     def validate_labels(value, field="params"):

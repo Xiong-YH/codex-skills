@@ -33,4 +33,4 @@ description: Turn an idea or existing script into a pixel game-style video throu
 跨空间叙事实例：[18 秒考研口播](examples/cs-postgrad-narrative-18s/)。复用其设计方法，题材、时长与转场组合按新工程决定。
 
 
-插图与人物表演实例：[32 秒 AI 行业短片](examples/ai-industry-32s/)。包含实际像素插图、事件驱动姿态、固定叙事节点进度条与可再生成的项目素材；生成插图需实际调用图像工具，不能用流程图代替已要求的插图。
+历史插图素材与失败复盘：[32 秒 AI 行业短片](examples/ai-industry-32s/)。其中配角开场口播、姓名条、多姿态切换和细线串点导航已撤回，不能作为新片默认方案。计算机口播按系列规则由单一主角固定姿态只开闭嘴，配角用于插图；先在 brief.singleNarrator 声明讲述者与隐藏姓名，顶部使用实心矩形进度条。
