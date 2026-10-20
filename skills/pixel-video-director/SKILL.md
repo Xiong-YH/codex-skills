@@ -9,9 +9,10 @@ description: 把创意或既有文案转成像素视频的可见动作、构图�
 
 | 当前任务 | 读取 | 执行产物 |
 | --- | --- | --- |
+| 开始制作、续作或复盘 | 按 [基础依赖](references/handoff.md) 定位其 `references/production-principles.md`，再读当前项目要求 | 确认适用的通用原则、系列偏好和单片限制；新经验回到所属记录 |
 | 新创意、脚本或分镜 | [创作合同](references/authoring.md)、[视觉表达方法](references/visual-system.md)、[视觉叙事](references/visual-storytelling.md) | 先确定信息关系、组件/场景和主体变化，按范围交付分镜；需要制作时写四份创作源 |
 | 只做画面方案、加强画面感或局部接镜 | [视觉表达方法](references/visual-system.md)、[视觉叙事](references/visual-storytelling.md)、[视觉分镜与工程映射](references/visual-storyboard.md) | 交付主体状态变化、构图光影、运镜、前后承接与素材需求；已有工程沿用其源文件 |
-| 背景生成、用户素材或局部替换 | [视觉表达方法](references/visual-system.md)、[素材替换](references/media-replacement.md) | 固定基调和样板，按镜头选择项目素材 |
+| 背景设计、生成、用户素材或局部替换 | [视觉表达方法](references/visual-system.md)、基础层 `modules/style/ART-DIRECTION.md`、[素材替换](references/media-replacement.md) | 先按内容构思空间与尺度，再复用或制作素材；样板只作质感参考 |
 | 选人物、人设或动作表演 | 按基础依赖定位 `modules/library/CHARACTERS.md` | 当前五人角色分工、动作参考与半身仿真人使用范围；能力状态以素材库为准 |
 | 转场选型或设计 | [视觉叙事](references/visual-storytelling.md)；实现时按基础依赖定位其 `modules/motion/TRANSITIONS.md`，再读所选配方 | 写清前镜交出、后镜接住、动作阶段与落稳后的讲解事件 |
 | 学习《深度工作》参考片的画面方法 | [参考片观察](references/deep-work-case.md) | 迁移母题、光影、尺度与语义承接；新主题重新选择人物、道具和场所 |
@@ -22,7 +23,7 @@ description: 把创意或既有文案转成像素视频的可见动作、构图�
 | 审片、修改或继续已有工程 | [Review 与影响范围](references/review.md) | review.json 与定向源文件修改 |
 
 1. 从用户已有产物继续；缺失信息可合理推断时记录在 brief，不设置逐阶段审批。
-   新分镜用 `visual` 明确观众疑问、表达形式、主体、动作、理解结果与承接；具体参数仍须选已实现能力。卡片可承载图像和场景，背景由本镜任务决定，不把样板当固定背景。
+   新分镜用 `visual` 明确观众疑问、表达形式、主体、动作、理解结果与承接，并写清有解释作用的空间与尺度；先构思再找素材，已有房间不作为默认菜单。具体机制仍须选已实现能力或补实现；新背景可用项目素材接入。
    纯设计没有音轨时标明建议时长；不为交付分镜强制建工程或运行 doctor。设计附件不能成为已有工程的第二份时间线，映射规则见视觉分镜参考。
 2. 工程阶段文案只改 script，镜头时长与事件只改 storyboard，能力选择只改 production-plan。按 ID 引用，执行 `handoff` 生成 VideoSpec。
 3. 制作时通过 `doctor` 定位基础能力并查询 `catalog`；超出已实现的场景需先补场景实现。依赖缺失明确报错。
