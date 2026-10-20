@@ -2,8 +2,8 @@ import React, {useLayoutEffect, useRef, useState} from 'react';
 import {cancelRender, continueRender, delayRender, useVideoConfig} from 'remotion';
 import type {Cue, Payload, Shot} from './types';
 
-type CueTextProps = {payload: Payload; cue: Cue; color?: string};
-const CueText: React.FC<CueTextProps> = ({payload, cue, color}) => {
+type CueTextProps = {payload: Payload; cue: Cue; color?: string; fontSize?: number};
+export const CueText: React.FC<CueTextProps> = ({payload, cue, color, fontSize}) => {
   const {height} = useVideoConfig();
   const {style} = payload;
   const node = useRef<HTMLDivElement>(null);
@@ -15,7 +15,7 @@ const CueText: React.FC<CueTextProps> = ({payload, cue, color}) => {
   const y = cue.y ?? defaults[cue.role] ?? 0.5;
   const safeX = style.safeArea?.x ?? 0.05;
   const width = Math.min(0.86, 2 * Math.min(x - safeX, 1 - safeX - x));
-  const size = height * (style.textRoles?.[cue.role] ?? 0.03);
+  const size = fontSize ?? height * (style.textRoles?.[cue.role] ?? 0.03);
   useLayoutEffect(() => {
     let live = true;
     document.fonts.ready.then(() => {

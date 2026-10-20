@@ -110,7 +110,18 @@ def export_project(root, destination):
     write_json(destination / "export-manifest.json", {"sourceInputHash": resolved["inputHash"], "mode": "standalone-direct-snapshot", "runtime": "pixel-game-video", "project": "project"})
     npm_directory = 'pixel-game-video/engine/remotion' if resolved['project']['renderBackend'] == 'remotion' else 'pixel-game-video'
     npm_install = 'npm ci' if resolved['project']['renderBackend'] == 'remotion' else 'npm install'
-    (destination / "RUN.md").write_text(f"# Standalone video snapshot\n\nInstall Python dependencies in pixel-game-video/requirements.txt and run `{npm_install}` in {npm_directory}; configure browser and FFmpeg as described in pixel-game-video/references/runtime.md.\n\nBuild with `python pixel-game-video/scripts/video.py build project`. Remotion projects can preview with `python pixel-game-video/scripts/video.py studio project`; export an MP4 when needed with `python pixel-game-video/scripts/video.py render project`. The export bundles source/assets, not runtime binaries or fonts. Director sources, when present, are preserved under authoring-sources; this project is an editable direct snapshot.\n", encoding="utf-8")
+    workbench_note = ''
+    if resolved['project']['renderBackend'] == 'remotion':
+        from engine.builder import build as build_media
+        exported = compile_project(target, skill_root=runtime, write=True)
+        build_media(target, exported, runtime, silent=exported['project']['audioMode'] == 'silent')
+        workbench_note = ("\nFor supported focus-desk projects, open the editable local workbench with "
+                          "`python pixel-game-video/scripts/video.py workbench project --port 5208`. "
+                          "Install its bundled UI dependencies with `npm ci` in pixel-game-video/workbench on first use. "
+                          "The generated `project/build/remotion/src/workbench.ts` splits scenes, captions, transitions and SFX. "
+                          "Save your workbench project JSON separately before leaving; it is an independent editing branch and "
+                          "does not rewrite director JSON. The workbench exports its edited timeline as MP4.\n")
+    (destination / "RUN.md").write_text(f"# Standalone video snapshot\n\nInstall Python dependencies in pixel-game-video/requirements.txt and run `{npm_install}` in {npm_directory}; configure browser and FFmpeg as described in pixel-game-video/references/runtime.md.\n\nBuild with `python pixel-game-video/scripts/video.py build project`. Remotion projects can preview with `python pixel-game-video/scripts/video.py studio project`; export an MP4 when needed with `python pixel-game-video/scripts/video.py render project`. The export bundles source/assets, not runtime binaries or fonts. Director sources, when present, are preserved under authoring-sources; this project is an editable direct snapshot.\n{workbench_note}", encoding="utf-8")
     return {"exported": str(destination), "sourceInputHash": resolved["inputHash"]}
 
 
@@ -131,7 +142,12 @@ def main(argv=None):
     music.add_argument('--overwrite', action='store_true')
     schema = subs.add_parser("schemas")
     schema.add_argument("--output", type=Path, default=SKILL_ROOT / "schemas")
-    for name in ("validate", "build", "studio", "preview", "render", "inspect", "export-project"):
+    jianying = subs.add_parser('export-jianying', help='Export a neutral Jianying draft with native captions and audio; does not install it')
+    jianying.add_argument('project', type=Path)
+    jianying.add_argument('destination', type=Path)
+    jianying.add_argument('--plate', type=Path, required=True, help='Matching clean MP4 plate without caption tracks or audio')
+    jianying.add_argument('--workbench-project', type=Path)
+    for name in ("validate", "build", "studio", "workbench", "preview", "render", "inspect", "export-project"):
         command = subs.add_parser(name)
         command.add_argument("project", type=Path)
         if name in ("preview", "render"):
@@ -141,6 +157,9 @@ def main(argv=None):
             command.add_argument("--overwrite", action="store_true")
         if name == "export-project":
             command.add_argument("destination", type=Path)
+        if name == 'workbench':
+            command.add_argument('--port', type=int, default=5208)
+            command.add_argument('--no-open', action='store_true')
         if name == "inspect":
             command.add_argument("--name", default="film")
     args = parser.parse_args(argv)
@@ -166,6 +185,9 @@ def main(argv=None):
         emit(module.import_bgm(args.project, args.source, overwrite=args.overwrite))
     elif args.command == "export-project":
         emit(export_project(args.project.resolve(), args.destination.resolve()))
+    elif args.command == 'export-jianying':
+        from engine.jianying_export import export_jianying
+        emit(export_jianying(args.project, args.destination, plate=args.plate, workbench_project=args.workbench_project))
     elif args.command == "inspect":
         from engine.render import inspect
         report = inspect(args.project.resolve(), name=args.name)
@@ -186,6 +208,9 @@ def main(argv=None):
             from engine.remotion_backend import studio
             process = studio(root)
             return process.wait()
+        elif args.command == 'workbench':
+            from engine.workbench_bridge import open_workbench
+            emit(open_workbench(root, SKILL_ROOT, port=args.port, no_open=args.no_open))
         else:
             from engine.render import render
             end = args.end_frame

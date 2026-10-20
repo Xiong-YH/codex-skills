@@ -113,11 +113,14 @@ def build(project_root: Path | str, resolved: dict, skill_root: Path | str,
             stale = output / name
             if stale.is_file():
                 stale.unlink()
-    _write(public / "payload.json", {"resolved": resolved, "style": style, "assets": assets, "audio": audio})
+    payload = {"resolved": resolved, "style": style, "assets": assets, "audio": audio}
+    _write(public / "payload.json", payload)
+    from .workbench_bridge import generate as generate_workbench
+    generate_workbench(root, resolved, payload, skill)
     files = {p.relative_to(root).as_posix(): _hash(p)
              for p in sorted(generated.rglob("*"))
              if p.is_file() and not set(p.relative_to(generated).parts) & IGNORED_BUILD_PARTS}
-    for name in ("animation-sfx.wav", "sfx-events.json"):
+    for name in ("animation-sfx.wav", "sfx-events.json", "workbench-manifest.json"):
         path = output / name
         if path.is_file():
             files[path.relative_to(root).as_posix()] = _hash(path)

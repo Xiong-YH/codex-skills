@@ -6,13 +6,21 @@ import shutil
 EXCLUDED_PARTS = {'__pycache__', 'node_modules', '.venv', '.cache', '.remotion', 'work', 'build', 'outputs',
                   '.git', 'sfx-bank', 'arcade-expanded', 'arcade-charge'}
 EXCLUDED_SUFFIXES = {'.pyc', '.pyo', '.log', '.exe', '.dll', '.so', '.dylib'}
+WORKBENCH_GENERATED = {'node_modules', 'dist', 'exports', 'gen', 'proj', 'public',
+                       '.parity', '.render-public', '.vite', '.cache', '.remotion'}
+WORKBENCH_GENERATED_FILES = {'workbench/src/projMeta.ts', 'workbench/src/mediaManifest.ts'}
 
 
 def skill_files(root, *, include_tests=True):
     root = Path(root)
     for path in sorted(root.rglob('*')):
         relative = path.relative_to(root)
-        if not path.is_file() or set(relative.parts) & EXCLUDED_PARTS:
+        if path.is_symlink() or not path.is_file() or set(relative.parts) & EXCLUDED_PARTS:
+            continue
+        if relative.parts[0] == 'workbench' and (
+                set(relative.parts[1:]) & WORKBENCH_GENERATED or
+                path.name.startswith(('.dev.', '.dev-')) or path.suffix == '.tsbuildinfo' or
+                relative.as_posix() in WORKBENCH_GENERATED_FILES):
             continue
         if path.suffix.lower() in EXCLUDED_SUFFIXES or relative.as_posix() == 'modules/audio/charge.py':
             continue

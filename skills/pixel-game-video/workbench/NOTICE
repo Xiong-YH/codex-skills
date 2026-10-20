@@ -1,0 +1,6 @@
+Pixel Game Video Workbench is adapted from video-shotcraft Workbench.
+Original project: https://github.com/Vincentwei1021/video-shotcraft
+Copyright 2026 Wei Yihao. Licensed under Apache License 2.0 (see LICENSE).
+Modified 2026-10-21: standalone Pixel Game Video integration, local-only export API,
+project-specific persistence, independent basic-card library, pinned runtime dependencies.
+Modified files carry an adaptation notice. Remotion and other dependencies retain their own licenses.

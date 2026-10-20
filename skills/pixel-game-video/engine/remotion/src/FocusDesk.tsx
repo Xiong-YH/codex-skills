@@ -174,7 +174,7 @@ export const DeskWorld: React.FC<{payload: Payload; shot: Shot; frame: number}> 
 };
 
 /** Source changes only while an opaque physical spread covers the complete frame. */
-const BookSweep: React.FC<{progress: number; x: number; y: number}> = ({progress, x, y}) => {
+export const BookSweep: React.FC<{progress: number; x: number; y: number}> = ({progress, x, y}) => {
   if (progress <= 0 || progress >= 1) return null;
   const opening = progress < 0.5;
   const p = smooth(opening ? progress / 0.46 : (progress - 0.56) / 0.44);

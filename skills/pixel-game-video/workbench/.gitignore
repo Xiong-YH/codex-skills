@@ -1,0 +1,15 @@
+node_modules/
+dist/
+*.tsbuildinfo
+proj
+public/*
+exports/
+.render-public/
+.dev*.pid
+.dev.log
+.parity/
+src/mediaManifest.ts
+src/projMeta.ts
+tests/.bundle-*.mjs
+src/projMeta.ts
+src/mediaManifest.ts

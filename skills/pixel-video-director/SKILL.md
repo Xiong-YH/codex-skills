@@ -19,7 +19,7 @@ description: 把创意或既有文案转成像素视频的可见动作、构图�
 | 音效、配乐与混音 | 按基础依赖定位其 `modules/audio/GUIDE.md`；街机＋鼓点读 `ARCADE.md`；延续计算机口播系列时读 [配乐要求](references/computing-voiceover.md#配乐要求) | 先确认声音素材，再设计项目事件、音量与旁白关系；按本项目已确认要求选择配乐 |
 | 旁白音色与配音 | 按基础依赖定位 `modules/audio/VOICES.md` 与 `modules/audio/JIANYING.md` | 计算机口播系列默认“解说小帅”；将音色与参考 ID 带入 brief，直接操作剪映专业版原生文本朗读生成当前台词，再测时长和交接 |
 | 延续本项目的计算机知识口播 | [已确认的表达方向](references/computing-voiceover.md) | 将相关偏好带入 brief，按新主题设计画面 |
-| 交接、预览、出片 | [基础依赖与命令](references/handoff.md) | video/ 中的 VideoSpec 与成片 |
+| 工程内剪辑、预览、出片与可编辑交付 | [基础依赖与交接流程](references/handoff.md)；需要可视化编辑时读基础 skill 的 `references/workbench.md` | 同一事件时间线驱动的 VideoSpec、所选后端预览、工作台多轨项目与按需成片 |
 | 审片、修改或继续已有工程 | [Review 与影响范围](references/review.md) | review.json 与定向源文件修改 |
 
 1. 从用户已有产物继续；缺失信息可合理推断时记录在 brief，不设置逐阶段审批。
@@ -29,6 +29,7 @@ description: 把创意或既有文案转成像素视频的可见动作、构图�
 3. 制作时通过 `doctor` 定位基础能力并查询 `catalog`；超出已实现的场景需先补场景实现。依赖缺失明确报错。
 4. `video/` 是生成物；沿 `source-map.json` 回改源文件。工具拒绝静默覆盖手改生成文件。
 5. 审片绑定本次输入和 MP4 哈希；连续播放、文字核验和听音都要有实际证据，未检查记为 `not_reviewed`。
+6. 原生 Remotion 可视化交付先验证同源拆解，再实测工作台改文案、镜头和独立音效、保存重开及导出。需要剪映草稿时按基础 skill 的 `references/jianying-export.md` 导出并单独核对安装与目标版本。工作台项目 JSON 是独立剪辑分支，不自动回写导演源；交付时主动打开工作台并另存 JSON，不把 Studio 或浏览器缓存当作完整编辑交付。
 
 分析新参考片需查看真实画面，运镜和转场需核对连续片段或前后帧；无法取得素材时，明确未确认内容，可继续提供标为新设计的方案。设计稿、生成素材、已实现能力和审过的成片分别记录，参考手法不自动成为引擎能力。
 
