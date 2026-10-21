@@ -1,0 +1,46 @@
+# Version only the skills and repository metadata. All other root content,
+# including docs/, legacy/, work/ and outputs/, stays on the local machine.
+/*
+!/.gitignore
+!/.gitattributes
+!/AGENTS.md
+!/README.md
+!/LICENSE
+!/LICENSE.*
+!/NOTICE
+!/skills/
+
+# Generated files and local dependencies, including inside a skill.
+__pycache__/
+*.py[cod]
+node_modules/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+.playwright/
+ms-playwright/
+browser-profile*/
+.env
+.env.*
+!.env.example
+work/
+build/
+outputs/
+sfx-bank/
+*.exe
+*.dll
+*.pyd
+*.so
+*.dylib
+*.mp4
+*.mov
+*.webm
+*.zip
+*.log
+.DS_Store
+Thumbs.db
+
+# Approved PNG/JPG assets and PCM WAV masters/example narration are skill
+# dependencies: keep them versioned rather than ignoring all binary media.
