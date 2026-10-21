@@ -1,8 +1,8 @@
 # 原生 Remotion 后端
 
-Remotion 负责基础层的场景绘制、帧采集和 Studio 预览。导演仍决定可见动作与镜头，四份 VideoSpec 仍由编译器统一解析成整数帧；不再维护第二张组件时间表，也不把 Canvas 成片嵌入 React。
+Remotion 负责基础层的场景绘制、帧采集和 Studio 预览。导演仍决定可见动作与镜头，四份 VideoSpec 仍由编译器统一解析成整数帧；不再维护第二张组件时间表。本页只说明原生 React 执行器；Canvas 通过同源逐帧 runtime 接入工作台的流程见 [本地工作台](workbench.md)，不会把 Canvas 成片 MP4 嵌入 React。
 
-制作、修改镜头衔接或交付可编辑工程时，先按 [制作与可编辑时间线](production-workflow.md) 把剪辑落实到创作源，再检查 Studio 与导出结果。需要浏览器多轨编辑时读 [本地工作台](workbench.md)；工作台在同一原生合成上拆解镜头、字幕、转场和独立音效。下文说明当前后端的安装、能力和生成物边界。
+制作时按 [制作与可编辑时间线](production-workflow.md) 建立初始创作源，再强制进入 [本地工作台](workbench.md) 剪辑、保存与最终导出。工作台从同源编译结果拆出镜头、文字、转场、音效、配乐轨道；Studio 用于原生执行器调试。下文的场景白名单仅约束原生后端，不约束工作台的 Canvas runtime 桥接。
 
 ## 安装与预览
 
@@ -19,13 +19,13 @@ python scripts/video.py studio work/my-desk
 
 Node 依赖锁定 Remotion 4.0.534、React 19.2.0，存于 `engine/remotion/package-lock.json`。`doctor` 检查完整出片环境，包括 Python、Node、已有 Chrome/Chromium 和 FFmpeg/ffprobe；仅使用 Studio 时，缺少最后两项不妨碍启动预览。可用 `PIXEL_BROWSER_EXECUTABLE` 指定浏览器，命令不会自动下载浏览器。其他配置见 [运行说明](runtime.md)。
 
-`studio` 先构建，然后打印实际本地 URL。打开该地址，在 `PixelFilm` 查看全片，在 `Scenes/FocusDesk` 单独检查场景；场景 composition 的 `shotIndex` 指向编译后的镜头。默认先交付可交互预览，修改创作源后重新 handoff（director 工程）并 build，再刷新 Studio。
+`studio` 先构建，然后打印实际本地 URL。打开该地址，在 `PixelFilm` 查看全片，在 `Scenes/FocusDesk` 单独检查场景；场景 composition 的 `shotIndex` 指向编译后的镜头。修改创作源后重新 handoff（director 工程）并 build，再刷新 Studio 调试；最终剪辑交付仍从工作台完成。
 
 浏览器可能要求一次用户手势解锁音频上下文；若程序调用播放后帧不推进，点击 Studio 的播放按钮，再检查实际帧号，不能仅凭 `playing=true` 判断播放成功。
 
-明确需要 MP4 时运行 `python scripts/video.py render PROJECT`；需要片段 MP4 时使用 `preview PROJECT --start-frame FIRST --end-frame LAST`。二者沿用现有 FFmpeg 编码、音轨切片、解码帧及媒体核验。区间始终为 `[FIRST,LAST)`，输出帧编号从零开始；Studio 中音轨只挂载一次。
+调试源合成时运行 `python scripts/video.py render PROJECT`；需要对照片段 MP4 时使用 `preview PROJECT --start-frame FIRST --end-frame LAST`。二者沿用现有 FFmpeg 编码、音轨切片、解码帧及媒体核验。区间始终为 `[FIRST,LAST)`，输出帧编号从零开始；Studio 中音轨只挂载一次。
 
-需要直接编辑时运行 `python scripts/video.py workbench PROJECT --port 5208 --no-open`。Studio 的播放头不是保存剪辑的入口；工作台通过 props/schema 改画面参数、通过片段改镜头和独立音效，另存项目 JSON，并从当前项目导出。当前工作台接入本页原生书桌场景，支持独立音效、PCM 旁白和 BGM，分轨须通过本次 PCM 重组检查；压低与 master 包络按源版本烘焙，编辑后需重新听音。暂拒绝独立 `role=title` cue；镜头 `heading` 仍可编辑。工作台导出在 `workbench/exports/` 保留与 MP4 同名的 `.project.json`，用「导出版本 JSON」下载该次提交的时间线，随成片一起交付。
+制作时运行 `python scripts/video.py workbench PROJECT --port 5208 --no-open`。Studio 播放头不是保存剪辑的入口；工作台用 props/schema 改画面参数、用独立片段调整镜头、文字、转场和音频，另存项目 JSON，并从当前项目导出。原生书桌场景与 Canvas runtime 使用不同画面单元；后者承接 Canvas 的现有场景、组件和素材能力，不能据此宣称本页原生执行器已实现它们。工作台支持独立 `role=title` cue；PCM 音效、旁白与 BGM 按本次源混音核对分轨重组。压低与 master 包络按源版本烘焙，编辑后重新听音。导出在 `workbench/exports/` 保留与 MP4 同名的 `.project.json`，交付时用「导出版本 JSON」下载配对时间线。
 
 ## 当前能力
 
@@ -47,9 +47,9 @@ scene params 必须提供 `heading`、恰好三项 `labels`（第一项是主任
 
 ## 构建与可迁移性
 
-`build` 写入 `build/remotion/`（TSX 源码、public/payload.json、可选音轨、依赖清单）、`build/remotion-build.json`、统一时间线及锁。生成目录是派生物，修改它会在渲染时触发哈希拒绝；应修改创作输入或 skill 的原生源码，再构建。Canvas 的 `build/film.html` 不参与这条路径。
+`build` 写入 `build/remotion/`（TSX 源码、public/payload.json、可选音轨、依赖清单）、`build/remotion-build.json`、统一时间线及锁。生成目录是派生物，修改它会在渲染时触发哈希拒绝；应修改创作输入或 skill 的原生源码，再构建。Canvas 工程另有 `build/film.html` 用于源执行器预览；其工作台桥接同样生成 `build/remotion/`，不改变源后端选择。
 
-工作台的 `build/remotion/src/workbench.ts`、`src/workbench-payload.json` 与独立音效也由构建结果生成。工作台清单和原合成共用 payload；首次导入通过 parity 后才交付。开始在工作台修改后，项目 JSON 是独立分支，不能把它与原导演源或生成 TSX 混为一个编辑入口。
+工作台的 `build/remotion/src/workbench.ts`、`src/workbench-payload.json` 与独立音频也由构建结果生成。工作台清单和原合成共用 payload；首次导入通过 parity 后才交付。开始在工作台修改后，项目 JSON 是独立分支，不能把它与原导演源或生成 TSX 混为一个编辑入口。
 
 `export-project` 继续导出可编辑 direct 快照，附完整基础源码、工作台与资产，排除 node_modules、缓存、浏览器和字体二进制。工作台编辑分支另存项目 JSON；移到新环境后按导出 RUN.md 安装依赖、重新构建并导入该 JSON。生成目录的本机依赖链接只是预览便利，不是交付依赖。
 

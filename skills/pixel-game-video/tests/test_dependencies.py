@@ -14,6 +14,7 @@ from engine.builder import build
 from engine.compiler import compile_project, read_json, write_json
 from engine.delivery import copy_skill, skill_files
 from engine.render import _build_bindings
+from engine.workbench_bridge import require_supported
 
 spec = importlib.util.spec_from_file_location('video_cli_for_delivery', ROOT / 'scripts/video.py')
 cli = importlib.util.module_from_spec(spec)
@@ -92,6 +93,14 @@ class DependencyTests(unittest.TestCase):
         exported_files = {path.relative_to(exported / 'pixel-game-video').as_posix()
                           for path in (exported / 'pixel-game-video').rglob('*') if path.is_file()}
         self.assertEqual(exported_files, {p.as_posix() for p in skill_files(source, include_tests=False)})
+        bridge = require_supported(exported / 'project')
+        self.assertTrue(bridge['supported'])
+        self.assertTrue(all(unit['component'] == 'CanvasShotUnit' for unit in bridge['manifest']['shots']))
+        run = (exported / 'RUN.md').read_text(encoding='utf-8')
+        self.assertIn('must use the local workbench for both Canvas and native Remotion', run)
+        self.assertIn('workbench project --port 5208', run)
+        self.assertIn('Each track\'s export button', run)
+        self.assertNotIn('render project`', run)
         result = subprocess.run([sys.executable, '-X', 'utf8',
             str(exported / 'pixel-game-video/scripts/video.py'), 'build', str(exported / 'project')],
             capture_output=True, text=True, encoding='utf-8')

@@ -81,7 +81,7 @@ class WorkbenchBridgeTests(unittest.TestCase):
         self.assertIsInstance(caption['props']['x'], (int, float))
         self.assertIsInstance(caption['props']['y'], (int, float))
         self.assertEqual(manifest['transitions'][0]['props']['outgoingShotId'], 's01')
-        self.assertEqual(manifest['order'][:2], ['captions', 'transitions'])
+        self.assertEqual(manifest['order'][0], 'captions')
         self.assertEqual(manifest['sfx'], [])
         self.assertTrue(status['audioReport']['empty'])
         require_supported(self.project, resolved)
@@ -137,6 +137,9 @@ class WorkbenchBridgeTests(unittest.TestCase):
                 self.assertEqual(cue['volume'], 1)
         self.assertEqual(int(np.abs(original - rebuilt).max()), 0)
         self.assertEqual(status['audioReport']['maxAbsPcmError'], 0)
+        stored = sum(len(pcm(public / cue['src'])) for kind in ('sfx', 'narration', 'bgm') for cue in manifest[kind])
+        self.assertEqual(status['audioReport']['stemStorageSamples'], stored)
+        self.assertLess(stored, status['audioReport']['denseStemStorageSamples'])
         require_supported(self.project, resolved)
         verify_build(self.project, resolved)
 
@@ -147,17 +150,17 @@ class WorkbenchBridgeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'different timeline|rebuild'):
             require_supported(self.project, changed)
 
-    def test_title_cues_do_not_silently_keep_old_global_visibility_rules(self):
+    def test_title_cues_import_as_independent_editable_clips(self):
         write_json(self.project / 'text.json', {'cues': [{
             'id': 'title', 'role': 'title', 'text': '独立标题',
             'start': {'event': 's01.enter'}, 'end': {'event': 's01.exit'},
         }]})
         resolved, status = self.build()
-        self.assertFalse(status['supported'])
-        self.assertIn('title', status['reason'].lower())
+        self.assertTrue(status['supported'])
+        self.assertEqual(status['manifest']['captions'][0]['props']['role'], 'title')
+        self.assertEqual(status['manifest']['captions'][0]['props']['text'], '独立标题')
         verify_build(self.project, resolved)
-        with self.assertRaisesRegex(ValueError, 'title'):
-            require_supported(self.project, resolved)
+        require_supported(self.project, resolved)
 
 
 if __name__ == '__main__':

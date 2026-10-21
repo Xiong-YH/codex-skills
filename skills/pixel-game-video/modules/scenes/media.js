@@ -10,7 +10,7 @@
   }
   P.media={image,draw(e,source){
     const g=e.ctx;g.fillStyle=e.colors.background;g.fillRect(0,0,e.width,e.height);
-    image(e,e.assets[source.assetKey],{x:0,y:0,width:e.width,height:e.height},source.fit,source.anchorX,source.anchorY);
+    image(e,e.frameAssets?.(source.assetKey,e.frame)||e.assets[source.assetKey],{x:0,y:0,width:e.width,height:e.height},source.fit,source.anchorX,source.anchorY);
     if(source.dim){g.save();g.globalAlpha=source.dim;g.fillStyle=e.colors.background;g.fillRect(0,0,e.width,e.height);g.restore();}
   }};
 })(globalThis.PixelVideo=globalThis.PixelVideo||{});

@@ -8,6 +8,8 @@ export interface ClipData {
   start: number;
   /** 时间轴上占据的长度（帧）——可短于/长于卡片原始时长（裁剪/定格延长） */
   duration: number;
+  /** Original unit length used to clamp actions after trims/holds; unaffected by timeline edits. */
+  sourceDurationInFrames?: number;
   /** 裁入点：从卡片素材的第几帧开始播（源帧），控制动效的进场时机 */
   inOffset: number;
   /** 变速倍率：每走 1 时间轴帧，源时间前进 speed 帧 */
@@ -28,6 +30,8 @@ export interface ClipData {
 export interface TrackData {
   id: string;
   name: string;
+  /** Semantic editing lane; persisted with project JSON, independent of its display name. */
+  role?: "shot" | "caption" | "title" | "transition" | "overlay" | "sfx" | "bgm" | "narration";
   hidden?: boolean;
   clips: ClipData[];
 }
@@ -44,6 +48,8 @@ export interface ProjectData {
   background?: string;
   /** 由哪个成片清单导入（清单 name + total）——`?import=project` 用它判断是否需要重新导入 */
   source?: string;
+  /** Retain absolute full-film duration in independent-track exports. */
+  exportDurationInFrames?: number;
   tracks: TrackData[];
 }
 
@@ -56,7 +62,7 @@ export const projectEndFrame = (project: ProjectData): number => {
   let end = 0;
   for (const t of project.tracks)
     if (!t.hidden) for (const c of t.clips) end = Math.max(end, c.start + c.duration);
-  return end;
+  return Math.max(end, project.exportDurationInFrames ?? 0);
 };
 
 /** Editing lanes include hidden clips so they remain reachable for further edits. Playback/export

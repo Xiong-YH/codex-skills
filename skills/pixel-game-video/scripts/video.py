@@ -108,20 +108,34 @@ def export_project(root, destination):
         project["authoringMode"] = "direct"
         write_json(target / "project.json", project)
     write_json(destination / "export-manifest.json", {"sourceInputHash": resolved["inputHash"], "mode": "standalone-direct-snapshot", "runtime": "pixel-game-video", "project": "project"})
-    npm_directory = 'pixel-game-video/engine/remotion' if resolved['project']['renderBackend'] == 'remotion' else 'pixel-game-video'
-    npm_install = 'npm ci' if resolved['project']['renderBackend'] == 'remotion' else 'npm install'
-    workbench_note = ''
-    if resolved['project']['renderBackend'] == 'remotion':
-        from engine.builder import build as build_media
+    # Rebuild with the copied runtime and copied media, then verify its live
+    # workbench manifest. This exercises portability for Canvas and native
+    # Remotion equally; no source build directory or cached film is copied.
+    from engine.builder import build as build_media
+    from engine.workbench_bridge import require_supported
+    previous_bytecode_policy = sys.dont_write_bytecode
+    sys.dont_write_bytecode = True
+    try:
         exported = compile_project(target, skill_root=runtime, write=True)
         build_media(target, exported, runtime, silent=exported['project']['audioMode'] == 'silent')
-        workbench_note = ("\nFor supported focus-desk projects, open the editable local workbench with "
-                          "`python pixel-game-video/scripts/video.py workbench project --port 5208`. "
-                          "Install its bundled UI dependencies with `npm ci` in pixel-game-video/workbench on first use. "
-                          "The generated `project/build/remotion/src/workbench.ts` splits scenes, captions, transitions and SFX. "
-                          "Save your workbench project JSON separately before leaving; it is an independent editing branch and "
-                          "does not rewrite director JSON. The workbench exports its edited timeline as MP4.\n")
-    (destination / "RUN.md").write_text(f"# Standalone video snapshot\n\nInstall Python dependencies in pixel-game-video/requirements.txt and run `{npm_install}` in {npm_directory}; configure browser and FFmpeg as described in pixel-game-video/references/runtime.md.\n\nBuild with `python pixel-game-video/scripts/video.py build project`. Remotion projects can preview with `python pixel-game-video/scripts/video.py studio project`; export an MP4 when needed with `python pixel-game-video/scripts/video.py render project`. The export bundles source/assets, not runtime binaries or fonts. Director sources, when present, are preserved under authoring-sources; this project is an editable direct snapshot.\n{workbench_note}", encoding="utf-8")
+        require_supported(target, exported)
+    finally:
+        sys.dont_write_bytecode = previous_bytecode_policy
+    (destination / "RUN.md").write_text(
+        "# Standalone video snapshot\n\n"
+        "Install Python dependencies in pixel-game-video/requirements.txt and configure Chrome and FFmpeg as described in pixel-game-video/references/runtime.md. "
+        "Install the bundled editor dependencies with `npm ci` in pixel-game-video/workbench. Runtime binaries, installed packages and fonts are not bundled.\n\n"
+        "Video editing and final export must use the local workbench for both Canvas and native Remotion projects. "
+        "Open it with `python pixel-game-video/scripts/video.py workbench project --port 5208`. "
+        "This command rebuilds the source-backed manifest; `python pixel-game-video/scripts/video.py build project` can also rebuild it explicitly. "
+        "The generated project/build/remotion/src/workbench.ts provides separate shots, titles/subtitles, transitions, sound effects, narration and music tracks. "
+        "Edit those tracks in the browser and export the final MP4 there. Each track's export button produces its independent MP4 and matching project JSON at the full film duration.\n\n"
+        "Save the current workbench project JSON and the JSON paired with each exported MP4 separately. "
+        "Import a saved workbench JSON to continue its edits after reopening. The bundled VideoSpec is a direct source snapshot; "
+        "it does not automatically include later workbench edits, and rebuilding the source does not rewrite a saved editing branch. "
+        "The original render command is only for source debugging or parity comparison, not final delivery. "
+        "Director sources, when present, are preserved under authoring-sources. Generated build files in this export were rebuilt from the copied source and may be regenerated.\n",
+        encoding="utf-8")
     return {"exported": str(destination), "sourceInputHash": resolved["inputHash"]}
 
 

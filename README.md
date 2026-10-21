@@ -4,7 +4,7 @@
 
 | Skill | 职责 |
 | --- | --- |
-| [pixel-game-video](skills/pixel-game-video/SKILL.md) | 按结构化工程制作视频；默认 Canvas，支持有限原生 Remotion 场景，维护素材、运动、声音与技术证据 |
+| [pixel-game-video](skills/pixel-game-video/SKILL.md) | 按结构化工程制作视频，强制工作台分轨剪辑与最终导出；Canvas runtime 与有限原生 Remotion 场景共用编辑交付 |
 | [pixel-video-director](skills/pixel-video-director/SKILL.md) | 把文案设计成可见动作、构图光影、运镜与语义转场；可只交付分镜，或继续制作交接、review 和定向修复 |
 
 画面叙事方法已整合进导演技能，包括视觉母题、光影与尺度、镜头和主体运动的区分、前后场景的语义承接。参考片的黑金配色、人物和 RPG 界面按新主题选择；[《深度工作》观片案例](skills/pixel-video-director/references/deep-work-case.md)仅是学习笔记，不代表基础层已实现其中所有效果。
@@ -24,14 +24,17 @@ flowchart TD
     A[audio 音色与混音] --> F
     SC[scenes 游戏机制与表演] --> F
     C[components 卡片与信息结构] --> F
-    F --> O[HTML / MP4 / 核验证据]
+    F --> W[工作台：镜头 / 文字 / 转场 / 音效 / 配乐独立轨道]
+    W --> O[最终 MP4 / 导出项目 JSON / 核验证据]
     O --> R[review 绑定输入与成片哈希]
     R -->|按源映射修复| S
 ```
 
-基础工程只维护四份 JSON，不复制整个引擎。运镜、配色和音效各在自己的模块维护，两个 `SKILL.md` 只保留使用入口和按需链接。纯视觉方案按 [分镜交接与工程映射](skills/pixel-video-director/references/visual-storyboard.md)编写；进入工程后，时间统一由 storyboard.json 维护。
+基础工程只维护四份 JSON，不复制整个引擎。运镜、配色和音效各在自己的模块维护，两个 `SKILL.md` 只保留使用入口和按需链接。纯视觉方案按 [分镜交接与工程映射](skills/pixel-video-director/references/visual-storyboard.md)编写；进入工程后，初始时间由 storyboard.json 维护；进入工作台编辑后，项目 JSON 保存独立剪辑分支，不自动回写导演源。
 
-Remotion 接在基础执行层：导演与 VideoSpec 保持原有职责，`renderBackend=remotion` 选择原生 React 场景，由同一份编译时间线驱动。当前试作支持书桌场景、整体相机轨迹和书页遮挡转场，尚未迁移 Canvas 的组件与其他场景。用 [12 秒书桌样例](skills/pixel-video-director/examples/remotion-focus-desk/README.md) 进入 Studio，安装与边界见 [Remotion 说明](skills/pixel-game-video/references/remotion.md)。
+制作视频必须在 [本地工作台](skills/pixel-game-video/references/workbench.md) 完成剪辑并导出最终成片。镜头、字幕与其他文字、转场、音效、配乐分别成轨，有旁白时另轨；交付 MP4 与该次导出项目 JSON。现有 Canvas 场景、组件、背景/replacement、人物事件姿态和转场通过同源逐帧 runtime 接入，场景内部配置通过 props 编辑，叙事进度另设叠加单元。它们没有因此全部重写成 React。
+
+`renderBackend=remotion` 仍只选择原生 React 场景：书桌、整体相机轨迹与书页遮挡转场；其白名单与 [Remotion 说明](skills/pixel-game-video/references/remotion.md) 保持一致。[12 秒书桌样例](skills/pixel-video-director/examples/remotion-focus-desk/README.md) 可用于原生执行器调试。两种后端均从同一编译时间线生成工作台初始项目，直接 `render` 用于源合成调试及一致性对照。
 
 ## 要求与经验入口
 
@@ -61,7 +64,7 @@ Remotion 接在基础执行层：导演与 VideoSpec 保持原有职责，`rende
 | 游戏反馈 | 焦点锁定、触点回弹、资源转移、状态确认、阶段进度、任务结算，共6类 |
 | 音效 | 保留已认可的选择、拾取、落位、展开、受阻、奖励6种街机＋鼓点原子；扩展和蓄力实验退出可选库与交付包 |
 | 配乐 | Canvas 与 Remotion 共用可选 BGM 混音，支持音量、淡入淡出、截取/循环和旁白压低；内置 Chill Wave 与来源署名，见[配乐工作流](skills/pixel-game-video/modules/audio/MUSIC.md) |
-| 交付与核验 | HTML、MP4、结构化工程及独立运行快照；技术核验、用户认可和实际视听review分别记录 |
+| 工作台与交付 | 镜头、文字、转场、音效、配乐独立编辑轨道，旁白按需另轨；强制工作台剪辑与最终导出，交付 MP4 与同次项目 JSON，独立运行快照按需提供；当前技术核验与视听 review 分别记录 |
 
 竞赛视频沿用已获正向反馈的 V6 视觉／V8 音画基线。32秒、筹码数量和试练天数属于该片示例；人物、题材偏好按项目记录，不推广为全部技能的固定条件。本轮停止音效探索，以现有已确认内容准备输出。认可范围及撤回原因集中在 [迭代记录](skills/pixel-game-video/references/iteration-history.md)。
 

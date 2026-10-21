@@ -6,8 +6,6 @@ saved later is an independent edit and is never written into director sources.
 """
 from __future__ import annotations
 
-import copy
-import importlib.util
 import json
 import math
 import os
@@ -25,8 +23,10 @@ def _write(path: Path, value: dict) -> None:
 
 
 def support_error(resolved: dict) -> str | None:
+    if resolved['project'].get('renderBackend', 'canvas') == 'canvas':
+        return None  # The selected Canvas runtime executes inside live units.
     if resolved['project'].get('renderBackend') != 'remotion':
-        return 'The local workbench currently requires renderBackend=remotion; Canvas remains the default backend.'
+        return 'Unknown workbench render backend.'
     if any(shot['scene'] != 'scenes.focus-desk.v1' for shot in resolved['shots']):
         return 'The local workbench currently supports only native Remotion scenes.focus-desk.v1 shots.'
     if any(motion['recipe'] not in {'motion.camera-track.v1', 'motion.book-sweep.v1'}
@@ -35,9 +35,6 @@ def support_error(resolved: dict) -> str | None:
     if any(motion['recipe'] == 'motion.book-sweep.v1' and index == 0
            for index, shot in enumerate(resolved['shots']) for motion in shot['motions']):
         return 'A workbench book-sweep transition requires a preceding focus-desk shot.'
-    if any(cue['role'] == 'title' for cue in resolved.get('cues', [])):
-        return ('Standalone title cues are not supported by this workbench bridge yet; use each focus-desk '
-                "shot's editable heading. Normal Remotion builds still support title cues.")
     return None
 
 
@@ -60,7 +57,85 @@ def _heading_schema(props: dict) -> list[dict]:
             _schema('slider', 'titleY', '标题垂直位置', props['titleY'], min=.07, max=.9, step=.01)]
 
 
+def _canvas_visual_manifest(resolved: dict, payload: dict) -> dict:
+    """Expose the compiled scene data, never a baked picture of the film."""
+    project = resolved['project']
+    shots, transitions = [], []
+    transition_recipes = {
+        'motion.focus-punch.v1', 'motion.mosaic-pullback.v1', 'motion.panel-slide.v1',
+        'motion.pixel-iris.v1', 'motion.shatter-reveal.v1', 'motion.book-sweep.v1',
+        'motion.shelf-travel.v1', 'motion.scene-to-card.v1', 'motion.match-dissolve.v1'}
+    fields = [('params', '场景参数'), ('components', '信息组件'), ('objects', '道具'),
+              ('performance', '人物姿态'), ('background', '背景素材'), ('replacement', '替换素材')]
+    for index, shot in enumerate(resolved['shots']):
+        props = {'shotIndex': index, 'sourceUnitId': shot['id'], 'actor': shot.get('actor') or ''}
+        schema = [_schema('text', 'actor', '人物素材 ID（空为无人）', props['actor'])]
+        for key, label in fields:
+            value = shot.get(key, [] if key in ('components', 'objects', 'performance') else None)
+            props[key + 'Json'] = json.dumps(value, ensure_ascii=False, indent=2)
+            schema.append(_schema('textarea', key + 'Json', label + ' JSON', props[key + 'Json']))
+        camera = [m for m in shot['motions'] if m['recipe'] not in transition_recipes]
+        props['cameraJson'] = json.dumps(camera, ensure_ascii=False, indent=2)
+        schema.append(_schema('textarea', 'cameraJson', '相机与局部动作 JSON', props['cameraJson']))
+        label = shot.get('params', {}).get('heading') or shot.get('params', {}).get('label') or shot['id']
+        shots.append({'id': shot['id'], 'label': label, 'from': shot['startFrame'],
+                      'duration': shot['durationFrames'], 'component': 'CanvasShotUnit',
+                      'props': props, 'schema': schema, 'cardId': shot['id'], 'cardName': label})
+        for motion_index, motion in enumerate(shot['motions']):
+            if motion['recipe'] not in transition_recipes:
+                continue
+            params = json.dumps(motion['params'], ensure_ascii=False, indent=2)
+            transitions.append({'id': shot['id'] + '.' + motion['id'], 'label': motion['recipe'],
+                'from': motion['startFrame'], 'duration': motion['endFrame'] - motion['startFrame'],
+                'component': 'CanvasTransitionUnit', 'cardId': shot['id'] + '.' + motion['id'],
+                'props': {'shotIndex': index, 'motionIndex': motion_index, 'paramsJson': params,
+                          'outgoingShotId': resolved['shots'][index - 1]['id'] if index else '',
+                          'incomingShotId': shot['id']},
+                'schema': [_schema('textarea', 'paramsJson', '转场参数 JSON', params)]})
+    overlays = []
+    if resolved.get('progress'):
+        progress = json.dumps(resolved['progress'], ensure_ascii=False, indent=2)
+        overlays.append({'id': 'narrative-progress', 'label': '叙事进度', 'from': 0,
+            'duration': resolved['durationFrames'], 'component': 'CanvasProgressUnit',
+            'props': {'progressJson': progress}, 'schema': [_schema('textarea', 'progressJson', '进度配置 JSON', progress)]})
+    manifest = _manifest_base(resolved, payload)
+    manifest.update(shots=shots, transitions=transitions, overlays=overlays)
+    return manifest
+
+
+def _manifest_base(resolved: dict, payload: dict) -> dict:
+    project, style = resolved['project'], payload['style']
+    canvas = project.get('renderBackend', 'canvas') == 'canvas'
+    defaults = {'title': .105, 'subtitle': .87, 'annotation': .22, 'label': .68}
+    captions = []
+    for index, cue in enumerate(resolved['cues']):
+        # Leave Canvas's own defaults in charge (its subtitle baseline differs
+        # from the native HTML text unit). Inspector still exposes explicit x/y.
+        y = cue.get('y')
+        if y is None:
+            y = defaults.get(cue['role'], .5)
+        props = {'cueIndex': index, 'role': cue['role'], 'text': cue['text'],
+                 'fontSize': project['height'] * style.get('textRoles', {}).get(cue['role'], .03),
+                 'color': style['colors'].get('accent', '#7ed5c8') if cue.get('accent') else style['colors'].get('ink', '#f5ebd4'),
+                 'x': cue['x'] if cue.get('x') is not None else .5, 'y': y}
+        captions.append({'id': cue['id'], 'label': cue['text'], 'from': cue['startFrame'],
+            'duration': cue['endFrame'] - cue['startFrame'],
+            'component': 'CanvasCaptionUnit' if canvas else 'CaptionUnit', 'props': props,
+            'schema': [_schema('textarea', 'text', '文案', props['text']),
+                       _schema('number', 'fontSize', '字号', props['fontSize'], min=12, max=140, step=1, unit='px'),
+                       _schema('color', 'color', '颜色', props['color']),
+                       _schema('slider', 'x', '水平位置', props['x'], min=.05, max=.95, step=.01),
+                       _schema('slider', 'y', '垂直位置', props['y'], min=.03, max=.95, step=.01)],
+            'cardId': cue['id'], 'cardName': cue['text']})
+    return {'name': project['title'], 'fps': project['fps'], 'width': project['width'], 'height': project['height'],
+            'total': resolved['durationFrames'], 'background': style['colors'].get('background', '#111820'),
+            'revision': resolved['inputHash'], 'shots': [], 'transitions': [], 'captions': captions,
+            'overlays': [], 'order': ['captions', 'overlays', 'transitions'], 'sfx': [], 'narration': [], 'bgm': []}
+
+
 def _visual_manifest(resolved: dict, payload: dict) -> dict:
+    if resolved['project'].get('renderBackend', 'canvas') == 'canvas':
+        return _canvas_visual_manifest(resolved, payload)
     project, style = resolved['project'], payload['style']
     shots, transitions, captions = [], [], []
     for index, shot in enumerate(resolved['shots']):
@@ -76,7 +151,7 @@ def _visual_manifest(resolved: dict, payload: dict) -> dict:
             if motion['recipe'] != 'motion.book-sweep.v1':
                 continue
             previous = resolved['shots'][index - 1]
-            props = {'shotIndex': index, 'outgoingShotId': previous['id'], 'motionIndex': motion_index,
+            props = {'shotIndex': index, 'outgoingShotId': previous['id'], 'incomingShotId': shot['id'], 'motionIndex': motion_index,
                      'x': motion['params'].get('x', .36), 'y': motion['params'].get('y', .67),
                      **_heading_props(previous, payload),
                      **{f'label{i + 1}': label for i, label in enumerate(previous['params']['labels'])}}
@@ -87,26 +162,9 @@ def _visual_manifest(resolved: dict, payload: dict) -> dict:
                                     _schema('slider', 'x', '翻书起点 X', props['x'], min=0, max=1, step=.01),
                                     _schema('slider', 'y', '翻书起点 Y', props['y'], min=0, max=1, step=.01)],
                                 'cardId': f"{shot['id']}.{motion['id']}", 'cardName': '翻书转场'})
-    defaults = {'title': .105, 'subtitle': .87, 'annotation': .22, 'label': .68}
-    for index, cue in enumerate(resolved['cues']):
-        props = {'cueIndex': index, 'text': cue['text'],
-                 'fontSize': project['height'] * style.get('textRoles', {}).get(cue['role'], .03),
-                 'color': style['colors'].get('accent', '#7ed5c8') if cue.get('accent') else style['colors'].get('ink', '#f5ebd4'),
-                 'x': cue['x'] if cue.get('x') is not None else .5,
-                 'y': cue['y'] if cue.get('y') is not None else defaults.get(cue['role'], .5)}
-        captions.append({'id': cue['id'], 'label': cue['text'], 'from': cue['startFrame'],
-                         'duration': cue['endFrame'] - cue['startFrame'],
-                         'component': 'CaptionUnit', 'props': props,
-                         'schema': [_schema('textarea', 'text', '文案', props['text']),
-                                    _schema('number', 'fontSize', '字号', props['fontSize'], min=12, max=140, step=1, unit='px'),
-                                    _schema('color', 'color', '颜色', props['color']),
-                                    _schema('slider', 'x', '水平位置', props['x'], min=.1, max=.9, step=.01),
-                                    _schema('slider', 'y', '垂直位置', props['y'], min=.07, max=.9, step=.01)],
-                         'cardId': cue['id'], 'cardName': cue['text']})
-    return {'name': project['title'], 'fps': project['fps'], 'width': project['width'], 'height': project['height'],
-            'total': resolved['durationFrames'], 'background': '#111820', 'revision': resolved['inputHash'],
-            'shots': shots, 'transitions': transitions, 'captions': captions, 'overlays': [],
-            'order': ['captions', 'transitions', 'overlays'], 'sfx': [], 'bgm': []}
+    manifest = _manifest_base(resolved, payload)
+    manifest.update(shots=shots, transitions=transitions)
+    return manifest
 
 
 def _pcm(path: Path):
@@ -115,51 +173,6 @@ def _pcm(path: Path):
         if (stream.getsampwidth(), stream.getframerate(), stream.getnchannels()) != (2, 48000, 2):
             raise ValueError('Workbench parity expects the original 48kHz stereo PCM mix.')
         return np.frombuffer(stream.readframes(stream.getnframes()), dtype='<i2').reshape(-1, 2).astype('int32')
-
-
-def _split_audio(root: Path, skill: Path, resolved: dict, public: Path) -> tuple[list[dict], dict]:
-    import numpy as np
-    fps = resolved['project']['fps']
-    if resolved['project']['audioMode'] == 'silent':
-        return [], {'sampleRate': 48000, 'channels': 2, 'events': [], 'maxAbsPcmError': 0, 'empty': True}
-    directory = skill / 'modules/audio'
-    sys.path.insert(0, str(directory))
-    try:
-        spec = importlib.util.spec_from_file_location('pixel_workbench_mixer', directory / 'mixer.py')
-        mixer = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mixer)
-        original = _pcm(public / 'animation.wav')
-        reconstructed = np.zeros_like(original)
-        entries, records = [], []
-        gain = resolved.get('mix', {}).get('masterGain', .8)
-        for index, event in enumerate(resolved.get('audio', [])):
-            single = copy.deepcopy(resolved)
-            single['audio'] = [{**event, 'frame': 0}]
-            mixed, source_records = mixer.render_sfx(single)
-            at = round(event['frame'] / fps * mixer.S.RATE)
-            count = min(source_records[0]['durationSamples'], len(original) - at)
-            mastered = .8 * np.tanh(mixed[:count] * gain / .8)
-            ident = re.sub(r'[^A-Za-z0-9_.-]+', '-', event['id']).strip('-') or 'event'
-            relative = f'audio/sfx/{index + 1:02d}-{ident}.wav'
-            path = public / relative
-            path.parent.mkdir(parents=True, exist_ok=True)
-            mixer.S.write_wav(path, mastered)
-            decoded = _pcm(path)
-            reconstructed[at:at + count] += decoded
-            entries.append({'from': event['frame'], 'duration': max(1, math.ceil(count / mixer.S.RATE * fps)),
-                            'src': relative, 'volume': 1, 'label': event['id']})
-            records.append({**event, 'src': relative, 'sample': at, 'samples': count,
-                            'sourceLevel': event.get('level', 1), 'masterGain': gain,
-                            'gainPolicy': source_records[0]['gainPolicy'],
-                            'note': 'Source event level, pan, normalization and master soft-clip are baked into this independent WAV; workbench volume is a relative multiplier.'})
-        difference = np.abs(reconstructed - original)
-        return entries, {'sampleRate': 48000, 'channels': 2, 'events': records,
-                         'maxAbsPcmError': int(difference.max()) if difference.size else 0,
-                         'empty': not records,
-                         'comparison': 'Integer PCM sum of independent WAVs at original event sample offsets versus original animation.wav.'}
-    finally:
-        sys.path.remove(str(directory))
-
 
 
 def _split_speech_music(root: Path, skill: Path, resolved: dict, public: Path) -> tuple[dict, dict]:
@@ -172,7 +185,7 @@ def _split_speech_music(root: Path, skill: Path, resolved: dict, public: Path) -
     directory = str(skill / 'modules/audio')
     sys.path.insert(0, directory)
     try:
-        import mixer, narration, music
+        import mixer, narration
         original = _pcm(public / 'animation.wav')
         samples, fps = len(original), resolved['project']['fps']
         stems = []
@@ -184,35 +197,56 @@ def _split_speech_music(root: Path, skill: Path, resolved: dict, public: Path) -
             raw, records = mixer.render_sfx(single)
             start = round(event['frame'] / fps * 48000)
             end = min(samples, start + records[0]['durationSamples'])
-            stems.append(('sfx', event['id'], start, end, raw * duck[:, None]))
+            # Retain only this event's audible interval. A full-film matrix per
+            # event makes ordinary multi-minute videos consume tens of GB.
+            stems.append(('sfx', event['id'], start, end, raw[start:end] * duck[start:end, None]))
         for cue in resolved.get('narration', []):
             single = {**resolved, 'narration': [cue]}
             raw, _ = narration.mix(single, root, np.zeros((samples, 2)))
             start = round(cue['frame'] / fps * 48000)
-            stems.append(('narration', cue['id'], start, start + cue['samples'], raw))
+            end = start + cue['samples']
+            stems.append(('narration', cue['id'], start, end, raw[start:end].copy()))
         if resolved.get('bgm'):
+            import music
             raw, _ = music.render(resolved, root, samples)
             cue = resolved['bgm']
-            stems.append(('bgm', cue.get('id', 'bgm'), round(cue['frame'] / fps * 48000),
-                          round(cue['endFrame'] / fps * 48000), raw))
+            start, end = (round(cue[field] / fps * 48000) for field in ('frame', 'endFrame'))
+            stems.append(('bgm', cue.get('id', 'bgm'), start, end, raw[start:end].copy()))
+        # Drop the last full-film render before allocating mastering buffers.
+        if stems:
+            del raw
         groups = {'sfx': [], 'narration': [], 'bgm': []}
         if not stems:
             return groups, {'maxAbsPcmError': int(np.abs(original).max()), 'events': [], 'empty': True}
-        total = sum(stem[4] for stem in stems)
+        total = np.zeros((samples, 2))
+        for _, _, start, end, part in stems:
+            total[start:end] += part
         gain = resolved.get('mix', {}).get('masterGain', .8)
         factor = np.full_like(total, gain)
         np.divide(.8 * np.tanh(total * gain / .8), total, out=factor, where=total != 0)
-        quantized = [np.rint(stem[4] * factor * 32767).astype('int32') for stem in stems]
-        residual = original - sum(quantized)
+        quantized = []
+        reconstructed = np.zeros_like(original)
+        # Select the largest contribution incrementally instead of stacking N
+        # full-film arrays. Ties keep the first stem, matching numpy.argmax.
+        owner = np.full(original.shape, -1, dtype='int32')
+        largest = np.zeros_like(total)
+        for index, (_, _, start, end, part) in enumerate(stems):
+            pcm = np.rint(part * factor[start:end] * 32767).astype('int32')
+            quantized.append(pcm)
+            reconstructed[start:end] += pcm
+            magnitude = np.abs(part)
+            wins = magnitude > largest[start:end]
+            np.copyto(largest[start:end], magnitude, where=wins)
+            np.copyto(owner[start:end], index, where=wins)
+        residual = original - reconstructed
         # Assign rounding remainder to the largest active contribution at each
         # sample/channel, without introducing sound outside a stem's interval.
-        owner = np.argmax(np.stack([np.abs(stem[4]) for stem in stems]), axis=0)
-        for index, pcm in enumerate(quantized):
-            pcm += np.where(owner == index, residual, 0)
-        reconstructed = np.zeros_like(original)
+        for index, ((_, _, start, end, _), pcm) in enumerate(zip(stems, quantized)):
+            pcm += np.where(owner[start:end] == index, residual[start:end], 0)
+        reconstructed.fill(0)
         records = []
         for index, ((kind, ident, start, end, _), pcm) in enumerate(zip(stems, quantized)):
-            part = pcm[start:end]
+            part = pcm
             if part.size and (part.min() < -32768 or part.max() > 32767):
                 raise ValueError('Independent workbench stem exceeds PCM limits; lower source levels.')
             safe = re.sub(r'[^A-Za-z0-9_.-]+', '-', ident).strip('-') or 'audio'
@@ -230,6 +264,8 @@ def _split_speech_music(root: Path, skill: Path, resolved: dict, public: Path) -
         difference = np.abs(reconstructed - original)
         return groups, {'sampleRate': 48000, 'channels': 2, 'events': records,
                         'maxAbsPcmError': int(difference.max()), 'empty': False,
+                        'stemStorageSamples': sum(end - start for _, _, start, end, _ in stems),
+                        'denseStemStorageSamples': samples * len(stems),
                         'gainPolicy': 'shared-master-envelope-with-PCM-rounding-conservation',
                         'editPolicy': 'Source ducking/fades/master envelope are baked; edits do not dynamically re-duck other clips.'}
     finally:
@@ -249,11 +285,9 @@ def generate(project_root: Path | str, resolved: dict, payload: dict, skill_root
     manifest = _visual_manifest(resolved, payload)
     if payload.get('audio') is None:
         audio = {'sampleRate': 48000, 'channels': 2, 'events': [], 'maxAbsPcmError': 0, 'empty': True}
-    elif resolved.get('narration') or resolved.get('bgm'):
+    else:
         groups, audio = _split_speech_music(root, skill, resolved, generated / 'public')
         manifest.update(groups)
-    else:
-        manifest['sfx'], audio = _split_audio(root, skill, resolved, generated / 'public')
     status['audioReport'] = audio
     if audio['maxAbsPcmError'] > 1:
         status['reason'] = ('Independent SFX differ from the original nonlinear master by more than one PCM unit '
@@ -267,19 +301,24 @@ def generate(project_root: Path | str, resolved: dict, payload: dict, skill_root
         '// JSON tuple literals are widened by TypeScript; the Python compiler validates the payload contract.\n'
         'export const WORKBENCH_PAYLOAD = data as unknown as Payload;\n', encoding='utf-8')
     serialized = json.dumps(manifest, ensure_ascii=False, indent=2)
+    canvas = resolved['project'].get('renderBackend', 'canvas') == 'canvas'
+    names = ['CanvasShotUnit', 'CanvasTransitionUnit', 'CanvasCaptionUnit', 'CanvasProgressUnit'] if canvas else ['DeskShotUnit', 'CaptionUnit', 'BookSweepUnit']
+    imports = ("import {" + ', '.join(names + (['CanvasOriginal'] if canvas else [])) + "} from './" +
+               ('CanvasWorkbenchUnits' if canvas else 'WorkbenchUnits') + "';\n")
+    original = ('React.createElement(CanvasOriginal)' if canvas else
+                'React.createElement(PixelFilm, {payload: WORKBENCH_PAYLOAD})')
     (source / 'workbench.ts').write_text(
-        "// Generated from resolved-timeline.json; edits in the workbench live in its saved project JSON.\n"
-        "import React from 'react';\nimport {PixelFilm} from './Root';\n"
-        "import {DeskShotUnit, CaptionUnit, BookSweepUnit} from './WorkbenchUnits';\n"
-        "import {WORKBENCH_PAYLOAD} from './workbench-payload';\n"
-        f'const data = {serialized};\n'
-        'const components = {DeskShotUnit, CaptionUnit, BookSweepUnit};\n'
-        'const visual = (units: typeof data.shots | typeof data.transitions | typeof data.captions) => units.map(unit => ({...unit,\n'
+        "// Generated from resolved-timeline.json; edits live in saved workbench project JSON.\n"
+        "import React from 'react';\nimport {PixelFilm} from './Root';\n" + imports +
+        "import {WORKBENCH_PAYLOAD} from './workbench-payload';\n" +
+        f'const data = {serialized};\n' +
+        'const components = {' + ', '.join(names) + '};\n' +
+        'const visual = <T extends {component: string}>(units: T[]) => units.map(unit => ({...unit,\n'
         '  component: components[unit.component as keyof typeof components] as React.ComponentType<Record<string, unknown>>,\n'
-        '}));\n'
-        'const Original: React.FC<Record<string, unknown>> = () => React.createElement(PixelFilm, {payload: WORKBENCH_PAYLOAD});\n'
+        '}));\n' +
+        'const Original: React.FC<Record<string, unknown>> = () => ' + original + ';\n' +
         'export const WORKBENCH = {...data, shots: visual(data.shots), transitions: visual(data.transitions),\n'
-        '  captions: visual(data.captions), original: Original};\n', encoding='utf-8')
+        '  captions: visual(data.captions), overlays: visual(data.overlays), original: Original};\n', encoding='utf-8')
     status.update(supported=True, manifest=manifest,
                   editBranch='Saved workbench project JSON; it does not rewrite director JSON.',
                   generatedProject='build/remotion', entryPoint='src/workbench.ts')
@@ -294,7 +333,10 @@ def require_supported(project_root: Path | str, resolved: dict | None = None) ->
     error = support_error(resolved)
     if error:
         raise ValueError(error)
-    from .remotion_backend import verify_build
+    if resolved['project'].get('renderBackend', 'canvas') == 'canvas':
+        from .canvas_workbench import verify_build
+    else:
+        from .remotion_backend import verify_build
     verify_build(root, resolved)
     path = root / 'build/workbench-manifest.json'
     if not path.is_file():

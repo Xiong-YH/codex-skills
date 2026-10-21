@@ -11,7 +11,7 @@
 
 看 `assets/project-template/` 的 Canvas 实例及 `assets/remotion-project-template/` 的原生 React 实例。所有坐标 x/y 为画幅归一化的 0..1；Canvas 世界图层在 320×180 绘制，文字在 1920×1080 绘制；Remotion 在同一输出画幅用 SVG/HTML 绘制像素形体。当前只接受这一尺寸组合，fps 可为 30 或 60；实际测试范围见运行说明。
 
-`project.renderBackend` 可为 `canvas`（缺省兼容旧工程）或 `remotion`。它选择基础层执行器，不改变时间线所有权；不能把 Canvas 场景自动包装成 Remotion。后端能力不对等，未支持的场景、素材组合和运动会在编译时拒绝，见 [Remotion 能力范围](remotion.md)。
+`project.renderBackend` 可为 `canvas`（缺省兼容旧工程）或 `remotion`。它选择基础层画面执行器，不改变初始时间线所有权。Canvas 通过同源逐帧 runtime 接入 Remotion 工作台，仍使用 Canvas 能力合同；原生 React 后端有自己的场景白名单，见 [Remotion 能力范围](remotion.md)。两者不会因为共用工作台而变成同一执行器，未支持的场景、素材组合和运动仍在编译时拒绝。
 
 每镜头 `durationFrames` 为正整数；`events` 是镜内相对帧，自动具有 `enter=0` 和 `exit=durationFrames`。外部引用为 `{ "event": "s01.enter", "offsetFrames": 6 }`。场景 params 内的事件使用本镜 local ID。
 
@@ -23,10 +23,10 @@
 
 direct 工程可以编辑四份输入。director 工程通过源映射验证四份生成文件和创作源的哈希；任意手改/上游变更会要求重新 handoff。
 
-[工作台](workbench.md) 首次从同一编译结果生成多轨清单，不改变上述所有权。用户在工作台中编辑后，下载的项目 JSON 成为独立剪辑分支；它不自动回写四份 VideoSpec 或导演创作源。原 `render PROJECT` 与工作台导出分别消费各自分支，不声称自动同步。
+视频制作必须进入 [工作台](workbench.md) 完成剪辑及最终导出。首次从同一编译结果生成镜头、文字、转场、音效和配乐多轨清单，有旁白时另轨，不改变初始创作源所有权。用户在工作台中编辑后，下载的项目 JSON 成为独立剪辑分支；它不自动回写四份 VideoSpec 或导演创作源。原 `render PROJECT` 消费 VideoSpec 分支用于调试和一致性对照；最终交付消费工作台分支，不声称自动同步。
 
 可选 `audio.bgm` 使用项目 PCM WAV，`at/end` 引用同一条事件时间线；支持独立音量、首尾淡化、音源截取/循环与旁白期间压低。素材、参数参与输入哈希并随独立工程导出；配置与署名见 [配乐工作流](../modules/audio/MUSIC.md)。
 
 镜头 `actor:null` 表示不叠加库人物，导入插画或片段内部仍可含人物；Canvas 机制采用居中放大的构图，Remotion 书桌保留场景固定布局。省略 actor 则沿用默认人物。全景转场作用于整幅场景，字幕独立；轻面板转场限于 scenes 目录定义的内容舞台。
 
-Canvas 的 `shot.performance` 可在通用人物层按同镜事件切换 V3 离散姿态；区间不得重叠或越镜，人物为空、使用 replacement 或由路径专用场景拥有时拒绝。脚底锚点由素材清单声明；这不提供音素口型或骨骼补间。`timeline.progress.nodes` 可绑定全片叙事节点，首节点必须为零帧，随后严格递增。字段见人物与文字模块指南。Remotion 尚未实现这两项，编译时明确拒绝。
+Canvas 的 `shot.performance` 可在通用人物层按同镜事件切换 V3 离散姿态；区间不得重叠或越镜，人物为空、使用 replacement 或由路径专用场景拥有时拒绝。脚底锚点由素材清单声明；这不提供音素口型或骨骼补间。`timeline.progress.nodes` 可绑定全片叙事节点，首节点必须为零帧，随后严格递增。字段见人物与文字模块指南。原生 Remotion 尚未实现这两项，编译时明确拒绝；Canvas runtime 路径可将它们带入工作台。

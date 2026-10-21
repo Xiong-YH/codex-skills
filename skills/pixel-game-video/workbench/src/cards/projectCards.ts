@@ -41,7 +41,7 @@ const build = (m: WorkbenchManifest | null) => {
         id,
         name,
         category: "成片单元",
-        durationInFrames: Math.max(2, first.duration),
+        durationInFrames: Math.max(1, first.duration),
         // 成片单元按成片自己的帧率编排（不是卡片库的 30fps）
         sourceFps: m.fps,
         width: m.width,

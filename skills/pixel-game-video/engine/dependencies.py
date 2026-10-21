@@ -95,12 +95,13 @@ def runtime_files(skill, resolved):
     files = set() if remotion else set(javascript_files(skill, resolved))
     files.update(path.relative_to(skill).as_posix() for path in (skill / 'engine').glob('*.py')
                  if remotion or path.name != 'remotion_backend.py')
-    if remotion:
-        backend_root = skill / 'engine/remotion'
-        files.update(path.relative_to(skill).as_posix() for path in backend_root.rglob('*')
-                     if path.is_file() and not set(path.relative_to(backend_root).parts) &
-                     {'node_modules', '.cache', '.remotion', 'build', 'outputs', '__pycache__'})
-    else:
+    # Canvas projects also use these React units and locked dependencies when
+    # edited/exported in the workbench. Keep the original Canvas runtime locked.
+    backend_root = skill / 'engine/remotion'
+    files.update(path.relative_to(skill).as_posix() for path in backend_root.rglob('*')
+                 if path.is_file() and not set(path.relative_to(backend_root).parts) &
+                 {'node_modules', '.cache', '.remotion', 'build', 'outputs', '__pycache__'})
+    if not remotion:
         files.update({'engine/player.html', 'engine/render_frames.cjs', 'package.json'})
     files.update({'scripts/video.py', 'requirements.txt', 'modules/library/prepare.py',
                   'modules/scenes/contract.py', 'modules/scenes/performance.py', 'modules/components/contract.py',

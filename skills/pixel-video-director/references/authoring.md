@@ -1,6 +1,6 @@
 # 创作合同
 
-只交付视觉方案时，可先按 [视觉分镜与工程映射](visual-storyboard.md) 输出设计稿，不强制创建四份 JSON 或调用基础层。用户要求制作、交接或继续已有工程时，以下源文件与时间规则保持唯一；设计稿不新增模型字段或运行时间线。
+只交付视觉方案时，可先按 [视觉分镜与工程映射](visual-storyboard.md) 输出设计稿，不强制创建四份 JSON 或调用基础层。用户要求制作、交接或继续已有工程时，以下源文件与时间规则保持唯一；设计稿不新增模型字段或运行时间线。制作视频时必须进入基础 skill 的工作台剪辑并最终导出，镜头、字幕与其他文字、转场、音效、配乐分别独立轨道；有旁白时另设旁白轨。
 
 人物按镜头显式选择：production-plan 中 `actor:null` 表示不叠加库人物，完整插画或片段内部仍可自带人物。不是所有画面都要有小人；场景、物体与组件可以独立主导画面。
 
@@ -8,7 +8,7 @@
 
 该系列全片由一个主角承担旁白，包括开场疑问；口播期间保持同一身体、头部、手臂与站位，只做局部开闭嘴。当前整图姿态执行器不能满足局部口型要求；需要同一底图的开闭嘴素材与实际适配，不能用四五种全身动作替代。站位固定不限制完整场景的合理运镜；连续背景不可裁成局部缩放窗口，字幕和顶部矩形进度条保持独立。
 
-系列工程在 brief.singleNarrator 声明 narrator 素材 ID 和 hiddenCharacterNames。check/handoff 会拒绝侧边讲述者换成配角、全身 performance 序列，以及字幕/标签泄露内部姓名。此结构校验不能替代对插图烘焙文字、真实声源和局部嘴型的视听检查。Canvas 支持剧情用途的事件姿态与顶部进度，Remotion 尚不支持这两项，会在交接校验时拒绝；Remotion 当前人物使用静态基准图，局部嘴型尚未接入。
+系列工程在 brief.singleNarrator 声明 narrator 素材 ID 和 hiddenCharacterNames。check/handoff 会拒绝侧边讲述者换成配角、全身 performance 序列，以及字幕/标签泄露内部姓名。此结构校验不能替代对插图烘焙文字、真实声源和局部嘴型的视听检查。Canvas 支持剧情用途的事件姿态与顶部进度，可通过同源 runtime 进入工作台；原生 Remotion 执行器仍不支持这两项，会在交接校验时拒绝。原生 Remotion 当前人物使用静态基准图，局部嘴型尚未接入。
 
 在分镜 `visual.subject/action` 写明口播讲述、情境演绎或无人镜头的职责。本系列有人的情境插画按 [主角优先](character-illustration.md#插画选角主角优先) 选角，多人或明确条件需要时再安排配角，情境角色不必跟随旁白张嘴；插图集合只参考风格与演绎方法，不作为必用模板。完整人物与场景先成立，再制作情境关键姿态；完整插画按 replacement 接入，见 [情境插画](character-illustration.md)。拆头拼身试样已撤回。
 
@@ -29,7 +29,7 @@
 
 文字用短句表达一个意思，游戏状态变化承载因果；转场服务焦点交接。不是每镜都需要运镜或音效。保留用户指定角色与表现方向。
 
-`production-plan.renderBackend` 缺省为 `canvas`；显式选 `remotion` 时由 handoff 透传到 project，不复制时间表。先查看基础层 `references/remotion.md` 的能力边界；[12 秒书桌示例](../examples/remotion-focus-desk/README.md) 演示同一套源文件如何交给原生 React 执行器。Remotion 默认进入 Studio 审片，用户需要成片导出时再 render。
+`production-plan.renderBackend` 缺省为 `canvas`；显式选 `remotion` 时由 handoff 透传到 project，不复制时间表。先查看基础层 `references/remotion.md` 的能力边界；[12 秒书桌示例](../examples/remotion-focus-desk/README.md) 演示同一套源文件如何交给原生 React 执行器。Canvas 与原生 Remotion 都必须进入工作台完成剪辑与最终导出。Studio、build/film.html 和直接 render 用于源合成调试与一致性对照，不代替工作台分轨编辑、保存和导出验收。
 
 `script.labels` 管理场景内短标签；storyboard 的 params 用 `{"labelId":"goal"}` 引用。handoff 把引用解析成基础合同字符串，源映射仍指向 script。例如：
 

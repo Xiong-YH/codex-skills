@@ -52,7 +52,7 @@
     rows.forEach((row,i)=>g.fillText(row,x,cy+(i-(rows.length-1)/2)*s*1.3));g.restore();
   }
   function picture(e,data,b){
-    const source=data.sourceShot?e.shotPreview(data.sourceShot):data.imageKey?e.assets[data.imageKey]:null;
+    const source=data.sourceShot?e.shotPreview(data.sourceShot):data.imageKey?(e.frameAssets?.(data.imageKey,e.frame)||e.assets[data.imageKey]):null;
     if(source)P.media.image(e,source,b,data.sourceShot?'cover':'contain');
     return Boolean(source);
   }

@@ -22,6 +22,7 @@ const TimeRemap: React.FC<{
 };
 
 export const MainComposition: React.FC<{ project: ProjectData; plate?: boolean }> = ({ project, plate = false }) => {
+  const frame = useCurrentFrame();
   // UI 中 tracks[0] 是最上层轨 → 最后渲染（覆盖在上）
   const ordered = [...project.tracks].reverse();
   return (
@@ -35,7 +36,7 @@ export const MainComposition: React.FC<{ project: ProjectData; plate?: boolean }
             if (plate && excludesFromPlate(clip, card)) return null;
             const Comp = card.component;
             const duration = Math.max(1, Math.round(clip.duration));
-            const props: Record<string, unknown> = themedProps(MANIFEST, card, project.themeId, resolveLinkedProps(project, clip), project.themeColors);
+            const props: Record<string, unknown> = themedProps(MANIFEST, card, project.themeId, resolveLinkedProps(project, clip, {frame, cards: CARDS}), project.themeColors);
             // 成片组件按 `duration`/`dur` 算出场淡出：注入 clip 的源时长，拉长/裁短后淡出跟着挪
             if (card.durationProp)
               props[card.durationProp] = Math.max(1, Math.round(clip.inOffset + duration * clip.speed));

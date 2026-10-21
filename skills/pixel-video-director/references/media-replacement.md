@@ -21,7 +21,7 @@ python scripts/director.py replace-media PROJECT s2 --file SHORT_VIDEO --layer r
 python scripts/director.py replace-media PROJECT s2 --clear --layer replacement
 ```
 
-默认视频必须覆盖镜头长度；hold 明确允许不足时保持最后一帧。不会自动加速、循环、截断字幕或改变后续镜头。时长也要改变时回改 storyboard 和事件，再交接。重新 build/render 后审片；当前仍完整重建，没有帧缓存拼接。
+默认视频必须覆盖镜头长度；hold 明确允许不足时保持最后一帧。不会自动加速、循环、截断字幕或改变后续镜头。时长也要改变时回改 storyboard 和事件，再交接。重新 build 后显式导入工作台，剪辑并导出当前版本后审片；直接 render 仅作源合成对照。当前仍完整重建，没有帧缓存拼接。
 
 替换文件字节也会使输入哈希和审片证据失效。交接、独立导出会带上引用素材；不写个人机器绝对路径。按新的素材重新核对 visual 意图与构图。
 

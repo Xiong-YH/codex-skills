@@ -6,7 +6,7 @@ import math
 from pathlib import Path
 
 from .models import INPUT_MODELS
-from .dependencies import runtime_files
+from .dependencies import actor_actions, runtime_files
 
 SKILL_ROOT = Path(__file__).resolve().parents[1]
 MODULES = ("style", "library", "text", "motion", "audio", "scenes", "components")
@@ -350,6 +350,11 @@ def compile_project(project_root, skill_root=None, *, write=False):
                 "mix": {"speechDuck": inputs["audio.json"]["speechDuck"]}}
     if progress:
         resolved['progress'] = progress
+    actions = actor_actions(resolved)
+    if actions:
+        manifest = read_json(skill / 'modules/library/characters/performance.json')
+        resolved['actorPoseLayout'] = {actor: {pose: manifest['actors'][actor][pose] for pose in poses}
+                                       for actor, poses in actions.items()}
     if write:
         write_json(root / "build/resolved-timeline.json", resolved)
         write_json(root / "build/project-lock.json", {"contractVersion": 1, "inputHash": digest,

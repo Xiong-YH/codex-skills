@@ -16,7 +16,11 @@ Visit `http://127.0.0.1:5208/?import=project`. Omit `--no-open` to open a browse
 
 The project must contain `src/workbench.ts` (or `.tsx`) exporting `WORKBENCH`, and its media in `public/`. The foundation build command generates the manifest and source units. A manual source project can use the structurally typed interface in `src/cards/manifest.ts`; it need not import this workbench package.
 
-The foundation bridge accepts native focus-desk scenes with independent SFX, narration and BGM after exact PCM reconstruction checks. Ducking/fades/master envelopes are baked from the source mix and do not dynamically follow later edits. It rejects standalone `role=title` cues; the original Remotion build and export still support those inputs. Each shot's `heading`, title style and task labels remain editable in the inspector. This bridge restriction does not remove the workbench's native text/title cards.
+The foundation bridge imports both native Remotion focus-desk scenes and Canvas projects. Canvas projects execute their original frame-addressable runtime inside React Canvas units; they are not flattened film clips or rewrites of every scene into React. Shots, text (including standalone `role=title` cues), transitions, SFX and BGM occupy separate editable tracks; narration has its own track when present. Canvas scene parameters, components, objects, actors and media configuration are inspector props, with JSON fields for structured values. Narrative progress is a separate overlay. The native Remotion scene whitelist remains unchanged.
+
+Initial SFX, narration and BGM stems must pass PCM reconstruction checks. Ducking/fades/master envelopes are baked from the source mix and do not dynamically follow later edits. Every video production must finish its edit and final MP4 export in this workbench; source `render` commands remain diagnostic references.
+
+Inspector media and actor changes can only select resources already compiled and loaded in the linked payload. Add new files or previously unloaded actors in the source project and rebuild before explicit reimport. The Canvas contract still rejects video footage combined with the all-shots `motion.mosaic-pullback.v1` transition; the workbench does not relax that restriction.
 
 The `proj` and `public/*` links, generated local media indexes, dependencies, cache and output videos are local runtime state excluded by `.gitignore`. They can be recreated by the open script. Never copy those links into a deliverable instead of copying the actual project assets.
 
@@ -35,6 +39,8 @@ The imported original's 900 frames at 60 fps play and export as exactly 15 secon
 ## Export MP4
 
 Click **导出成片**. The editor renders the timeline submitted at that moment (including your edits) through Remotion, reports progress, and shows **下载 MP4** after completion. Render failures are shown in the top bar; hover for the full error. Each export submission durably saves a `.project.json` beside its matching MP4 in `exports/`, using the same basename; **导出版本 JSON** downloads that exact submitted timeline. **保存工程 JSON** downloads the current editing state, which may differ if you keep editing during a render. Deliver the MP4 with its export-version JSON. Saved files remain in `exports/` after a server restart; JSON still needs the accompanying source project and media to reopen correctly.
+
+Use the down-arrow button in a track header to export only that track. It produces an MP4 with a paired `.project.json` snapshot. Visual tracks use the project background color rather than transparency; audio tracks also export as MP4 with the project background and only the selected audio, not WAV.
 
 An installed Chrome/Chromium is required. On macOS, Google Chrome is detected automatically. Set `PIXEL_BROWSER_EXECUTABLE` before starting the server for another browser installation:
 
@@ -65,7 +71,7 @@ PIXEL_BROWSER_EXECUTABLE=/path/to/installed/chrome \
 
 Parity renders the manifest import (`ProjImported`) and source composition (`ProjOriginal`) at the same frames. The manifest must provide `original`. It writes evidence to `.parity/`, exits nonzero for differences or inconclusive checks, and uses `PIXEL_PYTHON` (fallback `python3`) for Pillow image comparison. Select valid frames for films of other lengths. The comparison is for an unchanged import; a deliberately edited timeline should differ.
 
-The foundation bridge separately verifies the independent audio cues against its original mixed audio. A release check must also use the real UI to change text, move/trim a scene, adjust an independent sound, save/reload/import JSON and export a playable MP4.
+The foundation bridge separately verifies the independent audio cues against its original mixed audio. A release check must also use the real UI to edit text, move/trim a shot, independently adjust a transition, SFX and BGM, save/reload/import JSON, export each used track separately, and export a playable full-film MP4. Inspect the actual exported frames and listen to its audio; unit tests and unchanged-import parity cannot replace that acceptance check. If an intended capability cannot import, edit or export, implement and verify it before delivery rather than bypassing the workbench.
 
 ## Export a Jianying draft
 

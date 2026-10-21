@@ -80,13 +80,14 @@ class RemotionContractTests(unittest.TestCase):
         self.assertTrue(all(shot["scene"] == "scenes.focus-desk.v1" for shot in resolved["shots"]))
         self.assertGreater(resolved["durationFrames"], 0)
 
-    def test_dependency_lock_isolates_native_and_canvas_visual_runtimes(self):
+    def test_dependency_lock_includes_canvas_workbench_adapter_and_keeps_native_independent(self):
         compile_project(self.project, write=True)
         canvas_files = read_json(self.project / "build/project-lock.json")["runtimeFiles"]
         self.assertIn("engine/player.js", canvas_files)
         self.assertIn("modules/scenes/runtime.js", canvas_files)
         self.assertIn("engine/render_frames.cjs", canvas_files)
-        self.assertFalse(any(name.startswith("engine/remotion/") for name in canvas_files))
+        self.assertIn('engine/remotion/src/CanvasWorkbenchUnits.tsx', canvas_files)
+        self.assertIn('engine/remotion/package-lock.json', canvas_files)
         self.remotion_project()
         compile_project(self.project, write=True)
         native_files = read_json(self.project / "build/project-lock.json")["runtimeFiles"]

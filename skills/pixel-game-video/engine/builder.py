@@ -76,9 +76,6 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
             stale = output / name
             if stale.is_file():
                 stale.unlink()
-    if actions:
-        manifest = json.loads((modules / 'library/characters/performance.json').read_text(encoding='utf-8'))
-        resolved['actorPoseLayout'] = {actor:{pose:manifest['actors'][actor][pose] for pose in poses} for actor,poses in actions.items()}
     payload = {'resolved': resolved, 'style': style, 'assets': assets, 'mouth': mouth, 'audio': audio_uri}
     runtime = '\n'.join((skill_root / path).read_text(encoding='utf-8')
                          for path in javascript_files(skill_root, resolved))
@@ -96,4 +93,6 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
         'actorPreviewMode':'event-poses' if actions else 'reference-static','actorMouthAnimation':False,'actorSkeletalAnimation':False,
         'styleAssets':len(style_assets),
         'mouthSegments':len(mouth),'preview':'film.html'}, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+    from .canvas_workbench import build as build_workbench
+    build_workbench(project_root, resolved, payload, runtime, skill_root)
     return target

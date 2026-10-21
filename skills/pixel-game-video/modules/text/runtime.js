@@ -30,7 +30,7 @@
       const {ctx:g, width:w, height:h, colors:c} = e;
       for (const cue of cues) {
         if (frame < cue.startFrame || frame >= cue.endFrame) continue;
-        const size = (e.style.textRoles[cue.role] || .03) * h;
+        const size = cue.fontSize === undefined ? (e.style.textRoles[cue.role] || .03) * h : cue.fontSize;
         const x = (cue.x === undefined ? .5 : cue.x) * w;
         const defaultY = {title:.105, subtitle:.87, annotation:.22, label:.68};
         const y = (cue.y === undefined ? (defaultY[cue.role] || .5) : cue.y) * h;
@@ -50,8 +50,8 @@
           if(skin.border){g.fillStyle=skin.border;g.fillRect(left,top,sw,e.pixel*.5);}
           if(skin.accent){g.fillStyle=skin.accent;g.fillRect(left,top,e.pixel*5,e.pixel*.5);}
           g.restore();
-          draw(e, cue.text, x, y, size, c.ink, maxWidth);
-        } else draw(e, cue.text, x, y, size, cue.accent ? c.accent : c.ink, maxWidth, 'center', cue.role === 'title' ? '700' : '600');
+          draw(e, cue.text, x, y, size, cue.color || c.ink, maxWidth);
+        } else draw(e, cue.text, x, y, size, cue.color || (cue.accent ? c.accent : c.ink), maxWidth, 'center', cue.role === 'title' ? '700' : '600');
       }
     }
   };

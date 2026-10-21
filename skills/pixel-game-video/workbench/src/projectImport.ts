@@ -20,12 +20,13 @@ export const sfxUsage = (m: WorkbenchManifest | null): Map<string, number> => {
 const shortName = (src: string) => src.split("/").pop()!.replace(/\.[^.]+$/, "");
 
 /** 音频 cue → clip，贪心装箱进若干互不重叠的轨（同轨不重叠，便于单独挪动） */
-const packAudio = (cues: ManifestAudio[], trackName: string, defaultDuration: number, total: number): TrackData[] => {
+const packAudio = (cues: ManifestAudio[], trackName: string, role: TrackData["role"], defaultDuration: number, total: number): TrackData[] => {
   const lanes: { end: number; clips: ClipData[] }[] = [];
   for (const c of [...cues].sort((a, b) => a.from - b.from)) {
     const start = Math.max(0, Math.round(c.from));
     // 原片里 <Sequence> 超出合成尾部的部分被合成时长截掉；导出按最晚 clip 结束算时长，所以这里也截到 total
-    const duration = Math.max(2, Math.min(Math.round(c.duration ?? defaultDuration), total - start));
+    if (start >= total || (c.duration !== undefined && c.duration <= 0)) continue;
+    const duration = Math.max(1, Math.min(Math.round(c.duration ?? defaultDuration), total - start));
     let lane = lanes.find((l) => l.end <= start);
     if (!lane) {
       lane = { end: 0, clips: [] };
@@ -45,6 +46,7 @@ const packAudio = (cues: ManifestAudio[], trackName: string, defaultDuration: nu
   return lanes.map((lane, i) => ({
     id: uid("track"),
     name: lanes.length > 1 ? `${trackName} ${i + 1}` : trackName,
+    role,
     clips: lane.clips,
   }));
 };
@@ -54,18 +56,21 @@ const packAudio = (cues: ManifestAudio[], trackName: string, defaultDuration: nu
  *  渲出来就是原片。 */
 export const buildProjectFromManifest = (m: WorkbenchManifest): ProjectData => {
   const cardIds = groupUnits(m);
-  const unitTrack = (kind: "shot" | "transition" | "caption" | "overlay", name: string): TrackData | null => {
-    const units = unitsOf(m, kind);
+  const unitTrack = (kind: "shot" | "transition" | "caption" | "overlay", name: string, title = false): TrackData | null => {
+    const units = unitsOf(m, kind).filter(u => u.from < m.total && u.duration > 0 &&
+      (kind !== "caption" || (u.props?.role === "title") === title));
     if (!units.length) return null;
     return {
       id: uid("track"),
       name,
+      role: title ? "title" : kind,
       clips: units.map((u) => ({
         ...baseClip(),
         id: uid("clip"),
         cardId: cardIds.get(u)!,
         start: Math.max(0, Math.round(u.from)),
-        duration: Math.max(2, Math.min(Math.round(u.duration), m.total - Math.max(0, Math.round(u.from)))),
+        duration: Math.max(1, Math.min(Math.round(u.duration), m.total - Math.max(0, Math.round(u.from)))),
+        sourceDurationInFrames: Math.max(1, Math.round(u.duration)),
         props: inheritedProps(m, u.themeKey, u.props),
         label: u.label ?? u.id,
       })),
@@ -75,16 +80,18 @@ export const buildProjectFromManifest = (m: WorkbenchManifest): ProjectData => {
   const order = m.order ?? ["transitions", "captions", "overlays"];
   const NAMES = { transitions: t("track.transitions"), captions: t("track.captions"), overlays: t("track.overlays") } as const;
   const upper = order
-    .map((k) => unitTrack(k.slice(0, -1) as "transition" | "caption" | "overlay", NAMES[k]))
+    .flatMap((k) => k === "captions"
+      ? [unitTrack("caption", "标题", true), unitTrack("caption", NAMES[k])]
+      : [unitTrack(k.slice(0, -1) as "transition" | "overlay", NAMES[k])])
     .filter((t): t is TrackData => !!t);
 
   const tracks: TrackData[] = [
     // tracks[0] 为最上层，对应原片 z 序：转场 > 字幕 > 叠加层 > 镜头（缺省序，清单 order 可改）
     ...upper,
     ...(unitTrack("shot", t("track.shots")) ? [unitTrack("shot", t("track.shots"))!] : []),
-    ...(m.narration?.length ? packAudio(m.narration, "旁白", m.total, m.total) : []),
-    ...(m.bgm?.length ? packAudio(m.bgm, t("track.music"), m.total, m.total) : []),
-    ...(m.sfx?.length ? packAudio(m.sfx, t("track.sfx"), 90, m.total) : []),
+    ...(m.narration?.length ? packAudio(m.narration, "旁白", "narration", m.total, m.total) : []),
+    ...(m.bgm?.length ? packAudio(m.bgm, t("track.music"), "bgm", m.total, m.total) : []),
+    ...(m.sfx?.length ? packAudio(m.sfx, t("track.sfx"), "sfx", 90, m.total) : []),
   ];
 
   return {

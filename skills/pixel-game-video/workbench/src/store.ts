@@ -219,25 +219,39 @@ export const useStore = create<WorkbenchState>((set, get) => ({
     const newId = uid("clip");
     set((s) => ({
       project: mutateProject(s.project, (d) => {
-        const track =
-          d.tracks.find((t) => t.id === trackId) ?? d.tracks[d.tracks.length - 1];
-        if (!track) return;
         // 卡片按自己的 sourceFps 编排（卡片库 30、成片单元 = 清单 fps）；工程 fps 不同时换算时长 +
         // 反向变速，播放速度不变；媒体卡（realtime）只换算时长、不变速。
         // 拖拽负载里的 duration（素材库给视频 / 音频的默认长度）与 durationInFrames 同口径，一并换算
         const { duration, speed } = clipDefaultsFor(card, d.fps, extra?.duration);
+        const props = clone({ ...defaultsOf(card), ...extra?.props });
+        const start = Math.max(0, Math.round(at ?? s.playhead));
+        const file = String(props.file ?? "");
+        const role: TrackData["role"] = card.kind === "audio"
+          ? /(^|\/)bgm\//.test(file) ? "bgm" : /(^|\/)narration\//.test(file) ? "narration" : "sfx"
+          : cardId.startsWith("proj:transition:") || cardId === "flash-cut" ? "transition"
+          : cardId.startsWith("proj:caption:") ? props.role === "title" ? "title" : "caption"
+          : "shot";
+        let track = d.tracks.find(t => t.id === trackId);
+        if (!track) track = d.tracks.find(t => t.role === role &&
+          !t.clips.some(c => c.start < start + duration && start < c.start + c.duration));
+        if (!track) {
+          const names = {shot: "镜头", caption: "字幕", title: "标题", transition: "转场", overlay: "叠加层", sfx: "音效", bgm: "配乐", narration: "旁白"};
+          track = {id: uid("track"), name: names[role], role, clips: []};
+          if (card.kind === "audio") d.tracks.push(track); else d.tracks.unshift(track);
+        }
         track.clips.push({
           id: newId,
           cardId,
-          start: Math.max(0, Math.round(at ?? s.playhead)),
+          start,
           duration,
+          sourceDurationInFrames: card.durationInFrames,
           inOffset: 0,
           speed,
           opacity: 1,
           scale: 1,
           x: 0,
           y: 0,
-          props: clone({ ...defaultsOf(card), ...extra?.props }),
+          props,
           label: extra?.label,
         });
       }),

@@ -5,8 +5,9 @@ import { Ruler } from "./Ruler";
 import { ClipView } from "./ClipView";
 import { DRAG_MIME, readDragPayload } from "../dnd";
 import { useT, useTx } from "../i18n";
+import { ExportButton } from "../panels/ExportButton";
 
-const HEADER_W = 140;
+const HEADER_W = 210;
 
 /** 播放头竖线：唯一订阅 playhead 的时间轨组件——播放中每帧只动它 */
 const PlayheadLine: React.FC = () => {
@@ -61,7 +62,7 @@ export const Timeline: React.FC = () => {
 
   const onTrackHeadDown = (trackId: string) => (e: React.PointerEvent) => {
     if (e.button !== 0) return;
-    if ((e.target as HTMLElement).closest("button")) return; // 👁 / ✕ 照常点击
+    if ((e.target as HTMLElement).closest("button, a, input, select")) return;
     e.preventDefault();
     const startY = e.clientY;
     const from = useStore.getState().project.tracks.findIndex((t) => t.id === trackId);
@@ -196,6 +197,7 @@ export const Timeline: React.FC = () => {
                   {tx(track.name)}
                 </span>
                 <span className="track-actions">
+                  {track.clips.length > 0 && <ExportButton trackId={track.id} />}
                   <button
                     className="mini"
                     title={track.hidden ? t("tl.showTrack") : t("tl.hideTrack")}

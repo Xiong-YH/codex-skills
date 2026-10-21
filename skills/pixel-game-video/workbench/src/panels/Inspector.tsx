@@ -220,12 +220,12 @@ export const Inspector: React.FC = () => {
               <input
                 type="number"
                 value={Number((clip.duration / fps).toFixed(2))}
-                min={2 / fps}
+                min={1 / fps}
                 step={0.1}
                 onFocus={begin}
                 onChange={(e) =>
                   updateClip(clip.id, {
-                    duration: Math.max(2, Math.round(Number(e.target.value) * fps)),
+                    duration: Math.max(1, Math.round(Number(e.target.value) * fps)),
                   })
                 }
               />

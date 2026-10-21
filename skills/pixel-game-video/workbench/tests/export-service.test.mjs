@@ -91,6 +91,28 @@ test('existing MP4 API path stays unmuted and returns MP4 and exact snapshot',as
     assert.deepEqual((await request(middleware,{method:'GET',url:state.projectUrl.replace('/api/export','')})).json(),p);
   }finally{f.cleanup();}
 });
+
+test('five independent lanes submit their edited timing and props; solo exports retain full length without other visible/audio lanes',async()=>{
+  const f=fixture(),processes=fakeProcesses();try{
+    const middleware=createExportMiddleware({rootDir:f.root,browserLookup:()=>'/installed/chrome',spawnProcess:processes.spawnProcess});
+    const p=currentProject();
+    p.tracks[0].role='caption';p.tracks[1].role='shot';p.tracks[2].role='sfx';
+    p.tracks.push({id:'transitions',name:'转场',role:'transition',clips:[clip('proj:transition:t1',590,30,{paramsJson:'{"columns":12}'})]});
+    p.tracks.push({id:'music',name:'配乐',role:'bgm',clips:[clip('audio-clip',0,900,{file:'audio/music.wav',volume:.07})]});
+    for(const target of p.tracks){
+      const solo={...p,exportDurationInFrames:900,tracks:p.tracks.map(t=>({...t,hidden:t.id!==target.id}))};
+      const response=await request(middleware,{body:{project:solo,kind:'mp4'}});
+      assert.equal(response.status,202);
+      const state=await done(middleware,response.json().id);assert.equal(state.status,'done');
+      const render=processes.calls.at(-1);
+      assert.equal(render.props.project.exportDurationInFrames,900);
+      assert.deepEqual(render.props.project.tracks.filter(t=>!t.hidden).map(t=>t.id),[target.id]);
+      assert.deepEqual(render.props.project.tracks.find(t=>t.id===target.id).clips,target.clips);
+      const snapshot=(await request(middleware,{method:'GET',url:state.projectUrl.replace('/api/export','')})).json();
+      assert.deepEqual(snapshot,solo);
+    }
+  }finally{f.cleanup();}
+});
 test('unsupported exporter content surfaces an error without offering an incomplete ZIP',async()=>{
   const f=fixture(),processes=fakeProcesses({failExporter:true});try{
     const middleware=createExportMiddleware({rootDir:f.root,browserLookup:()=>'/installed/chrome',spawnProcess:processes.spawnProcess});

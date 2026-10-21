@@ -13,13 +13,14 @@ const payload = (): Payload => {
   return WORKBENCH_PAYLOAD;
 };
 
-type HeadingProps = {heading?: string; titleFontSize?: number; titleColor?: string; titleX?: number; titleY?: number};
+type HeadingProps = {heading?: string; titleFontSize?: number; titleColor?: string; titleX?: number; titleY?: number; hideHeading?: boolean};
 type DeskProps = HeadingProps & {shotIndex?: number; label1?: string; label2?: string; label3?: string};
 const shotWithLabels = (shot: Shot, props: DeskProps): Shot => ({...shot, params: {...shot.params,
   labels: [props.label1 ?? shot.params.labels[0], props.label2 ?? shot.params.labels[1], props.label3 ?? shot.params.labels[2]],
 }});
 
-const Heading: React.FC<HeadingProps & {shot: Shot}> = ({shot, heading, titleFontSize, titleColor, titleX, titleY}) => {
+const Heading: React.FC<HeadingProps & {shot: Shot}> = ({shot, heading, titleFontSize, titleColor, titleX, titleY, hideHeading}) => {
+  if (hideHeading) return null;
   const data = payload();
   return <CueText payload={data} fontSize={titleFontSize} color={titleColor ?? data.style.colors.gold ?? '#eac47c'} cue={{
     id: `${shot.id}.heading`, role: 'title', text: heading ?? shot.params.heading,
@@ -52,23 +53,32 @@ export const CaptionUnit: React.FC<CaptionProps> = ({cueIndex = 0, text, fontSiz
   </AbsoluteFill>;
 };
 
-type SweepProps = DeskProps & {motionIndex?: number; x?: number; y?: number; outgoingShotId?: string};
+type ClipTransform = {x?: number; y?: number; scale?: number; opacity?: number};
+type SweepProps = DeskProps & {motionIndex?: number; x?: number; y?: number; outgoingShotId?: string;
+  outgoingProps?: DeskProps; incomingProps?: DeskProps; outgoingSourceFrame?: number; incomingSourceFrame?: number;
+  outgoingTransform?: ClipTransform; incomingTransform?: ClipTransform};
 /** The outgoing world belongs to the transition: it freezes until the opaque
  * book reaches its midpoint. The incoming shot is revealed only after that
  * cover, even when this transition clip is moved or resized independently. */
-export const BookSweepUnit: React.FC<SweepProps> = ({shotIndex = 1, motionIndex = 0, x, y, ...heading}) => {
+export const BookSweepUnit: React.FC<SweepProps> = ({shotIndex = 1, motionIndex = 0, x, y, outgoingShotId, outgoingProps,
+  incomingProps: _incomingProps, outgoingSourceFrame, incomingSourceFrame: _incomingSourceFrame,
+  outgoingTransform, incomingTransform: _incomingTransform, ...heading}) => {
   const local = useCurrentFrame();
   const data = payload();
   const shot = data.resolved.shots[shotIndex];
-  const previous = shotWithLabels(data.resolved.shots[shotIndex - 1], heading);
+  const prior = outgoingShotId ? data.resolved.shots.find((item) => item.id === outgoingShotId) : data.resolved.shots[shotIndex - 1];
+  if (!prior) throw new Error('Missing outgoing book-sweep shot.');
+  const previousProps = outgoingProps ?? heading;
+  const previous = shotWithLabels(prior, previousProps);
   const motion = shot.motions[motionIndex];
   const progress = transitionProgress(local, motion.endFrame - motion.startFrame);
-  const previousFrame = previous.endFrame - 1;
+  const previousFrame = outgoingSourceFrame === undefined ? previous.endFrame - 1 : shotSourceFrame(outgoingSourceFrame, previous.durationFrames, previous.startFrame);
   const camera = cameraAt(previous, previousFrame);
   return <AbsoluteFill style={{fontFamily: data.style.fontFamily, pointerEvents: 'none'}}>
-    {progress < 0.5 ? <AbsoluteFill style={{background: '#111820', overflow: 'hidden'}}>
+    {progress < 0.5 ? <AbsoluteFill style={{background: '#111820', overflow: 'hidden',
+      transform: `translate(${outgoingTransform?.x ?? 0}px, ${outgoingTransform?.y ?? 0}px) scale(${outgoingTransform?.scale ?? 1})`, opacity: outgoingTransform?.opacity ?? 1}}>
       <DeskWorld payload={data} shot={previous} frame={previousFrame}/>
-      <Heading {...heading} shot={previous}/>
+      <Heading {...previousProps} shot={previous}/>
     </AbsoluteFill> : null}
     <BookSweep progress={progress} x={(x ?? motion.params.x ?? 0.36) * camera.scale + camera.x / W} y={(y ?? motion.params.y ?? 0.67) * camera.scale + camera.y / H}/>
   </AbsoluteFill>;

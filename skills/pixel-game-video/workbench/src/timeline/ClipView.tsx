@@ -90,14 +90,14 @@ export const ClipView: React.FC<{
         let d = df;
         d = Math.max(d, -orig.start); // 不越过时间轴 0 点
         d = Math.max(d, Math.ceil(-orig.inOffset / orig.speed)); // 裁入点不为负
-        d = Math.min(d, orig.duration - 2);
+        d = Math.min(d, orig.duration - 1);
         updateClip(clip.id, {
           start: orig.start + d,
           duration: orig.duration - d,
           inOffset: Math.max(0, orig.inOffset + d * orig.speed),
         });
       } else {
-        const d = Math.max(df, 2 - orig.duration);
+        const d = Math.max(df, 1 - orig.duration);
         updateClip(clip.id, { duration: orig.duration + d });
       }
     };
