@@ -71,7 +71,14 @@ def _finite(value, label):
             _finite(item, label)
 
 
+_handoff_spec = importlib.util.spec_from_file_location('pixel_handoff_contract', SKILL_ROOT / 'modules/motion/handoffs.py')
+_handoff_contract = importlib.util.module_from_spec(_handoff_spec)
+_handoff_spec.loader.exec_module(_handoff_contract)
+
+
 def _motion_params(recipe, params):
+    if _handoff_contract.validate_params(recipe, params):
+        return
     rules = {
         "motion.camera-push.v1": {"scale": (1, 1.25), "x": (0, 1), "y": (0, 1)},
         "motion.camera-track.v1": {"scaleFrom": (1, 1.75), "scaleTo": (1, 1.75),
@@ -85,9 +92,10 @@ def _motion_params(recipe, params):
                                   "incomingX": (0, 1), "incomingY": (0, 1), "incomingZoom": (1, 8)},
         "motion.mosaic-pullback.v1": {"columns": (3, 9)},
         "motion.book-sweep.v1": {"x": (0, 1), "y": (0, 1)},
-        "motion.shelf-travel.v1": {},
         "motion.scene-to-card.v1": {"x": (0, .9), "y": (0, .9), "width": (.1, .8)},
         "motion.match-dissolve.v1": {},
+        "motion.cross-dissolve.v1": {},
+        "motion.fade-through-black.v1": {},
     }
     if recipe not in rules:
         raise ValueError(f"motion executor unavailable: {recipe}")
@@ -240,6 +248,8 @@ def compile_project(project_root, skill_root=None, *, write=False):
             transition = capability.get("kind") == "transition"
             if transition and (index == 0 or start != shot["startFrame"]):
                 raise ValueError(f"{recipe}: transition requires a previous shot and must start at shot.enter")
+            if recipe in _handoff_contract.RECIPES:
+                _handoff_contract.validate_shots(recipe, motion['params'], shots[index-1], shot, project, start, end)
             if capability.get("layer") == "content":
                 bounds = shot["contentStage"]
                 if end - start < 8:
@@ -295,6 +305,7 @@ def compile_project(project_root, skill_root=None, *, write=False):
     source_hashes = {name: file_hash(root / name) for name in INPUT_MODELS}
     from .media import compile_media
     media = compile_media(root, shots, project['fps'])
+    _handoff_contract.validate_media(shots, project, media)
     source_hashes.update({item['file']: item['sha256'] for item in media.values()})
     if any(item['kind'] == 'video' for item in media.values()) and any(m['recipe'] == 'motion.mosaic-pullback.v1' for s in shots for m in s['motions']):
         raise ValueError('Video footage does not support the all-shots mosaic; use a cut or another transition')

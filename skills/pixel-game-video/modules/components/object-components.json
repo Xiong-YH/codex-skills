@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "object.resource-bundle-into-tray.v1",
+      "title": "筹码入托盘",
+      "status": "approved-fixed-view-demo",
+      "example": "examples/resource-into-tray/index.html",
+      "execution": "standalone-canvas",
+      "scope": "fixed three-quarter view, one bundle, two relative layouts, true polygon occlusion",
+      "notRegisteredAsShotComponentKind": true,
+      "currentUse": "current five-dimensional design and motion reference; no arbitrary-container support"
+    },
+    {
+      "id": "object.energy-actuator-assembly.v1",
+      "title": "供能·活塞加工·结构装配",
+      "status": "approved-reusable-canvas",
+      "runtime": "fusion-component.js",
+      "example": "examples/energy-actuator-assembly/index.html",
+      "execution": "standalone-canvas",
+      "durationSeconds": 4.5,
+      "scope": "fixed view, three modules, no audio, transparent component over project background",
+      "notRegisteredAsShotComponentKind": true,
+      "preview": "assets/reference/energy-actuator-assembly.png",
+      "currentUse": "historical five-dimensional example; redesign into one exclusive visual style before new production"
+    }
+  ]
+}

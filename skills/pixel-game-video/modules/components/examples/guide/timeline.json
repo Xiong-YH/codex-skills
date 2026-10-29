@@ -30,15 +30,15 @@
         },
         {
           "id": "finish1",
-          "frame": 70
+          "frame": 50
         },
         {
           "id": "finish2",
-          "frame": 120
+          "frame": 100
         },
         {
           "id": "finish3",
-          "frame": 170
+          "frame": 150
         }
       ],
       "motions": [],
@@ -91,15 +91,15 @@
         },
         {
           "id": "finish1",
-          "frame": 70
+          "frame": 50
         },
         {
           "id": "finish2",
-          "frame": 120
+          "frame": 100
         },
         {
           "id": "finish3",
-          "frame": 170
+          "frame": 150
         }
       ],
       "motions": [],
@@ -120,7 +120,7 @@
             "unit": "层",
             "detail": "主句 · 证据 · 补充说明",
             "startEvent": "e1",
-            "endEvent": "e3"
+            "endEvent": "finish1"
           }
         }
       ]
@@ -155,15 +155,15 @@
         },
         {
           "id": "finish1",
-          "frame": 70
+          "frame": 50
         },
         {
           "id": "finish2",
-          "frame": 120
+          "frame": 100
         },
         {
           "id": "finish3",
-          "frame": 170
+          "frame": 150
         }
       ],
       "motions": [],
@@ -236,15 +236,15 @@
         },
         {
           "id": "finish1",
-          "frame": 70
+          "frame": 50
         },
         {
           "id": "finish2",
-          "frame": 120
+          "frame": 100
         },
         {
           "id": "finish3",
-          "frame": 170
+          "frame": 150
         }
       ],
       "motions": [],
@@ -311,15 +311,15 @@
         },
         {
           "id": "finish1",
-          "frame": 70
+          "frame": 50
         },
         {
           "id": "finish2",
-          "frame": 120
+          "frame": 100
         },
         {
           "id": "finish3",
-          "frame": 170
+          "frame": 150
         }
       ],
       "motions": [],
@@ -371,15 +371,15 @@
         },
         {
           "id": "finish1",
-          "frame": 70
+          "frame": 50
         },
         {
           "id": "finish2",
-          "frame": 120
+          "frame": 100
         },
         {
           "id": "finish3",
-          "frame": 170
+          "frame": 150
         }
       ],
       "motions": [],
@@ -451,15 +451,15 @@
         },
         {
           "id": "finish1",
-          "frame": 70
+          "frame": 50
         },
         {
           "id": "finish2",
-          "frame": 120
+          "frame": 100
         },
         {
           "id": "finish3",
-          "frame": 170
+          "frame": 150
         }
       ],
       "motions": [],
@@ -535,15 +535,15 @@
         },
         {
           "id": "finish1",
-          "frame": 70
+          "frame": 50
         },
         {
           "id": "finish2",
-          "frame": 120
+          "frame": 100
         },
         {
           "id": "finish3",
-          "frame": 170
+          "frame": 150
         }
       ],
       "motions": [],
@@ -610,15 +610,15 @@
         },
         {
           "id": "finish1",
-          "frame": 70
+          "frame": 50
         },
         {
           "id": "finish2",
-          "frame": 120
+          "frame": 100
         },
         {
           "id": "finish3",
-          "frame": 170
+          "frame": 150
         }
       ],
       "motions": [],
@@ -687,15 +687,15 @@
         },
         {
           "id": "finish1",
-          "frame": 70
+          "frame": 50
         },
         {
           "id": "finish2",
-          "frame": 120
+          "frame": 100
         },
         {
           "id": "finish3",
-          "frame": 170
+          "frame": 150
         }
       ],
       "motions": [],
@@ -767,15 +767,15 @@
         },
         {
           "id": "finish1",
-          "frame": 70
+          "frame": 50
         },
         {
           "id": "finish2",
-          "frame": 120
+          "frame": 100
         },
         {
           "id": "finish3",
-          "frame": 170
+          "frame": 150
         }
       ],
       "motions": [],
@@ -840,15 +840,15 @@
         },
         {
           "id": "finish1",
-          "frame": 70
+          "frame": 50
         },
         {
           "id": "finish2",
-          "frame": 120
+          "frame": 100
         },
         {
           "id": "finish3",
-          "frame": 170
+          "frame": 150
         }
       ],
       "motions": [],
@@ -900,15 +900,15 @@
         },
         {
           "id": "finish1",
-          "frame": 70
+          "frame": 50
         },
         {
           "id": "finish2",
-          "frame": 120
+          "frame": 100
         },
         {
           "id": "finish3",
-          "frame": 170
+          "frame": 150
         }
       ],
       "motions": [],
@@ -995,15 +995,15 @@
         },
         {
           "id": "finish1",
-          "frame": 70
+          "frame": 50
         },
         {
           "id": "finish2",
-          "frame": 120
+          "frame": 100
         },
         {
           "id": "finish3",
-          "frame": 170
+          "frame": 150
         }
       ],
       "motions": [],

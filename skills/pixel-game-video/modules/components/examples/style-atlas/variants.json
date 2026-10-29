@@ -1,0 +1,1150 @@
+{
+  "schemaVersion": 1,
+  "baseExamples": 72,
+  "configurationsWithStack": 144,
+  "entries": [
+    {
+      "id": "identity.mechanical.open",
+      "sourceProject": "../guide",
+      "sourceShot": "identity",
+      "title": "无框并列",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "identity.mechanical.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "identity",
+      "title": "一体铭牌",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "identity.mechanical.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "identity",
+      "title": "齿条揭幕",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "identity.energy.open",
+      "sourceProject": "../guide",
+      "sourceShot": "identity",
+      "title": "开放式能量刻度",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "identity.energy.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "identity",
+      "title": "一体玻璃铭牌",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "identity.energy.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "identity",
+      "title": "充流揭幕",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "metric.mechanical.open",
+      "sourceProject": "../guide",
+      "sourceShot": "metric",
+      "title": "无框并列",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "metric.mechanical.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "metric",
+      "title": "一体铭牌",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "metric.mechanical.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "metric",
+      "title": "齿条揭幕",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "metric.energy.open",
+      "sourceProject": "../guide",
+      "sourceShot": "metric",
+      "title": "开放式能量刻度",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "metric.energy.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "metric",
+      "title": "一体玻璃铭牌",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "metric.energy.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "metric",
+      "title": "充流揭幕",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "comparison.mechanical.open",
+      "sourceProject": "../guide",
+      "sourceShot": "comparison",
+      "title": "无框并列",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "comparison.mechanical.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "comparison",
+      "title": "一体铭牌",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "comparison.mechanical.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "comparison",
+      "title": "齿条揭幕",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "comparison.energy.open",
+      "sourceProject": "../guide",
+      "sourceShot": "comparison",
+      "title": "开放式能量刻度",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "comparison.energy.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "comparison",
+      "title": "一体玻璃铭牌",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "comparison.energy.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "comparison",
+      "title": "充流揭幕",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "annotation.mechanical.open",
+      "sourceProject": "../guide",
+      "sourceShot": "annotation",
+      "title": "无框并列",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "annotation.mechanical.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "annotation",
+      "title": "一体铭牌",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "annotation.mechanical.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "annotation",
+      "title": "齿条揭幕",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "annotation.energy.open",
+      "sourceProject": "../guide",
+      "sourceShot": "annotation",
+      "title": "开放式能量刻度",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "annotation.energy.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "annotation",
+      "title": "一体玻璃铭牌",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "annotation.energy.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "annotation",
+      "title": "充流揭幕",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "chapter.mechanical.open",
+      "sourceProject": "../guide",
+      "sourceShot": "chapter",
+      "title": "无框并列",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "chapter.mechanical.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "chapter",
+      "title": "一体铭牌",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "chapter.mechanical.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "chapter",
+      "title": "齿条揭幕",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "chapter.energy.open",
+      "sourceProject": "../guide",
+      "sourceShot": "chapter",
+      "title": "开放式能量刻度",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "chapter.energy.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "chapter",
+      "title": "一体玻璃铭牌",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "chapter.energy.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "chapter",
+      "title": "充流揭幕",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "flow.mechanical.open",
+      "sourceProject": "../guide",
+      "sourceShot": "flow",
+      "title": "无框并列",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "flow.mechanical.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "flow",
+      "title": "一体铭牌",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "flow.mechanical.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "flow",
+      "title": "齿条揭幕",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "flow.energy.open",
+      "sourceProject": "../guide",
+      "sourceShot": "flow",
+      "title": "开放式能量刻度",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "flow.energy.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "flow",
+      "title": "一体玻璃铭牌",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "flow.energy.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "flow",
+      "title": "充流揭幕",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "timeline.mechanical.open",
+      "sourceProject": "../guide",
+      "sourceShot": "timeline",
+      "title": "无框并列",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "timeline.mechanical.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "timeline",
+      "title": "一体铭牌",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "timeline.mechanical.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "timeline",
+      "title": "齿条揭幕",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "timeline.energy.open",
+      "sourceProject": "../guide",
+      "sourceShot": "timeline",
+      "title": "开放式能量刻度",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "timeline.energy.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "timeline",
+      "title": "一体玻璃铭牌",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "timeline.energy.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "timeline",
+      "title": "充流揭幕",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "checklist.mechanical.open",
+      "sourceProject": "../guide",
+      "sourceShot": "checklist",
+      "title": "无框并列",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "checklist.mechanical.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "checklist",
+      "title": "一体铭牌",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "checklist.mechanical.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "checklist",
+      "title": "齿条揭幕",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "checklist.energy.open",
+      "sourceProject": "../guide",
+      "sourceShot": "checklist",
+      "title": "开放式能量刻度",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "checklist.energy.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "checklist",
+      "title": "一体玻璃铭牌",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "checklist.energy.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "checklist",
+      "title": "充流揭幕",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "hierarchy.mechanical.open",
+      "sourceProject": "../guide",
+      "sourceShot": "hierarchy",
+      "title": "无框并列",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "hierarchy.mechanical.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "hierarchy",
+      "title": "一体铭牌",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "hierarchy.mechanical.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "hierarchy",
+      "title": "齿条揭幕",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "hierarchy.energy.open",
+      "sourceProject": "../guide",
+      "sourceShot": "hierarchy",
+      "title": "开放式能量刻度",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "hierarchy.energy.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "hierarchy",
+      "title": "一体玻璃铭牌",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "hierarchy.energy.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "hierarchy",
+      "title": "充流揭幕",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "bars.mechanical.open",
+      "sourceProject": "../guide",
+      "sourceShot": "bars",
+      "title": "无框并列",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "bars.mechanical.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "bars",
+      "title": "一体铭牌",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "bars.mechanical.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "bars",
+      "title": "齿条揭幕",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "bars.energy.open",
+      "sourceProject": "../guide",
+      "sourceShot": "bars",
+      "title": "开放式能量刻度",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "bars.energy.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "bars",
+      "title": "一体玻璃铭牌",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "bars.energy.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "bars",
+      "title": "充流揭幕",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "code.mechanical.open",
+      "sourceProject": "../guide",
+      "sourceShot": "code",
+      "title": "无框并列",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "code.mechanical.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "code",
+      "title": "一体铭牌",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "code.mechanical.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "code",
+      "title": "齿条揭幕",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "code.energy.open",
+      "sourceProject": "../guide",
+      "sourceShot": "code",
+      "title": "开放式能量刻度",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "code.energy.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "code",
+      "title": "一体玻璃铭牌",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "code.energy.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "code",
+      "title": "充流揭幕",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "takeaway.mechanical.open",
+      "sourceProject": "../guide",
+      "sourceShot": "takeaway",
+      "title": "无框并列",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "takeaway.mechanical.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "takeaway",
+      "title": "一体铭牌",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "takeaway.mechanical.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "takeaway",
+      "title": "齿条揭幕",
+      "overrides": {
+        "visualStyle": "mechanical",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "takeaway.energy.open",
+      "sourceProject": "../guide",
+      "sourceShot": "takeaway",
+      "title": "开放式能量刻度",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "takeaway.energy.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "takeaway",
+      "title": "一体玻璃铭牌",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "takeaway.energy.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "takeaway",
+      "title": "充流揭幕",
+      "overrides": {
+        "visualStyle": "energy",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "identity.plain",
+      "sourceProject": "../guide",
+      "sourceShot": "identity",
+      "title": "朴素原版",
+      "overrides": {
+        "visualStyle": "plain",
+        "features": []
+      },
+      "optionalFeatures": []
+    },
+    {
+      "id": "metric.plain",
+      "sourceProject": "../guide",
+      "sourceShot": "metric",
+      "title": "朴素原版",
+      "overrides": {
+        "visualStyle": "plain",
+        "features": []
+      },
+      "optionalFeatures": []
+    },
+    {
+      "id": "comparison.plain",
+      "sourceProject": "../guide",
+      "sourceShot": "comparison",
+      "title": "朴素原版",
+      "overrides": {
+        "visualStyle": "plain",
+        "features": []
+      },
+      "optionalFeatures": []
+    },
+    {
+      "id": "annotation.plain",
+      "sourceProject": "../guide",
+      "sourceShot": "annotation",
+      "title": "朴素原版",
+      "overrides": {
+        "visualStyle": "plain",
+        "features": []
+      },
+      "optionalFeatures": []
+    },
+    {
+      "id": "chapter.plain",
+      "sourceProject": "../guide",
+      "sourceShot": "chapter",
+      "title": "朴素原版",
+      "overrides": {
+        "visualStyle": "plain",
+        "features": []
+      },
+      "optionalFeatures": []
+    },
+    {
+      "id": "flow.plain",
+      "sourceProject": "../guide",
+      "sourceShot": "flow",
+      "title": "朴素原版",
+      "overrides": {
+        "visualStyle": "plain",
+        "features": []
+      },
+      "optionalFeatures": []
+    },
+    {
+      "id": "timeline.plain",
+      "sourceProject": "../guide",
+      "sourceShot": "timeline",
+      "title": "朴素原版",
+      "overrides": {
+        "visualStyle": "plain",
+        "features": []
+      },
+      "optionalFeatures": []
+    },
+    {
+      "id": "checklist.plain",
+      "sourceProject": "../guide",
+      "sourceShot": "checklist",
+      "title": "朴素原版",
+      "overrides": {
+        "visualStyle": "plain",
+        "features": []
+      },
+      "optionalFeatures": []
+    },
+    {
+      "id": "hierarchy.plain",
+      "sourceProject": "../guide",
+      "sourceShot": "hierarchy",
+      "title": "朴素原版",
+      "overrides": {
+        "visualStyle": "plain",
+        "features": []
+      },
+      "optionalFeatures": []
+    },
+    {
+      "id": "bars.plain",
+      "sourceProject": "../guide",
+      "sourceShot": "bars",
+      "title": "朴素原版",
+      "overrides": {
+        "visualStyle": "plain",
+        "features": []
+      },
+      "optionalFeatures": []
+    },
+    {
+      "id": "code.plain",
+      "sourceProject": "../guide",
+      "sourceShot": "code",
+      "title": "朴素原版",
+      "overrides": {
+        "visualStyle": "plain",
+        "features": []
+      },
+      "optionalFeatures": []
+    },
+    {
+      "id": "takeaway.plain",
+      "sourceProject": "../guide",
+      "sourceShot": "takeaway",
+      "title": "朴素原版",
+      "overrides": {
+        "visualStyle": "plain",
+        "features": []
+      },
+      "optionalFeatures": []
+    }
+  ],
+  "plainExamples": 12,
+  "totalExamples": 84,
+  "totalConfigurations": 156
+}

@@ -15,8 +15,8 @@ def audio_tag(path):
     return f'<audio controls preload="none" src="{html.escape(path, quote=True)}"></audio>'
 
 
-def build(out, bank='all'):
-    if bank not in ['all', 'arcade', 'arcade-core']:
+def build(out, bank='arcade'):
+    if bank not in ['all', 'arcade', 'arcade-core', 'common']:
         raise ValueError(f'Unavailable audition bank: {bank}')
     out.mkdir(parents=True, exist_ok=True)
     catalog = json.loads(Path(__file__).with_name('catalog.json').read_text(encoding='utf-8'))['items']
@@ -26,6 +26,8 @@ def build(out, bank='all'):
         if bank == 'arcade' and not native:
             continue
         if bank == 'arcade-core' and item.get('bank') != bank:
+            continue
+        if bank == 'common' and item.get('bank') != bank:
             continue
         filename = item['id'] + '.wav'
         record = {**item, 'file': filename, 'material': palette.MATERIALS[item['id']], 'stems': {}}
@@ -60,7 +62,7 @@ def build(out, bank='all'):
     manifest = {'bank': bank, 'items': records, 'subjectiveListening': 'not_reviewed'}
     (out / 'index.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     template = Path(__file__).with_suffix('.html').read_text(encoding='utf-8')
-    intro = '街机电子主体＋鼓点＋回弹的基础六种已确认，完整音效保持母版电平。扩展与蓄力实验已退出可选库。'
+    intro = '常用九种：六种原街机音效＋三种正式注册新版。完整音效保持母版电平，旧 G2 仅在显式选择 all 时列出以兼容历史工程。'
     page = template.replace('__COUNT__', str(len(records))).replace('__INTRO__', intro).replace('__CARDS__', ''.join(cards))
     (out / 'index.html').write_text(page, encoding='utf-8')
     return manifest
@@ -69,7 +71,7 @@ def build(out, bank='all'):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--out', type=Path, required=True)
-    parser.add_argument('--bank', choices=['all', 'arcade', 'arcade-core'], default='all')
+    parser.add_argument('--bank', choices=['all', 'arcade', 'arcade-core', 'common'], default='arcade')
     args = parser.parse_args()
     manifest = build(args.out, args.bank)
     print(f'{len(manifest["items"])} sounds exported; PCM masters preserved')

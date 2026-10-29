@@ -2,12 +2,16 @@
 
 像素游戏感视频体系。日常使用两个 skill：导演负责画面设计与制作统筹，基础 skill 负责执行；运镜转场的实现维护在基础制作模块。
 
+本次及后续版本更新见[变更记录](CHANGELOG.md)。组件完整集合与朴素原版入口见[组件范例集](skills/pixel-game-video/modules/components/examples/style-atlas/README.md)。
+
 | Skill | 职责 |
 | --- | --- |
 | [pixel-game-video](skills/pixel-game-video/SKILL.md) | 按结构化工程制作视频，强制工作台分轨剪辑与最终导出；Canvas runtime 与有限原生 Remotion 场景共用编辑交付 |
 | [pixel-video-director](skills/pixel-video-director/SKILL.md) | 把文案设计成可见动作、构图光影、运镜与语义转场；可只交付分镜，或继续制作交接、review 和定向修复 |
 
 画面叙事方法已整合进导演技能，包括视觉母题、光影与尺度、镜头和主体运动的区分、前后场景的语义承接。参考片的黑金配色、人物和 RPG 界面按新主题选择；[《深度工作》观片案例](skills/pixel-video-director/references/deep-work-case.md)仅是学习笔记，不代表基础层已实现其中所有效果。
+
+分析参考片或设计整段内容时，先确定 [观点如何递进](skills/pixel-video-director/references/visual-storytelling.md#先确定整段如何推进理解)，再选逐镜画面。[《欲望合同》片段复盘](skills/pixel-video-director/references/desire-contract-case.md)记录本次真实观察、与现有作品的对照及未实施的迁移草案；参考的道具和段落顺序不作为模板。
 
 > 使用 $pixel-video-director，先把这段文案演成具体画面，写出主体动作、构图光影、运镜、前后转场和需要准备的素材，只交付视觉分镜。
 
@@ -62,7 +66,7 @@ flowchart TD
 | 转场 | 12种方法：9种通用配方＋3种空间设计；后三种已在竞赛场景落地，尚非通用recipe |
 | 节奏与构图 | 定位→主运动→落稳→阅读；全画幅统一镜头、卡片保持固有比例，按旁白与信息量留停顿 |
 | 游戏反馈 | 焦点锁定、触点回弹、资源转移、状态确认、阶段进度、任务结算，共6类 |
-| 音效 | 保留已认可的选择、拾取、落位、展开、受阻、奖励6种街机＋鼓点原子；扩展和蓄力实验退出可选库与交付包 |
+| 音效 | [九种正式音效](skills/pixel-game-video/modules/audio/ARCADE.md)：原六种加轻确认、焦点、逐层展开；先判断发声必要性，蓄力等撤回实验不参与正式可选库 |
 | 配乐 | Canvas 与 Remotion 共用可选 BGM 混音，支持音量、淡入淡出、截取/循环和旁白压低；内置 Chill Wave 与来源署名，见[配乐工作流](skills/pixel-game-video/modules/audio/MUSIC.md) |
 | 工作台与交付 | 镜头、文字、转场、音效、配乐独立编辑轨道，旁白按需另轨；强制工作台剪辑与最终导出，交付 MP4 与同次项目 JSON，独立运行快照按需提供；当前技术核验与视听 review 分别记录 |
 
@@ -70,7 +74,7 @@ flowchart TD
 
 设计转场从 [转场库](skills/pixel-game-video/modules/motion/TRANSITIONS.md) 进入：按交接关系查已实现配方和参考设计，明确实现状态，再安排动作与阅读节奏。
 
-新脚本先按 [视觉表达方法](skills/pixel-video-director/references/visual-system.md) 选择场景或组件，再安排主体变化。[组件体系看图指南](skills/pixel-game-video/modules/components/GUIDE.md) 提供十二类信息结构的实渲染总览、逐类大图、状态对照与组合参考，图片对应的独立示例随基础 skill 分发；[背景基调与样板](skills/pixel-game-video/modules/style/ART-DIRECTION.md) 用于创作新素材；[按镜头替换](skills/pixel-video-director/references/media-replacement.md) 提供可校验的导入入口。导演创作源示例在 [基础五类](skills/pixel-video-director/examples/component-system/brief.json) 与 [新增七类及组合](skills/pixel-video-director/examples/component-expansion/brief.json)。
+新脚本先按 [视觉表达方法](skills/pixel-video-director/references/visual-system.md) 选择场景或组件，再安排主体变化。[信息组件看图指南](skills/pixel-game-video/modules/components/INFORMATION-COMPONENTS.md) 提供十二类信息结构的实渲染总览、逐类大图、状态对照与组合参考，图片对应的独立示例随基础 skill 分发；[背景基调与样板](skills/pixel-game-video/modules/style/ART-DIRECTION.md) 用于创作新素材；[按镜头替换](skills/pixel-video-director/references/media-replacement.md) 提供可校验的导入入口。导演创作源示例在 [基础五类](skills/pixel-video-director/examples/component-system/brief.json) 与 [新增七类及组合](skills/pixel-video-director/examples/component-expansion/brief.json)。
 
 [完整插画进入视频](skills/pixel-game-video/modules/scenes/whole-illustration.md) 保留完整场景状态对照与8.4秒独立样例。导演层维护镜头事件、插画原图与提示词，编排脚本生成片段、同步脚本生成基础层快照并记录哈希；基础层按既有 replacement 合同运行，核心入口只路由。旧拆头拼身试样撤回，不继续作为推荐案例。
 

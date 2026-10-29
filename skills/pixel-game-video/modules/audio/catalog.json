@@ -3,79 +3,98 @@
   "items": [
     {
       "id": "code-tap",
-      "maxVariant": 2
+      "maxVariant": 2,
+      "status": "legacy-compatibility"
     },
     {
       "id": "replicate",
-      "maxVariant": 2
+      "maxVariant": 2,
+      "status": "legacy-compatibility"
     },
     {
       "id": "select",
-      "maxVariant": 2
+      "maxVariant": 2,
+      "status": "legacy-compatibility"
     },
     {
       "id": "focus-step",
-      "maxVariant": 0
+      "maxVariant": 0,
+      "status": "legacy-compatibility"
     },
     {
       "id": "lock",
-      "maxVariant": 2
+      "maxVariant": 2,
+      "status": "legacy-compatibility"
     },
     {
       "id": "panel-open",
-      "maxVariant": 0
+      "maxVariant": 0,
+      "status": "legacy-compatibility"
     },
     {
       "id": "question-tick",
-      "maxVariant": 2
+      "maxVariant": 2,
+      "status": "legacy-compatibility"
     },
     {
       "id": "system-unfold",
-      "maxVariant": 0
+      "maxVariant": 0,
+      "status": "legacy-compatibility"
     },
     {
       "id": "node-connect",
-      "maxVariant": 0
+      "maxVariant": 0,
+      "status": "legacy-compatibility"
     },
     {
       "id": "extract",
-      "maxVariant": 0
+      "maxVariant": 0,
+      "status": "legacy-compatibility"
     },
     {
       "id": "boundary-hit",
-      "maxVariant": 2
+      "maxVariant": 2,
+      "status": "legacy-compatibility"
     },
     {
       "id": "repair",
-      "maxVariant": 1
+      "maxVariant": 1,
+      "status": "legacy-compatibility"
     },
     {
       "id": "verified",
-      "maxVariant": 0
+      "maxVariant": 0,
+      "status": "legacy-compatibility"
     },
     {
       "id": "compare",
-      "maxVariant": 0
+      "maxVariant": 0,
+      "status": "legacy-compatibility"
     },
     {
       "id": "commit",
-      "maxVariant": 0
+      "maxVariant": 0,
+      "status": "legacy-compatibility"
     },
     {
       "id": "product-build",
-      "maxVariant": 0
+      "maxVariant": 0,
+      "status": "legacy-compatibility"
     },
     {
       "id": "stage-done",
-      "maxVariant": 2
+      "maxVariant": 2,
+      "status": "legacy-compatibility"
     },
     {
       "id": "product-ready",
-      "maxVariant": 0
+      "maxVariant": 0,
+      "status": "legacy-compatibility"
     },
     {
       "id": "complete",
-      "maxVariant": 0
+      "maxVariant": 0,
+      "status": "legacy-compatibility"
     },
     {
       "id": "arcade-select",
@@ -195,6 +214,64 @@
       "durationSeconds": 0.84,
       "anchorSeconds": 0,
       "suggestedMinGapSeconds": 0.9
+    },
+    {
+      "id": "arcade-confirm-soft",
+      "maxVariant": 0,
+      "name": "轻选择确认",
+      "bank": "common",
+      "status": "user-approved",
+      "group": "新增常用",
+      "use": [
+        "重要按钮确认",
+        "轻量开关生效"
+      ],
+      "avoid": [
+        "焦点浏览",
+        "与arcade-select叠加"
+      ],
+      "intensity": "light",
+      "durationSeconds": 0.18,
+      "anchorSeconds": 0,
+      "suggestedMinGapSeconds": 0.22
+    },
+    {
+      "id": "arcade-focus",
+      "maxVariant": 0,
+      "name": "焦点移动",
+      "bank": "common",
+      "status": "user-approved",
+      "group": "新增常用",
+      "use": [
+        "重要焦点移动并锁定"
+      ],
+      "avoid": [
+        "普通浏览",
+        "连续游走逐项发声"
+      ],
+      "intensity": "light",
+      "durationSeconds": 0.23,
+      "anchorSeconds": 0,
+      "suggestedMinGapSeconds": 0.3
+    },
+    {
+      "id": "arcade-unfold",
+      "maxVariant": 0,
+      "name": "系统展开",
+      "bank": "common",
+      "status": "user-approved",
+      "group": "新增常用",
+      "use": [
+        "结构逐层揭示"
+      ],
+      "avoid": [
+        "每张卡片重复展开",
+        "与arcade-launch叠加"
+      ],
+      "intensity": "medium",
+      "durationSeconds": 0.32,
+      "anchorSeconds": 0,
+      "suggestedMinGapSeconds": 0.4
     }
   ]
 }

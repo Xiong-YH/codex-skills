@@ -7,7 +7,7 @@ import wave
 import numpy as np
 
 BANK = Path(__file__).with_name('assets') / 'arcade-motion'
-BANKS = {'core': BANK}
+BANKS = {'core': BANK, 'common': BANK.parent / 'common-motion'}
 
 
 def manifest(bank='core'):

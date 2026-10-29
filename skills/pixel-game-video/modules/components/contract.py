@@ -4,6 +4,17 @@ import math
 
 def validate(component, shot, previous_ids):
     kind, data = component['kind'], component['data']
+    if 'styleLayers' in component:
+        raise ValueError('styleLayers has been retired: select one visualStyle and optional features=["stack"]')
+    if component.get('visualStyle', 'mechanical') not in ('plain', 'mechanical', 'energy'):
+        raise ValueError('visualStyle must select plain, mechanical or energy')
+    if component.get('styleVariant', 'inset') not in ('open', 'inset', 'relay'):
+        raise ValueError('styleVariant must be open, inset or relay')
+    features = component.get('features', [])
+    if not isinstance(features, list) or len(features) > 1 or any(feature != 'stack' for feature in features):
+        raise ValueError('features allows only the optional stack feature')
+    if component.get('visualStyle') == 'plain' and (features or component.get('styleVariant', 'inset') != 'inset'):
+        raise ValueError('plain uses the original simple renderer without styled variants or stack')
     events = {e['id']: e.get('localFrame', e['frame']) for e in shot['events']}
 
     def event(name):

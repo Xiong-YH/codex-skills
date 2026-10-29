@@ -75,6 +75,9 @@ class Component(Model):
     showEvent: Id = "enter"
     focusEvent: Id | None = None
     tone: Literal["accent", "gold", "danger", "secondary"] = "gold"
+    visualStyle: Literal["plain", "mechanical", "energy"] = "mechanical"
+    styleVariant: Literal["open", "inset", "relay"] = "inset"
+    features: Annotated[list[Literal["stack"]], Field(max_length=1)] = Field(default_factory=list)
     data: dict[str, Any]
 
 

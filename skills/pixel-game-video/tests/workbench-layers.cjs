@@ -11,7 +11,7 @@ const content=(e,s,f)=>{e.ctx.fillStyle='#ffc87a';e.ctx.fillRect(160,50+(f-s.sta
 P.scenes={stageBounds:()=>({x:110,y:22,width:190,height:110}),draw(e,s,f){background(e,s);actor(e,s,f);content(e,s,f);},
   drawLayer(e,s,f,layer){({background,actor,content})[layer](e,s,f);}};
 const pixels=canvas=>Buffer.from(canvas.getContext('2d').getImageData(0,0,width,height).data);
-const recipes=['motion.panel-slide.v1','motion.pixel-iris.v1','motion.focus-punch.v1','motion.mosaic-pullback.v1','motion.book-sweep.v1','motion.shelf-travel.v1','motion.scene-to-card.v1','motion.match-dissolve.v1','motion.shatter-reveal.v1'];
+const recipes=['motion.panel-slide.v1','motion.pixel-iris.v1','motion.focus-punch.v1','motion.mosaic-pullback.v1','motion.book-sweep.v1','motion.scene-to-card.v1','motion.match-dissolve.v1','motion.cross-dissolve.v1','motion.fade-through-black.v1','motion.shatter-reveal.v1'];
 let checked=0;
 let maxError=0;
 function parity(actual,expected,label){let changed=0,max=0;for(let i=0;i<actual.length;i++){const error=Math.abs(actual[i]-expected[i]);max=Math.max(max,error);if(error)changed++;}maxError=Math.max(maxError,max);assert.ok(max<=3,`${label}: ${changed} channels differ, max ${max}`);}

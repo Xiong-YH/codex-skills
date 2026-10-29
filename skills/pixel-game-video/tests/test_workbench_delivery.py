@@ -30,8 +30,14 @@ class WorkbenchDeliveryTests(unittest.TestCase):
                 file.write_text(name, encoding='utf-8')
             outside = Path(folder) / 'unrelated-project.json'
             outside.write_text('private local project state', encoding='utf-8')
-            (root / 'workbench/proj').symlink_to(outside)
-            (root / 'linked-secret.json').symlink_to(outside)
+            with self.subTest('symlink exclusion'):
+                try:
+                    (root / 'workbench/proj').symlink_to(outside)
+                    (root / 'linked-secret.json').symlink_to(outside)
+                except OSError as error:
+                    if getattr(error, 'winerror', None) == 1314:
+                        self.skipTest('Windows account lacks symbolic-link privilege; ordinary snapshot exclusions remain tested')
+                    raise
             packaged = {name.as_posix() for name in skill_files(root)}
             self.assertTrue(set(kept).issubset(packaged))
             self.assertTrue(set(excluded).isdisjoint(packaged))
