@@ -89,6 +89,13 @@ test('existing MP4 API path stays unmuted and returns MP4 and exact snapshot',as
     assert.equal(state.status,'done');assert.equal(state.kind,'mp4');assert.equal(processes.calls.length,1);assert.equal(processes.calls[0].props.plate,undefined);assert.ok(!processes.calls[0].args.includes('--muted'));
     const output=await request(middleware,{method:'GET',url:state.downloadUrl.replace('/api/export','')});assert.equal(output.headers['content-type'],'video/mp4');
     assert.deepEqual((await request(middleware,{method:'GET',url:state.projectUrl.replace('/api/export','')})).json(),p);
+    const metrics=(await request(middleware,{method:'GET',url:state.metricsUrl.replace('/api/export','')})).json();
+    assert.equal(metrics.status,'done');assert.equal(metrics.concurrency,state.concurrency);
+    assert.equal(metrics.renderedFrames,900);assert.equal(metrics.totalFrames,900);
+    assert.ok(metrics.timingsMs.materials>=0);assert.ok(metrics.timingsMs.renderAndEncode>=0);
+    assert.ok(metrics.timingsMs.total>=metrics.timingsMs.renderAndEncode);
+    assert.ok(processes.calls[0].args.includes(`--concurrency=${state.concurrency}`));
+    assert.equal(existsSync(path.join(f.root,'.render-public',response.json().id)),false);
   }finally{f.cleanup();}
 });
 
@@ -112,6 +119,44 @@ test('five independent lanes submit their edited timing and props; solo exports 
       assert.deepEqual(snapshot,solo);
     }
   }finally{f.cleanup();}
+});
+test('each export keeps its own material snapshot while subsequent exports see changed source files',async()=>{
+  const f=fixture(),processes=fakeProcesses(),snapshots=[];
+  try{
+    const middleware=createExportMiddleware({rootDir:f.root,browserLookup:()=>'/installed/chrome',spawnProcess:(command,args,options)=>{
+      const publicDir=args.find(value=>value.startsWith('--public-dir='))?.slice('--public-dir='.length);
+      if(publicDir){
+        const frozen=path.join(publicDir,'audio/click.wav');
+        snapshots.push(readFileSync(frozen,'utf8'));
+        writeFileSync(path.join(f.root,'public/audio/click.wav'),'changed during export');
+        assert.equal(readFileSync(frozen,'utf8'),snapshots.at(-1));
+      }
+      return processes.spawnProcess(command,args,options);
+    }});
+    for(let repeat=0;repeat<2;repeat++){
+      const response=await request(middleware,{body:{project:currentProject()}});
+      assert.equal((await done(middleware,response.json().id)).status,'done');
+    }
+    assert.deepEqual(snapshots,['sound','changed during export']);
+  }finally{f.cleanup();}
+});
+test('export fixes the configured concurrency in its command and rejects invalid configuration before spawning',async()=>{
+  const f=fixture(),processes=fakeProcesses(),original=process.env.PIXEL_RENDER_CONCURRENCY;
+  try{
+    process.env.PIXEL_RENDER_CONCURRENCY='6';
+    const middleware=createExportMiddleware({rootDir:f.root,browserLookup:()=>'/installed/chrome',spawnProcess:processes.spawnProcess});
+    const response=await request(middleware,{body:{project:currentProject()}});
+    process.env.PIXEL_RENDER_CONCURRENCY='2';
+    const state=await done(middleware,response.json().id);
+    assert.equal(state.concurrency,6);assert.ok(processes.calls[0].args.includes('--concurrency=6'));
+    process.env.PIXEL_RENDER_CONCURRENCY='0';
+    const invalid=await request(middleware,{body:{project:currentProject()}});
+    assert.equal(invalid.status,400);assert.match(invalid.json().error,/PIXEL_RENDER_CONCURRENCY/);
+    assert.equal(processes.calls.length,1);
+  }finally{
+    if(original===undefined)delete process.env.PIXEL_RENDER_CONCURRENCY;else process.env.PIXEL_RENDER_CONCURRENCY=original;
+    f.cleanup();
+  }
 });
 test('unsupported exporter content surfaces an error without offering an incomplete ZIP',async()=>{
   const f=fixture(),processes=fakeProcesses({failExporter:true});try{

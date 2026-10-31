@@ -212,6 +212,7 @@ export const CanvasShotUnit: React.FC<CanvasShotProps> = (props) => {
  * props/source clocks of both adjacent shot clips, including trims and speed. */
 export const CanvasTransitionUnit: React.FC<CanvasTransitionProps> = (props) => {
   const payload = data(), local = useCurrentFrame(), signature = JSON.stringify(props);
+  const sceneSignature = JSON.stringify([props.shotIndex, props.outgoingShotId, props.incomingShotId, props.outgoingProps, props.incomingProps]);
   const resolved = useMemo(() => {
     const incomingIndex = indexFor(payload.resolved, props.incomingShotId, props.shotIndex ?? 1);
     const outgoingIndex = indexFor(payload.resolved, props.outgoingShotId, incomingIndex - 1);
@@ -221,7 +222,7 @@ export const CanvasTransitionUnit: React.FC<CanvasTransitionProps> = (props) => 
       at === outgoingIndex ? editedShot(shot, props.outgoingProps ?? {}, payload) : shot);
     if (outgoingIndex !== incomingIndex - 1) shots.splice(incomingIndex - 1, 1, shots[outgoingIndex]);
     return editableResolved(payload, shots);
-  }, [payload, signature]);
+  }, [payload, sceneSignature]);
   const index = indexFor(resolved, props.incomingShotId, props.shotIndex ?? 1), shot = resolved.shots[index], previous = resolved.shots[index - 1];
   const originalIndex = indexFor(payload.resolved, props.incomingShotId, props.shotIndex ?? 1);
   const source = payload.resolved.shots[originalIndex].motions[props.motionIndex ?? 0];if (!source) throw new Error('Missing Canvas transition motion.');

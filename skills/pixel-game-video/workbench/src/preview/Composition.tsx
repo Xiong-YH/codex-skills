@@ -1,11 +1,11 @@
 // Adapted from video-shotcraft Workbench (Copyright 2026 Wei Yihao, Apache-2.0), 2026-10-21.
-import React from "react";
+import React, {useMemo} from "react";
 import { AbsoluteFill, Freeze, Sequence, useCurrentFrame } from "remotion";
 import type { ProjectData } from "../types";
 import { CARDS } from "../cards/registry";
 import { MANIFEST } from '../cards/projectCards';
 import { themedProps, themedBackground } from '../theme';
-import { resolveLinkedProps } from "../linkedProps.js";
+import { createLinkedPropsResolver } from "../linkedProps.js";
 import { excludesFromPlate } from "../renderMode.js";
 
 /** 时间重映射：clip 本地帧 → 卡片源帧（inOffset + f × speed）。
@@ -23,6 +23,7 @@ const TimeRemap: React.FC<{
 
 export const MainComposition: React.FC<{ project: ProjectData; plate?: boolean }> = ({ project, plate = false }) => {
   const frame = useCurrentFrame();
+  const resolveProps = useMemo(() => createLinkedPropsResolver(project), [project]);
   // UI 中 tracks[0] 是最上层轨 → 最后渲染（覆盖在上）
   const ordered = [...project.tracks].reverse();
   return (
@@ -36,7 +37,7 @@ export const MainComposition: React.FC<{ project: ProjectData; plate?: boolean }
             if (plate && excludesFromPlate(clip, card)) return null;
             const Comp = card.component;
             const duration = Math.max(1, Math.round(clip.duration));
-            const props: Record<string, unknown> = themedProps(MANIFEST, card, project.themeId, resolveLinkedProps(project, clip, {frame, cards: CARDS}), project.themeColors);
+            const props: Record<string, unknown> = themedProps(MANIFEST, card, project.themeId, resolveProps(clip, {frame, cards: CARDS}), project.themeColors);
             // 成片组件按 `duration`/`dur` 算出场淡出：注入 clip 的源时长，拉长/裁短后淡出跟着挪
             if (card.durationProp)
               props[card.durationProp] = Math.max(1, Math.round(clip.inOffset + duration * clip.speed));

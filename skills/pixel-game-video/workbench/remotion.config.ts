@@ -2,11 +2,12 @@
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { Config } from '@remotion/cli/config';
+import {resolveRenderConcurrency} from './scripts/render-settings.mjs';
 const hasManifest = ['workbench.ts', 'workbench.tsx'].some(f => existsSync(path.resolve('proj', f)));
 Config.overrideWebpackConfig(c => ({...c, resolve: {...c.resolve, symlinks: false, alias: {...c.resolve?.alias, '@proj': path.resolve(hasManifest ? 'proj' : 'proj-stub')}}}));
 Config.setVideoImageFormat('jpeg');
 Config.setOverwriteOutput(true);
-Config.setConcurrency(2);
+Config.setConcurrency(resolveRenderConcurrency());
 const browser = [process.env.PIXEL_BROWSER_EXECUTABLE,
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome', '/usr/bin/chromium',
 ].find(p => p && existsSync(p));
