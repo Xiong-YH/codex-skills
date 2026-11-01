@@ -1,6 +1,8 @@
 # 创作合同
 
-只交付视觉方案时，可先按 [视觉分镜与工程映射](visual-storyboard.md) 输出设计稿，不强制创建四份 JSON 或调用基础层。用户要求制作、交接或继续已有工程时，以下源文件与时间规则保持唯一；设计稿不新增模型字段或运行时间线。制作视频时必须进入基础 skill 的工作台剪辑并最终导出，镜头、字幕与其他文字、转场、音效、配乐分别独立轨道；有旁白时另设旁白轨。
+项目主画风与片段特选按基础层 [画风透传合同](../../pixel-game-video/modules/style/ART-DIRECTION-CONTRACT.md) 记录在 brief.constraints 与镜头 intent。片段有效画风必须将通用描述、人物/物种/背景/道具细化要求、规范版本和样板一起交给制作，不能只交风格名称；组件独立。现有 schema 不新增美术字段，美术 ID 不替换 production-plan.style，解析结果与样板快照为派生交接附件。
+
+只交付视觉方案时，按 [脚本表格规范](script-format.md) 输出总览和逐片段详情，再按 [视觉分镜与工程映射](visual-storyboard.md) 对应现有字段，不强制创建四份 JSON 或调用基础层。用户要求制作、交接或继续已有工程时，以下源文件与时间规则保持唯一；设计稿不新增模型字段或运行时间线。制作视频时必须进入基础 skill 的工作台剪辑并最终导出，镜头、字幕与其他文字、转场、音效、配乐分别独立轨道；有旁白时另设旁白轨。
 
 人物按镜头显式选择：production-plan 中 `actor:null` 表示不叠加库人物，完整插画或片段内部仍可自带人物。不是所有画面都要有小人；场景、物体与组件可以独立主导画面。
 
@@ -28,6 +30,8 @@
 | production-plan.json | 标题、输出规格、renderBackend、风格、人物与道具素材、文字角色、运镜和声音选择 | id / shots[].id / text[].cueId / audio[].id |
 
 文字用短句表达一个意思，游戏状态变化承载因果；转场服务焦点交接。**面向用户的每份视频脚本必须显式写出接镜／转场**，包括直切、同镜继续与首尾入场／收束；按 [转场标注](visual-storyboard.md#脚本中的呈现类型标注) 写交出、过程、接住和阅读开始条件。设计意图放 `visual.continuity` / `intent`，执行选择归production-plan；候选方案不能冒充可调用配方。不是每镜都需要运镜或音效。保留用户指定角色与表现方向。
+
+**脚本同时必填字幕形式**：按 [字幕形式描述](visual-storyboard.md#脚本必须描述字幕形式) 写明用途、位置与绑定、重点词与底板、显露／替换／收束和实现状态。此说明沿现有 intent 与事件交接，不新增未定义字段；生产须对照执行，不能只交台词或静默回退底部字幕。
 
 音效默认留白，只为有明确增益的关键变化写入 production-plan.audio，分镜简要说明保留作用；不按动作或卡点配满。触发筛选与删音对照统一按基础依赖的 `modules/audio/GUIDE.md` 执行，不另立音效次数或重复要求每条 cue 填说明字段。
 
@@ -58,3 +62,19 @@ production-plan 可用 `speechDuck` 设置旁白期间保留的音效比例，�
 `id` 缺省为 `bgm`，须与 production-plan 的其他对象 ID 区分，保证源映射可唯一定位；`gain` 与配乐自己的 `speechDuck` 范围为 0–1，默认分别为 0.18、0.25；后者设置旁白期间保留的配乐比例，与音效的顶层 `speechDuck` 分开。`loop` 默认 true；`trimStartSeconds` 默认 0；淡入/淡出为非负整数帧，默认 60/90。片段不足时可循环，关闭循环则需有足够素材覆盖所选区间。`title`、`artist`、`sourceUrl`、`licenseUrl`、`changes` 是可选署名记录，缺省为空串，按实际素材来源填写。handoff 原样传给 audio.json，复制配乐 WAV 并绑定源文件、复制件与生成参数哈希；沿源映射回改 BGM 对象。`silent` 模式拒绝显式配乐。
 
 `init PROJECT` 创建待填写模板，空字段会阻止交接。`init PROJECT --example` 复制可运行样例。`--idea` 只记录创意，写脚本和设计分镜仍由使用 skill 的 agent 完成，不把模板伪装成自动创作结果。
+
+组件从脚本到实现沿 [组件需求描述](visual-storyboard.md#脚本中的组件需求)。设计附件只拥有需求、五维和验证范围，不复制 script 文案或 storyboard 时间；它不由 handoff 自动解释执行。已有字段不能表达的新机制先在基础技能实现和注册适配器，再回填真实能力选择。
+
+## 合同与样例入口
+
+按当前任务选例子，不默认读取全部样例，也不把示例题材、片长或镜头结构当作新片约束。
+
+| 要核对什么 | 创作源或参考 |
+| --- | --- |
+| 四份源文件与基本选择机制 | [模板](../assets/templates/)、[选择机制](../examples/bounded-choice/brief.json) |
+| 缓存事件与场景编排 | [数据旅程](../examples/cache-journey/brief.json)、[人物取数](../examples/cache-adventure/brief.json)；人物真实表演范围仍按基础层能力目录 |
+| 信息结构与组件组合 | [基础五类](../examples/component-system/brief.json)、[扩展与组合](../examples/component-expansion/brief.json) |
+| 空间叙事与原生后端交接 | [跨空间叙事](../examples/cs-postgrad-narrative-18s/brief.json)、[原生书桌工程](../examples/remotion-focus-desk/README.md) |
+| 完整插画、素材与快照维护 | [插画创作源](../examples/whole-illustration/storyboard.json)，流程与审美状态见 [插画规范](character-illustration.md) |
+
+参考片的方法与真实观察从 [视觉叙事](visual-storytelling.md) 进入；该计算机口播系列的历史样例与撤回方案从 [系列要求](computing-voiceover.md) 进入。当前实现、运行核验和用户认可分别记录，不能因样例文件存在就声明本次制作已验证。

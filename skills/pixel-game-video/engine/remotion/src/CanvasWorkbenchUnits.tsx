@@ -43,6 +43,11 @@ const editedShot = (shot: Data, props: CanvasShotProps, payload: CanvasPayload):
     value[field] = json(source[`${field}Json`] ?? source[`${field}JSON`], shot[field], field);
   }
   if (props.actor !== undefined) value.actor = props.actor || null;
+  if (!Array.isArray(value.objects)) throw new Error('Editable objects JSON must be an array.');
+  for (const object of value.objects) {
+    if (!object || !PIXEL_CANVAS_RUNTIME.library.hasProp(object.asset))
+      throw new Error(`Prop '${object?.asset}' has no loaded renderer; edit the source project and rebuild.`);
+  }
   if (value.actor && !payload.assets[`${value.actor}:reference`]) throw new Error(`Character '${value.actor}' is outside this compiled project's assets; edit the source project and rebuild.`);
   for (const action of value.performance ?? []) if (value.actor && !payload.assets[`${value.actor}:pose:${action.pose}`])
     throw new Error(`Character pose '${value.actor}/${action.pose}' is outside this compiled project's assets; rebuild with that pose.`);

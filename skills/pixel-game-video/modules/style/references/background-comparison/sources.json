@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-01",
+  "method": "built-in image_gen",
+  "artProfileVersion": 2,
+  "pathBase": "Paths in assets and inputs are relative to the style module directory.",
+  "purpose": "同一工坊相近视角与布局的完整干净背景对照；比较整套方案，不归因单一维度。题材、配色、日光与占位不作为默认模板。",
+  "comparison": {
+    "layout": "same major shelf/window/workbench positions; generative redraw, not pixel-registered",
+    "approval": "pending_user_approval",
+    "review": "完整静帧已查看：无人物、无讲解文字，空间与主要对象对应，可爱版本的箱体、支撑和盆栽更圆润。未审人物/组件/字幕合成或动画；未核验严格像素网格。",
+    "iteration": "首版可爱转绘与粗像素过近，改为明显圆润的家具、箱体、植物与简化材质后选用。"
+  },
+  "assets": [
+    {
+      "file": "references/background-comparison/chunky-workshop-v1.png",
+      "style": "chunky",
+      "approval": "pending_user_approval",
+      "prompt": "Use case: stylized-concept. Asset type: complete clean 16:9 pixel-art background reference for an explainer video skill. Image 1 is a STYLE reference only: study the chunky hard-edged square pixel clusters of the workshop on its right; do not reproduce the character, split layout or framing. Create ONE full-bleed landscape image, no people, no text. Scene for a controlled comparison: a welcoming compact repair workshop, front-facing eye-level wide room, back wall parallel to image plane, coherent modest perspective. Fixed composition: a tall wooden shelf at far left (x4–24%, y12–72%) containing a few books and two storage boxes; a plain central sage wall (x30–66%, y15–57%) with quiet material color blocks, not a framed panel; a four-pane rectangular window at upper right (x72–94%, y12–48%) with simple trees outside; one long workbench beneath central wall and window (x32–94%, top at y60%, legs end at y82%), one small blue plant pot on its far right and one brass desk lamp on its left. Clear standing floor at lower left x6–28%, y72–90%; calm continuous wooden floor across bottom 18% for subtitles added later. Warm sunlight from upper right, cool muted blue-green shadows. CHUNKY rendering: visibly LARGE square pixel clusters and clear stepped silhouettes throughout, structural angular forms, VERY FEW hard-edged color bands per material, broad plain wood planes, plant simplified to a few chunky leaf groups, no intricate wood grain or tiny surface speckles. Enough depth through occlusion and value groups, no soft painting. This is chunky rather than detailed pixel art. Colors: warm honey wood, sage wall, restrained teal shadows, pale daylight. Full room fills the entire frame with no border, no captions, no UI, no watermark, no characters or character silhouettes, no protagonist, no smooth gradients, no blur, no antialiasing, no photographic textures. Landscape 16:9.",
+      "inputs": [
+        {
+          "file": "../library/characters/style-variants/chunky-board.png",
+          "role": "style only; ignore person and split layout",
+          "sha256": "699f1b2dc0a070349475b2ee80c1bd2612b78a275b3342d42b8ee7cb6eb23c61"
+        }
+      ],
+      "sha256": "aaa8030f1ddf759ceb5a770ec0b9f84a5552df30404946fd19bed58bc18fc8bd",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "file": "references/background-comparison/cute-workshop-v1.png",
+      "style": "cute",
+      "approval": "pending_user_approval",
+      "prompt": "Use case: style-transfer. Image 1 is the layout reference (clean workshop). Image 2 is the cute pixel-art art-direction reference; borrow its friendly compact shape design, never include its person. Create a NEW REDRAW of the same workshop in a VISIBLY DIFFERENT CUTE pixel-art style. The last attempt was too close to the original: merely brightening colors or smoothing details is insufficient. Make these decisive shape changes: rounded endcaps and generous stepped corner radii on the long workbench; short thick friendly table supports; chunky rounded storage boxes with large simple inset handles; round, plump pots and broad soft leaf silhouettes; books simplified to fewer clean color blocks; a compact friendly desk lamp with a large softly domed shade. Material detail must be VERY SIMPLE: plain wood planes, no thin wood grain, no peppered highlights, no bevel microtexture. Clean medium-size hard-edged pixel clusters express the curved silhouettes, without smooth vector edges or blur. A cheerful toy-like room with clear simple discrete shades, gentle contrast and pastel sage wall, honey-orange wood, blue pots, mint / teal boxes. Do not retain the gritty textured rendering of Image 1. Keep the same recognizable room layout and full 16:9 frame: tall shelf at far left, quiet wall in middle, four-pane window at upper right, lamp at left end of long workbench, potted plant at right end, tools on bench, boxes beneath, continuous open wooden floor along bottom. Same front-facing wide camera and sunlight from upper right. Keep furniture credible in perspective and support, do not distort the room. Same approximate major object positions but redraw every silhouette in the friendly simplified style. No people, no character fragments, no letters, no captions, no UI, no labels, no borders, no watermark. ONE complete clean opaque background, not a comparison board. This should read immediately as a cute room variant rather than a near-identical recolor.",
+      "inputs": [
+        {
+          "file": "references/background-comparison/chunky-workshop-v1.png",
+          "role": "layout target; redraw forms, preserve camera and approximate major placements",
+          "sha256": "aaa8030f1ddf759ceb5a770ec0b9f84a5552df30404946fd19bed58bc18fc8bd"
+        },
+        {
+          "file": "../library/characters/style-variants/cute-board.png",
+          "role": "cute art direction only; ignore person and split layout",
+          "sha256": "9f17b5c51f58abc4b3b20ea41c4a88687274f1d84db3ce4a0b17d7ed4da8c8fd"
+        }
+      ],
+      "sha256": "c348d2f7da6ba03ea30e78f1f2759d17341466856a8d96e16c0a91bc399962e1",
+      "width": 1672,
+      "height": 941
+    }
+  ]
+}

@@ -9,7 +9,7 @@ import unittest
 SKILL = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(SKILL))
 from engine.compiler import compile_project, read_json, write_json, _motion_params
-from engine.dependencies import javascript_files, runtime_files
+from engine.dependencies import javascript_files, runtime_files, selected_style
 from engine.workbench_bridge import _canvas_visual_manifest
 
 
@@ -28,7 +28,7 @@ class ContentHandoffTests(unittest.TestCase):
 
     def test_nine_designs_compile_into_independent_editable_tracks(self):
         resolved = compile_project(self.root)
-        manifest = _canvas_visual_manifest(resolved, {'style': read_json(SKILL / 'modules/style/pixel-study.json')})
+        manifest = _canvas_visual_manifest(resolved, {'style': selected_style(SKILL, resolved)[1]})
         self.assertEqual(len(manifest['transitions']), 9)
         self.assertEqual(len(manifest['shots']), 18)
         for unit in manifest['transitions']:

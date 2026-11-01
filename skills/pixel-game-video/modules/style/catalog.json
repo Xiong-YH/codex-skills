@@ -10,31 +10,38 @@
       "id": "style.cyberpunk.v1",
       "title": "像素赛博 · 霓虹夜城",
       "file": "cyberpunk.json",
-      "runtime": "cyberpunk.js"
+      "runtime": "cyberpunk.js",
+      "scenePreset": "layouts/cyberpunk.json",
+      "sceneRuntime": "backgrounds/cyberpunk.js"
     },
     {
       "id": "style.pixel-computing.v1",
       "title": "像素计算 · 工作台与机房",
       "file": "pixel-computing.json",
-      "runtime": "pixel-computing.js"
+      "runtime": "pixel-computing.js",
+      "scenePreset": "layouts/pixel-computing.json",
+      "sceneRuntime": "backgrounds/pixel-computing.js"
     },
     {
       "id": "style.pixel-study.v1",
       "title": "像素研途 · 档案馆、开发工坊与路线桌",
       "file": "pixel-study.json",
-      "runtime": "pixel-study.js"
+      "scenePreset": "layouts/pixel-study.json",
+      "sceneRuntime": "backgrounds/pixel-study.js"
     },
     {
       "id": "style.pixel-competition.v1",
       "title": "像素竞赛 · 训练室、时间桌与工坊",
       "file": "pixel-competition.json",
-      "runtime": "pixel-study.js"
+      "scenePreset": "layouts/pixel-competition.json",
+      "sceneRuntime": "backgrounds/pixel-study.js"
     },
     {
       "id": "style.pixel-editorial.v1",
       "title": "像素图解 · 暖金组件与可变背景",
       "file": "pixel-editorial.json",
-      "runtime": "pixel-editorial.js"
+      "runtime": "pixel-editorial.js",
+      "scenePreset": "layouts/pixel-editorial.json"
     }
   ]
 }

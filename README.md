@@ -4,6 +4,12 @@
 
 本次及后续版本更新见[变更记录](CHANGELOG.md)。组件完整集合与朴素原版入口见[组件范例集](skills/pixel-game-video/modules/components/examples/style-atlas/README.md)。
 
+七大模块的职责、现有文件归属与后续迁移项见[模块架构清单](skills/pixel-game-video/references/module-ownership.md)。模块 GUIDE 已统一为职责边界、任务路由与验收重点；背景资源、配套布局和人物事件执行器已按归属迁移；现有素材 ID 与 VideoSpec 字段保持兼容。
+
+[统一能力目录](skills/pixel-game-video/references/capability-catalog.md)通过 `catalog --capabilities` 汇总七模块的后端范围、编辑/导出边界、示例与测试入口；旧 `catalog` 查询保持兼容，目录检查不代表测试或审片通过。
+
+两个 SKILL.md 现按“任务选择 → 七模块 → 创作/制作约束”组织。具体参数、系列偏好与案例留在对应参考中按需读取；入口与规则的对应关系见[职责清单](skills/pixel-game-video/references/module-ownership.md#技能入口与详细规则)。
+
 | Skill | 职责 |
 | --- | --- |
 | [pixel-game-video](skills/pixel-game-video/SKILL.md) | 按结构化工程制作视频，强制工作台分轨剪辑与最终导出；Canvas runtime 与有限原生 Remotion 场景共用编辑交付 |
@@ -57,11 +63,13 @@ flowchart TD
 
 ## 当前交付基线
 
+场景美术按 [八类画风](skills/pixel-game-video/modules/style/PIXEL-STYLES.md) 选型，v3 保留颗粒、形状、细节、色阶、轮廓、光影、投影七项描述，细化八类核心与人物/物种/道具画法；画廊与命令行共用提示词展开。[主画风与片段透传合同](skills/pixel-game-video/modules/style/ART-DIRECTION-CONTRACT.md) 规定项目主画风、片段可特选、片段内统一继承；组件独立。[画廊](skills/pixel-game-video/modules/style/references/index.html) 保留原整景/局部参考，另补可爱与粗像素的完整干净背景对照，待用户审美确认。八类方向及原物种样板的既有认可范围保留；新参考、运行时预设和动画能力分别验收。
+
 | 维度 | 已收纳内容与边界 |
 | --- | --- |
 | 视觉方法与组件 | 脚本阶段明确解释任务；12类组件覆盖身份、数值、对比、标注、章节、流程、时间轴、清单、层级、条形比较、代码与结论，可按主次组合 |
 | 可变背景与片段替换 | 按内容先设计空间与尺度，再复用或制作项目素材；样板只作质感参考，已有房间不构成场所菜单。素材变更参与哈希与导出，默认保留字幕和旁白时序 |
-| 风格与人物 | 精致偏暗的像素画面；[已确认 V3 人物库](skills/pixel-game-video/modules/library/CHARACTERS.md)保留无围巾主角、三位差异化像素配角和一位半身专题配角，含人设与30张动作参考；Canvas 通用人物层可按事件切换姿态，Remotion 当前使用静态基准图 |
+| 风格与人物 | 项目主画风＋片段特选的八类场景画风，组件独立；[已确认 V3 人物库](skills/pixel-game-video/modules/library/CHARACTERS.md)保留无围巾主角、三位差异化像素配角和一位半身专题配角，含人设与30张动作参考；Canvas 通用人物层可按事件切换姿态，Remotion 当前使用静态基准图 |
 | 完整情境插画 | 7张完整场景姿态、生成提示词与独立样例；拆头试样已撤回，新插画仍待用户审美反馈 |
 | 转场 | 12种方法：9种通用配方＋3种空间设计；后三种已在竞赛场景落地，尚非通用recipe |
 | 节奏与构图 | 定位→主运动→落稳→阅读；全画幅统一镜头、卡片保持固有比例，按旁白与信息量留停顿 |

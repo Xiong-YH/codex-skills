@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-01",
+  "method": "built_in_imagegen_then_documented_finishing",
+  "original_six_style_direction": "user_positive_feedback",
+  "new_tiers_user_approval": "pending",
+  "runtime_ready": false,
+  "assets": [
+    {
+      "file": "more-coarse.png",
+      "review": "静帧已看，属于更粗候选；非严格网格或限色",
+      "sha256": "b0961563b7a2b6926f371180b40e5285f8bbd86a63b6935786c7c606029e5959"
+    },
+    {
+      "file": "four-tone-generated.png",
+      "role": "generation_source",
+      "sha256": "05f5e3a6785004ac4dd1ac38552539e43e25ea62af2a48a12c17a1a06bce576d"
+    },
+    {
+      "file": "four-tone-strict.png",
+      "derived_from": "four-tone-generated.png",
+      "processing": "prepare-reference.ps1 -Mode four-tone; weighted RGB nearest-palette mapping",
+      "palette": [
+        "#0f380f",
+        "#306230",
+        "#8bac0f",
+        "#9bbc0f"
+      ],
+      "review": "1254x1254，恰好四种不透明RGB色；已看静帧",
+      "sha256": "ccca0f1ce30c9c6772510b97ebe97690de98b0df59dab3938d4dbe3a9b7bbf3d"
+    },
+    {
+      "file": "ultra-coarse-generated.png",
+      "role": "generation_source",
+      "sha256": "8def0290adc75f2d9f13edead75dee0e8dba36a132baf6a5938b9d68083c1bf8"
+    },
+    {
+      "file": "ultra-coarse.png",
+      "derived_from": "ultra-coarse-generated.png",
+      "processing": "prepare-reference.ps1 -Mode ultra-grid; 40x40 center sampling, fixed eight-color nearest mapping, one logical eye restored at (22,15), 24x integer upscale",
+      "review": "960x960，恰好八色，各24x24块像素一致；已看静帧，候选待审美确认",
+      "sha256": "5663a40309fd11be97041153e10d6d63d4f4a3bc42209ff0356159a657d6df42"
+    }
+  ],
+  "platform_verification": "Windows PowerShell 5.1 / System.Drawing only",
+  "processing_script_sha256": "49b54f97d069ebd998364d7ccdda25d60796bd74c4fb4128c832aead9de6cb44"
+}

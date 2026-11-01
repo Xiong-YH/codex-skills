@@ -23,6 +23,27 @@
       "notRegisteredAsShotComponentKind": true,
       "preview": "assets/reference/energy-actuator-assembly.png",
       "currentUse": "historical five-dimensional example; redesign into one exclusive visual style before new production"
+    },
+    {
+      "id": "object.state-meter-break.v1",
+      "title": "状态仪表与条块散落",
+      "status": "standalone",
+      "runtime": "custom/state-meter.js",
+      "example": "examples/state-meter/index.html",
+      "execution": "standalone-canvas",
+      "scope": "fixed front view; count 4..40, event-bound growth/warning/fall/hold, contain layout; no generic fracture",
+      "notRegisteredAsShotComponentKind": true,
+      "currentUse": "script-driven component architecture example; no scene adapter or workbench integration"
+    },
+    {
+      "id": "object.request-queue-study.v1",
+      "title": "请求加工站与等待缓冲架",
+      "status": "approved-fixed-view-demo",
+      "example": "examples/request-queue/index.html",
+      "execution": "standalone-canvas",
+      "scope": "fixed view; two finite arrival scenarios; deterministic single-server processing and finite queue; no generic scheduling or workbench adapter",
+      "notRegisteredAsShotComponentKind": true,
+      "currentUse": "user-approved content-driven design study; mechanical appearance applies only to this example"
     }
   ]
 }

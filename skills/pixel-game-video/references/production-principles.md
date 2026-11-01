@@ -19,15 +19,18 @@
 
 ## 当前制作原则
 
+场景美术按 [项目主画风与片段透传](../modules/style/ART-DIRECTION-CONTRACT.md) 执行：项目主画风、片段可整段特选，四个场景分支统一继承；组件独立。八类描述与分支提示词唯一维护在 style/art-profiles.json，规范及实际使用样板随项目保留快照。本规则取代此前“分支各选画法”原型，不扩大为引擎自动换肤能力。
+
 | 原则 | 执行含义 | 细则入口 |
 | --- | --- | --- |
 | 先确定解释任务，再选画面 | 每镜回答一个明确问题；根据介绍、比较、过程、条件或结论选择组件与场景 | [组件看图指南](../modules/components/GUIDE.md)、[场景](../modules/scenes/GUIDE.md) |
 | 关键画面推进理解 | 先明确本段比前段新增什么理解，再让关键变化、比较或阅读支撑它；后镜使用前镜的结果或接续其疑问。图解与定义可保持稳定，示意画面不自动构成现实证据 | 创意与整段设计由 pixel-video-director 的 `references/visual-storytelling.md` 维护；基础层按本项目分镜执行，不依赖 director 安装 |
 | 让画面承担解释 | 用对象、状态、数量和空间关系推进观点；旁白组织信息，字幕辅助阅读 | [场景](../modules/scenes/GUIDE.md)、[文字](../modules/text/GUIDE.md) |
 | 同镜先定主次 | 一个主要解释对象，辅助信息服务它；保留主体与字幕空间，动作落稳后留阅读时间 | [组件与组合](../modules/components/GUIDE.md) |
-| 基础组件区分风格与特性，自定义组件有设计约定 | 基础组件可选朴素原版；机械／能量风格互斥，各选开放／一体／传递样式，可附加堆叠特性；新机制按五维设计并最小核验，动作与阅读停顿分开 | [基础规则](../modules/components/BASIC-COMPONENTS.md)、[自定义五维](../modules/components/DESIGN.md)、[动作时长](../modules/motion/GUIDE.md#组件内部的离散动作与节拍) |
+| 基础组件区分风格与特性，自定义组件有设计约定 | 基础组件可选朴素原版；机械／能量风格互斥，各选开放／一体／传递样式，可附加堆叠特性；新机制从脚本关系出发判断复用或定制，按五维设计与事件驱动试样核验，动作与阅读停顿分开 | [基础规则](../modules/components/BASIC-COMPONENTS.md)、[自定义五维](../modules/components/DESIGN.md)、[动作时长](../modules/motion/GUIDE.md#组件内部的离散动作与节拍) |
 | 运动对应关系与状态 | 先明确交出与接住的主体；避免无解释任务的反复推拉，声音跟随实际触点 | [转场库](../modules/motion/TRANSITIONS.md)、[游戏反馈](../modules/scenes/GAME_FEEL.md)、[声音](../modules/audio/GUIDE.md) |
 | 音效少而精准 | 默认留白，只强调有明确增益的关键变化；可用音色、可见动作和卡点不构成发声理由，审片做删音对照 | [音效必要性与密度](../modules/audio/GUIDE.md#先减触发再调强弱) |
+| 组件画风按共同规则生成 | 基础与自定义组件共用材质分工、相对厚度、受光、接触和主次要求；对象形态按内容设计，旧参考库迁移另行核验 | [组件共同画风](../modules/style/COMPONENT-ART.md) |
 | 空间与形状保持可信 | 连续房间遵循统一镜头；局部滑动用于独立面板；卡片保持比例，连接线避字 | [运动](../modules/motion/GUIDE.md)、[组件](../modules/components/GUIDE.md) |
 | 保留已确认的角色职责和风格 | 将适用偏好写入本片 brief，再按镜头安排人物、场所与背景；样板不固定全部镜头 | [风格基调](../modules/style/ART-DIRECTION.md)、[人物库](../modules/library/CHARACTERS.md) |
 | 场景从内容出发，素材随后匹配 | 保持可识别的视觉语言，开放场所、尺度、视点和构图；已有图库供合适时复用，不以换房间数量或新图配额代替创作 | [开放式场景设计](../modules/style/ART-DIRECTION.md#background-design) |

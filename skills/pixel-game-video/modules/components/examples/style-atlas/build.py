@@ -24,7 +24,7 @@ def inline_custom(folder):
         html = html.replace('../../assets/object-style/tokens-containers.png', data_uri(MODULE/'assets/object-style/tokens-containers.png'))
     else:
         html = html.replace('<script src="../../fusion-component.js"></script>', '<script>' + (MODULE/'fusion-component.js').read_text(encoding='utf-8') + '</script>')
-        html = html.replace('../../../style/assets/engineering-workshop-v1.png', data_uri(MODULE.parent/'style/assets/engineering-workshop-v1.png'))
+        html = html.replace('../../../library/backgrounds/engineering-workshop-v1.png', data_uri(MODULE.parent/'library/backgrounds/engineering-workshop-v1.png'))
     return html
 
 
@@ -42,7 +42,7 @@ def main():
     hook = 'const renderer=PixelVideo.createRenderer({canvas,createCanvas,assets,resolved:payload.resolved,mouth:payload.mouth,style:payload.style});'
     if hook not in film:
         raise RuntimeError('Guide renderer hook changed; update atlas binding')
-    film = film.replace('window.sceneDuration=', "payload.assets['@atlas.bg']=" + json.dumps(data_uri(MODULE.parent/'style/assets/engineering-workshop-v1.png')) + ';window.sceneDuration=', 1)
+    film = film.replace('window.sceneDuration=', "payload.assets['@atlas.bg']=" + json.dumps(data_uri(MODULE.parent/'library/backgrounds/engineering-workshop-v1.png')) + ';window.sceneDuration=', 1)
     film = film.replace(hook, hook.replace('const renderer=', 'let renderer=') + '''
 window.atlasConfigure=(config,background=true)=>{
  config=PixelVideo.componentStyles.normalize(config);

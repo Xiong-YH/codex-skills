@@ -5,40 +5,32 @@ description: 制作和修改像素游戏感视频，按结构化工程进入工�
 
 # Pixel Game Video
 
-把制作决策写入四份 VideoSpec JSON；运行代码完成时间线编译与合成。开始制作、续作或复盘时先读 [制作总则与经验入口](references/production-principles.md)，再读 [制作合同](references/contract.md)，运行 `python scripts/video.py catalog` 选择已实现的能力。
+按结构化工程制作和修改像素游戏感视频。开始制作、续作或复盘先读 [制作总则](references/production-principles.md)，工程编写前读 [制作合同](references/contract.md)；按当前任务选择下面的模块，不默认加载全部参考。
 
-制作视频必须进入 [本地工作台](references/workbench.md) 完成剪辑，并从工作台导出最终成片。镜头、字幕与其他文字、转场、音效、配乐必须分别成为可编辑轨道；有旁白时另设旁白轨。不允许把整条 MP4 当作唯一可编辑片段，也不以直接运行 `render` 代替工作台剪辑和最终导出。只有视觉设计或局部能力调试不要求出片时，可停在对应阶段。
+## 七大模块
 
-`renderBackend=canvas` 仍是画面执行的默认值，现有场景、组件、素材和转场通过 Canvas runtime 接入 Remotion 工作台；镜头内部人物、组件和背景参数通过 props 编辑。显式选择 `remotion` 时使用原生 React 场景，其能力边界仍见 [Remotion 后端](references/remotion.md)。两条路径共用工作台剪辑和导出流程，不能把 Canvas 接入描述为所有能力已重写成 React。
-
-| 修改内容 | 按需读取 |
+| 模块 | 负责什么 |
 | --- | --- |
-| 镜头剪辑、字幕音效同步、Studio 与成片一致、可编辑交付 | [制作与可编辑时间线](references/production-workflow.md) |
-| 浏览器多轨编辑、属性面板、保存工程 JSON 和导出 MP4 | [本地工作台](references/workbench.md) |
-| 剪映原生草稿、镜头分段、可编辑字幕和独立音效 | [剪映草稿导出](references/jianying-export.md) |
-| 色板、字体、像素密度 | [style](modules/style/GUIDE.md) |
-| 背景设计、生成、风格样板、镜头素材替换 | [开放式场景设计与风格基调](modules/style/ART-DIRECTION.md)；先按内容构思画面，再选素材 |
-| 基础组件选型、风格、样式与特性 | 先读[基础组件规则](modules/components/BASIC-COMPONENTS.md)，按 kind、单一 visualStyle、styleVariant 与可选 features 选择，完整可运行集合见[样式范例](modules/components/examples/style-atlas/README.md)；字段按需查[信息组件合同](modules/components/INFORMATION-COMPONENTS.md) |
-| 超出基础组件的新实体、路径、形变或关系机制 | [自定义组件五维](modules/components/DESIGN.md)；复用已验证部分，先做最小试样 |
-| 复用供能、加工、装配等已认可物体效果 | [可复用物体组件](modules/components/OBJECT-COMPONENTS.md)，独立 Canvas 绘制器与样例；不与 `shot.components.kind` 混用 |
-| 人物、物体、表情素材 | [library](modules/library/GUIDE.md)；当前五人人设与动作读 [已确认人物库](modules/library/CHARACTERS.md) |
-| 字幕、注释、标题、标签 | [text](modules/text/GUIDE.md) |
-| 转场选型与设计 | [转场库](modules/motion/TRANSITIONS.md)，选定后按链接读配方 |
-| 游戏感、操作反馈与局部细节 | [游戏反馈细节库](modules/scenes/GAME_FEEL.md)，按实际状态选择触点、运动和声音 |
-| 相机、物体运动、转场执行、特效 | [motion](modules/motion/GUIDE.md) |
-| 音色、声像、事件音效与配乐 | [audio](modules/audio/GUIDE.md)；六种已确认街机音效见 [ARCADE](modules/audio/ARCADE.md)；Chill Wave 导入、音量、淡化与旁白压低见 [配乐](modules/audio/MUSIC.md) |
-| 已有旁白导入与混音 | [声音指南](modules/audio/GUIDE.md)；导入项目 PCM 旁白并在工作台对齐，不自动生成配音或打开剪映 |
-| 游戏机制、人物表演与情境插画 | [scenes](modules/scenes/GUIDE.md)；[完整插画进入视频](modules/scenes/whole-illustration.md)，含实渲染图与独立样例 |
+| [style](modules/style/GUIDE.md) | 配色、字体角色、像素尺度、材质与光影规范 |
+| [library](modules/library/GUIDE.md) | 人物、道具、背景等素材身份、变体、锚点与来源 |
+| [components](modules/components/GUIDE.md) | 信息结构、可组合实体及局部状态与表现 |
+| [text](modules/text/GUIDE.md) | 字幕、标题、标签、注释与叙事进度的排版 |
+| [motion](modules/motion/GUIDE.md) | 通用运动、相机、转场、遮挡与几何反馈 |
+| [audio](modules/audio/GUIDE.md) | 事件音效、已有旁白导入、配乐与混音 |
+| [scenes](modules/scenes/GUIDE.md) | 空间、对象关系、状态机制、表演与跨模块编排 |
 
-从 `init PROJECT` 建轻量工程；编写后运行 `validate`、`build`，再运行 `workbench PROJECT`，完成多轨剪辑、保存与工作台导出。`preview`、`render` 用于源合成的调试和一致性对照。命令均为 `python scripts/video.py <命令> PROJECT`。依赖与环境配置见 [运行](references/runtime.md)，增加能力见 [模块维护](references/module-development.md)。
+选型运行 `python scripts/video.py catalog MODULE --capabilities`，MODULE 为上表模块名；按 ID、后端与状态筛选见 [能力目录](references/capability-catalog.md)。核对调用字段、支持范围及工作台边界：独立试样、设计索引和未实现项不能冒充已注册能力，目录检查不代表运行或审片通过。
 
-- 时间只在镜头和事件中定义，文字、运动和声音引用事件；同一编译时间线驱动预览与出片，不另写字幕/音效秒数表。
-- 工作台首次导入从同一编译结果生成镜头、文字、转场、音效与配乐独立片段；内容参数通过 props/schema 开放。未使用的类别不要求创建空轨；用到的类别不能合并或烘焙成整片。工作台编辑存档是独立创作分支，不自动回写四份 VideoSpec 或导演创作源。
-- `authoringMode=director` 的四份输入是生成物；按 `source-map.json` 回改创作源，再 handoff。
-- 素材、风格、配方通过稳定 ID 选择；未知能力先实现并核验，不能用文案假装已经执行。
-- 保留用户已确认的角色和表达方向。模板题材、片长只是示例。
-- 人物按镜头可选，不要求每个画面有小人。`actor:null` 不叠加库人物，完整插画/片段本身仍可含人物；无人镜头可由场景、物体或组件主导。
-- 插图集合参考风格与演绎方法，按脚本选择，不照搬样例结构、构图或固定动作。情境角色按剧情选择；口播与情境表演分别准备和验收，适用项目的固定姿势口播要求不能被情境动作覆盖。人物形体与场景接触先成立，不沿用已被否定的拆头拼身试样。
-- 支持事件音效、项目内 PCM 旁白与可选 BGM 混音；Canvas 的[事件姿态序列](modules/library/PRESENTER-ACTIONS.md) 供剧情表演使用，不能用全身图轮换模拟固定姿势口播；局部开闭嘴需先补齐同姿势口型素材与适配。Canvas 全片可用 [实心矩形叙事进度条](modules/text/NARRATIVE-PROGRESS.md)，两项均沿 Canvas runtime 进入工作台；原生 React 执行器仍不支持它们。尚无音素对齐、骨骼或通用 TTS。
+## 制作与修改
 
-交付前实测用到的各类轨道可分别编辑、保存重开、逐轨导出及工作台成片导出，并检查实际 MP4、转场前后解码帧与听觉同步。技术核验不代替视听 review；未检查项保留 `not_reviewed`。主动打开本地工作台并提供地址，交付 MP4 及该次「导出版本 JSON」；需要独立工程时用 `export-project` 交付带运行源码的快照。不把浏览器缓存当成交付。任何能力尚不能拆轨、编辑或导出时先补齐并验证，不能静默回退到直接出片。
+场景美术先读 [主画风与片段透传](modules/style/ART-DIRECTION-CONTRACT.md)，按 [八类画风及分支提示词](modules/style/PIXEL-STYLES.md) 选项目主画风，特殊片段可整段另选。片段内人物、物种、背景、场景道具统一继承有效规范；组件与字幕排版独立。画风 ID 不是运行时 style 预设，不能直接替换 production-plan.style。
+
+1. 沿用现有工程和项目要求。direct 工程编辑 `project.json / timeline.json / text.json / audio.json`；director 工程沿 `source-map.json` 回改创作源，再 handoff。镜头与事件拥有时间，文字、运动和声音引用同一时间线。
+2. 从 `init PROJECT` 建新工程；编写后依次 `validate`、`build`、`workbench`。命令入口为 [scripts/video.py](scripts/video.py)，依赖和独立工程导出按 [运行说明](references/runtime.md)。已有工程从当前阶段继续。
+3. 新组件及局部改版先读 [组件共同画风](modules/style/COMPONENT-ART.md)，基础/自定义与代码/素材生成均遵循；按实际画面核验，不以旧图库代替新规范。脚本所需组件按 [脚本驱动设计](modules/components/DESIGN.md) 判断复用、组合或定制；新机制按 [实现协议](modules/components/CUSTOM-RUNTIME.md) 做最小试样并沿实际路径接入，不把所有内容套成现有卡片。默认 Canvas；原生 Remotion 的白名单见 [后端边界](references/remotion.md)。两者共用工作台，Canvas 桥接不扩大原生能力。未知能力先实现并核验；旁白按已有素材导入，本流程不自动生成配音或调用 TTS。
+4. 制作出片必须读取 [工作台](references/workbench.md) 并在其中剪辑、最终导出。用到的镜头、文字、转场、音效、配乐分别成轨，有旁白时另轨；人物、组件与素材在镜头 props 内编辑。缺口先补齐，不能退回直接 render 交付；preview/render 用于调试和一致性对照，仅做局部能力调试时可停在调试阶段。
+5. 工作台 JSON 是独立剪辑分支，不自动回写上游。重建或重新导入前保存当前剪辑；主动打开工作台并提供地址，交付 MP4 与同次导出项目 JSON。实测编辑、保存重开、逐轨及成片导出，实际播放、核字、听音；未检查项保留 `not_reviewed`。完整流程见 [制作与可编辑时间线](references/production-workflow.md)。
+
+系列偏好由当前项目提供，人物按镜头可选，示例不决定片长、选角或场所。人物姿态、插画与口型的实际能力按 library/scenes 与能力目录核对；素材参考不等于表演已实现。
+
+按需交付 [剪映草稿](references/jianying-export.md)；维护能力时读 [模块维护](references/module-development.md) 与 [职责归属](references/module-ownership.md)。

@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "defaults": {
+    "references": {
+      "documentation": [
+        "modules/scenes/details.md",
+        "modules/scenes/SPACE-DESIGN.md",
+        "modules/scenes/MEDIA.md"
+      ],
+      "examples": [
+        "assets/project-template/timeline.json"
+      ],
+      "tests": [
+        "tests/test_contract.py",
+        "tests/test_canvas_workbench.py",
+        "tests/test_remotion_contract.py"
+      ]
+    },
+    "notes": [
+      "场景参数和人物/素材配置通过镜头 props 编辑。只列出声明支持的后端，组合和参数仍须经过编译器验证。"
+    ]
+  },
+  "items": {
+    "scenes.cache-adventure.v1": {
+      "references": {
+        "documentation": [
+          "modules/scenes/cache-adventure.md"
+        ],
+        "examples": [],
+        "tests": [
+          "tests/test_cache_narration.py"
+        ]
+      },
+      "notes": [
+        "当前人物为整图布局预览，关节动作未接入；不能将旧 catalog 中 articulated actions 的描述当作真实肢体表演。"
+      ]
+    },
+    "scenes.study-routes.v1": {
+      "references": {
+        "documentation": [
+          "modules/scenes/study-routes.md"
+        ],
+        "examples": [],
+        "tests": [
+          "tests/test_study_routes.py"
+        ]
+      }
+    },
+    "scenes.competition-routes.v1": {
+      "references": {
+        "documentation": [
+          "modules/scenes/competition-routes.md",
+          "modules/scenes/GAME_FEEL.md"
+        ],
+        "examples": [],
+        "tests": [
+          "tests/test_competition_routes.py",
+          "tests/game-feedback.cjs"
+        ]
+      },
+      "notes": [
+        "固定筹码、日历和空间交接属于本专用场景；不是通用参数或独立 motion recipe。"
+      ]
+    }
+  },
+  "features": [
+    {
+      "id": "scenes.actor-performance.v1",
+      "title": "事件驱动人物姿态",
+      "status": "workflow",
+      "invocation": "timeline.shots[].performance[]",
+      "references": {
+        "documentation": [
+          "modules/scenes/PRESENTER-ACTIONS.md"
+        ],
+        "examples": [],
+        "tests": [
+          "tests/test_presenter_progress.py",
+          "tests/presenter-progress.cjs"
+        ]
+      },
+      "notes": [
+        "仅 Canvas；需要可见 actor，不能与覆盖人物的 replacement 同用。"
+      ],
+      "workbench": {
+        "editing": "shot-props",
+        "track": "shots",
+        "independentTrack": false,
+        "export": "via-track"
+      }
+    },
+    {
+      "id": "scenes.project-media.v1",
+      "title": "项目背景与片段替换",
+      "status": "workflow",
+      "invocation": "timeline.shots[].background / replacement",
+      "references": {
+        "documentation": [
+          "modules/scenes/MEDIA.md",
+          "modules/scenes/whole-illustration.md"
+        ],
+        "examples": [],
+        "tests": [
+          "tests/test_components_media.py",
+          "tests/media.cjs"
+        ]
+      },
+      "notes": [
+        "仅 Canvas；项目媒体字节参与哈希，视频源声音不自动加入混音。"
+      ],
+      "workbench": {
+        "editing": "shot-props",
+        "track": "shots",
+        "independentTrack": false,
+        "export": "via-track"
+      }
+    },
+    {
+      "id": "scenes.game-feedback.v1",
+      "title": "状态反馈编排",
+      "status": "workflow",
+      "invocation": "scenes.competition-routes.v1 gameplay params.feedbackCues",
+      "references": {
+        "documentation": [
+          "modules/scenes/GAME_FEEL.md",
+          "modules/scenes/competition-routes.md"
+        ],
+        "examples": [],
+        "tests": [
+          "tests/test_competition_routes.py",
+          "tests/game-feedback.cjs"
+        ]
+      },
+      "notes": [
+        "目前是竞赛场景的专用实现，没有自动覆盖所有场景的反馈套用器。"
+      ],
+      "workbench": {
+        "editing": "shot-props",
+        "track": "shots",
+        "independentTrack": false,
+        "export": "via-track"
+      }
+    },
+    {
+      "id": "scenes.local-mouth.v1",
+      "title": "固定姿势局部口型",
+      "status": "not_implemented",
+      "invocation": "No local-mouth adapter",
+      "references": {
+        "documentation": [
+          "modules/scenes/PRESENTER-ACTIONS.md"
+        ],
+        "examples": [],
+        "tests": []
+      },
+      "notes": [
+        "需要同姿势开闭嘴素材与实际执行适配；全身姿态轮换不能代替。"
+      ]
+    },
+    {
+      "id": "scenes.skeletal-animation.v1",
+      "title": "通用骨骼与音素对齐",
+      "status": "not_implemented",
+      "invocation": "No skeletal or phoneme-alignment executor",
+      "references": {
+        "documentation": [
+          "modules/scenes/PRESENTER-ACTIONS.md"
+        ],
+        "examples": [],
+        "tests": []
+      },
+      "notes": [
+        "模拟语音节奏、素材动作参考与离散姿态不代表骨骼或音素对齐。"
+      ]
+    }
+  ]
+}

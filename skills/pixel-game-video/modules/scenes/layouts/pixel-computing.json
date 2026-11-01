@@ -1,0 +1,15 @@
+{
+  "libraryAssets": [
+    "style.pixel-workbench.v1",
+    "style.pixel-server-room.v1"
+  ],
+  "backgrounds": {
+    "workspace": "style.pixel-workbench.v1",
+    "archive": "style.pixel-server-room.v1"
+  },
+  "presenter": {
+    "x": 0.2,
+    "baseline": 0.785,
+    "height": 0.4
+  }
+}

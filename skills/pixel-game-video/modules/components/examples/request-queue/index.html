@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>队列 · 两片段组件设计试验</title>
+<style>
+:root{color-scheme:dark;--bg:#10191e;--panel:#172329;--line:#34464c;--ink:#f1e6cf;--muted:#9eafb1;--gold:#dbb77d;--green:#a1c5ad;--coral:#e4947c}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 'Microsoft YaHei UI','Microsoft YaHei',sans-serif}main{max-width:1160px;padding:44px 32px 60px;margin:auto}.eyebrow{font:12px ui-monospace,monospace;letter-spacing:2px;color:var(--gold)}header{display:flex;justify-content:space-between;gap:24px;align-items:flex-start}h1{font-size:clamp(27px,4vw,43px);line-height:1.3;font-weight:500;margin:14px 0 10px}h2{font-size:23px;font-weight:500;margin:0}h3{font-size:18px;font-weight:500;margin:0}p{margin:0;color:var(--muted)}.tag{font-size:12px;color:var(--muted);white-space:nowrap;padding-top:6px}.lead{max-width:760px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:30px 0 16px}button{font:inherit;color:var(--ink);border:1px solid var(--line);background:var(--panel);padding:10px 18px;cursor:pointer;border-radius:4px}button[aria-pressed=true]{background:var(--gold);border-color:var(--gold);color:#1d262b}.ghost{background:transparent}button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:4px}.stage{background:#142127;border:1px solid var(--line);position:relative;overflow:hidden}.stage-head{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;padding:20px 24px 0}.stage-head span{color:var(--muted);font-size:12px}.hero-canvas{display:block;width:100%;height:auto;aspect-ratio:1000/370}.caption{margin:0 24px 24px;padding-top:18px;border-top:1px solid var(--line);font-size:clamp(16px,2.2vw,22px);letter-spacing:.5px;color:var(--ink)}.metrics{display:flex;gap:24px;flex-wrap:wrap;margin-top:15px;padding:0 24px}.metrics span{color:var(--muted);font-size:13px}.metrics b{font-family:ui-monospace,monospace;font-size:21px;color:var(--ink);font-weight:500;margin-left:8px}.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:15px}.controls input{min-width:120px;flex:1;accent-color:var(--gold)}.clock{font:13px ui-monospace,monospace;color:var(--muted);min-width:95px}.section-title{display:flex;gap:16px;align-items:baseline;flex-wrap:wrap;margin:38px 0 18px}.section-title small{color:var(--muted)}.gallery{display:grid;grid-template-columns:1fr 1fr;gap:20px}.specimen{border:1px solid var(--line);background:var(--panel);padding:22px;min-width:0}.spec-head{display:flex;gap:12px;align-items:baseline}.spec-head span{font:12px ui-monospace,monospace;color:var(--gold)}.specimen canvas{display:block;width:100%;aspect-ratio:460/265;margin:10px 0}.chips{display:flex;gap:8px;flex-wrap:wrap}.chips span{font-size:12px;color:#c8d2ca;background:#233239;padding:3px 9px}.specimen p{margin-top:12px;font-size:13px}.legend{display:flex;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-top:14px}.legend i{display:inline-block;width:9px;height:9px;margin-right:7px}.note{font-size:12px;margin-top:18px}details{border-top:1px solid var(--line);padding:18px 0}summary{cursor:pointer;font-size:16px;color:var(--ink)}summary small{font-size:12px;color:var(--muted);margin-left:12px}.table-wrap{overflow:auto;margin-top:16px}table{border-collapse:collapse;width:100%;font-size:13px;table-layout:fixed}td,th{padding:11px 13px;border-bottom:1px solid #2a3b42;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{color:var(--gold);font-weight:500;background:#1b2a31}td:first-child{width:150px;color:#c4cfca}.overview{min-width:720px}.overview th:first-child,.overview td:first-child{width:80px}.overview th:nth-child(2){width:85px}.style-info{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0}.swatch{width:22px;height:22px;display:inline-block;vertical-align:middle;margin-right:6px}.footer{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:22px;margin-top:24px}@media(max-width:650px){main{padding:26px 16px}header{display:block}.tag{margin-top:12px}.gallery{grid-template-columns:1fr}.stage-head{padding:16px 16px 0}.metrics{padding:0 16px;gap:16px}.caption{margin:0 16px 18px}.specimen{padding:16px}td:first-child{width:100px}.overview{table-layout:auto;font-size:12px}.controls button{padding:10px 14px}.hero-canvas{aspect-ratio:1000/450}}
+</style></head>
+<body><main>
+<header><div class="lead"><div class="eyebrow">SCRIPT → FORM → MOTION</div><h1>请求太多，为什么会排队？</h1><p>两个片段，同一个处理位。先写清画面要求，再让组件把关系演出来。</p></div><div class="tag">独立组件试样 / 无声音<br>示意输入，不代表真实性能</div></header>
+<div class="tabs" aria-label="片段选择"><button id="p1" aria-pressed="true">P01 · 从容接住</button><button id="p2" aria-pressed="false">P02 · 队列积压</button></div>
+<section class="stage" aria-label="片段组件关联演示">
+<div class="stage-head"><div id="stage-title">P01 / 同一个处理位</div><span>处理周期始终为 1.2 秒 / 件（示意）</span></div>
+<div class="metrics" aria-live="off"><span>已到达<b id="arrived">0</b></span><span>等待<b id="waiting">0</b></span><span>处理中<b id="busy">0</b></span><span>已完成<b id="done">0</b></span></div>
+<canvas id="hero" class="hero-canvas" width="1000" height="370" role="img" aria-label="请求从左进入单件加工站，经过夹持盖章后送出；第二段出现等待缓冲架，处理节奏保持不变"></canvas>
+<div class="caption" id="quote"></div></section>
+<div class="controls"><button id="play">播放</button><button id="replay" class="ghost">从头重播</button><label for="seek">过程</label><input id="seek" type="range" min="0" max="360" step="1" value="144"><output class="clock" id="clock"></output></div>
+<div class="legend"><span><i style="background:#ead8b5"></i>原请求 · 编号保留</span><span><i style="background:#a1c5ad"></i>绿色印记 · 已完成</span><span><i style="background:#e4947c"></i>珊瑚标签 · 等待积压</span></div>
+<div class="section-title"><h2>把组件单独拿出来看</h2><small>同一套绘制器 · 可随上方进度查看动作</small></div>
+<div class="gallery">
+<article class="specimen"><div class="spec-head"><span>C01</span><h3>单件加工站</h3></div><canvas id="station" width="460" height="265" role="img" aria-label="独立加工站：深铁门架、黄铜压头、双导轨和有厚度的底座"></canvas><div class="chips"><span>机械风格</span><span>自定义开放门架</span><span>堆叠 · 开</span></div><p>一枚请求入位，夹具落下；原筹码盖章后送出。动作承担“处理”，不靠装饰齿轮表达机械感。</p></article>
+<article class="specimen"><div class="spec-head"><span>C02</span><h3>等待缓冲架</h3></div><canvas id="rack" width="460" height="265" role="img" aria-label="独立等待缓冲架：黄铜端帽、深铁双层托架，编号筹码沿承载面入槽和前移"></canvas><div class="chips"><span>机械风格</span><span>自定义双层承载</span><span>堆叠 · 开</span></div><p>先到的在出口端，后来者接在后面。筹码始终保持米色，只让等待读数提示积压。</p></article>
+</div>
+<p class="note">单独样式区：C01 展示 P01 的加工节奏，C02 展示 P02 的排队状态；均使用当前局部时间。它们是两次对照试验的独立视图。</p>
+<div class="section-title"><h2>先有脚本，再有造型</h2><small>展开查看完整十六维分镜与九维外观约定</small></div>
+<div class="table-wrap"><table class="overview"><thead><tr><th>片段 / 镜号</th><th>时间依据</th><th>理解目标与推进</th><th>类别 / 呈现</th><th>变化 / 组件选择</th><th>实现状态与缺口</th></tr></thead><tbody><tr><td>P01 / S01</td><td>建议 0–6 秒</td><td>建立逐件处理的基准，为积压作对照。</td><td>普通内容；机械实体过程图示。</td><td>C01：原请求入位、盖章、送出。</td><td>本页定制试样；无工作台接入。</td></tr><tr><td>P02 / S02</td><td>建议 6–12 秒</td><td>到达快于处理，等待累积。</td><td>普通内容；同构对照。</td><td>复用 C01＋新增 C02；原请求进入等待架。</td><td>本页定制试样；工程适配待补。</td></tr></tbody></table></div>
+<div id="script-details"></div>
+<details><summary>A01 · 共用外观约定 <small>机械 / 黄铜与深铁 / 统一受光</small></summary><div class="style-info"><span><i class="swatch" style="background:#304650"></i>深铁主体</span><span><i class="swatch" style="background:#c9a36a"></i>黄铜夹具</span><span><i class="swatch" style="background:#ead8b5"></i>原请求</span><span><i class="swatch" style="background:#a1c5ad"></i>完成印记</span></div><div id="style-table" class="table-wrap"></div></details>
+<div class="footer">固定视角、有限队列的概念演示；脚本先确定造型、材质、动作与保持，再按这些要求实现。当前仅局部 HTML 试样，不代表已经注册为通用组件或完成正式成片验收。</div>
+</main>
+<script id="script-data" type="application/json">{
+  "title": "请求太多，为什么会排队？",
+  "subtitle": "两个片段 · 两个定制组件 · 同一套机械语言",
+  "principle": "同一个处理位，只改变到达节奏。",
+  "style": [
+    [
+      "身份与依据",
+      "项目定制组件，非新注册 kind；参考机械风格与自定义五维，现有十二类和状态仪表不能直接表达实体排队、夹持和移交。"
+    ],
+    [
+      "风格",
+      "机械：黄铜夹具、深铁导轨、暖色受光；无齿轮装饰、青蓝充流和能量辉光。"
+    ],
+    [
+      "组织样式",
+      "按实体设计；C01 为开放门架与单件工位，C02 为双层缓冲架；不向基础 styleVariant 新增枚举。"
+    ],
+    [
+      "堆叠与层次",
+      "开启：同色薄侧壁、底板厚度、容器前沿遮挡；层数只表示承载结构，不暗示真实系统架构层数。"
+    ],
+    [
+      "外形与比例",
+      "固定略俯视正面，横向主轴，6px 薄侧壁；方形请求筹码保持同一比例；整体等比缩放。"
+    ],
+    [
+      "材质、颜色与光影",
+      "深铁三档硬边色阶，黄铜边缘与夹具；左上暖光、右下暗面。原请求为米色，完成后盖绿色印记；等待筹码保持原材质，只用珊瑚色标签提示积压。"
+    ],
+    [
+      "文字与阅读",
+      "文字放在装置外的标题/读数区，不贴在运动夹具上；筹码编号保持可辨，字号随页面布局调整。"
+    ],
+    [
+      "运动的外观机制",
+      "进料沿轨道移动，夹具下压盖章再抬起，同一筹码送出；缓冲架入槽/前移沿真实承载面进行，非淡入假装移交。"
+    ],
+    [
+      "背景适配与实现",
+      "独立组件放在低对比绘图区；硬边像素尺度和接触阴影一致。当前仅本页 Canvas 试样；无工作台或原生后端接入。"
+    ]
+  ],
+  "segments": [
+    {
+      "id": "P01",
+      "name": "从容接住",
+      "quote": "请求一个个来，处理位就能从容接住。",
+      "rows": [
+        [
+          "片段与时间",
+          "P01 / S01，建议 0–6 秒。此页局部预演 6 秒，无录音，未对齐实际旁白。"
+        ],
+        [
+          "理解目标",
+          "建立一个处理位逐件工作的基准；下一段只改变到达节奏，比较为什么会积压。"
+        ],
+        [
+          "类别与呈现",
+          "普通内容片段；无人讲解图示，机械实体承担过程。"
+        ],
+        [
+          "旁白与讲解文案",
+          "“请求一个个来，处理位就能从容接住。”建议旁白；本页只显示文字，无声音。"
+        ],
+        [
+          "画面与构图",
+          "正面略俯视中景；输入在左，C01 居中偏右，结果在右；低对比纯底，上方留读数、下方留字幕。"
+        ],
+        [
+          "人物与物体",
+          "无人物，避免争焦；4 枚有编号的请求筹码、1 个处理位、1 个完成托盘。"
+        ],
+        [
+          "组件选择",
+          "C01 单件加工站：自定义实体。基础流程链能列步骤，但不能显示单处理位的夹持与原件移交；需要局部状态机制。"
+        ],
+        [
+          "组件风格与样式",
+          "继承 A01 机械约定；自定义开放门架，堆叠开启；不设置未注册 styleVariant。"
+        ],
+        [
+          "组件形态与空间",
+          "深铁双柱门架、黄铜压头、横向双导轨、薄底座；筹码落在轨面，完成托盘前唇遮挡筹码底部。"
+        ],
+        [
+          "状态与动作",
+          "每 1.5 秒到达 1 件；处理时间固定为示意的 1.2 秒。原件入位→夹持盖章→抬头→送出，编号不变；完成结果保留，无等待积压。"
+        ],
+        [
+          "节奏与保持",
+          "单次进料/送出约 0.18 秒，下压/回位合计约 0.24 秒；余下时间保持夹持态，表示处理占用。结尾保持读数。"
+        ],
+        [
+          "运镜与图层",
+          "相机、背景和标签固定；导轨不漂移；只动请求与夹具。次序为装置后层→筹码→必要前沿。"
+        ],
+        [
+          "字幕与场景文字",
+          "下方完整显示旁白文案，无底板，强调“一个个来”；上方标出已到达/等待/完成的示意数量。每段文案整体稳定，不随每件完成换句。"
+        ],
+        [
+          "声音",
+          "旁白仅为建议文案；本页无旁白、配乐、环境声和音效，优先检查视觉因果。"
+        ],
+        [
+          "入场、接镜与收束",
+          "首镜装置已建立后开始进料；向 P02 交出同一工位、位置与处理周期。比较采用明确重置的对照试验，不假称同一批请求跨段延续。"
+        ],
+        [
+          "素材、能力与验收",
+          "纯代码绘制，无外部图片。核验原件身份、单件处理、完成保留、数量守恒；现阶段仅组件试样，不制作完整视频。"
+        ]
+      ]
+    },
+    {
+      "id": "P02",
+      "name": "队列积压",
+      "quote": "来的比处理的快，多出的请求就只能排队。",
+      "rows": [
+        [
+          "片段与时间",
+          "P02 / S02，建议 6–12 秒；本页作为独立对照试验，从局部 0 秒开始。"
+        ],
+        [
+          "理解目标",
+          "理解当到达持续快于处理，等待会累积；不是处理位突然变慢，也不模拟真实服务器性能。"
+        ],
+        [
+          "类别与呈现",
+          "普通内容片段；同构对照，增加可见缓冲架。"
+        ],
+        [
+          "旁白与讲解文案",
+          "“来的比处理的快，多出的请求就只能排队。”建议旁白；本页只显示文字，无声音。"
+        ],
+        [
+          "画面与构图",
+          "沿用相同视角、底色、C01 位置和结果区；左侧 C02 逐渐被米色筹码占据，等待量为新焦点。"
+        ],
+        [
+          "人物与物体",
+          "无人物；12 枚带编号请求、同一规格处理位、最多 10 槽缓冲架和完成托盘。数量是本次演示输入。"
+        ],
+        [
+          "组件选择",
+          "C01 原样复用，新增 C02 等待缓冲架。C02 只负责队列承载/前移/遮挡；到达与处理的调度由页内场景编排。"
+        ],
+        [
+          "组件风格与样式",
+          "C01、C02 均继承 A01；C02 为双层托架自定义布局，堆叠开启；等待变多不引入能量风格。"
+        ],
+        [
+          "组件形态与空间",
+          "黄铜端帽和深铁层架，前唇保留真实厚度；队首槽在右下端，向处理位交出。第二层按 FIFO 编号向下一层接续，保持对象唯一。"
+        ],
+        [
+          "状态与动作",
+          "请求每 0.36 秒到达一次；C01 仍按 1.2 秒逐件处理。后到请求进入空槽，前件出队后其余前移；结尾 12 件中完成 4、处理中 1、等待 7，结果保持。"
+        ],
+        [
+          "节奏与保持",
+          "入槽/移交短促完成，等待时静止；不让整架持续摇晃。6 秒处停止时间，等待与完成分区保留，供比较。"
+        ],
+        [
+          "运镜与图层",
+          "相机、轨道、机架不动；筹码沿承载面移动，队列与工位分属不同组件；前沿在筹码前，右侧压头保持原动作。"
+        ],
+        [
+          "字幕与场景文字",
+          "下方完整显示旁白文案，强调“快”“排队”；队列上方显示等待件数，珊瑚色仅提示积压，筹码不变红。文字不盖住对象。"
+        ],
+        [
+          "声音",
+          "无声音；不为每次到达和前移发声，避免密集触发。"
+        ],
+        [
+          "入场、接镜与收束",
+          "通过明确标注的对照切换进入第二段，保留同规格工位；请求批次重置不冒充连续记录。末态保持后收束，无自动循环或清空队列。"
+        ],
+        [
+          "素材、能力与验收",
+          "共用 C01 绘制及 A01 材质，新增 C02 实体。核验 FIFO、计数守恒、到达变快但处理周期不变、无副本；工作台和正式成片未接入/未审。"
+        ]
+      ]
+    }
+  ]
+}</script>
+<script>
+(()=>{'use strict';
+const DATA=JSON.parse(document.getElementById('script-data').textContent);
+function table(rows){const t=document.createElement('table'),body=document.createElement('tbody');for(const row of rows){const tr=document.createElement('tr');for(const value of row){const td=document.createElement('td');td.textContent=value;tr.append(td);}body.append(tr);}t.append(body);return t;}
+for(const s of DATA.segments){const d=document.createElement('details'),summary=document.createElement('summary');summary.textContent=s.id+' · '+s.name+' / 完整片段脚本';d.append(summary);const w=document.createElement('div');w.className='table-wrap';w.append(table(s.rows));d.append(w);document.getElementById('script-details').append(d);}
+document.getElementById('style-table').append(table(DATA.style));
+const $=id=>document.getElementById(id),hero=$('hero'),station=$('station'),rack=$('rack');
+const K={ink:'#efe3c9',muted:'#9badad',iron:'#304650',ironDark:'#1b2d35',ironLight:'#527079',brass:'#c9a36a',brassDark:'#80613c',brassLight:'#ead0a2',paper:'#ead8b5',paperSide:'#ab936d',green:'#a1c5ad',coral:'#e4947c'};
+const clamp=v=>Math.max(0,Math.min(1,v)),ease=v=>{v=clamp(v);return v*v*(3-2*v)},mix=(a,b,t)=>a+(b-a)*t;
+function rect(g,x,y,w,h,c){g.fillStyle=c;g.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h));}
+function poly(g,pts,c){g.fillStyle=c;g.beginPath();pts.forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));g.closePath();g.fill();}
+function line(g,x,y,x2,y2,c,w=1){g.strokeStyle=c;g.lineWidth=w;g.beginPath();g.moveTo(x,y);g.lineTo(x2,y2);g.stroke();}
+function text(g,s,x,y,size=14,c=K.ink,align='left'){g.fillStyle=c;g.font=`500 ${size}px "Microsoft YaHei",sans-serif`;g.textAlign=align;g.fillText(s,x,y);}
+function block(g,x,y,w,h,front,side=K.ironDark,top=K.ironLight){poly(g,[[x,y],[x+6,y-6],[x+w+6,y-6],[x+w,y]],top);poly(g,[[x+w,y],[x+w+6,y-6],[x+w+6,y+h-6],[x+w,y+h]],side);rect(g,x,y,w,h,front);}
+function bolt(g,x,y){rect(g,x-3,y-3,6,6,K.brassDark);rect(g,x-2,y-2,4,4,K.brass);rect(g,x-1,y-2,1,4,K.brassLight);}
+function token(g,x,y,id,done=false,scale=1){g.save();g.translate(x,y);g.scale(scale,scale);block(g,-17,-17,34,34,K.paper,K.paperSide,'#faebcd');rect(g,-12,-12,10,3,K.paperSide);text(g,String(id).padStart(2,'0'),0,6,13,'#4c4b42','center');if(done){rect(g,5,7,9,7,K.green);rect(g,8,6,3,4,'#52745e');}g.restore();}
+function model(kind,t){
+ const n=kind===0?4:12,interval=kind===0?1.5:.36,items=[];let end=0;
+ for(let i=0;i<n;i++){const arrival=.3+i*interval,start=Math.max(arrival,end),finish=start+1.2;end=finish;items.push({id:i+1,arrival,start,finish});}
+ const arrived=items.filter(i=>t>=i.arrival),complete=arrived.filter(i=>t>=i.finish),active=arrived.find(i=>t>=i.start&&t<i.finish),waiting=arrived.filter(i=>t<i.start);
+ return {items,arrived,complete,active,waiting,t};
+}
+function drawStation(g,x,y,s,state,source,destination){g.save();g.translate(x,y);g.scale(s,s);
+ // 部件均为实体：底座、双柱、横梁、传动杆与压头。
+ rect(g,19,201,324,9,'#0c171b');block(g,18,183,320,17,K.iron, K.ironDark,K.ironLight);
+ for(const px of [51,272]){block(g,px,43,24,140,K.iron,K.ironDark,K.ironLight);rect(g,px+6,49,3,128,K.brassDark);bolt(g,px+12,59);bolt(g,px+12,169);}
+ block(g,35,25,280,30,K.iron,K.ironDark,K.ironLight);rect(g,43,29,264,4,K.brass);for(const bx of [48,301])bolt(g,bx,40);
+ block(g,0,164,358,12,K.brassDark,K.ironDark,K.brass);rect(g,0,181,358,3,K.ironLight);
+ for(let i=0;i<16;i++){rect(g,5+i*23,171,9,5,K.ironDark);rect(g,5+i*23,174,9,1,K.brassLight);}
+ const a=state.active,age=a?state.t-a.start:0;
+ let press=0;if(a){if(age>=.18&&age<.30)press=ease((age-.18)/.12);else if(age>=.30&&age<.90)press=1;else if(age>=.90&&age<1.02)press=1-ease((age-.90)/.12);}
+ const head=84+26*press;rect(g,167,56,25,head-48,K.brassDark);rect(g,171,57,5,head-49,K.brassLight);block(g,143,head,72,18,K.brass,K.brassDark,K.brassLight);rect(g,150,head+18,58,7,K.ironDark);
+ if(a){let tx=179,ty=145;if(age<.18){const u=ease(age/.18);tx=mix(source?.x??15,179,u);ty=mix(source?.y??145,145,u);}else if(age>=1.02){const u=ease((age-1.02)/.18);tx=mix(179,destination?.x??337,u);ty=mix(145,destination?.y??145,u);}token(g,tx,ty,a.id,age>=.90);}
+ // 压头前沿与轨道前唇遮住合理范围，不重复绘制请求。
+ if(a&&press>.1){rect(g,143,head,72,18,K.brass);rect(g,145,head+2,68,3,K.brassLight);rect(g,150,head+18,58,7,K.ironDark);}
+ rect(g,0,177,358,5,K.ironDark);for(const bx of [34,322]){block(g,bx,199,20,9,K.ironDark);}
+ g.restore();}
+function slot(i){return {x:276-(i%5)*54,y:i<5?141:65};}
+function queuePositions(state){return state.waiting.map((item,i)=>{
+ let rank=i;const last=state.items.filter(r=>r.start<=state.t&&r.start>r.arrival+.001).at(-1);
+ const moving=last&&state.t-last.start<.18&&item.arrival<last.start;
+ const target=slot(rank),prev=slot(rank+1);let x=target.x,y=target.y;
+ if(moving){const u=ease((state.t-last.start)/.18);x=mix(prev.x,target.x,u);y=mix(prev.y,target.y,u);}
+ if(state.t-item.arrival<.18){const u=ease((state.t-item.arrival)/.18);x=mix(12,target.x,u);y=mix(-12,target.y,u);}
+ return {...item,x,y};});}
+function drawRack(g,x,y,s,state){g.save();g.translate(x,y);g.scale(s,s);
+ rect(g,1,178,324,7,'#0c171b');for(const xx of [9,310]){block(g,xx,26,14,148,K.iron,K.ironDark,K.ironLight);block(g,xx-4,23,22,12,K.brass,K.brassDark,K.brassLight);bolt(g,xx+7,44);}
+ for(const yy of [85,161]){block(g,1,yy,329,13,K.iron,K.ironDark,K.ironLight);rect(g,4,yy+3,320,3,K.brassDark);}
+ for(let i=0;i<10;i++){const q=slot(i);rect(g,q.x-21,q.y+18,42,3,K.ironDark);rect(g,q.x-20,q.y+20,40,1,K.brassDark);}
+ for(const item of queuePositions(state))token(g,item.x,item.y,item.id,false,.88);
+ for(const yy of [85,161]){rect(g,1,yy,329,5,K.ironLight);rect(g,1,yy+5,329,8,K.ironDark);rect(g,10,yy+5,312,1,K.brass);}
+ g.restore();}
+function tray(g,x,y,state){block(g,x-13,y+21,122,12,K.iron,K.ironDark,K.ironLight);for(const [i,item]of state.complete.entries())token(g,x+10+(i%3)*34,y-Math.floor(i/3)*36,item.id,true,.78);rect(g,x-13,y+18,122,9,K.ironDark);rect(g,x-9,y+18,112,2,K.brass);}
+function grid(g,w,h){g.clearRect(0,0,w,h);g.fillStyle='#24343b';for(let x=18;x<w;x+=24)for(let y=18;y<h;y+=24)g.fillRect(x,y,1,1);}
+function heroDraw(state,kind){const g=hero.getContext('2d');grid(g,1000,370);line(g,50,300,950,300,'#34464b');
+ const sx=485,sy=69,ss=1.05,baseY=sy+145*ss;
+ if(kind===1){text(g,'C02 / 等待缓冲架',68,50,15,K.muted);drawRack(g,72,95,1,state);line(g,403,256,485,baseY+20,K.brassDark,6);text(g,'先到先处理',72,302,13,K.muted);}else{text(g,'请求按间隔到达',84,150,16,K.muted);line(g,80,baseY+20,485,baseY+20,K.brassDark,6);for(let x=95;x<460;x+=36)rect(g,x,baseY+17,10,6,K.brass);}
+ text(g,'C01 / 单件加工站',560,49,15,K.muted);text(g,'完成保留',892,113,13,K.muted,'center');tray(g,866,baseY,state);
+ const source=kind===1?{x:(348-sx)/ss,y:(236-sy)/ss}:{x:(120-sx)/ss,y:145};
+ const activeIndex=state.active?state.active.id-1:state.complete.length;
+ const destination={x:(876+(activeIndex%3)*34-sx)/ss,y:(baseY-Math.floor(activeIndex/3)*36-sy)/ss};
+ drawStation(g,sx,sy,ss,state,source,destination);
+ text(g,kind===0?'四件请求，依次处理':'到达变密，处理周期不变',500,344,17,kind===0?K.green:K.coral,'center');}
+function stationDraw(state){const g=station.getContext('2d');grid(g,460,265);drawStation(g,32,28,1.03,state,{x:0,y:145},{x:355,y:145});text(g,'入位 → 夹持盖章 → 原件送出',230,259,13,K.muted,'center');}
+function rackDraw(state){const g=rack.getContext('2d');grid(g,460,265);drawRack(g,63,35,1,state);text(g,'等待 '+state.waiting.length+' 件 / 原编号保留',230,254,13,state.waiting.length?K.coral:K.muted,'center');}
+let kind=0,frame=144,playing=false,raf=0,last=0;
+function render(){const t=frame/60,state=model(kind,t);heroDraw(state,kind);stationDraw(model(0,t));rackDraw(model(1,t));$('arrived').textContent=state.arrived.length;$('waiting').textContent=state.waiting.length;$('busy').textContent=state.active?1:0;$('done').textContent=state.complete.length;$('quote').textContent=DATA.segments[kind].quote;$('stage-title').textContent=kind===0?'P01 / 到达间隔 1.5 秒':'P02 / 到达间隔 0.36 秒';$('seek').value=frame;$('clock').textContent=(frame/60).toFixed(2)+' / 6.00 s';}
+function stop(){playing=false;cancelAnimationFrame(raf);$('play').textContent='播放';}
+function tick(now){if(!playing)return;frame=Math.min(360,frame+(now-last)*.06);last=now;render();if(frame>=360)stop();else raf=requestAnimationFrame(tick);}
+function start(){playing=true;last=performance.now();$('play').textContent='暂停';raf=requestAnimationFrame(tick);}
+$('play').onclick=()=>{if(playing)stop();else{if(frame>=360)frame=0;start();}};$('replay').onclick=()=>{stop();frame=0;render();start();};$('seek').oninput=()=>{stop();frame=Number($('seek').value);render();};
+for(const [i,id]of ['p1','p2'].entries())$(id).onclick=()=>{stop();kind=i;frame=144;for(const [j,jd]of ['p1','p2'].entries())$(jd).setAttribute('aria-pressed',String(i===j));render();};
+window.QueueStudy={model,queuePositions,setTime(t,k=kind){stop();kind=k;frame=Math.max(0,Math.min(360,t*60));for(const [i,id]of ['p1','p2'].entries())$(id).setAttribute('aria-pressed',String(i===kind));render();}};
+render();
+})();
+</script>
+</body></html>

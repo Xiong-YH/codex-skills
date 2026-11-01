@@ -1,0 +1,40 @@
+{
+  "assets": {
+    "style.cyberpunk-city.v1": {
+      "file": "backgrounds/cyberpunk-city.png",
+      "sha256": "c28269cdce6fca4baf01277aef9252cd5ebbc9ad3c0497341242cb9ce8a70b9e"
+    },
+    "style.pixel-workbench.v1": {
+      "file": "backgrounds/pixel-workbench.png",
+      "sha256": "0e68d0194dace334e796e645309e87203e9c53176046df3b691a43c4e4fa4ad3"
+    },
+    "style.pixel-server-room.v1": {
+      "file": "backgrounds/pixel-server-room.png",
+      "sha256": "273794a78a028c3a6a0120b4426f8804b68e5b800b1983a729208cdf3077b7eb"
+    },
+    "style.study-desk.v1": {
+      "file": "backgrounds/pixel-workbench.png",
+      "sha256": "0e68d0194dace334e796e645309e87203e9c53176046df3b691a43c4e4fa4ad3"
+    },
+    "style.research-archive.v1": {
+      "file": "backgrounds/research-archive-v1.png",
+      "sha256": "be04a58c8072a9f0e0ed005b47f043c4953e0d5c53cb264a17e53435bb08fe69"
+    },
+    "style.engineering-workshop.v1": {
+      "file": "backgrounds/engineering-workshop-v1.png",
+      "sha256": "6bad8b73d981fd149773d813390ad594474d333042a64f79453139f3959d397e"
+    },
+    "style.route-atlas.v1": {
+      "file": "backgrounds/route-atlas-v1.png",
+      "sha256": "2ee6266236f6a6e4bcc55e95c1e1fe3820f49fb92573eb062b94ff02de56fc1e"
+    },
+    "style.foreground-shelf.v1": {
+      "file": "backgrounds/foreground-bookshelf-v1.png",
+      "sha256": "77ab0e0763f47cda667f81e15f0a561e7a3dd46c562954b19606f9be7a0bc058"
+    },
+    "style.competition-training.v1": {
+      "file": "backgrounds/pixel-server-room.png",
+      "sha256": "273794a78a028c3a6a0120b4426f8804b68e5b800b1983a729208cdf3077b7eb"
+    }
+  }
+}

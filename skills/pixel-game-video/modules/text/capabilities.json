@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "defaults": {
+    "references": {
+      "documentation": [
+        "modules/text/details.md"
+      ],
+      "examples": [
+        "assets/project-template/text.json"
+      ],
+      "tests": [
+        "tests/test_workbench_bridge.py",
+        "tests/test_canvas_workbench.py"
+      ]
+    },
+    "notes": [
+      "文字独立成轨；文案和起止时间来自项目事件。角色 ID 是目录标识，写入工程时使用 role 值。"
+    ]
+  },
+  "features": [
+    {
+      "id": "text.narrative-progress.v1",
+      "title": "全片叙事进度覆盖层",
+      "status": "workflow",
+      "invocation": "timeline.progress.nodes",
+      "references": {
+        "documentation": [
+          "modules/text/NARRATIVE-PROGRESS.md"
+        ],
+        "examples": [],
+        "tests": [
+          "tests/test_presenter_progress.py",
+          "tests/narrative-progress.cjs"
+        ]
+      },
+      "notes": [
+        "仅 Canvas；标签和节点绑定全片事件，不是任务完成度。"
+      ],
+      "workbench": {
+        "editing": "overlay-track",
+        "track": "overlays",
+        "independentTrack": true,
+        "export": "via-track"
+      }
+    }
+  ]
+}

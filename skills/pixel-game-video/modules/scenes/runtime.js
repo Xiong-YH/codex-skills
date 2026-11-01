@@ -98,7 +98,7 @@
     return {x:s.x*e.width,y:s.y*e.height,width:s.width*e.width,height:s.height*e.height};
   },
   drawLayer(e,shot,frame,layer){
-    if(layer==='background'){if(shot.background)P.media.draw(e,shot.background);else P.style.background(e,shot);}
+    if(layer==='background'){if(shot.replacement)return;if(shot.background)P.media.draw(e,shot.background);else P.style.background(e,shot);}
     else if(layer==='actor')P.library.actor(e,shot,frame);
     else if(layer==='content'){
       if(shot.replacement)P.media.draw(e,shot.replacement);else content(e,shot,frame);

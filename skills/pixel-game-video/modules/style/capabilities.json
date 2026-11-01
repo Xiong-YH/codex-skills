@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "defaults": {
+    "references": {
+      "documentation": [
+        "modules/style/details.md",
+        "modules/scenes/layouts/GUIDE.md"
+      ],
+      "examples": [
+        "assets/project-template/project.json"
+      ],
+      "tests": [
+        "tests/test_style.py",
+        "tests/test_remotion_contract.py"
+      ]
+    },
+    "notes": [
+      "风格通过项目配置选择并重建，不是可独立拖动或逐轨导出的工作台片段。原生 Remotion 仍只接受 pixel-editorial。"
+    ]
+  }
+}

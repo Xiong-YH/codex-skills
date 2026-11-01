@@ -1,5 +1,6 @@
 (function (P) {
   'use strict';
+  const basicProps = new Set(['prop.book.v1', 'prop.core.v1', 'prop.task-block.v1']);
   function cyberProp(g, asset, c) {
     const rect = (x,y,w,h,color) => { g.fillStyle = color; g.fillRect(x,y,w,h); };
     const shell = c.propShell || '#101b32', recess = c.propRecess || '#090f22';
@@ -51,6 +52,7 @@
     }
   }
   function propCanvas(e, asset) {
+    if (!basicProps.has(asset)) throw new Error(`Prop '${asset}' has no loaded renderer; edit the source project and rebuild.`);
     const key = asset + ':' + e.style.id + ':' + e.colors.accent;
     if (e.propCache[key]) return e.propCache[key];
     const canvas = e.createCanvas(48, 48), g = canvas.getContext('2d'), c = e.colors;
@@ -75,6 +77,7 @@
     return canvas;
   }
   P.library = {
+    hasProp: id => basicProps.has(id),
     reference(e, id, x, baseline, height, options = {}) {
       const image = e.assets[`${id}:reference`];
       if (!image) throw new Error('Missing character reference ' + id);
@@ -93,10 +96,11 @@
         e.height * (placement.baseline ?? .75), e.height * (placement.height ?? .40));
     },
     prop(e, asset, x, y, size, transform) {
+      const image = propCanvas(e, asset);
       const g = e.ctx, s = size || e.height * .24;
       const tr = transform || {scale:1,flip:1};
       g.save(); g.translate(x,y); g.scale(tr.scale * tr.flip, tr.scale);
-      g.imageSmoothingEnabled = false; g.drawImage(propCanvas(e,asset),-s/2,-s/2,s,s); g.restore();
+      g.imageSmoothingEnabled = false; g.drawImage(image,-s/2,-s/2,s,s); g.restore();
     },
     objects(e, shot, frame) {
       for (const object of shot.objects || []) {

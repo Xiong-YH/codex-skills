@@ -71,6 +71,8 @@
     g.drawImage(sprite(e,id,options),x-size/2,y-size/2,size,size);g.restore();
   };
   const original=P.library.prop;
+  const hasProp=P.library.hasProp;
+  P.library.hasProp=id=>ids.has(id)||hasProp(id);
   P.library.prop=function(e,id,x,y,size,transform){
     if(!ids.has(id))return original(e,id,x,y,size,transform);
     const g=e.ctx,tr=transform||{scale:1,flip:1};g.save();g.translate(x,y);g.scale(tr.scale*tr.flip,tr.scale);

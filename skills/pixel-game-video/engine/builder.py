@@ -5,7 +5,7 @@ import importlib.util
 import json
 import sys
 from pathlib import Path
-from .dependencies import actor_ids, actor_actions, javascript_files
+from .dependencies import actor_ids, actor_actions, javascript_files, selected_style, visual_asset_files
 
 
 def load_module(name, path):
@@ -32,26 +32,17 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
     modules = skill_root / 'modules'
     prepare = load_module('pixel_video_prepare', modules / 'library' / 'prepare.py')
     mouth_module = load_module('pixel_video_mouth', modules / 'scenes' / 'performance.py')
-    style_root = (modules / 'style').resolve()
-    style_catalog = json.loads((style_root / 'catalog.json').read_text(encoding='utf-8'))['items']
-    selected = next((item for item in style_catalog if item['id'] == resolved['project']['style']), None)
-    if not selected or not selected.get('file'):
-        raise ValueError('Style has no runtime preset: ' + resolved['project']['style'])
-    preset_path = style_file(style_root, selected['file'])
-    style = json.loads(preset_path.read_text(encoding='utf-8'))
+    selected, style = selected_style(skill_root, resolved)
     if style['id'] != selected['id']:
         raise ValueError('Style catalog and preset identity differ')
     actions = actor_actions(resolved)
     assets = prepare.prepare(modules / 'library', actor_ids=actor_ids(resolved), actions=actions)
     library_asset_count = len(assets)
-    style_assets = style.get('assets', {})
-    if not isinstance(style_assets, dict):
-        raise ValueError('Style assets must map stable IDs to module-relative image files')
+    style_assets = visual_asset_files(skill_root, style)
     mime_types = {'.png':'image/png', '.jpg':'image/jpeg', '.jpeg':'image/jpeg', '.webp':'image/webp'}
-    for ident, relative in style_assets.items():
+    for ident, image_path in style_assets.items():
         if ident in assets:
             raise ValueError('Style asset ID collides with the library: ' + ident)
-        image_path = style_file(style_root, relative)
         mime = mime_types.get(image_path.suffix.lower())
         if not mime:
             raise ValueError('Unsupported style image type: ' + image_path.suffix)

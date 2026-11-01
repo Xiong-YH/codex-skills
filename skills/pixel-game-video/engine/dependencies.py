@@ -29,7 +29,38 @@ def selected_style(skill, resolved):
     root = Path(skill) / 'modules/style'
     selected = next(item for item in read(root / 'catalog.json')['items']
                     if item['id'] == resolved['project']['style'])
-    return selected, read(inside(root, selected['file']))
+    style = read(inside(root, selected['file']))
+    if selected.get('scenePreset'):
+        layout = read(inside(Path(skill) / 'modules/scenes', selected['scenePreset']))
+        allowed = {'libraryAssets', 'backgrounds', 'presenter', 'transitionTextures'}
+        if not isinstance(layout, dict) or set(layout) - allowed or set(layout) & set(style):
+            raise ValueError('Scene preset must contain only distinct layout/resource fields')
+        style.update(layout)
+    return selected, style
+
+
+def visual_asset_files(skill, style):
+    """Resolve library images and legacy style-local images without path escapes."""
+    skill = Path(skill)
+    legacy = style.get('assets', {})
+    if not isinstance(legacy, dict):
+        raise ValueError('Style assets must map stable IDs to module-relative image files')
+    files = {ident: inside(skill / 'modules/style', relative)
+             for ident, relative in legacy.items()}
+    ids = style.get('libraryAssets', [])
+    if not isinstance(ids, list) or any(not isinstance(ident, str) for ident in ids):
+        raise ValueError('libraryAssets must be a list of stable image IDs')
+    if ids:
+        records = read(skill / 'modules/library/backgrounds/catalog.json')['assets']
+        if len(ids) != len(set(ids)):
+            raise ValueError('Duplicate library image IDs')
+        for ident in ids:
+            if ident in files:
+                raise ValueError('Duplicate visual asset ID: ' + ident)
+            if ident not in records:
+                raise ValueError('Unknown library image ID: ' + ident)
+            files[ident] = inside(skill / 'modules/library', records[ident]['file'])
+    return files
 
 
 def actor_ids(resolved):
@@ -56,9 +87,12 @@ def javascript_files(skill, resolved):
     if selected.get('runtime'):
         style_root = (Path(skill) / 'modules/style').resolve()
         paths.append('style/' + inside(style_root, selected['runtime']).relative_to(style_root).as_posix())
+    if selected.get('sceneRuntime'):
+        scene_root = (Path(skill) / 'modules/scenes').resolve()
+        paths.append('scenes/' + inside(scene_root, selected['sceneRuntime']).relative_to(scene_root).as_posix())
     paths += ['text/runtime.js', 'library/runtime.js', 'motion/runtime.js', 'scenes/runtime.js']
     if actor_actions(resolved):
-        paths.append('library/presenter-actions.js')
+        paths.append('scenes/presenter-actions.js')
     if resolved.get('progress'):
         paths.append('text/narrative-progress.js')
     if any(shot.get('background') or shot.get('replacement') or shot.get('components') for shot in resolved['shots']):
@@ -118,8 +152,11 @@ def runtime_files(skill, resolved):
             files.add(inside(component_root, item['file']).relative_to(skill).as_posix())
     selected, style = selected_style(skill, resolved)
     files.add('modules/style/' + selected['file'])
-    for relative in style.get('assets', {}).values():
-        files.add(inside(skill / 'modules/style', relative).relative_to(skill).as_posix())
+    if selected.get('scenePreset'):
+        files.add(inside(skill / 'modules/scenes', selected['scenePreset']).relative_to(skill).as_posix())
+    if style.get('libraryAssets'):
+        files.add('modules/library/backgrounds/catalog.json')
+    files.update(path.relative_to(skill).as_posix() for path in visual_asset_files(skill, style).values())
     for item in read(skill / 'modules/library/catalog.json')['items']:
         if item['id'] in actor_ids(resolved):
             files.add('modules/library/' + item['path'])

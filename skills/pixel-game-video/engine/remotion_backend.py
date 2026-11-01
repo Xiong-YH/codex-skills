@@ -82,17 +82,13 @@ def build(project_root: Path | str, resolved: dict, skill_root: Path | str,
         "include": ["src"]})
     modules = skill / "modules"
     prepare = _module("pixel_remotion_prepare", modules / "library/prepare.py")
-    from .dependencies import actor_ids, selected_style
+    from .dependencies import actor_ids, selected_style, visual_asset_files
     selected, style = selected_style(skill, resolved)
     if style["id"] != selected["id"]:
         raise ValueError("Style catalog and preset identity differ.")
     assets = prepare.prepare(modules / "library", actor_ids=actor_ids(resolved))
     mime_types = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp"}
-    style_root = (modules / "style").resolve()
-    for ident, relative in style.get("assets", {}).items():
-        image = (style_root / relative).resolve()
-        if not image.is_relative_to(style_root):
-            raise ValueError("Style asset escapes its module.")
+    for ident, image in visual_asset_files(skill, style).items():
         mime = mime_types.get(image.suffix.lower())
         if not mime or ident in assets:
             raise ValueError("Invalid or duplicate style image: " + ident)
