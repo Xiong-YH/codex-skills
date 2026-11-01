@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "bank": "common-motion",
+  "sampleRate": 48000,
+  "channels": 2,
+  "sampleWidth": 2,
+  "approval": {
+    "date": "2026-10-28",
+    "scope": "Three retained audition masters; soft confirmation includes light drums",
+    "feedback": "好多了，那音效库就先这样吧；正式注册吧",
+    "videoMixApproval": "separate review required"
+  },
+  "atoms": [
+    {
+      "id": "arcade-confirm-soft",
+      "name": "轻选择确认",
+      "variant": 0,
+      "design": "短电子确认＋低鼓主拍＋轻鼓边回拍",
+      "source": {
+        "legacyId": "select",
+        "legacyVariant": 1
+      },
+      "status": "user-approved",
+      "files": {
+        "master": {
+          "file": "arcade-confirm-soft.wav",
+          "sha256": "29b2ff2e9186d21caa2a25cbf0b79f24c1089d0c198767dd36c7502e1c635589"
+        }
+      }
+    },
+    {
+      "id": "arcade-focus",
+      "name": "焦点移动",
+      "variant": 0,
+      "design": "磁性上滑＋收柔末尾接触",
+      "source": {
+        "legacyId": "focus-step",
+        "legacyVariant": 0
+      },
+      "status": "user-approved",
+      "files": {
+        "master": {
+          "file": "arcade-focus.wav",
+          "sha256": "72a9e60edfced41557af0fa35834d2d399d5d2831901248555b0b3a4905ff0f9"
+        }
+      }
+    },
+    {
+      "id": "arcade-unfold",
+      "name": "系统展开",
+      "variant": 0,
+      "design": "三段玻璃质感递进＋收柔尾部",
+      "source": {
+        "legacyId": "system-unfold",
+        "legacyVariant": 0
+      },
+      "status": "user-approved",
+      "files": {
+        "master": {
+          "file": "arcade-unfold.wav",
+          "sha256": "e2a752de37c8da523a472cbf61eafaff3b2399be6b234d9d72f1b96abd4f7269"
+        }
+      }
+    }
+  ]
+}

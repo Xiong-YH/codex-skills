@@ -113,6 +113,35 @@
           "title": "Tone",
           "type": "string"
         },
+        "visualStyle": {
+          "default": "mechanical",
+          "enum": [
+            "plain",
+            "mechanical",
+            "energy"
+          ],
+          "title": "Visualstyle",
+          "type": "string"
+        },
+        "styleVariant": {
+          "default": "inset",
+          "enum": [
+            "open",
+            "inset",
+            "relay"
+          ],
+          "title": "Stylevariant",
+          "type": "string"
+        },
+        "features": {
+          "items": {
+            "const": "stack",
+            "type": "string"
+          },
+          "maxItems": 1,
+          "title": "Features",
+          "type": "array"
+        },
         "data": {
           "additionalProperties": true,
           "title": "Data",

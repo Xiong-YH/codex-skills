@@ -18,7 +18,9 @@ description: 制作和修改像素游戏感视频，按结构化工程进入工�
 | 剪映原生草稿、镜头分段、可编辑字幕和独立音效 | [剪映草稿导出](references/jianying-export.md) |
 | 色板、字体、像素密度 | [style](modules/style/GUIDE.md) |
 | 背景设计、生成、风格样板、镜头素材替换 | [开放式场景设计与风格基调](modules/style/ART-DIRECTION.md)；先按内容构思画面，再选素材 |
-| 卡片、流程、时间轴、清单、层级、数据、代码与结论 | [十二类组件看图选型与组合](modules/components/GUIDE.md)，含实渲染总览、大图与状态对照；`catalog components` |
+| 基础组件选型、风格、样式与特性 | 先读[基础组件规则](modules/components/BASIC-COMPONENTS.md)，按 kind、单一 visualStyle、styleVariant 与可选 features 选择，完整可运行集合见[样式范例](modules/components/examples/style-atlas/README.md)；字段按需查[信息组件合同](modules/components/INFORMATION-COMPONENTS.md) |
+| 超出基础组件的新实体、路径、形变或关系机制 | [自定义组件五维](modules/components/DESIGN.md)；复用已验证部分，先做最小试样 |
+| 复用供能、加工、装配等已认可物体效果 | [可复用物体组件](modules/components/OBJECT-COMPONENTS.md)，独立 Canvas 绘制器与样例；不与 `shot.components.kind` 混用 |
 | 人物、物体、表情素材 | [library](modules/library/GUIDE.md)；当前五人人设与动作读 [已确认人物库](modules/library/CHARACTERS.md) |
 | 字幕、注释、标题、标签 | [text](modules/text/GUIDE.md) |
 | 转场选型与设计 | [转场库](modules/motion/TRANSITIONS.md)，选定后按链接读配方 |

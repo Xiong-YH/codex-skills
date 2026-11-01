@@ -1,0 +1,729 @@
+{
+  "schemaVersion": 1,
+  "source": "actual Canvas runtime via style-atlas, no separate mock renderer",
+  "sources": {
+    "modules/components/plain.js": "a3d7a4119e169fb3c18fb5606798588a837a30ff70f2e9945575426eeef20070",
+    "modules/components/style-layers.js": "8c00a6d46d6666e3000ecba846d8813f7fb8f5ba4e08e8eca73b179cc329846a",
+    "modules/components/apparatus.js": "7e9e2379b29637ea7c31c27e9adcba03eabc8fe643655eb8dc4ae9eb5512aead",
+    "modules/components/runtime.js": "19a1fac2efb05d686ced8d3dfa6a2bd3249c85ec8b39355695559139a759ddc1",
+    "modules/components/catalog.json": "676a69350671f5e54d1ea5e5abbf5ade8f612a44a2b9e3ad0a362a77ebde970c",
+    "modules/components/examples/guide/timeline.json": "cf48112601c30706a71c89bb541480ace9205258e20506267f7c5a491d30b438",
+    "modules/components/examples/style-atlas/template.html": "452d9613efff1e99eec9438f9151df27b198e65f412060c14625fbeaed8f88a1",
+    "modules/components/examples/style-atlas/variants.json": "b2e93ef1e165dbd1544d9713571bc1e1fa31ac6ddd37f9f37ee5b3e805bce2c0"
+  },
+  "background": true,
+  "records": [
+    {
+      "kind": "identity",
+      "visualStyle": "mechanical",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "metric",
+      "visualStyle": "mechanical",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "comparison",
+      "visualStyle": "mechanical",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "annotation",
+      "visualStyle": "mechanical",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "chapter",
+      "visualStyle": "mechanical",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "flow",
+      "visualStyle": "mechanical",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "timeline",
+      "visualStyle": "mechanical",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "checklist",
+      "visualStyle": "mechanical",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "hierarchy",
+      "visualStyle": "mechanical",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "bars",
+      "visualStyle": "mechanical",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "code",
+      "visualStyle": "mechanical",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "takeaway",
+      "visualStyle": "mechanical",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "identity",
+      "visualStyle": "mechanical",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "metric",
+      "visualStyle": "mechanical",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "comparison",
+      "visualStyle": "mechanical",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "annotation",
+      "visualStyle": "mechanical",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "chapter",
+      "visualStyle": "mechanical",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "flow",
+      "visualStyle": "mechanical",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "timeline",
+      "visualStyle": "mechanical",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "checklist",
+      "visualStyle": "mechanical",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "hierarchy",
+      "visualStyle": "mechanical",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "bars",
+      "visualStyle": "mechanical",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "code",
+      "visualStyle": "mechanical",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "takeaway",
+      "visualStyle": "mechanical",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "identity",
+      "visualStyle": "mechanical",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "metric",
+      "visualStyle": "mechanical",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "comparison",
+      "visualStyle": "mechanical",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "annotation",
+      "visualStyle": "mechanical",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "chapter",
+      "visualStyle": "mechanical",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "flow",
+      "visualStyle": "mechanical",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "timeline",
+      "visualStyle": "mechanical",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "checklist",
+      "visualStyle": "mechanical",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "hierarchy",
+      "visualStyle": "mechanical",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "bars",
+      "visualStyle": "mechanical",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "code",
+      "visualStyle": "mechanical",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "takeaway",
+      "visualStyle": "mechanical",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "identity",
+      "visualStyle": "energy",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "metric",
+      "visualStyle": "energy",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "comparison",
+      "visualStyle": "energy",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "annotation",
+      "visualStyle": "energy",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "chapter",
+      "visualStyle": "energy",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "flow",
+      "visualStyle": "energy",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "timeline",
+      "visualStyle": "energy",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "checklist",
+      "visualStyle": "energy",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "hierarchy",
+      "visualStyle": "energy",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "bars",
+      "visualStyle": "energy",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "code",
+      "visualStyle": "energy",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "takeaway",
+      "visualStyle": "energy",
+      "styleVariant": "open",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "identity",
+      "visualStyle": "energy",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "metric",
+      "visualStyle": "energy",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "comparison",
+      "visualStyle": "energy",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "annotation",
+      "visualStyle": "energy",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "chapter",
+      "visualStyle": "energy",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "flow",
+      "visualStyle": "energy",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "timeline",
+      "visualStyle": "energy",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "checklist",
+      "visualStyle": "energy",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "hierarchy",
+      "visualStyle": "energy",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "bars",
+      "visualStyle": "energy",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "code",
+      "visualStyle": "energy",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "takeaway",
+      "visualStyle": "energy",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "identity",
+      "visualStyle": "energy",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-relay.jpg"
+    },
+    {
+      "kind": "metric",
+      "visualStyle": "energy",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-relay.jpg"
+    },
+    {
+      "kind": "comparison",
+      "visualStyle": "energy",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-relay.jpg"
+    },
+    {
+      "kind": "annotation",
+      "visualStyle": "energy",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-relay.jpg"
+    },
+    {
+      "kind": "chapter",
+      "visualStyle": "energy",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-relay.jpg"
+    },
+    {
+      "kind": "flow",
+      "visualStyle": "energy",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-relay.jpg"
+    },
+    {
+      "kind": "timeline",
+      "visualStyle": "energy",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-relay.jpg"
+    },
+    {
+      "kind": "checklist",
+      "visualStyle": "energy",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-relay.jpg"
+    },
+    {
+      "kind": "hierarchy",
+      "visualStyle": "energy",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-relay.jpg"
+    },
+    {
+      "kind": "bars",
+      "visualStyle": "energy",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-relay.jpg"
+    },
+    {
+      "kind": "code",
+      "visualStyle": "energy",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-relay.jpg"
+    },
+    {
+      "kind": "takeaway",
+      "visualStyle": "energy",
+      "styleVariant": "relay",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-relay.jpg"
+    },
+    {
+      "kind": "identity",
+      "visualStyle": "plain",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "plain.jpg"
+    },
+    {
+      "kind": "metric",
+      "visualStyle": "plain",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "plain.jpg"
+    },
+    {
+      "kind": "comparison",
+      "visualStyle": "plain",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "plain.jpg"
+    },
+    {
+      "kind": "annotation",
+      "visualStyle": "plain",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "plain.jpg"
+    },
+    {
+      "kind": "chapter",
+      "visualStyle": "plain",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "plain.jpg"
+    },
+    {
+      "kind": "flow",
+      "visualStyle": "plain",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "plain.jpg"
+    },
+    {
+      "kind": "timeline",
+      "visualStyle": "plain",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "plain.jpg"
+    },
+    {
+      "kind": "checklist",
+      "visualStyle": "plain",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "plain.jpg"
+    },
+    {
+      "kind": "hierarchy",
+      "visualStyle": "plain",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "plain.jpg"
+    },
+    {
+      "kind": "bars",
+      "visualStyle": "plain",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "plain.jpg"
+    },
+    {
+      "kind": "code",
+      "visualStyle": "plain",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "plain.jpg"
+    },
+    {
+      "kind": "takeaway",
+      "visualStyle": "plain",
+      "styleVariant": "inset",
+      "features": [],
+      "frame": 215,
+      "sheet": "plain.jpg"
+    }
+  ],
+  "files": {
+    "mechanical-open.jpg": {
+      "sha256": "19dccea0a959fe76054bb88d54d9ca26b05ebe722f383b05c7c94d9086e802b8",
+      "bytes": 747433
+    },
+    "mechanical-inset.jpg": {
+      "sha256": "f5b1e148510b2572437c819eab1538789d4164e119b20df291b25087f0ec4e0c",
+      "bytes": 732128
+    },
+    "mechanical-relay.jpg": {
+      "sha256": "a723a7512dc9ec5b7927c49482bb9dfc30741691dc9162ec2935b06ac12d7215",
+      "bytes": 770388
+    },
+    "energy-open.jpg": {
+      "sha256": "30baa4918ad1550818d987e218a1abd496efbff7b95fe0448c837e74e8a1f157",
+      "bytes": 726350
+    },
+    "energy-inset.jpg": {
+      "sha256": "76ede6a136103643fa377e7ffa14544972b460be943c7fecef51875b14cc1e64",
+      "bytes": 720297
+    },
+    "energy-relay.jpg": {
+      "sha256": "afc1be5c2d797456070015a0b0e96a623a87381aede9b9e055b1008d1f373fb5",
+      "bytes": 727615
+    },
+    "plain.jpg": {
+      "sha256": "674111b5f81f5ab04be34302dec8016a5b0cdc00b24d2ee726be270c5c5effbf",
+      "bytes": 633640
+    },
+    "overview.jpg": {
+      "sha256": "0e57ba304759a36f18d40bb832bf3ce33e1975788f9431c5e72d6723c433bc6a",
+      "bytes": 411374
+    },
+    "chapter-states.jpg": {
+      "sha256": "0fbc480a90c5b818fc7e4cd3270ddda1b33dd38bba7f720db6a47f9726c31168",
+      "bytes": 1215760
+    }
+  },
+  "scope": "84 no-stack final examples including the original plain renderer; seven chapter state strips. Full stack/time checks recorded by component-styles.cjs; aesthetic approval remains separate.",
+  "sourceHashEncoding": "UTF-8 with LF line endings"
+}

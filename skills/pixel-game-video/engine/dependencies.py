@@ -10,8 +10,8 @@ SCENE_SCRIPTS = {
     'scenes.presenter-board.v1': ['scenes/presenter-board.js'],
     'scenes.study-routes.v1': ['library/education.js', 'scenes/study-routes.js'],
 }
-NARRATIVE_RECIPES = {'motion.book-sweep.v1', 'motion.shelf-travel.v1',
-                     'motion.scene-to-card.v1', 'motion.match-dissolve.v1'}
+NARRATIVE_RECIPES = {'motion.book-sweep.v1',
+                     'motion.scene-to-card.v1', 'motion.match-dissolve.v1', 'motion.cross-dissolve.v1', 'motion.fade-through-black.v1'}
 
 
 def read(path):
@@ -64,7 +64,7 @@ def javascript_files(skill, resolved):
     if any(shot.get('background') or shot.get('replacement') or shot.get('components') for shot in resolved['shots']):
         paths += ['scenes/media.js']
     if any(shot.get('components') for shot in resolved['shots']):
-        paths += ['components/runtime.js']
+        paths += ['components/style-layers.js', 'components/plain.js', 'components/apparatus.js', 'components/runtime.js']
     scenes = {shot['scene'] for shot in resolved['shots']}
     objects = {obj['asset'] for shot in resolved['shots'] for obj in shot.get('objects', [])}
     records = read(Path(skill) / 'modules/library/catalog.json')['items']
@@ -84,6 +84,8 @@ def javascript_files(skill, resolved):
         if 'gameplay' in modes:
             paths += ['motion/game-feedback.js', 'scenes/competition-feedback.js']
     recipes = {motion['recipe'] for shot in resolved['shots'] for motion in shot.get('motions', [])}
+    if recipes & {'motion.component-handoff.v1', 'motion.line-handoff.v1', 'motion.preview-expand.v1', 'motion.panel-occlusion.v1'}:
+        paths.append('motion/content-handoffs.js')
     if recipes & NARRATIVE_RECIPES:
         paths.append('motion/narrative-transitions.js')
     return list(dict.fromkeys('modules/' + path for path in paths)) + ['engine/player.js']
@@ -105,10 +107,15 @@ def runtime_files(skill, resolved):
         files.update({'engine/player.html', 'engine/render_frames.cjs', 'package.json'})
     files.update({'scripts/video.py', 'requirements.txt', 'modules/library/prepare.py',
                   'modules/scenes/contract.py', 'modules/scenes/performance.py', 'modules/components/contract.py',
-                  'modules/audio/narration.py'})
+                  'modules/audio/narration.py', 'modules/motion/handoffs.py'})
     # Catalogs are validation contracts; lock these even when only one entry is selected.
     files.update('modules/' + name + '/catalog.json'
                  for name in ('style', 'library', 'text', 'motion', 'audio', 'scenes', 'components'))
+    if any(shot.get('components') for shot in resolved['shots']):
+        component_root = skill / 'modules/components'
+        files.add('modules/components/assets/gears/manifest.json')
+        for item in read(component_root / 'assets/gears/manifest.json')['items']:
+            files.add(inside(component_root, item['file']).relative_to(skill).as_posix())
     selected, style = selected_style(skill, resolved)
     files.add('modules/style/' + selected['file'])
     for relative in style.get('assets', {}).values():
@@ -129,11 +136,13 @@ def runtime_files(skill, resolved):
                      ('mixer.py', 'palette.py', 'game_audio.py', 'arcade.py'))
         if resolved.get('bgm'):
             files.add('modules/audio/music.py')
-        manifest = 'modules/audio/assets/arcade-motion/manifest.json'
-        files.add(manifest)  # palette reads the bank's semantic metadata at import time.
         sounds = {cue['sound'] for cue in resolved.get('audio', [])}
-        for item in read(skill / manifest)['atoms']:
-            if item['id'] in sounds:
-                relative = 'modules/audio/assets/arcade-motion/' + item['files']['master']['file']
-                files.add(inside(skill, relative).relative_to(skill).as_posix())
+        for bank in ('arcade-motion', 'common-motion'):
+            directory = 'modules/audio/assets/' + bank + '/'
+            manifest = directory + 'manifest.json'
+            files.add(manifest)  # palette reads both banks at import time.
+            for item in read(skill / manifest)['atoms']:
+                if item['id'] in sounds:
+                    relative = directory + item['files']['master']['file']
+                    files.add(inside(skill, relative).relative_to(skill).as_posix())
     return sorted(files)

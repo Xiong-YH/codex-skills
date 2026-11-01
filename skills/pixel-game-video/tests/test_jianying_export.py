@@ -79,8 +79,14 @@ class ExportPlanTests(unittest.TestCase):
             self.assertEqual(resolve_audio(root, skill, 'foundation-sfx/stems/select.wav'), foundation.resolve())
             for relative in ('../private.wav', '/tmp/private.wav', 'https://example.com/audio.wav'):
                 with self.assertRaises(ValueError): resolve_audio(root, skill, relative)
-            (audio.parent / 'escape.wav').symlink_to(foundation)
-            with self.assertRaises(ValueError): resolve_audio(root, skill, 'audio/escape.wav')
+            with self.subTest('symlink escape'):
+                try:
+                    (audio.parent / 'escape.wav').symlink_to(foundation)
+                except OSError as error:
+                    if getattr(error, 'winerror', None) == 1314:
+                        self.skipTest('Windows account lacks symbolic-link privilege; ordinary path guards remain tested')
+                    raise
+                with self.assertRaises(ValueError): resolve_audio(root, skill, 'audio/escape.wav')
 
 
 @unittest.skipUnless(importlib.util.find_spec('pyJianYingDraft') and shutil.which('ffmpeg'), 'Optional Jianying dependency and FFmpeg required')

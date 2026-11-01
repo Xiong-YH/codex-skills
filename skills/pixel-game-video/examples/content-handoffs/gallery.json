@@ -1,0 +1,174 @@
+{
+  "pairs": [
+    {
+      "number": 1,
+      "title": "同形主体匹配",
+      "out": "h01-out",
+      "incoming": "h01-in",
+      "recipe": "motion.component-handoff.v1",
+      "params": {
+        "mode": "match",
+        "pairs": [
+          {
+            "from": "seal",
+            "to": "result"
+          }
+        ]
+      }
+    },
+    {
+      "number": 2,
+      "title": "下划线接成路线",
+      "out": "h02-out",
+      "incoming": "h02-in",
+      "recipe": "motion.line-handoff.v1",
+      "params": {
+        "source": "premise",
+        "target": "route",
+        "startLine": [
+          [
+            0.22,
+            0.53
+          ],
+          [
+            0.57,
+            0.53
+          ]
+        ],
+        "points": [
+          [
+            0.22,
+            0.53
+          ],
+          [
+            0.5,
+            0.53
+          ],
+          [
+            0.5,
+            0.59
+          ],
+          [
+            0.78,
+            0.59
+          ]
+        ]
+      }
+    },
+    {
+      "number": 3,
+      "title": "资料重组成比较",
+      "out": "h03-out",
+      "incoming": "h03-in",
+      "recipe": "motion.component-handoff.v1",
+      "params": {
+        "mode": "reflow",
+        "pairs": [
+          {
+            "from": "a0",
+            "to": "b0"
+          },
+          {
+            "from": "a1",
+            "to": "b1"
+          },
+          {
+            "from": "a2",
+            "to": "b2"
+          }
+        ]
+      }
+    },
+    {
+      "number": 4,
+      "title": "预览展开为现场",
+      "out": "h04-out",
+      "incoming": "h04-in",
+      "recipe": "motion.preview-expand.v1",
+      "params": {
+        "source": "preview"
+      }
+    },
+    {
+      "number": 5,
+      "title": "档案面板遮挡",
+      "out": "h05-out",
+      "incoming": "h05-in",
+      "recipe": "motion.panel-occlusion.v1",
+      "params": {
+        "source": "file",
+        "direction": "left"
+      }
+    },
+    {
+      "number": 7,
+      "title": "报告回到全貌",
+      "out": "h07-out",
+      "incoming": "h07-in",
+      "recipe": "motion.component-handoff.v1",
+      "params": {
+        "mode": "overview",
+        "pairs": [
+          {
+            "from": "report",
+            "to": "report-slot"
+          }
+        ]
+      }
+    },
+    {
+      "number": 8,
+      "title": "双栏合流",
+      "out": "h08-out",
+      "incoming": "h08-in",
+      "recipe": "motion.component-handoff.v1",
+      "params": {
+        "mode": "merge",
+        "sources": [
+          "benefit",
+          "risk"
+        ],
+        "target": "answer"
+      }
+    },
+    {
+      "number": 9,
+      "title": "从白天做到夜晚",
+      "out": "h09-out",
+      "incoming": "h09-in",
+      "recipe": "motion.cross-dissolve.v1",
+      "params": {}
+    },
+    {
+      "number": 10,
+      "title": "关键词承接",
+      "out": "h10-out",
+      "incoming": "h10-in",
+      "recipe": "motion.component-handoff.v1",
+      "params": {
+        "mode": "keyword",
+        "pairs": [
+          {
+            "from": "question",
+            "to": "heading"
+          }
+        ],
+        "word": "验证",
+        "fromRect": [
+          0.479166667,
+          0.456592593,
+          0.1,
+          0.06
+        ],
+        "toRect": [
+          0.473958333,
+          0.203740741,
+          0.1,
+          0.06
+        ],
+        "fontFrom": 0.037037037037037035,
+        "fontTo": 0.046296296296296294
+      }
+    }
+  ]
+}

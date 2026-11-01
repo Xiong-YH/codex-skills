@@ -46,7 +46,7 @@
       "motions": [
         {
           "id": "narrative-handoff",
-          "recipe": "motion.shelf-travel.v1",
+          "recipe": "motion.cross-dissolve.v1",
           "target": "scene",
           "start": {
             "event": "s3.enter"

@@ -25,6 +25,18 @@ class CanvasWorkbenchTests(unittest.TestCase):
         build(self.root, resolved, SKILL)
         return resolved, require_supported(self.root, resolved)
 
+    def test_plain_fades_are_separate_canvas_transition_units(self):
+        for recipe in ('motion.cross-dissolve.v1', 'motion.fade-through-black.v1'):
+            timeline=read_json(self.root/'timeline.json')
+            motion=timeline['shots'][1]['motions'][0]
+            motion.update(recipe=recipe,params={})
+            write_json(self.root/'timeline.json',timeline)
+            resolved,status=self.build()
+            transition=next(unit for unit in status['manifest']['transitions']
+                            if unit['props']['incomingShotId']==resolved['shots'][1]['id'])
+            self.assertEqual(transition['component'],'CanvasTransitionUnit')
+            self.assertEqual(json.loads(transition['props']['paramsJson']),{})
+
     def test_canvas_scene_and_transition_are_live_units_with_editable_source(self):
         resolved, status = self.build()
         manifest = status['manifest']
@@ -38,11 +50,11 @@ class CanvasWorkbenchTests(unittest.TestCase):
         transition = manifest['transitions'][0]
         self.assertEqual(transition['props']['outgoingShotId'], resolved['shots'][0]['id'])
         self.assertEqual(transition['props']['incomingShotId'], resolved['shots'][1]['id'])
-        runtime = (self.root / 'build/remotion/src/canvas-runtime.ts').read_text()
+        runtime = (self.root / 'build/remotion/src/canvas-runtime.ts').read_text(encoding='utf-8')
         self.assertIn('P.createRenderer', runtime)
         self.assertIn('PIXEL_CANVAS_RUNTIME', runtime)
         self.assertNotIn('.mp4', runtime)
-        entry = (self.root / 'build/remotion/src/workbench.ts').read_text()
+        entry = (self.root / 'build/remotion/src/workbench.ts').read_text(encoding='utf-8')
         self.assertIn('CanvasOriginal', entry)
         self.assertTrue((self.root / 'build/film.html').is_file())
         self.assertEqual(status['audioReport']['maxAbsPcmError'], 0)
@@ -74,7 +86,7 @@ class CanvasWorkbenchTests(unittest.TestCase):
         public_payload = read_json(self.root / 'build/remotion/public/payload.json')
         self.assertTrue(public_payload['assets']['@s01.background'].startswith('data:image/png;'))
         generated = self.root / 'build/remotion/src/canvas-runtime.ts'
-        generated.write_text(generated.read_text() + '\n// tampered')
+        generated.write_text(generated.read_text(encoding='utf-8') + '\n// tampered', encoding='utf-8')
         with self.assertRaisesRegex(ValueError, 'changed'):
             require_supported(self.root, resolved)
 

@@ -5,6 +5,7 @@
 !/.gitattributes
 !/AGENTS.md
 !/README.md
+!/CHANGELOG.md
 !/LICENSE
 !/LICENSE.*
 !/NOTICE
@@ -44,3 +45,30 @@ Thumbs.db
 
 # Approved PNG/JPG assets and PCM WAV masters/example narration are skill
 # dependencies: keep them versioned rather than ignoring all binary media.
+
+# User-approved lightweight design favorites. Media stays excluded.
+!/collections/
+/collections/*
+!/collections/favorites/
+/collections/favorites/*
+!/collections/favorites/catalog.json
+!/collections/favorites/README.md
+
+# Version the review workbench source and its lightweight poster only.
+!/docs/
+/docs/*
+!/docs/prototypes/
+/docs/prototypes/*
+!/docs/prototypes/segment-review/
+/docs/prototypes/segment-review/*
+!/docs/prototypes/segment-review/*.html
+!/docs/prototypes/segment-review/*.css
+!/docs/prototypes/segment-review/*.js
+!/docs/prototypes/segment-review/*.py
+!/docs/prototypes/segment-review/README.md
+!/docs/prototypes/segment-review/assets/
+/docs/prototypes/segment-review/assets/*
+!/docs/prototypes/segment-review/assets/poster.png
+!/docs/prototypes/segment-review/tests/
+/docs/prototypes/segment-review/tests/*
+!/docs/prototypes/segment-review/tests/test_*.py

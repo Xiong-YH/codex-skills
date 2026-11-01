@@ -1,6 +1,27 @@
 (function (P) {
   'use strict';
   const smooth = p => {p=P.clamp(p);return p*p*(3-2*p);};
+  function glassCells(e,a){
+    const w=e.width,h=e.height,cx=(a.x??.62)*w,cy=(a.y??.5)*h,seed=a.seed??e.seed??1;
+    const key=['glass',w,h,cx,cy,seed].join(':');e.propCache=e.propCache||{};
+    if(e.propCache[key])return e.propCache[key];
+    const random=n=>{const v=Math.sin((n+seed*17)*127.1)*43758.5453;return v-Math.floor(v)};
+    const sites=[];for(let row=0;row<5;row++)for(let col=0;col<7;col++)sites.push([(col+.15+.7*random(row*7+col))*w/7,(row+.15+.7*random(100+row*7+col))*h/5]);
+    sites.push([cx,cy],[cx+w*.025,cy-h*.035],[cx-w*.035,cy+h*.02]);
+    const cells=sites.map((site,index)=>{
+      let points=[[0,0],[w,0],[w,h],[0,h]];
+      for(let j=0;j<sites.length&&points.length;j++){
+        if(j===index)continue;const other=sites[j],nx=other[0]-site[0],ny=other[1]-site[1],limit=(other[0]**2+other[1]**2-site[0]**2-site[1]**2)/2;
+        const clipped=[];for(let k=0;k<points.length;k++){
+          const v=points[k],u=points[(k+1)%points.length],dv=v[0]*nx+v[1]*ny-limit,du=u[0]*nx+u[1]*ny-limit;
+          if(dv<=0)clipped.push(v);
+          if((dv<=0)!==(du<=0)){const t=dv/(dv-du);clipped.push([v[0]+(u[0]-v[0])*t,v[1]+(u[1]-v[1])*t])}
+        }points=clipped;
+      }
+      return{points,x:site[0],y:site[1],spin:(random(index+400)-.5)*1.4,variation:random(index+800)};
+    }).filter(c=>c.points.length>=3);
+    return e.propCache[key]=cells;
+  }
   function stage(e) {
     return e.stage || {x:e.width*.36,y:e.height*.18,width:e.width*.59,height:e.height*.585};
   }
@@ -200,17 +221,20 @@
       const p = P.progress(frame,motion.startFrame,motion.endFrame);
       if (p >= 1) return;
       const g=e.ctx,w=e.width,h=e.height,a=motion.params || {}, cx=(a.x === undefined ? .62:a.x)*w,cy=(a.y === undefined ? .5:a.y)*h;
-      const points=[[0,0],[w*.33,0],[w*.66,0],[w,0],[w,h*.33],[w,h*.66],[w,h],[w*.66,h],[w*.33,h],[0,h],[0,h*.66],[0,h*.33]];
-      for(let i=0;i<points.length;i++) {
-        const q=points[i],r=points[(i+1)%points.length],mx=(cx+q[0]+r[0])/3,my=(cy+q[1]+r[1])/3;
-        const seed=(a.seed ?? e.seed ?? 1), variation=(Math.sin((i+seed)*127.1)*43758.5453)%1;
-        const fly=Math.max(0,(p-.13)/.87),distance=(fly*.25+fly*fly*1.05)*(1+Math.abs(variation)*.3);
-        g.save(); g.globalAlpha=1-P.clamp((p-.5)/.5); g.translate((mx-cx)*distance,(my-cy)*distance);
-        g.translate(mx,my);g.rotate((i%2 ? 1:-1)*fly*.18);g.translate(-mx,-my);
-        g.beginPath();g.moveTo(cx,cy);g.lineTo(q[0],q[1]);g.lineTo(r[0],r[1]);g.closePath();g.clip();
-        g.drawImage(previous,0,0,w,h);
-        if(p<.3) {g.strokeStyle=e.colors.ink;g.globalAlpha=Math.min(.75,p*6);g.lineWidth=e.pixel*.5;g.stroke();}
-        g.restore();
+      if(p<=0){g.drawImage(previous,0,0,w,h);return;}
+      const cells=glassCells(e,a),diagonal=Math.hypot(w,h);
+      if(p<.14)g.drawImage(previous,0,0,w,h);
+      for(const cell of cells){
+        const radius=Math.hypot(cell.x-cx,cell.y-cy)/diagonal,delay=.11+radius*.16+cell.variation*.045;
+        const fly=P.clamp((p-delay)/(1-delay)),travel=(fly*.12+fly*fly*1.65)*(1+cell.variation*.48);
+        g.save();g.globalAlpha=1-smooth((fly-.55)/.45);
+        g.translate((cell.x-cx)*travel,(cell.y-cy)*travel+h*.50*fly*fly);
+        g.translate(cell.x,cell.y);g.rotate(cell.spin*fly);g.translate(-cell.x,-cell.y);
+        g.beginPath();cell.points.forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));g.closePath();
+        g.save();g.clip();g.drawImage(previous,0,0,w,h);g.restore();
+        // Thin irregular crack rims: no extrusion, glass block, or mirror text.
+        g.strokeStyle=p<.15?(e.colors.ink||'#152b38'):(e.colors.accent||'#9cc9cd');
+        g.lineWidth=Math.max(.6,e.pixel*.45);g.globalAlpha*=Math.min(.65,p*7);g.stroke();g.restore();
       }
     },
     effects(e,motions,frame) {

@@ -1,47 +1,46 @@
-# 转场库：选型与设计入口
+# 转场：当前选型入口
 
-目前收纳 **12 种转场方法：9 种可直接调用的配方、3 种空间设计（已在竞赛专用场景落地，尚无通用配方）**。另有 2 种已撤回实验，不计入可选数量。相机推进/跟拍、物体翻转和金光特效是辅助运动，不单独算转场。
+日常只读本页和选中的配方。执行ID以[catalog.json](catalog.json)及`python scripts/video.py catalog motion`为准；`design.*`是设计索引，不能填入recipe。参数、引用和后端限制由编译器校验，素材语义与美术效果仍需实际检查。
 
-这里负责选型；可执行 ID 与参数以 [catalog.json](catalog.json) 为准，算法仍在 motion 执行器中。`design.*` 仅为设计索引，不能写入 VideoSpec 的 `recipe`。新设计完成参数合同、运行实现和片段核验后，才登记为 `motion.*`；保留对应设计说明，避免只剩效果名。
+## 内容交接选型
 
-## 已实现：9 种
+按前后镜头关系选择，不为每次换句增加动作。以下九种用法由四个新配方族和已有淡化承载，细节只读[内容交接配方](recipes/content-handoffs.md)。
 
-“已实现”表示引擎可执行，不代表适合当前项目或已获得本次审美认可。
-
-| 名称 / recipe | 交接关系与适用情境 | 选用限制 / 详细说明 |
+| 关系／原编号 | 执行选择 | 何时优先使用 |
 | --- | --- | --- |
-| 焦点冲入 `motion.focus-punch.v1` | 从可辨认的物体冲入，在运动中接到新空间；强调进入某个主题 | 前后焦点要有语义与构图承接，避免突然大推大拉。[配方](recipes/focus-punch.md) |
-| 场景卡墙 `motion.mosaic-pullback.v1` | 完整场景缩成一格，展示集合，再锁定下一项 | 只有“个体→集合→目标”确实需要讲清时使用。[配方](recipes/mosaic-pullback.md) |
-| 信息面板滑动 `motion.panel-slide.v1` | 同一背景里的独立旧面板退出、新面板进入 | 不能把连续房间裁成移动面板。[配方](recipes/panel-slide.md) |
-| 像素窗口 `motion.pixel-iris.v1` | 从指定焦点逐格展开下一组信息 | 限独立信息区；适合阶段结果。[配方](recipes/pixel-iris.md) |
-| 碎屏揭示 `motion.shatter-reveal.v1` | 旧画面碎片散开，显露后景 | 适合打破障碍等明确剧情，普通口播慎用。[配方](recipes/shatter-reveal.md) |
-| 书页铺屏 `motion.book-sweep.v1` | 实体书页铺满画幅，完整遮挡时换景，再扫离 | 先建立书页来源，不能突然飞来无关的书。[配方](recipes/narrative-handoffs.md) |
-| 前景书架横移 `motion.shelf-travel.v1` | 横向经过前景书架，遮住两个完整房间的接缝 | 要有相邻空间或路线关系。[配方](recipes/narrative-handoffs.md) |
-| 场景收为图卡 `motion.scene-to-card.v1` | 前一完整场景收进下一镜中的真实图卡 | 适合回顾、并列路线；落点使用同一来源图像。[配方](recipes/narrative-handoffs.md) |
-| 主体匹配溶解 `motion.match-dissolve.v1` | 主体几何保持，完整旧场景缓慢溶解为新场景 | 是淡化方案；用户已否定本次竞赛视频首转场的效果，不用于该处重做。[配方](recipes/match-dissolve.md) |
+| 01 同形主体匹配 | `motion.component-handoff.v1`，mode=`match` | 保留共同主体，优先于整屏匹配溶解；图形及含义须由素材提供 |
+| 02 下划线接路线 | `motion.line-handoff.v1` | 一个判断引出步骤或路径 |
+| 03 资料重组成比较 | `motion.component-handoff.v1`，mode=`reflow` | 同批对象重排，优先于普通滑页 |
+| 04 预览展开为现场 | `motion.preview-expand.v1` | 已有真实现场预览时，优先于焦点冲入／装饰性窗口 |
+| 05 档案面板遮挡 | `motion.panel-occlusion.v1` | 档案进入分析，优先替代无来源的书页铺屏 |
+| 07 报告回到全貌 | `motion.component-handoff.v1`，mode=`overview` | 信息对象回到版面，优先于整景收卡 |
+| 08 双栏结论合流 | `motion.component-handoff.v1`，mode=`merge` | 多个依据合成判断，优先于普通滑页 |
+| 09 同构图昼夜变化 | `motion.cross-dissolve.v1`＋项目日／夜素材 | 天色、光源和状态共同表现时间，不只改数字 |
+| 10 关键词成为标题 | `motion.component-handoff.v1`，mode=`keyword` | 同一个词接续下一层解释 |
 
-## 新收纳：3 种空间转场设计
+这是选型优先级，旧工程不自动改写。配方可执行不等于任意素材均适配；原试样的正面反馈不代替本片验收。
 
-三种设计已在竞赛 cinematic/gameplay 场景落地，尚无通用 recipe。认可范围与 V3/V4 撤回原因统一见 [迭代记录](../../references/iteration-history.md)；其他场景需补实现和逐片核验。
+## 仍有独立用途的基础与旧配方
 
-| 设计 ID / 名称 | 连续动作 | 适合解释 |
-| --- | --- | --- |
-| `design.card-focus-lift.v1` 聚焦前移 | 在已有布局中定位 → 镜头靠近 → 同一张卡前移并改变透视/阴影 → 落稳讲解 | 从全貌进入一个具体主题；本片题板进入算法讲解。[设计](recipes/card-spatial-handoffs.md#聚焦前移) |
-| `design.stack-to-layout.v1` 卡堆展开 | 已有叠层分离 → 各卡错峰展开 → 视角趋平 → 落成布局 | 整体与组成、任务或时间分配；本片时间卡展开。[设计](recipes/card-spatial-handoffs.md#卡堆展开) |
-| `design.target-isolate.v1` 目标抽离 | 列表内已有目标被选中 → 向中心抽出 → 邻项退居背景 → 推近并确认 | 从多个选项进入一项；本片选出试练计划。[设计](recipes/card-spatial-handoffs.md#目标抽离) |
+| 用途 | 配方与用法 |
+| --- | --- |
+| 直接换镜／同镜继续 | 明写切点或保留关系，不需要添加motion |
+| 柔和接续 | `motion.cross-dissolve.v1`；章节间隔用`motion.fade-through-black.v1`。[淡化](recipes/fades.md) |
+| 普通信息分页 | `motion.panel-slide.v1`，保留背景和人物。[面板](recipes/panel-slide.md) |
+| 阶段信息收拢、展开 | `motion.pixel-iris.v1`，限独立信息区。[窗口](recipes/pixel-iris.md) |
+| 个体→集合→目标 | `motion.mosaic-pullback.v1`，须确有集合关系。[卡墙](recipes/mosaic-pullback.md) |
+| 剧情打破障碍 | `motion.shatter-reveal.v1`，不作日常换页。[碎裂](recipes/shatter-reveal.md) |
+| 明确的实体书页 | `motion.book-sweep.v1`；档案场景先考虑新版05。[书页](recipes/narrative-handoffs.md) |
+| 完整场景纳入图卡 | `motion.scene-to-card.v1`，排除独立口播层；信息对象先考虑新版07。[图卡](recipes/narrative-handoffs.md) |
+| 强烈进入一个焦点 | `motion.focus-punch.v1`，保留特定重音及旧工程用途。[冲入](recipes/focus-punch.md) |
+| 整景缓慢溶解、保留首尾停顿 | `motion.match-dissolve.v1`，不具备自动主体匹配；主体交接先考虑新版01。[溶解](recipes/match-dissolve.md) |
 
-## 设计下一次转场时填写
+## 范围与禁用
 
-每个交接先写清以下内容，再选配方或实现新能力。可写入 storyboard 的 `intent`，时间只放镜头事件，能力选择仍放 production-plan，不另建一份秒数时间线。
+聚焦前移、卡堆展开、目标抽离这[三种空间设计](recipes/card-spatial-handoffs.md)只有竞赛cinematic／gameplay的专用实现，不能填写为通用recipe。
 
-- **前镜交出什么**：明确物体、来源镜头、当前状态和可辨认标记。
-- **后镜接住什么**：同一物体的落点、大小与状态；若更换内容，说明新内容怎样进入。
-- **动作怎样组织**：定位、主运动、落稳、阅读分别由哪些事件控制；同一背景是否保留。
-- **讲解何时开始**：主体落稳后再进入新句和密集文字；按实际旁白长度留理解时间。
-- **怎么验收**：首尾主体对应、中途无裸底/重影/镜像字、落位无跳变；连续播放检查节奏，听音检查同步。
+不自动恢复：两个`motion.stage-*`背景裁片、`motion.shelf-travel.v1`书架横移、本轮阵列拉远／俯看、原06信件动作接力，以及已否定的雷电、冲击波、燃烧和棱镜试样。单片限制仍以当前项目为准，不扩大为所有项目禁用合理运镜或特效。
 
-不要默认每句话切一次、每次转场同长，或把“动作变慢”直接等同于“节奏更好”。有时保留场景、只改变物体关系更合适。参考片的定位→移动→落稳→解释是设计线索，阶段可重叠，时长按信息量与旁白安排。
+脚本必须说明“前镜交出→变化过程→后镜接住→落稳阅读”，直切、同镜继续和首尾也要写。事件时间、轨道和执行规则见[运动指南](GUIDE.md)；风格按[组件与背景同框](../style/ART-DIRECTION.md#组件与背景在同一画面中定风格)核对。
 
-## 已撤回：2 种
-
-`motion.stage-focus-punch.v1`、`motion.stage-mosaic-pullback.v1`：连续背景裁成局部贴片，造成空间割裂，状态为 unavailable；不可重新选用。参见 [失败说明](recipes/stage-transitions.md)。
+仅在研究新方法或追溯反馈时读[研究记录](TRANSITION-CANDIDATES.md)／[历史](../../references/iteration-history.md)，它们不覆盖当前能力目录和本页选型。

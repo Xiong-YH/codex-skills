@@ -1,7 +1,8 @@
 import React, {useEffect, useMemo, useRef} from 'react';
-import {cancelRender, continueRender, delayRender, useCurrentFrame} from 'remotion';
+import {cancelRender, continueRender, delayRender, getRemotionEnvironment, useCurrentFrame} from 'remotion';
 import {PIXEL_CANVAS_RUNTIME} from './canvas-runtime';
 import {WORKBENCH_PAYLOAD} from './workbench-payload';
+import {videoKeysForShots} from './canvas-video-selection';
 
 // The Canvas contract is intentionally broader than the native desk contract.
 // Each selected runtime module validates/uses its own structured scene fields.
@@ -33,8 +34,8 @@ const json = (value: string | undefined, fallback: any, field: string): any => {
   try {return JSON.parse(value);} catch {throw new Error(`Invalid editable ${field} JSON.`);}
 };
 const transitionRecipes = new Set(['motion.panel-slide.v1', 'motion.pixel-iris.v1', 'motion.focus-punch.v1',
-  'motion.mosaic-pullback.v1', 'motion.book-sweep.v1', 'motion.shelf-travel.v1', 'motion.scene-to-card.v1',
-  'motion.match-dissolve.v1', 'motion.shatter-reveal.v1']);
+  'motion.mosaic-pullback.v1', 'motion.component-handoff.v1', 'motion.line-handoff.v1', 'motion.preview-expand.v1', 'motion.panel-occlusion.v1', 'motion.book-sweep.v1', 'motion.scene-to-card.v1',
+  'motion.match-dissolve.v1', 'motion.cross-dissolve.v1', 'motion.fade-through-black.v1', 'motion.shatter-reveal.v1']);
 const editedShot = (shot: Data, props: CanvasShotProps, payload: CanvasPayload): Data => {
   const value: Data = {...shot};
   for (const field of ['params', 'objects', 'components', 'background', 'replacement', 'performance']) {
@@ -112,8 +113,9 @@ const videoAsset = (src: string, key: string): Promise<HTMLVideoElement> => new 
   video.onerror = () => {clean();reject(new Error(`Canvas video could not load: ${key}`));};
   video.src = src;video.load();
 });
-const loadAssets = async (payload: CanvasPayload): Promise<Record<string, CanvasImageSource>> => {
-  const values = await Promise.all(Object.entries(payload.assets).map(async ([key, src]) => [key,
+const loadAssets = async (payload: CanvasPayload, videoKeys?: string[]): Promise<Record<string, CanvasImageSource>> => {
+  const entries = Object.entries(payload.assets).filter(([key]) => payload.resolved.media?.[key]?.kind !== 'video' || videoKeys === undefined || videoKeys.includes(key));
+  const values = await Promise.all(entries.map(async ([key, src]) => [key,
     await (payload.resolved.media?.[key]?.kind === 'video' ? videoAsset(src, key) : imageAsset(src, key))] as const));
   await document.fonts.ready;return Object.fromEntries(values);
 };
@@ -130,7 +132,7 @@ const seekVideo = async (video: HTMLVideoElement, target: number, key: string): 
 const prepareVideos = async (resolved: Data, assets: Record<string, CanvasImageSource>, frame: number, frames: Record<string, number>, cache: Map<string, HTMLCanvasElement>): Promise<void> => {
   const {fps} = resolved.project;
   await Promise.all(Object.entries(resolved.media ?? {}).map(async ([key, raw]) => {
-    const item = raw as Data;if (item.kind !== 'video') return;
+    const item = raw as Data;if (item.kind !== 'video' || !assets[key]) return;
     const selectedFrame = Math.max(item.shotStartFrame, Math.min(item.shotEndFrame - 1, frames[String(item.shotStartFrame)] ?? frame));
     const fixed = [item.shotEndFrame - 1, item.shotStartFrame + Math.floor((item.shotEndFrame - item.shotStartFrame) * .72)];
     const desired = [...new Set([...fixed, selectedFrame])];
@@ -147,29 +149,41 @@ const prepareVideos = async (resolved: Data, assets: Record<string, CanvasImageS
   }));
 };
 
-type Draw = {resolved: Data; frame: number; videoFrames?: Record<string, number>; skipMedia?: boolean; draw: (renderer: any) => void};
+type Draw = {resolved: Data; frame: number; videoKeys?: string[]; videoFrames?: Record<string, number>; skipMedia?: boolean; draw: (renderer: any) => void};
 const CanvasLayer: React.FC<{payload: CanvasPayload; request: Draw; identity: string}> = ({payload, request, identity}) => {
   const canvas = useRef<HTMLCanvasElement>(null);
-  const assetState = useRef<{payload: CanvasPayload; pending: Promise<Record<string, CanvasImageSource>>} | null>(null);
+  const assetState = useRef<{payload: CanvasPayload; selection: string; pending: Promise<Record<string, CanvasImageSource>>} | null>(null);
   const rendererState = useRef<{resolved: Data; canvas: HTMLCanvasElement; value: any} | null>(null);
   const queue = useRef<Promise<void>>(Promise.resolve());
   const videoCache = useRef(new Map<string, HTMLCanvasElement>());
   const mediaSignature = useRef('');
+  useEffect(() => () => {
+    void assetState.current?.pending.then(assets => {
+      for (const asset of Object.values(assets)) if (asset instanceof HTMLVideoElement) {
+        asset.pause();asset.removeAttribute('src');asset.load();
+      }
+    }).catch(() => {});
+  }, []);
   // Every changed frame/prop holds Remotion's screenshot until both the exact
   // video source frame and the synchronous Canvas drawing have completed.
   const handle = useMemo(() => delayRender(`Canvas workbench ${identity}`), [identity]);
   useEffect(() => {
     let cancelled = false, released = false;
     const release = () => {if (!released) {released = true;continueRender(handle);}};
-    if (!assetState.current || assetState.current.payload !== payload) assetState.current = {payload,
-      pending: request.skipMedia ? document.fonts.ready.then(() => ({})) : loadAssets(payload)};
+    const selection = request.skipMedia ? 'none' : JSON.stringify(request.videoKeys ?? '*');
+    if (!assetState.current || assetState.current.payload !== payload || assetState.current.selection !== selection) assetState.current = {payload, selection,
+      pending: request.skipMedia ? document.fonts.ready.then(() => ({})) : loadAssets(payload, request.videoKeys)};
     const pending = assetState.current.pending;
     queue.current = queue.current.catch(() => {}).then(async () => {
       const assets = await pending;if (cancelled || !canvas.current) return;
       const signature = JSON.stringify(request.resolved.media);
       if (mediaSignature.current !== signature) {videoCache.current.clear();mediaSignature.current = signature;}
       if (!request.skipMedia) await prepareVideos(request.resolved, assets, request.frame, request.videoFrames ?? {}, videoCache.current);
-      if (cancelled || !canvas.current) return;
+      // A live Player can advance while a video seek is in flight. Present that
+      // completed frame before processing the latest queued request, otherwise
+      // every seek slower than one display frame starves the preview forever.
+      // Rendering still discards superseded requests to preserve exact frames.
+      if (!canvas.current || (cancelled && getRemotionEnvironment().isRendering)) return;
       if (!rendererState.current || rendererState.current.resolved !== request.resolved || rendererState.current.canvas !== canvas.current) {
         const createCanvas = (width: number, height: number) => {const target = document.createElement('canvas');target.width = width;target.height = height;return target;};
         rendererState.current = {resolved: request.resolved, canvas: canvas.current, value: PIXEL_CANVAS_RUNTIME.createRenderer({
@@ -204,7 +218,7 @@ export const CanvasShotUnit: React.FC<CanvasShotProps> = (props) => {
     return editableResolved(payload, payload.resolved.shots.map((shot: Data, at: number) => at === index ? editedShot(shot, props, payload) : shot));
   }, [payload, signature]);
   const index = indexFor(resolved, props.sourceUnitId, props.shotIndex ?? 0), frame = sourceFrame(resolved.shots[index], local);
-  const request = useMemo(() => ({resolved, frame, draw: (renderer: any) => renderer.drawShot(frame, index)}), [resolved, frame, index]);
+  const request = useMemo(() => ({resolved, frame, videoKeys: videoKeysForShots(resolved, [index]), draw: (renderer: any) => renderer.drawShot(frame, index)}), [resolved, frame, index]);
   return <CanvasLayer payload={payload} request={request} identity={`shot:${signature}:${frame}`}/>;
 };
 
@@ -230,7 +244,7 @@ export const CanvasTransitionUnit: React.FC<CanvasTransitionProps> = (props) => 
   const frame = source.startFrame + Math.max(0, Math.floor(local + 1e-6));
   const incomingFrame = props.incomingSourceFrame === undefined ? Math.max(shot.startFrame, Math.min(shot.endFrame - 1, frame)) : sourceFrame(shot, props.incomingSourceFrame);
   const outgoingFrame = props.outgoingSourceFrame === undefined ? undefined : sourceFrame(previous, props.outgoingSourceFrame);
-  const request = useMemo(() => ({resolved, frame, videoFrames: {[shot.startFrame]: incomingFrame, [previous.startFrame]: outgoingFrame ?? previous.endFrame - 1},
+  const request = useMemo(() => ({resolved, frame, videoKeys: motion.recipe === 'motion.mosaic-pullback.v1' ? undefined : videoKeysForShots(resolved, [index - 1, index]), videoFrames: {[shot.startFrame]: incomingFrame, [previous.startFrame]: outgoingFrame ?? previous.endFrame - 1},
     draw: (renderer: any) => renderer.drawTransition(frame, index, motion, {incomingFrame, outgoingFrame,
       outgoingTransform: props.outgoingTransform, incomingTransform: props.incomingTransform})}), [resolved, frame, signature]);
   return <CanvasLayer payload={payload} request={request} identity={`transition:${signature}:${frame}`}/>;

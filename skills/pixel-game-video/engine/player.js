@@ -8,15 +8,16 @@
                 assets,resolved,mouth,frameAssets,createCanvas,propCache:{},fps:project.fps,seed:project.seed??1};
     const history=new Map(),contentHistory=new Map(),worldHistory=new Map();
     const contentRecipes=new Set(['motion.panel-slide.v1','motion.pixel-iris.v1']);
-    const worldRecipes=new Set(['motion.focus-punch.v1','motion.mosaic-pullback.v1','motion.book-sweep.v1','motion.shelf-travel.v1','motion.scene-to-card.v1','motion.match-dissolve.v1']);
+    const handoffRecipes=new Set(['motion.component-handoff.v1','motion.line-handoff.v1','motion.preview-expand.v1','motion.panel-occlusion.v1']);
+    const worldRecipes=new Set([...handoffRecipes,'motion.focus-punch.v1','motion.mosaic-pullback.v1','motion.book-sweep.v1','motion.scene-to-card.v1','motion.match-dissolve.v1', 'motion.cross-dissolve.v1', 'motion.fade-through-black.v1']);
     base.shotPreview=id=>{
       const index=resolved.shots.findIndex(s=>s.id===id);
       if(index<0)throw new Error('Unknown preview shot '+id);
-      return snapshot(index);
+      return snapshot(index,true);
     };
     function plainWorld(shot,frame,target,includePresenter=true){
       const flat=plainScratch,g=flat.getContext('2d');g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,width,height);
-      const e={...base,ctx:g,frame};
+      const e={...base,ctx:g,frame,includePresenter};
       if(includePresenter)P.scenes.draw(e,shot,frame);
       else{
         // Overview tiles contain complete rooms, without multiplying a separate
@@ -67,10 +68,43 @@
       }
       g.imageSmoothingEnabled=false;g.drawImage(source,0,0);g.restore();
     }
-    function snapshot(index){
-      if(history.has(index))return history.get(index);
+    function snapshot(index,excludePresenter=false){
+      const key=index+':'+excludePresenter;
+      if(history.has(key))return history.get(key);
       const shot=resolved.shots[index],frame=shot.endFrame-1,target=createCanvas(width,height),flat=createCanvas(width,height);
-      worldAt(shot,frame,flat);composite(target.getContext('2d'),flat,shot,frame);history.set(index,target);return target;
+      if(excludePresenter)plainWorld(shot,frame,target,false);
+      else{worldAt(shot,frame,flat);composite(target.getContext('2d'),flat,shot,frame);}
+      history.set(key,target);return target;
+    }
+    function presenterAt(shot,frame){
+      const flat=createCanvas(width,height),target=createCanvas(width,height);
+      // Replacement media has no separately removable presenter layer.
+      if(!shot.replacement)P.scenes.drawLayer({...base,ctx:flat.getContext('2d'),frame},shot,frame,'actor');
+      composite(target.getContext('2d'),flat,shot,frame,false);return target;
+    }
+    function handoffContext(index,motion,outgoingFrame,incomingFrame,options={}){
+      const owners={old:resolved.shots[index-1],next:resolved.shots[index]},frames={old:outgoingFrame,next:incomingFrame};
+      const transforms={old:options.outgoingTransform,next:options.incomingTransform};
+      const find=(side,id)=>{const c=(owners[side].components||[]).find(c=>c.id===id);if(!c)throw new Error('Unknown handoff component '+side+':'+id);return c;};
+      const box=(side,id)=>{const c=find(side,id),t=transforms[side]||{},scale=t.scale??1;return [(c.x-.5)*scale+.5+(t.x||0)/width,(c.y-.5)*scale+.5+(t.y||0)/height,c.width*scale,c.height*scale];};
+      return {box,item:find,verifyPreview(id){const c=find('old',id),bg=owners.next.background;if(c.kind!=='identity'||!bg||c.data.image!==bg.file||bg.dim)throw new Error('preview-expand image must match the incoming background');},rect(side,b){const t=transforms[side]||{},s=t.scale??1;return[(b[0]-.5)*s+.5+(t.x||0)/width,(b[1]-.5)*s+.5+(t.y||0)/height,b[2]*s,b[3]*s];},opacity(side){return transforms[side]?.opacity??1;},scale(side){return transforms[side]?.scale??1;},scene(side,excluded){
+        const shot={...owners[side],components:(owners[side].components||[]).filter(c=>!excluded.includes(c.id))};
+        return transformed(plainWorld(shot,frames[side],createCanvas(width,height)),transforms[side]);
+      },component(side,id,rect){
+        const original=find(side,id),[x,y,w,h]=rect,c={...original,x,y,width:w,height:h};
+        // Incoming geometry is read at landing, not its first entry-animation frame.
+        const f=side==='next'?Math.min(owners.next.endFrame-1,motion.endFrame-1):frames.old;
+        const t=transforms[side]||{};ctx.save();ctx.globalAlpha*=t.opacity??1;
+        try{P.components.draw({...base,ctx,frame:f},{...owners[side],components:[c]},f);}finally{ctx.restore();}
+      },previewBox(id){
+        const c=find('old',id),asset=base.assets[c.data.imageKey];
+        if(!asset||Math.abs(asset.width/asset.height-width/height)>.001)throw new Error('preview-expand image must match the project aspect ratio');
+        const b=box('old',id),bounds=P.componentApparatus.imageBounds(base,c,{x:b[0]*width,y:b[1]*height,width:b[2]*width,height:b[3]*height});
+        if(!bounds)throw new Error('preview-expand source requires an image viewport');
+        const {x:bx,y:by,width:bw,height:bh}=bounds;
+        const scale=Math.min(bw/asset.width,bh/asset.height),rw=asset.width*scale,rh=asset.height*scale;
+        return [(bx+(bw-rw)/2)/width,(by+(bh-rh)/2)/height,rw/width,rh/height];
+      },preview(){const c=createCanvas(width,height);P.scenes.drawLayer({...base,ctx:c.getContext('2d'),frame:frames.next},owners.next,frames.next,'background');return c;}};
     }
     function clear(){ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,width,height);}
     function transformed(source,transform={}){
@@ -97,10 +131,12 @@
       const shot=resolved.shots[index],previous=resolved.shots[index-1];
       const incomingFrame=shotFrame(index,options.incomingFrame??frame);
       const outgoingFrame=shotFrame(index-1,options.outgoingFrame??previous.endFrame-1);
-      const old=options.outgoingFrame===undefined?snapshot(index-1):shotCanvas(index-1,outgoingFrame);
-      const next=shotCanvas(index,incomingFrame),e={...base,ctx};
+      const isCard=motion.recipe==='motion.scene-to-card.v1';
+      const old=isCard?plainWorld(previous,outgoingFrame,createCanvas(width,height),false):
+        (options.outgoingFrame===undefined?snapshot(index-1):shotCanvas(index-1,outgoingFrame));
+      const next=shotCanvas(index,incomingFrame),e={...base,ctx,handoff:handoffRecipes.has(motion.recipe)?handoffContext(index,motion,outgoingFrame,incomingFrame,options):null};
       if(worldRecipes.has(motion.recipe)){
-        P.motion.worldTransition({...e,gallery:motion.recipe==='motion.mosaic-pullback.v1'?gallery():[]},
+        P.motion.worldTransition({...e,outgoingPresenter:isCard?transformed(presenterAt(previous,outgoingFrame),options.outgoingTransform):null,gallery:motion.recipe==='motion.mosaic-pullback.v1'?gallery():[]},
           transformed(old,options.outgoingTransform),transformed(next,options.incomingTransform),motion,frame);
       }else if(contentRecipes.has(motion.recipe)){
         const g=world.getContext('2d');g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,width,height);
@@ -140,7 +176,8 @@
       if(full){
         if(index===0)throw new Error('A world transition needs a previous shot');
         const target=plainWorld(shot,frame,incomingWorld);
-        P.motion.worldTransition({...base,ctx,gallery:full.recipe==='motion.mosaic-pullback.v1'?gallery():[]},snapshot(index-1),target,full,frame);
+        const isCard=full.recipe==='motion.scene-to-card.v1';
+        P.motion.worldTransition({...base,ctx,handoff:handoffRecipes.has(full.recipe)?handoffContext(index,full,resolved.shots[index-1].endFrame-1,frame):null,outgoingPresenter:isCard?presenterAt(resolved.shots[index-1],resolved.shots[index-1].endFrame-1):null,gallery:full.recipe==='motion.mosaic-pullback.v1'?gallery():[]},snapshot(index-1,isCard),target,full,frame);
       }else{worldAt(shot,frame,world);composite(ctx,world,shot,frame);}
       const e={...base,ctx};
       for(const m of shot.motions||[]){

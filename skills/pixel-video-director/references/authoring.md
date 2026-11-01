@@ -18,7 +18,7 @@
 
 四个 JSON 源文件是可独立继续的阶段产物；JSON Schema 在 [schemas/](../schemas/)，运行合同源在 [models.py](../scripts/directorlib/models.py)。`python scripts/director.py check PROJECT` 检查格式与交叉引用。
 
-脚本阶段先读 [视觉表达方法](visual-system.md)，对用户交付按 [脚本标注](visual-storyboard.md#脚本中的呈现类型标注) 分别写明片段类别、画面呈现和声音安排，不将旁白或组件与插画混作同层级类别；本系列插画按 [片段设计要求](character-illustration.md#从脚本到插画片段) 写出可制作的状态、动作与承接。新分镜用 storyboard.shots[].visual 记录表达决定，components 记录组件结构/位置/事件，组件文字仍引用 script.labels。production-plan 的 background/replacement 选择项目素材，操作见 [素材替换](media-replacement.md)。旧工程 visual 可缺省，check 会列出缺项；新模板空值会阻止交接。
+脚本阶段先按 [整段认知推进](visual-storytelling.md#先确定整段如何推进理解) 确认观点如何递进，再读 [视觉表达方法](visual-system.md)，对用户交付按 [脚本标注](visual-storyboard.md#脚本中的呈现类型标注) 分别写明片段类别、画面呈现和声音安排，不将旁白或组件与插画混作同层级类别；本系列插画按 [片段设计要求](character-illustration.md#从脚本到插画片段) 写出可制作的状态、动作与承接。新分镜用 storyboard.shots[].visual 记录表达决定，components 记录组件结构/位置/事件，组件文字仍引用 script.labels。production-plan 的 background/replacement 选择项目素材，操作见 [素材替换](media-replacement.md)。旧工程 visual 可缺省，check 会列出缺项；新模板空值会阻止交接。
 
 | 文件 | 唯一拥有的内容 | 稳定标识 |
 | --- | --- | --- |
@@ -27,7 +27,9 @@
 | storyboard.json | 镜头顺序与 durationFrames、表达意图、场景机制、物体位置、事件、文字时间 | shots[].id / events[].id / objects[].id / cues[].cueId |
 | production-plan.json | 标题、输出规格、renderBackend、风格、人物与道具素材、文字角色、运镜和声音选择 | id / shots[].id / text[].cueId / audio[].id |
 
-文字用短句表达一个意思，游戏状态变化承载因果；转场服务焦点交接。不是每镜都需要运镜或音效。保留用户指定角色与表现方向。
+文字用短句表达一个意思，游戏状态变化承载因果；转场服务焦点交接。**面向用户的每份视频脚本必须显式写出接镜／转场**，包括直切、同镜继续与首尾入场／收束；按 [转场标注](visual-storyboard.md#脚本中的呈现类型标注) 写交出、过程、接住和阅读开始条件。设计意图放 `visual.continuity` / `intent`，执行选择归production-plan；候选方案不能冒充可调用配方。不是每镜都需要运镜或音效。保留用户指定角色与表现方向。
+
+音效默认留白，只为有明确增益的关键变化写入 production-plan.audio，分镜简要说明保留作用；不按动作或卡点配满。触发筛选与删音对照统一按基础依赖的 `modules/audio/GUIDE.md` 执行，不另立音效次数或重复要求每条 cue 填说明字段。
 
 `production-plan.renderBackend` 缺省为 `canvas`；显式选 `remotion` 时由 handoff 透传到 project，不复制时间表。先查看基础层 `references/remotion.md` 的能力边界；[12 秒书桌示例](../examples/remotion-focus-desk/README.md) 演示同一套源文件如何交给原生 React 执行器。Canvas 与原生 Remotion 都必须进入工作台完成剪辑与最终导出。Studio、build/film.html 和直接 render 用于源合成调试与一致性对照，不代替工作台分轨编辑、保存和导出验收。
 

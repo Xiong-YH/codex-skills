@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>筹码入托盘 · 最小动作验证</title>
+<style>
+:root{color-scheme:dark;--bg:#111b21;--ink:#e5e9db;--muted:#a0b4b4;--edge:#334a50;--gold:#e1b578;--mint:#a2ceb6}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.7 "Microsoft YaHei UI","Microsoft YaHei",sans-serif}main{max-width:1180px;margin:auto;padding:28px 34px}.kicker{font-size:11px;color:var(--mint);letter-spacing:3px}h1{font-size:27px;font-weight:500;margin:8px 0}p{margin:0;color:var(--muted)}.heading{display:flex;justify-content:space-between;align-items:center;gap:20px}.tag{color:var(--gold);font-size:12px;white-space:nowrap}.stage{margin-top:20px;position:relative;border:1px solid var(--edge);border-radius:4px;overflow:hidden;background:#14252b}canvas{display:block;width:100%;height:auto;aspect-ratio:1080/490}.status{position:absolute;top:15px;left:20px;font-size:12px;color:#c6d3c5}.status:before{content:"";display:inline-block;width:6px;height:6px;background:var(--gold);margin-right:8px}#loading{position:absolute;inset:0;display:grid;place-items:center;background:#14252b}.bar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:14px 0}button,select{font:inherit;font-size:12px;border:1px solid var(--edge);color:var(--ink);background:#1a2b31;padding:8px 12px;border-radius:3px;cursor:pointer}button.primary{background:var(--mint);color:#18362b;border:0;padding:9px 16px}button[aria-pressed=true]{color:var(--gold);border-color:#876e43}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}.seek{margin-left:auto;display:flex;align-items:center;gap:9px;color:var(--muted);font-size:12px}.seek input{width:180px;accent-color:var(--mint)}#clock{font:12px monospace;min-width:65px}.detail{display:flex;justify-content:space-between;gap:20px;font-size:13px;color:var(--muted);border-top:1px solid var(--edge);padding:15px 0}.detail b{color:var(--gold);font-weight:500}details{border-top:1px solid #2b4047;padding-top:13px;color:var(--muted);font-size:12px}summary{cursor:pointer;color:#c5d9cf}dl{display:grid;grid-template-columns:90px 1fr;gap:8px 16px;margin:13px 0 0}dt{color:#d8dfce}dd{margin:0}footer{font-size:11px;color:#7f979a;margin:17px 0;line-height:1.9}a{color:#bad8c8}@media(max-width:750px){main{padding:21px 16px}.heading{display:block}.tag{margin-top:8px}h1{font-size:23px}.seek{width:100%;margin-left:0}.seek input{flex:1}.detail{display:block}.detail span{display:block;margin-bottom:7px}.status{font-size:10px;top:10px;left:12px}dl{grid-template-columns:70px 1fr}}
+</style></head><body><main>
+<div class="heading"><div><div class="kicker">ONE ASSET / ONE MOTION / EXPLICIT OCCLUSION</div><h1>先把“进入托盘”做正确。</h1><p>用同一批原图，只验证一个动作：来源移出 → 进入内部 → 被真实前沿遮挡 → 停稳。</p></div><div class="tag">最小 Demo · 无声音</div></div>
+<div class="stage"><canvas id="canvas" width="2160" height="980" role="img" aria-label="筹码沿短弧线落入托盘，前壁沿实际斜边正确遮挡"></canvas><span class="status" id="status"></span><div id="loading">读取组件…</div></div>
+<div class="bar"><button class="primary" id="replay">↻ 重播</button><button id="pause">暂停</button><button id="layers" aria-pressed="false">显示分层</button><button id="old" aria-pressed="false">对照旧裁切</button><select id="layout" aria-label="切换布局验证"><option value="a">布局 A</option><option value="b">布局 B · 换尺寸和位置</option></select><label class="seek">过程<input id="scrub" type="range" min="0" max="149" value="0" aria-label="逐帧查看"><span id="clock"></span></label></div>
+<div class="detail"><span id="explain">形态和素材先确定，动作再使用它们。</span><span id="ownership"></span></div>
+<details><summary>查看本次组件约定</summary><dl><dt>形态</dt><dd>固定三分之四视角的木托盘与同一组筹码，使用已确认的像素原图。</dd><dt>动作</dt><dd>一次短弧线转移；主运动20帧（0.33秒），落位收尾6帧（0.10秒），随后保持。</dd><dt>分层</dt><dd>托盘底面／后壁 → 筹码 → 前壁／近侧壁。前景层按原图实际斜向轮廓裁取，不再使用水平条带。</dd><dt>合理性</dt><dd>落点由托盘内部平面定位；同一组筹码仅绘制一次。换布局时，落点和遮挡轮廓随容器一起变换。</dd><dt>边界</dt><dd>本例验证固定视角下的整组转移与遮挡。换角度、换托盘形状或逐枚搬运，需要各自的素材与约定。</dd></dl></details>
+<footer>点击“显示分层”看真实前景轮廓；点击“对照旧裁切”查看原来的水平截断。此页是独立动作试验，未制作书本翻页或正式视频。</footer>
+</main>
+<script id="contract" type="application/json">
+{
+ "id":"resource-bundle-into-tray.v1",
+ "fps":60,"durationFrames":150,
+ "purpose":"同一组资源从来源转移到容器，保留身份、落点和真实遮挡。",
+ "assets":{"file":"../../assets/object-style/tokens-containers.png","bundle":{"x":51,"y":205,"w":485,"h":366},"tray":{"x":596,"y":216,"w":705,"h":404}},
+ "view":"fixed-three-quarter",
+ "layerOrder":["tray-base","bundle","tray-near-walls"],
+ "nearWallPolygon":[[604,381],[622,377],[1069,476],[1270,315],[1294,311],[1294,429],[1101,615],[1081,616],[602,479]],
+ "interiorPlane":[[840,319],[1243,337],[1058,474],[670,393]],
+ "landingUV":[0.60,0.96],"bundleAnchor":[0.5,0.78],
+ "sourceOffset":[-385,106],"bundleWidth":160,"arcHeight":112,
+ "events":{"start":24,"contact":44,"settled":50},
+ "layouts":{"a":{"centerX":730,"bottom":399,"width":460},"b":{"centerX":670,"bottom":371,"width":385}},
+ "supported":["fixed-view-translation","source-identity","polygon-occlusion","layout-relative-landing"],
+ "unsupported":["new-view-angle","arbitrary-container-image","individual-token-transfer"]
+}
+</script>
+<script>
+(()=>{'use strict';
+const $=s=>document.getElementById(s),spec=JSON.parse($('contract').textContent),g=$('canvas').getContext('2d');const W=1080,H=490;
+const asset=new Image();let ready=false,frame=0,playing=true,last=0,layout='a',showLayers=false,old=false;
+const clamp=x=>Math.max(0,Math.min(1,x)),ease=x=>{x=clamp(x);return x*x*(3-2*x)},mix=(a,b,p)=>a+(b-a)*p;
+function transform(){const a=spec.layouts[layout],c=spec.assets.tray,s=a.width/c.w;return{scale:s,x:a.centerX-a.width/2,y:a.bottom-c.h*s,width:a.width,height:c.h*s,point:([x,y])=>[a.centerX-a.width/2+(x-c.x)*s,a.bottom-c.h*s+(y-c.y)*s]}}
+function planePoint(u,v){const [a,b,c,d]=spec.interiorPlane;return[mix(mix(a[0],b[0],u),mix(d[0],c[0],u),v),mix(mix(a[1],b[1],u),mix(d[1],c[1],u),v)]}
+function simulation(f){const tr=transform(),e=spec.events,p=ease((f-e.start)/(e.contact-e.start)),target=tr.point(planePoint(...spec.landingUV)),relativeScale=spec.layouts[layout].width/spec.layouts.a.width;
+const source=[target[0]+spec.sourceOffset[0]*relativeScale,target[1]+spec.sourceOffset[1]*relativeScale];
+const settle=clamp((f-e.contact)/(e.settled-e.contact)),bounce=f>=e.contact&&f<e.settled?-3.5*Math.sin(settle*Math.PI)*relativeScale:0;
+const foot=[mix(source[0],target[0],p),mix(source[1],target[1],p)-Math.sin(p*Math.PI)*spec.arcHeight*relativeScale+bounce];
+return{tr,p,foot,source,target,width:spec.bundleWidth*relativeScale,ownership:f<e.start?'source':f<e.contact?'in-flight':'target',resourceCount:1}}
+function poly(points){g.beginPath();points.forEach((p,i)=>i?g.lineTo(...p):g.moveTo(...p));g.closePath()}
+function text(s,x,y,color='#d9e0d0',size=15,align='center'){g.fillStyle=color;g.font='400 '+size+'px "Microsoft YaHei",sans-serif';g.textAlign=align;g.textBaseline='middle';g.fillText(s,x,y)}
+function tray(tr){const c=spec.assets.tray;g.drawImage(asset,c.x,c.y,c.w,c.h,tr.x,tr.y,tr.width,tr.height)}
+function drawBundle(s){const c=spec.assets.bundle,w=s.width,h=w*c.h/c.w;g.drawImage(asset,c.x,c.y,c.w,c.h,s.foot[0]-w*spec.bundleAnchor[0],s.foot[1]-h*spec.bundleAnchor[1],w,h)}
+function fore(tr,wrong){g.save();if(wrong){g.beginPath();g.rect(tr.x,tr.y+tr.height*.57,tr.width,tr.height*.43)}else poly(spec.nearWallPolygon.map(tr.point));g.clip();tray(tr);g.restore()}
+function shadow(x,y,w,opacity){g.save();g.globalAlpha=opacity;g.fillStyle='#020e13';g.beginPath();g.ellipse(x,y,w,9,0,0,Math.PI*2);g.fill();g.restore()}
+function render(f,{bundle=true,wrong=old,debug=showLayers,labels=true,background=true,occlusion=true}={}){const s=simulation(f),tr=s.tr;g.setTransform(2,0,0,2,0,0);g.clearRect(0,0,W,H);if(background){const q=g.createRadialGradient(650,230,50,550,240,680);q.addColorStop(0,'#20383e');q.addColorStop(1,'#102027');g.fillStyle=q;g.fillRect(0,0,W,H)}g.imageSmoothingEnabled=false;
+shadow(spec.layouts[layout].centerX,spec.layouts[layout].bottom+13,tr.width*.43,.40);if(f<spec.events.contact)shadow(s.source[0],s.source[1]+s.width*spec.assets.bundle.h/spec.assets.bundle.w*(1-spec.bundleAnchor[1])+6,s.width*.44,.22*(1-s.p));
+tray(tr);if(bundle)drawBundle(s);if(occlusion)fore(tr,wrong);
+if(debug){poly(spec.nearWallPolygon.map(tr.point));g.fillStyle='#cc8c5050';g.fill();g.strokeStyle='#e2ba7f';g.lineWidth=1;g.stroke();poly(spec.interiorPlane.map(tr.point));g.strokeStyle='#90c6c1';g.stroke();g.fillStyle='#d4e6b2';g.fillRect(s.target[0]-3,s.target[1]-3,6,6);text('内部落点',s.target[0]+14,s.target[1]+17,'#c1dfd7',12,'left')}
+if(labels){text('来源',s.source[0],s.source[1]+46,s.ownership==='source'?'#c6d3c1':'#6d8688',13);text('接收',spec.layouts[layout].centerX,spec.layouts[layout].bottom+42,'#c6d3c1',13);if(wrong)text('旧方式：水平条带会把筹码截断',540,455,'#e6a48d',15);else text(s.ownership==='source'?'同一组资源准备转移':s.ownership==='in-flight'?'经过路径，沿真实轮廓遮挡':'筹码落在内部，前壁与近侧壁自然遮挡',540,455)}return s}
+function draw(){if(!ready)return;const s=render(frame);$('status').textContent=old?'旧裁切对照':frame<spec.events.start?'初态':frame<spec.events.contact?'运动中':frame<spec.events.settled?'接触与收尾':'末态保持';$('scrub').value=Math.round(frame);$('clock').textContent=(frame/spec.fps).toFixed(2)+' / 2.5s';$('pause').textContent=playing?'暂停':frame>=149?'重看':'继续';$('explain').innerHTML=old?'旧版：用水平区域近似前壁。':'新版：前壁／近侧壁使用<b>真实斜向轮廓</b>，不会重画内部底面。';$('ownership').textContent='资源归属：'+({'source':'来源','in-flight':'在途','target':'接收'})[s.ownership]+' · 总量 1 组'}
+function replay(){frame=0;playing=true;last=0;draw()}
+$('replay').onclick=replay;$('pause').onclick=()=>{if(frame>=149)return replay();playing=!playing;last=0;draw()};$('layers').onclick=()=>{showLayers=!showLayers;$('layers').setAttribute('aria-pressed',showLayers);draw()};$('old').onclick=()=>{old=!old;$('old').setAttribute('aria-pressed',old);draw()};$('layout').onchange=e=>{layout=e.target.value;draw()};$('scrub').oninput=e=>{frame=+e.target.value;playing=false;draw()};
+function raf(ts){if(ready&&playing){if(last)frame=Math.min(149,frame+Math.min((ts-last)/1000,.10)*spec.fps);if(frame>=149)playing=false;draw()}last=ts;requestAnimationFrame(raf)}document.addEventListener('visibilitychange',()=>last=0);
+window.minimalDemo={spec,seek:f=>{frame=Math.max(0,Math.min(149,f));playing=false;draw()},layout:v=>{layout=v;$('layout').value=v;draw()},state:()=>({ready,frame,layout,playing,old,showLayers,...simulation(frame)}),
+verify:()=>{const results=[];for(const name of ['a','b']){layout=name;for(let f=0;f<150;f++){const s=simulation(f);if(s.resourceCount!==1||!s.foot.every(Number.isFinite))throw Error('Invalid state');}const s=simulation(50);if(Math.hypot(s.foot[0]-s.target[0],s.foot[1]-s.target[1])>1e-8)throw Error('Landing drift');
+// The same foreground layer must protect its opaque pixels at every overlap.
+for(const f of [34,39,43,44,47,50,149]){render(f,{bundle:false,wrong:false,debug:false,labels:false,background:false});const base=g.getImageData(0,0,W*2,H*2).data;render(f,{bundle:true,wrong:false,debug:false,labels:false,background:false});const full=g.getImageData(0,0,W*2,H*2).data;render(f,{bundle:true,wrong:false,debug:false,labels:false,background:false,occlusion:false});const raw=g.getImageData(0,0,W*2,H*2).data;
+g.save();g.setTransform(2,0,0,2,0,0);g.clearRect(0,0,W,H);fore(s.tr,false);g.restore();const mask=g.getImageData(0,0,W*2,H*2).data;let max=0,checked=0,occludedResourcePixels=0;
+for(let i=0;i<mask.length;i+=4)if(mask[i+3]>=250){checked++;let removed=false;for(let k=0;k<3;k++){max=Math.max(max,Math.abs(base[i+k]-full[i+k]));if(Math.abs(raw[i+k]-full[i+k])>6)removed=true;}if(removed)occludedResourcePixels++;}if(max>6)throw Error('Foreground leak '+max);if(f>=44&&occludedResourcePixels<30)throw Error('Test did not exercise visible occlusion');results.push({layout:name,frame:f,opaquePixels:checked,maxForegroundDelta:max,occludedResourcePixels});}}
+layout='a';$('layout').value='a';draw();return{stateFrames:300,landing:'passed',resourceIdentity:'passed',motionFrames:20,settleFrames:6,occlusion:results}},
+};
+asset.onload=()=>{ready=true;$('loading').remove();if(matchMedia('(prefers-reduced-motion: reduce)').matches){frame=149;playing=false}draw();requestAnimationFrame(raf)};asset.onerror=()=>{$('loading').textContent='素材读取失败'};asset.src=spec.assets.file;
+})();
+</script></body></html>

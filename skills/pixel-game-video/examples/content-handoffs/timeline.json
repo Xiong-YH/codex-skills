@@ -1,0 +1,1012 @@
+{
+  "shots": [
+    {
+      "id": "h01-out",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "seal",
+          "kind": "identity",
+          "x": 0.18,
+          "y": 0.28,
+          "width": 0.64,
+          "height": 0.4,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "合同已确认",
+            "image": "media/stamp.png",
+            "detail": "确认这份约定"
+          }
+        }
+      ],
+      "background": {
+        "file": "media/workshop.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0.5
+      }
+    },
+    {
+      "id": "h01-in",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        }
+      ],
+      "motions": [
+        {
+          "id": "handoff",
+          "recipe": "motion.component-handoff.v1",
+          "target": "scene",
+          "start": {
+            "event": "h01-in.enter"
+          },
+          "durationFrames": 60,
+          "params": {
+            "mode": "match",
+            "pairs": [
+              {
+                "from": "seal",
+                "to": "result"
+              }
+            ]
+          }
+        }
+      ],
+      "components": [
+        {
+          "id": "result",
+          "kind": "identity",
+          "x": 0.18,
+          "y": 0.28,
+          "width": 0.64,
+          "height": 0.4,
+          "showEvent": "ready",
+          "tone": "accent",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "结果确认率",
+            "image": "media/ring.png",
+            "detail": "68% 已确认"
+          }
+        }
+      ],
+      "background": {
+        "file": "media/workshop.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0.5
+      }
+    },
+    {
+      "id": "h02-out",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "premise",
+          "kind": "identity",
+          "x": 0.18,
+          "y": 0.28,
+          "width": 0.64,
+          "height": 0.4,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "先验证，再投入",
+            "detail": "让一个判断成为下一步的入口"
+          }
+        }
+      ],
+      "background": {
+        "file": "media/workshop.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0.5
+      }
+    },
+    {
+      "id": "h02-in",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        }
+      ],
+      "motions": [
+        {
+          "id": "handoff",
+          "recipe": "motion.line-handoff.v1",
+          "target": "scene",
+          "start": {
+            "event": "h02-in.enter"
+          },
+          "durationFrames": 60,
+          "params": {
+            "source": "premise",
+            "target": "route",
+            "startLine": [
+              [
+                0.22,
+                0.53
+              ],
+              [
+                0.57,
+                0.53
+              ]
+            ],
+            "points": [
+              [
+                0.22,
+                0.53
+              ],
+              [
+                0.5,
+                0.53
+              ],
+              [
+                0.5,
+                0.59
+              ],
+              [
+                0.78,
+                0.59
+              ]
+            ]
+          }
+        }
+      ],
+      "components": [
+        {
+          "id": "route",
+          "kind": "flow",
+          "x": 0.13,
+          "y": 0.27,
+          "width": 0.74,
+          "height": 0.42,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "先验证，再推进",
+            "items": [
+              {
+                "event": "ready",
+                "title": "问题"
+              },
+              {
+                "event": "ready",
+                "title": "验证"
+              },
+              {
+                "event": "ready",
+                "title": "投入"
+              }
+            ]
+          }
+        }
+      ],
+      "background": {
+        "file": "media/workshop.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0.5
+      }
+    },
+    {
+      "id": "h03-out",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "a0",
+          "kind": "identity",
+          "x": 0.1,
+          "y": 0.27,
+          "width": 0.23,
+          "height": 0.35,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "效率",
+            "detail": "资料记录"
+          }
+        },
+        {
+          "id": "a1",
+          "kind": "identity",
+          "x": 0.37,
+          "y": 0.27,
+          "width": 0.23,
+          "height": 0.35,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "成本",
+            "detail": "资料记录"
+          }
+        },
+        {
+          "id": "a2",
+          "kind": "identity",
+          "x": 0.64,
+          "y": 0.27,
+          "width": 0.23,
+          "height": 0.35,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "维护",
+            "detail": "资料记录"
+          }
+        }
+      ],
+      "background": {
+        "file": "media/workshop.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0.5
+      }
+    },
+    {
+      "id": "h03-in",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        }
+      ],
+      "motions": [
+        {
+          "id": "handoff",
+          "recipe": "motion.component-handoff.v1",
+          "target": "scene",
+          "start": {
+            "event": "h03-in.enter"
+          },
+          "durationFrames": 72,
+          "params": {
+            "mode": "reflow",
+            "pairs": [
+              {
+                "from": "a0",
+                "to": "b0"
+              },
+              {
+                "from": "a1",
+                "to": "b1"
+              },
+              {
+                "from": "a2",
+                "to": "b2"
+              }
+            ]
+          }
+        }
+      ],
+      "components": [
+        {
+          "id": "b0",
+          "kind": "identity",
+          "x": 0.12,
+          "y": 0.25,
+          "width": 0.76,
+          "height": 0.17,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "效率",
+            "detail": "稳定提升"
+          }
+        },
+        {
+          "id": "b1",
+          "kind": "identity",
+          "x": 0.12,
+          "y": 0.44,
+          "width": 0.76,
+          "height": 0.17,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "成本",
+            "detail": "投入可控"
+          }
+        },
+        {
+          "id": "b2",
+          "kind": "identity",
+          "x": 0.12,
+          "y": 0.63,
+          "width": 0.76,
+          "height": 0.17,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "维护",
+            "detail": "持续跟进"
+          }
+        }
+      ],
+      "background": {
+        "file": "media/workshop.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0.5
+      }
+    },
+    {
+      "id": "h04-out",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "preview",
+          "kind": "identity",
+          "x": 0.12,
+          "y": 0.23,
+          "width": 0.76,
+          "height": 0.47,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "档案现场",
+            "image": "media/archive.png",
+            "detail": "从已有预览进入完整空间"
+          }
+        }
+      ],
+      "background": {
+        "file": "media/workshop.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0.5
+      }
+    },
+    {
+      "id": "h04-in",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        }
+      ],
+      "motions": [
+        {
+          "id": "handoff",
+          "recipe": "motion.preview-expand.v1",
+          "target": "scene",
+          "start": {
+            "event": "h04-in.enter"
+          },
+          "durationFrames": 72,
+          "params": {
+            "source": "preview"
+          }
+        }
+      ],
+      "components": [],
+      "background": {
+        "file": "media/archive.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0.5
+      }
+    },
+    {
+      "id": "h05-out",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "file",
+          "kind": "identity",
+          "x": 0.4,
+          "y": 0.36,
+          "width": 0.5,
+          "height": 0.18,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "研究档案",
+            "detail": "这份资料进入下一阶段"
+          }
+        }
+      ],
+      "background": {
+        "file": "media/workshop.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0.5
+      }
+    },
+    {
+      "id": "h05-in",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        }
+      ],
+      "motions": [
+        {
+          "id": "handoff",
+          "recipe": "motion.panel-occlusion.v1",
+          "target": "scene",
+          "start": {
+            "event": "h05-in.enter"
+          },
+          "durationFrames": 60,
+          "params": {
+            "source": "file",
+            "direction": "left"
+          }
+        }
+      ],
+      "components": [
+        {
+          "id": "analysis",
+          "kind": "identity",
+          "x": 0.18,
+          "y": 0.28,
+          "width": 0.64,
+          "height": 0.4,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "开始分析",
+            "detail": "覆盖期间完成换景"
+          }
+        }
+      ],
+      "background": {
+        "file": "media/archive.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0.5
+      }
+    },
+    {
+      "id": "h07-out",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        },
+        {
+          "id": "counted",
+          "frame": 1
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "report",
+          "kind": "bars",
+          "x": 0.16,
+          "y": 0.22,
+          "width": 0.68,
+          "height": 0.48,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "研究记录 A",
+            "max": 100,
+            "items": [
+              {
+                "label": "正例",
+                "value": 70,
+                "event": "ready",
+                "endEvent": "counted"
+              },
+              {
+                "label": "反例",
+                "value": 45,
+                "event": "ready",
+                "endEvent": "counted"
+              }
+            ]
+          }
+        }
+      ],
+      "background": {
+        "file": "media/workshop.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0.5
+      }
+    },
+    {
+      "id": "h07-in",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        },
+        {
+          "id": "counted",
+          "frame": 1
+        }
+      ],
+      "motions": [
+        {
+          "id": "handoff",
+          "recipe": "motion.component-handoff.v1",
+          "target": "scene",
+          "start": {
+            "event": "h07-in.enter"
+          },
+          "durationFrames": 72,
+          "params": {
+            "mode": "overview",
+            "pairs": [
+              {
+                "from": "report",
+                "to": "report-slot"
+              }
+            ]
+          }
+        }
+      ],
+      "components": [
+        {
+          "id": "report-slot",
+          "kind": "bars",
+          "x": 0.33,
+          "y": 0.3,
+          "width": 0.34,
+          "height": 0.24,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "研究记录 A",
+            "max": 100,
+            "items": [
+              {
+                "label": "正例",
+                "value": 70,
+                "event": "ready",
+                "endEvent": "counted"
+              },
+              {
+                "label": "反例",
+                "value": 45,
+                "event": "ready",
+                "endEvent": "counted"
+              }
+            ]
+          }
+        },
+        {
+          "id": "context",
+          "kind": "identity",
+          "x": 0.04,
+          "y": 0.3,
+          "width": 0.25,
+          "height": 0.24,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "背景"
+          }
+        },
+        {
+          "id": "plan",
+          "kind": "identity",
+          "x": 0.71,
+          "y": 0.3,
+          "width": 0.25,
+          "height": 0.24,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "后续"
+          }
+        }
+      ],
+      "background": {
+        "file": "media/workshop.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0.5
+      }
+    },
+    {
+      "id": "h08-out",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "benefit",
+          "kind": "identity",
+          "x": 0.1,
+          "y": 0.3,
+          "width": 0.34,
+          "height": 0.34,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "收益明确"
+          }
+        },
+        {
+          "id": "risk",
+          "kind": "identity",
+          "x": 0.56,
+          "y": 0.3,
+          "width": 0.34,
+          "height": 0.34,
+          "showEvent": "ready",
+          "tone": "accent",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "风险可控"
+          }
+        }
+      ],
+      "background": {
+        "file": "media/workshop.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0.5
+      }
+    },
+    {
+      "id": "h08-in",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        }
+      ],
+      "motions": [
+        {
+          "id": "handoff",
+          "recipe": "motion.component-handoff.v1",
+          "target": "scene",
+          "start": {
+            "event": "h08-in.enter"
+          },
+          "durationFrames": 72,
+          "params": {
+            "mode": "merge",
+            "sources": [
+              "benefit",
+              "risk"
+            ],
+            "target": "answer"
+          }
+        }
+      ],
+      "components": [
+        {
+          "id": "answer",
+          "kind": "identity",
+          "x": 0.15,
+          "y": 0.28,
+          "width": 0.7,
+          "height": 0.38,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "满足条件，再推进",
+            "detail": "两端共同支撑这一判断"
+          }
+        }
+      ],
+      "background": {
+        "file": "media/workshop.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0.5
+      }
+    },
+    {
+      "id": "h09-out",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        }
+      ],
+      "motions": [],
+      "components": [],
+      "background": {
+        "file": "media/day-night-atlas.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0
+      }
+    },
+    {
+      "id": "h09-in",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        }
+      ],
+      "motions": [
+        {
+          "id": "handoff",
+          "recipe": "motion.cross-dissolve.v1",
+          "target": "scene",
+          "start": {
+            "event": "h09-in.enter"
+          },
+          "durationFrames": 100,
+          "params": {}
+        }
+      ],
+      "components": [],
+      "background": {
+        "file": "media/day-night-atlas.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 1
+      }
+    },
+    {
+      "id": "h10-out",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        }
+      ],
+      "motions": [],
+      "components": [
+        {
+          "id": "question",
+          "kind": "takeaway",
+          "x": 0.3,
+          "y": 0.34,
+          "width": 0.4,
+          "height": 0.3,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "验证",
+            "detail": "先提出问题，再确定怎么做"
+          }
+        }
+      ],
+      "background": {
+        "file": "media/workshop.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0.5
+      }
+    },
+    {
+      "id": "h10-in",
+      "durationFrames": 150,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "events": [
+        {
+          "id": "ready",
+          "frame": 0
+        }
+      ],
+      "motions": [
+        {
+          "id": "handoff",
+          "recipe": "motion.component-handoff.v1",
+          "target": "scene",
+          "start": {
+            "event": "h10-in.enter"
+          },
+          "durationFrames": 72,
+          "params": {
+            "mode": "keyword",
+            "pairs": [
+              {
+                "from": "question",
+                "to": "heading"
+              }
+            ],
+            "word": "验证",
+            "fromRect": [
+              0.479166667,
+              0.456592593,
+              0.1,
+              0.06
+            ],
+            "toRect": [
+              0.473958333,
+              0.203740741,
+              0.1,
+              0.06
+            ],
+            "fontFrom": 0.037037037037037035,
+            "fontTo": 0.046296296296296294
+          }
+        }
+      ],
+      "components": [
+        {
+          "id": "heading",
+          "kind": "takeaway",
+          "x": 0.25,
+          "y": 0.08,
+          "width": 0.5,
+          "height": 0.32,
+          "showEvent": "ready",
+          "tone": "gold",
+          "visualStyle": "mechanical",
+          "features": [],
+          "data": {
+            "title": "验证",
+            "detail": "提出假设 → 小步测试 → 对照结果"
+          }
+        }
+      ],
+      "background": {
+        "file": "media/workshop.png",
+        "kind": "image",
+        "fit": "cover",
+        "anchorY": 0.5
+      }
+    }
+  ]
+}

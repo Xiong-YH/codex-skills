@@ -62,9 +62,9 @@ def _canvas_visual_manifest(resolved: dict, payload: dict) -> dict:
     project = resolved['project']
     shots, transitions = [], []
     transition_recipes = {
-        'motion.focus-punch.v1', 'motion.mosaic-pullback.v1', 'motion.panel-slide.v1',
+        'motion.focus-punch.v1', 'motion.mosaic-pullback.v1', 'motion.component-handoff.v1', 'motion.line-handoff.v1', 'motion.preview-expand.v1', 'motion.panel-occlusion.v1', 'motion.panel-slide.v1',
         'motion.pixel-iris.v1', 'motion.shatter-reveal.v1', 'motion.book-sweep.v1',
-        'motion.shelf-travel.v1', 'motion.scene-to-card.v1', 'motion.match-dissolve.v1'}
+        'motion.scene-to-card.v1', 'motion.match-dissolve.v1', 'motion.cross-dissolve.v1', 'motion.fade-through-black.v1'}
     fields = [('params', '场景参数'), ('components', '信息组件'), ('objects', '道具'),
               ('performance', '人物姿态'), ('background', '背景素材'), ('replacement', '替换素材')]
     for index, shot in enumerate(resolved['shots']):

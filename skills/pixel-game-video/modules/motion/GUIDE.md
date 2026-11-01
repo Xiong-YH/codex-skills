@@ -1,41 +1,34 @@
-# 运动与转场
+# 运动与转场执行
 
-原 `pixel-motion-transitions` 已融入本模块，配方与执行器共用一份 ID。
+转场选型只读[当前入口](TRANSITIONS.md)，再读选中的配方；本页维护通用时间、运动与合成约束。参数格式和支持范围查[catalog.json](catalog.json)，以编译器校验为准。
 
-设计转场先读 [转场库](TRANSITIONS.md)：集中收纳可执行配方、参考设计与撤回项，按交接关系选型。参考设计的 `design.*` 不是可执行 recipe。
+## 组件内部的离散动作与节拍
 
-局部操作反馈见 [游戏反馈细节库](../scenes/GAME_FEEL.md)。`game-feedback.js` 提供不拉伸物体的短弧线、位置回弹、角标和粒子辅助；触发事件、对象身份、数量和文案归场景，声音由 audio 引用同一事件。这些辅助不作为转场计数。
+用户要求组件内部的单次运动不能拖慢，应在适合视频与 BGM 卡点的时间内完成。当前制作起点为：常规位移、展开、选中、翻转与落位的主运动约 **0.20–0.45秒**，完整单次离散动作（含必要回弹/收尾）**不超过0.60秒**。这些具体数值是本轮采用的制作起点，并非用户已逐项认可的参数；用户或单片约束明确指定时优先。
 
-| 配方 | 类型 | 维护说明 |
-| --- | --- | --- |
-| `motion.camera-push.v1` | 相机 | [共享焦点推进](recipes/camera-push.md) |
-| `motion.camera-track.v1` | 相机 | [有边界的横向跟拍与景别变化](recipes/camera-track.md) |
-| `motion.focus-punch.v1` | 强转场 | [焦点冲入切换](recipes/focus-punch.md) |
-| `motion.mosaic-pullback.v1` | 强转场 | [马赛克拉远](recipes/mosaic-pullback.md) |
-| `motion.match-dissolve.v1` | 转场 | [匹配主体与缓慢接续](recipes/match-dissolve.md) |
-| `motion.book-sweep.v1` / `motion.shelf-travel.v1` / `motion.scene-to-card.v1` | 叙事转场 | [书页、跨空间横移与场景图卡](recipes/narrative-handoffs.md) |
-| `motion.panel-slide.v1` | 转场 | [信息面板接续](recipes/panel-slide.md) |
-| `motion.pixel-iris.v1` | 转场 | [像素窗口展开](recipes/pixel-iris.md) |
-| `motion.shatter-reveal.v1` | 转场 | [上一镜纹理碎裂](recipes/shatter-reveal.md) |
-| `motion.object-reveal.v1` | 物体 | [二维翻转放大](recipes/object-reveal.md) |
-| `motion.gold-burst.v1` | 特效 | [局部金光爆发](recipes/gold-burst.md) |
+- 区分“运动段”和“停留段”：动作迅速完成，之后让对象和文字稳定可读；需要更长阅读时增加停留，不拉长运动。
+- 结合实际配乐选触点，再反推运动起点。单拍时长为 `60 / BPM` 秒；例如120 BPM一拍0.50秒，可用0.35秒完成动作，约0.15秒停稳。低速音乐可选择半拍或更细分拍，不为了等下一拍让物体慢慢漂移。
+- BPM只是网格，不能据此声称已识别实际重音。视觉揭晓、接触或落位择其主要触点对齐，按当前配乐听音确认；不要求所有对象和每一拍都响或动。
+- 多步因果可在多个节点完成，每次动作短促、中间保留状态；不得把一条没有新意义的长路径任意切段以绕过时长限制。成组动作还要检查从首个启动到最后收束的整体长度，不用密集错峰拖成漫长波浪。
+- 记录触发、触点、收束三个事件或相应区间；帧数只在已有 storyboard/执行合同维护，时长取整数帧。新动作仍需真实实现，不增加未定义的“自动卡点”字段。
 
-每项运动指定 ID、recipe、target、start 事件、durationFrames、params。
-相机、转场、特效使用 `target:"scene"`；物体动画引用镜头内 object ID。
-参数与可选范围见 `catalog.json`；通用执行器位于 `runtime.js`，书页/书架/图卡位于 `narrative-transitions.js`。
-三种卡片空间设计见 [空间接力设计](recipes/card-spatial-handoffs.md)，由当前竞赛场景实现；固定比例纹理归 scenes/competition-cards.js，全画幅相机与布局归 scenes/competition-cinematic.js。局部倾斜与 WebGL 实验已归档，历史依据见 [迭代记录](../../references/iteration-history.md)。
-所有坐标按画幅归一化；帧时间只由统一编译器解析。
+这项限制针对组件内部的离散动作，不把叙事等待、雨烟、能量持续输送、环境循环或有解释任务的整体相机一律截成0.60秒；它们仍须有内容依据和主次。确需更长的物体演示时，在本镜意图中说明理解任务并单独审看，不能沿用默认慢动效。预览页的手动慢放仅供检查，默认播放应体现实际制作节奏。
 
-转场从新镜头 enter 开始，需要一个前镜头；占用新镜头时间，不能越出镜头。
-按交接关系选择：focus-punch 进入焦点、mosaic-pullback 表达个体与集合、书页/书架完成物体或场所承接、scene-to-card 回收前文。人物可通过 `actor:null` 退场。先确定前后镜要传递的内容，再选择配方；反复推拉同一背景不自动形成叙事推进。
-panel-slide、pixel-iris 是轻转场选项，仅替换右侧信息区，人物与背景保持稳定。
-人物站立约束肢体动作，运镜可改变整个房间与人物的景别。连续背景使用完整画幅的统一相机；人物可随镜头自然进出视野，字幕独立。局部交接用于独立图文或面板，不能裁断连续场景。stage 背景裁片配方已撤回，见 [失败说明](recipes/stage-transitions.md)。
-字幕新句和新旁白在转场结束后出现；传递焦点的主物体须在切入时已显露，后续机制事件再排在落位后。时长按实际旁白与动作阶段安排；各配方里的试用帧数不是节奏标准。
-碎屏保留给打破障碍等特殊剧情，不作为通用镜头切换。
-相机推进结束保持最终构图到镜头末，字幕保持独立。
-同镜头的转场不能互相重叠；其他同类运动在同一目标上不能重叠。
-声音引用动作事件，由 [audio](../audio/GUIDE.md) 合成。
+## 相机与辅助动作
 
-固定场景计数归 [scenes](../scenes/GUIDE.md)；互动卡是场景和文字的组合，不冒充相机能力。
-前景遮挡辅助 `staging.js` 可用于动作中的场所切换；遮挡中点覆盖整个画幅，切换应藏在该点。它不是读取旧帧的通用转场配方。
-验收必须检查前、中、后帧及连续视频：焦点连贯、无裸底、无镜像字、无残片。
+| 用途 | 配方 |
+| --- | --- |
+| 轻推近 | [motion.camera-push.v1](recipes/camera-push.md) |
+| 有边界的跟拍 | [motion.camera-track.v1](recipes/camera-track.md) |
+| 物体二维翻转放大 | [motion.object-reveal.v1](recipes/object-reveal.md) |
+| 局部金光重音 | [motion.gold-burst.v1](recipes/gold-burst.md) |
+
+这些不是额外转场。局部反馈见[游戏反馈库](../scenes/GAME_FEEL.md)；`staging.js`的前景遮挡辅助不是读取旧帧的通用配方。
+
+## 编排与验收
+
+- motion填写ID、recipe、target、start事件、durationFrames、params；坐标按画幅归一化。物体动画引用object ID，其余已列运动使用target=scene。
+- 转场从后镜enter开始，需要前镜，占用后镜时间且不越界；转场之间不能重叠。同类运动在同一目标上不能重叠。时间只由统一编译器解析，项目合同见[制作合同](../../references/contract.md)。
+- 连续房间按整幅相机合成；局部运动用于独立内容，不能裁断背景。新内容交接的固定相机等额外限制见所选配方。相机推进结束后保持末态到镜头结束。
+- 新字幕和新旁白在转场落稳后出现；主交接对象须在切入时已显露。阅读停顿与运动分开，配方示例秒数不是统一节奏。声音引用同一动作事件，交给[audio](../audio/GUIDE.md)。
+- 检查首、中、末态与连续播放：来源和落点对应、遮挡切点完整、无裸底／镜像字／残片。正式片的分轨与导出验收按[工作台](../../references/workbench.md)完成，静帧或单元一致性不代替成片审看。

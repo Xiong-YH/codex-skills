@@ -58,6 +58,16 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
         assets[ident] = 'data:' + mime + ';base64,' + base64.b64encode(image_path.read_bytes()).decode('ascii')
     for key, item in resolved.get('media', {}).items():
         assets[key] = 'data:' + item['mime'] + ';base64,' + base64.b64encode((project_root / item['file']).read_bytes()).decode('ascii')
+    if any(shot.get('components') for shot in resolved['shots']):
+        component_root = modules / 'components'
+        gear_manifest = json.loads((component_root / 'assets/gears/manifest.json').read_text(encoding='utf-8'))
+        style['componentGearAssets'] = {}
+        for item in gear_manifest['items']:
+            image_path = style_file(component_root, item['file'])
+            if item['assetKey'] in assets:
+                raise ValueError('Component asset ID collision: ' + item['assetKey'])
+            assets[item['assetKey']] = 'data:image/png;base64,' + base64.b64encode(image_path.read_bytes()).decode('ascii')
+            style['componentGearAssets'][item['id']] = {'assetKey': item['assetKey'], 'crop': item['crop']}
     mouth = mouth_module.schedule(resolved['cues'], resolved['project']['fps'])
     audio_uri = None
     if not silent and resolved['project'].get('audioMode') != 'silent':

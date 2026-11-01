@@ -78,9 +78,15 @@ class TransitionTests(unittest.TestCase):
         compile_project(self.root)
 
     def test_withdrawn_stage_crops_cannot_silently_render(self):
-        for recipe in ('motion.stage-focus-punch.v1','motion.stage-mosaic-pullback.v1'):
+        for recipe in ('motion.stage-focus-punch.v1','motion.stage-mosaic-pullback.v1','motion.shelf-travel.v1'):
             self.edit(lambda shots:shots[1].update(motions=[self.motion(recipe)]))
             with self.subTest(recipe=recipe),self.assertRaisesRegex(ValueError,'unavailable capability'):compile_project(self.root)
+
+    def test_plain_fades_compile_as_independent_transitions(self):
+        for recipe in ('motion.cross-dissolve.v1', 'motion.fade-through-black.v1'):
+            self.edit(lambda shots: shots[1].update(motions=[self.motion(recipe)]))
+            result=compile_project(self.root)
+            self.assertEqual(result['shots'][1]['motions'][0]['recipe'],recipe)
 
     def test_world_transitions_preserve_standing_presenter_selection(self):
         for recipe in ('motion.focus-punch.v1','motion.mosaic-pullback.v1'):

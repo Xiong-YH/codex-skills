@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "source": "Built-in image_gen; original generated assets retained unchanged. User identified these three images as the desired gear style.",
+  "reference": "../object-style/gears-mechanisms.png",
+  "baseView": "front-face sprite; stack is an optional code-controlled extrusion, never baked into another variant",
+  "items": [
+    {
+      "id": "steel",
+      "assetKey": "@components.gear.steel",
+      "file": "assets/gears/steel.png",
+      "crop": [
+        70,
+        58,
+        1115,
+        1115
+      ],
+      "description": "Blue-steel broad-tooth solid gear with a circular bearing bore.",
+      "sha256": "e4515a700956ed06de30ce7ab52ee2c63c7c1218e62c36ae6e0996eb111ca5c3",
+      "usage": "historical-only"
+    },
+    {
+      "id": "brass",
+      "assetKey": "@components.gear.brass",
+      "file": "assets/gears/brass.png",
+      "crop": [
+        39,
+        40,
+        1176,
+        1176
+      ],
+      "description": "Brass broad-tooth open-spoke gear with transparent openings and central bore.",
+      "sha256": "dfb670e74cd4e610bd4715df196d7b8a1b6c41f36e3fda9923f126b23e9c3295",
+      "usage": "active"
+    },
+    {
+      "id": "steel-brass",
+      "assetKey": "@components.gear.steel-brass",
+      "file": "assets/gears/steel-brass.png",
+      "crop": [
+        33,
+        32,
+        1188,
+        1188
+      ],
+      "description": "Blue-steel ring with three brass spokes and a brass bearing around the bore.",
+      "sha256": "6f0cafb4c806be19513f374366270e704cd3077a9a38b7fcf00d4919b637d6f9",
+      "usage": "historical-only"
+    }
+  ],
+  "activeGear": "brass"
+}

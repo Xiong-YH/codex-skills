@@ -2,6 +2,8 @@
 
 本工程是 [组件指南](../../GUIDE.md) 内参考图的可编辑源，使用基础 skill 的当前引擎实际渲染。包括十二类组件、流程链与清单组合、代码与标注组合，共十四镜；每镜 240 帧。静音和中性背景仅用于文档对照，不作为视频项目默认值。
 
+图例按[基础组件规范](../../BASIC-COMPONENTS.md)默认采用机械风格。修改 `visualStyle` 可切换能量，`styleVariant` 选择 open／inset／relay，`features: ["stack"]` 可添加堆叠；每类共十二种配置，类型和 data 不变。数值与条形的运动示例为 20 帧，完成后留阅读时间。
+
 | 文件 | 内容 |
 | --- | --- |
 | project.json | 1920×1080、60fps、pixel-editorial 风格与静音模式 |
@@ -18,6 +20,7 @@
 python scripts/video.py validate modules/components/examples/guide
 python scripts/video.py build modules/components/examples/guide
 node modules/components/render-reference.cjs
+node tests/component-styles.cjs modules/components/examples/guide
 ```
 
 打开本工程生成的 `build/film.html` 可播放和拖动检查。修改组件数据或事件后，先重新 build 再生成参考图；渲染脚本会核对目录覆盖和 HTML 输入哈希，并遍历全部帧检查运行错误。
@@ -25,3 +28,5 @@ node modules/components/render-reference.cjs
 参考图位于 `../../assets/reference/`，来源清单记录源文件哈希、取帧和图片哈希。脚本沿用基础 skill 的 Playwright 依赖及 `PIXEL_NODE_MODULES`、`PIXEL_BROWSER_EXECUTABLE` 配置。依赖说明见 [运行文档](../../../../references/runtime.md)。
 
 截图与状态拼图用于选型和静态验收，不表示声音、连续播放或用户审美认可。对比组的 `sourceShot` 使用前两镜最终画面；条形比较中的数值已在画面中标为示意。
+
+六样式总览与自定义集合见[完整范例集](../style-atlas/README.md)。本工程单张默认图只用于职责说明。
