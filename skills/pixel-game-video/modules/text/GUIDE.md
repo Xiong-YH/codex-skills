@@ -12,6 +12,7 @@
 | --- | --- |
 | 后端、编辑方式、示例与验证边界 | [统一能力目录](../../references/capability-catalog.md)；运行 python scripts/video.py catalog text --capabilities |
 | 按场景选择字幕形式、画面文字及实现边界 | [表现选型](EXPRESSION.md) |
+| 借鉴参考片中的字幕与反馈手法，并按新主题原创转化 | [可迁移手法参考](EXPRESSION.md#可迁移手法参考按主题重新设计)、[原创检查](EXPRESSION.md#参考转化与原创检查)；设计参考不等于固定效果预设 |
 | 角色选型与布局 | [角色与排版细节](details.md)、[能力目录](catalog.json) |
 | 位置、强调、换行、底板与事件区间 | [字段与绘制约束](details.md)、[公共合同](../../references/contract.md) |
 | 全片叙事进度 | [叙事节点进度条](NARRATIVE-PROGRESS.md)；Canvas 支持，原生 Remotion 拒绝 |
