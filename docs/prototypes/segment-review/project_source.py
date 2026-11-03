@@ -50,6 +50,32 @@ def manifest(root):
     if seg['shotId']==x['shotId']:seg['objectIds'].append(x['id'])
  hashes={n:sha(root/n) for n in NAMES}
  if mapping.exists():hashes['review-map.json']=sha(mapping)
+ # Optional full script includes unproduced shots without inventing media times.
+ script_review=None
+ review_path=root/'review-script.json'
+ if review_path.exists():
+  script_review=read(review_path)
+  if script_review.get('schemaVersion')!=1 or not isinstance(script_review.get('shots'),list):raise ValueError('完整脚本格式不正确')
+  seen=set()
+  for entry in script_review['shots']:
+   sid=entry.get('id')
+   if not isinstance(sid,str) or sid in seen:raise ValueError('完整脚本镜号缺失或重复')
+   seen.add(sid)
+   for field in ('title','narration','visual','transition','category'):
+    if not isinstance(entry.get(field),str):raise ValueError('完整脚本字段缺失：'+field)
+   matching=[s for s in segments if s['shotId']==sid]
+   entry['status']='rendered' if matching else 'planned'
+   for field in ('poster','proposalImage'):
+    if field in entry:
+     image=(root/'review-assets'/entry[field]).resolve()
+     if not image.is_relative_to((root/'review-assets').resolve()) or image.suffix.lower() not in ('.png','.jpg','.jpeg','.webp') or not image.is_file():raise ValueError('脚本参考图路径不正确')
+     entry[field]='/project-assets/'+image.relative_to((root/'review-assets').resolve()).as_posix()
+   for segment in matching:
+    segment['title']=sid+' · '+entry['title']
+    if entry.get('poster'):segment['poster']=entry['poster']
+    preview=entry.get('previewSeconds')
+    if isinstance(preview,(int,float)) and segment['start']<=preview<segment['end']:segment['preview']=preview
+  hashes['review-script.json']=sha(review_path)
  revision=hashlib.sha256(json.dumps(hashes,sort_keys=True).encode()).hexdigest()
  videos=list((root/'video/outputs').glob('*.mp4'));video=max(videos,key=lambda p:p.stat().st_mtime) if videos else None
- return {'schemaVersion':1,'project':{'id':brief['id'],'title':plan['title'],'fps':fps,'durationSeconds':offset/fps,'revision':revision,'sourceHashes':hashes,'videoSha256':sha(video) if video else None},'segments':segments,'objects':objects,'video':video}
+ return {'schemaVersion':1,'project':{'id':brief['id'],'title':plan['title'],'fps':fps,'durationSeconds':offset/fps,'revision':revision,'sourceHashes':hashes,'videoSha256':sha(video) if video else None},'segments':segments,'objects':objects,'video':video,'scriptReview':script_review}

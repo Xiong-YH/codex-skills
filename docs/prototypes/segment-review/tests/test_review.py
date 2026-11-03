@@ -38,6 +38,18 @@ class ReviewTests(unittest.TestCase):
             self.assertEqual([s['start'] for s in first['segments']],[0,2.2,4])
             self.assertEqual(first['project']['durationSeconds'],6)
             self.assertTrue(all(o['sourceRefs'] for o in first['objects']))
+            draft={'schemaVersion':1,'shots':[{'id':sid,'title':sid,'narration':'讲解','visual':'画面','transition':'直切后落稳','category':'普通内容片段'} for sid in ('s1','s2')]}
+            (root/'review-script.json').write_text(json.dumps(draft),encoding='utf-8')
+            with_script=manifest(root)
+            self.assertEqual([s['status'] for s in with_script['scriptReview']['shots']],['rendered','planned'])
+            self.assertEqual(with_script['project']['durationSeconds'],6)
+            self.assertEqual(len(with_script['segments']),3)
+            self.assertNotIn('start',with_script['scriptReview']['shots'][1])
+            self.assertNotEqual(first['project']['revision'],with_script['project']['revision'])
+            draft['shots'][0]['poster']='../brief.json'
+            (root/'review-script.json').write_text(json.dumps(draft),encoding='utf-8')
+            with self.assertRaises(ValueError):manifest(root)
+            (root/'review-script.json').unlink()
             sources['script.json']['labels'][0]['text']='新句';(root/'script.json').write_text(json.dumps(sources['script.json']),encoding='utf-8')
             self.assertNotEqual(first['project']['revision'],manifest(root)['project']['revision'])
             (root/'review-map.json').write_text(json.dumps({'objects':[{'sourceRefs':[{'file':'missing.json','stableId':'missing'}]}]}),encoding='utf-8')

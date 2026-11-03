@@ -3,6 +3,8 @@ from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 import argparse, hashlib, json, os, tempfile, threading, math
 from datetime import datetime, timezone
+from urllib.parse import unquote, urlsplit
+import mimetypes
 from project_source import manifest
 ROOT = Path(__file__).resolve().parents[3]
 WEB = Path(__file__).resolve().parent
@@ -89,6 +91,11 @@ class Handler(SimpleHTTPRequestHandler):
             try:
                 with LOCK: self.reply(200,self.snapshot())
             except (ValueError,OSError) as exc:self.reply(500,{'error':str(exc)})
+        elif self.path.startswith('/project-assets/'):
+            base=(self.server.project_root/'review-assets').resolve()
+            file=(base/unquote(urlsplit(self.path).path[len('/project-assets/'):])).resolve()
+            if not file.is_relative_to(base) or file.suffix.lower() not in {'.png','.jpg','.jpeg','.webp'} or not file.is_file():return self.reply(404,{'error':'参考图不存在'})
+            payload=file.read_bytes();self.send_response(200);self.send_header('Content-Type',mimetypes.guess_type(file.name)[0]);self.send_header('Content-Length',str(len(payload)));self.end_headers();self.wfile.write(payload)
         elif self.path.split('?')[0]=='/assets/sample.mp4':
             media=manifest(self.server.project_root)['video'];size=media.stat().st_size;start=0;end=size-1
             ranged=self.headers.get('Range')
