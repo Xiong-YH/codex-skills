@@ -27,6 +27,22 @@ class CapabilityTests(unittest.TestCase):
     def item(self, ident):
         return next(item for group in capabilities.query(ident=ident)['modules'] for item in group['items'])
 
+    def test_interview_actions_expose_their_own_coverage_without_claiming_a_test_run(self):
+        cases = {
+            'object.interview-cards.v1': 'tests/interview-components.cjs',
+            'object.judgment-stamp.v1': 'tests/interview-components.cjs',
+            'object.task-workbench.v1': 'tests/interview-components.cjs',
+            'object.character-offer-receive.v1': 'tests/offer-receive.cjs',
+            'object.transcript-reach-hold.v1': 'tests/transcript-reach.cjs',
+        }
+        for ident, test in cases.items():
+            with self.subTest(ident=ident):
+                item = self.item(ident)
+                self.assertEqual(item['references']['tests'], [test])
+                self.assertEqual(item['status'], 'standalone')
+                self.assertEqual(item['workbench']['editing'], 'not-integrated')
+                self.assertEqual(item['verification']['testRun'], 'not_run')
+
     def test_existing_catalog_output_and_source_files_are_unchanged(self):
         paths = list((ROOT / 'modules').glob('*/catalog.json'))
         before = {path: path.read_bytes() for path in paths}

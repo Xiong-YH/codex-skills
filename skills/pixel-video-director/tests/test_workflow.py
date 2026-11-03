@@ -47,6 +47,18 @@ class WorkflowTests(unittest.TestCase):
         write_json(verification / "metadata.json", {**manifest, "technicalStatus": "passed"})
         return verification / "render-manifest.json"
 
+    def test_unfilled_template_intent_blocks_an_otherwise_complete_project(self):
+        template = Path(self.tmp.name) / "unfilled"
+        initialize(template, example=False)
+        intent = read_json(template / "storyboard.json")["shots"][0]["intent"]
+        self.change("storyboard.json", lambda d: d["shots"][0].update(intent=intent))
+        with self.assertRaisesRegex(ValueError, "intent"):
+            handoff(self.project, self.foundation)
+        self.assertFalse((self.project / "video").exists())
+        self.change("storyboard.json", lambda d: d["shots"][0].update(intent="比较方案，选择后保留结果。"))
+        handoff(self.project, self.foundation)
+        self.assertTrue((self.project / "video/source-map.json").is_file())
+
     def test_handoff_joins_stable_ids_and_resolves_scene_labels(self):
         self.change("script.json", lambda d: d["cues"].reverse())
         handoff(self.project, self.foundation)

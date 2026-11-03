@@ -58,6 +58,61 @@
         ],
         "tests": []
       }
+    },
+    "object.interview-cards.v1": {
+      "references": {
+        "documentation": [
+          "modules/components/DESIGN.md",
+          "modules/components/OBJECT-COMPONENTS.md"
+        ],
+        "tests": [
+          "tests/interview-components.cjs"
+        ]
+      }
+    },
+    "object.judgment-stamp.v1": {
+      "references": {
+        "documentation": [
+          "modules/components/DESIGN.md",
+          "modules/components/OBJECT-COMPONENTS.md"
+        ],
+        "tests": [
+          "tests/interview-components.cjs"
+        ]
+      }
+    },
+    "object.task-workbench.v1": {
+      "references": {
+        "documentation": [
+          "modules/components/DESIGN.md",
+          "modules/components/OBJECT-COMPONENTS.md"
+        ],
+        "tests": [
+          "tests/interview-components.cjs"
+        ]
+      }
+    },
+    "object.character-offer-receive.v1": {
+      "references": {
+        "documentation": [
+          "modules/components/OBJECT-COMPONENTS.md",
+          "modules/components/character/README.md"
+        ],
+        "tests": [
+          "tests/offer-receive.cjs"
+        ]
+      }
+    },
+    "object.transcript-reach-hold.v1": {
+      "references": {
+        "documentation": [
+          "modules/components/OBJECT-COMPONENTS.md",
+          "modules/components/character/README.md"
+        ],
+        "tests": [
+          "tests/transcript-reach.cjs"
+        ]
+      }
     }
   }
 }

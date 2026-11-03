@@ -4,7 +4,7 @@
     {
       "id": "s1",
       "durationFrames": 480,
-      "intent": "待填写：durationFrames=480 在模板 60 fps 下为 8 秒，仅作结构占位。按紧凑节奏重估文案、动作与时长，并将本提示替换为具体镜头意图和必要的估时依据。",
+      "intent": "",
       "scene": "scenes.focus.v1",
       "params": {},
       "events": [],
