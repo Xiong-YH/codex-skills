@@ -1,4 +1,4 @@
 interface:
   display_name: "像素视频导演"
   short_description: "把文案演成有构图光影、运镜转场的像素分镜，按需交接制作、出片和审片"
-  default_prompt: "使用 $pixel-video-director，把我的文案设计成具体画面，写出主体动作、构图光影、运镜与转场；需要出片时再交接制作工程并完成 Review。"
+  default_prompt: "使用 $pixel-video-director，优先合镜，按紧凑节奏把我的文案设计成具体画面，用表格逐镜给出预估时长与依据，写出主体动作、构图光影、运镜与转场；需要出片时再交接制作工程并完成 Review。"

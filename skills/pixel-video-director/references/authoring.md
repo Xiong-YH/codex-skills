@@ -57,4 +57,4 @@ production-plan 可用 `speechDuck` 设置旁白期间保留的音效比例，�
 
 `id` 缺省为 `bgm`，须与 production-plan 的其他对象 ID 区分，保证源映射可唯一定位；`gain` 与配乐自己的 `speechDuck` 范围为 0–1，默认分别为 0.18、0.25；后者设置旁白期间保留的配乐比例，与音效的顶层 `speechDuck` 分开。`loop` 默认 true；`trimStartSeconds` 默认 0；淡入/淡出为非负整数帧，默认 60/90。片段不足时可循环，关闭循环则需有足够素材覆盖所选区间。`title`、`artist`、`sourceUrl`、`licenseUrl`、`changes` 是可选署名记录，缺省为空串，按实际素材来源填写。handoff 原样传给 audio.json，复制配乐 WAV 并绑定源文件、复制件与生成参数哈希；沿源映射回改 BGM 对象。`silent` 模式拒绝显式配乐。
 
-`init PROJECT` 创建待填写模板，空字段会阻止交接。`init PROJECT --example` 复制可运行样例。`--idea` 只记录创意，写脚本和设计分镜仍由使用 skill 的 agent 完成，不把模板伪装成自动创作结果。
+`init PROJECT` 创建待填写模板，空字段会阻止交接。模板的 `durationFrames=480` 在模板 60 fps 下为 8 秒，仅是结构占位；创作时替换占位 intent，按 [紧凑节奏与估时](visual-storyboard.md#紧凑节奏与估时) 重估每镜，结合本片目标重设 brief 的总时长范围，不能沿用占位帧数补空白。`init PROJECT --example` 复制可运行样例，其时长也只属于该示例。`--idea` 只记录创意，写脚本和设计分镜仍由使用 skill 的 agent 完成，不把模板伪装成自动创作结果。
