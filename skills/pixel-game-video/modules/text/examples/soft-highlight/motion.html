@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>字幕五项优化动态对照</title><style>body{margin:24px;background:#111820;color:#edf5f8;font:16px system-ui}main{max-width:900px;margin:auto}button,select{font:inherit;padding:8px;background:#253e50;color:#edf5f8;border:1px solid #547184;border-radius:5px}label{display:block}select{max-width:100%}p{color:#b9cad3}.text-small{font-size:14px}</style><main><h1>字幕五项优化对照</h1><p>设计参考，非生产执行器；示意主体与无配音重音时刻用于观察机制。</p><div id="caption-motion-demo">
+<style>
+#caption-motion-demo{display:grid;gap:12px}#caption-motion-demo .caption-pair{display:grid;gap:12px}#caption-motion-demo figure{margin:0}#caption-motion-demo figcaption{margin-bottom:6px}#caption-motion-demo canvas{display:block;width:100%;height:250px}#caption-motion-demo .timeline{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px}#caption-motion-demo .timeline input{min-width:0;width:100%}
+</style>
+<div class="caption-pair"><figure><figcaption>对照版 · 固定位置、固定强调方式</figcaption><canvas data-view="static" role="img" aria-label="静态字幕对照"></canvas></figure><figure><figcaption>优化提案 · 语义重音、双行排版与构图避让</figcaption><canvas data-view="motion" role="img" aria-label="关键词变色、下划线展开与连续底板演示"></canvas></figure></div>
+<label class="form-label">查看项目 <select class="form-select" data-scene><option value="0">1 · 关键词动态高亮</option><option value="1">2 · 底板连续伸缩 / 轻强调</option><option value="2">3 · 长句双行 / 强调</option><option value="3">4 · 不强调 / 仅变色 / 变色＋下划线</option><option value="4">5 · 主体占位与字幕避让</option></select></label><div class="timeline"><button class="btn btn-primary" type="button" data-play>播放</button><input class="form-range" data-time type="range" min="0" max="20" step="0.01" value="0" aria-label="演示时间"><output data-clock>0.0 / 20 秒</output></div>
+<div class="text-small" aria-live="polite" data-phase>整句先出现，关键词尚未强调</div>
+<script>(()=>{
+const root=document.getElementById('caption-motion-demo'),views=[...root.querySelectorAll('canvas')],play=root.querySelector('[data-play]'),slider=root.querySelector('[data-time]'),clock=root.querySelector('[data-clock]'),phase=root.querySelector('[data-phase]'),picker=root.querySelector('[data-scene]');
+const image=new Image();image.src='../../../library/backgrounds/pixel-server-room.png';
+const scenes=[{start:0,name:'关键词随语义高亮',lines:[['先','保存一个版本','，再继续修改。']],level:2},{start:4,name:'底板连续伸缩',lines:[['需要时，','回到原来的状态','。']],level:1},{start:8,name:'长句按语义分为两行',lines:[['修改之前，先','保存一个版本','；'],['遇到问题，就能','','回到修改之前。']],level:2},{start:12,name:'三档强度同屏对照',lines:[['这份记录会留在本地。','','']],level:0},{start:16,name:'主体占用底部，字幕移到上方留白',lines:[['这里的操作结果，','','请看下方演示。']],level:0}];
+let t=0,playing=false,last=0,lastPhase='';const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;const saved=window.openai?.widgetState?.modelContent;if(saved&&Number.isFinite(saved.time))t=Math.max(0,Math.min(20,saved.time));
+const clamp=v=>Math.max(0,Math.min(1,v)),ease=v=>{v=clamp(v);return 1-Math.pow(1-v,3)};
+function remember(){window.openai?.setWidgetState?.({modelContent:{time:t},privateContent:null})?.catch(()=>{});}
+function sceneAt(at){return scenes[Math.min(4,Math.floor(at/4))];}
+function widthOf(g,words){return words.reduce((s,x)=>s+g.measureText(x).width,0);}
+function render(){slider.value=t;clock.textContent=t.toFixed(1)+' / 20 秒';const scene=sceneAt(t),idx=scenes.indexOf(scene),local=t-scene.start;picker.value=idx;const emphasisLabel=scene.level===0?'不高亮':scene.level===1?'暖金文字':'暖金文字＋下划线';const stage=scene.name+' · '+emphasisLabel;if(stage!==lastPhase){phase.textContent=stage;lastPhase=stage;}
+for(const canvas of views){const width=Math.max(300,canvas.getBoundingClientRect().width),height=250,dpr=Math.min(devicePixelRatio||1,2);if(canvas.width!==Math.round(width*dpr)||canvas.height!==height*dpr){canvas.width=Math.round(width*dpr);canvas.height=height*dpr;}const g=canvas.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,width,height);if(image.complete&&image.naturalWidth){const scale=Math.max(width/image.naturalWidth,height/image.naturalHeight),iw=image.naturalWidth*scale,ih=image.naturalHeight*scale;g.drawImage(image,(width-iw)/2,height-ih,iw,ih);}else{g.fillStyle='#142638';g.fillRect(0,0,width,height);}
+if(idx===3){
+const dynamic=canvas.dataset.view==='motion',fontSize=Math.max(16,Math.min(22,width*34/1280)),terms=['先','保存一个版本','。'];
+['普通说明 · 不强调','重要提醒 · 仅变色','关键结论 · 变色＋下划线'].forEach((label,row)=>{
+const level=dynamic?row:2,y=45+row*78;
+g.textAlign='left';g.textBaseline='middle';g.font='500 12px "Microsoft YaHei",sans-serif';g.fillStyle='#c7d9e5';g.fillText(dynamic?label:'统一用强强调',12,y-29);
+g.font='700 '+fontSize+'px "Microsoft YaHei",sans-serif';const tw=widthOf(g,terms),pad=fontSize*2.8,left=(width-tw)/2-pad,right=(width+tw)/2+pad,fade=pad/(right-left),gradient=g.createLinearGradient(left,0,right,0);gradient.addColorStop(0,'rgba(8,15,24,0)');gradient.addColorStop(fade,'rgba(8,15,24,.65)');gradient.addColorStop(1-fade,'rgba(8,15,24,.65)');gradient.addColorStop(1,'rgba(8,15,24,0)');g.fillStyle=gradient;g.fillRect(left,y-fontSize*1.05,right-left,fontSize*2.1);
+let x=(width-tw)/2;terms.forEach((word,index)=>{const rw=g.measureText(word).width;g.shadowColor='rgba(0,0,0,.7)';g.shadowBlur=3;g.shadowOffsetY=2;g.fillStyle=index===1&&level>0?'#f7cf82':'#f5f3ec';g.fillText(word,x,y);g.shadowBlur=0;g.shadowOffsetY=0;if(index===1&&level===2){g.fillStyle='#f7cf82';g.fillRect(x,y+fontSize*.74,rw,2);}x+=rw;});});continue;
+}
+const size=Math.max(16,Math.min(25,width*34/1280)),gap=size*1.8,dynamic=canvas.dataset.view==='motion';g.font='700 '+size+'px "Microsoft YaHei",sans-serif';g.textBaseline='middle';g.textAlign='left';
+if(idx===4){const boxWidth=Math.min(width*.8,460),boxHeight=84,left=(width-boxWidth)/2;g.fillStyle='#253e50';g.fillRect(left,height-103,boxWidth,boxHeight);g.strokeStyle='#7fa6b6';g.lineWidth=2;g.strokeRect(left,height-103,boxWidth,boxHeight);g.fillStyle='#edf5f8';g.textAlign='center';g.font='600 18px "Microsoft YaHei",sans-serif';g.fillText('主体演示区域',width/2,height-78);g.fillStyle='#f7cf82';const progress=clamp(local/1.5);g.fillRect(left+20,height-52,(boxWidth-40)*progress,10);g.font='700 '+size+'px "Microsoft YaHei",sans-serif';g.textAlign='left';}
+// Both versions keep the same semantic line break. Static version emphasizes everything;
+// proposal limits emphasis and moves the whole reading group away from the subject.
+let lines=scene.lines;if(idx===3&&!dynamic)lines=[['这份记录会','留在本地','。']];
+const textWidth=Math.max(...lines.map(words=>widthOf(g,words)));let plateWidth=textWidth;
+if(dynamic&&idx>0&&local<.45&&!reduced){const oldWidth=Math.max(...scenes[idx-1].lines.map(words=>widthOf(g,words)));plateWidth=oldWidth+(textWidth-oldWidth)*ease(local/.45);}
+const bottomY=height-43-(lines.length-1)*gap/2,topY=52,y=dynamic&&idx===4?topY:bottomY;
+const pad=Math.max(28,size*104/34),left=(width-plateWidth)/2-pad,right=(width+plateWidth)/2+pad,fade=pad/(right-left),grad=g.createLinearGradient(left,0,right,0);grad.addColorStop(0,'rgba(8,15,24,0)');grad.addColorStop(fade,'rgba(8,15,24,.65)');grad.addColorStop(1-fade,'rgba(8,15,24,.65)');grad.addColorStop(1,'rgba(8,15,24,0)');g.fillStyle=grad;g.fillRect(left,y-size*1.24-(lines.length-1)*gap/2,right-left,size*2.48+(lines.length-1)*gap);
+const emphasis=dynamic?(reduced?(local>=1?1:0):ease((local-1)/.4)):1,level=dynamic?scene.level:2;
+lines.forEach((words,row)=>{let x=(width-widthOf(g,words))/2;const rowY=y+(row-(lines.length-1)/2)*gap;for(let i=0;i<words.length;i++){const word=words[i],rw=g.measureText(word).width;g.shadowColor='rgba(0,0,0,.7)';g.shadowBlur=3;g.shadowOffsetY=2;const a=i===1&&level>0?emphasis:0;g.fillStyle=`rgb(${Math.round(245+2*a)},${Math.round(243-36*a)},${Math.round(236-106*a)})`;g.fillText(word,x,rowY);g.shadowBlur=0;g.shadowOffsetY=0;if(i===1&&level===2&&emphasis>0&&word){g.fillStyle='#f7cf82';g.fillRect(x,rowY+size*25/34,rw*emphasis,Math.max(2,size*3/34));}x+=rw;}});
+}
+}
+function tick(now){if(playing){t=Math.min(20,t+(now-last)/1000);if(t>=20){playing=false;play.textContent='重播';remember();}render();}last=now;requestAnimationFrame(tick);}
+play.onclick=()=>{if(t>=20)t=0;playing=!playing;last=performance.now();play.textContent=playing?'暂停':'播放';render();remember();};slider.oninput=()=>{playing=false;play.textContent='播放';t=Number(slider.value);render();};slider.onchange=remember;picker.onchange=()=>{playing=false;play.textContent='播放';t=scenes[Number(picker.value)].start;render();remember();};image.onload=render;new ResizeObserver(render).observe(root);window.addEventListener('openai:set_globals',event=>{const state=event.detail?.globals?.widgetState?.modelContent;if(state&&Number.isFinite(state.time)){t=Math.max(0,Math.min(20,state.time));render();}});render();requestAnimationFrame(tick);
+})();
+</script>
+</div>
+</main></html>

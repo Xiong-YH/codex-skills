@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>同一张图 · 三种组件冲击</title>
+<style>
+body{background:#0a1420;color:#edf5f8;font:16px system-ui;margin:24px}main{max-width:960px;margin:auto}canvas{display:block;width:100%;height:auto;border:1px solid #38556b}button{padding:.65em 1em;margin:8px 4px 0 0;background:#21394b;color:white;border:1px solid #547184;border-radius:6px;font:inherit}p{color:#b9cad3}
+</style>
+<main><h1>同一张图 · 三种组件冲击</h1>
+<canvas width="960" height="540" aria-label="机房里的通知卡、确认印章和缓存槽"></canvas>
+<button data-play="0">通知卡</button><button data-play="1">确认印章</button><button data-play="2">缓存槽</button><button data-play="all">依次播放</button>
+<label><input type="checkbox" id="screen-impact" checked> 原版叠加：全屏暖闪＋背景微震</label>
+<p role="status">点击组件播放。关闭叠加可比较单独的组件回弹。</p></main>
+<script src="../../impact-reference.js"></script>
+<script>
+const {sampleImpact,sampleScreenImpact}=PixelVideo.impactReference;
+const canvas=document.querySelector('canvas'),g=canvas.getContext('2d');
+const bg=new Image();
+const objects=[
+ {x:195,y:305,w:175,h:105,label:'通知卡',title:'收到通知',detail:'新消息已送达',color:'#f7cf82',strength:.83},
+ {x:480,y:305,w:135,h:76,label:'确认印章',title:'已确认',detail:'',color:'#ff9d81',strength:1},
+ {x:765,y:305,w:164,h:105,label:'缓存槽',title:'命中缓存',detail:'■  数据已就绪',color:'#9ef1cc',strength:.65}
+];
+let starts=[],request;
+function draw(now){
+ const elapsed=(now-Math.max(-1000,...starts.filter(t=>t<=now)))/1000;
+ const screen=document.querySelector('#screen-impact').checked;
+ const overlay=sampleScreenImpact(screen?elapsed:-1);
+ g.fillStyle='#142638';g.fillRect(0,0,960,540);
+ if(bg.complete&&bg.naturalWidth){
+  const zoom=screen?overlay.backgroundScale:1;
+  g.drawImage(bg,(1-zoom)*480+overlay.backgroundX*.75,(1-zoom)*270+overlay.backgroundY*.75,960*zoom,540*zoom);
+ }
+ g.fillStyle='#091521d9';g.fillRect(28,160,904,275);
+ g.textAlign='center';g.textBaseline='middle';
+ for(const [i,o] of objects.entries()){
+  const pose=sampleImpact((now-(starts[i]??now+1000))/1000,{strength:o.strength});
+  g.save();g.translate(o.x+pose.x*.75,o.y+pose.y*.75);g.scale(pose.scale,pose.scale);
+  g.fillStyle='#0b1928';g.fillRect(-o.w/2,-o.h/2,o.w,o.h);
+  g.strokeStyle=o.color;g.lineWidth=3;g.strokeRect(-o.w/2,-o.h/2,o.w,o.h);
+  g.fillStyle=o.color;g.font='700 27px system-ui';g.fillText(o.title,0,o.detail?-11:0);
+  if(o.detail){g.fillStyle='#edf5f8';g.font='16px system-ui';g.fillText(o.detail,0,23);}
+  g.restore();
+  g.fillStyle='#b9cad3';g.font='17px system-ui';g.fillText(o.label,o.x,405);
+ }
+ if(overlay.flash){
+  g.save();g.globalAlpha=overlay.flash;g.fillStyle=overlay.flashColor;g.fillRect(0,0,960,540);g.restore();
+ }
+ if(starts.some(t=>now<t+400))request=requestAnimationFrame(draw);
+}
+bg.onload=()=>{cancelAnimationFrame(request);draw(performance.now());};
+bg.src='../../../library/backgrounds/pixel-server-room.png';
+for(const button of document.querySelectorAll('[data-play]'))button.onclick=()=>{
+ cancelAnimationFrame(request);
+ const now=performance.now(),mode=button.dataset.play;
+ starts=mode==='all'?objects.map((_,i)=>now+i*650):objects.map((_,i)=>i===Number(mode)?now:-1000);
+ document.querySelector('[role=status]').textContent=mode==='all'?'依次触发通知卡、确认印章和缓存槽。':'触发'+objects[Number(mode)].label+'。';
+ draw(now);
+};
+draw(performance.now());
+</script>
+</html>

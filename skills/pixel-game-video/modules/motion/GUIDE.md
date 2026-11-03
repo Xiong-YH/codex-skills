@@ -16,6 +16,7 @@
 | 组件动作时长和配乐触点 | [离散动作与节拍](TIMING.md) |
 | 参数、相机和转场边界 | [编排与验收](details.md#编排与验收)、[公共合同](../../references/contract.md) |
 | 游戏反馈与声音 | [场景反馈](../scenes/GAME_FEEL.md)、[声音](../audio/GUIDE.md) |
+| 字幕、道具或组件的冲入、回弹与衰减震动 | [个体冲击逐帧参考](IMPACT.md) |
 
 ## 验收重点
 
