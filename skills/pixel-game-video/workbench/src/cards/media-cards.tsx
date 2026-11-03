@@ -52,10 +52,10 @@ export const videoClipCard: CardDef = {
   ],
 };
 
-const ImageClip: React.FC<{ file?: string; fit?: string }> = ({ file = "", fit = "contain" }) => {
+const ImageClip: React.FC<{ file?: string; fit?: string; transparentBg?: boolean }> = ({ file = "", fit = "contain", transparentBg = false }) => {
   if (!file) return null;
   return (
-    <AbsoluteFill style={{ background: "#000" }}>
+    <AbsoluteFill style={{ background: transparentBg ? "transparent" : "#000" }}>
       <Img
         src={staticFile(file)}
         style={{ width: "100%", height: "100%", objectFit: fit as React.CSSProperties["objectFit"] }}
@@ -74,6 +74,7 @@ export const imageClipCard: CardDef = {
   component: ImageClip as React.ComponentType<Record<string, unknown>>,
   schema: [
     { type: "text", key: "file", label: "文件（public/ 下）", default: "" },
+    { type: "boolean", key: "transparentBg", label: "保留透明背景", default: false },
     {
       type: "select", key: "fit", label: "适配", default: "contain",
       options: [

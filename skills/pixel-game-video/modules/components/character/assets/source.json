@@ -1,0 +1,21 @@
+{
+  "generator": "built-in imagegen",
+  "input": "用户已确认的第一镜手部修复静帧（阿墨正面造型）",
+  "purpose": "完整人物正面接信动作试样",
+  "sha256": "ed7d7cceb20addcb116a2dad1ef1dddfc3bb60000ac74ccdaed63d5f501696f5",
+  "size": [
+    1774,
+    887
+  ],
+  "grid": {
+    "columns": 4,
+    "rows": 2,
+    "order": "row-major",
+    "boundaries": "round(index * source dimension / cell count)"
+  },
+  "approval": {
+    "staticIdentity": "user-approved",
+    "animation": "standalone action user-approved; new combinations require review"
+  },
+  "promptSummary": "同一完整上半身人物，8个接信连贯姿态，固定头与躯干，手腕与肩部连续，一封信，透明背景；不拆头拼身。"
+}

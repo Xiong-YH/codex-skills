@@ -24,7 +24,7 @@ export type CanvasTransitionProps = {
   outgoingSourceFrame?: number; incomingSourceFrame?: number;
   outgoingTransform?: ClipTransform; incomingTransform?: ClipTransform;
 };
-type CaptionProps = {cueIndex?: number; text?: string; fontSize?: number; color?: string; x?: number; y?: number; role?: string};
+type CaptionProps = {cueIndex?: number; text?: string; fontSize?: number; color?: string; x?: number; y?: number; role?: string; showBackdrop?: boolean; richTextJson?: string};
 const data = (): CanvasPayload => {
   if (!WORKBENCH_PAYLOAD || !PIXEL_CANVAS_RUNTIME) throw new Error('Canvas units require a generated Canvas workbench build.');
   return WORKBENCH_PAYLOAD as unknown as CanvasPayload;

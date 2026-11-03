@@ -8,6 +8,30 @@
 
 本例不受基础组件三样式的外形限制；换角度、容器和动作机制按[五维](DESIGN.md)补素材并核验。[完整集合](examples/style-atlas/README.md)同时收纳基础组件和以下历史实例。
 
+## 面试牌桌：三个独立组件试样
+
+[统一播放与五维约定](examples/interview-components/index.html)：切换牌组、印章或试做台，可播放、拖动进度并切换宿主位置和尺寸；五维约定在页面中展开查看。三项均为 `prototype-standalone-canvas`，尚未获得用户审美认可，尚未接入工作台。Node 状态与语法检查已执行；浏览器视觉与操作核验由本次实际证据另行记录，不凭代码检查声明通过。
+
+| 组件 | 对应当前分镜 | 动作与结果 | 绘制入口 |
+| --- | --- | --- | --- |
+| `object.interview-cards.v1` 实体对照牌组 | 第 02–08、12 镜 | 同一副三张 A/B 对照牌依次翻开，校园牌被拿起后归位；牌背、正面和对象身份连续 | [interview/cards.js](interview/cards.js)，`PixelInterviewCards` |
+| `object.judgment-stamp.v1` 悬停判决印章 | 第 09、13 镜 | 一枚印章接近简历、留隙悬停，再移开并放到桌边；简历始终未盖印 | [interview/stamp.js](interview/stamp.js)，`PixelJudgmentStamp` |
+| `object.task-workbench.v1` 任务试做台 | 第 11 镜 | 同一报名任务暴露必填校验缺口，补规则后重试；空提交被拦住，有效报名被保留 | [interview/task-station.js](interview/task-station.js)，`PixelTaskWorkbench` |
+
+浏览器中先加载 [interview/drawing.js](interview/drawing.js)，再加载所选绘制器。三者均提供 `draw(ctx, {time, x, y, width, height})` 与 `stateAt(time)`；Node 可直接 `require` 对应绘制器，由它加载共享依赖。宿主拥有背景、字幕、音频及镜头时间，组件不清空画布、不自播、不循环，并在宿主矩形内保持原比例。例如：
+
+```javascript
+// 已依次加载 interview/drawing.js 和 interview/cards.js。
+// time 由当前镜头事件换算，本例仅演示一个组件调用。
+PixelInterviewCards.draw(ctx, {time, x: 0, y: 0, width: 960, height: 540});
+```
+
+试做台另提供纯函数 `submit({validationInstalled, name, records})`，统一播放页可实际检查空值拦截与有效提交；表单为本地模拟，不连接真实报名服务。以上支持范围为当前固定视角、对象与动作，以及原布局和等比缩小后贴右下边缘的布局；持牌与握章的手臂依赖画幅边缘出画，不能把裁切后的手臂悬空放在桌面中间。换牌型、视角、手部动作或任务逻辑时核验变化部分。三项均未注册为 `shot.components.kind`，正式接入仍按场景调用或项目素材流程完成，并另外核验工作台编辑与导出。
+
+## 完整人物接取道具试样
+
+`object.character-offer-receive.v1`：[播放接信动作](examples/offer-receive/index.html) · [五维与调用](character/README.md) · [绘制器](character/offer-receive.js)。使用 8 张完整人物姿态完成伸手、握住信封、收回胸前与持稳，不拆头像和身体。宿主可控制时间、位置与等比尺寸；目前限定阿墨、正面视角与信封，其他人物和道具需补齐动作素材。静帧造型和独立动作已获认可，并作为预合成素材用于第一镜；尚未注册为工作台原生组件，不填写为 `shot.components.kind`。新组合仍需单独审看。
+
 ## 历史认可实例：供能、活塞加工与结构装配
 
 `object.energy-actuator-assembly.v1`，用户于 2026-10-29 认可并要求收纳。2026-10-30 起，基础风格改为机械／能量互斥；此旧融合装置保留源码与历史五维参考，新制作须按当前单一风格重新审看，不自动沿用旧混合外观。

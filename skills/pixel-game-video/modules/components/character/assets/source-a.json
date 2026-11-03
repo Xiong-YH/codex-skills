@@ -1,0 +1,12 @@
+{
+  "generator": "built-in imagegen",
+  "reference": "用户已确认的第一镜手部修复图",
+  "purpose": "A 举纸、前伸、停手的完整手部姿态序列",
+  "sha256": "f019420340ff6792837ce47f1462b7b85550d04d589f7c10e3ad6c789cbd45f3",
+  "size": [
+    1182,
+    1330
+  ],
+  "layout": "two columns; explicitly registered variable-height rows; see runtime",
+  "status": "pending-user-review"
+}

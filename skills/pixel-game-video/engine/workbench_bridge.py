@@ -127,6 +127,11 @@ def _manifest_base(resolved: dict, payload: dict) -> dict:
                        _schema('slider', 'x', '水平位置', props['x'], min=.05, max=.95, step=.01),
                        _schema('slider', 'y', '垂直位置', props['y'], min=.03, max=.95, step=.01)],
             'cardId': cue['id'], 'cardName': cue['text']})
+        if canvas and cue['role'] == 'subtitle':
+            captions[-1]['props']['showBackdrop'] = True
+            captions[-1]['schema'].append(_schema('boolean', 'showBackdrop', '显示本句底板', True))
+        if canvas:
+            captions[-1]['schema'].append(_schema('textarea', 'richTextJson', '单行富文本布局 JSON（可留空）', ''))
     return {'name': project['title'], 'fps': project['fps'], 'width': project['width'], 'height': project['height'],
             'total': resolved['durationFrames'], 'background': style['colors'].get('background', '#111820'),
             'revision': resolved['inputHash'], 'shots': [], 'transitions': [], 'captions': captions,

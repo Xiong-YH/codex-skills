@@ -23,6 +23,80 @@
       "notRegisteredAsShotComponentKind": true,
       "preview": "assets/reference/energy-actuator-assembly.png",
       "currentUse": "historical five-dimensional example; redesign into one exclusive visual style before new production"
+    },
+    {
+      "id": "object.interview-cards.v1",
+      "title": "实体对照牌组",
+      "status": "prototype-standalone-canvas",
+      "runtime": "interview/cards.js",
+      "dependencies": [
+        "interview/drawing.js"
+      ],
+      "example": "examples/interview-components/index.html",
+      "execution": "standalone-canvas",
+      "durationSeconds": 8.4,
+      "scope": "fixed view, three persistent A/B cards, two-sided flips, pickup and return; original and smaller bottom-right-anchored 16:9 host layouts",
+      "notRegisteredAsShotComponentKind": true,
+      "currentUse": "interview storyboard object study; Node state and syntax checks performed; browser review recorded separately; no workbench integration or user visual approval"
+    },
+    {
+      "id": "object.judgment-stamp.v1",
+      "title": "悬停判决印章",
+      "status": "prototype-standalone-canvas",
+      "runtime": "interview/stamp.js",
+      "dependencies": [
+        "interview/drawing.js"
+      ],
+      "example": "examples/interview-components/index.html",
+      "execution": "standalone-canvas",
+      "durationSeconds": 5.6,
+      "scope": "fixed view, one stamp approaching and suspending above an unmarked CV, then set aside; original and smaller bottom-right-anchored 16:9 host layouts",
+      "notRegisteredAsShotComponentKind": true,
+      "currentUse": "interview storyboard object study; Node state and syntax checks performed; browser review recorded separately; no workbench integration or user visual approval"
+    },
+    {
+      "id": "object.task-workbench.v1",
+      "title": "任务试做台",
+      "status": "prototype-standalone-canvas",
+      "runtime": "interview/task-station.js",
+      "dependencies": [
+        "interview/drawing.js"
+      ],
+      "example": "examples/interview-components/index.html",
+      "execution": "standalone-canvas",
+      "durationSeconds": 7.4,
+      "scope": "fixed view and local simulated signup task, missing validation, rule installation and retry; original and smaller bottom-right-anchored 16:9 host layouts",
+      "notRegisteredAsShotComponentKind": true,
+      "currentUse": "interview storyboard object study; Node state and syntax checks performed; browser review recorded separately; no live signup service, workbench integration or user visual approval"
+    },
+    {
+      "id": "object.character-offer-receive.v1",
+      "title": "完整人物接信动作",
+      "status": "prototype-whole-pose-sequence",
+      "runtime": "character/offer-receive.js",
+      "assets": [
+        "character/assets/amo-offer-receive.png"
+      ],
+      "example": "examples/offer-receive/index.html",
+      "execution": "standalone-canvas",
+      "durationSeconds": 3.2,
+      "scope": "Amo character, fixed frontal view, eight complete poses, one envelope; time/position/uniform scale; no skeleton or arbitrary-object grasping",
+      "notRegisteredAsShotComponentKind": true,
+      "currentUse": "approved still identity and standalone action; used as precomposed first-shot footage, not registered as a native workbench component; new combinations require review"
+    },
+    {
+      "id": "object.transcript-reach-hold.v1",
+      "title": "举成绩单、前伸与停手",
+      "status": "prototype-whole-pose-sequence",
+      "runtime": "character/transcript-reach.js",
+      "assets": [
+        "character/assets/a-transcript-reach.png"
+      ],
+      "execution": "standalone-canvas",
+      "durationSeconds": 3.6,
+      "scope": "fixed first-person foreground, one transcript, intact hands and sleeves, registered eight poses, stop-and-hold; equal-aspect host scaling",
+      "notRegisteredAsShotComponentKind": true,
+      "currentUse": "first-shot integration in current local project; pending user visual review"
     }
   ]
 }
