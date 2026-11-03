@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "defaults": {
+    "references": {
+      "documentation": [
+        "modules/audio/ARCADE.md",
+        "modules/audio/details.md"
+      ],
+      "examples": [
+        "modules/audio/preview.html"
+      ],
+      "tests": [
+        "tests/test_audio_baseline.py",
+        "tests/test_game_audio.py",
+        "tests/test_workbench_bridge.py"
+      ]
+    },
+    "notes": [
+      "正式原子与旧版兼容音色分别标记；声音素材认可不代表本片混音已审。工作台音频为已处理 PCM 分轨，修改后不动态重算其他轨道压低/总线包络。"
+    ]
+  },
+  "features": [
+    {
+      "id": "audio.narration-import.v1",
+      "title": "已有旁白导入与混音",
+      "status": "workflow",
+      "invocation": "audio.narration[]; project.audioMode=narration+sfx",
+      "references": {
+        "documentation": [
+          "modules/audio/details.md"
+        ],
+        "examples": [],
+        "tests": [
+          "tests/test_cache_narration.py",
+          "tests/test_workbench_bridge.py"
+        ]
+      },
+      "notes": [
+        "导入项目内 PCM WAV，不生成新配音。"
+      ],
+      "workbench": {
+        "editing": "audio-track",
+        "track": "narration",
+        "independentTrack": true,
+        "export": "via-track"
+      }
+    },
+    {
+      "id": "audio.bgm-mix.v1",
+      "title": "配乐导入与混音",
+      "status": "workflow",
+      "invocation": "video.py import-bgm PROJECT; audio.bgm",
+      "references": {
+        "documentation": [
+          "modules/audio/MUSIC.md"
+        ],
+        "examples": [],
+        "tests": [
+          "tests/test_bgm_contract.py",
+          "tests/test_bgm_mix.py"
+        ]
+      },
+      "notes": [
+        "支持音量、淡化、循环与旁白压低；Chill Wave 来源与署名保存在原音乐元数据中。"
+      ],
+      "workbench": {
+        "editing": "audio-track",
+        "track": "bgm",
+        "independentTrack": true,
+        "export": "via-track"
+      }
+    },
+    {
+      "id": "audio.tts.v1",
+      "title": "通用配音生成",
+      "status": "not_implemented",
+      "invocation": "No TTS executor",
+      "references": {
+        "documentation": [
+          "modules/audio/details.md"
+        ],
+        "examples": [],
+        "tests": []
+      },
+      "notes": [
+        "音色参考与旁白导入不构成 TTS 能力。"
+      ]
+    }
+  ]
+}

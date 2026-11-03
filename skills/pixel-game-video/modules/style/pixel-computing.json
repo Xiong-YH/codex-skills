@@ -1,13 +1,5 @@
 {
   "id": "style.pixel-computing.v1",
-  "assets": {
-    "style.pixel-workbench.v1": "assets/pixel-workbench.png",
-    "style.pixel-server-room.v1": "assets/pixel-server-room.png"
-  },
-  "backgrounds": {
-    "workspace": "style.pixel-workbench.v1",
-    "archive": "style.pixel-server-room.v1"
-  },
   "colors": {
     "background": "#0a1221",
     "panel": "#142638",
@@ -24,7 +16,6 @@
     "wallShade": "#060c17"
   },
   "fontFamily": "Microsoft YaHei, Noto Sans CJK SC, sans-serif",
-  "presenter": {"x":0.20,"baseline":0.785,"height":0.40},
   "safeArea": {
     "x": 0.05,
     "top": 0.06,

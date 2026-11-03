@@ -40,6 +40,8 @@
     e.propCache[key]=canvas;return canvas;
   }
   const original=P.library.prop;
+  const hasProp=P.library.hasProp;
+  P.library.hasProp=id=>ids.has(id)||hasProp(id);
   P.library.prop=function(e,id,x,y,size,transform){
     if(!ids.has(id))return original(e,id,x,y,size,transform);
     const tr=transform||{scale:1,flip:1},g=e.ctx,s=size||e.height*.27;

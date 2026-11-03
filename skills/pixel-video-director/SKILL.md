@@ -5,51 +5,44 @@ description: 把创意或既有文案转成像素视频的可见动作、构图�
 
 # Pixel Video Director
 
-把观点设计成观众看得懂的画面，再写入可编辑工程、调用基础 skill 出片，并按证据回改。面向用户交付的视频脚本、视觉分镜和局部镜头方案必须使用 Markdown 表格，一镜一行；按 [分镜标注](references/visual-storyboard.md#脚本中的呈现类型标注) 明写每个接镜的交出、转场过程、接住与落稳，直切也不省略。用户只要视觉方案或分镜时，交付设计即可；需要制作时再进入工程与基础依赖流程，并强制在工作台完成剪辑和最终导出。
+把观点设计成可见动作、构图光影、运镜转场与分镜；按需交接制作、审片并定向修复。沿用用户已有文案和工程，只交付视觉方案时可停在设计阶段。面向用户的脚本默认按 [脚本表格规范](references/script-format.md) 输出项目基调、片段总览和逐片段多维详情；局部修改仅输出受影响片段，明确覆盖组件选择、风格/组织样式/堆叠、形态材质及可见行为，不留给制作补猜。
 
 新脚本与分镜先按 [镜头数量与合并原则](references/visual-storyboard.md#镜头数量与合并原则) 合并连续解释任务，再按 [紧凑节奏与估时](references/visual-storyboard.md#紧凑节奏与估时) 规划文案、动作和镜头预算；用户指定的节奏、已有工程约束及实际旁白优先。模板帧数只作结构占位，创作时须重新估时。
 
-插图集合仅供参考风格与演绎方法，是否使用由脚本决定；不照搬其故事结构、镜头顺序或构图。每镜可有人或无人。延续本计算机口播系列时，先区分“普通内容片段”和“插画（特殊片段）”：普通内容可用纯画面＋组件或主角讲述；插画须单独设计为铺满画幅的完整情境，主要图片元素表达含义，同时必须配套具体讲解，无人声时保留讲解字幕。插画人物优先由主角小棕承担；多人情境或脚本明确的身份、剧情条件需要时再选配角。有无旁白另行安排，不把全屏、有人物或正常操作演示直接改称插画。分类、选角、讲解与制作验收见 [插画规范](references/character-illustration.md)。
+## 先选任务
 
-| 当前任务 | 读取 | 执行产物 |
+| 当前任务 | 读取与交付 |
+| --- | --- |
+| 新创意、文案画面化、分镜或局部接镜 | 先确定 [整段理解推进](references/visual-storytelling.md#先确定整段如何推进理解)，再按 [视觉表达](references/visual-system.md) 与 [分镜标注](references/visual-storyboard.md) 设计主体、动作、结果及承接；交付视觉方案即可，不强制建工程或运行 doctor |
+| 建工程、制作交接与出片 | 读 [创作合同](references/authoring.md)、[基础依赖与交接](references/handoff.md)；写创作源，交接后由基础技能进入工作台 |
+| 续作、审片与定向修复 | 读 [Review 与影响范围](references/review.md)，区分导演源和工作台剪辑分支，沿实际分支修改并核验 |
+| 延续计算机口播系列 | 创作前读 [系列要求](references/computing-voiceover.md) 与 [分类、选角和讲解规范](references/character-illustration.md)，需要插画局部动态时再读 [动态设计](references/illustration-motion.md) |
+
+开始制作、续作或复盘时，按 [依赖定位](references/handoff.md) 找到基础技能，读取其 `references/production-principles.md`，将适用的系列偏好与单片限制写入 brief。下面的基础模块路径均相对定位到的 FOUNDATION，不要求固定同级安装。
+
+## 按七大模块落设计
+
+| 模块 | 导演决定 | 基础能力入口 |
 | --- | --- | --- |
-| 开始制作、续作或复盘 | 按 [基础依赖](references/handoff.md) 定位其 `references/production-principles.md`，再读当前项目要求 | 确认适用的通用原则、系列偏好和单片限制；新经验回到所属记录 |
-| 新创意、脚本或分镜 | [创作合同](references/authoring.md)、[视觉表达方法](references/visual-system.md)、[视觉叙事](references/visual-storytelling.md)、[脚本呈现标注](references/visual-storyboard.md#脚本中的呈现类型标注)；本计算机口播系列另读 [情境插画规范](references/character-illustration.md) | 分别标注片段类别、画面呈现和声音安排；插画作为特殊片段单独设计整屏完整情境，不把整段普通讲解改标为插画；需要制作时写四份创作源 |
-| 只做画面方案、加强画面感或局部接镜 | [视觉表达方法](references/visual-system.md)、[视觉叙事](references/visual-storytelling.md)、[视觉分镜与工程映射](references/visual-storyboard.md) | 交付主体状态变化、构图光影、运镜、前后承接与素材需求；已有工程沿用其源文件 |
-| 背景设计、生成、用户素材或局部替换 | [视觉表达方法](references/visual-system.md)、基础层 `modules/style/ART-DIRECTION.md`、[素材替换](references/media-replacement.md) | 先按内容构思空间与尺度，再复用或制作素材；样板只作质感参考 |
-| 选人物、人设或动作表演 | 按基础依赖定位 `modules/library/CHARACTERS.md` | 当前五人角色分工、动作参考与半身仿真人使用范围；能力状态以素材库为准 |
-| 人物动态、文案情境演绎 | [动态与插画方向](references/character-illustration.md)、[完整插画镜头脚本](examples/whole-illustration/storyboard.json)；基础层 `modules/scenes/whole-illustration.md` | 先做对完整人物与情境，再制作相邻姿态与事件；禁止沿用拆头拼身试样 |
-| 插画静中有动、图层与局部 animation 设计 | [插画动态设计](references/illustration-motion.md) | 完整人物关键姿态与道具/场景局部动画分工；写清触发、遮挡、收束和素材需求，按真实能力编排或补实现 |
-| 基础组件的风格与特性 | 按[基础依赖](references/handoff.md)定位 `modules/components/BASIC-COMPONENTS.md` | 选择 kind、机械／能量二选一的 visualStyle，以及可选堆叠 features；同一事件编排，不建立独立风格组件系列 |
-| 自定义实体、路径、形变或关系机制 | 按基础依赖定位 `modules/components/DESIGN.md` | 简短五维约定与可播放的最小试样；复用与核验范围按该页执行 |
-| 转场选型或设计 | [视觉叙事](references/visual-storytelling.md)；设计阶段即按基础依赖定位其 `modules/motion/TRANSITIONS.md`，只读当前选型入口及所选配方；研究新方法或追溯反馈时再读研究／历史 | 写清前镜交出、后镜接住、动作阶段与落稳后的讲解事件；区分已注册recipe、专用实现与待适配试样，不恢复被删项目 |
-| 学习《深度工作》参考片的画面方法 | [参考片观察](references/deep-work-case.md) | 迁移母题、光影、尺度与语义承接；新主题重新选择人物、道具和场所 |
-| 分析新参考片、对照当前设计并沉淀方法 | [参考片复盘方法与案例](references/desire-contract-case.md)、[整段认知推进](references/visual-storytelling.md#先确定整段如何推进理解) | 先重建观点递进，再核对画面如何承担关键转折；区分可见事实、效果判断与迁移设计，按范围更新规则 |
-| 加强游戏感与操作反馈 | 按基础依赖定位其 `modules/scenes/GAME_FEEL.md` | 按状态选择细节，安排触点事件与声音，保留试用/认可状态 |
-| 音效、配乐与混音 | 按基础依赖定位其 `modules/audio/GUIDE.md`；街机＋鼓点读 `ARCADE.md`；延续计算机口播系列时读 [配乐要求](references/computing-voiceover.md#配乐要求) | 先确认声音素材，再设计项目事件、音量与旁白关系；按本项目已确认要求选择配乐 |
-| 已有旁白导入与混音 | 按基础依赖定位 `modules/audio/GUIDE.md` | 有现成音频时导入工作台并对齐；制作流程不自动生成配音或打开剪映 |
-| 延续本项目的计算机知识口播、积累制作经验 | [本系列要求](references/computing-voiceover.md)；人物/情境镜头再读 [情境插画方向](references/character-illustration.md) | 将当前要求带入 brief，分别落实固定姿势口型、情境演绎与能力缺口；不能以静态图配旁白代替口播 |
-| 工程内剪辑、预览、出片与可编辑交付 | [基础依赖与交接流程](references/handoff.md)；制作时必读基础 skill 的 `references/workbench.md` | 同一事件时间线驱动的 VideoSpec，以及工作台独立镜头、文字、转场、音效、配乐轨道与最终成片 |
-| 审片、修改或继续已有工程 | [Review 与影响范围](references/review.md) | review.json 与定向源文件修改 |
+| style | 像素语言、构图、光影与视觉层级 | `modules/style/GUIDE.md` |
+| library | 需要哪些人物、道具、背景与素材变体 | `modules/library/GUIDE.md` |
+| components | 用什么信息结构、实体与局部状态解释观点 | `modules/components/GUIDE.md` |
+| text | 讲解、字幕、标签及阅读顺序；文字留在 script | `modules/text/GUIDE.md` |
+| motion | 主体运动、相机、交出/接住与落稳；设计转场时先查库 | `modules/motion/GUIDE.md` |
+| audio | 旁白安排、必要声音触点与配乐关系 | `modules/audio/GUIDE.md` |
+| scenes | 空间、对象关系、机制与人物/无人镜头的编排 | `modules/scenes/GUIDE.md` |
 
-1. 从用户已有产物继续；缺失信息可合理推断时记录在 brief，不设置逐阶段审批。
-   先确定整段新增理解及前后依据，再用新分镜的 `visual` 明确观众疑问、表达形式、主体、动作、理解结果与承接，并写清有解释作用的空间与尺度；先构思再找素材，已有房间不作为默认菜单。具体机制仍须选已实现能力或补实现；新背景可用项目素材接入。
-   纯设计没有音轨时标明建议时长；不为交付分镜强制建工程或运行 doctor。设计附件不能成为已有工程的第二份时间线，映射规则见视觉分镜参考。
-2. 工程阶段文案只改 script，镜头时长与事件只改 storyboard，能力选择只改 production-plan。按 ID 引用，执行 `handoff` 生成 VideoSpec。
-3. 制作时通过 `doctor` 定位基础能力并查询 `catalog`；超出已实现的场景需先补场景实现。依赖缺失明确报错。
-4. `video/` 是生成物；沿 `source-map.json` 回改源文件。工具拒绝静默覆盖手改生成文件。
-5. 审片绑定本次输入和 MP4 哈希；连续播放、文字核验和听音都要有实际证据，未检查记为 `not_reviewed`。
-6. 制作必须从工作台剪辑和导出最终成片。镜头、字幕与其他文字、转场、音效、配乐分别独立轨道，有旁白时另轨；先验证同源拆解，再实测五类轨道分别编辑、保存重开及导出。Canvas 通过逐帧 runtime 桥接，原生 Remotion 保留自己的能力边界；人物、组件和素材配置通过镜头 props 编辑。缺口先补齐并验证，不能回退直接 render。工作台项目 JSON 是独立剪辑分支，不自动回写导演源；主动打开工作台，交付 MP4 与同次「导出版本 JSON」，不把 Studio 或浏览器缓存当作完整编辑交付。剪映草稿按需另行导出与验收，见基础 skill 的 `references/jianying-export.md`。
+制作前按交接流程运行对应后端的 doctor，再用 `python FOUNDATION/scripts/video.py catalog MODULE --capabilities` 核对调用方式、后端、编辑边界及示例；参数按模块合同读取。只读本次模块与选中的配方。新组件外观及素材生成按 FOUNDATION 的 `modules/style/COMPONENT-ART.md` 共同画风执行。背景/片段接入另读 [素材替换](references/media-replacement.md)，未知机制先补实现并验证。
 
-分析新参考片需查看真实画面，运镜和转场需核对连续片段或前后帧；无法取得素材时，明确未确认内容，可继续提供标为新设计的方案。设计稿、生成素材、已实现能力和审过的成片分别记录，参考手法不自动成为引擎能力。
+## 创作与交付约束
 
-执行入口：[scripts/director.py](scripts/director.py)。结构模板在 [assets/templates/](assets/templates/)，完整样例：[12 秒选择机制](examples/bounded-choice/)、[缓存示意](examples/cache-journey/)、[缓存人物表演](examples/cache-adventure/)。样例主题与时长不是全局默认值。
+- 场景美术按基础层 `modules/style/ART-DIRECTION-CONTRACT.md`：项目选主画风，特殊片段可明确特选；逐镜列明有效画风和回归承接。按同一有效规范展开人物、物种、背景、道具的细化提示词与参考图，不能分支各选。组件独立，不继承场景画风。规范版本与实际使用样板随项目快照交接；不得将美术目录 ID 当作引擎 style ID。
 
-信息组件源例：[基础五类](examples/component-system/brief.json)、[新增七类与组合](examples/component-expansion/brief.json)。从表达关系选型，不把示例的排列、题材或背景作为固定模板。
+- 每镜明确新增理解、主体状态变化与前后承接。用到组件时，按 [组件需求描述](references/visual-storyboard.md#脚本中的组件需求) 说明信息、初态、触发、变化、结果和保留关系；沿 FOUNDATION 的 `modules/components/DESIGN.md` 判断复用或定制，不要求用户先定义组件。脚本按分镜规范标注片段类别、画面呈现、声音安排及字幕形式（位置、重点、显露与收束）；接镜必须写交出、过程、接住和落稳阅读，直切、同镜继续及首尾也标注。
+- 工程只维护 `brief / script / storyboard / production-plan` 四份创作源：目标与限制、文案、镜头时间/事件、能力选择分别归位。入口为 [scripts/director.py](scripts/director.py)；`check` 后 `handoff` 生成 VideoSpec，生成文件沿源映射回改，不静默覆盖手改内容。
+- 脚本先审完整语义单元与阅读连续性；有插画人物时，母图先与基准并排检查整体比例，通过后才制作动画。两项按 [Review](references/review.md) 的前置审查执行，最终合成另行复查。
+- 创作方案、参考素材、已实现能力与审过的成片分别记录。分析参考片必须看实际画面，运动与转场核对连续片段或前后帧；无法核实时明确未确认内容。示例与参考片不固定新片的题材、角色、构图、片长或镜头顺序。
+- 出片前必读 FOUNDATION 的 `references/workbench.md`，在工作台完成分轨剪辑和最终导出；不能以 Studio 或直接 render 代替。保存的工作台 JSON 是独立剪辑分支，不自动回写导演源，继续前先确认使用哪一份源。
+- 主动打开工作台并提供地址，交付 MP4 与同次导出项目 JSON。按交接与 Review 合同实测编辑、保存重开及导出，再连续观看、核字和听音；证据绑定当前输入/剪辑项目与成片哈希，未检查项保留 `not_reviewed`。剪映草稿按需从基础技能的 `references/jianying-export.md` 进入。
 
-人物演绎源例：[8.4秒完整插画与总结](examples/whole-illustration/brief.json)，含分心、抱头、趴下与回到项目。`scripts/render-illustration.py` 按 storyboard 事件编排完整画面，`scripts/sync-illustration-example.py` 生成基础层独立快照；两者的 `--check` 拒绝旧衍生物。旧拆头双样例已被用户否定并撤回，新插画尚待用户反馈。
-
-跨空间叙事实例：[18 秒考研口播](examples/cs-postgrad-narrative-18s/)。复用其设计方法，题材、时长与转场组合按新工程决定。
-
-
-历史插图素材与失败复盘：[32 秒 AI 行业短片](examples/ai-industry-32s/)。其中配角开场口播、姓名条、多姿态切换和细线串点导航已撤回，不能作为新片默认方案。计算机口播按系列规则由单一主角固定姿态只开闭嘴，配角用于插图；先在 brief.singleNarrator 声明讲述者与隐藏姓名，顶部使用实心矩形进度条。
+样例用于核对合同和设计方法，入口见 [创作合同](references/authoring.md) 与 [视觉叙事](references/visual-storytelling.md)；人物插画及其素材/快照按 [插画规范](references/character-illustration.md) 维护。系列规则和历史反馈留在所属记录，不在本入口另存一套。

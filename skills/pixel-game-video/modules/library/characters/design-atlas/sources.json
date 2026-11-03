@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "additional_sources": "additional-sources.json",
+  "date": "2026-11-01",
+  "method": "built_in_imagegen",
+  "status": "generated_design_candidates",
+  "user_approval": "pending",
+  "runtime_ready": false,
+  "assets": [
+    {
+      "file": "style-atlas.png",
+      "prompt": "Use case: stylized-concept. Create ONE polished pixel-art style comparison atlas, landscape 3 columns by 2 rows, six equal panels, generous gutters, no lettering or numbers anywhere. Every panel depicts the EXACT SAME scene and subject: a full-body anthropomorphic orange fox courier, cream muzzle and tail tip, teal short jacket, carrying a small ochre parcel with both paws, standing beside a wooden counter in a little delivery depot, three-quarter view, complete body including ears and feet. Same pose, camera, layout, object scale, and neutral daylight in all six panels; only pixel technique changes. Row-major style order: 1 chunky minimal pixel sprites, very coarse large square clusters, 12-color restrained palette, one shadow level, black outline; 2 classic adventure pixel art, medium clusters, crisp one-pixel contour, 3 shade ramps, selective dithering; 3 super-deformed cute pixel art, large head and short limbs consistently stylized including paws, pastel bright palette, brown outline, no gradient; 4 detailed cinematic pixel art, finer hand-placed clusters, rich material ramps, selective contour, still unmistakably discrete pixel edges, not smooth painting; 5 four-tone monochrome handheld pixel art, exactly four olive green tones, ordered dithering, sharp square edges; 6 isometric pixel diorama, orthographic 2:1 ground axes, consistent isometric fox, counter and depot, clean geometric volumes and medium clusters. Panel 6 changes camera only as necessary to demonstrate isometric perspective; retain scene contents and pose. Clear and visibly different pixel treatments, beautiful professional reference sheet, composed pixel art rather than a mosaic filter. No text, no logos, no extra characters, no blur. Each panel scene fills its own cell. This is a style study, not an animation sheet.",
+      "review": {
+        "static_visual": "reviewed",
+        "observations": "六格可区分粗颗粒、经典、可爱比例、细节、绿色限色与等距；经典与细节存在颗粒密度交叠，粗颗粒背景比角色细；不是严格网格或调色板标定。",
+        "palette_verified": false,
+        "animation_reviewed": false
+      },
+      "sha256": "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8"
+    },
+    {
+      "file": "species-atlas.png",
+      "prompt": "Use case: stylized-concept. Generate ONE landscape pixel-art character species design atlas, four columns by two rows, eight spacious equal cells, no text or labels. Every character full body clearly visible, isolated against same warm pale neutral backdrop, same logical pixel grain and medium-detail classic adventure-game pixel art, crisp deliberately designed square clusters, three-step material shading, restrained palette, warm friendly expression. Unified art direction but distinct anatomies, no blur, no smooth digital painting or mosaic filter. All characters are NEW provisional metaphor-scene characters, not existing named mascots. Row-major order: 1 anthropomorphic orange fox with cream muzzle and big tail, teal short jacket, two arms two legs, holding small parcel; 2 natural-bodied blue pigeon with two wings folded and two feet, small message tube held in beak, no added hands; 3 expressive dark brown ant, EXACTLY six limbs (four lower walking limbs grounded and two upper manipulating limbs holding a crumb), two antennae, segmented body; 4 friendly turtle in natural quadruped stance, integrated domed shell, four short legs, looking at a small waypoint stone; 5 purple octopus with exactly eight clearly distinguishable arms arranged visibly around body, three arms touching separate small wooden blocks on the floor, remaining five resting, no human hands; 6 anthropomorphic young sapling with leaf crown, trunk body, two branch arms and two root feet, holding a small watering can; 7 small fantasy dragon, two legs and two forearms PLUS two separately attached wings, small horns and one tail, sitting beside a small locked chest; 8 friendly utility robot, box body, two jointed arms with grippers, two legs, one sensor face, holding a spanner. Poses gentle and readable, all limbs within cells, no duplicate character parts, no framing boxes, no scenery, no humans, no lettering. Detailed enough to see anatomical design, consistent pixel art quality across all eight. This is a static concept reference atlas, not animation frames.",
+      "review": {
+        "static_visual": "reviewed",
+        "observations": "八类主体可识别，画风基本统一。多足与多腕存在遮挡与数量歧义，未通过可用精灵的解剖验收，正式姿态须单独清稿核数；非透明分层素材。",
+        "anatomy_approved": false,
+        "animation_reviewed": false
+      },
+      "sha256": "c03a2e51a64be639d330c169c95934709c09ef3393366c6113ab556c087189b7"
+    }
+  ]
+}

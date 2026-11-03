@@ -1,0 +1,265 @@
+﻿{
+    "date":  "2026-11-01",
+    "method":  "System.Drawing rectangle extraction; no generative repaint",
+    "platformVerified":  "Windows PowerShell 5.1",
+    "version":  1,
+    "backgroundComparison": "background-comparison/sources.json",
+    "assets":  [
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "ffb4ec281697ee9a57313fc10a6fc12f67aa02ce1555704a41d22a4f8751fd17",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/chunky/background-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "3c27809c8fa4ce0b9ee21837d71f267410ea6225bc94e4848a9c7fa477825de5",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/chunky/character-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "4ad4eb9f2c8bf21e041e084f9d843cad8df899f7726a4fb3dc7b0fd2c5ab4411",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/chunky/prop-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "d29b03c83f1c3eac07cb6ef20faccd3f8e1b100e4f43cdb9f67cfe90df89227d",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/chunky/scene.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/more-coarse.png",
+                       "sha256":  "abb81f7affbae29a23c31a9818344db91f628f79b69cf3825e8bc79ed53d9f53",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "b0961563b7a2b6926f371180b40e5285f8bbd86a63b6935786c7c606029e5959",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/more-coarse/background-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/more-coarse.png",
+                       "sha256":  "c11b05d704ad7afbc4bbc20656ba6bdfbe0f29c0cb70157e1b4338d7b5b48983",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "b0961563b7a2b6926f371180b40e5285f8bbd86a63b6935786c7c606029e5959",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/more-coarse/character-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/more-coarse.png",
+                       "sha256":  "08f1875f80b89175aaa9682fa52eb265033b76ae4e478686ceb50abdf919a50f",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "b0961563b7a2b6926f371180b40e5285f8bbd86a63b6935786c7c606029e5959",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/more-coarse/prop-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/more-coarse.png",
+                       "sha256":  "d2af44133424c3a47631875b28b21f6ae43bcd8aa9b28b3a0c8336e2d6f40ef7",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "b0961563b7a2b6926f371180b40e5285f8bbd86a63b6935786c7c606029e5959",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/more-coarse/scene.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/ultra-coarse.png",
+                       "sha256":  "d4b1601c824633ccaf14c69fe592cd9eed832c4ac6048080862cb093a4b93d97",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "5663a40309fd11be97041153e10d6d63d4f4a3bc42209ff0356159a657d6df42",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/ultra-coarse/background-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/ultra-coarse.png",
+                       "sha256":  "72481d1f89e97ab97f5ca5678d2fb240e615f7d0bc4d46be8152e4ab1588080a",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "5663a40309fd11be97041153e10d6d63d4f4a3bc42209ff0356159a657d6df42",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/ultra-coarse/character-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/ultra-coarse.png",
+                       "sha256":  "f08e7e77d89fe1b78c259df895c1fbb4bc4097d6adf0b5b0ad6e2b286bad6099",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "5663a40309fd11be97041153e10d6d63d4f4a3bc42209ff0356159a657d6df42",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/ultra-coarse/prop-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/ultra-coarse.png",
+                       "sha256":  "8e57fc95580774a37b8272fabab465454274b9f679213d7bbfbd0f0b24e0f98d",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "5663a40309fd11be97041153e10d6d63d4f4a3bc42209ff0356159a657d6df42",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/ultra-coarse/scene.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "1535d87ad7b97398e7ca322da3da6ffe9b26f79f218322fada84a7f1f6289a6b",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/classic/background-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "7eb91ae1a033c2a19b6b224b40bdb389a10eb145c3ebfd1c75c360f8f208fde0",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/classic/character-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "eca1f3898e5f9ec5208c81555ecaad7ff745a204db4214b76fc8cdf92223c7a3",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/classic/prop-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "61c534739c8363567afb37078067545b154677a1384bb4afec3509848f9d25ef",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/classic/scene.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "a90fcecf9b55784f8a8b9b69e7fa4002dc1e9e198732ee96ea8dedc1194c17fb",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/cute/background-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "e7720f8b0421c9fd307d7723036d572f106692fa7c007b03222cbb7292f05c56",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/cute/character-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "e3e01b98fb26ab2a73c8c1c896a62511a3448e4f918bdd3f50088a9a969846ad",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/cute/prop-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "12b4f065ff9532e3300cc2b39f838f8cd19d0e4365279b25844586d33cb1a40c",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/cute/scene.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "39a3df5325adfaed5681d4a7ea71481bcccc15461fdd2a68626af8af11c0547c",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/detailed/background-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "a0bd5bd70a66d90052de926685a0c80ac0e4812233cdbc102a77e6d8ec1e0867",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/detailed/character-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "b1a83240e5f1cfa43bb073db1ad408a1bc63ecb2a0cff953f308e8d353a331e8",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/detailed/prop-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "e8fddf8810ba5f8c43cc97aa1c05698f90fc027e305aa8340a7ac0a9ef74d2cc",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/detailed/scene.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/four-tone-strict.png",
+                       "sha256":  "a14954b70c23d3a94eb6c718328e489d7b2be9038cdb0761feffa87791efe4a4",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "ccca0f1ce30c9c6772510b97ebe97690de98b0df59dab3938d4dbe3a9b7bbf3d",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/four-tone/background-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/four-tone-strict.png",
+                       "sha256":  "4c4a6d15eada086b89eb64a6cabc36cd75bd32154f2740585e2d4cb084bc6e60",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "ccca0f1ce30c9c6772510b97ebe97690de98b0df59dab3938d4dbe3a9b7bbf3d",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/four-tone/character-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/four-tone-strict.png",
+                       "sha256":  "4e116e95073e4f2c1bbea7aaa5d5bd7290542cec7a6930a4dd1bb6192eb0f521",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "ccca0f1ce30c9c6772510b97ebe97690de98b0df59dab3938d4dbe3a9b7bbf3d",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/four-tone/prop-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/four-tone-strict.png",
+                       "sha256":  "e16da730befb2a2933de1bb266433017e96973ba0e66558a11fe172bf66212d2",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "ccca0f1ce30c9c6772510b97ebe97690de98b0df59dab3938d4dbe3a9b7bbf3d",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/four-tone/scene.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "c4431cb5a8362d84aea0e6b0a80ad13cdb9aad3075059ae1030c1e139affd8c0",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/isometric/background-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "2906f727e9813b5a8276e511a4daf3350c66b8a48f1a01b7aeeeb00617ef9e9b",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/isometric/character-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "38b71c779676e181011ef269988752d30184ec1ed326db6b461341836ee865b6",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/isometric/prop-detail.png"
+                   },
+                   {
+                       "source":  "../library/characters/design-atlas/style-atlas.png",
+                       "sha256":  "e9fd0f07648bcabb2505c4066d184fe8c6e593057d80ca611a2d5d254786a67c",
+                       "method":  "reference extraction only; details are crops, not independent production assets",
+                       "sourceSha256":  "01fec6ffcdf3a51bd6a93d51bae6883524dd765d72ea22b3ed9896f2bd279ec8",
+                       "approval":  "inherits approved source art direction; crop is not new animation approval",
+                       "file":  "references/isometric/scene.png"
+                   }
+               ]
+}

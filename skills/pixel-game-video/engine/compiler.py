@@ -6,7 +6,8 @@ import math
 from pathlib import Path
 
 from .models import INPUT_MODELS
-from .dependencies import actor_actions, runtime_files
+from .dependencies import actor_actions, runtime_files, selected_style, visual_asset_files
+from .registry import is_available
 
 SKILL_ROOT = Path(__file__).resolve().parents[1]
 MODULES = ("style", "library", "text", "motion", "audio", "scenes", "components")
@@ -133,7 +134,7 @@ def compile_project(project_root, skill_root=None, *, write=False):
 
     def require(module, ident):
         item = lookup[module].get(ident)
-        if item is None or item.get("status") in ("planned", "draft", "unavailable"):
+        if not is_available(item):
             raise ValueError(f"{module}: unavailable capability {ident}; run catalog")
         return item
 
@@ -179,6 +180,11 @@ def compile_project(project_root, skill_root=None, *, write=False):
     spec = importlib.util.spec_from_file_location("pixel_scene_contract", validator_file)
     validator = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(validator)
+    _, style = selected_style(skill, {'project': project})
+    backgrounds = style.get('backgrounds')
+    if backgrounds is not None and not isinstance(backgrounds, dict):
+        raise ValueError('Style backgrounds must map environments to visual asset IDs')
+    background_assets = visual_asset_files(skill, style) if backgrounds is not None else {}
     component_spec = importlib.util.spec_from_file_location('pixel_components', skill / 'modules/components/contract.py')
     component_validator = importlib.util.module_from_spec(component_spec)
     component_spec.loader.exec_module(component_validator)
@@ -210,6 +216,13 @@ def compile_project(project_root, skill_root=None, *, write=False):
                 raise ValueError("object IDs cannot be scene/actor; object assets must be props")
         _finite(shot["params"], shot["id"])
         validator.validate(shot["scene"], shot["params"], shot["events"], shot["objects"])
+        if backgrounds is not None:
+            for environment in validator.background_environments(shot):
+                asset = backgrounds.get(environment)
+                if asset not in background_assets:
+                    raise ValueError(f"{shot['id']}: {shot['scene']} needs background environment "
+                                     f"{environment!r}, missing from {project['style']}; "
+                                     'choose a compatible style or supply project media')
         unique((c['id'] for c in shot['components']), shot['id'] + '.components')
         for component in shot['components']:
             require('components', 'components.' + component['kind'] + '.v1')

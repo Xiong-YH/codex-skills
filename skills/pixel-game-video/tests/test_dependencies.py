@@ -37,7 +37,7 @@ class DependencyTests(unittest.TestCase):
         copy_skill(ROOT, runtime, include_tests=False)
         before = compile_project(self.project, runtime, write=True)
         for relative in ('modules/scenes/competition-cinematic.js',
-                         'modules/style/assets/cyberpunk-city.png'):
+                         'modules/library/backgrounds/cyberpunk-city.png'):
             path = runtime / relative
             path.write_bytes(path.read_bytes() + b'\n')
         self.assertEqual(before['inputHash'], compile_project(self.project, runtime)['inputHash'])

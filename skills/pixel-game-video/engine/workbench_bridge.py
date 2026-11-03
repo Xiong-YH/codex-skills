@@ -16,6 +16,8 @@ import subprocess
 import sys
 import wave
 
+from .backend_caps import REMOTION_MOTIONS, REMOTION_SCENES
+
 
 def _write(path: Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -27,9 +29,9 @@ def support_error(resolved: dict) -> str | None:
         return None  # The selected Canvas runtime executes inside live units.
     if resolved['project'].get('renderBackend') != 'remotion':
         return 'Unknown workbench render backend.'
-    if any(shot['scene'] != 'scenes.focus-desk.v1' for shot in resolved['shots']):
+    if any(shot['scene'] not in REMOTION_SCENES for shot in resolved['shots']):
         return 'The local workbench currently supports only native Remotion scenes.focus-desk.v1 shots.'
-    if any(motion['recipe'] not in {'motion.camera-track.v1', 'motion.book-sweep.v1'}
+    if any(motion['recipe'] not in REMOTION_MOTIONS
            for shot in resolved['shots'] for motion in shot['motions']):
         return 'The local workbench cannot yet split this motion recipe into independent editable clips.'
     if any(motion['recipe'] == 'motion.book-sweep.v1' and index == 0

@@ -28,6 +28,10 @@ python modules/components/examples/style-atlas/build.py
 
 [章节运动状态对照](../../assets/reference/style-atlas/chapter-states.jpg)只提供关键取帧，动态播放以 HTML 为准。在构建本集后运行 `node modules/components/render-atlas.cjs` 更新图片与源文件哈希。参考配置、执行器或素材改变后重新捕获，不能沿用旧图证明当前实现。
 
+## 脚本驱动的自定义范例
+
+[复合仪表与条块散落](../state-meter/index.html)独立展示需求→五维→状态/绘制→试样的完整路径，源码与边界见其[设计记录](../state-meter/design.md)。本合集不把它计入基础 kind 或样式数量，也未将其接入工作台。
+
 ## 朴素原版
 
 另含十二类 `visualStyle: "plain"` 范例，不选机械／能量三样式，也不叠加 stack。共 84 个基础范例、156 种配置。[朴素十二类总览](../../assets/reference/style-atlas/plain.jpg)由原版绘制器实际捕获。界面选择“朴素 / 无风格”即可查看与复制参数。

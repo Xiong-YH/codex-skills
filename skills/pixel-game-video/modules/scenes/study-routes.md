@@ -13,4 +13,4 @@ params：`phase,environment,heading,kicker,labels[3],startEvent,completeEvent,so
 
 `sourceShots` 在 decision 中必须为两个不同的前序镜头 ID，其他 phase 为空。编译器阻止当前/未来引用，避免递归。运行时从完整镜头末帧获取图卡，不含字幕，不复制手绘的“假缩略图”。默认右图卡左上角 `.54,.30`、宽 `.29`，与 scene-to-card 的落位参数一致。
 
-背景图、素材提示词在 style/assets；背景与实体道具以 480×270 网格生成到输出画幅，文字保留输出分辨率。runtime 中仅含图形逻辑，不放旁白与长篇生成提示词。
+背景图、素材提示词在 library/backgrounds；背景与实体道具以 480×270 网格生成到输出画幅，文字保留输出分辨率。runtime 中仅含图形逻辑，不放旁白与长篇生成提示词。

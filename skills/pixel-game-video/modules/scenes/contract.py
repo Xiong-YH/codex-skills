@@ -1,6 +1,23 @@
 """Scene-specific data validation; timing resolution belongs to the compiler."""
 
 
+def background_environments(shot):
+    """Background selectors actually reached by this shot's scene renderer."""
+    if shot.get('replacement'):
+        return set()
+    params = shot['params']
+    required = set() if shot.get('background') else {params.get('environment', 'workspace')}
+    if shot['scene'] == 'scenes.cache-adventure.v1':
+        phase = params['phase']
+        # This renderer also selects rooms internally, even with a project background.
+        required.update({'workspace', 'archive'} if phase == 'miss' else
+                        {'archive'} if phase == 'fetch' else {'workspace'})
+    if shot['scene'] == 'scenes.competition-routes.v1' and params.get('presentation') in ('cinematic', 'gameplay'):
+        if params['phase'] in ('question', 'training', 'cost', 'trial'):
+            required.add('workspace')
+    return required
+
+
 def validate(scene_id, params, events, objects):
     event_ids = {e['id'] if isinstance(e, dict) else e for e in events} | {'enter', 'exit'}
     event_frames = {e['id']: e.get('localFrame', e.get('frame')) for e in events if isinstance(e, dict)}

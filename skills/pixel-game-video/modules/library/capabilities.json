@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "defaults": {
+    "references": {
+      "documentation": [
+        "modules/library/CHARACTERS.md",
+        "modules/library/details.md",
+        "modules/library/backgrounds/README.md"
+      ],
+      "examples": [
+        "modules/library/characters/index.html"
+      ],
+      "tests": [
+        "tests/test_style.py",
+        "tests/test_presenter_progress.py",
+        "tests/test_dependencies.py"
+      ]
+    },
+    "notes": [
+      "人物是完整原图/基准图或已声明姿态；不代表局部口型、骨骼或自动音素对齐。道具和人物通过镜头 props 使用，背景 ID 由场景预设选择。"
+    ]
+  }
+}

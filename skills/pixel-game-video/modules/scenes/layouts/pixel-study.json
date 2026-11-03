@@ -1,0 +1,23 @@
+{
+  "libraryAssets": [
+    "style.study-desk.v1",
+    "style.research-archive.v1",
+    "style.engineering-workshop.v1",
+    "style.route-atlas.v1",
+    "style.foreground-shelf.v1"
+  ],
+  "backgrounds": {
+    "workspace": "style.study-desk.v1",
+    "research": "style.research-archive.v1",
+    "workshop": "style.engineering-workshop.v1",
+    "atlas": "style.route-atlas.v1"
+  },
+  "presenter": {
+    "x": 0.19,
+    "baseline": 0.785,
+    "height": 0.4
+  },
+  "transitionTextures": {
+    "shelf": "style.foreground-shelf.v1"
+  }
+}

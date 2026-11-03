@@ -146,6 +146,12 @@ def main(argv=None):
     doctor_parser.add_argument('--backend', choices=['canvas', 'remotion'], default='canvas')
     cat = subs.add_parser("catalog")
     cat.add_argument("module", nargs="?", choices=["style", "library", "text", "motion", "audio", "scenes", "components"])
+    cat.add_argument('--capabilities', action='store_true', help='Unified discovery view; leaves runtime catalog output unchanged')
+    cat.add_argument('--id', dest='capability_id', help='Exact capability ID; requires --capabilities')
+    cat.add_argument('--backend', choices=['canvas', 'remotion'], help='Filter declared executor support; requires --capabilities')
+    cat.add_argument('--status', choices=['registered', 'workflow', 'legacy', 'standalone', 'unavailable', 'not_implemented'],
+                     help='Filter implementation/registration state; requires --capabilities')
+    cat.add_argument('--check', action='store_true', help='Check all capability references without executing tests; requires --capabilities')
     init = subs.add_parser("init")
     init.add_argument("project", type=Path)
     init.add_argument("--title", default="像素视频示例")
@@ -183,8 +189,17 @@ def main(argv=None):
         return 0 if result["ready"] else 1
     from engine.compiler import catalog, compile_project, read_json, write_json
     if args.command == "catalog":
-        data = catalog()
-        emit(data[args.module] if args.module else data)
+        if not args.capabilities and (args.capability_id or args.backend or args.status or args.check):
+            parser.error('catalog filters and --check require --capabilities')
+        if args.check and (args.module or args.capability_id or args.backend or args.status):
+            parser.error('catalog --check validates the full inventory; do not combine it with filters')
+        if args.capabilities:
+            from engine.capabilities import check, query
+            emit(check(SKILL_ROOT) if args.check else query(SKILL_ROOT, module=args.module,
+                 ident=args.capability_id, backend=args.backend, status=args.status))
+        else:
+            data = catalog()
+            emit(data[args.module] if args.module else data)
     elif args.command == "schemas":
         from engine.models import INPUT_MODELS
         for name, model in INPUT_MODELS.items():

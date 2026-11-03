@@ -1,0 +1,49 @@
+{
+  "file": "ultra-board.png",
+  "prompt": "Use case: stylized-concept / identity-preserve. Create a single landscape TWO-PANEL reference board in ULTRA-COARSE TOP-DOWN ACTION GAME SPRITE aesthetic, inspired by the compact in-game sprites of Soul Knight, not its detailed promotional illustrations. Reference image is ONLY identity and color cues of Xiaozong: human boy with warm golden brown tousled hair, mint teal jacket over white shirt, navy pants and shoes, no scarf. Absolutely DO NOT preserve the reference's detailed body proportions, anatomy or large rendered portrait. Redesign him as an ACTUAL tiny gameplay sprite about 16 pixels wide by 22 pixels tall. Head merges into tiny torso; arms are 2x3 blocks, feet 2x2 blocks; hair a chunky asymmetric golden silhouette, two single dark pixels for eyes; a mint block with white stripe for torso, navy blocks below. 8-12 flat palette colors, uniform square logical pixel grid, no gradients, no antialiasing, no thin detailed outlines, no texture noise. LEFT third: plain light neutral backdrop, ONE enlarged sprite shown with big crisp square pixels; FULL BODY but no anatomical joints or realistic proportions. RIGHT two thirds: top-down slightly front-facing small pixel workshop GAME ROOM with grid floor, two simple wooden shelves, a mint toolbox on a low table and doorway. Same small sprite stands at table; character is only about one SIXTH of room height, exactly like an actual playable character inside a game, not a giant head portrait at a desk. All environment and props are the SAME ultra-coarse native pixel art. No UI, labels, text, watermarks, foxes or other characters. Prioritize immediately readable silhouette, mint/golden/navy identity blocks, and gameplay-scale action relation. Strong big staircase edges. The character in the right panel must be the same compact sprite as left, at smaller display scale, NOT a detailed chibi portrait.",
+  "style": "ultra-coarse",
+  "status": "user_approved_static_reference",
+  "review": "Viewed: compact simplified human sprite, recognizable hair/mint/navy cues, small game-room scale. No strict logical-grid or palette guarantee.",
+  "derivatives": [
+    {
+      "file": "ultra-sprite.png",
+      "rect": [
+        0,
+        0,
+        520,
+        1024
+      ],
+      "sha256": "af25bf26f167462eac5e4d429826069aa3e97dbc2eeedd4b4fa60e3e704a828c"
+    },
+    {
+      "file": "ultra-room.png",
+      "rect": [
+        538,
+        14,
+        985,
+        997
+      ],
+      "sha256": "0fc075038bd3a3b4d2834f10df0f36f3437b584d493cf62d9b1b9dc7f6d047dd"
+    },
+    {
+      "file": "ultra-prop.png",
+      "rect": [
+        790,
+        530,
+        470,
+        210
+      ],
+      "sha256": "68daecd4fbb242fe13f37e9c238db0516e4654962a60ab64422a9315ce1ec485"
+    }
+  ],
+  "sha256": "43da0a49380ff6be285718796549b6d4076cf20f7af5d9ff61f15d9bcdb0e1fb",
+  "identityReference": {
+    "file": "../00-lead.png",
+    "sha256": "f876797f5f919ed0d0a4675bdc102a65e9a387e83620c198f646709a9d0e2f0a"
+  },
+  "approval": {
+    "date": "2026-11-01",
+    "userFeedback": "可以，就这种，很不错，这块 skill 就调整到这里",
+    "scope": "超粗像素小棕游戏精灵造型与对应房间静态参考；不含动画、口型或严格网格色数认证"
+  }
+}

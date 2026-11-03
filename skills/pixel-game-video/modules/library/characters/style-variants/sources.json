@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-01",
+  "method": "built_in_imagegen",
+  "identity": {
+    "file": "../00-lead.png",
+    "assetId": "actor.azong.v3",
+    "name": "小棕",
+    "approval": "existing_V3_user_approved",
+    "sha256": "f876797f5f919ed0d0a4675bdc102a65e9a387e83620c198f646709a9d0e2f0a"
+  },
+  "assets": [
+    {
+      "file": "cute-board.png",
+      "prompt": "Use case: identity-preserve / style-transfer. Create a clean landscape TWO-PANEL pixel art protagonist reference board. Reference image 1 is the APPROVED HUMAN IDENTITY, not an animal: Xiaozong, a friendly stylized young human male, warm golden-brown tousled side-swept hair with recognizable asymmetric tufts, rounded face, thick short dark brows, large dark rounded-square eyes with white corners, small gentle curved smile, mint-teal OPEN short jacket with rolled white cuffs and a little yellow square on left chest, white inner shirt, dark navy trousers, navy shoes with white tops. NO scarf, NO animal ears, NO muzzle, NO tail. Preserve the specific face and hair silhouette and clothing from the reference; do not invent a new generic mascot. Maintain coherent head neck shoulders torso arm and hand scale. No detached head or body-part collage. Overall STYLE is CUTE PIXEL ART: cohesive big-head short-limb proportions close to the identity reference, warm approachable expression, simplified rounded forms built with deliberate crisp stair-step pixel clusters, soft bright colors but HARD color blocks, 2-3 shade levels per material, minimal texture, dark selective outlines, not smooth anime painting. Left panel about 42 percent width: complete full-body character standing in the SAME relaxed pose as identity reference, facing slightly right, ears, hands and shoes fully visible, pale cream plain background. Right panel about 58 percent width: the SAME human protagonist at a simple cozy workshop desk, gently examining a small mint mechanical box, hands naturally contacting its lid, shelves and window behind. Match character/environment/prop pixel grain, proportion language and lighting. The room must be painted in the same cute pixel art, not realistic background with sprite pasted on. Calm daylight. One character per panel, identical identity and jacket. No foxes or other animals. No labels, no text, no watermarks. This is a new static candidate reference in the established human identity, not approved animation. Do not embed any explanatory UI components.",
+      "style": "cute",
+      "sha256": "9f17b5c51f58abc4b3b20ea41c4a88687274f1d84db3ce4a0b17d7ed4da8c8fd"
+    },
+    {
+      "file": "chunky-board.png",
+      "prompt": "Use case: identity-preserve / style-transfer. Create a clean landscape TWO-PANEL pixel art protagonist reference board. undefined Overall STYLE is COARSE PIXEL ART (the normal coarse tier, not ultra-coarse): visible large square clusters, deliberate clear staircase silhouettes, simplified features and mitten-like hands, clear readable dark eyebrows and square eyes, 12-18 grouped colors as a target, 1-2 hard shadow blocks per material, minimal texture, no gradients, no blur, no smooth anti-aliased linework or realistic painting. Preserve coherent slightly stylized big-head body proportion from identity reference, do not use realistic adult arms with the original cute face. Left panel about 42 percent width: complete full-body character standing in SAME relaxed pose as approved identity reference, facing slightly right, ears, hands and shoes visible, pale cream background. Right panel about 58 percent width: SAME human protagonist at a simple cozy workshop desk, gently examining a small mint mechanical box, hands naturally contacting its lid, shelves and window behind. Design the ENTIRE room and box with the SAME large coarse pixel clusters, reducing shelves and window into clear blocks and suppressing texture. Calm daylight. One character per panel, identical identity and mint open jacket. No foxes or other animals. No labels, no text, no watermarks. This is a new static candidate reference in the established human identity, not approved animation. Do not embed any explanatory UI components.",
+      "style": "chunky",
+      "sha256": "699f1b2dc0a070349475b2ee80c1bd2612b78a275b3342d42b8ee7cb6eb23c61"
+    }
+  ],
+  "review": {
+    "static_visual": "viewed; identity traits broadly retained; background and hand/body proportions remain subject to user review",
+    "approval": "pending",
+    "runtime_ready": false,
+    "scope": "new static style boards; not replacement V3 master, not animation or mouth adaptation"
+  }
+}

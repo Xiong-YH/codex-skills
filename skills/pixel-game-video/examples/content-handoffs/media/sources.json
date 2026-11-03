@@ -6,13 +6,13 @@
         "workshop.png",
         "archive.png"
       ],
-      "source": "../../../modules/style/assets/engineering-workshop-v1.png and research-archive-v1.png",
+      "source": "../../../modules/library/backgrounds/engineering-workshop-v1.png and research-archive-v1.png",
       "role": "existing repository-owned style samples reused in this example"
     },
     {
       "file": "day-night-atlas.png",
       "tool": "built-in image_gen",
-      "styleReference": "../../../modules/style/assets/pixel-workbench.png",
+      "styleReference": "../../../modules/library/backgrounds/pixel-workbench.png",
       "promptSummary": "New pixel-art workroom, large window, identical camera and furniture in stacked daytime/nighttime frames; blue sky and sunlight become moon and stars with task lamp on; no people or baked text",
       "invariantLimit": "individual details not pixel-identical; cross-dissolve represents elapsed time"
     },

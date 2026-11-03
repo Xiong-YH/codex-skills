@@ -1,39 +1,24 @@
-# 风格
+# 风格：任务入口
 
-新背景按 [开放式场景设计与风格样板](ART-DIRECTION.md) 制作，先确定内容需要的空间与尺度，再找或制作素材。下列预设的房间映射是已有示例的后备素材，不构成新主题的场所菜单；镜头可直接选择项目 background/replacement 素材。`style.pixel-editorial.v1` 提供组件配色与中性排版备用底，实际环境由分镜设计；留空底只适合结构预演或明确采用图解的镜头。
+定义场景美术的像素尺度、造型、色阶、材质、光影与投影。项目主画风与片段特选按 [透传合同](ART-DIRECTION-CONTRACT.md) 展开，人物、其他物种、背景、场景道具统一遵循片段有效画风。组件按自己的美术规范独立处理，字幕排版归 text。
 
-负责色板、像素网格、字体角色与文字安全区；不决定题材、角色和时长。
+## 职责边界
 
-| 文件 | 维护内容 |
+背景图与来源已归 library/backgrounds；环境映射、人物站位与前景纹理已归 scenes/layouts，具体背景绘制归 scenes/backgrounds。公共构建层合成现有运行配置。文字排版归 text，组件结构归 components。
+
+## 按任务读取
+
+| 当前任务 | 读取入口 |
 | --- | --- |
-| `catalog.json` | 风格 ID、预设与可选的独立执行器 |
-| `preset.json` | 日光版颜色、字体栈、安全区、字号比例 |
-| `runtime.js` | 通用帮助函数、日光背景与面板 |
-| `cyberpunk.json`、`cyberpunk.js` | 夜城版颜色、字幕皮肤、背景与终端面板 |
-| `assets/` | 风格拥有的背景图与生成来源记录 |
-| `pixel-computing.json`、`pixel-computing.js` | 工作台与机房的像素计算风格、镜头环境选择 |
-| `pixel-study.json`、`pixel-study.js` | 研途场景组：书桌、档案馆、工坊、俯视路线桌；480×270 背景网格 |
-| `pixel-competition.json` | 竞赛场景组：复用工作台、机房训练室、开发工坊与路线桌；沿用 pixel-study.js 的像素背景执行器 |
+| 后端、编辑方式、示例与验证边界 | [统一能力目录](../../references/capability-catalog.md)；运行 python scripts/video.py catalog style --capabilities |
+| 新组件画风、素材生成与局部改版 | [组件共同画风](COMPONENT-ART.md)；按材质、厚度、接触和主次生成，原图库整体迁移待后续 |
+| 背景与同镜美术设计 | [美术方向](ART-DIRECTION.md)；先按内容设计空间，样板不是场所菜单 |
+| 八类画风、分支提示词与片段透传 | [八类画风](PIXEL-STYLES.md)、[画廊](references/index.html)、[透传合同](ART-DIRECTION-CONTRACT.md)；用 resolve-art-direction.cjs 展开，非运行时预设 |
+| 风格选型、网格、字段和接入 | [预设与接入细节](details.md)、[风格目录](catalog.json) |
+| 素材管理或场所布局 | [素材](../library/GUIDE.md)、[场景布局](../scenes/layouts/GUIDE.md) |
 
-`style.modern-pixel.v1` 使用日光浅青天空、青绿远景、暖沙平台与奶油信息卡；深青文字保证明亮背景上的对比。
-背景按天空、远山、近景、平台分层；云和地表纹理避开主体信息区，不使用满屏点阵作装饰。
-平台顶面固定在画高 75%，与角色脚底共用基线；字幕区保持浅底深字，不叠加场景纹理。
-`style.cyberpunk.v1` 使用暗靛夜城、青绿与洋红霓虹、少量琥珀光；背景是有纵深和材质的游戏场景，不能用满屏点阵或纯色替代。
-`style.pixel-computing.v1` 复用候选 02 工作台和 03 机房；environment 的 workspace/archive 在预设 backgrounds 映射到独立素材。保留明确像素画质感，计算机口播用途不意味着改成写实空间。新样例显式选择这个风格，原工程继续按自身 ID 构建。
-屋顶平台约在画高 75%，与人物脚底对齐；人物可不出镜，画面仍由环境和机制成立。
-终端面板采用深色金属层、切角、局部发光接缝；亮字与面板分层，字幕有独立暗底，霓虹不压文字。
-原生人物和物体最近邻放大；背景图保持自身像素细节，位移和相机在最终分辨率合成。
-文字按输出尺寸绘制，不先画进低分辨率像素层。
+## 验收重点
 
-替换风格：复制预设、修改 ID/颜色/字体、在目录项 `file` 引用该预设；构建器按项目 style 选择。
-专用背景和面板放目录项 `runtime`，在通用执行器后加载；素材在预设 `assets` 中按稳定 ID 引用模块内相对路径。
-可选 `subtitle` 字段提供 `background`、`opacity`、`border`、`accent` 和画高比例 `height`（默认 .16）；字幕排版仍由 text 模块负责。像素计算版使用 .105 的较薄底板，人物与道具仍须避开实际字幕文字。
-可选 `textShadow` 配置暗色描影；`blur`、`offsetY` 为画高比例，用于复杂背景上的标签分离。
-新建工程按模板指定的 style ID；当前考研叙事样例显式选择 `style.pixel-study.v1`，不改变其他工程默认值。生成素材与提示词保存在 `assets/study-scenes-prompts.json`；`transitionTextures.shelf` 提供实体前景书架。
-字体通过 `fontFamily` 配置；目标机器须已安装对应字体，预览和导出使用同一浏览器。
-`presenter` 可配置固定讲述人物的 `x`、`baseline`、`height` 画幅比例；未配置时沿用原站位。像素计算风格将脚底放在工作台表面，不随镜头或图文事件走动。
-当前运行版为 320×180 原生网格、1920×1080 输出；其他尺寸须适配布局后验证。
+检查同镜明暗、材质、像素尺度与轮廓，小屏可读、运动无明显像素跳动；目标平台字体须实际核验。
 
-验收：小屏文字可读、角色轮廓稳定、明暗层级清楚；镜头运动不产生整像素大幅跳动。
-暗色场景仍需有局部光源、材质和空间层次，不能只压暗整张背景；前景遮挡素材与背景保持同一像素与材质方向。减少战斗或 HUD 包装时仍保留已选的像素画风。具体项目的色调和场所偏好由其 brief 决定。
-场景内短标签使用 [text](../text/GUIDE.md)，素材色彩归 [library](../library/GUIDE.md)。
+全片分轨、保存重开和最终导出统一按 [工作台](../../references/workbench.md) 验证，本页不表示已完成当前项目验收。新增能力查 [模块维护](../../references/module-development.md)，职责调整查 [归属与迁移清单](../../references/module-ownership.md)。

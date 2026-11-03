@@ -2,6 +2,16 @@
 
 这些是已收纳的独立 Canvas 表现组件，列表见 [object-components.json](object-components.json)。它们与十二类信息组件的 `shot.components.kind` 分开；在项目场景中调用绘制器，或按工程事件合成为项目素材后接入，不填写未注册 kind。背景、字幕、配乐和总片时长仍由项目拥有。
 
+新设计从 [脚本驱动设计](DESIGN.md) 开始，新的独立组件按 [实现协议](CUSTOM-RUNTIME.md) 分离状态、绘制和播放器。旧实例保留原接口与适用范围。
+
+## 内容驱动设计的认可范例：加工站与等待缓冲架
+
+`object.request-queue-study.v1`：[播放与独立样式](examples/request-queue/index.html) · [认可及适用范围](examples/request-queue/design.md)。2026-11-01 用户认可本次两片段脚本到组件的效果：先建立逐件处理，再保持处理周期并让到达变密，等待因此可见。固定视角、两套有限输入的独立 HTML，未接入工作台。机械造型只属于此例，不成为所有项目默认。
+
+## 状态变化完整范例：复合仪表与条块散落
+
+`object.state-meter-break.v1`：[播放](examples/state-meter/index.html) · [设计与调用](examples/state-meter/design.md)。由脚本需要推导出数值/分段条联动和原条块脱离；组件状态与绘制独立于播放器，支持事件绑定、稳定 ID、非顺序取帧、数量和布局变化。纯 Canvas 独立试样，未注册 shot.components.kind 或工作台适配器；不宣称任意物体碎裂。
+
 ## 当前五维动作范例：筹码入托盘
 
 `object.resource-bundle-into-tray.v1`：[播放与五维约定](examples/resource-into-tray/index.html)。同一组筹码短弧线转移，容器内部平面定位落点，真实前壁与近侧壁轮廓负责遮挡。主运动 20 帧、收尾 6 帧，60fps；不是所有组件的固定秒数。支持原固定视角与两种位置／尺寸布局，不宣称任意容器或逐枚搬运可用。
