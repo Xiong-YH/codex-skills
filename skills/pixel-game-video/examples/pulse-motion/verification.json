@@ -1,0 +1,62 @@
+{
+  "date": "2026-11-06",
+  "scope": "non-3D motion port and reusable HTML grammar; technical verification only",
+  "inputHash": "fec38a170d9582cb1ab05a557d6933be8ea8683f478727d113eb0e6b2a946252",
+  "upstreamRevision": "6145f7e3482628543bd6f2d68fe3b618d366213a",
+  "checks": {
+    "pythonContractTests": 40,
+    "motionRuntimeTests": 5,
+    "sourceWorkbenchPixelParityFrames": 64,
+    "htmlModes": 8,
+    "htmlSeekStates": 48,
+    "htmlLayoutWidths": [
+      360,
+      1100
+    ],
+    "htmlCopiedConfigurations": 10,
+    "htmlFrameRates": [
+      30,
+      60
+    ],
+    "workbenchEditSaveReopen": true,
+    "workbenchMp4Export": true,
+    "fullFfmpegDecode": "passed",
+    "legacyWorldTransitionFrames": 84,
+    "legacyNarrativeTransitionFrames": 216
+  },
+  "video": {
+    "sha256": "e82d2777d2c07d12909f83da1f38ea6946cd17b9f7109b92b40638c978f5acc4",
+    "projectSha256": "d809e9f2bc0f2bd13d07156435ca8c26388226e0ca0c7338aa984b020d6ac07d",
+    "durationSeconds": 24,
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "frames": 1440
+  },
+  "normalSpeedPlayback": {
+    "ended": true,
+    "duration": 24,
+    "width": 1920,
+    "height": 1080,
+    "playbackRate": 1,
+    "wallSeconds": 24.46869999998808,
+    "presentedCallbacks": 1435
+  },
+  "limitations": [
+    "Not a full repository test-suite pass. Legacy content-handoffs.cjs expects obsolete payload.style.assets; that pixel suite did not pass and was not changed.",
+    "No native Remotion expansion, TTS or word alignment is claimed.",
+    "User aesthetic approval is pending; HTML scene art is illustrative.",
+    "Workstation runtime artifacts stay in ignored work/build directories; no binary delivery is tracked."
+  ],
+  "stagedSourceValidation": {
+    "inputHash": "02099b40c0d85eee3bf6a36b1d01c314411a5df0112d7f2686841f6a1953e962",
+    "skillValidation": "passed for both skills",
+    "directorHandoff": "recipe, target, curve and event window preserved",
+    "pythonTests": 14,
+    "runtimeTests": 5,
+    "pixelParityFrames": 64,
+    "htmlModes": 8,
+    "htmlSeekStates": 48,
+    "exportEvidence": "The MP4 above was exported from the full working-tree inputHash; the staged snapshot was built and tested independently without earlier unrelated working-tree edits."
+  }
+}

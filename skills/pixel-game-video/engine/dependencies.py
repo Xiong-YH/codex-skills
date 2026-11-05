@@ -122,6 +122,7 @@ def javascript_files(skill, resolved):
         paths.append('motion/content-handoffs.js')
     if recipes & NARRATIVE_RECIPES:
         paths.append('motion/narrative-transitions.js')
+    paths += ['motion/pulse-spec.js', 'motion/pulse.js']  # Shared grammar, then runtime.
     return list(dict.fromkeys('modules/' + path for path in paths)) + ['engine/player.js']
 
 
@@ -142,6 +143,8 @@ def runtime_files(skill, resolved):
     files.update({'scripts/video.py', 'requirements.txt', 'modules/library/prepare.py',
                   'modules/scenes/contract.py', 'modules/scenes/performance.py', 'modules/components/contract.py',
                   'modules/audio/narration.py', 'modules/motion/handoffs.py'})
+    files.update({'modules/motion/pulse_contract.py', 'modules/motion/FRAMETELL-NOTICE.md',
+                  'modules/motion/licenses/AGPL-3.0.txt'})
     # Catalogs are validation contracts; lock these even when only one entry is selected.
     files.update('modules/' + name + '/catalog.json'
                  for name in ('style', 'library', 'text', 'motion', 'audio', 'scenes', 'components'))

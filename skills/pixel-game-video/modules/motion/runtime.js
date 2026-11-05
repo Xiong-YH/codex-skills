@@ -188,6 +188,14 @@
       else if(motion.recipe==='motion.pixel-iris.v1')iris(e,outgoing,incoming,motion,p);
       else throw new Error('Unknown content transition '+motion.recipe);
     },
+    cameraTransform(c,w,h) {
+      let x,y;
+      if(c.mode==='center'||c.mode==='track'){
+        x=w/2-c.x*w*c.scale;y=h/2-c.y*h*c.scale;
+        if(c.mode==='track'||c.bounds!=='free'){x=P.clamp(x,w-w*c.scale,0);y=P.clamp(y,h-h*c.scale,0);}
+      }else{x=c.x*w*(1-c.scale);y=c.y*h*(1-c.scale);}
+      return {x:x+(c.shakeX||0),y:y+(c.shakeY||0),scale:c.scale};
+    },
     camera(motions, frame) {
       let result = {scale:1,x:.62,y:.5};
       for (const m of [...motions].sort((a,b)=>a.startFrame-b.startFrame)) {

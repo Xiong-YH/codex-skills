@@ -332,6 +332,157 @@
         ]
       },
       "contract": "handoffs.py"
+    },
+    {
+      "id": "motion.camera-pulse.v1",
+      "kind": "camera",
+      "target": "scene",
+      "title": "短促关注点相机：推近、平移、冲击、回全景",
+      "params": {
+        "kind": [
+          "push",
+          "pan",
+          "slam",
+          "back"
+        ],
+        "x": [
+          0,
+          1
+        ],
+        "y": [
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1.75
+        ],
+        "ease": [
+          "out",
+          "inOut",
+          "slam",
+          "linear",
+          "expo",
+          "back",
+          "draw"
+        ],
+        "bounds": [
+          "cover",
+          "free"
+        ]
+      }
+    },
+    {
+      "id": "motion.camera-path.v1",
+      "kind": "camera",
+      "target": "scene",
+      "title": "连续关注点关键帧",
+      "params": {
+        "keys": "[{atFrame,durationFrames,x,y,scale,ease}]",
+        "bounds": [
+          "cover",
+          "free"
+        ]
+      }
+    },
+    {
+      "id": "motion.camera-shake.v1",
+      "kind": "camera-effect",
+      "target": "scene",
+      "title": "可叠加的衰减相机震动",
+      "params": {
+        "amplitude": [
+          0,
+          40
+        ]
+      }
+    },
+    {
+      "id": "motion.layer-move.v1",
+      "kind": "layer",
+      "target": "scene",
+      "title": "背景／人物／内容组整体移动、缩放、旋转和显隐",
+      "params": {
+        "layer": [
+          "background",
+          "actor",
+          "content"
+        ],
+        "ease": [
+          "out",
+          "inOut",
+          "slam",
+          "linear",
+          "expo",
+          "back",
+          "draw"
+        ],
+        "xFrom": [
+          -1,
+          1
+        ],
+        "xTo": [
+          -1,
+          1
+        ],
+        "yFrom": [
+          -1,
+          1
+        ],
+        "yTo": [
+          -1,
+          1
+        ],
+        "scaleFrom": [
+          0.05,
+          4
+        ],
+        "scaleTo": [
+          0.05,
+          4
+        ],
+        "rotationFrom": [
+          -360,
+          360
+        ],
+        "rotationTo": [
+          -360,
+          360
+        ],
+        "opacityFrom": [
+          0,
+          1
+        ],
+        "opacityTo": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "id": "motion.page-turn.v1",
+      "kind": "transition",
+      "layer": "world",
+      "target": "scene",
+      "title": "页面接续：交叉淡化、轻移与出页模糊",
+      "params": {
+        "direction": [
+          "left",
+          "right"
+        ],
+        "blur": [
+          0,
+          12
+        ],
+        "exitPixels": [
+          0,
+          120
+        ],
+        "enterPixels": [
+          0,
+          120
+        ]
+      }
     }
   ]
 }

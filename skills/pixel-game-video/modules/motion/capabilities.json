@@ -5,19 +5,28 @@
       "documentation": [
         "modules/motion/TRANSITIONS.md",
         "modules/motion/details.md",
-        "modules/motion/TIMING.md"
+        "modules/motion/TIMING.md",
+        "modules/motion/recipes/pulse-camera.md",
+        "modules/motion/lab/index.html",
+        "modules/motion/pulse-spec.js"
       ],
       "examples": [
-        "examples/content-handoffs/timeline.json"
+        "examples/content-handoffs/timeline.json",
+        "examples/pulse-motion/timeline.json"
       ],
       "tests": [
         "tests/test_transitions.py",
         "tests/test_content_handoffs.py",
-        "tests/test_remotion_contract.py"
+        "tests/test_remotion_contract.py",
+        "tests/test_pulse_motion.py",
+        "tests/pulse-motion.test.cjs",
+        "tests/pulse-pixels.cjs",
+        "tests/pulse-lab.cjs"
       ]
     },
     "notes": [
-      "转场可独立成轨；相机、物体动作与局部特效在镜头 props 中编辑。设计索引与竞赛专用空间交接不能直接填为 recipe。"
+      "转场可独立成轨；相机、物体动作与局部特效在镜头 props 中编辑。设计索引与竞赛专用空间交接不能直接填为 recipe。",
+      "新增非3D pulse相机、路径、震动、图层组与page-turn；仅Canvas及同源工作台，不扩大原生Remotion白名单。来源与AGPL许可随模块分发。"
     ]
   }
 }

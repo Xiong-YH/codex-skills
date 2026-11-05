@@ -5,6 +5,8 @@ description: 接手完整文案，拆大模块和片段，以大白话及可弃�
 
 # Pixel Video Director
 
+**核心要求：镜头描述与实际动效一致。** 新增或修改镜头前必读[动态规范与兑现合同](references/motion-direction.md)，结合 FOUNDATION 的可执行 HTML 与共用曲线设计焦点、运动、落稳和阅读；交接到真实配方及事件，出片逐项核对。不能只写运镜形容词、靠静态参考猜效果，或用近似动画替代已采用的方案。固定镜头可明确写固定，不要求每镜都有运镜。
+
 **创作前必读：** 生成或修改视觉脚本、分镜和视听编排前（局部修改也适用），先按 [依赖定位](references/handoff.md) 找到 FOUNDATION，读取其 `references/production-principles.md`，落实核心通用要求及本次相关踩坑。只做分镜不要求建工程或运行 doctor。
 
 **已确认要求主动继承：** 后续新片的普通字幕遵循 FOUNDATION `modules/text/SOFT-HIGHLIGHT.md` 的制作默认，由 Agent 落实到设计、工作台选型及成片审查；特殊表达或既有有效约定使用其他方案时写明具体依据，不等使用者再次提醒。只交设计时仍明确本片采用及例外，制作接手后核对实际调用。

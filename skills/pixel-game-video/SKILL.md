@@ -5,6 +5,8 @@ description: 按已有脚本或工程制作、修改像素游戏感视频，在�
 
 # Pixel Game Video
 
+**核心要求：按镜头决定兑现动效。** 制作前从[可执行HTML规范](modules/motion/lab/index.html)核对所选效果，并按[正式调用合同](modules/motion/recipes/pulse-camera.md)落实对应配方、目标、曲线和事件窗口；从实际导出检查起态、过程、落点与阅读。不能只写运镜名称、靠静态图猜效果，或用近似动作代替已采用的设计。
+
 选题与完整文案交给 pixel-video-writer；大模块、大白话/构思草图、结构化设计/动态白模和正式制作统筹交给 pixel-video-director。已有工程直接从当前阶段继续，基础技能可独立运行，不为局部实现修复重跑上游流程。
 
 按结构化工程制作和修改像素游戏感视频。开始制作、续作或复盘先读 [制作总则](references/production-principles.md)，工程编写前读 [制作合同](references/contract.md)；按当前任务选择下面的模块，不默认加载全部参考。

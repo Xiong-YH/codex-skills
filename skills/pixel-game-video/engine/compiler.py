@@ -75,9 +75,14 @@ def _finite(value, label):
 _handoff_spec = importlib.util.spec_from_file_location('pixel_handoff_contract', SKILL_ROOT / 'modules/motion/handoffs.py')
 _handoff_contract = importlib.util.module_from_spec(_handoff_spec)
 _handoff_spec.loader.exec_module(_handoff_contract)
+_pulse_spec = importlib.util.spec_from_file_location('pixel_pulse_contract', SKILL_ROOT / 'modules/motion/pulse_contract.py')
+_pulse_contract = importlib.util.module_from_spec(_pulse_spec)
+_pulse_spec.loader.exec_module(_pulse_contract)
 
 
 def _motion_params(recipe, params):
+    if _pulse_contract.validate(recipe, params):
+        return
     if _handoff_contract.validate_params(recipe, params):
         return
     rules = {
@@ -244,11 +249,17 @@ def compile_project(project_root, skill_root=None, *, write=False):
         unique((m["id"] for m in shot["motions"]), f"{shot['id']}.motions")
         targets = {"scene", "actor"} | {o["id"] for o in shot["objects"]}
         intervals = {}
+        camera_recipes = {m['recipe'] for m in shot['motions']}
+        if camera_recipes & {'motion.camera-pulse.v1', 'motion.camera-path.v1'} and camera_recipes & {'motion.camera-push.v1', 'motion.camera-track.v1'}:
+            raise ValueError('Do not mix legacy and pulse cameras in one shot; use camera-path for continuous framing')
+        if any(m['recipe'] == 'motion.layer-move.v1' for m in shot['motions']) and shot['scene'] == 'scenes.competition-routes.v1' and shot['params'].get('presentation') in ('cinematic', 'gameplay'):
+            raise ValueError('layer-move cannot split a competition cinematic/gameplay world')
         for motion in shot["motions"]:
             capability = require("motion", motion["recipe"])
             _motion_params(motion["recipe"], motion["params"])
             start = resolve(motion.pop("start"))
             end = start + motion.pop("durationFrames")
+            _pulse_contract.validate_window(motion['recipe'], motion['params'], end-start)
             if start < shot["startFrame"] or end > shot["endFrame"]:
                 raise ValueError(f"{shot['id']}.{motion['id']}: motion outside shot")
             if motion["target"] not in targets:
@@ -281,6 +292,8 @@ def compile_project(project_root, skill_root=None, *, write=False):
                                 obj["y"] + .135 <= bounds["y"] + bounds["height"]):
                             raise ValueError(f"{owner['id']}.{obj['id']}: object outside content stage; reposition it or use another transition")
             key = ("transition" if transition else ("camera" if capability.get('kind')=='camera' else recipe), motion["target"])
+            if recipe == 'motion.layer-move.v1':
+                key = (recipe, motion['params']['layer'])
             if any(start < b and a < end for a, b in intervals.get(key, [])):
                 raise ValueError(f"overlapping motion on {motion['target']}: {recipe}")
             intervals.setdefault(key, []).append((start, end))

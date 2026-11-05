@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>运镜与动效 · 可执行规范</title><link rel="stylesheet" href="lab.css"></head>
+<body>
+<main id="motion-lab">
+ <header><span class="eyebrow">PIXEL VIDEO / MOTION</span><h1>运镜与动效，可执行规范</h1><p>选择效果 → 播放或拖动 → 查看曲线 → 复制工程配置。这里调用正式运镜函数，场景用 HTML 分层呈现。</p></header>
+ <nav id="preset-buttons" aria-label="动效选择"></nav>
+ <div class="layout">
+  <section aria-label="动画预览">
+   <div class="viewport" id="viewport"><div class="scene-fit" id="scene-fit">
+    <div class="page" id="page-a"><div class="world" id="world-a"><div class="background"></div><div class="content-group" id="group-a"><div class="block input">输入</div><div class="connection"></div><div class="block result">结果<span>关注对象</span></div></div></div></div>
+    <div class="page" id="page-b"><div class="background alternate"></div><div class="new-result">下一页<br><span>旧页退场，新内容落稳</span></div></div>
+    <div class="crosshair" aria-hidden="true"></div><div class="hud">固定标题 · 不随相机移动</div><div class="subtitle">字幕独立成轨</div>
+   </div></div>
+   <div class="controls"><button id="play" type="button">播放</button><button id="replay" type="button">重播</button><label>帧率<select id="fps"><option value="60">60 fps</option><option value="30">30 fps</option></select></label><label>速度<select id="speed"><option value="1">正常</option><option value="0.25">¼ 倍</option></select></label><strong id="phase">保持</strong></div>
+   <label class="timeline-label" for="timeline">时间 <output id="time-label">0.00 s</output></label><input type="range" id="timeline" min="0" max="179" value="0" step="1">
+   <p id="description" aria-live="polite"></p>
+  </section>
+  <aside>
+   <h2>曲线规范</h2><label>缓动<select id="easing"></select></label>
+   <svg viewBox="0 0 340 190" role="img" aria-label="横轴是时间进度，纵轴是运动进度；曲线与实际执行器共用函数"><path class="grid" d="M35 20V155H320 M35 35H320 M35 95H320"/><path class="guide" d="M35 155L320 35"/><path id="curve"/><circle id="curve-dot" r="5"/><text x="30" y="177">0</text><text x="294" y="177">时间 →</text><text x="3" y="39">1</text><text x="3" y="156">0</text><text x="8" y="15">进度</text></svg>
+   <code id="formula"></code><dl id="facts"></dl><p class="note" id="curve-note"></p>
+  </aside>
+ </div>
+ <section class="config"><div class="config-heading"><h2>工程调用</h2><button id="copy" type="button">复制 JSON</button><span id="copy-status" role="status"></span></div><textarea id="config" readonly rows="12" aria-label="可复制的 VideoSpec motion 配置"></textarea></section>
+ <footer><p>共享源：<a href="../pulse-spec.js">曲线与预设规范</a> · <a href="../pulse.js">正式执行器</a> · <a href="../recipes/pulse-camera.md">参数及工作台合同</a> · <a href="../FRAMETELL-NOTICE.md">来源与 AGPL 许可</a></p><p>预览中的场景是结构示意，不代表正式美术。页面转场用相同的位移／透明度／模糊关系映射到 HTML；正式导出仍走 Canvas 同源执行器。未引入 3D。</p></footer>
+</main>
+<script src="../../style/runtime.js"></script><script src="../runtime.js"></script><script src="../pulse-spec.js"></script>
+<script>PixelVideo.scenes={draw(){},drawLayer(){}};</script><script src="../pulse.js"></script><script src="lab.js"></script>
+</body></html>

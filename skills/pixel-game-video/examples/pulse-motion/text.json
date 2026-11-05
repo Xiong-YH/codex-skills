@@ -1,0 +1,236 @@
+{
+  "cues": [
+    {
+      "id": "title1",
+      "role": "title",
+      "text": "推近：关注关键对象",
+      "start": {
+        "event": "s01.enter",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s01.exit"
+      }
+    },
+    {
+      "id": "sub1",
+      "role": "subtitle",
+      "text": "技术试样 · 无配音 · 字幕独立成轨",
+      "phrases": [
+        "ji shu shi yang",
+        "wu pei yin",
+        "zi mu du li cheng gui"
+      ],
+      "start": {
+        "event": "s01.enter",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s01.exit"
+      }
+    },
+    {
+      "id": "title2",
+      "role": "title",
+      "text": "平移：从右到左",
+      "start": {
+        "event": "s02.enter",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s02.exit"
+      }
+    },
+    {
+      "id": "sub2",
+      "role": "subtitle",
+      "text": "技术试样 · 无配音 · 字幕独立成轨",
+      "phrases": [
+        "ji shu shi yang",
+        "wu pei yin",
+        "zi mu du li cheng gui"
+      ],
+      "start": {
+        "event": "s02.enter",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s02.exit"
+      }
+    },
+    {
+      "id": "title3",
+      "role": "title",
+      "text": "冲击：快速推近并收回",
+      "start": {
+        "event": "s03.enter",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s03.exit"
+      }
+    },
+    {
+      "id": "sub3",
+      "role": "subtitle",
+      "text": "技术试样 · 无配音 · 字幕独立成轨",
+      "phrases": [
+        "ji shu shi yang",
+        "wu pei yin",
+        "zi mu du li cheng gui"
+      ],
+      "start": {
+        "event": "s03.enter",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s03.exit"
+      }
+    },
+    {
+      "id": "title4",
+      "role": "title",
+      "text": "震动：短促冲击后落稳",
+      "start": {
+        "event": "s04.enter",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s04.exit"
+      }
+    },
+    {
+      "id": "sub4",
+      "role": "subtitle",
+      "text": "技术试样 · 无配音 · 字幕独立成轨",
+      "phrases": [
+        "ji shu shi yang",
+        "wu pei yin",
+        "zi mu du li cheng gui"
+      ],
+      "start": {
+        "event": "s04.enter",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s04.exit"
+      }
+    },
+    {
+      "id": "title5",
+      "role": "title",
+      "text": "回全景：重新看清整体",
+      "start": {
+        "event": "s05.enter",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s05.exit"
+      }
+    },
+    {
+      "id": "sub5",
+      "role": "subtitle",
+      "text": "技术试样 · 无配音 · 字幕独立成轨",
+      "phrases": [
+        "ji shu shi yang",
+        "wu pei yin",
+        "zi mu du li cheng gui"
+      ],
+      "start": {
+        "event": "s05.enter",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s05.exit"
+      }
+    },
+    {
+      "id": "title6",
+      "role": "title",
+      "text": "关键帧：推近、平移、拉回",
+      "start": {
+        "event": "s06.enter",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s06.exit"
+      }
+    },
+    {
+      "id": "sub6",
+      "role": "subtitle",
+      "text": "技术试样 · 无配音 · 字幕独立成轨",
+      "phrases": [
+        "ji shu shi yang",
+        "wu pei yin",
+        "zi mu du li cheng gui"
+      ],
+      "start": {
+        "event": "s06.enter",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s06.exit"
+      }
+    },
+    {
+      "id": "title7",
+      "role": "title",
+      "text": "图层组：移动内容，背景不动",
+      "start": {
+        "event": "s07.enter",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s07.exit"
+      }
+    },
+    {
+      "id": "sub7",
+      "role": "subtitle",
+      "text": "技术试样 · 无配音 · 字幕独立成轨",
+      "phrases": [
+        "ji shu shi yang",
+        "wu pei yin",
+        "zi mu du li cheng gui"
+      ],
+      "start": {
+        "event": "s07.enter",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s07.exit"
+      }
+    },
+    {
+      "id": "title8",
+      "role": "title",
+      "text": "页面接续：轻移、淡化与模糊",
+      "start": {
+        "event": "s08.enter",
+        "offsetFrames": 40
+      },
+      "end": {
+        "event": "s08.exit"
+      }
+    },
+    {
+      "id": "sub8",
+      "role": "subtitle",
+      "text": "技术试样 · 无配音 · 字幕独立成轨",
+      "phrases": [
+        "ji shu shi yang",
+        "wu pei yin",
+        "zi mu du li cheng gui"
+      ],
+      "start": {
+        "event": "s08.enter",
+        "offsetFrames": 40
+      },
+      "end": {
+        "event": "s08.exit"
+      }
+    }
+  ]
+}

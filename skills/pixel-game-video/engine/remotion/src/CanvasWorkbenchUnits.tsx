@@ -33,7 +33,7 @@ const json = (value: string | undefined, fallback: any, field: string): any => {
   if (value === undefined || value.trim() === '') return fallback;
   try {return JSON.parse(value);} catch {throw new Error(`Invalid editable ${field} JSON.`);}
 };
-const transitionRecipes = new Set(['motion.panel-slide.v1', 'motion.pixel-iris.v1', 'motion.focus-punch.v1',
+const transitionRecipes = new Set(['motion.page-turn.v1', 'motion.panel-slide.v1', 'motion.pixel-iris.v1', 'motion.focus-punch.v1',
   'motion.mosaic-pullback.v1', 'motion.component-handoff.v1', 'motion.line-handoff.v1', 'motion.preview-expand.v1', 'motion.panel-occlusion.v1', 'motion.book-sweep.v1', 'motion.scene-to-card.v1',
   'motion.match-dissolve.v1', 'motion.cross-dissolve.v1', 'motion.fade-through-black.v1', 'motion.shatter-reveal.v1']);
 const editedShot = (shot: Data, props: CanvasShotProps, payload: CanvasPayload): Data => {

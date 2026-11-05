@@ -1,6 +1,7 @@
 (function(P){
   'use strict';
   P.createRenderer=function({canvas,createCanvas,assets,resolved,mouth,style,frameAssets}){
+    for(const shot of resolved.shots)for(const motion of shot.motions||[])P.motion.validatePulse?.(motion);
     const project=resolved.project,width=project.width,height=project.height;
     canvas.width=width;canvas.height=height;
     const ctx=canvas.getContext('2d'),world=createCanvas(width,height),incoming=createCanvas(width,height),incomingWorld=createCanvas(width,height),plainScratch=createCanvas(width,height);
@@ -9,7 +10,7 @@
     const history=new Map(),contentHistory=new Map(),worldHistory=new Map();
     const contentRecipes=new Set(['motion.panel-slide.v1','motion.pixel-iris.v1']);
     const handoffRecipes=new Set(['motion.component-handoff.v1','motion.line-handoff.v1','motion.preview-expand.v1','motion.panel-occlusion.v1']);
-    const worldRecipes=new Set([...handoffRecipes,'motion.focus-punch.v1','motion.mosaic-pullback.v1','motion.book-sweep.v1','motion.scene-to-card.v1','motion.match-dissolve.v1', 'motion.cross-dissolve.v1', 'motion.fade-through-black.v1']);
+    const worldRecipes=new Set([...handoffRecipes,'motion.page-turn.v1','motion.focus-punch.v1','motion.mosaic-pullback.v1','motion.book-sweep.v1','motion.scene-to-card.v1','motion.match-dissolve.v1', 'motion.cross-dissolve.v1', 'motion.fade-through-black.v1']);
     base.shotPreview=id=>{
       const index=resolved.shots.findIndex(s=>s.id===id);
       if(index<0)throw new Error('Unknown preview shot '+id);
@@ -59,13 +60,8 @@
     function composite(g,source,shot,frame,background=true){
       const camera=P.motion.camera(shot.motions||[],frame);
       g.save();if(background){g.fillStyle=base.colors.background;g.fillRect(0,0,width,height);}
-      if(camera.mode==='track'){
-        g.translate(P.clamp(width/2-camera.x*width*camera.scale,width-width*camera.scale,0),
-                    P.clamp(height/2-camera.y*height*camera.scale,height-height*camera.scale,0));
-        g.scale(camera.scale,camera.scale);
-      }else{
-        g.translate(camera.x*width,camera.y*height);g.scale(camera.scale,camera.scale);g.translate(-camera.x*width,-camera.y*height);
-      }
+      const tr=P.motion.cameraTransform(camera,width,height);
+      g.translate(tr.x,tr.y);g.scale(tr.scale,tr.scale);
       g.imageSmoothingEnabled=false;g.drawImage(source,0,0);g.restore();
     }
     function snapshot(index,excludePresenter=false){
@@ -146,8 +142,7 @@
         // Conjugate the outgoing clip transform through the incoming camera.
         // This preserves the content-only recipe and its exact original mask.
         const camera=P.motion.camera(shot.motions||[],incomingFrame),cs=camera.scale;
-        const cx=camera.mode==='track'?P.clamp(width/2-camera.x*width*cs,width-width*cs,0):camera.x*width*(1-cs);
-        const cy=camera.mode==='track'?P.clamp(height/2-camera.y*height*cs,height-height*cs,0):camera.y*height*(1-cs);
+        const tr=P.motion.cameraTransform(camera,width,height),cx=tr.x,cy=tr.y;
         const si=incomingTransform.scale??1,so=outgoingTransform.scale??1;
         const oldContent=createCanvas(width,height),og=oldContent.getContext('2d');
         og.globalAlpha=outgoingTransform.opacity??1;

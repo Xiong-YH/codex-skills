@@ -63,7 +63,7 @@ def _canvas_visual_manifest(resolved: dict, payload: dict) -> dict:
     """Expose the compiled scene data, never a baked picture of the film."""
     project = resolved['project']
     shots, transitions = [], []
-    transition_recipes = {
+    transition_recipes = {'motion.page-turn.v1',
         'motion.focus-punch.v1', 'motion.mosaic-pullback.v1', 'motion.component-handoff.v1', 'motion.line-handoff.v1', 'motion.preview-expand.v1', 'motion.panel-occlusion.v1', 'motion.panel-slide.v1',
         'motion.pixel-iris.v1', 'motion.shatter-reveal.v1', 'motion.book-sweep.v1',
         'motion.scene-to-card.v1', 'motion.match-dissolve.v1', 'motion.cross-dissolve.v1', 'motion.fade-through-black.v1'}

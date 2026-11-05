@@ -1,0 +1,366 @@
+{
+  "shots": [
+    {
+      "id": "s01",
+      "durationFrames": 180,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [
+        {
+          "id": "book",
+          "asset": "prop.book.v1",
+          "x": 0.65,
+          "y": 0.45
+        },
+        {
+          "id": "core",
+          "asset": "prop.core.v1",
+          "x": 0.35,
+          "y": 0.48
+        }
+      ],
+      "events": [],
+      "motions": [
+        {
+          "id": "camera",
+          "recipe": "motion.camera-pulse.v1",
+          "target": "scene",
+          "start": {
+            "event": "s01.enter",
+            "offsetFrames": 36
+          },
+          "durationFrames": 17,
+          "params": {
+            "kind": "push",
+            "x": 0.65,
+            "y": 0.45,
+            "bounds": "cover"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "durationFrames": 180,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [
+        {
+          "id": "book",
+          "asset": "prop.book.v1",
+          "x": 0.65,
+          "y": 0.45
+        },
+        {
+          "id": "core",
+          "asset": "prop.core.v1",
+          "x": 0.35,
+          "y": 0.48
+        }
+      ],
+      "events": [],
+      "motions": [
+        {
+          "id": "camera",
+          "recipe": "motion.camera-pulse.v1",
+          "target": "scene",
+          "start": {
+            "event": "s02.enter",
+            "offsetFrames": 0
+          },
+          "durationFrames": 17,
+          "params": {
+            "kind": "push",
+            "x": 0.65,
+            "y": 0.45,
+            "scale": 1.4
+          }
+        },
+        {
+          "id": "pan",
+          "recipe": "motion.camera-pulse.v1",
+          "target": "scene",
+          "start": {
+            "event": "s02.enter",
+            "offsetFrames": 60
+          },
+          "durationFrames": 18,
+          "params": {
+            "kind": "pan",
+            "x": 0.35,
+            "y": 0.48
+          }
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "durationFrames": 180,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [
+        {
+          "id": "book",
+          "asset": "prop.book.v1",
+          "x": 0.65,
+          "y": 0.45
+        },
+        {
+          "id": "core",
+          "asset": "prop.core.v1",
+          "x": 0.35,
+          "y": 0.48
+        }
+      ],
+      "events": [],
+      "motions": [
+        {
+          "id": "camera",
+          "recipe": "motion.camera-pulse.v1",
+          "target": "scene",
+          "start": {
+            "event": "s03.enter",
+            "offsetFrames": 36
+          },
+          "durationFrames": 22,
+          "params": {
+            "kind": "slam",
+            "x": 0.65,
+            "y": 0.45
+          }
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "durationFrames": 180,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [
+        {
+          "id": "book",
+          "asset": "prop.book.v1",
+          "x": 0.65,
+          "y": 0.45
+        },
+        {
+          "id": "core",
+          "asset": "prop.core.v1",
+          "x": 0.35,
+          "y": 0.48
+        }
+      ],
+      "events": [],
+      "motions": [
+        {
+          "id": "camera",
+          "recipe": "motion.camera-shake.v1",
+          "target": "scene",
+          "start": {
+            "event": "s04.enter",
+            "offsetFrames": 36
+          },
+          "durationFrames": 15,
+          "params": {
+            "amplitude": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "s05",
+      "durationFrames": 180,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [
+        {
+          "id": "book",
+          "asset": "prop.book.v1",
+          "x": 0.65,
+          "y": 0.45
+        },
+        {
+          "id": "core",
+          "asset": "prop.core.v1",
+          "x": 0.35,
+          "y": 0.48
+        }
+      ],
+      "events": [],
+      "motions": [
+        {
+          "id": "camera",
+          "recipe": "motion.camera-pulse.v1",
+          "target": "scene",
+          "start": {
+            "event": "s05.enter",
+            "offsetFrames": 0
+          },
+          "durationFrames": 17,
+          "params": {
+            "kind": "push",
+            "x": 0.65,
+            "y": 0.45,
+            "scale": 1.5
+          }
+        },
+        {
+          "id": "wide",
+          "recipe": "motion.camera-pulse.v1",
+          "target": "scene",
+          "start": {
+            "event": "s05.enter",
+            "offsetFrames": 60
+          },
+          "durationFrames": 30,
+          "params": {
+            "kind": "back"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s06",
+      "durationFrames": 180,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [
+        {
+          "id": "book",
+          "asset": "prop.book.v1",
+          "x": 0.65,
+          "y": 0.45
+        },
+        {
+          "id": "core",
+          "asset": "prop.core.v1",
+          "x": 0.35,
+          "y": 0.48
+        }
+      ],
+      "events": [],
+      "motions": [
+        {
+          "id": "camera",
+          "recipe": "motion.camera-path.v1",
+          "target": "scene",
+          "start": {
+            "event": "s06.enter",
+            "offsetFrames": 20
+          },
+          "durationFrames": 140,
+          "params": {
+            "keys": [
+              {
+                "atFrame": 0,
+                "durationFrames": 17,
+                "x": 0.65,
+                "y": 0.45,
+                "scale": 1.4,
+                "ease": "out"
+              },
+              {
+                "atFrame": 45,
+                "durationFrames": 18,
+                "x": 0.35,
+                "y": 0.48,
+                "scale": 1.4,
+                "ease": "out"
+              },
+              {
+                "atFrame": 100,
+                "durationFrames": 30,
+                "x": 0.5,
+                "y": 0.5,
+                "scale": 1,
+                "ease": "out"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s07",
+      "durationFrames": 180,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [
+        {
+          "id": "book",
+          "asset": "prop.book.v1",
+          "x": 0.65,
+          "y": 0.45
+        },
+        {
+          "id": "core",
+          "asset": "prop.core.v1",
+          "x": 0.35,
+          "y": 0.48
+        }
+      ],
+      "events": [],
+      "motions": [
+        {
+          "id": "camera",
+          "recipe": "motion.layer-move.v1",
+          "target": "scene",
+          "start": {
+            "event": "s07.enter",
+            "offsetFrames": 36
+          },
+          "durationFrames": 25,
+          "params": {
+            "layer": "content",
+            "xTo": -0.15,
+            "scaleTo": 0.9,
+            "rotationTo": -4,
+            "ease": "out"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s08",
+      "durationFrames": 180,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [
+        {
+          "id": "book",
+          "asset": "prop.book.v1",
+          "x": 0.65,
+          "y": 0.45
+        },
+        {
+          "id": "core",
+          "asset": "prop.core.v1",
+          "x": 0.35,
+          "y": 0.48
+        }
+      ],
+      "events": [],
+      "motions": [
+        {
+          "id": "page",
+          "recipe": "motion.page-turn.v1",
+          "target": "scene",
+          "start": {
+            "event": "s08.enter",
+            "offsetFrames": 0
+          },
+          "durationFrames": 36,
+          "params": {}
+        }
+      ]
+    }
+  ]
+}

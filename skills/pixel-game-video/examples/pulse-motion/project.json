@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "authoringMode": "direct",
+  "title": "非3D运镜移植 · 八段试样",
+  "fps": 60,
+  "width": 1920,
+  "height": 1080,
+  "nativeWidth": 320,
+  "nativeHeight": 180,
+  "style": "style.modern-pixel.v1",
+  "seed": 7,
+  "audioMode": "silent"
+}

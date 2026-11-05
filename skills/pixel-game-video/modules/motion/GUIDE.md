@@ -1,5 +1,10 @@
 # 运动与转场：任务入口
 
+选型和理解动效先打开[可执行HTML规范](lab/index.html)，查看实际动画、共用曲线与可复制工程配置；
+随后按[调用合同](recipes/pulse-camera.md)写入项目。效果图不作为规范来源。
+Agent 直接读取 [pulse-spec.js](pulse-spec.js) 的曲线／预设和 catalog 参数合同，
+用 HTML 播放复核实际变化，不从截图猜时长、曲线或工程调用。
+
 维护通用运动、缓动、相机、转场、遮挡与几何反馈，消费编译后的事件与进度。
 
 ## 职责边界
@@ -13,6 +18,7 @@
 | 后端、编辑方式、示例与验证边界 | [统一能力目录](../../references/capability-catalog.md)；运行 python scripts/video.py catalog motion --capabilities |
 | 选择转场 | [转场库](TRANSITIONS.md)，再读选中配方；不默认加载研究候选和历史 |
 | 相机与辅助动作 | [配方选型](details.md#相机与辅助动作)、[能力目录](catalog.json) |
+| 新镜头的短促运镜／图层动画／页面接续 | [非3D运镜与页面接续](recipes/pulse-camera.md)：五预设、关键帧、分组变换；Canvas与工作台 |
 | 组件动作时长和配乐触点 | [离散动作与节拍](TIMING.md) |
 | 参数、相机和转场边界 | [编排与验收](details.md#编排与验收)、[公共合同](../../references/contract.md) |
 | 游戏反馈与声音 | [场景反馈](../scenes/GAME_FEEL.md)、[声音](../audio/GUIDE.md) |
