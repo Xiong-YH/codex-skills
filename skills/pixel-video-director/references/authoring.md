@@ -1,8 +1,12 @@
 # 创作合同
 
+按 [接稿合同](collaboration.md) 继承编剧已确认的受众、问题、价值和当前完整文案；已有有效确认不重复询问。内容创作规则由编剧维护，导演从视听设计继续。交接工程时，受众写入 brief.audience，问题、价值和实际确认依据写入 brief.constraints，沿用现有字段，不新增运行 schema。已有文案或工程不自动证明选题已确认；续作沿用有效确认。
+
 项目主画风与片段特选按基础层 [画风透传合同](../../pixel-game-video/modules/style/ART-DIRECTION-CONTRACT.md) 记录在 brief.constraints 与镜头 intent。片段有效画风必须将通用描述、人物/物种/背景/道具细化要求、规范版本和样板一起交给制作，不能只交风格名称；组件独立。现有 schema 不新增美术字段，美术 ID 不替换 production-plan.style，解析结果与样板快照为派生交接附件。
 
-只交付视觉方案时，按 [脚本表格规范](script-format.md) 输出总览和逐片段详情，再按 [视觉分镜与工程映射](visual-storyboard.md) 对应现有字段，不强制创建四份 JSON 或调用基础层。用户要求制作、交接或继续已有工程时，以下源文件与时间规则保持唯一；设计稿不新增模型字段或运行时间线。制作视频时必须进入基础 skill 的工作台剪辑并最终导出，镜头、字幕与其他文字、转场、音效、配乐分别独立轨道；有旁白时另设旁白轨。
+前期视觉方案按 [导演四阶段](director-workflow.md) 从模块、大白话/草图逐步细化到结构化设计与白模；需要正式制作交接时再按 [设计格式](script-format.md) 和 [视觉分镜与工程映射](visual-storyboard.md) 对应现有字段，不强制创建四份 JSON 或调用基础层。用户要求制作、交接或继续已有工程时，以下源文件与时间规则保持唯一；设计稿不新增模型字段或运行时间线。制作视频时必须进入基础 skill 的工作台剪辑并最终导出，镜头、字幕与其他文字、转场、音效、配乐分别独立轨道；有旁白时另设旁白轨。
+
+制作交接继承 [全局创作目标](audience-experience.md)，将适用指标方向、情绪/认知目标及本片开头/核心/收尾决定记录在 brief.constraints；执行层按本片要求核对实际旁白、剪辑中的前两秒/前五秒与全片兑现。发布数据和设计检查分开，不新增运行 schema 字段。
 
 人物按镜头显式选择：production-plan 中 `actor:null` 表示不叠加库人物，完整插画或片段内部仍可自带人物。不是所有画面都要有小人；场景、物体与组件可以独立主导画面。
 
@@ -20,18 +24,18 @@
 
 四个 JSON 源文件是可独立继续的阶段产物；JSON Schema 在 [schemas/](../schemas/)，运行合同源在 [models.py](../scripts/directorlib/models.py)。`python scripts/director.py check PROJECT` 检查格式与交叉引用。
 
-脚本阶段先按 [整段认知推进](visual-storytelling.md#先确定整段如何推进理解) 确认观点如何递进，再读 [视觉表达方法](visual-system.md)，对用户交付按 [脚本标注](visual-storyboard.md#脚本中的呈现类型标注) 分别写明片段类别、画面呈现和声音安排，不将旁白或组件与插画混作同层级类别；本系列插画按 [片段设计要求](character-illustration.md#从脚本到插画片段) 写出可制作的状态、动作与承接。新分镜用 storyboard.shots[].visual 记录表达决定，components 记录组件结构/位置/事件，组件文字仍引用 script.labels。production-plan 的 background/replacement 选择项目素材，操作见 [素材替换](media-replacement.md)。旧工程 visual 可缺省，check 会列出缺项；新模板空值会阻止交接。
+从编剧交来的当前路线与完整文案开始，按 [导演四阶段](director-workflow.md) 接稿，再读 [视觉表达方法](visual-system.md)，对用户交付按 [脚本标注](visual-storyboard.md#脚本中的呈现类型标注) 分别写明片段类别、画面呈现和声音安排，不将旁白或组件与插画混作同层级类别；本系列插画按 [片段设计要求](character-illustration.md#从脚本到插画片段) 写出可制作的状态、动作与承接。新分镜用 storyboard.shots[].visual 记录表达决定，components 记录组件结构/位置/事件，组件文字仍引用 script.labels。production-plan 的 background/replacement 选择项目素材，操作见 [素材替换](media-replacement.md)。旧工程 visual 可缺省，check 会列出缺项；新模板空值会阻止交接。
 
 | 文件 | 唯一拥有的内容 | 稳定标识 |
 | --- | --- | --- |
-| brief.json | 创意、受众、核心观点、时长范围、明确约束 | id |
-| script.json | 字幕 text、讲解 phrases、句子含义 meaning，以及场景 labels | cues[].id / labels[].id |
+| brief.json | 编剧确定的创意、受众、核心观点与约束；导演继承并补视听限制 | id |
+| script.json | 编剧拥有的逐字文案；导演添加的屏幕标签仍存同一源，内容修改按协作合同回写 | cues[].id / labels[].id |
 | storyboard.json | 镜头顺序与 durationFrames、表达意图、场景机制、物体位置、事件、文字时间 | shots[].id / events[].id / objects[].id / cues[].cueId |
 | production-plan.json | 标题、输出规格、renderBackend、风格、人物与道具素材、文字角色、运镜和声音选择 | id / shots[].id / text[].cueId / audio[].id |
 
 文字用短句表达一个意思，游戏状态变化承载因果；转场服务焦点交接。**面向用户的每份视频脚本必须显式写出接镜／转场**，包括直切、同镜继续与首尾入场／收束；按 [转场标注](visual-storyboard.md#脚本中的呈现类型标注) 写交出、过程、接住和阅读开始条件。设计意图放 `visual.continuity` / `intent`，执行选择归production-plan；候选方案不能冒充可调用配方。不是每镜都需要运镜或音效。保留用户指定角色与表现方向。
 
-**脚本同时必填字幕形式**：按 [字幕形式描述](visual-storyboard.md#脚本必须描述字幕形式) 写明用途、位置与绑定、重点词与底板、显露／替换／收束和实现状态。此说明沿现有 intent 与事件交接，不新增未定义字段；生产须对照执行，不能只交台词或静默回退底部字幕。
+**阶段三详细设计及正式交接须落实字幕形式**：按 [字幕形式描述](visual-storyboard.md#脚本必须描述字幕形式) 写明用途、位置与绑定、重点词与底板、显露／替换／收束和实现状态。此说明沿现有 intent 与事件交接，不新增未定义字段；生产须对照执行，不能只交台词或静默回退底部字幕。
 
 音效默认留白，只为有明确增益的关键变化写入 production-plan.audio，分镜简要说明保留作用；不按动作或卡点配满。触发筛选与删音对照统一按基础依赖的 `modules/audio/GUIDE.md` 执行，不另立音效次数或重复要求每条 cue 填说明字段。
 

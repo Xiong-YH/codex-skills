@@ -1,11 +1,25 @@
 ---
 name: pixel-video-director
-description: 把创意或既有文案转成像素视频的可见动作、构图光影、运镜转场与视觉分镜，也可交接结构化工程、出片、审片和定向修复。增强画面感、把抽象观点演出来或迁移参考片手法时使用；制作交接与出片依赖 pixel-game-video。
+description: 接手完整文案，拆大模块和片段，以大白话及可弃用线框草图讨论，再共同迭代结构化设计与动态白模，统筹正式制作和审片。分镜、片段衔接或观看体验设计时使用；选题文案归 pixel-video-writer，正式执行归 pixel-game-video。
 ---
 
 # Pixel Video Director
 
-把观点设计成可见动作、构图光影、运镜转场与分镜；按需交接制作、审片并定向修复。沿用用户已有文案和工程，只交付视觉方案时可停在设计阶段。面向用户的脚本默认按 [脚本表格规范](references/script-format.md) 输出项目基调、片段总览和逐片段多维详情；局部修改仅输出受影响片段，明确覆盖组件选择、风格/组织样式/堆叠、形态材质及可见行为，不留给制作补猜。
+**创作前必读：** 生成或修改视觉脚本、分镜和视听编排前（局部修改也适用），先按 [依赖定位](references/handoff.md) 找到 FOUNDATION，读取其 `references/production-principles.md`，落实核心通用要求及本次相关踩坑。只做分镜不要求建工程或运行 doctor。
+
+**已确认要求主动继承：** 后续新片的普通字幕遵循 FOUNDATION `modules/text/SOFT-HIGHLIGHT.md` 的制作默认，由 Agent 落实到设计、工作台选型及成片审查；特殊表达或既有有效约定使用其他方案时写明具体依据，不等使用者再次提醒。只交设计时仍明确本片采用及例外，制作接手后核对实际调用。
+
+**职责与接稿：** 导演对全片观看体验负责，接手编剧的完整文案，自主完成视听设计、制作统筹与创作审片。选题、观点、论据和逐字文案归 pixel-video-writer；新创意先路由编剧，已有文案按 [协作定位与接稿](references/collaboration.md) 继续。继承“帮谁、问题、价值”的真实确认，不因角色切换重问；方向变化才确认受影响部分。
+
+**命令结果边界：**check 只查创作结构与引用；handoff 只查基础输入。visual/intent 不自动执行，成功不代表动作兑现或视听通过。最终工作台成片用 [Review](references/review.md) 的 workbench-review-init / workbench-review-check 绑定同次导出 JSON 与 MP4；原 review-check 只审导演源合成分支。
+
+**交付前必查：**生成或修改视觉脚本前，必读 [文画对应检查](references/visual-storytelling.md#把讲述推进落实到画面)；制作涉及离散组件动作时，必读 FOUNDATION 的 `modules/motion/TIMING.md`；审片必按 [推进与节奏复核](references/review.md#推进节奏与观看距离的复核) 执行。将检查结果写入当前镜头设计或审片记录，并在交付结论中简记检查范围和未关闭项。缺少文画对应、焦点顺序或动作/阅读安排的设计先补齐，不标可交接；尚未播放的成片不标视听通过。具体判据只在链接目标维护。
+
+按 [导演四阶段](references/director-workflow.md) 执行：**拆大模块 → 大白话与构思草图 → 结构化设计＋动态白模 → 正式制作与审片**。阶段二给静态线框、火柴人和运动箭头，明确只是辅助理解的参考，后续可不采纳；用户明确要求单独继承。阶段三独立选择方案，把原多维检查与可播放白模放在同一迭代中。局部只改受影响片段及关联接镜，不逐镜增加审批。
+
+观众目标、开头/核心/收尾及情绪认知路线从项目继承。需要改主张、论据或关键路线时返回编剧，在唯一内容源修订。当前 [工作台](references/script-review-workspace.md) 默认单片段查看，完整设计按需展开；草图不自动转成动画，描述改变后相关预览待复核。动态播放和样板 WebM 使用 [设计数据](references/director-project.md)，不能代替最终成片。
+
+已有 [同一入口和 JSON](references/script-creator.md) 继续使用；编剧文案保留另一视图，导演实际进度由 stages.director.phase 表示。旧项目和草稿保留，未提供的新设计不从旧稿猜测。纯文案交编剧即可，纯设计按所需阶段交付，不强制正式出片。
 
 新脚本与分镜先按 [镜头数量与合并原则](references/visual-storyboard.md#镜头数量与合并原则) 合并连续解释任务，再按 [紧凑节奏与估时](references/visual-storyboard.md#紧凑节奏与估时) 规划文案、动作和镜头预算；用户指定的节奏、已有工程约束及实际旁白优先。模板帧数只作结构占位，创作时须重新估时。
 
@@ -13,12 +27,13 @@ description: 把创意或既有文案转成像素视频的可见动作、构图�
 
 | 当前任务 | 读取与交付 |
 | --- | --- |
-| 新创意、文案画面化、分镜或局部接镜 | 先确定 [整段理解推进](references/visual-storytelling.md#先确定整段如何推进理解)，再按 [视觉表达](references/visual-system.md) 与 [分镜标注](references/visual-storyboard.md) 设计主体、动作、结果及承接；交付视觉方案即可，不强制建工程或运行 doctor |
+| 只有新创意、需要完整文案或内容改写 | 按 [协作定位](references/collaboration.md) 转编剧；已确认内容直接沿用，不先生成分镜 |
+| 已有文案画面化、分镜或局部接镜 | 从当前文案和路线按 [导演四阶段](references/director-workflow.md) 继续，再读 [视觉表达](references/visual-system.md) 与 [分镜标注](references/visual-storyboard.md)；不要求重写文案或完成制作 |
 | 建工程、制作交接与出片 | 读 [创作合同](references/authoring.md)、[基础依赖与交接](references/handoff.md)；写创作源，交接后由基础技能进入工作台 |
 | 续作、审片与定向修复 | 读 [Review 与影响范围](references/review.md)，区分导演源和工作台剪辑分支，沿实际分支修改并核验 |
 | 延续计算机口播系列 | 创作前读 [系列要求](references/computing-voiceover.md) 与 [分类、选角和讲解规范](references/character-illustration.md)，需要插画局部动态时再读 [动态设计](references/illustration-motion.md) |
 
-开始制作、续作或复盘时，按 [依赖定位](references/handoff.md) 找到基础技能，读取其 `references/production-principles.md`，将适用的系列偏好与单片限制写入 brief。下面的基础模块路径均相对定位到的 FOUNDATION，不要求固定同级安装。
+制作、续作或复盘同样先读该总则；制作时将适用的系列偏好与单片限制写入 brief。下面的基础模块路径均相对定位到的 FOUNDATION，不要求固定同级安装。
 
 ## 按七大模块落设计
 

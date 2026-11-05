@@ -1,0 +1,245 @@
+{
+  "$defs": {
+    "Evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "frame",
+            "playback",
+            "audio",
+            "metadata",
+            "source"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "checked": {
+          "default": false,
+          "title": "Checked",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind",
+        "path",
+        "description"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "ReviewCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "enum": [
+            "content",
+            "visual",
+            "motion",
+            "text",
+            "audio",
+            "technical"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "status": {
+          "default": "not_reviewed",
+          "enum": [
+            "passed",
+            "failed",
+            "not_reviewed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "evidence": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Evidence"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "notes": {
+          "default": "",
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "category"
+      ],
+      "title": "ReviewCheck",
+      "type": "object"
+    },
+    "TimeRange": {
+      "additionalProperties": false,
+      "properties": {
+        "startFrame": {
+          "minimum": 0,
+          "title": "Startframe",
+          "type": "integer"
+        },
+        "endFrame": {
+          "exclusiveMinimum": 0,
+          "title": "Endframe",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "startFrame",
+        "endFrame"
+      ],
+      "title": "TimeRange",
+      "type": "object"
+    },
+    "WorkbenchBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "branch": {
+          "const": "workbench",
+          "default": "workbench",
+          "title": "Branch",
+          "type": "string"
+        },
+        "projectJson": {
+          "title": "Projectjson",
+          "type": "string"
+        },
+        "projectSha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Projectsha256",
+          "type": "string"
+        },
+        "video": {
+          "title": "Video",
+          "type": "string"
+        },
+        "videoSha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Videosha256",
+          "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": true,
+          "title": "Metadata",
+          "type": "object"
+        }
+      },
+      "required": [
+        "projectJson",
+        "projectSha256",
+        "video",
+        "videoSha256",
+        "metadata"
+      ],
+      "title": "WorkbenchBinding",
+      "type": "object"
+    },
+    "WorkbenchIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "issueId": {
+          "title": "Issueid",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "content",
+            "visual",
+            "motion",
+            "text",
+            "audio",
+            "technical"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "clipId": {
+          "title": "Clipid",
+          "type": "string"
+        },
+        "timeRange": {
+          "$ref": "#/$defs/TimeRange"
+        },
+        "expected": {
+          "minLength": 1,
+          "title": "Expected",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/Evidence"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "status": {
+          "default": "failed",
+          "enum": [
+            "passed",
+            "failed",
+            "not_reviewed"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issueId",
+        "category",
+        "clipId",
+        "timeRange",
+        "expected",
+        "evidence"
+      ],
+      "title": "WorkbenchIssue",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "default": 1,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "binding": {
+      "$ref": "#/$defs/WorkbenchBinding"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/ReviewCheck"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "issues": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/WorkbenchIssue"
+      },
+      "title": "Issues",
+      "type": "array"
+    }
+  },
+  "required": [
+    "binding",
+    "checks"
+  ],
+  "title": "WorkbenchReview",
+  "type": "object"
+}

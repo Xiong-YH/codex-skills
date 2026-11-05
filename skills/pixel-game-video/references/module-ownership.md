@@ -4,7 +4,7 @@
 
 ## 分层与职责
 
-两个任务入口保持不变：pixel-video-director 管表达设计、创作源、交接与 review；pixel-game-video 管工程制作与交付。七大模块提供能力，公共执行层负责合同、统一事件时间线、编译、后端适配及工作台桥接。工作台负责独立剪辑分支与最终导出，不是第八个能力模块。
+三个任务入口分别负责：pixel-video-writer 管选题、叙事与完整文案；pixel-video-director 管大模块、大白话/构思草图、结构化设计/动态白模与正式制作统筹和创作审片；pixel-game-video 管工程执行与交付。纯文案可独立完成，导演不要求编剧预先补全视觉细节。七大模块提供能力，公共执行层负责合同、统一事件时间线、编译、后端适配及工作台桥接。工作台负责独立剪辑分支与最终导出，不是第八个能力模块。
 
 | 模块入口 | 唯一负责 | 输入与输出关系 | 不在本模块决定 |
 | --- | --- | --- | --- |
@@ -54,6 +54,7 @@
 | Canvas/Remotion 适配与工作台桥接 | `engine/canvas_workbench.py`、`workbench_bridge.py`、`remotion_backend.py`、`engine/remotion/` | 两后端能力范围分别记录，不为接入工作台复制整套 React 实现 |
 | 工作台编辑、保存、导出 | `workbench/`；[工作台说明](workbench.md) | 各模块只补充能力验收，不重复全套交付流程 |
 | 通用制作原则与经验分级 | [制作总则](production-principles.md) | 入口链接到总则，具体参数归模块 |
+| 选题、叙事、文案、观众目标与内容交接 | writer 的 SKILL.md、references/script-workflow.md、audience-experience.md、handoff.md | 导演继承当前版本，旧编剧参考页仅作兼容路由 |
 | 系列偏好、创作源、review | director 的 `references/computing-voiceover.md`、创作/审片合同；单片 brief/review | 基础 skill 独立使用时由项目提供，不硬依赖 director 相对路径 |
 | 历史认可与失败记录 | [迭代记录](iteration-history.md) | 现行模块保留必要限制和链接，不复制历史叙述 |
 

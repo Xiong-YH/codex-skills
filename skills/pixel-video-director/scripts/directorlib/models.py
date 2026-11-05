@@ -69,7 +69,7 @@ class VisualIntent(Contract):
     form: Literal["scene", "process", "identity", "metric", "comparison", "annotation", "chapter",
                   "flow", "timeline", "checklist", "hierarchy", "bars", "code", "takeaway"]
     subject: str = Field(min_length=1)
-    action: str = Field(min_length=1)
+    action: str = Field(min_length=1, description="设计意图，不自动执行；须由真实场景参数、事件、素材或已实现机制兑现。")
     result: str = Field(min_length=1)
     continuity: str = Field(min_length=1)
 
@@ -89,7 +89,7 @@ class Shot(Contract):
     id: str = Field(pattern=r"^[a-zA-Z][a-zA-Z0-9_-]*$")
     durationFrames: int = Field(gt=0)
     intent: str = Field(min_length=1)
-    visual: VisualIntent | None = None
+    visual: VisualIntent | None = Field(default=None, description="视觉设计说明，不是渲染指令；旧工程可缺省，但 check 会报告不完整。")
     scene: str
     params: dict[str, Any] = {}
     events: list[Event] = []
@@ -252,5 +252,31 @@ class Review(Contract):
     issues: list[Issue] = []
 
 
+class WorkbenchBinding(Contract):
+    branch: Literal["workbench"] = "workbench"
+    projectJson: str
+    projectSha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    video: str
+    videoSha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    metadata: dict[str, Any]
+
+
+class WorkbenchIssue(Contract):
+    issueId: str
+    category: Category
+    clipId: str
+    timeRange: TimeRange
+    expected: str = Field(min_length=1)
+    evidence: list[Evidence] = Field(min_length=1)
+    status: Status = "failed"
+
+
+class WorkbenchReview(Contract):
+    schemaVersion: Literal[1] = 1
+    binding: WorkbenchBinding
+    checks: list[ReviewCheck]
+    issues: list[WorkbenchIssue] = []
+
+
 MODELS = {"brief": Brief, "script": Script, "storyboard": Storyboard,
-          "production-plan": Plan, "review": Review}
+          "production-plan": Plan, "review": Review, "workbench-review": WorkbenchReview}

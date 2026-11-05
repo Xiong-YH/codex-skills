@@ -119,7 +119,8 @@
               "type": "null"
             }
           ],
-          "default": null
+          "default": null,
+          "description": "视觉设计说明，不是渲染指令；旧工程可缺省，但 check 会报告不完整。"
         },
         "scene": {
           "title": "Scene",
@@ -217,6 +218,7 @@
           "type": "string"
         },
         "action": {
+          "description": "设计意图，不自动执行；须由真实场景参数、事件、素材或已实现机制兑现。",
           "minLength": 1,
           "title": "Action",
           "type": "string"

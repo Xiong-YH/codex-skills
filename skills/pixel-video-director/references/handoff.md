@@ -1,5 +1,7 @@
 # 基础依赖与交接
 
+本页唯一维护导演到制作的工程交接；编剧到导演的内容交接见 [协作定位](collaboration.md)，两种交接不新增用户审批。导演可只交付分镜，编剧可只交付文案。
+
 本流程适用于工程交接与制作。只做视觉分镜时按 [设计稿与源文件映射](visual-storyboard.md) 交付，进入本流程后再定位基础依赖。
 
 需 Python 3.10+ 与 [requirements.txt](../requirements.txt)。渲染依赖由 pixel-game-video 自己的 doctor 检查。
@@ -15,6 +17,11 @@ python scripts/director.py handoff PROJECT --foundation FOUNDATION
 python FOUNDATION/scripts/video.py build PROJECT/video
 python FOUNDATION/scripts/video.py workbench PROJECT/video --port 5208 --no-open
 ```
+
+`doctor` 实际调用基础层环境检查，可加 `--backend canvas|remotion`；依赖未就绪返回非零。它不执行渲染或视听审查。
+`check` 仅核对创作源结构与引用，缺少 visual 时返回 `valid:false` 和退出码 2。
+`handoff` 的 `valid:true` 仅表示基础输入校验通过；为旧工程兼容仍列出 visualIntentMissing。
+两者均返回动作落实与视听未审状态。visual/intent 是设计说明，不会自动编译成动作；制作时必须核对实际事件、素材和执行器是否兑现说明。
 
 `PROJECT` 和 `FOUNDATION` 是使用者选择的目录占位符，不写入工程配置。具体出片参数、模块状态和运行条件读取基础 skill 的入口及 `video.py --help`。
 
@@ -39,6 +46,8 @@ handoff 将四份创作源合成为 `video/{project,timeline,text,audio}.json`�
 1. 在 storyboard 确定镜头顺序、时长、场景机制与参数、动作事件和文字区间；script 保存文案与短标签，production-plan 选择人物、素材、运镜转场和声音，引用同一批事件。已有旁白作为素材导入后按实长精调；配音生成不在本流程内。
 2. `check`、`handoff` 后由基础层编译唯一整数帧时间线。Canvas 和原生 Remotion 共用编译合同；Canvas 通过逐帧 runtime 桥接进入工作台，不把 Canvas 全片 MP4 当唯一镜头，也不把它称为原生 React 迁移。
 3. 运行 `python FOUNDATION/scripts/video.py workbench PROJECT/video --port 5208 --no-open`，主动打开实际打印地址。从同一编译 payload 拆出镜头、字幕与其他文字、转场、音效、配乐五类独立轨道；有旁白时另轨。场景参数、组件、人物与素材配置通过镜头 props/schema 编辑，叙事进度等叠加项使用自己的单元。
+
+   导入后由制作 Agent 按 FOUNDATION `modules/text/SOFT-HIGHLIGHT.md` 主动应用普通字幕默认，设置本片关键词与等级并保存 `captionDesign`；其他设计保留具体选用依据。不把选择或落实要求的责任留给使用者。首次导入的源一致性对照与随后应用字幕方案分别记录，正式检查绑定最终剪辑分支。
 4. 初始导入与源合成做同帧 parity，分轨音频与本次源 WAV 做 PCM 重组核对。再在真实 UI 分别编辑五类轨道，连续播放，检查动作落稳、阅读、转场前中后与听音；保存刷新、下载 JSON 并重新导入，确认修改仍在；逐轨导出，确认只包含所选轨道。原生 Remotion 能力白名单仍按基础层 `references/remotion.md`；Canvas runtime 桥接不扩大该白名单。
 5. 最终成片必须从工作台当前项目导出，随后按 [Review](review.md) 检查真实 MP4、解码帧和听音。直接 `render` 只用于源合成调试与一致性对照。任何选用能力尚不能进入工作台、独立编辑或导出时，先补齐并验证，不能静默绕过。
 6. 工作台在 `workbench/exports/` 持久保存与 MP4 同名的 `.project.json`；交付 MP4 与「导出版本 JSON」。导出后继续编辑时，「保存工程 JSON」可能是更新状态，不能与旧 MP4 混配。音轨的压低、淡化及 master 包络按源版本烘焙，修改后不会动态重算其他轨道，须重新听音。

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "projectId": "welcome",
+  "revision": 0,
+  "title": "新视频",
+  "activeStage": 0,
+  "stages": {
+    "brief": {
+      "idea": "",
+      "topic": "",
+      "audience": "",
+      "takeaway": "",
+      "problem": "",
+      "value": "",
+      "confirmed": false,
+      "confirmationEvidence": "",
+      "confirmedRevision": null
+    },
+    "narrative": {
+      "confirmed": false,
+      "route": [],
+      "references": []
+    },
+    "copy": [],
+    "visualDirection": "",
+    "visuals": [],
+    "check": {
+      "summary": "尚未开始"
+    }
+  }
+}

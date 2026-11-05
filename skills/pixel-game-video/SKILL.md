@@ -1,9 +1,11 @@
 ---
 name: pixel-game-video
-description: 制作和修改像素游戏感视频，按结构化工程进入工作台，以独立镜头、文字、转场、音效和配乐轨道剪辑、导出 MP4 与核验证据。已有脚本或局部效果直接使用；从创意策划到 review 使用 pixel-video-director。
+description: 按已有脚本或工程制作、修改像素游戏感视频，在工作台分轨剪辑并导出可编辑成片。选题与文案使用 pixel-video-writer，视听设计与制作统筹使用 pixel-video-director。
 ---
 
 # Pixel Game Video
+
+选题与完整文案交给 pixel-video-writer；大模块、大白话/构思草图、结构化设计/动态白模和正式制作统筹交给 pixel-video-director。已有工程直接从当前阶段继续，基础技能可独立运行，不为局部实现修复重跑上游流程。
 
 按结构化工程制作和修改像素游戏感视频。开始制作、续作或复盘先读 [制作总则](references/production-principles.md)，工程编写前读 [制作合同](references/contract.md)；按当前任务选择下面的模块，不默认加载全部参考。
 

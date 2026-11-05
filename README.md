@@ -1,6 +1,6 @@
 # Codex Skills
 
-像素游戏感视频体系。日常使用两个 skill：导演负责画面设计与制作统筹，基础 skill 负责执行；运镜转场的实现维护在基础制作模块。
+像素游戏感视频体系。日常使用三个 skill：编剧负责选题与完整文案，导演负责视听设计与制作统筹，基础 skill 负责执行；运镜转场的实现维护在基础制作模块。
 
 本次及后续版本更新见[变更记录](CHANGELOG.md)。组件完整集合与朴素原版入口见[组件范例集](skills/pixel-game-video/modules/components/examples/style-atlas/README.md)。
 
@@ -8,12 +8,15 @@
 
 [统一能力目录](skills/pixel-game-video/references/capability-catalog.md)通过 `catalog --capabilities` 汇总七模块的后端范围、编辑/导出边界、示例与测试入口；旧 `catalog` 查询保持兼容，目录检查不代表测试或审片通过。
 
-两个 SKILL.md 现按“任务选择 → 七模块 → 创作/制作约束”组织。具体参数、系列偏好与案例留在对应参考中按需读取；入口与规则的对应关系见[职责清单](skills/pixel-game-video/references/module-ownership.md#技能入口与详细规则)。
+新视频先由[编剧](skills/pixel-video-writer/SKILL.md)讨论并确认受众、问题和价值，确认叙事后尽早交完整文案并自查；只要文案可在此交付。需要视听设计时由[导演](skills/pixel-video-director/SKILL.md)接手同一稿，按[导演四阶段](skills/pixel-video-director/references/director-workflow.md)拆大模块、大白话与可弃用构思草图，再共同迭代结构化设计和动态白模，最后统筹正式制作与审片；需要成片再交基础制作。[协作合同](skills/pixel-video-writer/references/handoff.md)定义按需加载、跨安装定位、版本和修订分工。已有[入口与项目 JSON](skills/pixel-video-director/references/script-creator.md)保留，页面改为编剧视图与导演四阶段；旧阶段字段兼容，不因交接另建项目。工作台默认一次看一段，完整维度按需展开，支持[白模播放与 WebM 导出](skills/pixel-video-director/references/director-project.md)。
+
+导演与制作 SKILL.md 现按“任务选择 → 七模块 → 创作/制作约束”组织。具体参数、系列偏好与案例留在对应参考中按需读取；入口与规则的对应关系见[职责清单](skills/pixel-game-video/references/module-ownership.md#技能入口与详细规则)。
 
 | Skill | 职责 |
 | --- | --- |
 | [pixel-game-video](skills/pixel-game-video/SKILL.md) | 按结构化工程制作视频，强制工作台分轨剪辑与最终导出；Canvas runtime 与有限原生 Remotion 场景共用编辑交付 |
-| [pixel-video-director](skills/pixel-video-director/SKILL.md) | 把文案设计成可见动作、构图光影、运镜与语义转场；可只交付分镜，或继续制作交接、review 和定向修复 |
+| [pixel-video-writer](skills/pixel-video-writer/SKILL.md) | 讨论选题、确认叙事路线、交付完整文案并检查内容依据；可独立交付，不要求分镜或制作工具 |
+| [pixel-video-director](skills/pixel-video-director/SKILL.md) | 接手当前文案，设计全片视听体验与分镜，统筹试样、制作交接、创作审片和定向修复 |
 
 画面叙事方法已整合进导演技能，包括视觉母题、光影与尺度、镜头和主体运动的区分、前后场景的语义承接。参考片的黑金配色、人物和 RPG 界面按新主题选择；[《深度工作》观片案例](skills/pixel-video-director/references/deep-work-case.md)仅是学习笔记，不代表基础层已实现其中所有效果。
 
@@ -23,8 +26,9 @@
 
 ```mermaid
 flowchart TD
-    I[创意] --> D[pixel-video-director]
-    D --> S[脚本 / 分镜 / 制作方案]
+    I[创意] --> B[pixel-video-writer 选题与完整文案]
+    B --> D[pixel-video-director 视听设计]
+    D --> S[分镜 / 制作方案]
     S --> V[四份 VideoSpec JSON]
     V --> F[pixel-game-video 编译与合成]
     ST[style 风格] --> F
@@ -37,29 +41,32 @@ flowchart TD
     F --> W[工作台：镜头 / 文字 / 转场 / 音效 / 配乐独立轨道]
     W --> O[最终 MP4 / 导出项目 JSON / 核验证据]
     O --> R[review 绑定输入与成片哈希]
-    R -->|按源映射修复| S
+    R -->|视听设计问题| S
+    R -->|观点与文案问题| B
 ```
 
-基础工程只维护四份 JSON，不复制整个引擎。运镜、配色和音效各在自己的模块维护，两个 `SKILL.md` 只保留使用入口和按需链接。纯视觉方案按 [分镜交接与工程映射](skills/pixel-video-director/references/visual-storyboard.md)编写；进入工程后，初始时间由 storyboard.json 维护；进入工作台编辑后，项目 JSON 保存独立剪辑分支，不自动回写导演源。
+基础工程只维护四份 JSON，不复制整个引擎。运镜、配色和音效各在自己的模块维护，各技能 `SKILL.md` 只保留使用入口和按需链接。纯视觉方案按 [分镜交接与工程映射](skills/pixel-video-director/references/visual-storyboard.md)编写；进入工程后，初始时间由 storyboard.json 维护；进入工作台编辑后，项目 JSON 保存独立剪辑分支，不自动回写导演源。
 
 制作视频必须在 [本地工作台](skills/pixel-game-video/references/workbench.md) 完成剪辑并导出最终成片。镜头、字幕与其他文字、转场、音效、配乐分别成轨，有旁白时另轨；交付 MP4 与该次导出项目 JSON。现有 Canvas 场景、组件、背景/replacement、人物事件姿态和转场通过同源逐帧 runtime 接入，场景内部配置通过 props 编辑，叙事进度另设叠加单元。它们没有因此全部重写成 React。
 
 `renderBackend=remotion` 仍只选择原生 React 场景：书桌、整体相机轨迹与书页遮挡转场；其白名单与 [Remotion 说明](skills/pixel-game-video/references/remotion.md) 保持一致。[12 秒书桌样例](skills/pixel-video-director/examples/remotion-focus-desk/README.md) 可用于原生执行器调试。两种后端均从同一编译时间线生成工作台初始项目，直接 `render` 用于源合成调试及一致性对照。
 
+全流程的[留存与情绪认知目标](skills/pixel-video-writer/references/audience-experience.md)与[叙事设计及参考](skills/pixel-video-writer/references/narrative-design.md)现由编剧技能唯一维护，导演从项目继承；开头、核心、收尾整体确认，指标与观众体验持续传递到制作和复盘。
+
 ## 要求与经验入口
 
-制作、续作或复盘先读 [制作总则与经验入口](skills/pixel-game-video/references/production-principles.md)，再按范围读取下列记录。两个视频 skill 均已接入此入口。
+制作、续作或复盘先读 [制作总则与经验入口](skills/pixel-game-video/references/production-principles.md)，再按范围读取下列记录。三个视频 skill 按当前任务接入此入口；编剧独立安装不要求渲染依赖。
 
 | 记录 | 管什么 |
 | --- | --- |
 | [仓库维护约定](AGENTS.md) | 文件归属、技能独立与维护验证 |
-| [制作总则](skills/pixel-game-video/references/production-principles.md) | 通用制作原则、要求层级与经验沉淀方法 |
+| [核心要求与常见踩坑](skills/pixel-game-video/references/production-principles.md) | 现行通用要求、必须规避的问题与反馈沉淀方式；制作先读 |
 | [计算机口播系列偏好](skills/pixel-video-director/references/computing-voiceover.md) | 这个系列的画风、人物职责、背景、叙事与声音方向 |
 | [情境插画参考与创作源](skills/pixel-video-director/references/character-illustration.md) | 完整情境插画、文案改编、原图与提示词；[基础层看图与运行指南](skills/pixel-game-video/modules/scenes/whole-illustration.md) |
 | 每片的 brief.json / review.json | 本片目标、时长、约束及实际审片证据 |
 | [迭代记录](skills/pixel-game-video/references/iteration-history.md) | 历次反馈、有效方法、失败和撤回原因，保留各自适用范围 |
 
-新经验记录现象、结论、范围、状态与证据；更新当前生效的要求，同时保留历史。用户的新要求优先，单片示例不自动升级为通用默认，历史认可不代替本次验证。
+制作中收到吐槽先记本片问题并修复；用户明确满意后主动提炼适用经验，更新总则或所属模块，同类项合并，原话、修复版本和认可证据留历史。用户明确的新要求可立即生效；系列/单片限制不泛化，历史认可不代替本次验证。
 
 ## 当前交付基线
 
@@ -88,9 +95,11 @@ flowchart TD
 
 增强局部游戏感从 [游戏反馈细节库](skills/pixel-game-video/modules/scenes/GAME_FEEL.md) 进入：收纳六类反馈及已获认可的竞赛视频实例，关联触发状态、动作、声音和验收；与转场分开维护。
 
-将 `skills/pixel-game-video/` 完整复制到 Codex 的 skills 目录即可单独使用。使用 director 时同时安装 `skills/pixel-video-director/`；它通过同级目录、显式 `--foundation` 或 `PIXEL_VIDEO_SKILL` 定位基础层。
+将 `skills/pixel-game-video/` 完整复制到 Codex 的 skills 目录即可单独使用。编剧可只复制 `skills/pixel-video-writer/` 独立写稿。需要导演工具时安装 `skills/pixel-video-director/`；制作时另安装基础技能。跨技能按显式目录、对应变量、同级目录和 Codex skills 目录定位，详见[协作合同](skills/pixel-video-writer/references/handoff.md)。旧导演参考路径保留路由，原工程命令与项目 ID 不变。
 
-> 使用 $pixel-video-director，把我的创意转成脚本和分镜，制作一支像素游戏感视频，并给出有证据的 review。
+> 使用 $pixel-video-writer，先讨论并确认这个选题帮谁、解决什么问题、提供什么价值，再确认叙事并写出完整文案。
+
+> 使用 $pixel-video-director，接手当前完整文案与确认记录，完成视听设计，继续统筹像素视频制作与有证据的 review。
 
 > 使用 $pixel-game-video，在现有工程的第二镜加入碎屏转场，按源文件修改并验证该片段。
 

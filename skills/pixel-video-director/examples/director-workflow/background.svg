@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#e8eae4"/>
+<path d="M0 340H960M320 0V340M680 0V340" stroke="#c8cec6" fill="none" stroke-width="2"/>
+<rect x="65" y="70" width="160" height="180" rx="3" fill="#d8e1df" stroke="#b6c1bc" stroke-width="3"/>
+<path d="M145 70V250M65 160H225" stroke="#b6c1bc" stroke-width="3"/>
+<path d="M435 0L420 70H540L525 0" fill="#f2eee2" stroke="#c7c9be" stroke-width="2"/>
+<path d="M280 345V240Q280 220 300 220H345Q365 220 365 240V345M595 345V240Q595 220 615 220H660Q680 220 680 240V345" fill="#d4d9ce" stroke="#b5bdb0" stroke-width="3"/>
+<path d="M165 315H795L960 540H0Z" fill="#c8d3c7" stroke="#a7b6a8" stroke-width="3"/>
+<path d="M192 337H768L880 505H80Z" fill="#d9e1d3" stroke="#b7c5b6" stroke-width="2"/>
+<text x="930" y="28" text-anchor="end" font-size="15" fill="#879186" font-family="sans-serif">空间布局样板</text>
+</svg>

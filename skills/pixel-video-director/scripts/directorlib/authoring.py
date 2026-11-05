@@ -104,7 +104,7 @@ def load_sources(project):
         raise ValueError("script、storyboard cue 引用与 production-plan.text 必须覆盖同一组 cue ID。")
     for cue_id, appearance in text.items():
         if appearance["role"] == "subtitle" and not cues[cue_id]["phrases"]:
-            raise ValueError(f"字幕 {cue_id} 缺少 phrases；模拟讲述嘴型需要脚本短句。")
+            raise ValueError(f"字幕 {cue_id} 缺少 phrases；文字排练节奏需要脚本短句，不生成嘴型。")
     if plan["audioMode"] == "silent" and plan["audio"]:
         raise ValueError("silent 模式不能同时安排音效，请回改 production-plan.audio。")
     if plan["audioMode"] == "silent" and plan["bgm"] is not None:
@@ -290,6 +290,9 @@ def handoff(project, foundation=None):
     write_json(project / ".director-state.json", {"schemaVersion": 1, "sources": sources,
                                                   "inputHash": validation["inputHash"]})
     return {"valid": True, "video": "video", "inputHash": validation["inputHash"],
+            "scope": "foundation-input-validation", "actionImplementation": "not_reviewed",
+            "audiovisualReview": "not_reviewed",
+            "visualIntentMissing": [s['id'] for s in sources['storyboard.json']['shots'] if not s['visual']],
             "durationFrames": sum(s["durationFrames"] for s in sources["storyboard.json"]["shots"]),
             "mappedFields": len(mappings)}
 
