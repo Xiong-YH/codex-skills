@@ -1,0 +1,7 @@
+// Same bridge for old HTML studies. Only the embedding parent can control it.
+(()=>{if(new URLSearchParams(location.search).get('embed')!=='1')return;document.documentElement.classList.add('embed');const style=document.createElement('style');style.textContent='.embed main{padding:0;max-width:none}.embed header,.embed footer,.embed details,.embed .explain,.embed #beat,.embed #play,.embed #replay{display:none}.embed .controls{padding:10px 12px;margin:0}.embed body{margin:0}';document.head.append(style);let range=null;
+async function configure(message){await window.caseReady;const api=window.characterCase;if(!api)return;api.stop?.();const max=Number(document.getElementById('seek').max),start=Math.max(0,Number(message.start)),end=Math.min(max,Number(message.end));if(!Number.isFinite(start)||!Number.isFinite(end)||end<=start)return;range={start,end};api.seek(start);if(message.command==='play')api.play?.();}
+window.addEventListener('message',event=>{if(event.source!==parent||event.data?.type!=='performance-preview')return;if(event.data.command==='stop'){window.characterCase?.stop?.();return;}if(['configure','play'].includes(event.data.command))configure(event.data);});
+setInterval(()=>{if(!range||!window.characterCase)return;const input=document.getElementById('seek'),t=Number(input.value);if(t>=range.end){characterCase.stop?.();characterCase.seek(range.end);}else if(t<range.start)characterCase.seek(range.start);},50);
+Promise.resolve(window.caseReady).then(()=>parent.postMessage({type:'performance-preview-ready'},'*'));
+})();

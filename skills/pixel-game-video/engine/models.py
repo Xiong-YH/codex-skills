@@ -1,7 +1,7 @@
 """Single source for the four VideoSpec schemas and structural validation."""
 from typing import Annotated, Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 Id = Annotated[str, Field(pattern=r"^[A-Za-z][A-Za-z0-9_.-]*$", max_length=100)]
 Unit = Annotated[float, Field(ge=0, le=1, allow_inf_nan=False)]
@@ -32,9 +32,33 @@ class FrameRef(Model):
     offsetFrames: int = 0
 
 
+class SpeechAnchor(Model):
+    cueId: Id
+    edge: Literal['start', 'end', 'word'] = 'word'
+    word: str = ''
+    occurrence: Annotated[int, Field(ge=0)] = 0
+    offsetFrames: int = 0
+
+
+class Rehearsal(Model):
+    cueIds: Annotated[list[Id], Field(min_length=1)]
+    startFrame: Annotated[int, Field(ge=0)] = 12
+    unitsPerSecond: Annotated[float, Field(gt=0, le=30)] = 4.3
+    commaSeconds: Annotated[float, Field(ge=0, le=5)] = 0.18
+    stopSeconds: Annotated[float, Field(ge=0, le=5)] = 0.35
+    gapSeconds: Annotated[float, Field(ge=0, le=5)] = 0.2
+
+
 class Event(Model):
     id: Id
-    frame: Annotated[int, Field(ge=0)]
+    frame: Annotated[int, Field(ge=0)] | None = None
+    speech: SpeechAnchor | None = None
+
+    @model_validator(mode='after')
+    def one_clock(self):
+        if (self.frame is None) == (self.speech is None):
+            raise ValueError('event requires exactly one of frame or speech')
+        return self
 
 
 class SceneObject(Model):
@@ -104,6 +128,7 @@ class Shot(Model):
     params: dict[str, Any] = Field(default_factory=dict)
     objects: list[SceneObject] = Field(default_factory=list)
     events: list[Event] = Field(default_factory=list)
+    rehearsal: Rehearsal | None = None
     motions: list[Motion] = Field(default_factory=list)
     components: list[Component] = Field(default_factory=list)
     background: MediaSource | None = None

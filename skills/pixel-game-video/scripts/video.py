@@ -20,8 +20,17 @@ def emit(value):
 def build(root):
     from engine.compiler import compile_project
     from engine.builder import build as build_media
+    from engine.change_report import snapshot, plan
+    from engine.compiler import read_json, write_json
+    baseline = Path(root) / 'build/project-state.json'
+    previous = read_json(baseline) if baseline.is_file() else None
     resolved = compile_project(root, write=True)
+    current = snapshot(resolved, SKILL_ROOT)
+    changes = plan(current, previous, resolved)
     build_media(root, resolved, SKILL_ROOT, silent=resolved["project"]["audioMode"] == "silent")
+    changes['preview'] = 'current'
+    write_json(Path(root) / 'build/change-report.json', changes)
+    write_json(baseline, current)
     return resolved
 
 
@@ -162,6 +171,8 @@ def main(argv=None):
     music.add_argument('--overwrite', action='store_true')
     schema = subs.add_parser("schemas")
     schema.add_argument("--output", type=Path, default=SKILL_ROOT / "schemas")
+    change_status = subs.add_parser('changes', help='Read-only impact plan against the last successful build')
+    change_status.add_argument('project', type=Path)
     jianying = subs.add_parser('export-jianying', help='Export a neutral Jianying draft with native captions and audio; does not install it')
     jianying.add_argument('project', type=Path)
     jianying.add_argument('destination', type=Path)
@@ -188,7 +199,10 @@ def main(argv=None):
         emit(result)
         return 0 if result["ready"] else 1
     from engine.compiler import catalog, compile_project, read_json, write_json
-    if args.command == "catalog":
+    if args.command == 'changes':
+        from engine.change_report import inspect as inspect_changes
+        emit(inspect_changes(args.project, SKILL_ROOT))
+    elif args.command == "catalog":
         if not args.capabilities and (args.capability_id or args.backend or args.status or args.check):
             parser.error('catalog filters and --check require --capabilities')
         if args.check and (args.module or args.capability_id or args.backend or args.status):

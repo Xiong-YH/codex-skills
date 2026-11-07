@@ -4,7 +4,7 @@
 
 ## 分层与职责
 
-三个任务入口分别负责：pixel-video-writer 管选题、叙事与完整文案；pixel-video-director 管大模块、大白话/构思草图、结构化设计/动态白模与正式制作统筹和创作审片；pixel-game-video 管工程执行与交付。纯文案可独立完成，导演不要求编剧预先补全视觉细节。七大模块提供能力，公共执行层负责合同、统一事件时间线、编译、后端适配及工作台桥接。工作台负责独立剪辑分支与最终导出，不是第八个能力模块。
+任务入口分为三类：pixel-video-writer 管选题、叙事、逐字文案与内容自查；pixel-video-director 管视听表达、分镜、制作统筹与创作 review；pixel-game-video 管工程制作与技术交付。编剧可独立交付文案，导演从当前完整文案继续，不将视觉表设为编剧完成前提。七大模块提供能力，公共执行层负责合同、统一事件时间线、编译、后端适配及工作台桥接。工作台负责独立剪辑分支与最终导出，不是第八个能力模块。
 
 | 模块入口 | 唯一负责 | 输入与输出关系 | 不在本模块决定 |
 | --- | --- | --- | --- |
@@ -53,8 +53,8 @@
 | 运行依赖、构建、媒体解析、交付打包 | `engine/dependencies.py`、`builder.py`、`media.py`、`delivery.py` 等 | 模块声明所需能力/资源，不复制打包逻辑 |
 | Canvas/Remotion 适配与工作台桥接 | `engine/canvas_workbench.py`、`workbench_bridge.py`、`remotion_backend.py`、`engine/remotion/` | 两后端能力范围分别记录，不为接入工作台复制整套 React 实现 |
 | 工作台编辑、保存、导出 | `workbench/`；[工作台说明](workbench.md) | 各模块只补充能力验收，不重复全套交付流程 |
-| 通用制作原则与经验分级 | [制作总则](production-principles.md) | 入口链接到总则，具体参数归模块 |
-| 选题、叙事、文案、观众目标与内容交接 | writer 的 SKILL.md、references/script-workflow.md、audience-experience.md、handoff.md | 导演继承当前版本，旧编剧参考页仅作兼容路由 |
+| 核心通用要求、常见踩坑与沉淀方式 | [制作总则](production-principles.md) | 制作先读唯一摘要；技术细节归模块，原话/版本/认可证据归历史 |
+| 选题、叙事、文案、观众目标与内容交接 | writer 的 SKILL.md、references/script-workflow.md、audience-experience.md、handoff.md；项目内容源 | 导演继承当前版本，旧编剧参考页只作兼容路由，不复制规则 |
 | 系列偏好、创作源、review | director 的 `references/computing-voiceover.md`、创作/审片合同；单片 brief/review | 基础 skill 独立使用时由项目提供，不硬依赖 director 相对路径 |
 | 历史认可与失败记录 | [迭代记录](iteration-history.md) | 现行模块保留必要限制和链接，不复制历史叙述 |
 
@@ -75,7 +75,7 @@
 
 ## 技能入口与详细规则
 
-第 5 项将两个 SKILL.md 收拢为任务路由、七模块入口与关键约束。基础入口直接链接本包模块，导演入口通过 handoff 定位 FOUNDATION，再读取其模块路径；基础技能独立安装不依赖导演文件。
+两个原 SKILL.md 已收拢为任务路由、七模块入口与关键约束；新增编剧入口只加载内容规则，导演/基础入口保留各自制作能力。基础入口直接链接本包模块，导演入口通过 handoff 定位 FOUNDATION，再读取其模块路径；基础技能独立安装不依赖导演文件。
 
 | 内容 | 详细规则归属 | 入口保留的职责 |
 | --- | --- | --- |
@@ -88,4 +88,4 @@
 | 审片与历史反馈 | 导演的 references/review.md；[迭代记录](iteration-history.md) | 实际播放、核字与听音绑定当前版本，未审保留 not_reviewed |
 | 创作源示例与素材维护 | 导演的 references/authoring.md 样例入口、character-illustration.md | 按任务找例子，不在主入口列整套案例或复制历史 |
 
-精简只调整说明与读取路径，不修改 frontmatter、UI 调用策略、脚本参数、运行合同或现有素材。引用与元数据核验不等同于新的视频运行或审美验收。
+本次角色拆分调整技能描述、任务路由、内容规则归属与创作器展示；不修改工程命令、VideoSpec、时间线合同或已确认素材。引用与元数据核验不等同于新的视频运行或审美验收。

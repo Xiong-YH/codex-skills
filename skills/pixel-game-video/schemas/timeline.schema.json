@@ -170,14 +170,32 @@
           "type": "string"
         },
         "frame": {
-          "minimum": 0,
-          "title": "Frame",
-          "type": "integer"
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Frame"
+        },
+        "speech": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SpeechAnchor"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "required": [
-        "id",
-        "frame"
+        "id"
       ],
       "title": "Event",
       "type": "object"
@@ -356,6 +374,60 @@
       "title": "ProgressNode",
       "type": "object"
     },
+    "Rehearsal": {
+      "additionalProperties": false,
+      "properties": {
+        "cueIds": {
+          "items": {
+            "maxLength": 100,
+            "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Cueids",
+          "type": "array"
+        },
+        "startFrame": {
+          "default": 12,
+          "minimum": 0,
+          "title": "Startframe",
+          "type": "integer"
+        },
+        "unitsPerSecond": {
+          "default": 4.3,
+          "exclusiveMinimum": 0,
+          "maximum": 30,
+          "title": "Unitspersecond",
+          "type": "number"
+        },
+        "commaSeconds": {
+          "default": 0.18,
+          "maximum": 5,
+          "minimum": 0,
+          "title": "Commaseconds",
+          "type": "number"
+        },
+        "stopSeconds": {
+          "default": 0.35,
+          "maximum": 5,
+          "minimum": 0,
+          "title": "Stopseconds",
+          "type": "number"
+        },
+        "gapSeconds": {
+          "default": 0.2,
+          "maximum": 5,
+          "minimum": 0,
+          "title": "Gapseconds",
+          "type": "number"
+        }
+      },
+      "required": [
+        "cueIds"
+      ],
+      "title": "Rehearsal",
+      "type": "object"
+    },
     "SceneObject": {
       "additionalProperties": false,
       "properties": {
@@ -446,6 +518,17 @@
           "title": "Events",
           "type": "array"
         },
+        "rehearsal": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Rehearsal"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "motions": {
           "items": {
             "$ref": "#/$defs/Motion"
@@ -496,6 +579,48 @@
         "scene"
       ],
       "title": "Shot",
+      "type": "object"
+    },
+    "SpeechAnchor": {
+      "additionalProperties": false,
+      "properties": {
+        "cueId": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Cueid",
+          "type": "string"
+        },
+        "edge": {
+          "default": "word",
+          "enum": [
+            "start",
+            "end",
+            "word"
+          ],
+          "title": "Edge",
+          "type": "string"
+        },
+        "word": {
+          "default": "",
+          "title": "Word",
+          "type": "string"
+        },
+        "occurrence": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Occurrence",
+          "type": "integer"
+        },
+        "offsetFrames": {
+          "default": 0,
+          "title": "Offsetframes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "cueId"
+      ],
+      "title": "SpeechAnchor",
       "type": "object"
     }
   },

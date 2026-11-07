@@ -3,18 +3,21 @@
   "defaults": {
     "references": {
       "documentation": [
-        "modules/text/details.md"
+        "modules/text/details.md",
+        "modules/text/SOFT-HIGHLIGHT.md"
       ],
       "examples": [
         "assets/project-template/text.json"
       ],
       "tests": [
         "tests/test_workbench_bridge.py",
-        "tests/test_canvas_workbench.py"
+        "tests/test_canvas_workbench.py",
+        "workbench/tests/caption-design.test.mjs"
       ]
     },
     "notes": [
-      "文字独立成轨；文案和起止时间来自项目事件。角色 ID 是目录标识，写入工程时使用 role 值。"
+      "文字独立成轨；文案和起止时间来自项目事件。角色 ID 是目录标识，写入工程时使用 role 值。",
+      "工作台已注册 soft-highlight-caption 素材卡，支持柔边底板、关键词与语义双行；导出前检查 captionDesign 与实际卡 ID。仅工作台剪辑分支与 MP4，不新增 VideoSpec 字段或原生后端配方，剪映原生字幕未接入。"
     ]
   },
   "features": [

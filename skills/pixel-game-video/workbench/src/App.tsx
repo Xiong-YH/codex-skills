@@ -5,6 +5,8 @@ import { Inspector } from "./panels/Inspector";
 import { PreviewPanel } from "./preview/PreviewPanel";
 import { Timeline } from "./timeline/Timeline";
 import { ExportButton } from "./panels/ExportButton";
+import { CaptionDesign } from './panels/CaptionDesign';
+import {ProjectStatus} from './panels/ProjectStatus';
 import { flushSave, resetProject, useStore } from "./store";
 import { CARDS } from "./cards/registry";
 import { MANIFEST } from "./cards/projectCards";
@@ -133,6 +135,7 @@ export const App: React.FC = () => {
           {t("redo")}
         </button>
         <span className="tl-sep" />
+        <CaptionDesign />
         <ExportButton />
         <ExportButton kind="jianying" />
         <button className="btn" onClick={exportJson} title="下载工程 JSON 快照，便于备份和恢复">保存工程 JSON</button>
@@ -169,6 +172,7 @@ export const App: React.FC = () => {
       </header>
 
       {MANIFEST && project.source !== manifestKey(MANIFEST) && <div className="manifest-warning" role="status">已保留上次编辑。当前原片清单已更新；需要新版原片时，在素材中点击“导入成片”（可撤销）。</div>}
+      <ProjectStatus />
       <main className="main">
         <div className={`panel-wrap library-panel${libraryOpen ? " is-open" : " is-collapsed"}`} style={{ width: libW }}>
           <LibraryPanel />

@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "scope": "Parameterized acting references; phase times belong to each clip",
+  "sequences": [
+    {
+      "id": "seq.attempt-correct",
+      "title": "尝试—发现不对—修正",
+      "when": "正在解决具体问题",
+      "status": "candidate-example",
+      "actions": [
+        "act.pen-hover",
+        "act.pen-touch",
+        "act.pen-pause",
+        "act.cross-out"
+      ],
+      "phases": [
+        "准备",
+        "尝试",
+        "停住检查",
+        "撤销或修正"
+      ],
+      "variation": "将写字换成输入/搭建，但保留失败痕迹与修正依据",
+      "avoid": "不能只换表情却没有尝试结果",
+      "example": "examples/asking-s02a/index.html"
+    },
+    {
+      "id": "seq.hesitate-withdraw",
+      "title": "想做—试探—退回",
+      "when": "目标可见，人物尚未决定",
+      "status": "candidate-example",
+      "actions": [
+        "act.observe",
+        "act.test-reach",
+        "act.retract"
+      ],
+      "phases": [
+        "注意目标",
+        "接近未触",
+        "撤回保持"
+      ],
+      "variation": "可用门把、发送键、递出的物件；退回后对象应保持原态",
+      "avoid": "不能在未接触时让对象先响应",
+      "example": "examples/asking-s02a/index.html"
+    },
+    {
+      "id": "seq.decide-execute",
+      "title": "决定—触及—执行—稳定",
+      "when": "人物已找到要做的下一步",
+      "status": "candidate-example",
+      "actions": [
+        "act.resolve",
+        "act.grasp",
+        "act.lift",
+        "act.verify"
+      ],
+      "phases": [
+        "准备",
+        "接触",
+        "执行",
+        "检查"
+      ],
+      "variation": "同一目标的第二次尝试可比第一次短促而果断",
+      "avoid": "缺少握持素材时不拿摊手替代",
+      "example": "examples/asking-s02a/index.html"
+    },
+    {
+      "id": "seq.search-find",
+      "title": "寻找—定位—取用",
+      "when": "目标位置尚不确定",
+      "status": "design-only",
+      "actions": [
+        "act.scan",
+        "act.inspect",
+        "act.grasp",
+        "act.lift"
+      ],
+      "phases": [
+        "扫描范围",
+        "定位目标",
+        "触及",
+        "取用"
+      ],
+      "variation": "书架、工具台、界面检索各按空间设计",
+      "avoid": "不能扫描未存在的目标或无依据瞬移",
+      "example": null
+    },
+    {
+      "id": "seq.compare-choose",
+      "title": "查看双方—比较—选择",
+      "when": "两个候选有可比维度",
+      "status": "design-only",
+      "actions": [
+        "act.observe",
+        "act.compare",
+        "act.point",
+        "act.tap"
+      ],
+      "phases": [
+        "看A",
+        "看B并对照",
+        "指向选择",
+        "确认"
+      ],
+      "variation": "可保留被放弃项，展示选择条件而非随机发光",
+      "avoid": "不把决定安排在比较之前",
+      "example": null
+    },
+    {
+      "id": "seq.impact-recover",
+      "title": "刺激—反应—恢复",
+      "when": "突发事件改变处境",
+      "status": "design-only",
+      "actions": [
+        "act.observe",
+        "act.flinch",
+        "act.breathe",
+        "act.resolve"
+      ],
+      "phases": [
+        "接收刺激",
+        "一次反应",
+        "落稳",
+        "重新行动"
+      ],
+      "variation": "反应可以后缩、停手或避让，不固定抱头",
+      "avoid": "禁止持续抖动和无触发惊吓",
+      "example": null
+    },
+    {
+      "id": "seq.operate-verify",
+      "title": "操作—验证—修正或结束",
+      "when": "存在可观察的操作结果",
+      "status": "design-only",
+      "actions": [
+        "act.tap",
+        "act.verify",
+        "act.retry"
+      ],
+      "phases": [
+        "执行",
+        "看结果",
+        "分支选择"
+      ],
+      "variation": "成功可直接收束；失败先改变条件再试",
+      "avoid": "不靠无依据进度条宣称成功",
+      "example": null
+    },
+    {
+      "id": "seq.offer-receive",
+      "title": "递出—接触—转移—释放",
+      "when": "有两方和一个共享物件",
+      "status": "design-only",
+      "actions": [
+        "act.offer",
+        "act.receive",
+        "act.place"
+      ],
+      "phases": [
+        "交出",
+        "共同接触",
+        "接稳",
+        "原持有者释放"
+      ],
+      "variation": "物件路径与两方手势一同制作",
+      "avoid": "交接期间不得出现两个物件副本",
+      "example": null
+    },
+    {
+      "id": "seq.approach-work",
+      "title": "走近—坐稳—开始工作",
+      "when": "人物尚未处在操作位置",
+      "status": "design-only",
+      "actions": [
+        "act.approach",
+        "act.sit",
+        "act.pen-hover",
+        "act.pen-touch"
+      ],
+      "phases": [
+        "到达",
+        "承重",
+        "准备",
+        "开始"
+      ],
+      "variation": "站立工作可去坐下；工具由任务决定",
+      "avoid": "不把人物整体滑行称为走路",
+      "example": null
+    },
+    {
+      "id": "seq.review-question",
+      "title": "回看—定位疑点—整理提问",
+      "when": "已经阅读过资料",
+      "status": "design-only",
+      "actions": [
+        "act.turn-page",
+        "act.compare",
+        "act.pen-pause",
+        "act.type"
+      ],
+      "phases": [
+        "回看",
+        "比对",
+        "定位不懂",
+        "组织表达"
+      ],
+      "variation": "可在纸上记录或在输入框整理，内容需来自本片",
+      "avoid": "不凭空生成专业名词或改变原文主张",
+      "example": null
+    },
+    {
+      "id": "seq.finish-handoff",
+      "title": "完成—放下—整理—交接",
+      "when": "本段已有可验证的末态",
+      "status": "design-only",
+      "actions": [
+        "act.verify",
+        "act.place",
+        "act.handoff"
+      ],
+      "phases": [
+        "确认完成",
+        "放下释放",
+        "整理",
+        "交给下一段"
+      ],
+      "variation": "也可保留手中物，按下镜需要交接",
+      "avoid": "不能为了收镜取消刚刚得到的结果",
+      "example": null
+    },
+    {
+      "id": "seq.task-choice",
+      "title": "任务累积—逐次反应—选择一项",
+      "when": "多个任务同时争取注意",
+      "status": "approved-example-only",
+      "actions": [
+        "act.observe",
+        "act.retreat",
+        "act.frustrated",
+        "act.point",
+        "act.tap"
+      ],
+      "phases": [
+        "接收任务",
+        "压力增加",
+        "停顿",
+        "选择",
+        "对象响应"
+      ],
+      "variation": "第一次认可案例仅供节奏参考；其他场景可不用抱头",
+      "avoid": "不要将此链复制到所有迷茫或求助镜头",
+      "example": "examples/task-choice/index.html"
+    }
+  ]
+}

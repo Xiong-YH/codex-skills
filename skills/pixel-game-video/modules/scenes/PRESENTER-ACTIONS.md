@@ -13,6 +13,8 @@ Canvas 的 `shot.performance` 将现有 V3 姿态图接入实际播放；Remotio
 
 可选 `neutral/wave/talk/dazed-left/dazed-right/overwhelmed`。仅在已选的剧情表演中安排有原因的动作与收束；不要用持续上下浮动代替表演，也不让整个身体无缘由循环摆动。左右疑惑使用两张独立姿态，中间留 neutral，不镜像人物。这些动作不构成口播推荐动作集。
 
+这六项是当前 `shot.performance` 的已接入素材范围，不是剧情动作的上限。需要执笔、拿放、撤回、递接等行为时，先查 [动作形态与连贯动作段](character-performance/README.md)，按本镜制作完整姿态及独立片段；其中的设计ID不能写入本字段。独立播放器与示例不自动扩展 Canvas 姿态白名单或 Remotion 支持。
+
 `modules/library/characters/performance.json` 声明原图哈希、布局裁切边界、统一身高参考与脚底锚点。构建只嵌入用到的姿态和 neutral，动作素材及清单参与工程哈希。运行时只做原图的裁切放置，不重画面部、不修改 alpha。人物在不同姿态间改变手势、表情和头肩关系，脚底保持相同位置；这是离散关键姿态表演，并非骨骼动画、补间手臂或真实音素口型。
 
 导演工程的姿态区间由 storyboard.performance 拥有；人物身份仍在 production-plan。新增姿态或替换图像后重新核验身份、脚底、手部、透明边缘和实际播放。当前接入不自动代表素材已完成透明清稿或获得本次审美认可。

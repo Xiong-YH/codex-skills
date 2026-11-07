@@ -230,6 +230,7 @@ export const useStore = create<WorkbenchState>((set, get) => ({
           ? /(^|\/)bgm\//.test(file) ? "bgm" : /(^|\/)narration\//.test(file) ? "narration" : "sfx"
           : cardId.startsWith("proj:transition:") || cardId === "flash-cut" ? "transition"
           : cardId.startsWith("proj:caption:") ? props.role === "title" ? "title" : "caption"
+          : cardId === 'soft-highlight-caption' ? 'caption'
           : "shot";
         let track = d.tracks.find(t => t.id === trackId);
         if (!track) track = d.tracks.find(t => t.role === role &&

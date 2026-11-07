@@ -8,7 +8,7 @@ import path from 'node:path';
 import {createExportMiddleware,parseExportRequest,renderArguments,activeVideoProject} from '../scripts/export-service.mjs';
 import {excludesFromPlate,renderPropsForKind} from '../src/renderMode.js';
 const clip=(cardId,start,duration,props={})=>({id:`${cardId}-${start}`,cardId,start,duration,inOffset:0,speed:1,opacity:1,scale:1,x:0,y:0,props});
-const currentProject=()=>({name:'Edited Demo',fps:60,width:1920,height:1080,tracks:[{id:'captions',name:'captions',clips:[clip('proj:caption:c1',650,250,{text:'用户当前字幕'})]},{id:'shots',name:'shots',clips:[clip('proj:shot:s1',0,600,{heading:'用户当前标题'})]},{id:'sound',name:'sound',clips:[clip('audio-clip',870,30,{file:'audio/click.wav',volume:.2})]}]});
+const currentProject=()=>({name:'Edited Demo',captionDesign:{mode:'custom',reason:'保留本回归工程的已有字幕设计'},fps:60,width:1920,height:1080,tracks:[{id:'captions',name:'captions',clips:[clip('proj:caption:c1',650,250,{text:'用户当前字幕'})]},{id:'shots',name:'shots',clips:[clip('proj:shot:s1',0,600,{heading:'用户当前标题'})]},{id:'sound',name:'sound',clips:[clip('audio-clip',870,30,{file:'audio/click.wav',volume:.2})]}]});
 const request=(middleware,{method='POST',url='/',body,origin='http://127.0.0.1:5208'}={})=>new Promise((resolve,reject)=>{
   const req=Readable.from(body===undefined?[]:[Buffer.from(typeof body==='string'?body:JSON.stringify(body))]);
   req.method=method;req.url=url;req.headers={host:'127.0.0.1:5208','content-type':'application/json',...(origin?{origin}:{})};
@@ -23,7 +23,7 @@ const fixture=()=>{
   const root=path.join(base,'skill/workbench'),video=path.join(base,'video');
   mkdirSync(path.join(root,'public/audio'),{recursive:true});mkdirSync(path.join(video,'build/remotion/src'),{recursive:true});mkdirSync(path.join(base,'skill/scripts'),{recursive:true});
   writeFileSync(path.join(root,'public/audio/click.wav'),'sound');writeFileSync(path.join(video,'project.json'),'{}');writeFileSync(path.join(base,'skill/scripts/video.py'),'# exporter');
-  symlinkSync(path.join(video,'build/remotion/src'),path.join(root,'proj'));
+  symlinkSync(path.join(video,'build/remotion/src'),path.join(root,'proj'),process.platform==='win32'?'junction':'dir');
   return {root,video,cleanup:()=>rmSync(base,{recursive:true,force:true})};
 };
 const fakeProcesses=({failExporter=false,failDependency=false}={})=>{
@@ -67,7 +67,7 @@ test('plate excludes caption/audio layers but preserves shot headings and the or
 test('request never accepts a caller output path and active project must be a generated foundation project',()=>{
   assert.throws(()=>parseExportRequest(JSON.stringify({project:currentProject(),destination:'/outside'})),/输出路径/);
   assert.throws(()=>parseExportRequest(JSON.stringify({project:currentProject(),kind:'other'})),/导出类型/);
-  const f=fixture();try{assert.equal(activeVideoProject(f.root),f.video);rmSync(path.join(f.root,'proj'));symlinkSync(f.root,path.join(f.root,'proj'));assert.throws(()=>activeVideoProject(f.root),/foundation/);}finally{f.cleanup();}
+  const f=fixture();try{assert.equal(activeVideoProject(f.root),f.video);rmSync(path.join(f.root,'proj'));symlinkSync(f.root,path.join(f.root,'proj'),process.platform==='win32'?'junction':'dir');assert.throws(()=>activeVideoProject(f.root),/foundation/);}finally{f.cleanup();}
   assert.ok(renderArguments({output:'x',propsFile:'p',publicDir:'d',browser:'b',kind:'jianying'}).includes('--muted'));
   assert.ok(!renderArguments({output:'x',propsFile:'p',publicDir:'d',browser:'b',kind:'mp4'}).includes('--muted'));
 });

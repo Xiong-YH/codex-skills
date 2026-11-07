@@ -143,6 +143,14 @@ test('dragging third scene and caption from library preserves fixed source selec
   assert.doesNotThrow(()=>validateProject(useStore.getState().project));
 });
 
+test('soft caption library card enters a caption lane with real-time timing at 60fps',()=>{
+  useStore.getState().addClip('soft-highlight-caption',undefined,1800);
+  const lane=useStore.getState().project.tracks.find(t=>t.clips.some(c=>c.cardId==='soft-highlight-caption'&&c.start===1800));
+  const added=lane.clips.find(c=>c.cardId==='soft-highlight-caption'&&c.start===1800);
+  assert.equal(lane.role,'caption');assert.equal(added.duration,240);assert.equal(added.speed,1);
+  assert.equal(added.props.fontSize,34);assert.equal(added.props.plateOpacity,.65);
+});
+
 test('adding media without an explicit target creates independent music, narration and overlapping effect lanes',()=>{
   const s=useStore.getState();
   s.addClip('audio-clip',undefined,20,{props:{file:'audio/sfx/a.wav',volume:.3}});

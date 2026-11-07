@@ -1,0 +1,167 @@
+{
+  "version": 2,
+  "atlas": {
+    "file": "assets/seated-actions-v2.png",
+    "sha256": "4f2137f452ec487e0f9ad509878d25ccd9a88b72654a7e5e7ae2660f81c2b97c",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "grid": [
+      3,
+      3
+    ],
+    "alpha": true,
+    "source": "built-in image_gen: complete atlas, alpha cleanup, then whole-scene furniture correction; see prompts.md",
+    "status": "furniture corrected candidate; user review pending",
+    "registration": "project-local; not added to actor.azong.v3 pose whitelist"
+  },
+  "identity": "小棕: brown hair, teal-green jacket; existing standalone-case identity; not the formal blue-gray S02A costume",
+  "inspection": {
+    "anatomy": "9 complete seated vignettes; visible two hands/arms or occluded shoulder chain checked, no detached hand patches; last pose phone held and no phone on desk",
+    "anchors": "fixed 418px cells; lower rows shifted -4px in whole-vignette draw; minor furniture/hair variation remains",
+    "limits": [
+      "discrete whole-pose keys, no optical-flow or skeletal inbetweens",
+      "small colored fringe remains at some edges",
+      "pen/paper content is generated marks, not exact handwriting",
+      "full atlas changes when switching, slight furniture edge drift possible"
+    ],
+    "furniture": "All9 cells inspected: near-left support connects front apron to floor; right front support and rear supports visible; stool remains separate. Minor pixel/edge variation remains.",
+    "previousFailure": "Original check focused on human limbs and phone ownership; omitted desk load-bearing structure. Prior broad structural pass withdrawn."
+  },
+  "poses": {
+    "hover": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        0
+      ]
+    },
+    "write": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        418,
+        0,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        0
+      ]
+    },
+    "pause": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        836,
+        0,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        0
+      ]
+    },
+    "cross": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        0,
+        418,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        -4
+      ]
+    },
+    "withdraw": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        418,
+        418,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        -4
+      ]
+    },
+    "reach": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        836,
+        418,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        -4
+      ]
+    },
+    "retract": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        0,
+        836,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        -4
+      ]
+    },
+    "grip": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        418,
+        836,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        -4
+      ]
+    },
+    "held": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        836,
+        836,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        -4
+      ]
+    }
+  },
+  "previousAtlas": {
+    "file": "assets/seated-actions.png",
+    "sha256": "5c55207df77f118a763f6430f9b58ae5710048eee7f4c1e4ef14b9b44bef5127",
+    "nativeSize": [
+      1254,
+      1254
+    ],
+    "grid": [
+      3,
+      3
+    ],
+    "alpha": true,
+    "source": "built-in image_gen; whole-pose sprite atlas then alpha cleanup; see prompts.md",
+    "status": "failed: student-side desk support absent; retained for history",
+    "registration": "project-local; not added to actor.azong.v3 pose whitelist"
+  }
+}

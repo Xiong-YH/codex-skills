@@ -54,5 +54,6 @@ get('play').onclick=()=>playing?stop():play();get('replay').onclick=()=>{stop();
 fps.onchange=()=>{stop();frame=0;get('timeline').max=count(3)-1;updateConfig();render();};easing.onchange=()=>{stop();frame=0;get('description').textContent=descriptions[selected]+' 当前手动缓动 '+easing.value+' 覆盖预设；实际运动以曲线为准。';updateConfig();render();};
 get('copy').onclick=async()=>{try{await navigator.clipboard.writeText(get('config').value);get('copy-status').textContent='已复制';}catch{get('config').select();get('copy-status').textContent='已选中，可手动复制';}};
 new ResizeObserver(()=>{get('scene-fit').style.transform=`scale(${get('viewport').clientWidth/960})`;}).observe(get('viewport'));
-choose('push');
+const query=new URLSearchParams(location.search);document.body.classList.toggle('embedded',query.get('embed')==='1');
+choose(['push','pan','slam','shake','back','path','layer','page'].includes(query.get('effect'))?query.get('effect'):'push');
 })();

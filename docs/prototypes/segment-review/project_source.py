@@ -1,6 +1,7 @@
 """Read bounded director sources and expose traceable review objects, without mutating them."""
 import hashlib,json
 from pathlib import Path
+from check_dimensions import COLUMNS, dimensions
 NAMES=('brief.json','script.json','storyboard.json','production-plan.json')
 def sha(path):
  h=hashlib.sha256()
@@ -78,4 +79,8 @@ def manifest(root):
   hashes['review-script.json']=sha(review_path)
  revision=hashlib.sha256(json.dumps(hashes,sort_keys=True).encode()).hexdigest()
  videos=list((root/'video/outputs').glob('*.mp4'));video=max(videos,key=lambda p:p.stat().st_mtime) if videos else None
- return {'schemaVersion':1,'project':{'id':brief['id'],'title':plan['title'],'fps':fps,'durationSeconds':offset/fps,'revision':revision,'sourceHashes':hashes,'videoSha256':sha(video) if video else None},'segments':segments,'objects':objects,'video':video,'scriptReview':script_review}
+ for seg in segments:
+  shot=next(s for s in board['shots'] if s['id']==seg['shotId'])
+  planned=next((s for s in plan['shots'] if s['id']==seg['shotId']),{})
+  seg['checkDimensions']=dimensions(seg,shot,planned,script,plan,[o for o in objects if o['id'] in seg['objectIds']])
+ return {'schemaVersion':1,'checkColumns':[{'key':k,'label':v} for k,v in COLUMNS],'project':{'id':brief['id'],'title':plan['title'],'fps':fps,'durationSeconds':offset/fps,'revision':revision,'sourceHashes':hashes,'videoSha256':sha(video) if video else None},'segments':segments,'objects':objects,'video':video,'scriptReview':script_review}

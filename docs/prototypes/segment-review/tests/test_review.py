@@ -50,8 +50,16 @@ class ReviewTests(unittest.TestCase):
             (root/'review-script.json').write_text(json.dumps(draft),encoding='utf-8')
             with self.assertRaises(ValueError):manifest(root)
             (root/'review-script.json').unlink()
+            self.assertEqual(len(first['checkColumns']),9)  # plus segment / shot identity
+            cells=first['segments'][0]['checkDimensions']
+            self.assertEqual(cells['duration']['value']['seconds'],2.2)
+            self.assertEqual(cells['copy']['value']['projectLabels'][0]['text'],'原句')
+            self.assertIsNone(cells['transition']['value']['continuity'])
+            self.assertIsNone(cells['background']['value']['replacement'])
+            self.assertTrue(all(c['verification']=='not_reviewed' for c in cells.values()))
             sources['script.json']['labels'][0]['text']='新句';(root/'script.json').write_text(json.dumps(sources['script.json']),encoding='utf-8')
             self.assertNotEqual(first['project']['revision'],manifest(root)['project']['revision'])
+            self.assertEqual(manifest(root)['segments'][0]['checkDimensions']['copy']['value']['projectLabels'][0]['text'],'新句')
             (root/'review-map.json').write_text(json.dumps({'objects':[{'sourceRefs':[{'file':'missing.json','stableId':'missing'}]}]}),encoding='utf-8')
             with self.assertRaises(ValueError):manifest(root)
 

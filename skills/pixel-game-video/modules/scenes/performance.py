@@ -46,7 +46,7 @@ def schedule(cues, fps):
         if isinstance(groups, str):
             groups = [groups]
         if not groups:
-            raise ValueError(f"Caption {cue['id']} needs phrase groups for mouth timing")
+            raise ValueError(f"Caption {cue['id']} needs phrase groups for text rehearsal timing; no mouth animation")
         words = [group.lower().split() for group in groups]
         count = sum(len(group) for group in words)
         span = cue['endFrame'] - cue['startFrame']

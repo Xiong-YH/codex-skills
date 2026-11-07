@@ -1,0 +1,79 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>同一组组件 · 机械与能量</title><style>
+:root{color-scheme:dark;--bg:#0e171c;--ink:#eee5d2;--muted:#9db0b1;--line:#31454d;--gold:#ddb471;--mint:#9ed8c1}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 'Microsoft YaHei',sans-serif}main{max-width:1800px;margin:auto;padding:28px 30px 36px}.top{display:flex;justify-content:space-between;gap:24px;align-items:end}h1{font-size:30px;font-weight:500;letter-spacing:1px;margin:0 0 5px}p{color:var(--muted);margin:0}.kicker{color:var(--gold);font-size:11px;letter-spacing:3px;margin-bottom:8px}.chip{font-size:12px;border:1px solid var(--line);padding:5px 12px;border-radius:30px;color:var(--muted);white-space:nowrap}.toolbar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:23px 0 18px;padding:15px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}button{font:inherit;color:var(--ink);border:1px solid #465d65;background:#1a2a31;padding:7px 15px;cursor:pointer;border-radius:4px}button:hover{background:#2a3d44}button[aria-pressed=true]{background:#d5b37c;color:#17282d;border-color:#e9c68d}.spacer{flex:1}label{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}input{accent-color:#d3af73}#seek{min-width:160px;width:190px}output{color:var(--muted);font-size:12px;min-width:40px}.compare{display:grid;grid-template-columns:1fr 1fr;gap:22px}.sample{border:1px solid var(--line);background:#16232a;overflow:hidden}.head{padding:16px 20px;display:flex;justify-content:space-between;gap:12px;align-items:baseline}.head h2{font-size:23px;font-weight:500;margin:0;color:var(--gold)}.energy .head h2{color:var(--mint)}.head span{color:var(--muted);font-size:12px}.scene{aspect-ratio:16/9;position:relative;background:#14252d}.scene svg{display:block;width:100%;height:100%}.desc{padding:13px 20px 16px;color:#b9c5be;font-size:13px;border-top:1px solid var(--line)}.details-title{display:flex;align-items:baseline;justify-content:space-between;margin:24px 0 11px}h3{font-size:17px;font-weight:500;margin:0}.details-title span{color:var(--muted);font-size:12px}.detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}.detail{background:#14232a;min-width:0}.detail svg{display:block;width:100%;aspect-ratio:1.35}.detail b{font-size:13px;font-weight:500;display:block;margin:0 15px 4px}.detail p{font-size:12px;margin:0 15px 14px}.foot{margin-top:18px;font-size:12px;color:var(--muted)}a{color:#ddc18e}button:focus-visible,input:focus-visible{outline:2px solid var(--mint);outline-offset:3px}@media(max-width:950px){.compare{grid-template-columns:1fr}.top{align-items:start}main{padding:20px 16px}.head span{max-width:60%;text-align:right}.spacer{display:none}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style></head><body><main>
+<div class="top"><div><div class="kicker">通知与专注 / 组件风格对照</div><h1>同一组物体，两种做法</h1><p>保持原片布局与三句文案，换材质、结构和状态反馈。</p></div><span class="chip">局部造型试样</span></div>
+<div class="toolbar"><button data-state="60" aria-pressed="true">消息打断</button><button data-state="135" aria-pressed="false">关闭干扰</button><button data-state="239" aria-pressed="false">任务完成</button><button id="transition">看转场中途</button><div class="spacer"></div><button id="play">播放动作</button><input id="seek" aria-label="两版共同进度" type="range" min="0" max="239" value="60"><output id="time">2.00s</output><label><input id="background" type="checkbox" checked>原片背景</label></div>
+<div class="compare"><article class="sample mechanical"><div class="head"><h2>01 / 机械</h2><span>黄铜 · 深铁 · 纸张 · 传动与锁定</span></div><div id="scene-m" class="scene"></div><div class="desc">纸板变成带传动笔架的工作台；开关带动闸门，通知纸片收回，笔架继续完成任务。</div></article><article class="sample energy"><div class="head"><h2>02 / 能量</h2><span>青绿玻璃 · 黄铜端帽 · 通路与激活</span></div><div id="scene-e" class="scene"></div><div class="desc">纸板保留纸面，笔架增加玻璃导轨；关闭通知通路后，信号熄灭，书写进度逐段点亮。</div></article></div>
+<div class="details-title"><h3>放大看：还是原来的三个对象</h3><span>上方切换状态，下方同步变化</span></div>
+<div class="compare"><div class="detail-grid" id="detail-m"></div><div class="detail-grid" id="detail-e"></div></div>
+<p class="foot">光路与亮度表示激活状态及任务步骤。<a href="original.png">查看原版同状态取帧 ↗</a></p>
+</main><script>
+const A={bg:'../../../library/backgrounds/pixel-workbench.png',gear:'../../assets/gears/brass.png'};
+const C={deep:'#0a1922',dark:'#142b34',metal:'#344b50',edge:'#18272d',brass:'#a7753e',gold:'#d9ad65',shine:'#f4d192',dim:'#765535',paper:'#eee2c2',paperShade:'#d7c69b',ink:'#526a62',glass:'#244f56',cyan:'#79c9bb',mint:'#b3e4cf'};
+const clamp=v=>Math.max(0,Math.min(1,v)),p=(f,a,d=10)=>clamp((f-a)/d),e=v=>1-Math.pow(1-v,3);
+let frame=60,playing=false,last=0,bg=true;
+const R=(x,y,w,h,c,other='')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}" ${other}/>`;
+const L=(path,c,w=2,other='')=>`<path d="${path}" fill="none" stroke="${c}" stroke-width="${w}" ${other}/>`;
+const circ=(x,y,r,c,other='')=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" ${other}/>`;
+function metal(x,y,w,h,corner=true){return R(x-3,y-3,w+6,h+6,C.deep)+R(x,y,w,h,C.brass)+R(x+3,y+3,w-6,h-6,C.metal)+R(x+4,y+3,w-8,2,C.shine)+R(x+3,y+h-6,w-6,3,C.dim)+(corner?[[x+8,y+8],[x+w-9,y+8],[x+8,y+h-9],[x+w-9,y+h-9]].map(([a,b])=>R(a-2,b-2,5,5,C.deep)+R(a-1,b-1,2,2,C.gold)).join(''):'');}
+function gear(x,y,r,angle=0){return `<g transform="translate(${x} ${y})"><g transform="rotate(${angle})"><svg x="${-r}" y="${-r}" width="${r*2}" height="${r*2}" viewBox="39 40 1176 1176"><image href="${A.gear}" width="1254" height="1254"/></svg></g>${circ(0,0,r*.10,C.deep)}${circ(-r*.025,-r*.025,r*.06,C.shine)}</g>`;}
+function glass(x,y,w,h,on=1){return R(x-2,y-2,w+4,h+4,C.deep)+R(x,y,w,h,'#426b6c')+R(x+3,y+3,w-6,h-6,'#183c46')+R(x+6,y+7,w-12,h-14,'#255963')+R(x+8,y+8,w-16,h-16,C.cyan,`opacity="${.12+.45*on}"`)+R(x+6,y+6,3,h-12,'#c5ead5','opacity=".6"')+R(x+w-7,y+7,1,h-14,'#76aaa8')+metal(x-4,y-7,w+8,10,false)+metal(x-4,y+h-3,w+8,10,false);}
+function base(x,y,w){return R(x+6,y+7,w,9,C.deep)+metal(x,y,w,12,false)+R(x+12,y+12,14,7,C.deep)+R(x+w-26,y+12,14,7,C.deep);}
+function state(f){const focused=f>=90,g=f;const off=focused?e(p(f,112,8)):0;
+const lines=focused?[1,.37+.63*e(p(g,157,11)),e(p(g,173,11)),e(p(g,189,11))]:[e(p(f,4,11)),.37*e(p(f,17,7)),0,0];let pen={x:84+173*lines[0],y:131};if(!focused&&f>=17)pen={x:84+173*lines[1],y:175};if(focused){let i=g<168?1:g<184?2:3;pen={x:84+173*lines[i],y:131+44*i};}return{f,focused,off,lines,pen,done:e(p(f,208,10)),moving:f<24||(f>=157&&f<200)};}
+function pencil(x,y,opacity=1,energy=false){return `<g opacity="${opacity}" transform="translate(${x} ${y}) rotate(-35)"><g transform="translate(-12 -8)">${energy?R(7,-115,11,93,'#4c7f7d')+R(9,-109,3,78,C.mint):R(7,-115,11,93,C.gold)+R(7,-115,3,93,C.shine)}${R(7,-130,11,15,C.metal)}${L('M7-128H18',C.gold,3)}<path d="M0 0 7-22 18-22 24 0Z" fill="#d5bb8c"/><path d="M0 0 12 8 24 0Z" fill="#30363a"/></g></g>`;}
+function board(type,s){const m=type==='m',motion=s.moving?(s.f<24?s.f*7:(s.f-157)*6):s.focused?258:168;
+let z=R(1,12,323,352,C.deep)+R(2,10,318,347,m?'#785931':'#3b5b5c')+metal(4,9,310,347,false)+R(12,18,294,328,C.paper)+R(15,21,287,2,'#fff0cb');
+z+=metal(107,0,102,21,false)+R(115,8,85,5,'#69776a');
+z+=R(45,60,83,9,'#446160')+R(45,79,199,3,'#c4b995');
+z+=s.lines.map((v,i)=>R(45,117+44*i,12,12,'#c8bc98')+L(`M83 ${131+44*i}H${83+173*v}`,C.ink,7)).join('');
+if(m){
+ z+=metal(-17,36,25,274,false)+R(-11,44,3,256,C.dim);for(let y=52;y<298;y+=11)z+=R(-8,y,13,4,C.gold);
+ z+=R(-4,s.pen.y-7,38,15,C.metal)+L(`M-2 ${s.pen.y-8}H33`,C.gold,2)+gear(-7,s.pen.y,18,motion);
+ z+=R(27,s.pen.y-15,19,30,C.deep)+metal(29,s.pen.y-13,15,26,false)+L(`M44 ${s.pen.y-6}L${s.pen.x-19} ${s.pen.y-32}`,C.dim,5)+L(`M44 ${s.pen.y-7}L${s.pen.x-19} ${s.pen.y-33}`,C.gold,2);
+ z+=R(-7,328,335,14,C.deep)+R(1,330,318,8,C.brass)+R(6,331,307,2,C.shine)+gear(5,337,17,motion)+gear(307,337,17,-motion);
+}else{
+ z+=glass(-15,43,15,266,1)+L(`M-8 54V${s.pen.y}`,C.mint,4)+R(-18,s.pen.y-10,23,20,C.brass)+R(-15,s.pen.y-7,17,14,C.glass)+R(-12,s.pen.y-4,11,7,C.mint);
+ z+=L(`M4 ${s.pen.y-3}H30L${s.pen.x-19} ${s.pen.y-32}`,'#376267',5)+L(`M4 ${s.pen.y-3}H30L${s.pen.x-19} ${s.pen.y-32}`,C.cyan,2);
+ z+=glass(17,328,281,12,0)+R(23,332,269*(s.focused?Math.max(.3,(s.lines.reduce((a,v)=>a+v,0))/4):.3),4,C.cyan)+R(25,332,92,2,C.mint);
+}
+z+=pencil(s.pen.x,s.pen.y,1-s.done,!m);
+if(s.done>0)z+=`<g opacity="${s.done}">${m?metal(216,281,67,52):glass(217,283,64,45,1)}${L('M230 306l11 10 25-27',m?'#e6d6a0':C.mint,6)}</g>`;
+z+=base(20,358,275);return z;}
+function bell(x,y,c){return `<g transform="translate(${x} ${y})"><path d="M18 22V13a9 9 0 0 0-18 0v9l-4 5h26Z" fill="${c}"/>${L('M5 31h8',c,3)}</g>`;}
+function phone(type,s){const m=type==='m';let z=metal(0,0,155,297)+R(10,14,135,260,m?'#21373e':'#153940')+R(12,16,131,2,m?'#6c7c71':'#89bfaf')+R(60,5,35,5,C.deep);
+if(m){for(let i=0;i<3;i++){let y=50+45*i;z+=metal(24,y,108,31,false)+R(30,y+7,95,17,C.paperShade)+L(`M35 ${y+12}H115M35 ${y+19}H99`,'#637268',2);}z+=L('M20 191V249H131',C.dim,7)+L('M20 191V249H131',C.gold,2);z+=gear(122,244,15,s.off*90);z+=R(25,200,105*s.off,7,C.metal)+R(25,200,105*s.off,2,C.gold);}
+else{for(let i=0;i<3;i++){let y=50+45*i;z+=glass(25,y,104,25,1-s.off)+L(`M42 ${y+12}H112`,s.off>.5?'#456964':C.mint,3);}z+=L('M20 190V249H130','#183039',9)+L('M20 190V249H130',s.off>.5?'#34514e':C.cyan,4);z+=R(116,237,12,12,s.off>.5?'#36534f':C.mint);}
+z+=bell(22,185,s.off>.5?'#8d9f94':C.gold)+R(61,190,63,28,C.deep)+metal(63,192,59,24,false)+R(68,197,49,14,m?'#19282b':'#254c4d')+R(96-26*s.off,197,19,14,s.off>.5?'#b0bc9c':C.shine)+L(`M${99-26*s.off} 199v9`,C.dim,2);
+if(s.off>0)z+=`<g opacity="${s.off}">${L('M16 183l28 27','#e2e0c7',3)}${L('M67 244l9 8 15-18',m?'#c5c798':C.mint,4)}</g>`;
+z+=base(-6,300,167);return z;}
+function bubble(type,w=170,h=57,off=0){const m=type==='m';let z;if(m){z=R(4,5,w,h,C.deep)+R(0,0,w,h,C.brass)+R(3,3,w-6,h-6,C.paperShade)+R(5,5,w-10,2,'#fff1cf')+R(12,-4,15,12,C.metal)+L('M15-2h9',C.shine,2)+`<path d="M15 ${h-3}v14l17-14" fill="${C.paperShade}"/>`;}
+else{z=glass(0,0,w,h,1-off)+`<path d="M15 ${h-3}v14l17-14" fill="#3a7f7c" stroke="${C.cyan}" stroke-width="2"/>`;}
+z+=R(15,18,22,20,m?'#536d63':'#8acdbc')+L('M19 23H32M19 29H28',m?'#dbcfaa':'#315e5b',2);for(let i=0;i<3;i++)z+=R(66+i*24,27,7,7,m?'#5e6c5b':C.mint);return z;}
+function notifications(type,s,phoneX,phoneY){let z='';if(!s.focused){for(let i=0;i<2;i++){let v=e(p(s.f,24+i*22,10));if(v)z+=`<g opacity="${v}" transform="translate(${phoneX-65-78*v-i*70} ${270+i*111-(1-v)*20})">${bubble(type)}</g>`;}}
+else if(s.off<1){z+=`<g opacity="${1-s.off}" transform="translate(${phoneX-102-50*s.off} ${302-30*s.off})">${bubble(type,170,57,s.off)}</g>`;}return z;}
+function pointer(x,y){return `<g transform="translate(${x} ${y})"><path d="M0 0v29l9-7 7 15 7-4-7-14 13-1Z" fill="#eee5ce" stroke="#34484b" stroke-width="2"/></g>`;}
+function paperTransition(type,f){if(f<81||f>=103)return '';let t=f-81,x=t<8?-1440+1440*e(p(t,0,8)):t<12?0:1440*e(p(t,12,10));let z=R(-30,-30,1430,780,C.paper)+L('M21-30V750','#c3a475',8)+L('M51-30V750','#e1cda7',3);for(let i=0;i<3;i++)z+=L(`M160 ${225+i*90}H${1030-i*110}`,'#d6c8a5',10);if(type==='m'){z+=metal(1301,-10,37,740,false)+gear(1320,80,37,t*13)+gear(1320,635,37,t*13);}else{z+=glass(1307,-12,16,744,1)+L('M1315 0V720',C.mint,4);}return `<g transform="translate(${x} 0)">${z}</g>`;}
+function svg(content,view='0 0 1280 720'){return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${view}" role="img">${content}</svg>`;}
+function scene(type,s){let z=bg?`<image href="${A.bg}" width="1280" height="720" preserveAspectRatio="xMidYMid slice"/>${R(0,0,1280,720,'#050e19','opacity=".34"')}`:R(0,0,1280,720,'#13252c')+L('M0 578H1280','#42534b',2);
+let x=s.focused?430:412,y=179,sc=s.focused?1.10:1,px=s.focused?934:848,py=258;
+z+=`<ellipse cx="${x+160*sc}" cy="${y+379*sc}" rx="${194*sc}" ry="14" fill="#071725" opacity=".6"/><g transform="translate(${x} ${y}) scale(${sc})">${board(type,s)}</g><g transform="translate(${px} ${py})">${phone(type,s)}</g>${notifications(type,s,px,py)}`;
+if(s.f>=103&&s.f<157)z+=pointer(px+86,py+204);
+let cap=s.f<90?'消息一多，手上的事就停了。':s.f<157?'先把干扰关掉。':'再把这一件做完。';if(s.f<90||s.f>=103)z+=`<text x="640" y="640" text-anchor="middle" font-family="Microsoft YaHei,sans-serif" font-size="30" font-weight="700" fill="#f3ead1" stroke="#14252b" stroke-width="4" paint-order="stroke">${cap}</text>`;
+return svg(z+paperTransition(type,s.f));}
+function details(type,s){const m=type==='m';const entries=[
+ {view:'-68 -22 460 438',body:`<g transform="translate(0 4)">${board(type,s)}</g>`,name:'任务纸板与铅笔',note:m?'齿条移动笔架，底部滚轴承托纸张。':'玻璃导轨定位笔架，窄光带显示书写进度。'},
+ {view:'-43 -28 246 365',body:phone(type,s),name:'手机与通知开关',note:m?'实体拨杆牵动闸门，关闭后锁定。':'关闭通知通路，玻璃信号仓随之变暗。'},
+ {view:'-14 -33 220 151',body:bubble(type,170,57,s.off),name:'通知气泡',note:m?'纸质通知条，黄铜夹固定。':'透明玻璃载体，信息激活时局部点亮。'}
+ ];return entries.map(v=>`<div class="detail">${svg(v.body,v.view)}<b>${v.name}</b><p>${v.note}</p></div>`).join('');}
+function render(){const s=state(frame);document.querySelector('#scene-m').innerHTML=scene('m',s);document.querySelector('#scene-e').innerHTML=scene('e',s);document.querySelector('#detail-m').innerHTML=details('m',s);document.querySelector('#detail-e').innerHTML=details('e',s);document.querySelector('#seek').value=frame;document.querySelector('#time').textContent=(frame/30).toFixed(2)+'s';document.querySelectorAll('[data-state]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.state===frame)));}
+function stop(){playing=false;document.querySelector('#play').textContent='播放动作';}
+function setFrame(f){frame=Math.max(0,Math.min(239,Math.round(f)));render();}
+document.querySelectorAll('[data-state]').forEach(b=>b.onclick=()=>{stop();setFrame(+b.dataset.state)});
+document.querySelector('#transition').onclick=()=>{stop();setFrame(84)};
+document.querySelector('#seek').oninput=v=>{stop();setFrame(+v.target.value)};
+document.querySelector('#background').onchange=v=>{bg=v.target.checked;render()};
+document.querySelector('#play').onclick=()=>{if(playing){stop();return;}if(frame>=239)setFrame(0);playing=true;last=performance.now()-frame/30*1000;document.querySelector('#play').textContent='暂停';requestAnimationFrame(tick);};
+function tick(t){if(!playing)return;const f=Math.min(239,Math.floor((t-last)/1000*30));if(f!==frame)setFrame(f);if(f>=239){stop();return;}requestAnimationFrame(tick);}
+window.StylePreview={setFrame,state,render,getFrame:()=>frame,isPlaying:()=>playing};render();
+</script></body></html>

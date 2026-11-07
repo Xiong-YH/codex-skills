@@ -16,6 +16,7 @@
 | 背景与来源 | [背景库](backgrounds/README.md)、[背景目录](backgrounds/catalog.json) |
 | 物体、锚点、放置及新增素材 | [素材接入细节](details.md) |
 | 剧情姿态与能力限制 | [姿态合同](../scenes/PRESENTER-ACTIONS.md)；整图轮换不等于局部嘴型 |
+| 新动作的素材缺口与动作段选型 | [人物表演库](../scenes/character-performance/README.md)；设计关系归 scenes，源图与锚点仍归素材清单 |
 | 完整插画、动作时序与位移 | [插画接入](../scenes/whole-illustration.md)、[场景](../scenes/GUIDE.md)、[运动](../motion/GUIDE.md) |
 
 ## 验收重点

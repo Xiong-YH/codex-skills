@@ -7,7 +7,7 @@ EXCLUDED_PARTS = {'__pycache__', 'node_modules', '.venv', '.cache', '.remotion',
                   '.git', 'sfx-bank', 'arcade-expanded', 'arcade-charge'}
 EXCLUDED_SUFFIXES = {'.pyc', '.pyo', '.log', '.exe', '.dll', '.so', '.dylib'}
 WORKBENCH_GENERATED = {'node_modules', 'dist', 'exports', 'gen', 'proj', 'public',
-                       '.parity', '.render-public', '.vite', '.cache', '.remotion'}
+                       '.parity', '.render-public', '.vite', '.cache', '.remotion', '.segment-cache'}
 WORKBENCH_GENERATED_FILES = {'workbench/src/projMeta.ts', 'workbench/src/mediaManifest.ts'}
 
 

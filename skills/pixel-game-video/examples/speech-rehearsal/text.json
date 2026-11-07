@@ -1,0 +1,37 @@
+{
+  "cues": [
+    {
+      "id": "line1",
+      "role": "subtitle",
+      "text": "第二次，直接命中缓存。",
+      "phrases": [
+        "di er ci",
+        "zhi jie ming zhong huan cun"
+      ],
+      "start": {
+        "event": "s01.speech_start",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s01.speech_end",
+        "offsetFrames": 0
+      },
+      "accent": "命中"
+    },
+    {
+      "id": "hit_label",
+      "role": "annotation",
+      "text": "命中！",
+      "start": {
+        "event": "s01.hit",
+        "offsetFrames": 0
+      },
+      "end": {
+        "event": "s01.speech_end",
+        "offsetFrames": 0
+      },
+      "x": 0.5,
+      "y": 0.63
+    }
+  ]
+}

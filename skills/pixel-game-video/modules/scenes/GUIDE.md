@@ -17,6 +17,7 @@
 | 完整插画和替换片段 | [完整插画接入](whole-illustration.md)；不恢复拆头试样 |
 | 状态反馈 | [游戏反馈细节库](GAME_FEEL.md)；detail.* 是设计索引，不是 motion recipe |
 | 剧情姿态与模拟讲述节奏 | [姿态接入](PRESENTER-ACTIONS.md)、[当前表演限制](details.md) |
+| 扩展动作形态、选择连贯表演段或制作独立人物片段 | [人物表演库](character-performance/README.md)、[可浏览动作与动作段](character-performance/index.html)；设计候选不是引擎配方 |
 
 ## 验收重点
 

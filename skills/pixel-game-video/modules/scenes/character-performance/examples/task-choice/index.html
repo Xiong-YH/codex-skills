@@ -1,0 +1,14 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>人物少动，故事照样向前</title><link rel="stylesheet" href="style.css"></head><body><main>
+<header><span class="kicker">CHARACTER STUDY / 01</span><h1>先让人物有反应，再让事情往前走。</h1><p>8秒情境试样：任务堆积 → 只选一项 → 开始推进。第二版：复用小棕五张完整姿态图，无口播、无嘴型、无骨骼动画。</p></header>
+<div id="viewport"><div id="stage"><div class="wall"></div><div class="window"><div class="moon"></div><div class="skyline"></div></div><div class="shelf"><i></i><i></i><i></i><i></i></div><div class="floor"></div><div class="rug"></div><div class="desk"><div class="desk-top"></div><div class="leg one"></div><div class="leg two"></div></div><div class="lamp"><div class="shade"></div><div class="stem"></div><div class="base"></div></div><div id="light"></div><div class="tray"><span>稍后处理</span></div>
+<canvas id="actor" width="1200" height="675" aria-label="小棕保持完整姿态，只在事件节点换图"></canvas>
+<div id="tasks"><div class="task" id="task0"><span class="number">01</span><b>修复报错</b><span class="meta">当前最重要</span><div class="progress"><i id="progress"></i></div><span id="done">✓</span></div><div class="task" id="task1"><span class="number">02</span><b>回复邮件</b><span class="meta">可以稍后</span></div><div class="task" id="task2"><span class="number">03</span><b>整理文档</b><span class="meta">可以稍后</span></div></div>
+<div class="status"><span id="task-state"></span><span id="work-state"></span></div><div id="caption"></div><span class="scene-mark">静音 · 情境演绎</span></div></div>
+<div class="controls"><button id="play">播放</button><button id="replay">重播</button><label>速度<select id="speed"><option value="1">正常</option><option value=".25">¼ 倍</option></select></label><input id="seek" type="range" min="0" max="8" step=".001" value="0" aria-label="动画时间"><output id="clock">0.00 / 8.00 s</output></div>
+<section class="explain"><div><span class="kicker">人物正在做什么</span><h2 id="pose-label">保持待机姿态</h2><p>任务到来后才后缩；抱头留出停顿；回正、伸手后，卡片才被选中。整体变换围绕脚底，不拆身体。</p></div><div><span class="kicker">画面正在做什么</span><h2 id="event-label">建立情境</h2><p>任务进入、数量累积、优先项显露、次要任务归位、进度推进，由代码承担过程。</p></div></section>
+<footer>此独立试样的流畅与事件编排已获用户认可，范围不扩大为其他镜头或正式成片。素材来自既有人物库；人物姿态调用现有 presenter-actions 执行器。这里复用5张人物图与8个姿态区间；伸手使用既有摊手姿态，不是新生成的精确手指动画。</footer>
+</main><script>globalThis.PixelVideo=globalThis.PixelVideo||{};</script><script src="../../../presenter-actions.js"></script><script src="poses.js"></script><script src="case.js"></script><script src="../../embed-bridge.js"></script></body></html>
+
+
+
+

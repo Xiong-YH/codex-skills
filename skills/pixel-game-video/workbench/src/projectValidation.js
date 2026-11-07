@@ -11,6 +11,10 @@ export const validateProject = (p, knownCards) => {
   finite(p.height, 16, 4320, '画布高度', true);
   if (p.exportDurationInFrames !== undefined) finite(p.exportDurationInFrames, 1, p.fps * 3600, '导出总帧数', true);
   if (p.tracks.length > 100) fail('轨道超过 100 条');
+  if (p.sourceBase !== undefined && (!p.sourceBase || typeof p.sourceBase !== 'object' || Array.isArray(p.sourceBase) ||
+      !p.sourceBase.globals || typeof p.sourceBase.globals !== 'object' || !p.sourceBase.units || typeof p.sourceBase.units !== 'object' || Array.isArray(p.sourceBase.units))) fail('源更新基线格式无效');
+  if (p.captionDesign !== undefined && (!p.captionDesign || !['soft-highlight','custom'].includes(p.captionDesign.mode) ||
+      (p.captionDesign.reason !== undefined && typeof p.captionDesign.reason !== 'string'))) fail('字幕方案格式无效');
   const ids = new Set();
   let clips = 0;
   const trackIds = new Set();
@@ -23,6 +27,7 @@ export const validateProject = (p, knownCards) => {
       if (++clips > 10000) fail('片段超过 10000 个');
       if (!c || typeof c.id !== 'string' || ids.has(c.id) || typeof c.cardId !== 'string') fail('片段 ID 无效或重复');
       ids.add(c.id);
+      if(c.sourceKey!==undefined&&(typeof c.sourceKey!=='string'||c.sourceKey.length>500))fail('源单元标识无效');
       if (knownCards && !knownCards[c.cardId]) fail(`当前工程没有组件：${c.cardId}`);
       finite(c.start, 0, p.fps * 3600, '起始帧', true);
       finite(c.duration, 1, p.fps * 3600, '持续帧数', true);

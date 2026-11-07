@@ -83,6 +83,20 @@ class Handler(SimpleHTTPRequestHandler):
         return {**data,'storage':{'path':'collections/favorites/catalog.json','bytes':len(encode(data)),'maxBytes':MAX_BYTES,'maxItems':MAX_ITEMS,'maxEntryBytes':MAX_ENTRY}}
     def do_GET(self):
         if not self.host_ok(): return self.reply(403,{'error':'仅接受本机地址'})
+        if self.path.split('?')[0] in ('/script', '/script/'):
+            page=ROOT/'outputs/script-creator.html'
+            if not page.exists():page=ROOT/'skills/pixel-video-director/assets/templates/workflow-overview.html'
+            payload=page.read_bytes()
+            self.send_response(200);self.send_header('Content-Type','text/html; charset=utf-8');self.send_header('Cache-Control','no-store');self.send_header('Content-Length',str(len(payload)));self.end_headers();self.wfile.write(payload);return
+        if self.path.startswith('/script-review/'):
+            name=self.path.split('?')[0][len('/script-review/'):]
+            allowed={'design-review.html','design-review.css','design-review.js','script-bridge.js','workspace-theme.css'}
+            if name not in allowed:return self.reply(404,{'error':'工作台文件不存在'})
+            page=ROOT/'skills/pixel-video-director/assets/segment-review'/name
+            payload=page.read_bytes();kind='text/html' if name.endswith('.html') else 'text/css' if name.endswith('.css') else 'text/javascript'
+            self.send_response(200);self.send_header('Content-Type',kind+'; charset=utf-8');self.send_header('Cache-Control','no-store');self.send_header('Content-Length',str(len(payload)));self.end_headers();self.wfile.write(payload);return
+        if self.path.startswith('/segment-review/'):
+            self.path=self.path[len('/segment-review'):]
         if self.path=='/api/project':
             try:
                 data=manifest(self.server.project_root);data.pop('video');return self.reply(200,data)

@@ -7,6 +7,7 @@ import { MANIFEST } from '../cards/projectCards';
 import { themedProps, themedBackground } from '../theme';
 import { createLinkedPropsResolver } from "../linkedProps.js";
 import { excludesFromPlate } from "../renderMode.js";
+import {SOFT_CAPTION_CARD, previousCaptionText} from '../captionDesign.js';
 
 /** 时间重映射：clip 本地帧 → 卡片源帧（inOffset + f × speed）。
  *  卡片全部是 frame 的纯函数（tween 均 clamp），因此变速/裁入/超时长定格都安全。
@@ -38,6 +39,7 @@ export const MainComposition: React.FC<{ project: ProjectData; plate?: boolean }
             const Comp = card.component;
             const duration = Math.max(1, Math.round(clip.duration));
             const props: Record<string, unknown> = themedProps(MANIFEST, card, project.themeId, resolveProps(clip, {frame, cards: CARDS}), project.themeColors);
+            if (clip.cardId === SOFT_CAPTION_CARD) props.previousText=previousCaptionText(track,clip,CARDS);
             // 成片组件按 `duration`/`dur` 算出场淡出：注入 clip 的源时长，拉长/裁短后淡出跟着挪
             if (card.durationProp)
               props[card.durationProp] = Math.max(1, Math.round(clip.inOffset + duration * clip.speed));

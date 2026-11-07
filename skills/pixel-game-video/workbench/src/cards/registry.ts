@@ -8,6 +8,7 @@ import { audioClipCard, imageClipCard, videoClipCard } from "./media-cards";
 import { BG_CARDS } from "./background-cards";
 import { PROJECT_CARDS } from "./projectCards";
 import { buildCardRegistry } from "./buildRegistry";
+import { softHighlightCard } from './soft-highlight';
 
 /** 注册表（同 id 先到先得）：
  *  - 工作台原生卡：通用文字 / Ink Press 字卡 / 解说条 / 闪白转场（全部 schema 参数化）
@@ -16,6 +17,7 @@ import { buildCardRegistry } from "./buildRegistry";
  *  - 成片单元卡：已链接成片工程 workbench.ts 清单里的镜头 / 转场 / 字幕 / 叠加层
  *  此独立版本不依赖外部 demo/gallery，所有默认卡在本应用内实现。 */
 const ALL: CardDef[] = [
+  softHighlightCard,
   textBasicCard,
   titleCardCard,
   captionStripCard,

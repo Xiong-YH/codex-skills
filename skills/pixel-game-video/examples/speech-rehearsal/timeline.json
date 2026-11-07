@@ -1,0 +1,75 @@
+{
+  "shots": [
+    {
+      "id": "s01",
+      "durationFrames": 600,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "params": {},
+      "objects": [],
+      "rehearsal": {
+        "cueIds": [
+          "line1"
+        ],
+        "startFrame": 30
+      },
+      "events": [
+        {
+          "id": "speech_start",
+          "speech": {
+            "cueId": "line1",
+            "edge": "start"
+          }
+        },
+        {
+          "id": "hit",
+          "speech": {
+            "cueId": "line1",
+            "word": "命中"
+          }
+        },
+        {
+          "id": "speech_end",
+          "speech": {
+            "cueId": "line1",
+            "edge": "end"
+          }
+        }
+      ],
+      "components": [
+        {
+          "id": "cache",
+          "kind": "identity",
+          "x": 0.34,
+          "y": 0.29,
+          "width": 0.32,
+          "height": 0.29,
+          "showEvent": "speech_start",
+          "focusEvent": "hit",
+          "data": {
+            "title": "缓存",
+            "detail": "请求再次到来"
+          }
+        }
+      ],
+      "motions": [
+        {
+          "id": "push",
+          "recipe": "motion.camera-pulse.v1",
+          "target": "scene",
+          "start": {
+            "event": "s01.hit",
+            "offsetFrames": -17
+          },
+          "durationFrames": 17,
+          "params": {
+            "kind": "push",
+            "x": 0.5,
+            "y": 0.43,
+            "bounds": "cover"
+          }
+        }
+      ]
+    }
+  ]
+}

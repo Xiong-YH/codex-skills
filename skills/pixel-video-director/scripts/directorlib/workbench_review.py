@@ -15,9 +15,15 @@ def workbench_binding(root, project_json, video):
     project_path, media = confined(root, project_json), confined(root, video)
     # Reuse the workbench's actual input validator, rather than a looser copy.
     validator = foundation_root() / 'workbench/src/projectValidation.js'
-    script = "import {readFileSync} from 'node:fs';import {pathToFileURL} from 'node:url';const {validateProject}=await import(pathToFileURL(process.argv[1]));validateProject(JSON.parse(readFileSync(process.argv[2],'utf8')));"
+    caption_validator = validator.with_name('captionDesign.js')
+    script = ("import {readFileSync} from 'node:fs';import {pathToFileURL} from 'node:url';"
+              "const {validateProject}=await import(pathToFileURL(process.argv[1]));"
+              "const {validateCaptionDesign}=await import(pathToFileURL(process.argv[3]));"
+              "const project=JSON.parse(readFileSync(process.argv[2],'utf8'));"
+              "validateProject(project);validateCaptionDesign(project);")
     checked = subprocess.run([os.environ.get('PIXEL_NODE', 'node'), '--input-type=module', '-e',
-                              script, str(validator), str(project_path)], capture_output=True, text=True)
+                              script, str(validator), str(project_path), str(caption_validator)],
+                             capture_output=True, text=True, encoding='utf-8')
     if checked.returncode:
         raise ValueError('工作台项目校验失败：' + checked.stderr)
     project = read_json(project_path)

@@ -1,0 +1,475 @@
+{
+  "schemaVersion": 1,
+  "id": "asking-s02a-performance-v3",
+  "fps": 60,
+  "duration": 18,
+  "events": [
+    {
+      "id": "open",
+      "time": 0
+    },
+    {
+      "id": "write",
+      "time": 2.2
+    },
+    {
+      "id": "pause",
+      "time": 2.45
+    },
+    {
+      "id": "night.begin",
+      "time": 3.5
+    },
+    {
+      "id": "cross",
+      "time": 4.15
+    },
+    {
+      "id": "cross.settle",
+      "time": 4.42
+    },
+    {
+      "id": "withdraw",
+      "time": 5.8
+    },
+    {
+      "id": "night.end",
+      "time": 6.5
+    },
+    {
+      "id": "question.full",
+      "time": 6.8
+    },
+    {
+      "id": "question.fade",
+      "time": 7.5
+    },
+    {
+      "id": "question.gone",
+      "time": 7.9
+    },
+    {
+      "id": "try.reach",
+      "time": 8.35
+    },
+    {
+      "id": "try.retract",
+      "time": 8.7
+    },
+    {
+      "id": "try.settle",
+      "time": 9
+    },
+    {
+      "id": "wait",
+      "time": 10.6
+    },
+    {
+      "id": "decision",
+      "time": 12
+    },
+    {
+      "id": "decision.settle",
+      "time": 12.2
+    },
+    {
+      "id": "grip",
+      "time": 12.47
+    },
+    {
+      "id": "lift",
+      "time": 12.82
+    },
+    {
+      "id": "phone.ready",
+      "time": 13.05
+    },
+    {
+      "id": "chat.enter",
+      "time": 13.3
+    },
+    {
+      "id": "chat.full",
+      "time": 13.65
+    },
+    {
+      "id": "end",
+      "time": 18
+    },
+    {
+      "id": "caption.1",
+      "time": 2
+    },
+    {
+      "id": "caption.2",
+      "time": 3.6
+    },
+    {
+      "id": "caption.3",
+      "time": 8
+    },
+    {
+      "id": "caption.4",
+      "time": 10
+    }
+  ],
+  "assets": {
+    "hover": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        0
+      ]
+    },
+    "write": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        418,
+        0,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        0
+      ]
+    },
+    "pause": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        836,
+        0,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        0
+      ]
+    },
+    "cross": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        0,
+        418,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        -4
+      ]
+    },
+    "withdraw": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        418,
+        418,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        -4
+      ]
+    },
+    "reach": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        836,
+        418,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        -4
+      ]
+    },
+    "retract": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        0,
+        836,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        -4
+      ]
+    },
+    "grip": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        418,
+        836,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        -4
+      ]
+    },
+    "held": {
+      "file": "assets/seated-actions-v2.png",
+      "sourceRect": [
+        836,
+        836,
+        418,
+        418
+      ],
+      "offset": [
+        0,
+        -4
+      ]
+    }
+  },
+  "poses": [
+    {
+      "at": "open",
+      "pose": "hover"
+    },
+    {
+      "at": "write",
+      "pose": "write"
+    },
+    {
+      "at": "pause",
+      "pose": "pause"
+    },
+    {
+      "at": "cross",
+      "pose": "cross"
+    },
+    {
+      "at": "withdraw",
+      "pose": "withdraw"
+    },
+    {
+      "at": "try.reach",
+      "pose": "reach"
+    },
+    {
+      "at": "try.retract",
+      "pose": "retract"
+    },
+    {
+      "at": "wait",
+      "pose": "withdraw"
+    },
+    {
+      "at": "decision.settle",
+      "pose": "reach"
+    },
+    {
+      "at": "grip",
+      "pose": "grip"
+    },
+    {
+      "at": "lift",
+      "pose": "held"
+    }
+  ],
+  "values": {
+    "night": [
+      {
+        "at": "open",
+        "value": 0,
+        "ease": "hold"
+      },
+      {
+        "at": "night.begin",
+        "value": 0,
+        "ease": "hold"
+      },
+      {
+        "at": "night.end",
+        "value": 1,
+        "ease": "inOut"
+      }
+    ],
+    "question": [
+      {
+        "at": "open",
+        "value": 0,
+        "ease": "hold"
+      },
+      {
+        "at": "night.end",
+        "value": 0,
+        "ease": "hold"
+      },
+      {
+        "at": "question.full",
+        "value": 1,
+        "ease": "out"
+      },
+      {
+        "at": "question.fade",
+        "value": 1,
+        "ease": "hold"
+      },
+      {
+        "at": "question.gone",
+        "value": 0,
+        "ease": "out"
+      }
+    ],
+    "chat": [
+      {
+        "at": "open",
+        "value": 0,
+        "ease": "hold"
+      },
+      {
+        "at": "chat.enter",
+        "value": 0,
+        "ease": "hold"
+      },
+      {
+        "at": "chat.full",
+        "value": 1,
+        "ease": "out"
+      }
+    ],
+    "cameraScale": [
+      {
+        "at": "open",
+        "value": 1.12,
+        "ease": "hold"
+      },
+      {
+        "at": "pause",
+        "value": 1.12,
+        "ease": "hold"
+      },
+      {
+        "at": "night.begin",
+        "value": 1,
+        "ease": "out"
+      },
+      {
+        "at": "decision",
+        "value": 1,
+        "ease": "hold"
+      },
+      {
+        "at": "chat.full",
+        "value": 1.04,
+        "ease": "out"
+      }
+    ],
+    "cameraX": [
+      {
+        "at": "open",
+        "value": 0,
+        "ease": "hold"
+      },
+      {
+        "at": "decision",
+        "value": 0,
+        "ease": "hold"
+      },
+      {
+        "at": "chat.full",
+        "value": -30,
+        "ease": "out"
+      }
+    ]
+  },
+  "dependencies": [
+    {
+      "before": "try.reach",
+      "after": "try.retract",
+      "minFrames": 1
+    },
+    {
+      "before": "decision.settle",
+      "after": "grip",
+      "minFrames": 1
+    },
+    {
+      "before": "grip",
+      "after": "lift",
+      "minFrames": 1
+    },
+    {
+      "before": "lift",
+      "after": "phone.ready",
+      "minFrames": 1
+    },
+    {
+      "before": "phone.ready",
+      "after": "chat.enter",
+      "minFrames": 1
+    }
+  ],
+  "captions": [
+    {
+      "start": "open",
+      "end": "caption.1",
+      "text": "你有没有过这种感觉？"
+    },
+    {
+      "start": "caption.1",
+      "end": "caption.2",
+      "text": "大学已经上了一段时间，"
+    },
+    {
+      "start": "caption.2",
+      "end": "caption.3",
+      "text": "你很迷茫，在这个人生的开放题上不知道如何作答。"
+    },
+    {
+      "start": "caption.3",
+      "end": "caption.4",
+      "text": "你不知道自己适合什么，"
+    },
+    {
+      "start": "caption.4",
+      "end": "decision",
+      "text": "更不知道第一步该从哪里开始。"
+    },
+    {
+      "start": "decision",
+      "end": "end",
+      "text": "这时候，你想到一位已经实习过的学长，咨询到："
+    }
+  ],
+  "beats": [
+    {
+      "at": "open",
+      "title": "准备落笔，却不知道如何继续",
+      "sequence": "seq.attempt-correct"
+    },
+    {
+      "at": "cross",
+      "title": "划掉尝试，时间仍在过去",
+      "sequence": "seq.attempt-correct"
+    },
+    {
+      "at": "try.reach",
+      "title": "想求助，伸手后又退回",
+      "sequence": "seq.hesitate-withdraw"
+    },
+    {
+      "at": "decision",
+      "title": "下定决定，接触后拿起手机",
+      "sequence": "seq.decide-execute"
+    }
+  ],
+  "scope": {
+    "type": "independent silent acting study",
+    "source": "existing S02A narration and approved animatic, retained unchanged",
+    "changes": "seated acting alternative; 18s estimated instead of 15s; camera uses 2D framing; no original OTS/side-angle camera recreation",
+    "approval": "not_reviewed_by_user"
+  }
+}

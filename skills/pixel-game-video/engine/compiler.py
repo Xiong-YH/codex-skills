@@ -146,8 +146,16 @@ def compile_project(project_root, skill_root=None, *, write=False):
     require("style", project["style"])
     shots = inputs["timeline.json"]["shots"]
     unique((s["id"] for s in shots), "shots")
+    from .speech_timing import simulate
+    unique((c['id'] for c in inputs['text.json']['cues']), 'text cues')
+    rehearsal_texts = {c['id']: c for c in inputs['text.json']['cues']}
+    rehearsal_rows = []
     events, cursor = {}, 0
     for shot in shots:
+        for row in simulate(shot, rehearsal_texts, project['fps']):
+            rehearsal_rows.append(dict(row, shotId=shot['id'],
+                                       absoluteStartFrame=cursor + row['startFrame'],
+                                       absoluteEndFrame=cursor + row['endFrame']))
         shot["startFrame"] = cursor
         shot["endFrame"] = cursor + shot["durationFrames"]
         unique((e["id"] for e in shot["events"]), f"{shot['id']}.events")
@@ -310,7 +318,7 @@ def compile_project(project_root, skill_root=None, *, write=False):
             raise ValueError(f"{cue['id']}: invalid text interval")
         if cue["role"] == "subtitle":
             if not cue["phrases"] or any(not p.strip() for p in cue["phrases"]):
-                raise ValueError(f"{cue['id']}: subtitles require nonempty pinyin phrases for simulated mouth")
+                raise ValueError(f"{cue['id']}: subtitles require nonempty pinyin phrases for text rehearsal timing; no mouth animation")
             if end - start < len(cue["phrases"]) * 3:
                 raise ValueError(f"{cue['id']}: insufficient frames for phrases")
             if any(start < b and a < end for a, b in subtitles):
@@ -387,6 +395,8 @@ def compile_project(project_root, skill_root=None, *, write=False):
                 "mix": {"speechDuck": inputs["audio.json"]["speechDuck"]}}
     if progress:
         resolved['progress'] = progress
+    if rehearsal_rows:
+        resolved['speechRehearsal'] = rehearsal_rows
     actions = actor_actions(resolved)
     if actions:
         manifest = read_json(skill / 'modules/library/characters/performance.json')

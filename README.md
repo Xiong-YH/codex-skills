@@ -1,6 +1,6 @@
 # Codex Skills
 
-非3D运镜从[可执行HTML规范](skills/pixel-game-video/modules/motion/lab/index.html)选型：实际动画、共用曲线与可复制工程JSON。调用[短促相机、关键帧、图层组与页面接续](skills/pixel-game-video/modules/motion/recipes/pulse-camera.md)，复用同源Canvas执行器接入工作台。[八段试样](skills/pixel-game-video/examples/pulse-motion/README.md)保留创作输入；原生Remotion范围不变。移植来源与AGPL许可见[NOTICE](skills/pixel-game-video/modules/motion/FRAMETELL-NOTICE.md)，随独立交付保留。
+非3D运镜从[导演统一选型](skills/pixel-game-video/modules/motion/library.html)选型：实际动画、共用曲线与可复制工程JSON。调用[短促相机、关键帧、图层组与页面接续](skills/pixel-game-video/modules/motion/recipes/pulse-camera.md)，复用同源Canvas执行器接入工作台。[八段试样](skills/pixel-game-video/examples/pulse-motion/README.md)保留创作输入；原生Remotion范围不变。移植来源与AGPL许可见[NOTICE](skills/pixel-game-video/modules/motion/FRAMETELL-NOTICE.md)，随独立交付保留。
 
 像素游戏感视频体系。日常使用三个 skill：编剧负责选题与完整文案，导演负责视听设计与制作统筹，基础 skill 负责执行；运镜转场的实现维护在基础制作模块。
 

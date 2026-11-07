@@ -4,8 +4,12 @@ import {randomBytes} from 'node:crypto';
 import {spawn} from 'node:child_process';
 import path from 'node:path';
 import {MAX_PROJECT_BYTES,validateProject} from '../src/projectValidation.js';
+import {validateCaptionDesign,visibleCaptions,SOFT_CAPTION_CARD} from '../src/captionDesign.js';
 import {renderPropsForKind} from '../src/renderMode.js';
 import {resolveRenderConcurrency,updateRenderProgress} from './render-settings.mjs';
+import {renderWithSegments} from './segment-cache.mjs';
+import {inspectEdit} from '../src/sourceSync.js';
+import {verifyEncoded} from './media-check.mjs';
 
 export const installedBrowser = () => {
   const candidates=process.env.PIXEL_BROWSER_EXECUTABLE?[process.env.PIXEL_BROWSER_EXECUTABLE]:[
@@ -17,10 +21,14 @@ export const installedBrowser = () => {
 };
 export const parseExportRequest = raw => {
   const body=JSON.parse(raw);
-  if(!body||typeof body!=='object'||Object.keys(body).some(k=>!['project','kind'].includes(k)))throw new Error('仅接受 project/kind；输出路径由工作台生成');
+  if(!body||typeof body!=='object'||Object.keys(body).some(k=>!['project','kind','reuseSegments'].includes(k)))throw new Error('仅接受 project/kind/reuseSegments；输出路径由工作台生成');
+  if(body.reuseSegments!==undefined&&typeof body.reuseSegments!=='boolean')throw new Error('reuseSegments 必须是布尔值');
   const kind=body.kind??'mp4';
   if(!['mp4','jianying'].includes(kind))throw new Error('不支持的导出类型');
-  return {project:validateProject(body.project),kind};
+  const project=validateProject(body.project);
+  validateCaptionDesign(project);
+  if(kind==='jianying'&&visibleCaptions(project).some(c=>c.cardId===SOFT_CAPTION_CARD))throw new Error('柔边重音字幕目前支持工作台 MP4 导出，尚未接入剪映原生字幕。');
+  return {project,kind,reuseSegments:body.reuseSegments===true};
 };
 /** Only the active generated foundation project is eligible; no API argument can choose a path. */
 export const activeVideoProject = rootDir => {
@@ -87,8 +95,12 @@ export const createExportMiddleware = ({rootDir,browserLookup=installedBrowser,s
       job.timingsMs.materials=performance.now()-copyStarted;
       const renderer=path.join(rootDir,'node_modules','@remotion','cli','remotion-cli.js');
       const renderedOutput=job.kind==='jianying'?plate:path.join(rootDir,job.output);
-      await runCommand(process.execPath,[renderer,...renderArguments({output:renderedOutput,propsFile,publicDir:renderPublic,browser:job.browser,kind:job.kind,concurrency:job.concurrency})],job,{progressScale:job.kind==='jianying'?.8:.99});
+      if(job.reuseSegments&&job.kind==='mp4')await renderWithSegments({rootDir,project,propsFile,publicDir:renderPublic,browser:job.browser,concurrency:job.concurrency,output:renderedOutput,job,run:runCommand});
+      else await runCommand(process.execPath,[renderer,...renderArguments({output:renderedOutput,propsFile,publicDir:renderPublic,browser:job.browser,kind:job.kind,concurrency:job.concurrency})],job,{progressScale:job.kind==='jianying'?.8:.99});
       if(!existsSync(renderedOutput))throw new Error('渲染进程结束，但没有生成视频文件');
+      if(job.reuseSegments&&job.kind==='mp4'){
+        job.phase='checking';job.mediaCheck=await verifyEncoded(renderedOutput,project);
+      }
       if(job.kind==='jianying'){
         job.progress=.82;job.lastLine='生成原生剪映草稿…';
         await runCommand(python,[script,'export-jianying',video,draftDir,'--plate',plate,'--workbench-project',path.join(rootDir,job.projectOutput)],job,{progressBase:.82,progressScale:.12,phase:'draft'});
@@ -99,14 +111,17 @@ export const createExportMiddleware = ({rootDir,browserLookup=installedBrowser,s
         rmSync(plate,{force:true});
       }
       if(!existsSync(path.join(rootDir,job.output)))throw new Error('导出进程结束，但没有生成可下载文件');
+      job.checks={timing:inspectEdit(project),visual:'not_reviewed',audio:'not_reviewed'};
       job.status='done';job.progress=1;job.lastLine=job.kind==='jianying'?'剪映草稿导出完成':'导出完成';
     }catch(error){job.status='error';job.lastLine=error instanceof Error?error.message:String(error);}
     finally{
       rmSync(propsFile,{force:true});rmSync(renderPublic,{recursive:true,force:true});
+      rmSync(renderPublic+'-bundle',{recursive:true,force:true});
+      for(const suffix of ['.concat.txt','.audio.wav'])rmSync(path.join(rootDir,job.output)+suffix,{force:true});
       job.timingsMs.total=performance.now()-started;job.phase=job.status;job.renderEtaSeconds=undefined;
       try{writeFileSync(path.join(rootDir,job.metricsOutput),JSON.stringify({status:job.status,kind:job.kind,concurrency:job.concurrency,
         width:project.width,height:project.height,fps:project.fps,renderedFrames:job.renderedFrames,totalFrames:job.totalFrames,
-        encodedFrames:job.encodedFrames,renderFps:job.renderFps,timingsMs:job.timingsMs},null,2));}
+        encodedFrames:job.encodedFrames,renderFps:job.renderFps,timingsMs:job.timingsMs,cache:job.cache,checks:job.checks,mediaCheck:job.mediaCheck},null,2));}
       catch(error){job.logTail.push(`耗时报告保存失败：${error.message}`);}
     }
   };
@@ -122,14 +137,14 @@ export const createExportMiddleware = ({rootDir,browserLookup=installedBrowser,s
       req.on('end',()=>{
         if(rejected)return;
         if([...jobs.values()].some(j=>j.status==='running')){send(409,{error:'已有导出在进行中'});return;}
-        let project,kind,video,script,concurrency;
-        try{({project,kind}=parseExportRequest(Buffer.concat(chunks).toString('utf8')));concurrency=resolveRenderConcurrency();
+        let project,kind,video,script,concurrency,reuseSegments;
+        try{({project,kind,reuseSegments}=parseExportRequest(Buffer.concat(chunks).toString('utf8')));concurrency=resolveRenderConcurrency();
           if(kind==='jianying'){video=activeVideoProject(rootDir);script=path.resolve(rootDir,'../scripts/video.py');if(!existsSync(script))throw new Error('缺少剪映导出 CLI，请更新完整 pixel-game-video skill');}
         }catch(error){send(400,{error:error.message});return;}
         const browser=browserLookup();if(!browser){send(400,{error:'没有找到已安装 Chrome。请设置 PIXEL_BROWSER_EXECUTABLE 后重新启动工作台。不会自动下载浏览器。'});return;}
         const id=randomBytes(12).toString('hex'),stem=`${safeName(project.name)}-${id}${kind==='jianying'?'-jianying':''}`;
         const output=`exports/${stem}.${kind==='jianying'?'zip':'mp4'}`;
-        const job={kind,status:'running',phase:'preparing',progress:0,output,projectOutput:`exports/${stem}.project.json`,metricsOutput:`exports/${stem}.metrics.json`,timingsMs:{},concurrency,lastLine:'准备导出…',logTail:[],browser};
+        const job={kind,reuseSegments,status:'running',phase:'preparing',progress:0,output,projectOutput:`exports/${stem}.project.json`,metricsOutput:`exports/${stem}.metrics.json`,timingsMs:{},concurrency,lastLine:'准备导出…',logTail:[],browser};
         jobs.set(id,job);send(202,{id,kind});
         void runJob(job,project,{propsFile:path.join(outDir,`.props-${id}.json`),renderPublic:path.join(rootDir,'.render-public',id),plate:path.join(outDir,`${stem}.plate.mp4`),video,script,draftDir:path.join(outDir,stem)});
       });

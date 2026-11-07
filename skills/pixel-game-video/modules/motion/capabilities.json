@@ -8,7 +8,9 @@
         "modules/motion/TIMING.md",
         "modules/motion/recipes/pulse-camera.md",
         "modules/motion/lab/index.html",
-        "modules/motion/pulse-spec.js"
+        "modules/motion/pulse-spec.js",
+        "modules/motion/SELECTION.md",
+        "modules/motion/library.html"
       ],
       "examples": [
         "examples/content-handoffs/timeline.json",
@@ -21,7 +23,8 @@
         "tests/test_pulse_motion.py",
         "tests/pulse-motion.test.cjs",
         "tests/pulse-pixels.cjs",
-        "tests/pulse-lab.cjs"
+        "tests/pulse-lab.cjs",
+        "tests/test_motion_selection.py"
       ]
     },
     "notes": [

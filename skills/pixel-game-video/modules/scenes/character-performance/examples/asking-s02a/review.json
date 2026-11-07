@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "scope": "independent HTML performance study; original project unchanged",
+  "sourceHashes": {
+    "actions.json": "ac6025348cd2a5d075206d205bd4274c55719985eeb5510945106bd92b626532",
+    "sequences.json": "1c66120a5b0fc0d1f449a86b7749d606f581de3913c0857beb1a229369319878",
+    "player.js": "d9a4c56fcbce313c1161f86cdfc9ce0f375b9bf06af7b776fbdbf1982d2c70fe",
+    "examples/asking-s02a/plan.json": "04a6d4741f2e3b27904c6a98ff93174a30972418619eccd4f5cc1a622ba5a1e7",
+    "examples/asking-s02a/case.js": "9ff9e8783e843e01ebe6da484eb664c817e01d8a17d1d4c68ec58bb4c28e8524",
+    "examples/asking-s02a/style.css": "94c06bd7dc6f69184adb1773ecbbf0101fc84b5dcc7b3d6e9b4c2c76f06c42ef",
+    "examples/asking-s02a/assets/seated-actions.png": "5c55207df77f118a763f6430f9b58ae5710048eee7f4c1e4ef14b9b44bef5127"
+  },
+  "technical": {
+    "status": "passed",
+    "checks": [
+      "catalogue generation current",
+      "36 action designs and12 sequence references",
+      "original narration preserved",
+      "event dependency validation and deterministic seeking",
+      "9 distinct rendered whole-pose states",
+      "18sec playback completes",
+      "sandbox early-timestamp regression",
+      "library-to-source HTTP playback and asset loading",
+      "mobile no horizontal overflow",
+      "both skills quick_validate"
+    ]
+  },
+  "visual": {
+    "status": "candidate, user feedback pending",
+    "reviewed": [
+      "complete atlas anatomy and phone ownership",
+      "write and hesitation static compositions",
+      "final held-phone and chat composition"
+    ],
+    "limits": [
+      "finite key-pose changes, no skeletal or optical-flow inbetweens",
+      "some furniture/hair variation and small colored edge fringe remain",
+      "silent estimated timing, no narration alignment",
+      "new sequence not yet user-approved"
+    ]
+  },
+  "approvalScope": "task-choice example only was previously approved; not this new S02A or all36 actions",
+  "status": "superseded: previous source and furniture assessment; see assets.json version2 and review-v3.md"
+}

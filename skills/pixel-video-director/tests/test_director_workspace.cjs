@@ -10,6 +10,7 @@ assert.equal(JSON.stringify(example),snapshot,'reading and deriving a view never
 const plainOnly=M.clone(example);delete plainOnly.stages.director.segments[1].plan;
 assert.equal(M.readiness(plainOnly,plainOnly.stages.director.segments[1]).plan,'missing');
 assert.throws(()=>M.timeline(plainOnly));
+const independent=M.clone(example);independent.stages.director.segments[1].plan.rendererSource='project/renderer.js';assert.throws(()=>M.timeline(independent),'external animatics must not silently export through the generic renderer');
 assert.ok(plainOnly.stages.director.segments[1].sketch,'a sketch does not fabricate an adopted motion plan');
 
 const changed=M.clone(example);changed.stages.director.segments[1].description+=' 改变人物出场方式。';
@@ -22,6 +23,15 @@ assert.deepEqual(movedSketch.stages.director.segments[1].plan,example.stages.dir
 
 const paper=segments[1].plan.elements.find(e=>e.id==='grade');
 assert.equal(M.position(paper,0).y,32);assert.ok(M.position(paper,.55).y>32);assert.equal(M.position(paper,2).y,110);
+const spin={id:'spin',label:'在吗\n那个请问一下',kind:'box',shape:'bubble',pivot:{x:40,y:40},x:20,y:20,w:40,h:20,keyframes:[{at:0,scale:1,rotation:0},{at:.6,scale:.1,rotation:360}]};
+M.validatePlan({duration:1,elements:[spin]},new Set());
+assert.equal(M.position(spin,.3).rotation,180);assert.ok(Math.abs(M.position(spin,.3).scale-.55)<1e-9);
+assert.equal(M.position(spin,.8).rotation,360);assert.equal(M.position(paper,0).scale,1);
+assert.throws(()=>M.validatePlan({duration:1,elements:[{...spin,keyframes:[{at:0,scale:-1}]}]},new Set()));
+assert.throws(()=>M.validatePlan({duration:1,elements:[{...spin,pivot:{x:NaN,y:4}}]},new Set()));
+M.validatePlan({duration:1,elements:[{...spin,shape:'text',textStyle:{size:48,weight:700,color:'#76582e'}}]},new Set());
+assert.throws(()=>M.validatePlan({duration:1,elements:[{...spin,textStyle:{size:Infinity}}]},new Set()));
+assert.throws(()=>M.validatePlan({duration:1,elements:[{...spin,textStyle:{color:'url(external)'}}]},new Set()));
 assert.deepEqual(M.affected(example,'s2'),['s1','s2','s3']);
 assert.throws(()=>M.validate({...example,stages:[]}));
 const bad=M.clone(example);bad.stages.director.segments[1].plan.subtitles[0].cueId='absent';assert.throws(()=>M.validate(bad));

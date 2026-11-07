@@ -11,3 +11,5 @@ phase 为 question / fetch / store / hit / miss / summary。startEvent、arriveE
 - summary：稳定构图中重复短路径，帮助收束概念。
 
 这是概念比喻；路径长短和运动时间不代表真实硬件延迟，也不替代缓存一致性、容量或淘汰策略说明。规则在场景、素材在 library、强调动画在 motion、旁白在 audio 中维护。
+
+comparison 是 240 帧、30 fps 连续对照样片的 Canvas 阶段。它沿用计算道具和路径绘制，单独绘制暗蓝机房与槽位反馈。场景参数 JSON 中的 hitFrame（133–175，本镜帧）控制第二次抵达与反馈起点，hitStrength（0–2）控制轮廓和碎屑强度。字幕片段独立编排，移动 hitFrame 后应同步对齐字幕片段。其余节拍与布局为该样片的绘制配方。

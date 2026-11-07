@@ -103,6 +103,38 @@ class BoundaryTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, '过期'):
                 check_workbench_review(self.root)
 
+    def test_formal_review_rejects_missing_or_unapplied_caption_choice(self):
+        self.fixture()
+        self.real_run = subprocess.run
+        project = read_json(self.root / 'edit.json')
+        project['tracks'][0]['role'] = 'caption'
+        project['tracks'][0]['clips'][0].update(cardId='proj:caption:plain', props={'text': '本片字幕'})
+        write_json(self.root / 'edit.json', project)
+        with patch('directorlib.workbench_review.subprocess.run', side_effect=self.probe):
+            with self.assertRaisesRegex(ValueError, '尚未选择字幕方案'):
+                initialize_workbench_review(self.root, 'edit.json', 'film.mp4')
+            project['captionDesign'] = {'mode': 'soft-highlight'}
+            write_json(self.root / 'edit.json', project)
+            with self.assertRaisesRegex(ValueError, '实际组件不符'):
+                initialize_workbench_review(self.root, 'edit.json', 'film.mp4')
+            project['tracks'][0]['clips'][0]['cardId'] = 'soft-highlight-caption'
+            write_json(self.root / 'edit.json', project)
+            self.assertEqual(initialize_workbench_review(self.root, 'edit.json', 'film.mp4')['status'], 'not_reviewed')
+
+    def test_formal_review_requires_specific_custom_choice_field(self):
+        self.fixture()
+        self.real_run = subprocess.run
+        project = read_json(self.root / 'edit.json')
+        project['tracks'][0]['role'] = 'caption'
+        project['captionDesign'] = {'mode': 'custom', 'reason': ' '}
+        write_json(self.root / 'edit.json', project)
+        with patch('directorlib.workbench_review.subprocess.run', side_effect=self.probe):
+            with self.assertRaisesRegex(ValueError, '选用原因'):
+                initialize_workbench_review(self.root, 'edit.json', 'film.mp4')
+            project['captionDesign']['reason'] = '本片此段使用对象旁标注解释差异'
+            write_json(self.root / 'edit.json', project)
+            self.assertEqual(initialize_workbench_review(self.root, 'edit.json', 'film.mp4')['status'], 'not_reviewed')
+
     def test_media_mismatch_rejected(self):
         self.fixture()
         self.real_run = subprocess.run

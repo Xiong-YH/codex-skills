@@ -1,0 +1,10 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>二维镜头实验室</title><link rel="stylesheet" href="style.css"></head><body>
+<main><header><div class="kicker">MOTION STUDIES / 01</div><h1>让镜头带着理解走。</h1><p>六个已认可的二维设计试样。使用真实 GSAP 时间轴与 Flip；不包含 3D，设计已认可，正式配方适配待完成。</p></header>
+<nav id="choices" aria-label="选择效果"></nav>
+<section class="player"><div class="stage" id="stage"><div id="fit"><div id="scene"></div><div class="hud"><span id="scene-title"></span><span>2D / RESEARCH</span></div><div class="subtitle" id="subtitle"></div></div></div>
+<div class="transport"><button id="play" class="primary">播放</button><button id="replay">重播</button><label>速度 <select id="speed"><option value="1">正常 1×</option><option value="0.25">慢放 ¼×</option></select></label><label class="scrub"><input aria-label="动画进度" id="seek" type="range" min="0" max="4" step=".001" value="0"></label><output id="clock">0.00 / 4.00 s</output></div></section>
+<section class="caption"><div><div class="kicker" id="source"></div><h2 id="name"></h2><p id="description"></p></div><div class="watch"><span>看这里</span><p id="watch"></p></div></section>
+<footer>这是效果研究页，不把试样名称当成已注册的 recipe。网页可暂停和跳转；是否进入正式技能，要另验背景余量、字幕避让、随机逐帧求值与工作台导出。<br>库：GSAP 3.13.0 · <a href="vendor/GSAP-LICENSE.txt">来源与许可链接</a> · 本页无外部素材或在线依赖。</footer></main>
+<script src="vendor/gsap.min.js"></script><script src="vendor/Flip.min.js"></script><script src="preview.js"></script></body></html>
+
+

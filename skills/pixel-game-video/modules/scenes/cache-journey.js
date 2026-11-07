@@ -91,7 +91,61 @@
       if(!s.complete)data(e,[.60,.42+(.51-.42)*P.ease(s.q)],'A',.16*(1-s.q));
     }
   }
+  function comparison(e,shot,frame){
+    const t=frame-shot.startFrame, a=shot.params, g=e.ctx;
+    const hit=a.hitFrame, power=a.hitStrength;
+    const client=[.17,.73], slot=[.44,.73], server=[.84,.72];
+    const mouth=[.44,.645], port=[.84,.562], terminal=[.17,.635];
+    const short=[terminal,[.17,.57],[.44,.57],mouth];
+    const long=[mouth,[.44,.475],[.84,.475],port];
+    const mint='#87ffe1', blue='#719ed1', amber='#ffcb76';
+    const travel=(path,from,to)=>point(e,path,(t-from)/(to-from));
+    const w=e.width,h=e.height;
+    g.fillStyle='#0b1628';g.fillRect(0,0,w,h);
+    g.fillStyle='#101f36';g.fillRect(0,h*.405,w,h*.40);
+    for(const x of [.027,.095,.64,.705,.93]){
+      g.fillStyle='#0c192c';g.fillRect(w*x,h*.42,w*.048,h*.37);
+      g.fillStyle='#182c48';
+      for(let row=0;row<7;row++)g.fillRect(w*(x+.005),h*(.44+row*.045),w*.036,h*.027);
+      g.fillStyle='#31516a';g.fillRect(w*(x+.031),h*.455,w*.007,h*.009);
+    }
+    g.fillStyle='#192b43';g.fillRect(0,h*.80,w,h*.012);
+    g.fillStyle='#0e1c31';g.fillRect(0,h*.812,w,h*.188);
+    g.fillStyle='#253957';g.fillRect(w*.08,h*.115,w*.84,h*.004);
+    g.fillStyle='#87ffe1';g.fillRect(w*.08,h*.115,w*.055,h*.004);
+    route(e,long,blue,t<60?.24:t<132?.95:.52);
+    route(e,short,mint,t<hit?.35:1);
+    device(e,'prop.cache-terminal.v1',client,.29);
+    device(e,'prop.cache-crate.v1',slot,.32,{filled:t>=128,key:'A'});
+    device(e,'prop.data-vault.v1',server,.32);
+    label(e,a.labels.requester,.17,.865,.029);
+    label(e,a.labels.cache,.44,.865,.029,mint);
+    label(e,a.labels.origin,.84,.865,.029);
+    if(t<42)query(e,travel(short,0,42),'A');
+    else if(t<60)query(e,mouth,'A');
+    else if(t<92)query(e,travel(long,60,92),'A');
+    else if(t<128)data(e,travel([...long].reverse(),97,128),'A',.21);
+    if(t>=92&&t<107)highlight(e,port,(t-92)/15,amber);
+    if(t>=128&&t<137)highlight(e,slot,(t-128)/9,mint);
+    if(t>=132&&t<hit)query(e,travel(short,132,hit),'A');
+    if(t>=hit+7&&t<190)data(e,travel([...short].reverse(),hit+7,190),'A',.21);
+    const age=t-hit;
+    if(age>=0&&age<13){
+      const q=age/13, x=slot[0]*e.width,y=(slot[1]+.018)*e.height;
+      const w=e.height*(.132+.055*q*power),h=e.height*(.112+.044*q*power);
+      g.save();g.globalAlpha=P.clamp((1-q)*power);
+      g.strokeStyle=mint;g.lineWidth=e.height*.014;
+      g.strokeRect(x-w,y-h,2*w,2*h);
+      for(let i=0;i<8;i++){
+        const side=i%2?1:-1, spread=(i%4-1.5)*.045;
+        g.fillStyle=i%3?mint:'#f3fff8';
+        g.fillRect(x+side*(w+e.height*(.016+q*.085*power)),y+e.height*(spread+q*spread),e.height*.018,e.height*.018);
+      }
+      g.restore();
+    }
+  }
   P.cacheJourney={state,draw(e,shot,frame){
+    if(shot.params.phase==="comparison"){comparison(e,shot,frame);return;}
     const s=state(shot,frame,e.fps);if(s.phase==='store')store(e,shot,s);else world(e,shot,s);
   }};
 })(globalThis.PixelVideo=globalThis.PixelVideo||{});

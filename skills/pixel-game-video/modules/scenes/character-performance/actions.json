@@ -1,0 +1,680 @@
+{
+  "schemaVersion": 1,
+  "scope": "Design vocabulary, not runtime pose whitelist",
+  "actions": [
+    {
+      "id": "act.observe",
+      "family": "注意与观察",
+      "title": "定向注视",
+      "trigger": "目标进入视野",
+      "contact": "视线落点可辨",
+      "endState": "注视目标",
+      "status": "existing-pose-reference",
+      "poseReference": "neutral",
+      "reference": {
+        "kind": "pose-analogy",
+        "src": "../../library/characters/actions/00-lead/neutral.png",
+        "sourceRect": [
+          152,
+          10,
+          283,
+          483
+        ],
+        "nativeSize": [
+          512,
+          512
+        ],
+        "label": "已有姿态的近似参考 · 不代表精确动作"
+      }
+    },
+    {
+      "id": "act.inspect",
+      "family": "注意与观察",
+      "title": "靠近细看",
+      "trigger": "远处信息不可辨",
+      "contact": "整体前倾与支撑成立",
+      "endState": "获得细节",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/inspect.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.scan",
+      "family": "注意与观察",
+      "title": "左右查找",
+      "trigger": "不知道目标在哪",
+      "contact": "视线与身体朝向对应",
+      "endState": "找到或仍未找到",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/scan.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.follow",
+      "family": "注意与观察",
+      "title": "追踪移动物",
+      "trigger": "目标发生位移",
+      "contact": "先目标后跟随反应",
+      "endState": "视线抵达末位置",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/follow.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.pen-hover",
+      "family": "思考与试探",
+      "title": "悬笔准备",
+      "trigger": "打开空白笔记",
+      "contact": "手持笔、笔尖离纸",
+      "endState": "准备但未写入",
+      "status": "candidate-example",
+      "example": {
+        "path": "examples/asking-s02a/index.html",
+        "pose": "hover"
+      },
+      "reference": {
+        "kind": "candidate-art",
+        "src": "examples/asking-s02a/assets/seated-actions-v2.png",
+        "sourceRect": [
+          0,
+          0,
+          418,
+          418
+        ],
+        "nativeSize": [
+          1254,
+          1254
+        ],
+        "label": "候选完整姿态 · 未获本轮认可"
+      }
+    },
+    {
+      "id": "act.pen-touch",
+      "family": "思考与试探",
+      "title": "落笔写入",
+      "trigger": "尝试作答",
+      "contact": "笔尖接纸，纸面出现痕迹",
+      "endState": "留下尝试",
+      "status": "candidate-example",
+      "example": {
+        "path": "examples/asking-s02a/index.html",
+        "pose": "write"
+      },
+      "reference": {
+        "kind": "candidate-art",
+        "src": "examples/asking-s02a/assets/seated-actions-v2.png",
+        "sourceRect": [
+          418,
+          0,
+          418,
+          418
+        ],
+        "nativeSize": [
+          1254,
+          1254
+        ],
+        "label": "候选完整姿态 · 未获本轮认可"
+      }
+    },
+    {
+      "id": "act.pen-pause",
+      "family": "思考与试探",
+      "title": "停笔犹豫",
+      "trigger": "不知道如何继续",
+      "contact": "笔离纸，已有痕迹保留",
+      "endState": "问题未解",
+      "status": "candidate-example",
+      "example": {
+        "path": "examples/asking-s02a/index.html",
+        "pose": "pause"
+      },
+      "reference": {
+        "kind": "candidate-art",
+        "src": "examples/asking-s02a/assets/seated-actions-v2.png",
+        "sourceRect": [
+          836,
+          0,
+          418,
+          418
+        ],
+        "nativeSize": [
+          1254,
+          1254
+        ],
+        "label": "候选完整姿态 · 未获本轮认可"
+      }
+    },
+    {
+      "id": "act.cross-out",
+      "family": "思考与试探",
+      "title": "划掉重写",
+      "trigger": "否定刚才尝试",
+      "contact": "划线与笔触对应",
+      "endState": "保留失败痕迹",
+      "status": "candidate-example",
+      "example": {
+        "path": "examples/asking-s02a/index.html",
+        "pose": "cross"
+      },
+      "reference": {
+        "kind": "candidate-art",
+        "src": "examples/asking-s02a/assets/seated-actions-v2.png",
+        "sourceRect": [
+          0,
+          418,
+          418,
+          418
+        ],
+        "nativeSize": [
+          1254,
+          1254
+        ],
+        "label": "候选完整姿态 · 未获本轮认可"
+      }
+    },
+    {
+      "id": "act.compare",
+      "family": "思考与试探",
+      "title": "来回比对",
+      "trigger": "存在两个候选",
+      "contact": "两个对象均可读，目光有落点",
+      "endState": "找到差异",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/compare.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.test-reach",
+      "family": "思考与试探",
+      "title": "伸手试探",
+      "trigger": "想触及目标但不确定",
+      "contact": "指尖接近但未接触",
+      "endState": "尚未操作",
+      "status": "candidate-example",
+      "example": {
+        "path": "examples/asking-s02a/index.html",
+        "pose": "reach"
+      },
+      "reference": {
+        "kind": "candidate-art",
+        "src": "examples/asking-s02a/assets/seated-actions-v2.png",
+        "sourceRect": [
+          836,
+          418,
+          418,
+          418
+        ],
+        "nativeSize": [
+          1254,
+          1254
+        ],
+        "label": "候选完整姿态 · 未获本轮认可"
+      }
+    },
+    {
+      "id": "act.retract",
+      "family": "思考与试探",
+      "title": "缩手撤回",
+      "trigger": "决定暂不操作",
+      "contact": "接触前中止，物体不响应",
+      "endState": "目标保持原态",
+      "status": "candidate-example",
+      "example": {
+        "path": "examples/asking-s02a/index.html",
+        "pose": "retract"
+      },
+      "reference": {
+        "kind": "candidate-art",
+        "src": "examples/asking-s02a/assets/seated-actions-v2.png",
+        "sourceRect": [
+          0,
+          836,
+          418,
+          418
+        ],
+        "nativeSize": [
+          1254,
+          1254
+        ],
+        "label": "候选完整姿态 · 未获本轮认可"
+      }
+    },
+    {
+      "id": "act.set-pen",
+      "family": "操作与接触",
+      "title": "放下笔",
+      "trigger": "结束当前尝试",
+      "contact": "支撑面承住后释放",
+      "endState": "笔留桌面",
+      "status": "candidate-example",
+      "example": {
+        "path": "examples/asking-s02a/index.html",
+        "pose": "withdraw"
+      },
+      "reference": {
+        "kind": "candidate-art",
+        "src": "examples/asking-s02a/assets/seated-actions-v2.png",
+        "sourceRect": [
+          418,
+          418,
+          418,
+          418
+        ],
+        "nativeSize": [
+          1254,
+          1254
+        ],
+        "label": "候选完整姿态 · 未获本轮认可"
+      }
+    },
+    {
+      "id": "act.grasp",
+      "family": "操作与接触",
+      "title": "抓握物件",
+      "trigger": "决定拿起",
+      "contact": "手掌包住握持部，肩肘腕连续",
+      "endState": "物件仍受桌面支撑",
+      "status": "candidate-example",
+      "example": {
+        "path": "examples/asking-s02a/index.html",
+        "pose": "grip"
+      },
+      "reference": {
+        "kind": "candidate-art",
+        "src": "examples/asking-s02a/assets/seated-actions-v2.png",
+        "sourceRect": [
+          418,
+          836,
+          418,
+          418
+        ],
+        "nativeSize": [
+          1254,
+          1254
+        ],
+        "label": "候选完整姿态 · 未获本轮认可"
+      }
+    },
+    {
+      "id": "act.lift",
+      "family": "操作与接触",
+      "title": "拿起查看",
+      "trigger": "抓握已经成立",
+      "contact": "支撑由桌面转为手，桌上不留副本",
+      "endState": "物件被持有",
+      "status": "candidate-example",
+      "example": {
+        "path": "examples/asking-s02a/index.html",
+        "pose": "held"
+      },
+      "reference": {
+        "kind": "candidate-art",
+        "src": "examples/asking-s02a/assets/seated-actions-v2.png",
+        "sourceRect": [
+          836,
+          836,
+          418,
+          418
+        ],
+        "nativeSize": [
+          1254,
+          1254
+        ],
+        "label": "候选完整姿态 · 未获本轮认可"
+      }
+    },
+    {
+      "id": "act.place",
+      "family": "操作与接触",
+      "title": "放下释放",
+      "trigger": "结束查看",
+      "contact": "接触桌面后松手",
+      "endState": "物件归桌面",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/place.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.tap",
+      "family": "操作与接触",
+      "title": "点击确认",
+      "trigger": "选择已形成",
+      "contact": "触点后界面响应",
+      "endState": "选择生效",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/tap.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.turn-page",
+      "family": "操作与接触",
+      "title": "翻页查找",
+      "trigger": "继续查找信息",
+      "contact": "捏住页角、翻过与释放",
+      "endState": "下一页可读",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/turn-page.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.type",
+      "family": "操作与接触",
+      "title": "输入内容",
+      "trigger": "准备好具体问题",
+      "contact": "手与键面/屏幕对应",
+      "endState": "内容实际进入",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/type.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.drag",
+      "family": "操作与接触",
+      "title": "拖动归位",
+      "trigger": "要改变对象位置",
+      "contact": "按住后同行，释放后停留",
+      "endState": "新位置保留",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/drag.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.approach",
+      "family": "位移与支撑",
+      "title": "走近目标",
+      "trigger": "要开始面对面操作",
+      "contact": "落脚与重心转换",
+      "endState": "抵达可及范围",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/approach.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.retreat",
+      "family": "位移与支撑",
+      "title": "后撤避让",
+      "trigger": "目标逼近",
+      "contact": "脚底/椅面支撑可信",
+      "endState": "扩大安全距离",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/retreat.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.sit",
+      "family": "位移与支撑",
+      "title": "坐下落稳",
+      "trigger": "准备持续操作",
+      "contact": "先接触座面再承重",
+      "endState": "坐姿稳定",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/sit.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.stand",
+      "family": "位移与支撑",
+      "title": "起身行动",
+      "trigger": "决定离开当前任务",
+      "contact": "重心转到双脚",
+      "endState": "站立可接行走",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/stand.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.turn",
+      "family": "位移与支撑",
+      "title": "转身换关注",
+      "trigger": "新目标在另一侧",
+      "contact": "完整身体转向的中间姿",
+      "endState": "面向新目标",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/turn.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.offer",
+      "family": "交流与协作",
+      "title": "递出物件",
+      "trigger": "向对方提供对象",
+      "contact": "交出前持有者明确",
+      "endState": "等待接物",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/offer.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.receive",
+      "family": "交流与协作",
+      "title": "接住物件",
+      "trigger": "对方已经递出",
+      "contact": "双手接触后持有权转移",
+      "endState": "新持有者接稳",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/receive.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.point",
+      "family": "交流与协作",
+      "title": "指向重点",
+      "trigger": "发现值得关注的对象",
+      "contact": "手势、视线与目标对位",
+      "endState": "关注落到目标",
+      "status": "existing-pose-reference",
+      "poseReference": "talk",
+      "reference": {
+        "kind": "pose-analogy",
+        "src": "../../library/characters/actions/00-lead/talk.png",
+        "sourceRect": [
+          77,
+          10,
+          286,
+          483
+        ],
+        "nativeSize": [
+          512,
+          512
+        ],
+        "label": "已有姿态的近似参考 · 不代表精确动作"
+      }
+    },
+    {
+      "id": "act.listen",
+      "family": "交流与协作",
+      "title": "倾听回应",
+      "trigger": "对方正在表达",
+      "contact": "阅读/倾听期保持，必要时一次点头",
+      "endState": "听完后再操作",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/listen.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.greet",
+      "family": "交流与协作",
+      "title": "招呼回应",
+      "trigger": "看见对方到来",
+      "contact": "方向有对象，挥手后收回",
+      "endState": "完成问候",
+      "status": "existing-pose-reference",
+      "poseReference": "wave",
+      "reference": {
+        "kind": "pose-analogy",
+        "src": "../../library/characters/actions/00-lead/wave.png",
+        "sourceRect": [
+          96,
+          9,
+          289,
+          484
+        ],
+        "nativeSize": [
+          512,
+          512
+        ],
+        "label": "已有姿态的近似参考 · 不代表精确动作"
+      }
+    },
+    {
+      "id": "act.flinch",
+      "family": "反应与恢复",
+      "title": "短促惊退",
+      "trigger": "突然冲击或错误",
+      "contact": "刺激先发生，整体反应后落稳",
+      "endState": "恢复支撑",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/flinch.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.frustrated",
+      "family": "反应与恢复",
+      "title": "挫败抱头",
+      "trigger": "多次受阻已经累积",
+      "contact": "完整肩臂与头关系",
+      "endState": "压力停顿",
+      "status": "existing-pose-reference",
+      "poseReference": "overwhelmed",
+      "reference": {
+        "kind": "pose-analogy",
+        "src": "../../library/characters/actions/00-lead/overwhelmed.png",
+        "sourceRect": [
+          82,
+          11,
+          311,
+          482
+        ],
+        "nativeSize": [
+          512,
+          512
+        ],
+        "label": "已有姿态的近似参考 · 不代表精确动作"
+      }
+    },
+    {
+      "id": "act.breathe",
+      "family": "反应与恢复",
+      "title": "停下缓一口气",
+      "trigger": "强动作结束",
+      "contact": "一次起伏并回稳，不永久循环",
+      "endState": "恢复可操作状态",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/breathe.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.resolve",
+      "family": "反应与恢复",
+      "title": "回正并下决定",
+      "trigger": "找到可尝试的下一步",
+      "contact": "准备与执行方向一致",
+      "endState": "动作可以开始",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/resolve.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.verify",
+      "family": "核验与交接",
+      "title": "检查结果",
+      "trigger": "操作已经结束",
+      "contact": "目光/指认对应真实结果",
+      "endState": "成功或失败可辨",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/verify.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.retry",
+      "family": "核验与交接",
+      "title": "修正后再试",
+      "trigger": "验证未通过",
+      "contact": "改变条件再执行，不只重复表情",
+      "endState": "得到新的反馈",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/retry.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    },
+    {
+      "id": "act.handoff",
+      "family": "核验与交接",
+      "title": "整理后交接",
+      "trigger": "当前阶段完成",
+      "contact": "对象归位，接续状态明确",
+      "endState": "下一段接住结果",
+      "status": "design-only",
+      "reference": {
+        "kind": "schematic",
+        "src": "references/handoff.svg",
+        "label": "动作构图示意 · 非完成素材"
+      }
+    }
+  ]
+}

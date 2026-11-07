@@ -2,6 +2,7 @@
 /** 工程数据模型：Project → Track → Clip。所有时间量以时间轴帧为单位（默认 30fps）。 */
 
 export interface ClipData {
+  sourceKey?: string;
   id: string;
   cardId: string;
   /** 时间轴上的起点（帧） */
@@ -37,6 +38,9 @@ export interface TrackData {
 }
 
 export interface ProjectData {
+  sourceBase?: {revision?: string; globals: Record<string, unknown>; units: Record<string, unknown>};
+  /** Explicit subtitle choice; actual card use is checked before export. */
+  captionDesign?: {mode: 'soft-highlight' | 'custom'; reason?: string};
   /** Visual preset; absent means the manifest's default, preserving older JSON. */
   themeId?: string;
   themeColors?: Record<string, string>;

@@ -1,0 +1,11 @@
+Local research preview dependencies: GSAP 3.13.0, MotionPathPlugin 3.13.0,
+Flip 3.13.0. Original copyright/license headers remain in every library file.
+
+Copyright (c) 2025 GreenSock. All rights reserved.
+License and terms: https://gsap.com/standard-license
+Official documentation: https://gsap.com/docs/v3/
+Pinned source distribution: https://www.npmjs.com/package/gsap/v/3.13.0
+
+This file records source and license links; it does not replace the upstream
+license or relicense the libraries. The preview's custom scene/animation code
+is separate from the bundled upstream files.

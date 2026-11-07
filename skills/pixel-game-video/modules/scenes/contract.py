@@ -52,7 +52,7 @@ def validate(scene_id, params, events, objects):
         'scenes.choice.v1': {'options', 'selectedIndex', 'selectEvent'},
         'scenes.assembly.v1': {'parts', 'resultLabel'},
         'scenes.focus.v1': {'label', 'detail'},
-        'scenes.cache-journey.v1': {'phase','environment','startEvent','arriveEvent','completeEvent','labels'},
+        'scenes.cache-journey.v1': {'hitFrame','hitStrength','phase','environment','startEvent','arriveEvent','completeEvent','labels'},
         'scenes.cache-adventure.v1': {'phase','environment','startEvent','arriveEvent','completeEvent','labels'},
         'scenes.presenter-board.v1': {'layout','heading','kicker','items'},
         'scenes.study-routes.v1': {'phase','environment','heading','kicker','labels','startEvent','completeEvent','sourceShots'},
@@ -154,6 +154,17 @@ def validate(scene_id, params, events, objects):
             used.add(row['object']);label(row['label'],'label');label(row['detail'],'detail');event(row['event'])
         if used!=known:raise ValueError('presenter-board: objects and items must match')
     elif scene_id in ('scenes.cache-journey.v1','scenes.cache-adventure.v1'):
+        if scene_id == 'scenes.cache-journey.v1' and params.get('phase') == 'comparison':
+            if set(params) != {'phase','environment','labels','hitFrame','hitStrength'} or objects:
+                raise ValueError('cache comparison requires its scene properties and no objects')
+            if params['environment'] != 'archive' or not isinstance(params['labels'],dict) or set(params['labels']) != {'requester','origin','cache'}:
+                raise ValueError('cache comparison requires the archive and three device labels')
+            for key,value in params['labels'].items(): label(value,key)
+            if type(params['hitFrame']) is not int or not 133 <= params['hitFrame'] <= 175:
+                raise ValueError('cache comparison hitFrame must be an integer from 133 to 175')
+            if type(params['hitStrength']) not in (int,float) or not 0 <= params['hitStrength'] <= 2:
+                raise ValueError('cache comparison hitStrength must be between 0 and 2')
+            return
         if params.get('phase') not in ('question','fetch','store','hit','miss','summary'):
             raise ValueError('cache-journey: unknown phase')
         if params.get('environment') not in ('workspace','archive'):

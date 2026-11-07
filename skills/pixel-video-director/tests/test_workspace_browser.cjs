@@ -62,7 +62,7 @@ const pageFile=path.join(out,'script-creator.html');builder.build(project,pageFi
   assert.deepEqual(errors,[]);
   const oldReturn={schema:'script-review/1',kind:'return',id:'old-review',revision:'unknown-old-source',suggestions:[{shotId:'s2',dimension:'layout',sourceKey:'stage-3-field-2',sourceValue:'旧原文',proposal:'旧审阅建议，需要核对'}]};
   const returnFile=path.join(out,'old-review-return.json');fs.writeFileSync(returnFile,JSON.stringify(oldReturn));const originalDescription=await page.evaluate(()=>DirectorWorkspace.getProject().stages.director.segments[1].description);
-  await page.locator('#import-project').setInputFiles(returnFile);assert.equal(await page.evaluate(()=>DirectorWorkspace.getRecord().importedReviews.length),1);assert.equal(await page.evaluate(()=>DirectorWorkspace.getProject().stages.director.segments[1].description),originalDescription,'old review suggestions never overwrite current source');
+  await page.locator('#import-project').setInputFiles(returnFile);await page.waitForFunction(()=>DirectorWorkspace.getRecord().importedReviews.length===1);assert.equal(await page.evaluate(()=>DirectorWorkspace.getRecord().importedReviews.length),1);assert.equal(await page.evaluate(()=>DirectorWorkspace.getProject().stages.director.segments[1].description),originalDescription,'old review suggestions never overwrite current source');
   await page.reload();assert.equal(await page.evaluate(()=>DirectorWorkspace.getRecord().importedReviews.length),1);
 
   // Preserve an old-page draft and quarantine a same-revision source conflict across refreshes.

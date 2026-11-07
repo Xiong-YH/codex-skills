@@ -1,0 +1,6 @@
+const fs=require('fs'),path=require('path');const read=file=>fs.readFileSync(path.join(__dirname,file),'utf8');
+const plan=JSON.parse(read('plan.json')),files=[...new Set(Object.values(plan.assets).map(x=>x.file))],images=Object.fromEntries(files.map(file=>[file,'data:image/png;base64,'+fs.readFileSync(path.join(__dirname,file)).toString('base64')]));
+const data='window.CASE_PLAN='+JSON.stringify(plan)+';window.CASE_IMAGES={};';fs.writeFileSync(path.join(__dirname,'data.js'),data);
+const scripts={'../../../../motion/pulse-spec.js':read('../../../../motion/pulse-spec.js'),'../../player.js':read('../../player.js'),'data.js':'window.CASE_PLAN='+JSON.stringify(plan)+';window.CASE_IMAGES='+JSON.stringify(images)+';','case.js':read('case.js'),'../../embed-bridge.js':read('../../embed-bridge.js')};
+let html=read('index.html').replace('<link rel="stylesheet" href="style.css">',()=>'<style>'+read('style.css')+'</style>');html=html.replace(/<script src="([^"]+)"><\/script>/g,(_,src)=>'<script>'+scripts[src].replace(/<\/script/gi,'<\\/script')+'</script>');
+if(process.argv[2]){const target=path.resolve(process.argv[2]);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,html);console.log('Built '+Buffer.byteLength(html)+' bytes');}else console.log('Updated data.js; provide an output path for standalone packaging');

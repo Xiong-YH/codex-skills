@@ -1,0 +1,381 @@
+{
+  "schemaVersion": 2,
+  "scope": "Abstract performance relations, review draft; scene bindings belong to projects",
+  "sequences": [
+    {
+      "id": "pattern.reorient",
+      "title": "注意重定向",
+      "question": "观众怎样从原焦点转向新焦点？",
+      "relation": "新线索改变注意分配；感知先于朝向变化，朝向变化可先于身体行动。",
+      "variables": [
+        "线索来源与方向",
+        "感知延迟",
+        "视线／头／身体的参与程度",
+        "是否继续行动"
+      ],
+      "phases": [
+        "线索进入",
+        "注意转移",
+        "新焦点稳定"
+      ],
+      "branches": [
+        "只转移注意，不操作",
+        "注意后再接其他动作模式"
+      ],
+      "invariant": "新焦点必须在空间中存在；不能用无目标歪头代替定向。",
+      "avoid": "把每次关注改变都演成惊吓。",
+      "examples": [
+        {
+          "media": "video",
+          "path": "examples/relationship-studies/media/reorient.mp4",
+          "label": "独立动作关系排练：注意重定向",
+          "start": 0,
+          "end": 5,
+          "coverage": "完整5秒结构排练；代码人物与简化对象演示本项关系，不代表正式角色动画或美术已通过",
+          "status": "candidate-example"
+        }
+      ],
+      "status": "draft-review",
+      "scope": "待用户审核的关系模式；不是固定动作链或执行配方",
+      "group": "行为关系",
+      "previousExamples": [
+        {
+          "path": "examples/asking-s02a/index.html",
+          "label": "旧试样中的注意变化",
+          "start": 5.8,
+          "end": 8,
+          "coverage": "局部示例：看向手机，不证明完整模式已实现",
+          "status": "candidate-example"
+        }
+      ]
+    },
+    {
+      "id": "pattern.prepare-resolve",
+      "title": "蓄势与收束",
+      "question": "怎样让一个动作有意图、力度与结束感？",
+      "relation": "主动作前的准备改变速度或重心；动作完成后回收余势，保留可读末态。",
+      "variables": [
+        "准备方向与幅度",
+        "主运动时长",
+        "余势大小",
+        "稳定停留"
+      ],
+      "phases": [
+        "准备",
+        "主动作",
+        "收束"
+      ],
+      "branches": [
+        "果断：短准备、快执行",
+        "谨慎：小幅准备、轻落稳",
+        "疲惫：准备不足、结果延迟"
+      ],
+      "invariant": "准备与主动作服务同一目标，收束不撤销动作结果。",
+      "avoid": "所有动作一律夸张回弹或先反向拉一下。",
+      "examples": [
+        {
+          "media": "video",
+          "path": "examples/relationship-studies/media/prepare-resolve.mp4",
+          "label": "独立动作关系排练：蓄势与收束",
+          "start": 0,
+          "end": 5,
+          "coverage": "完整5秒结构排练；代码人物与简化对象演示本项关系，不代表正式角色动画或美术已通过",
+          "status": "candidate-example"
+        }
+      ],
+      "status": "draft-review",
+      "scope": "待用户审核的关系模式；不是固定动作链或执行配方",
+      "group": "变化与节奏",
+      "previousExamples": [
+        {
+          "path": "examples/asking-s02a/index.html",
+          "label": "旧试样中的抓机与持机",
+          "start": 12,
+          "end": 14,
+          "coverage": "局部姿态示例；没有连续肢体补间",
+          "status": "candidate-example"
+        }
+      ]
+    },
+    {
+      "id": "pattern.inhibit",
+      "title": "启动与抑制",
+      "question": "怎样表现“想做，但没有完成”？",
+      "relation": "一个已启动的动作被条件、判断或阻力中止；中止后可保持、退回或改道。",
+      "variables": [
+        "中止原因",
+        "中止发生在接触前或后",
+        "退回幅度",
+        "未完成结果如何保留"
+      ],
+      "phases": [
+        "起动",
+        "条件介入",
+        "停止／退回／改道"
+      ],
+      "branches": [
+        "接触前停止：目标不响应",
+        "接触后停止：保留已发生的局部变化",
+        "外部打断：转入新目标"
+      ],
+      "invariant": "未完成不等于没有发生；已发生的接触和痕迹不能被无声重置。",
+      "avoid": "只把表情改成犹豫，动作却照常完成。",
+      "examples": [
+        {
+          "media": "video",
+          "path": "examples/relationship-studies/media/inhibit.mp4",
+          "label": "独立动作关系排练：启动与抑制",
+          "start": 0,
+          "end": 5,
+          "coverage": "完整5秒结构排练；代码人物与简化对象演示本项关系，不代表正式角色动画或美术已通过",
+          "status": "candidate-example"
+        }
+      ],
+      "status": "draft-review",
+      "scope": "待用户审核的关系模式；不是固定动作链或执行配方",
+      "group": "行为关系",
+      "previousExamples": [
+        {
+          "path": "examples/asking-s02a/index.html",
+          "label": "旧试样：伸手又收回",
+          "start": 8.2,
+          "end": 10.6,
+          "coverage": "展示接触前撤回这一种分支",
+          "status": "candidate-example"
+        }
+      ]
+    },
+    {
+      "id": "pattern.feedback-loop",
+      "title": "反馈闭环",
+      "question": "角色怎样根据结果改变下一次行动？",
+      "relation": "动作产生可观察反馈；角色据此维持、调整或停止策略。",
+      "variables": [
+        "预期结果",
+        "反馈延迟与可见性",
+        "调整了哪个条件",
+        "何时退出循环"
+      ],
+      "phases": [
+        "作用",
+        "观察反馈",
+        "维持／调整／停止"
+      ],
+      "branches": [
+        "达到预期：收束",
+        "未达预期：改变条件再试",
+        "反馈不明：补充观察"
+      ],
+      "invariant": "下一次尝试的改变必须对应刚才的反馈，不能只原样重播。",
+      "avoid": "把固定“失败—修正—成功”当成唯一结局。",
+      "examples": [
+        {
+          "media": "video",
+          "path": "examples/relationship-studies/media/feedback-loop.mp4",
+          "label": "独立动作关系排练：反馈闭环",
+          "start": 0,
+          "end": 5,
+          "coverage": "完整5秒结构排练；代码人物与简化对象演示本项关系，不代表正式角色动画或美术已通过",
+          "status": "candidate-example"
+        }
+      ],
+      "status": "draft-review",
+      "scope": "待用户审核的关系模式；不是固定动作链或执行配方",
+      "group": "行为关系",
+      "previousExamples": [
+        {
+          "path": "examples/asking-s02a/index.html",
+          "label": "旧试样：落笔、停笔与划改",
+          "start": 2.1,
+          "end": 5.8,
+          "coverage": "只展示尝试受阻；未完整展示修正成功",
+          "status": "candidate-example"
+        }
+      ]
+    },
+    {
+      "id": "pattern.couple",
+      "title": "耦合与解耦",
+      "question": "人物与物体何时一起动，何时独立？",
+      "relation": "接触或约束成立后，两个对象形成共同运动；释放／支撑转换后解除关系。",
+      "variables": [
+        "接触点",
+        "约束何时生效",
+        "共同运动范围",
+        "释放或支撑转换"
+      ],
+      "phases": [
+        "建立关系",
+        "共同变化",
+        "解除或转交关系"
+      ],
+      "branches": [
+        "抓住后同动，释放后独立",
+        "一方带动另一方",
+        "双方接触后转移持有权"
+      ],
+      "invariant": "接触前不应凭空同行；同一物体的身份、数量和持有者连续。",
+      "avoid": "把拿起、拖动、递接当成同一套固定手势。",
+      "examples": [
+        {
+          "media": "video",
+          "path": "examples/relationship-studies/media/couple.mp4",
+          "label": "独立动作关系排练：耦合与解耦",
+          "start": 0,
+          "end": 5,
+          "coverage": "完整5秒结构排练；代码人物与简化对象演示本项关系，不代表正式角色动画或美术已通过",
+          "status": "candidate-example"
+        }
+      ],
+      "status": "draft-review",
+      "scope": "待用户审核的关系模式；不是固定动作链或执行配方",
+      "group": "行为关系",
+      "previousExamples": [
+        {
+          "path": "examples/asking-s02a/index.html",
+          "label": "旧试样：桌上手机转为手中手机",
+          "start": 12.47,
+          "end": 14.2,
+          "coverage": "离散关键姿态的持有权变化，非完整抓握过程",
+          "status": "candidate-example"
+        }
+      ]
+    },
+    {
+      "id": "pattern.accumulate",
+      "title": "累积与阈值",
+      "question": "连续的小变化怎样引出一次明显转变？",
+      "relation": "输入逐步改变某个状态；当条件达到阈值时，行为或空间关系发生转变。",
+      "variables": [
+        "累积的是什么",
+        "每次输入留下什么",
+        "阈值依据",
+        "是否存在饱和或恢复"
+      ],
+      "phases": [
+        "输入累积",
+        "接近阈值",
+        "状态转变"
+      ],
+      "branches": [
+        "渐进变化后突然转变",
+        "达到上限后停止响应",
+        "输入撤去后逐步恢复"
+      ],
+      "invariant": "转变必须与累积状态有关；没有数据时不编造精确数值。",
+      "avoid": "每次输入都重复同一幅抱头图。",
+      "examples": [
+        {
+          "media": "video",
+          "path": "examples/relationship-studies/media/accumulate.mp4",
+          "label": "独立动作关系排练：累积与阈值",
+          "start": 0,
+          "end": 5,
+          "coverage": "完整5秒结构排练；代码人物与简化对象演示本项关系，不代表正式角色动画或美术已通过",
+          "status": "candidate-example"
+        }
+      ],
+      "status": "draft-review",
+      "scope": "待用户审核的关系模式；不是固定动作链或执行配方",
+      "group": "变化与节奏",
+      "previousExamples": [
+        {
+          "path": "examples/task-choice/index.html",
+          "label": "已认可案例：任务累积与反应",
+          "start": 0.4,
+          "end": 3.4,
+          "coverage": "一个具体情境，不代表所有累积都要表达压力",
+          "status": "approved-example-only"
+        }
+      ]
+    },
+    {
+      "id": "pattern.contrast",
+      "title": "重复与变奏",
+      "question": "怎样通过两次相似行动让变化被看见？",
+      "relation": "保留可识别的共同起势或条件，改变节奏、路径、决断或结果中的有意义部分。",
+      "variables": [
+        "保持不变的基准",
+        "本次改变的维度",
+        "两次之间的因果线索",
+        "是否需要重复"
+      ],
+      "phases": [
+        "建立基准",
+        "改变条件",
+        "再次行动并对照"
+      ],
+      "branches": [
+        "同一起势，不同结局",
+        "同一目标，不同策略",
+        "同一动作，不同角色响应"
+      ],
+      "invariant": "变奏必须有可识别的基准与改变，不能无理由复制动作凑时长。",
+      "avoid": "把同一套动作换道具就称为新表演。",
+      "examples": [
+        {
+          "media": "video",
+          "path": "examples/relationship-studies/media/contrast.mp4",
+          "label": "独立动作关系排练：重复与变奏",
+          "start": 0,
+          "end": 5,
+          "coverage": "完整5秒结构排练；代码人物与简化对象演示本项关系，不代表正式角色动画或美术已通过",
+          "status": "candidate-example"
+        }
+      ],
+      "status": "draft-review",
+      "scope": "待用户审核的关系模式；不是固定动作链或执行配方",
+      "group": "变化与节奏",
+      "previousExamples": [
+        {
+          "path": "examples/asking-s02a/index.html",
+          "label": "旧试样：第一次撤回，第二次拿起",
+          "start": 8.2,
+          "end": 14.2,
+          "coverage": "对照需看两次尝试；不是新的模式示范片",
+          "status": "candidate-example"
+        }
+      ]
+    },
+    {
+      "id": "pattern.continuity",
+      "title": "接续与交接",
+      "question": "一个动作的末态怎样成为下个动作的起态？",
+      "relation": "沿用对象、支撑、方向或注意的连续关系，或明确表现关系如何改变，再开启下一段。",
+      "variables": [
+        "保留的状态",
+        "支撑点与持有者",
+        "空间／机位是否改变",
+        "何时释放原焦点"
+      ],
+      "phases": [
+        "保留前态",
+        "转换关系",
+        "接住新态"
+      ],
+      "branches": [
+        "同一对象接续",
+        "不同对象之间转交",
+        "明确切镜后重新建立关系"
+      ],
+      "invariant": "后段承接实际留下的状态；不凭空复位、复制物体或改变惯用手。",
+      "avoid": "把整理、放下、成功作为所有结尾的必需动作。",
+      "examples": [
+        {
+          "media": "video",
+          "path": "examples/relationship-studies/media/continuity.mp4",
+          "label": "独立动作关系排练：接续与交接",
+          "start": 0,
+          "end": 5,
+          "coverage": "完整5秒结构排练；代码人物与简化对象演示本项关系，不代表正式角色动画或美术已通过",
+          "status": "candidate-example"
+        }
+      ],
+      "status": "draft-review",
+      "scope": "待用户审核的关系模式；不是固定动作链或执行配方",
+      "group": "段落衔接",
+      "previousExamples": []
+    }
+  ],
+  "composition": "可叠加：先确定行为关系，再按需要添加节奏/变化，最后检查段落接续；不要求每镜用满三层。"
+}

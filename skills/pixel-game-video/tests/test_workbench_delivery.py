@@ -10,6 +10,17 @@ from engine.delivery import copy_skill, skill_files
 
 
 class WorkbenchDeliveryTests(unittest.TestCase):
+    def test_segment_cache_is_excluded_without_platform_link_privileges(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            for name in ['workbench/.segment-cache/a.mp4', 'workbench/.segment-cache/a.mp4.json',
+                         'workbench/scripts/segment-cache.mjs', 'engine/change_report.py']:
+                file = root / name
+                file.parent.mkdir(parents=True, exist_ok=True)
+                file.write_text('test', encoding='utf-8')
+            packaged = {p.as_posix() for p in skill_files(root)}
+            self.assertEqual(packaged, {'workbench/scripts/segment-cache.mjs', 'engine/change_report.py'})
+
     def test_snapshot_keeps_editor_sources_and_excludes_live_artifacts(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder) / 'skill'
@@ -19,6 +30,7 @@ class WorkbenchDeliveryTests(unittest.TestCase):
                     'modules/audio/assets/arcade-motion/select.wav']
             excluded = ['workbench/node_modules/private/cache.json',
                         'workbench/exports/my-film.mp4', 'workbench/.render-public/payload.json',
+                        'workbench/.segment-cache/fragment.mp4', 'workbench/.segment-cache/fragment.mp4.json',
                         'workbench/.parity/frame.png', 'workbench/gen/modules.ts',
                         'workbench/public/payload.json', 'workbench/dist/index.html',
                         'workbench/.dev.pid', 'workbench/.dev.meta.json', 'workbench/.dev-5208.pid',

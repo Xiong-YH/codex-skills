@@ -1,0 +1,13 @@
+{
+  "cues": [
+    {
+      "id": "hit_sound",
+      "sound": "verified",
+      "at": {
+        "event": "s01.hit",
+        "offsetFrames": 0
+      },
+      "level": 0.25
+    }
+  ]
+}

@@ -17,6 +17,7 @@
 | 查看全部可运行样式与自定义集合 | [完整范例集](examples/style-atlas/README.md)：84 个基础实例（含朴素十二类）与堆叠、五维动作试样 |
 | 通用动作时长与节拍 | [motion 动作节拍](../motion/TIMING.md)；组件保留状态含义，不另立时长表 |
 | 从脚本判断复用、组合或新机制，设计自定义组件 | [脚本驱动设计与五维](DESIGN.md) |
+| 普通片段少字、延续已确认的组件风格 | [设计约定与认可对照](DESIGN.md#少字与组件风格延续)；含同对象机械／能量试样 |
 | 实现可暂停、倒拖、复用的自定义试样，准备工程接入 | [自定义实现协议](CUSTOM-RUNTIME.md)；[状态仪表完整例子](examples/state-meter/design.md) |
 | 查看实体牌组、悬停印章与任务试做台 | [面试牌桌统一预览](examples/interview-components/index.html)，含五维约定、两种布局与本地表单试做；当前是独立试样 |
 | 复用已认可的物体效果 | [物体组件与调用边界](OBJECT-COMPONENTS.md) |

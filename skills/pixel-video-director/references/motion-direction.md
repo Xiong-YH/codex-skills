@@ -4,7 +4,9 @@
 
 ## 先用动态规范决定观看过程
 
-写镜头描述前，读取 FOUNDATION 的 `modules/motion/GUIDE.md`、`modules/motion/recipes/pulse-camera.md` 和 `modules/motion/pulse-spec.js`，打开 `modules/motion/lab/index.html` 播放相关效果。HTML 结构用来理解层级、焦点和运动，曲线与正式执行器共用；静态图只补充构图，不能作为动效规范或兑现证据。基础技能缺失时仍可交纯设计，但须说明无法核对执行能力，不把候选 ID 写成已实现。
+写镜头描述前，先使用 FOUNDATION 的 `modules/motion/library.html`，或运行 `python modules/motion/library.py --intent 目的`。按突出重点、转换关注、交代空间、内容交接、事件强调、稳定阅读选型；默认聚焦当前后端可调用的常用项。只读取选中项指向的调用合同、曲线及动态预览，不先通读全部执行器和研究记录。待接入设计与旧配方按需显式展开，设计ID不能写作recipe。完整选型规则见 FOUNDATION `modules/motion/SELECTION.md`。
+
+HTML 结构用来理解层级、焦点和运动；pulse系列预览与正式执行器共用曲线，GSAP设计试样尚不因此获得正式能力。静态图只补充构图，不能作为动效兑现证据。基础技能缺失时仍可交纯设计，但须说明无法核对执行能力。
 
 导演先判断观众此刻要看谁、看见什么变化、最后读懂什么，再选择运动。相机改变关注点，主体动作改变状态，图层组改变一组对象，转场交接相邻镜头；四者分开描述。固定镜头与直接切镜同样是有效设计，不为套用预设强行动起来。
 

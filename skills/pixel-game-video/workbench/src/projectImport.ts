@@ -5,6 +5,7 @@ import type { ManifestAudio, WorkbenchManifest } from "./cards/manifest";
 import { groupUnits, manifestKey, unitsOf } from "./cards/manifest";
 import { inheritedProps } from './theme';
 import { t } from "./i18n";
+import {attachSourceBaseline} from './sourceSync.js';
 
 const baseClip = (): Omit<ClipData, "id" | "cardId" | "start" | "duration"> => ({
   inOffset: 0, speed: 1, opacity: 1, scale: 1, x: 0, y: 0, props: {},
@@ -22,7 +23,11 @@ const shortName = (src: string) => src.split("/").pop()!.replace(/\.[^.]+$/, "")
 /** 音频 cue → clip，贪心装箱进若干互不重叠的轨（同轨不重叠，便于单独挪动） */
 const packAudio = (cues: ManifestAudio[], trackName: string, role: TrackData["role"], defaultDuration: number, total: number): TrackData[] => {
   const lanes: { end: number; clips: ClipData[] }[] = [];
+  const occurrences = new Map<string, number>();
   for (const c of [...cues].sort((a, b) => a.from - b.from)) {
+    const identity = c.label ?? c.src;
+    const occurrence = occurrences.get(identity) ?? 0;
+    occurrences.set(identity, occurrence + 1);
     const start = Math.max(0, Math.round(c.from));
     // 原片里 <Sequence> 超出合成尾部的部分被合成时长截掉；导出按最晚 clip 结束算时长，所以这里也截到 total
     if (start >= total || (c.duration !== undefined && c.duration <= 0)) continue;
@@ -35,6 +40,7 @@ const packAudio = (cues: ManifestAudio[], trackName: string, role: TrackData["ro
     lane.clips.push({
       ...baseClip(),
       id: uid("clip"),
+      sourceKey: `${role}:${identity}:${occurrence}`,
       cardId: "audio-clip",
       start,
       duration,
@@ -67,6 +73,7 @@ export const buildProjectFromManifest = (m: WorkbenchManifest): ProjectData => {
       clips: units.map((u) => ({
         ...baseClip(),
         id: uid("clip"),
+        sourceKey: `${kind}:${u.id}`,
         cardId: cardIds.get(u)!,
         start: Math.max(0, Math.round(u.from)),
         duration: Math.max(1, Math.min(Math.round(u.duration), m.total - Math.max(0, Math.round(u.from)))),
@@ -94,7 +101,7 @@ export const buildProjectFromManifest = (m: WorkbenchManifest): ProjectData => {
     ...(m.sfx?.length ? packAudio(m.sfx, t("track.sfx"), "sfx", 90, m.total) : []),
   ];
 
-  return {
+  return attachSourceBaseline({
     ...(m.themes ? {themeId: m.defaultTheme ?? m.themes[0]?.id} : {}),
     name: m.name,
     fps: m.fps,
@@ -103,5 +110,5 @@ export const buildProjectFromManifest = (m: WorkbenchManifest): ProjectData => {
     background: m.background,
     source: manifestKey(m),
     tracks,
-  };
+  }) as ProjectData;
 };

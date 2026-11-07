@@ -25,6 +25,8 @@
 
 ## 工作台 Canvas 字幕属性
 
+普通讲解可直接使用 [柔边重音字幕卡](SOFT-HIGHLIGHT.md#实现边界与使用方式)，其文字、底板与强调共用测量结果；不必手工拼 `richTextJson` 与底板轨。以下是原 Canvas 字幕单元的独立路径，继续兼容已有工程。
+
 工作台的 Canvas 字幕可关闭“显示本句底板”（默认开启，旧工程不变）。需要在字幕空隙中保持底板时，用保留透明背景的图片素材放入独立叠加轨，覆盖所需区间，位于文字下方、镜头上方；再关闭各句底板。位置、尺寸、透明度和区间由这条独立轨道拥有，不用延长文字时长或塞入空字幕填间隙。此开关属于工作台字幕属性，不新增 VideoSpec 字段。
 
 工作台 Canvas 字幕可填写 `richTextJson`，保留 `text/fontSize/color` 为实际文案与默认样式。JSON 使用归一化 `left/right/y` 指定单行区域，可附 `label:{text,x,y,fontSize,color}` 与 `emphasis:[{text,color,treatment,ink}]`。`treatment` 可用 `chip`（色块）或 `underline`（下划线）；按最长词匹配，修改文案后自动重新测量，超宽报错。此模式只画字和强调，底板放独立轨并关闭本句底板；不新增 VideoSpec 字段，也不改变旧字幕默认行为。

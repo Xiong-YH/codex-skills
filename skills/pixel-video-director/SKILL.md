@@ -9,6 +9,10 @@ description: 接手完整文案，拆大模块和片段，以大白话及可弃�
 
 **创作前必读：** 生成或修改视觉脚本、分镜和视听编排前（局部修改也适用），先按 [依赖定位](references/handoff.md) 找到 FOUNDATION，读取其 `references/production-principles.md`，落实核心通用要求及本次相关踩坑。只做分镜不要求建工程或运行 doctor。
 
+**每支视频都参考手法库。** 构思视听方案前读 [《惊艳手法库》原文](references/garden-skills/craft.md)，从本片的讲述、情绪和画风出发，挑与观看任务相符的叙事、节奏、运镜或转场思路。先想清楚观众先看到什么、何时发现新信息、哪里需要停下来读，再定手法。合适时用拉远揭示、跟随主体或借场景对象接镜；固定机位、直切和留白也可直接采用。上游的片长、参数、模板和工具链按参考处理，实际调用及验收沿本 Skill 与 FOUNDATION 的合同。来源与授权见 [上游说明](references/garden-skills/NOTICE.md)。
+
+**人物设计与新动作。** 设计姿态、触点和过渡时，按角色的生理结构核对肢体连接、关节活动、重心和支撑，审片复核实际画面。新视频需要库外动作时，先向用户说明用途并询问是否制作。提供可审看的动作后，再询问是否收入共享库。详见 FOUNDATION 制作总则的「人物结构与新动作」，导演与制作沿用已取得的确认。
+
 **已确认要求主动继承：** 后续新片的普通字幕遵循 FOUNDATION `modules/text/SOFT-HIGHLIGHT.md` 的制作默认，由 Agent 落实到设计、工作台选型及成片审查；特殊表达或既有有效约定使用其他方案时写明具体依据，不等使用者再次提醒。只交设计时仍明确本片采用及例外，制作接手后核对实际调用。
 
 **职责与接稿：** 导演对全片观看体验负责，接手编剧的完整文案，自主完成视听设计、制作统筹与创作审片。选题、观点、论据和逐字文案归 pixel-video-writer；新创意先路由编剧，已有文案按 [协作定位与接稿](references/collaboration.md) 继续。继承“帮谁、问题、价值”的真实确认，不因角色切换重问；方向变化才确认受影响部分。
@@ -33,6 +37,7 @@ description: 接手完整文案，拆大模块和片段，以大白话及可弃�
 | 已有文案画面化、分镜或局部接镜 | 从当前文案和路线按 [导演四阶段](references/director-workflow.md) 继续，再读 [视觉表达](references/visual-system.md) 与 [分镜标注](references/visual-storyboard.md)；不要求重写文案或完成制作 |
 | 建工程、制作交接与出片 | 读 [创作合同](references/authoring.md)、[基础依赖与交接](references/handoff.md)；写创作源，交接后由基础技能进入工作台 |
 | 续作、审片与定向修复 | 读 [Review 与影响范围](references/review.md)，区分导演源和工作台剪辑分支，沿实际分支修改并核验 |
+| 人物反复用少数表情、需要操作或连贯表演 | 读 [人物表演设计](references/character-performance.md)，先按当前场景设计行为，再选动作段和补完整姿态；动作参考不等于已接入能力 |
 | 延续计算机口播系列 | 创作前读 [系列要求](references/computing-voiceover.md) 与 [分类、选角和讲解规范](references/character-illustration.md)，需要插画局部动态时再读 [动态设计](references/illustration-motion.md) |
 
 制作、续作或复盘同样先读该总则；制作时将适用的系列偏好与单片限制写入 brief。下面的基础模块路径均相对定位到的 FOUNDATION，不要求固定同级安装。

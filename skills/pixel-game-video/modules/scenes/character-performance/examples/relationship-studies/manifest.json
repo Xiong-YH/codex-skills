@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "type": "independent code-native acting relation references; not final character artwork",
+  "fps": 30,
+  "size": [
+    960,
+    540
+  ],
+  "audio": false,
+  "sourceSha256": "d4efc03165b1c173f6a262b66f39210b9fef5f8ddf4a9e4f4f84f9b9fed84ab3",
+  "clips": [
+    {
+      "id": "reorient",
+      "title": "注意重定向",
+      "subtitle": "线索出现 → 感知延迟 → 转向新目标",
+      "duration": 5,
+      "file": "media/reorient.mp4",
+      "sha256": "c44c4e85f0d4465ae9d698876d61201b94cd09415e7b05ad6f50be609776ffcb",
+      "verification": {
+        "codec": "h264",
+        "pixelFormat": "yuv420p",
+        "frames": 150,
+        "duration": 5,
+        "decode": "passed"
+      }
+    },
+    {
+      "id": "prepare-resolve",
+      "title": "蓄势与收束",
+      "subtitle": "准备 → 短促施力 → 余势收住",
+      "duration": 5,
+      "file": "media/prepare-resolve.mp4",
+      "sha256": "1b3b3b1c630b86c9beadf8a4de6a279ea779f861f6905e3c13b93f3d16e30346",
+      "verification": {
+        "codec": "h264",
+        "pixelFormat": "yuv420p",
+        "frames": 150,
+        "duration": 5,
+        "decode": "passed"
+      }
+    },
+    {
+      "id": "inhibit",
+      "title": "启动与抑制",
+      "subtitle": "伸手接近 → 接触前中止 → 撤回，目标不响应",
+      "duration": 5,
+      "file": "media/inhibit.mp4",
+      "sha256": "05f7494610112af3f1d4b08f4bedf8a9cc00aaab5c3fa3e7259a8a3de9f23f6d",
+      "verification": {
+        "codec": "h264",
+        "pixelFormat": "yuv420p",
+        "frames": 150,
+        "duration": 5,
+        "decode": "passed"
+      }
+    },
+    {
+      "id": "feedback-loop",
+      "title": "反馈闭环",
+      "subtitle": "尝试不匹配 → 调整条件 → 再试，获得新反馈",
+      "duration": 5,
+      "file": "media/feedback-loop.mp4",
+      "sha256": "a0bc73613adac696b53d5846e4c1bc083e7a343d3dc90aca52f6b21e2231d5d0",
+      "verification": {
+        "codec": "h264",
+        "pixelFormat": "yuv420p",
+        "frames": 150,
+        "duration": 5,
+        "decode": "passed"
+      }
+    },
+    {
+      "id": "couple",
+      "title": "耦合与解耦",
+      "subtitle": "抓住 → 人物与物体同行 → 放稳后释放",
+      "duration": 5,
+      "file": "media/couple.mp4",
+      "sha256": "96e7de5c22745bca09d8bae41affeb2c420aa01ed969fb5a7c1941ea4bbd134c",
+      "verification": {
+        "codec": "h264",
+        "pixelFormat": "yuv420p",
+        "frames": 150,
+        "duration": 5,
+        "decode": "passed"
+      }
+    },
+    {
+      "id": "accumulate",
+      "title": "累积与阈值",
+      "subtitle": "负荷逐项增加 → 达到承受界限 → 改变行为",
+      "duration": 5,
+      "file": "media/accumulate.mp4",
+      "sha256": "d4e4370060ea7d4a6ad8d44975a87b06bb448af385c8b0f24227c1ace5eea69a",
+      "verification": {
+        "codec": "h264",
+        "pixelFormat": "yuv420p",
+        "frames": 150,
+        "duration": 5,
+        "decode": "passed"
+      }
+    },
+    {
+      "id": "contrast",
+      "title": "重复与变奏",
+      "subtitle": "同一起势、不同条件 → 不同结局",
+      "duration": 5,
+      "file": "media/contrast.mp4",
+      "sha256": "57e921d447dd73af3943d0706f17213388c625182ff41e9b664713cd273b2853",
+      "verification": {
+        "codec": "h264",
+        "pixelFormat": "yuv420p",
+        "frames": 150,
+        "duration": 5,
+        "decode": "passed"
+      }
+    },
+    {
+      "id": "continuity",
+      "title": "接续与交接",
+      "subtitle": "递出 → 双方接稳 → 原持有者释放",
+      "duration": 5,
+      "file": "media/continuity.mp4",
+      "sha256": "b0347afd1b7138cc600159934b469791140e8499cde80c6ad876ab22dbcbeeb1",
+      "verification": {
+        "codec": "h264",
+        "pixelFormat": "yuv420p",
+        "frames": 150,
+        "duration": 5,
+        "decode": "passed"
+      }
+    }
+  ],
+  "checks": [
+    "all five diagnostic states per clip rendered without reach errors",
+    "recorded continuous real-time canvas playback",
+    "encoded H264 yuv420p with no audio"
+  ],
+  "aestheticApproval": "pending user review",
+  "technicalVerification": {
+    "all8Decoded": true,
+    "totalDuration": 40,
+    "nativeBrowserPlayback": "passed all8",
+    "userAestheticReview": "pending"
+  }
+}
