@@ -65,6 +65,31 @@
   },
   "features": [
     {
+      "id": "scenes.layered-background.v1",
+      "title": "背景拆层与视差片段制作",
+      "status": "workflow",
+      "invocation": "按 layered-backgrounds.md 准备图层并独立合成视频，再用 timeline.shots[].background / replacement 导入",
+      "references": {
+        "documentation": [
+          "modules/scenes/layered-backgrounds.md",
+          "modules/scenes/MEDIA.md"
+        ],
+        "examples": [],
+        "tests": []
+      },
+      "notes": [
+        "按需采用；素材生成、透明层、遮挡补全、确定性合成与独立片段审看属于制作流程。",
+        "通过现有 Canvas 项目媒体接入，内部图层回改依赖项目素材与合成源码；工作台仅编辑合成片段。",
+        "此 ID 用于查询，不是 scene 或 motion recipe；分层视差设计试样不因此成为通用运行时执行器。"
+      ],
+      "workbench": {
+        "editing": "shot-props",
+        "track": "shots",
+        "independentTrack": false,
+        "export": "via-track"
+      }
+    },
+    {
       "id": "scenes.actor-performance.v1",
       "title": "事件驱动人物姿态",
       "status": "workflow",

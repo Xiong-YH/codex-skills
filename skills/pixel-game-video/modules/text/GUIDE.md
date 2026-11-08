@@ -12,6 +12,7 @@
 | --- | --- |
 | 后端、编辑方式、示例与验证边界 | [统一能力目录](../../references/capability-catalog.md)；运行 python scripts/video.py catalog text --capabilities |
 | 按场景选择字幕形式、画面文字及实现边界 | [表现选型](EXPRESSION.md) |
+| 特殊字幕从屏幕前方砸入，落点震动并闪屏 | [景深砸入字幕](EXPRESSION.md#景深砸入字幕) |
 | 普通字幕采用暖金关键词、下划线和左右渐隐底板 | [已认可基线与工作台执行器](SOFT-HIGHLIGHT.md)；工作台卡 `soft-highlight-caption`，支持编辑及 MP4 导出，不新增 VideoSpec 字段 |
 | 防止选了方案却仍用临时白字 | [实际调用与导出检查](SOFT-HIGHLIGHT.md#实现边界与使用方式)；项目保存选型，导出检查实际卡 ID |
 | 借鉴参考片中的字幕与反馈手法，并按新主题原创转化 | [可迁移手法参考](EXPRESSION.md#可迁移手法参考按主题重新设计)、[原创检查](EXPRESSION.md#参考转化与原创检查)；设计参考不等于固定效果预设 |

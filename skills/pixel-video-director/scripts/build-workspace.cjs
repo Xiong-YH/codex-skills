@@ -17,5 +17,25 @@ function build(project,output){
  if(output){fs.mkdirSync(path.dirname(output),{recursive:true});fs.writeFileSync(output,html);}
  return html;
 }
-function main(){const args=process.argv.slice(2);let stateFile=path.resolve('outputs/script-creator.json'),output=path.resolve('outputs/script-creator.html');for(let i=0;i<args.length;i++){const arg=args[i];if(arg==='--state'||arg==='--output'){if(!args[i+1]||args[i+1].startsWith('--'))throw Error('Missing value for '+arg);if(arg==='--state')stateFile=path.resolve(args[++i]);else output=path.resolve(args[++i]);}else if(!arg.startsWith('-'))output=path.resolve(arg);else throw Error('Unknown argument: '+arg);}if(!fs.existsSync(stateFile)){fs.mkdirSync(path.dirname(stateFile),{recursive:true});fs.copyFileSync(welcomePath,stateFile);}const state=readJSON(stateFile);build(state,output);console.log('Updated workspace: '+output+'; project: '+state.projectId+'; revision: '+state.revision);}
+function main(){
+ const args=process.argv.slice(2);
+ let stateFile=path.resolve('work/script-creator/script-creator.json'),output;
+ for(let i=0;i<args.length;i++){
+  const arg=args[i];
+  if(arg==='--state'||arg==='--output'){
+   if(!args[i+1]||args[i+1].startsWith('--'))throw Error('Missing value for '+arg);
+   if(arg==='--state')stateFile=path.resolve(args[++i]);
+   else output=path.resolve(args[++i]);
+  }else if(!arg.startsWith('-'))output=path.resolve(arg);
+  else throw Error('Unknown argument: '+arg);
+ }
+ output??=path.join(path.dirname(stateFile),'script-creator.html');
+ if(!fs.existsSync(stateFile)){
+  fs.mkdirSync(path.dirname(stateFile),{recursive:true});
+  fs.copyFileSync(welcomePath,stateFile);
+ }
+ const state=readJSON(stateFile);
+ build(state,output);
+ console.log('Updated workspace: '+output+'; project: '+state.projectId+'; revision: '+state.revision);
+}
 if(require.main===module)main();module.exports={build,readJSON};

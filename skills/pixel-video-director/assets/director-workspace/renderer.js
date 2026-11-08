@@ -19,19 +19,76 @@ function sketch(doc,data){
  }
  const caption=doc.createElement('figcaption');caption.textContent='构思参考 · 用来说明内容，后续可调整、替换或不采纳。';figure.append(caption);return figure;
 }
-async function prepare(plan){const src=plan.background?.image;if(!src||images.has(src))return;const image=new Image();const ready=new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=()=>reject(Error('背景图无法读取，请重新选择图片。'));});image.src=src;await ready;images.set(src,image);}
+function prepareImage(src,label){
+ if(!src)return;
+ const cached=images.get(src);
+ if(cached)return cached.ready;
+ const image=new Image(),asset={};
+ asset.ready=new Promise((resolve,reject)=>{
+  image.onload=()=>{asset.image=image;resolve();};
+  image.onerror=()=>{images.delete(src);reject(Error(label+'无法读取，请重新选择图片。'));};
+ });
+ images.set(src,asset);
+ image.src=src;
+ return asset.ready;
+}
+async function prepare(plan){
+ await Promise.all([
+  prepareImage(plan.background?.image,'背景图'),
+  prepareImage(plan.overlay,'固定叠层'),
+  ...(plan.elements||[]).map(element=>prepareImage(element.image,'元素图片'))
+ ]);
+}
+function drawImage(ctx,src,w,h,x=0,y=0,fit='cover'){
+ const image=images.get(src)?.image;
+ if(!image)return;
+ const scale=(fit==='contain'?Math.min:Math.max)(w/image.width,h/image.height);
+ const iw=image.width*scale,ih=image.height*scale;
+ ctx.drawImage(image,x+(w-iw)/2,y+(h-ih)/2,iw,ih);
+}
+function applyCamera(ctx,camera,time,w,h){
+ const {x,y,scale}=M.position({x:0,y:0,keyframes:camera.keyframes},time);
+ const limit=50*(scale-1);
+ const tx=Math.max(-limit,Math.min(limit,x))*w/100;
+ const ty=Math.max(-limit,Math.min(limit,y))*h/100;
+ ctx.translate(w/2+tx,h/2+ty);
+ ctx.scale(scale,scale);
+ ctx.translate(-w/2,-h/2);
+}
 function wrap(ctx,text,max){const lines=[];let line='';for(const c of text){if(c==='\n'||ctx.measureText(line+c).width>max){lines.push(line);line=c==='\n'?'':c;}else line+=c;}if(line)lines.push(line);return lines;}
-function frame(canvas,project,segment,time){
- const p=segment.plan,ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);ctx.fillStyle=p.background?.color||'#eeeee8';ctx.fillRect(0,0,w,h);const image=images.get(p.background?.image);if(image){const scale=Math.max(w/image.width,h/image.height),iw=image.width*scale,ih=image.height*scale;ctx.drawImage(image,(w-iw)/2,(h-ih)/2,iw,ih);}
- ctx.save();if((p.transition||'cut')==='fade')ctx.globalAlpha=Math.min(1,time/.35);
- for(const e of p.elements||[]){const pos=M.position(e,time),x=pos.x*w/100,y=pos.y*h/100,ew=e.w*w/100,eh=e.h*h/100;ctx.save();ctx.globalAlpha*=pos.opacity;ctx.strokeStyle='#414b50';ctx.fillStyle='#f8f8f2';ctx.lineWidth=2;ctx.setLineDash([]);
+function drawElement(ctx,e,time,w,h){
+ const pos=M.position(e,time),x=pos.x*w/100,y=pos.y*h/100,ew=e.w*w/100,eh=e.h*h/100;
+ ctx.save();ctx.globalAlpha*=pos.opacity;
   const px=e.pivot?e.pivot.x*w/100:x+ew/2,py=e.pivot?e.pivot.y*h/100:y+eh/2;
   ctx.translate(px,py);ctx.rotate(pos.rotation*Math.PI/180);ctx.scale(pos.scale,pos.scale);ctx.translate(-px,-py);
+  if(e.image){
+   drawImage(ctx,e.image,ew,eh,x,y,'contain');
+   ctx.restore();
+   return;
+  }
+  ctx.strokeStyle='#414b50';ctx.fillStyle='#f8f8f2';ctx.lineWidth=2;ctx.setLineDash([]);
   if(e.kind==='person'){ctx.beginPath();ctx.arc(x+ew/2,y+eh*.17,Math.min(ew*.17,eh*.11),0,Math.PI*2);ctx.moveTo(x+ew/2,y+eh*.29);ctx.lineTo(x+ew/2,y+eh*.64);ctx.moveTo(x+ew*.2,y+eh*.49);ctx.lineTo(x+ew/2,y+eh*.36);ctx.lineTo(x+ew*.8,y+eh*.49);ctx.moveTo(x+ew*.22,y+eh*.94);ctx.lineTo(x+ew/2,y+eh*.64);ctx.lineTo(x+ew*.78,y+eh*.94);ctx.stroke();}
   else if(e.shape==='bubble'){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+ew,y);ctx.lineTo(x+ew,y+eh);ctx.lineTo(x+ew*.18,y+eh);ctx.lineTo(x-ew*.06,y+eh*.83);ctx.lineTo(x,y+eh*.65);ctx.closePath();ctx.fill();ctx.stroke();}
   else if(e.shape!=='text'){ctx.fillRect(x,y,ew,eh);ctx.strokeRect(x,y,ew,eh);}
   ctx.fillStyle=e.textStyle?.color||'#27353a';const fontSize=e.textStyle?.size?e.textStyle.size*w/960:Math.max(14,w/50);ctx.font=`${e.textStyle?.weight||400} ${fontSize}px "Microsoft YaHei",sans-serif`;ctx.textAlign='center';const labelLines=e.label.split('\n').slice(0,4),cy=e.kind==='person'?y+eh+22:y+eh/2+fontSize*.35;labelLines.forEach((line,i)=>ctx.fillText(line.slice(0,30),x+ew/2,cy+(i-(labelLines.length-1)/2)*fontSize*1.3,Math.max(10,ew-10)));ctx.restore();
- }ctx.restore();
+}
+function frame(canvas,project,segment,time){
+ const p=segment.plan,ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height;
+ ctx.clearRect(0,0,w,h);ctx.fillStyle=p.background?.color||'#eeeee8';ctx.fillRect(0,0,w,h);
+ const elements=p.elements||[];
+ const fade=p.transition==='fade'?Math.min(1,time/.35):ctx.globalAlpha;
+ ctx.save();
+ if(p.camera)applyCamera(ctx,p.camera,time,w,h);
+ drawImage(ctx,p.background?.image,w,h);
+ ctx.globalAlpha=fade;
+ for(const e of elements)if(e.layer!=='screen')drawElement(ctx,e,time,w,h);
+ ctx.restore();
+
+ drawImage(ctx,p.overlay,w,h);
+ ctx.save();ctx.globalAlpha=fade;
+ for(const e of elements)if(e.layer==='screen')drawElement(ctx,e,time,w,h);
+ ctx.restore();
+
  const subtitle=(p.subtitles||[]).filter(s=>time>=s.from&&time<s.to).map(s=>project.stages.copy.find(c=>c.id===s.cueId)?.text||'').join('\n');
  if(subtitle){ctx.font=`${w/32}px "Microsoft YaHei",sans-serif`;const lines=wrap(ctx,subtitle,w*.86),lh=w/24;ctx.fillStyle='rgba(20,28,32,.86)';ctx.fillRect(w*.04,h-lh*(lines.length+1),w*.92,lh*(lines.length+.6));ctx.fillStyle='#fff';ctx.textAlign='center';lines.forEach((line,i)=>ctx.fillText(line,w/2,h-lh*(lines.length-i-.05)));}
  ctx.font=`${w/85}px "Microsoft YaHei",sans-serif`;ctx.textAlign='left';ctx.fillStyle='rgba(30,40,45,.7)';ctx.fillText('动态白模 · 无音轨 · 时长预估',w*.025,h*.045);

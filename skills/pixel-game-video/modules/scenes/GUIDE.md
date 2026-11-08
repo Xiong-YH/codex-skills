@@ -13,6 +13,7 @@
 | 后端、编辑方式、示例与验证边界 | [统一能力目录](../../references/capability-catalog.md)；运行 python scripts/video.py catalog scenes --capabilities |
 | 场景选型、参数与后端 | [场景选型表与限制](details.md)、[能力目录](catalog.json)、[场景合同](contract.py) |
 | 空间、布局与项目媒体 | [空间设计](SPACE-DESIGN.md)、[布局预设](layouts/GUIDE.md)、[素材合同](MEDIA.md) |
+| 按需拆分背景、制作分层视差或前景遮挡片段 | [背景拆层与视差片段](layered-backgrounds.md)；先独立合成，再按项目媒体合同接入 |
 | 自由组合组件与素材 | [组件](../components/GUIDE.md)、[素材](../library/GUIDE.md)；使用已支持的 canvas 场景合同 |
 | 完整插画和替换片段 | [完整插画接入](whole-illustration.md)；不恢复拆头试样 |
 | 状态反馈 | [游戏反馈细节库](GAME_FEEL.md)；detail.* 是设计索引，不是 motion recipe |

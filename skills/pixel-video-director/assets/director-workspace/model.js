@@ -12,7 +12,9 @@ function elements(items,animated=false,duration=0){
  assert(Array.isArray(items)&&items.length<=24,'画面最多包含 24 个占位元素。');const ids=new Set();
  for(const e of items){assert(e&&text(e.id,100)&&e.id&&!ids.has(e.id),'元素 ID 需要唯一。');ids.add(e.id);assert(text(e.label,120)&&['box','person'].includes(e.kind||'box'),'占位元素需要文字和合法类型。');
   for(const key of ['x','y'])assert(number(e[key],-150,200),'元素坐标不正确。');for(const key of ['w','h'])assert(number(e[key],1,200),'元素大小不正确。');
+  if(e.layer!==undefined)assert(animated&&['stage','screen'].includes(e.layer),'白模元素层应为 stage 或 screen。');
   if(e.shape!==undefined)assert(['bubble','text'].includes(e.shape)&&(e.kind||'box')==='box','气泡与纯文字形态只用于方框占位。');
+  if(e.image!==undefined)assert(animated&&(e.kind||'box')==='box'&&e.shape===undefined&&typeof e.image==='string'&&e.image&&imageURL(e.image),'白模图片元素只接受内嵌 PNG/JPEG/WebP，使用 box 且不设 shape。');
   if(e.textStyle!==undefined){const t=e.textStyle;assert(t&&typeof t==='object'&&!Array.isArray(t),'文字样式格式不正确。');if(t.size!==undefined)assert(number(t.size,10,120),'文字字号超出白模范围。');if(t.weight!==undefined)assert([400,500,600,700,800].includes(t.weight),'文字字重不正确。');if(t.color!==undefined)assert(/^#[a-f\d]{6}$/i.test(t.color),'文字颜色需要六位十六进制色值。');}
   if(e.pivot!==undefined)assert(animated&&number(e.pivot.x,-150,200)&&number(e.pivot.y,-150,200),'旋转中心需要合法百分比坐标。');
   if(e.keyframes!==undefined){assert(animated&&Array.isArray(e.keyframes)&&e.keyframes.length<=30,'只有动态设计接受关键帧。');let at=-1;for(const k of e.keyframes){assert(k&&number(k.at,0,duration)&&k.at>at,'动作关键帧应按时间递增并处于片段内。');at=k.at;for(const key of ['x','y'])if(k[key]!==undefined)assert(number(k[key],-150,200),'动作位置不正确。');if(k.opacity!==undefined)assert(number(k.opacity,0,1),'动作透明度不正确。');if(k.scale!==undefined)assert(number(k.scale,.01,8),'缩放应在 0.01–8 之间。');if(k.rotation!==undefined)assert(number(k.rotation,-3600,3600),'旋转角度超出白模范围。');}}
@@ -22,6 +24,18 @@ function validateSketch(sketch){assert(sketch&&typeof sketch==='object'&&!Array.
 function validatePlan(plan,cueIds){
  assert(plan&&number(plan.duration,0.2,180),'样板片段时长应为 0.2–180 秒。');assert(text(plan.basis||'',100),'白模依据格式不正确。');
  const b=plan.background||{};assert(!b.color||/^#[a-f\d]{6}$/i.test(b.color),'背景颜色需要六位十六进制色值。');assert(imageURL(b.image),'背景只接受内嵌 PNG/JPEG/WebP，便于离线保存和导出。');assert(text(b.description||''),'背景描述过长。');elements(plan.elements||[],true,plan.duration);
+ if(plan.overlay!==undefined)assert(typeof plan.overlay==='string'&&plan.overlay&&imageURL(plan.overlay),'固定叠层只接受内嵌 PNG/JPEG/WebP。');
+ if(plan.camera!==undefined){
+  const keys=plan.camera?.keyframes;
+  assert(Array.isArray(keys)&&keys.length>=1&&keys.length<=30,'相机需要 1–30 个关键帧。');
+  let previousTime=-1;
+  for(const key of keys){
+   assert(key&&number(key.at,0,plan.duration)&&key.at>previousTime,'相机关键帧应按时间递增并处于片段内。');
+   for(const axis of ['x','y'])if(key[axis]!==undefined)assert(number(key[axis],-50,50),'相机平移百分比超出范围。');
+   if(key.scale!==undefined)assert(number(key.scale,1,2),'相机倍率应为 1–2。');
+   previousTime=key.at;
+  }
+ }
  assert(Array.isArray(plan.subtitles||[])&&(plan.subtitles||[]).length<=100,'字幕安排格式不正确。');for(const s of plan.subtitles||[])assert(s&&cueIds.has(s.cueId)&&number(s.from,0,plan.duration)&&number(s.to,s.from,plan.duration)&&s.to>s.from,'字幕需引用已有文案 ID，并安排在片段时长内。');
  assert(['cut','continue','fade'].includes(plan.transition||'cut'),'白模仅支持直切、同场继续与淡入。');
  for(const key of ['layout','action','stateIn','stateOut','audio','continuity'])if(plan[key]!==undefined)assert(text(plan[key]),'设计说明过长。');
