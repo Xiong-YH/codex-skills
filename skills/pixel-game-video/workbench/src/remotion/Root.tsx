@@ -7,11 +7,10 @@ import { zodFromCard } from "./zodFromCard";
 import { MainComposition } from "../preview/Composition";
 import { demoProject } from "../demoProject";
 import { projectDuration, projectEndFrame } from "../types";
-import type { ProjectData } from "../types";
 import { MANIFEST, ORIGINAL } from "../cards/projectCards";
 import { buildProjectFromManifest } from "../projectImport";
 
-type MainProps = { project: ProjectData; renderExact?: boolean; plate?: boolean };
+type MainProps = React.ComponentProps<typeof MainComposition> & { renderExact?: boolean };
 const Main = MainComposition as React.ComponentType<MainProps>;
 
 /** Remotion Studio / CLI 入口：

@@ -1,30 +1,49 @@
 // Adapted from video-shotcraft Workbench (Copyright 2026 Wei Yihao, Apache-2.0), 2026-10-21.
 import React from "react";
-import { AbsoluteFill, Audio, Img, OffthreadVideo, staticFile } from "remotion";
+import { AbsoluteFill, Audio, Html5Video, Img, OffthreadVideo, staticFile, useCurrentFrame, useRemotionEnvironment, useVideoConfig } from "remotion";
+import { sourceFrameAt } from "../videoFrames.js";
 import type { CardDef } from "./types";
 
 // —— 媒体卡：视频 / 图片 / 音频文件直接上轨（成片工程 public/ 与仓库音效库都走它们）——
 // 视频/音频卡 kind:"video"/"audio"：裁入=trimBefore、变速=playbackRate（不能包 Freeze，会掐死原生播放）
 
+export type PreparedVideoFrames = {directory: string; ticks: number[]; timeBase: number; rotation: number};
+
 const VideoClip: React.FC<{
   file?: string;
+  preparedFrames?: PreparedVideoFrames;
   fit?: string;
   muted?: boolean;
   volume?: number;
   inOffset?: number;
   speed?: number;
-}> = ({ file = "", fit = "contain", muted = false, volume = 1, inOffset = 0, speed = 1 }) => {
+}> = ({ file = "", preparedFrames, fit = "contain", muted = false, volume = 1, inOffset = 0, speed = 1 }) => {
+  const { isRendering } = useRemotionEnvironment();
+  const frame = useCurrentFrame();
+  const { fps, width, height } = useVideoConfig();
   if (!file) return null;
+  const src = staticFile(file);
+  const timing = { trimBefore: Math.round(inOffset), playbackRate: speed };
+  const size = { width: "100%", height: "100%", objectFit: fit as React.CSSProperties["objectFit"] };
+  if (!isRendering || !preparedFrames) {
+    // Preserve playback and the standalone Studio/CLI debugging path.
+    const Media = isRendering ? OffthreadVideo : Html5Video;
+    return <AbsoluteFill style={{ background: "#000" }}>
+      <Media src={src} {...timing} muted={muted} volume={volume} style={size} />
+    </AbsoluteFill>;
+  }
+  const { directory, ticks, timeBase, rotation } = preparedFrames;
+  const tick = sourceFrameAt(ticks, timeBase, (timing.trimBefore + frame * speed) / fps);
+  const quarterTurn = Math.abs(rotation % 180) === 90;
+  const orientation: React.CSSProperties = rotation ? {
+    position: "absolute", left: "50%", top: "50%",
+    width: quarterTurn ? height : width, height: quarterTurn ? width : height,
+    transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
+  } : {};
   return (
     <AbsoluteFill style={{ background: "#000" }}>
-      <OffthreadVideo
-        src={staticFile(file)}
-        trimBefore={Math.round(inOffset)}
-        playbackRate={speed}
-        muted={muted}
-        volume={volume}
-        style={{ width: "100%", height: "100%", objectFit: fit as React.CSSProperties["objectFit"] }}
-      />
+      <Img src={staticFile(`${directory}/${tick}.jpg`)} style={{ ...size, ...orientation }} />
+      {!muted && volume > 0 && <Audio src={src} {...timing} volume={volume} />}
     </AbsoluteFill>
   );
 };

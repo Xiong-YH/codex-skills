@@ -1,6 +1,12 @@
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 const exec = promisify(execFile);
+export const mediaExecutable = async type => {
+  const configured = process.env[`PIXEL_${type.toUpperCase()}`];
+  if (configured) return configured;
+  const {RenderInternals} = await import('@remotion/renderer');
+  return RenderInternals.getExecutablePath({type,indent:false,logLevel:'error',binariesDirectory:null});
+};
 export const analyzeGray = (buffer,width,height,fps=2) => {
   const size=width*height, rows=Math.floor(height*.85), frames=Math.floor(buffer.length/size);
   const issues=[];let stillStart=null,blankStart=null;
@@ -22,9 +28,7 @@ export const analyzeGray = (buffer,width,height,fps=2) => {
   return {sampledFrames:frames,issues,coverage:`${fps}fps grayscale, subtitle band excluded; static/flat pictures are review hints only`};
 };
 export const verifyEncoded = async (file,project) => {
-  const {RenderInternals}=await import('@remotion/renderer');
-  const executable=type=>process.env[`PIXEL_${type.toUpperCase()}`]||RenderInternals.getExecutablePath({type,indent:false,logLevel:'error',binariesDirectory:null});
-  const {stdout}=await exec(executable('ffprobe'),['-v','error','-count_frames','-show_entries','stream=codec_type,width,height,nb_read_frames,r_frame_rate,duration','-of','json',file],{maxBuffer:2*1024*1024,timeout:300000});
+  const {stdout}=await exec(await mediaExecutable('ffprobe'),['-v','error','-count_frames','-show_entries','stream=codec_type,width,height,nb_read_frames,r_frame_rate,duration','-of','json',file],{maxBuffer:2*1024*1024,timeout:300000});
   const streams=JSON.parse(stdout).streams, video=streams.find(s=>s.codec_type==='video');
   const total=Math.max(2,project.exportDurationInFrames??0,...project.tracks.filter(t=>!t.hidden).flatMap(t=>t.clips.map(c=>c.start+c.duration)));
   if(!video||Number(video.nb_read_frames)!==total||video.width!==project.width||video.height!==project.height)throw new Error('导出帧数或画幅与本次剪辑不符');
@@ -35,7 +39,7 @@ export const verifyEncoded = async (file,project) => {
   const h=Math.max(2,Math.round(160*project.height/project.width/2)*2);
   let scan;
   try{
-    const decoded=await exec(executable('ffmpeg'),['-v','error','-i',file,'-an','-vf',`fps=2,scale=160:${h},format=gray`,'-f','rawvideo','pipe:1'],{encoding:'buffer',maxBuffer:128*1024*1024,timeout:300000});
+    const decoded=await exec(await mediaExecutable('ffmpeg'),['-v','error','-i',file,'-an','-vf',`fps=2,scale=160:${h},format=gray`,'-f','rawvideo','pipe:1'],{encoding:'buffer',maxBuffer:128*1024*1024,timeout:300000});
     scan={pixelScan:'sampled',...analyzeGray(decoded.stdout,160,h)};
   }catch(e){scan={pixelScan:'unavailable',issues:[],coverage:'Pixel scan did not run. Configure PIXEL_FFMPEG with rawvideo support.',error:String(e.message).slice(-500)};}
   return {technical:'passed',frames:total,...scan,visualReview:'not_reviewed',audioReview:'not_reviewed'};

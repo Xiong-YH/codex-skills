@@ -22,7 +22,11 @@ const TimeRemap: React.FC<{
   return <Freeze frame={Math.max(0, inOffset + frame * speed)}>{children}</Freeze>;
 };
 
-export const MainComposition: React.FC<{ project: ProjectData; plate?: boolean }> = ({ project, plate = false }) => {
+export const MainComposition: React.FC<{
+  project: ProjectData;
+  plate?: boolean;
+  preparedVideoFrames?: Record<string, import("../cards/media-cards").PreparedVideoFrames>;
+}> = ({ project, plate = false, preparedVideoFrames }) => {
   const frame = useCurrentFrame();
   const resolveProps = useMemo(() => createLinkedPropsResolver(project), [project]);
   // UI 中 tracks[0] 是最上层轨 → 最后渲染（覆盖在上）
@@ -39,6 +43,11 @@ export const MainComposition: React.FC<{ project: ProjectData; plate?: boolean }
             const Comp = card.component;
             const duration = Math.max(1, Math.round(clip.duration));
             const props: Record<string, unknown> = themedProps(MANIFEST, card, project.themeId, resolveProps(clip, {frame, cards: CARDS}), project.themeColors);
+            if (clip.cardId === "video-clip") {
+              props.preparedFrames = typeof props.file === "string" && preparedVideoFrames &&
+                Object.prototype.hasOwnProperty.call(preparedVideoFrames, props.file)
+                ? preparedVideoFrames[props.file] : undefined;
+            }
             if (clip.cardId === SOFT_CAPTION_CARD) props.previousText=previousCaptionText(track,clip,CARDS);
             // 成片组件按 `duration`/`dur` 算出场淡出：注入 clip 的源时长，拉长/裁短后淡出跟着挪
             if (card.durationProp)
