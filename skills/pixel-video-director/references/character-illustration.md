@@ -86,11 +86,11 @@
 
 用户只要脚本时，交付上述设计即可。进入制作后按基础层的 [完整插画进入视频](../../pixel-game-video/modules/scenes/whole-illustration.md) 准备并核验实际素材和片段，再通过 replacement 接入；原始媒体与最终画幅都须检查整屏构图，不能用静态图加旁白冒充脚本要求的动作。制作细节与实际事件回写既有创作源，不另建一条秒数时间线。
 
-本例用设备通知、人物疲惫和抱头等状态表达分心压力，原图见 [场景母图](../examples/whole-illustration/media/01-tired.png) 与 [抱头状态](../examples/whole-illustration/media/03-overwhelmed.png)，[生成提示词](../examples/whole-illustration/generation-prompts.json) 随创作源保留。新主题学习这种文案与画面的对应关系，重新选择处境和载体。
+需要查阅分心压力的历史表演试样时，可对照设备通知、人物疲惫和抱头这几个状态。原图见 [场景母图](../examples/whole-illustration/media/01-tired.png) 与 [抱头状态](../examples/whole-illustration/media/03-overwhelmed.png)，[生成提示词](../examples/whole-illustration/generation-prompts.json) 随创作源保留。
 
 ## 参考用法与人物出镜
 
-**这组插图是风格与演绎方法的参考，不是每片必用的素材包或结构模板。** 可学习像素质感、完整人物与场景的统一，以及动作如何回应文案中的处境。新片的故事结构、镜头顺序、构图布局、动作组合、片长及插画数量由本片脚本重新决定，不默认复用书桌、通知、抱头、趴下，也不默认安排“插画开场 → 组件总结”。同一段连续姿态需保持空间连续，这不要求其他视频沿用该段构图。
+正式画风和演绎先看 [《提问的艺术》R30](art-of-asking-reference.md)。按本片脚本选择故事结构、镜头、构图、动作和插画数量。同一段连续姿态保持空间连续，历史参考供对应表演问题按需查阅。
 
 逐镜先确定解释任务，再选择表达形式和人物职责：
 

@@ -18,7 +18,7 @@
 
 可用四个问题做设计自查：删去本段会失去哪步理解？调换相邻两段是否仍完全一样？关键结论由什么画面或依据支持？结尾是否回应了开头提出的问题？可调换不必然是缺点，并列说明可以独立；需要修复的是把依赖关系误写成信息罗列。
 
-实片观察与本仓库设计对照见 [《欲望合同》参考片段复盘](desire-contract-case.md)。学习其推进方法，不能据此把合同、签章、情绪条或原片顺序变成通用模板。
+导演的实片主参考见 [《提问的艺术》R30](art-of-asking-reference.md)。需要拆解道具如何贯穿观点时，可另查 [《欲望合同》参考片段复盘](desire-contract-case.md)。
 
 项目采用情境模拟时，把编剧已确定的参与任务、结果或换位设计成可见过程；需重构其内容时再读编剧的 [情境模拟方法](scenario-simulation.md)。角色换位只是其中一种机制，模拟内容不自动成为现实证据。
 
@@ -105,4 +105,4 @@ RPG、卡牌和 HUD 需表达选择、资源、进度、反馈或结果。用户
 
 纯设计稿与工程的映射见 [视觉分镜](visual-storyboard.md)。设计阶段可用首帧、交接帧、落稳帧说明需求；有素材时暂时遮掉字幕，检查主要动作与关系是否可辨。静帧正确不能证明中间没有露底、重影、遮字或节奏问题，实际转场仍需完整画幅连续播放和相应听音，按 [Review](review.md) 保留未审状态。
 
-完整源示例：[缓存往返、保留副本、命中与回源](../examples/cache-journey/brief.json)、[书页、书架与真实图卡的跨空间叙事](../examples/cs-postgrad-narrative-18s/brief.json)。[《深度工作》参考片](deep-work-case.md)提供观片案例，主题、时长、黑金配色与道具不成为新项目默认。历史取舍仍通过基础依赖读取 `references/iteration-history.md`。
+按需查阅专项示例 [缓存往返、保留副本、命中与回源](../examples/cache-journey/brief.json)、[书页、书架与真实图卡的跨空间叙事](../examples/cs-postgrad-narrative-18s/brief.json) 及 [《深度工作》观片笔记](deep-work-case.md)。历史取舍通过基础依赖读取 `references/iteration-history.md`。
