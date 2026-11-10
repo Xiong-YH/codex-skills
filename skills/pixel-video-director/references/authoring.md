@@ -37,7 +37,9 @@
 
 **阶段三详细设计及正式交接须落实字幕形式**：按 [字幕形式描述](visual-storyboard.md#脚本必须描述字幕形式) 写明用途、位置与绑定、重点词与底板、显露／替换／收束和实现状态。此说明沿现有 intent 与事件交接，不新增未定义字段；生产须对照执行，不能只交台词或静默回退底部字幕。
 
-音效默认留白，只为有明确增益的关键变化写入 production-plan.audio，分镜简要说明保留作用；不按动作或卡点配满。触发筛选与删音对照统一按基础依赖的 `modules/audio/GUIDE.md` 执行，不另立音效次数或重复要求每条 cue 填说明字段。
+声音按基础层的 [Garden 工作流](../../pixel-game-video/modules/audio/GARDEN.md) 设计。在 brief.constraints 分别记录配乐和音效的来源，写清声音对标、材质、段落起伏与有口播时的让位方式。把动作和声音重心写到同一个分镜事件。确认、碰撞默认对齐起音，换场可对齐掠过声的包络峰或蓄力声的结束点。
+
+`production-plan.audio[]` 可选 [Garden 音色或街机 WAV](../../pixel-game-video/modules/audio/SYNTHESIS.md) 的 `sound`，也可填项目内 PCM `file`。合成参数写 `params`，落点写 `align`，`at` 引用 storyboard 事件。handoff 将 cue 与引用素材交给基础工程。按本片的材质与叙事节奏决定叠层、密度和留白。
 
 `production-plan.renderBackend` 缺省为 `canvas`；显式选 `remotion` 时由 handoff 透传到 project，不复制时间表。先查看基础层 `references/remotion.md` 的能力边界；[12 秒书桌示例](../examples/remotion-focus-desk/README.md) 演示同一套源文件如何交给原生 React 执行器。Canvas 与原生 Remotion 都必须进入工作台完成剪辑与最终导出。Studio、build/film.html 和直接 render 用于源合成调试与一致性对照，不代替工作台分轨编辑、保存和导出验收。
 

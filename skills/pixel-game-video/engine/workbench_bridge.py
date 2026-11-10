@@ -199,28 +199,23 @@ def _split_speech_music(root: Path, skill: Path, resolved: dict, public: Path) -
         intervals = [(round(v['frame'] / fps * 48000), round(v['frame'] / fps * 48000) + v['samples'])
                      for v in resolved.get('narration', [])]
         duck = narration.duck_envelope(samples, intervals, resolved.get('mix', {}).get('speechDuck', .28))
-        for event in resolved.get('audio', []):
-            single = {**resolved, 'audio': [event]}
-            raw, records = mixer.render_sfx(single)
-            start = round(event['frame'] / fps * 48000)
-            end = min(samples, start + records[0]['durationSamples'])
-            # Retain only this event's audible interval. A full-film matrix per
-            # event makes ordinary multi-minute videos consume tens of GB.
-            stems.append(('sfx', event['id'], start, end, raw[start:end] * duck[start:end, None]))
+        for record, clip in mixer.sfx_parts(resolved, root):
+            start = record['sample']
+            end = min(samples, start + len(clip))
+            stems.append(('sfx', record['id'], start, end, clip[:end - start] * duck[start:end, None]))
         for cue in resolved.get('narration', []):
             single = {**resolved, 'narration': [cue]}
             raw, _ = narration.mix(single, root, np.zeros((samples, 2)))
             start = round(cue['frame'] / fps * 48000)
             end = start + cue['samples']
             stems.append(('narration', cue['id'], start, end, raw[start:end].copy()))
+            del raw
         if resolved.get('bgm'):
             import music
             raw, _ = music.render(resolved, root, samples)
             cue = resolved['bgm']
             start, end = (round(cue[field] / fps * 48000) for field in ('frame', 'endFrame'))
             stems.append(('bgm', cue.get('id', 'bgm'), start, end, raw[start:end].copy()))
-        # Drop the last full-film render before allocating mastering buffers.
-        if stems:
             del raw
         groups = {'sfx': [], 'narration': [], 'bgm': []}
         if not stems:

@@ -212,9 +212,14 @@ def transform(sources):
                 if look[field] is not None:
                     target[field] = map_value("text.json", f"/cues/{j}/{field}", look[field], "production-plan.json", cid, "/" + field)
             outputs["text.json"]["cues"].append(target)
-    outputs["audio.json"]["cues"] = [map_value("audio.json", f"/cues/{i}", cue, "production-plan.json", cue["id"], "")
-                                            for i, cue in enumerate(plan["audio"])]
+    outputs["audio.json"]["cues"] = [
+        map_value("audio.json", f"/cues/{i}", {key: value for key, value in cue.items() if value is not None},
+                  "production-plan.json", cue["id"], "")
+        for i, cue in enumerate(plan["audio"])
+    ]
     outputs['audio.json']['speechDuck'] = map_value('audio.json', '/speechDuck', plan['speechDuck'], 'production-plan.json', plan['id'], '/speechDuck')
+    if plan['masterGain'] is not None:
+        outputs['audio.json']['masterGain'] = map_value('audio.json', '/masterGain', plan['masterGain'], 'production-plan.json', plan['id'], '/masterGain')
     if plan['narration']:
         outputs['audio.json']['narration'] = [map_value('audio.json', f'/narration/{i}', cue, 'production-plan.json', cue['id'], '') for i,cue in enumerate(plan['narration'])]
     if plan['bgm'] is not None:
@@ -246,6 +251,7 @@ def handoff(project, foundation=None):
                   "mappings": mappings}
     media = {}
     media_refs = list(sources['production-plan.json']['narration'])
+    media_refs.extend(cue for cue in sources['production-plan.json']['audio'] if cue['file'])
     if sources['production-plan.json']['bgm'] is not None:
         media_refs.append(sources['production-plan.json']['bgm'])
     visual_files = []

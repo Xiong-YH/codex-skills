@@ -90,10 +90,12 @@ def export_project(root, destination):
     target.mkdir()
     for name in INPUT_MODELS:
         shutil.copy2(root / name, target / name)
-    for cue in resolved.get('narration', []):
-        media = target / cue['file']
+    audio_files = {cue['file'] for kind in ('audio', 'narration')
+                   for cue in resolved.get(kind, []) if 'file' in cue}
+    for relative in sorted(audio_files):
+        media = target / relative
         media.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(root / cue['file'], media)
+        shutil.copy2(root / relative, media)
     if resolved.get('bgm'):
         media = target / resolved['bgm']['file']
         media.parent.mkdir(parents=True, exist_ok=True)

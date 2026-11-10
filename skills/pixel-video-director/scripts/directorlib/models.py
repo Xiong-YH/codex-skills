@@ -1,7 +1,7 @@
 """Versioned authoring contracts. JSON schemas are generated from these models."""
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class Contract(BaseModel):
@@ -146,11 +146,20 @@ class TextPlan(Contract):
 
 class Sound(Contract):
     id: str
-    sound: str
+    sound: str | None = None
+    file: str | None = Field(default=None, min_length=1)
     at: Ref
     level: float = Field(ge=0, le=1)
     x: float = Field(default=0.5, ge=0, le=1)
     variant: int = Field(default=0, ge=0)
+    params: dict[str, bool | int | float | str | list[bool | int | float | str]] | None = None
+    align: Literal["start", "peak", "end"] | None = None
+
+    @model_validator(mode="after")
+    def require_source(self):
+        if (self.sound is None) == (self.file is None):
+            raise ValueError("音效须填写 sound 或 file 中的一项")
+        return self
 
 
 class Narration(Contract):
@@ -193,6 +202,7 @@ class Plan(Contract):
     narration: list[Narration] = []
     bgm: Bgm | None = None
     speechDuck: float = Field(default=0.28, ge=0, le=1)
+    masterGain: float | None = Field(default=None, gt=0, le=4)
 
 
 class Evidence(Contract):

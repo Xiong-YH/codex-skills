@@ -176,7 +176,11 @@ def runtime_files(skill, resolved):
                      ('mixer.py', 'palette.py', 'game_audio.py', 'arcade.py'))
         if resolved.get('bgm'):
             files.add('modules/audio/music.py')
-        sounds = {cue['sound'] for cue in resolved.get('audio', [])}
+        sounds = {cue['sound'] for cue in resolved.get('audio', []) if 'sound' in cue}
+        if any(cue.get('synthesis') for cue in resolved.get('audio', [])):
+            files.update('modules/audio/' + name for name in (
+                'synthesis.py', 'render-sfx.mjs', 'vendor/garden-skills/scripts/lib/synth.mjs',
+                'vendor/garden-skills/LICENSE', 'vendor/garden-skills/NOTICE.md'))
         for bank in ('arcade-motion', 'common-motion'):
             directory = 'modules/audio/assets/' + bank + '/'
             manifest = directory + 'manifest.json'

@@ -159,11 +159,20 @@ class Text(Model):
 
 class AudioCue(Model):
     id: Id
-    sound: Id
+    sound: Id | None = None
+    file: Annotated[str, Field(min_length=1)] | None = None
     at: FrameRef
     level: Unit = 0.5
     x: Unit = 0.5
     variant: Annotated[int, Field(ge=0)] = 0
+    params: dict[str, bool | int | float | str | list[bool | int | float | str]] | None = None
+    align: Literal["start", "peak", "end"] | None = None
+
+    @model_validator(mode="after")
+    def require_source(self):
+        if (self.sound is None) == (self.file is None):
+            raise ValueError("SFX cue requires exactly one of sound or file")
+        return self
 
 
 class NarrationCue(Model):
@@ -195,6 +204,7 @@ class Audio(Model):
     cues: list[AudioCue] = Field(default_factory=list)
     narration: list[NarrationCue] = Field(default_factory=list)
     speechDuck: Unit = 0.28
+    masterGain: Annotated[float, Field(gt=0, le=4, allow_inf_nan=False)] | None = None
     bgm: Bgm | None = None
 
 

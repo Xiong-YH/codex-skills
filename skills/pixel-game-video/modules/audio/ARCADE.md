@@ -1,6 +1,6 @@
 # 九种正式常用音效
 
-先按 [必要性与删减规则](GUIDE.md#先减触发再调强弱) 决定是否发声，再从下表选型；表中的动作是适用范围，不是必响清单。九种均为48kHz、16-bit、双声道固定 WAV，`variant=0`，制作时直接读取并校验哈希。
+这是 [Garden 声音设计](GARDEN.md) 中可选的一组材质，适合需要电子主体、鼓点和回弹的触点。九种均为 48kHz、16-bit、双声道固定 WAV，`variant=0`，制作时读取母版并校验哈希。
 
 | ID | 时长 | 适用触点 | 避用 |
 | --- | --- | --- | --- |
@@ -18,7 +18,7 @@
 
 - 原六种及电子/鼓点/回弹分层见 [基础清单](assets/arcade-motion/manifest.json)。母版保持原 PCM，三个分层已经包含在完整声音里，不要再与母版叠加；分层不要分别归一化。
 - 新增三种见 [常用扩充清单](assets/common-motion/manifest.json)。轻选择来自旧 `select/variant=1`，含短低鼓和45ms轻鼓边回拍；焦点移动来自 `focus-step/0`，系统展开来自 `system-unfold/0`。正式注册保存最终试听字节，使用独立 ID；新增三种只提供完整母版。
-- 九种素材随 skill 打包；工程锁定实际使用的母版。旧 G2 ID 仅为兼容历史工程保留，调用旧 ID 不会得到新版。过去撤回的扩展、持续蓄力及网络参考不恢复，本轮不继续扩库。
+- 九种素材随 skill 打包，工程锁定实际使用的母版。旧 G2 ID 为历史工程兼容保留。可调音色走独立的 [合成入口](SYNTHESIS.md)，选型时可与这里的固定母版搭配。
 
 来源、哈希及认可范围以 manifest 与 [迭代记录](../../references/iteration-history.md) 为准。原子试听认可不等于新片混音已验收；音量与执行边界见 GUIDE。
 
@@ -31,4 +31,4 @@ python modules/audio/preview.py --out <试听目录>
 python modules/audio/gallery.py --out <单文件试听目录>
 ```
 
-`preview.py`默认导出九种及原六种分层；`--bank arcade-core`仅原六种，`--bank common`仅新增三种，`--bank all`另列旧 G2（每类仅版本0，不是全 variant 试听）。`gallery.py`导出一个离线 HTML，内嵌九种、18个分层、配乐、人声参考和规范快照；重新运行才会更新快照。播放器不会自动连续播放，试听页不代表已完成主观审片。
+`preview.py` 默认导出九种及原六种分层。`--bank arcade-core` 选原六种，`--bank common` 选另外三种，`--bank library` 一起试听 Garden 的 33 种合成音色。`gallery.py` 导出包含九种、18 个分层、配乐、人声参考和规范快照的单文件 HTML。

@@ -25,7 +25,7 @@ description: 按已有脚本或工程制作、修改像素游戏感视频，在�
 | [components](modules/components/GUIDE.md) | 按 [脚本需求](modules/components/DESIGN.md) 判断复用或定制。新组件先读 [共同画风](modules/style/COMPONENT-ART.md) 和 [实现协议](modules/components/CUSTOM-RUNTIME.md) |
 | [text](modules/text/GUIDE.md) | 有字幕必读 [后续制作默认与实际调用](modules/text/SOFT-HIGHLIGHT.md)，落实到工作台与导出画面 |
 | [motion](modules/motion/GUIDE.md) | 从 [动效选型](modules/motion/SELECTION.md) 查真实调用。离散组件动作必读 [动作与阅读预算](modules/motion/TIMING.md) |
-| [audio](modules/audio/GUIDE.md) | 音效取舍、旁白素材导入、配乐与混音 |
+| [audio](modules/audio/GUIDE.md) | Garden 声音设计、音色选型、事件对齐、分轨混音与审片 |
 | [scenes](modules/scenes/GUIDE.md) | 空间、对象关系、状态机制、表演与项目片段合成 |
 
 ## 续作与扩展

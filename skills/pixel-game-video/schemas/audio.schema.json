@@ -10,10 +10,31 @@
           "type": "string"
         },
         "sound": {
-          "maxLength": 100,
-          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
-          "title": "Sound",
-          "type": "string"
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sound"
+        },
+        "file": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "File"
         },
         "at": {
           "$ref": "#/$defs/FrameRef"
@@ -37,11 +58,74 @@
           "minimum": 0,
           "title": "Variant",
           "type": "integer"
+        },
+        "params": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "type": "array"
+                  }
+                ]
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Params"
+        },
+        "align": {
+          "anyOf": [
+            {
+              "enum": [
+                "start",
+                "peak",
+                "end"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Align"
         }
       },
       "required": [
         "id",
-        "sound",
         "at"
       ],
       "title": "AudioCue",
@@ -216,6 +300,20 @@
       "minimum": 0,
       "title": "Speechduck",
       "type": "number"
+    },
+    "masterGain": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "maximum": 4,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mastergain"
     },
     "bgm": {
       "anyOf": [

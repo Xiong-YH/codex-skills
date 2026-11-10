@@ -4,6 +4,8 @@
     "references": {
       "documentation": [
         "modules/audio/ARCADE.md",
+        "modules/audio/GARDEN.md",
+        "modules/audio/SYNTHESIS.md",
         "modules/audio/details.md"
       ],
       "examples": [
@@ -12,14 +14,40 @@
       "tests": [
         "tests/test_audio_baseline.py",
         "tests/test_game_audio.py",
+        "tests/test_synth_sfx.py",
         "tests/test_workbench_bridge.py"
       ]
     },
     "notes": [
-      "正式原子与旧版兼容音色分别标记；声音素材认可不代表本片混音已审。工作台音频为已处理 PCM 分轨，修改后不动态重算其他轨道压低/总线包络。"
+      "Garden 合成、街机母版和旧版兼容音色分别列出。工作台使用本次混音的独立 PCM 片段，修改后按当前版本复听。"
     ]
   },
   "features": [
+    {
+      "id": "audio.sfx-import.v1",
+      "title": "项目音效导入与事件对齐",
+      "status": "workflow",
+      "invocation": "audio.cues[].file + at",
+      "references": {
+        "documentation": ["modules/audio/SYNTHESIS.md"],
+        "examples": [],
+        "tests": ["tests/test_synth_sfx.py"]
+      },
+      "workbench": {"editing": "audio-track", "track": "sfx", "independentTrack": true, "export": "via-track"}
+    },
+    {
+      "id": "audio.garden-score.v1",
+      "title": "Garden score、分 bus 与声音技术检查",
+      "status": "workflow",
+      "invocation": "node modules/audio/vendor/garden-skills/scripts/audio.mjs build|beats|check",
+      "references": {
+        "documentation": ["modules/audio/GARDEN.md", "modules/audio/vendor/garden-skills/references/sound.md"],
+        "examples": ["modules/audio/vendor/garden-skills/assets/starter/score.mjs"],
+        "tests": []
+      },
+      "notes": ["可选原版 Tone 路径按其 package-lock 安装。score 产出的 bus 可转换 PCM 后导入工作台。"],
+      "workbench": {"editing": "not-integrated", "track": null, "independentTrack": false, "export": "not-integrated"}
+    },
     {
       "id": "audio.narration-import.v1",
       "title": "已有旁白导入与混音",

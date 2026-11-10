@@ -66,6 +66,8 @@ def _resources(module, raw, source_kind):
             'modules/scenes/' + raw[key] for key in ('scenePreset', 'sceneRuntime') if raw.get(key)]
     if module == 'library' and raw.get('path'):
         return [root + raw['path']]
+    if module == 'audio' and raw.get('synthesis'):
+        return [root + 'synthesis.py', root + 'render-sfx.mjs', root + 'vendor/garden-skills/scripts/lib/synth.mjs']
     return []
 
 
@@ -157,6 +159,13 @@ def _invocation(module, raw, source_kind):
         return 'Standalone HTML/Canvas; not shot.components.kind'
     if source_kind == 'background':
         return 'Scene preset libraryAssets ID; not project.style or a project media file'
+    if module == 'audio' and raw.get('synthesis'):
+        invocation = 'audio.cues[].sound + params'
+        if raw['synthesis'].get('peakAlignment'):
+            invocation += ' + align="peak"'
+        if raw['synthesis'].get('endAlignment'):
+            invocation += ' + align="end"'
+        return invocation
     return {
         'style': 'project.style',
         'library': 'timeline.shots[].actor' if raw.get('kind') == 'actor' else 'timeline.shots[].objects[].asset',

@@ -326,17 +326,29 @@ def compile_project(project_root, skill_root=None, *, write=False):
             subtitles.append((start, end))
         cue.update(startFrame=start, endFrame=end)
     audio = inputs["audio.json"]["cues"]
+    from modules.audio.synthesis import resolve_sfx
+    source_hashes = {name: file_hash(root / name) for name in INPUT_MODELS}
+    spec = importlib.util.spec_from_file_location('pixel_narration', skill / 'modules/audio/narration.py')
+    narration_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(narration_module)
     unique((c["id"] for c in audio), "audio cues")
     for cue in audio:
-        sound = require("audio", cue["sound"])
         frame = resolve(cue.pop("at"))
         if not 0 <= frame < cursor:
             raise ValueError(f"{cue['id']}: audio event outside video")
+        if 'file' in cue:
+            if 'params' in cue or cue.pop('align', 'start') != 'start' or cue['variant'] != 0:
+                raise ValueError(f"{cue['id']}: imported SFX use their PCM onset and do not accept params or variants")
+            path, info = narration_module.inspect_clip(root, cue['file'], label='SFX')
+            relative = path.relative_to(root).as_posix()
+            cue.update(file=relative, frame=frame, **info)
+            source_hashes[relative] = info['sha256']
+            continue
+        sound = require("audio", cue["sound"])
         if cue["variant"] > sound.get("maxVariant", 0):
             raise ValueError(f"{cue['id']}: unavailable sound variant {cue['variant']}")
-        cue["frame"] = frame
+        resolve_sfx(cue, sound, frame, project["fps"])
 
-    source_hashes = {name: file_hash(root / name) for name in INPUT_MODELS}
     from .media import compile_media
     media = compile_media(root, shots, project['fps'])
     _handoff_contract.validate_media(shots, project, media)
@@ -347,9 +359,6 @@ def compile_project(project_root, skill_root=None, *, write=False):
     if bool(narration) != (project['audioMode'] == 'narration+sfx'):
         raise ValueError('Narration clips require audioMode=narration+sfx and vice versa')
     unique((c['id'] for c in narration), 'narration')
-    spec = importlib.util.spec_from_file_location('pixel_narration', skill / 'modules/audio/narration.py')
-    narration_module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(narration_module)
     intervals = []
     for cue in narration:
         frame = resolve(cue.pop('at'))
@@ -392,7 +401,8 @@ def compile_project(project_root, skill_root=None, *, write=False):
                 "durationFrames": cursor, "durationSeconds": cursor / project["fps"],
                 "shots": shots, "events": events, "cues": cues, "audio": audio, "narration": narration, "media": media,
                 "bgm": bgm,
-                "mix": {"speechDuck": inputs["audio.json"]["speechDuck"]}}
+                "mix": {key: inputs["audio.json"][key] for key in ("speechDuck", "masterGain")
+                        if key in inputs["audio.json"]}}
     if progress:
         resolved['progress'] = progress
     if rehearsal_rows:

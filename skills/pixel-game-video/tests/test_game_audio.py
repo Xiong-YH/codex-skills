@@ -22,6 +22,8 @@ class GameAudioTests(unittest.TestCase):
     def test_catalog_variants_are_finite_deterministic_and_tapered(self):
         items = json.loads((ROOT / 'modules/audio/catalog.json').read_text(encoding='utf-8'))['items']
         for item in items:
+            if 'synthesis' in item:
+                continue
             for variant in range(item['maxVariant'] + 1):
                 with self.subTest(sound=item['id'], variant=variant):
                     clip = palette.sound(item['id'], variant)
