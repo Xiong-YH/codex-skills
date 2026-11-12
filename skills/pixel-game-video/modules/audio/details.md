@@ -15,7 +15,7 @@
 
 ## 旁白与配乐
 
-`project.audioMode="narration+sfx"`配合 `audio.json.narration` 的 `id/file/at/gain` 导入现成旁白。文件须在项目内，48kHz、16-bit、单或双声道 PCM WAV，不得重叠或越界；编译绑定素材哈希。旁白先归一化再乘自身 gain，音效的 `speechDuck` 不压低旁白，但最终总线仍处理全部声音。[历史音色](VOICES.md)只作参考，不代替当前台词，也不意味着已有 TTS 或口型对齐。
+`project.audioMode="narration+sfx"` 配合 `audio.json.narration` 的 `id/file/at/gain` 读取已有工程的音轨。文件须在项目内，48 kHz、16-bit、单或双声道 PCM WAV，且区间须在片内并互不重叠。编译绑定素材哈希，混音先做旁白归一化再乘自身 gain。
 
 顶层 `audio.json.speechDuck` 是旁白期间音效保留比例，默认0.28；导演在 production-plan 设置同名字段。可选 `bgm` 有独立的 gain、淡化、循环和 `speechDuck`（默认0.25），见 [配乐工作流](MUSIC.md)。`silent` 模式不输出音轨。实际 MP4 仍需听音核对，素材认可与成片验收分别记录。
 

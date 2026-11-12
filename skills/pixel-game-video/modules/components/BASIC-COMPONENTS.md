@@ -9,11 +9,13 @@
 | 决定 | 唯一字段 | 合法选择 |
 | --- | --- | --- |
 | 解释什么 | kind | 十二类已有信息组件 |
-| 材质和运动机制 | visualStyle | plain（朴素原版）、mechanical 或 energy；默认 mechanical，三者择一 |
+| 材质和运动机制 | visualStyle | plain（朴素原版）、mechanical、energy 或 paper；默认 mechanical |
 | 如何组织主体和信息 | styleVariant | open、inset 或 relay；默认 inset |
 | 是否增加空间层次 | features | `[]` 或 `["stack"]`；默认空 |
 
-两种风格各有三种样式；堆叠独立开关。十二类 × 两种风格 × 三种样式共 72 个基础范例，计入堆叠共 144 种配置。配置数量不等于新的语义种类。旧 `styleLayers` 混搭数组继续拒绝。
+机械与能量各有三种样式。十二类 × 两种风格 × 三种样式共 72 个原有基础范例，计入堆叠共 144 种配置。旧 `styleLayers` 混搭数组继续拒绝。
+
+`paper` 适用于纯文字的 `identity`、`checklist` 与 `takeaway`。用像素折角、层片和印记区分纸张、复制件与勾选结果。open 留空行边，inset 加纸边线，relay 增加沿纸边推进的痕迹，stack 按承载关系开关。需要图像视口时可用其他风格的身份卡。
 
 ## 样式是方法，不是三个固定外框
 

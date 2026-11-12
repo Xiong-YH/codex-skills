@@ -2,6 +2,38 @@
   "module": "motion",
   "items": [
     {
+      "id": "motion.actor-blocking.v1",
+      "kind": "actor",
+      "target": "actor",
+      "title": "小棕的连续走位与伸手触点",
+      "params": {
+        "action": ["walk", "reach"],
+        "from": "normalized [x, footY]",
+        "to": "normalized [x, footY]",
+        "height": [0.12, 0.5],
+        "facing": ["left", "right"],
+        "hand": "normalized [x, y] for reach",
+        "contact": "shot-local event ID for reach"
+      },
+      "backends": ["canvas"]
+    },
+    {
+      "id": "motion.contact-fx.v1",
+      "kind": "effect",
+      "target": "scene",
+      "title": "接触点像素火花、晕染与掠光",
+      "params": {
+        "style": ["sparks", "bloom", "light-sweep"],
+        "tone": ["gold", "accent", "danger"],
+        "x": [0, 1],
+        "y": [0, 1],
+        "radius": [0.04, 0.4],
+        "strength": [0.05, 1],
+        "seed": "non-negative integer"
+      },
+      "backends": ["canvas"]
+    },
+    {
       "id": "motion.camera-track.v1",
       "kind": "camera",
       "title": "有边界的跟拍与景别变化",
@@ -276,6 +308,7 @@
           "keyword"
         ],
         "pairs": "[{from: outgoing component ID, to: incoming component ID}]",
+        "roomReveal": "optional match-only feathered room reveal, left or right; preserve one card",
         "sources": "merge: 2–6 outgoing component IDs",
         "target": "merge: incoming component ID",
         "word": "keyword: shared title word",

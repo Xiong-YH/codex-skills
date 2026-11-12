@@ -1,12 +1,12 @@
 # Codex Skills
 
-像素游戏感视频的编剧、导演与制作技能。按当前任务进入，已有项目从实际进度继续。
+无口播像素信息动效的编剧、导演与制作技能。用组件变化和屏幕主句讲清信息，按实际配乐排关键动作与转场。
 
 ## 选择技能
 
 | 当前需要 | Skill | 交付 |
 | --- | --- | --- |
-| 讨论选题、写完整文案、单独修改开头、正文或收尾 | [pixel-video-writer](skills/pixel-video-writer/SKILL.md) | 选题与叙事确认记录、完整稿或局部改稿、内容自查 |
+| 讨论选题、写全片上屏文案、修改开头、正文或收尾 | [pixel-video-writer](skills/pixel-video-writer/SKILL.md) | 叙事路线、屏幕主句、必要标注和事实依据 |
 | 把文案演成画面、设计分镜、统筹与审片 | [pixel-video-director](skills/pixel-video-director/SKILL.md) | 视听设计、草图与动态白模、制作交接、创作审片 |
 | 按脚本或工程制作、修改并导出视频 | [pixel-game-video](skills/pixel-game-video/SKILL.md) | 可编辑工程、工作台成片、同次项目 JSON 与核验证据 |
 
@@ -22,7 +22,9 @@
 | 运行、构建和依赖 | [运行说明](skills/pixel-game-video/references/runtime.md) |
 | 剪辑、保存和最终导出 | [工作台](skills/pixel-game-video/references/workbench.md) |
 | 当前通用要求与常见问题 | [制作总则](skills/pixel-game-video/references/production-principles.md) |
-| 延续计算机口播系列 | [系列要求](skills/pixel-video-director/references/computing-voiceover.md)，其他项目按自己的约定 |
+| 设计组件承接、配乐卡点和冲击 | [无口播信息动效与音乐卡点](skills/pixel-video-director/references/beat-driven-explainer.md) |
+| 体验无口播、普通人物动作和同源白模 | [缓存过程示例](skills/pixel-video-director/examples/beat-driven-cache/README.md) |
+| 选择可循环底乐和实际拍位 | [可复用 BGM](skills/pixel-game-video/modules/audio/bgm-system/README.md) |
 | 追溯用户反馈、失败与认可范围 | [迭代记录](skills/pixel-game-video/references/iteration-history.md) |
 | 维护模块与新增能力 | [职责归属](skills/pixel-game-video/references/module-ownership.md)、[模块维护](skills/pixel-game-video/references/module-development.md) |
 | 查本仓库更新 | [变更记录](CHANGELOG.md) |

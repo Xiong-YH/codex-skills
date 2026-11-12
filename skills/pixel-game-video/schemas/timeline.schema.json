@@ -118,7 +118,8 @@
           "enum": [
             "plain",
             "mechanical",
-            "energy"
+            "energy",
+            "paper"
           ],
           "title": "Visualstyle",
           "type": "string"
@@ -473,6 +474,20 @@
           "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
           "title": "Id",
           "type": "string"
+        },
+        "beatId": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Beatid"
         },
         "durationFrames": {
           "exclusiveMinimum": 0,

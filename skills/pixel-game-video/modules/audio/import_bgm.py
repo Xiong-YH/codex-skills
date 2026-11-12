@@ -9,7 +9,7 @@ import tempfile
 import wave
 
 
-def import_bgm(project, source=None, *, overwrite=False):
+def import_bgm(project, source, *, overwrite=False):
     root = Path(project).resolve()
     if not root.is_dir():
         raise ValueError('Create the video or director project before importing BGM')
@@ -20,15 +20,10 @@ def import_bgm(project, source=None, *, overwrite=False):
     shots = json.loads(board.read_text(encoding='utf-8'))['shots']
     if not shots:
         raise ValueError('BGM requires an existing storyboard or timeline')
-    bundled = source is None
-    music_dir = Path(__file__).resolve().parent / 'assets/music'
-    metadata = json.loads((music_dir / 'chill-wave.json').read_text(encoding='utf-8')) if bundled else {}
-    source = music_dir / metadata['file'] if bundled else Path(source).resolve()
+    source = Path(source).resolve()
     if not source.is_file():
         raise ValueError('BGM source audio file is missing')
-    if bundled and hashlib.sha256(source.read_bytes()).hexdigest() != metadata['sha256']:
-        raise ValueError('Bundled Chill Wave differs from its source manifest')
-    destination = root / 'media' / ('chill-wave.wav' if bundled else 'bgm.wav')
+    destination = root / 'media' / 'bgm.wav'
     if not destination.resolve().is_relative_to(root):
         raise ValueError('BGM destination must stay inside the project')
     if destination.exists() and not overwrite:
@@ -57,7 +52,7 @@ def import_bgm(project, source=None, *, overwrite=False):
               'at': {'event': shots[0]['id'] + '.enter'}, 'end': {'event': shots[-1]['id'] + '.exit'},
               'gain': 0.18, 'loop': True, 'trimStartSeconds': 0.0,
               'fadeInFrames': 60, 'fadeOutFrames': 90, 'speechDuck': 0.25,
-              **{key: metadata.get(key, '') for key in ('title', 'artist', 'sourceUrl', 'licenseUrl')},
+              'title': '', 'artist': '', 'sourceUrl': '', 'licenseUrl': '',
               'changes': 'Converted to 48kHz PCM; trimmed/looped, faded and mixed as configured.'}
     return {'file': config['file'], 'samples': samples, 'sha256': hashlib.sha256(destination.read_bytes()).hexdigest(),
             'bgm': config, 'note': 'Add bgm to production-plan.json (director) or audio.json (direct); source JSON was not edited.'}

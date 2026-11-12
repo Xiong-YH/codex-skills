@@ -90,6 +90,23 @@
     if(!shot.actor){g.translate(e.width*.5,e.height*.40);g.scale(1.3,1.3);g.translate(-e.width*.65,-e.height*.48);}
     handler(e,shot,frame);P.library.objects(e,shot,frame);g.restore();
   }
+  function background(e,shot) {
+    const {ctx:g,width:w,height:h,colors:c,pixel:px} = e;
+    g.save();
+    if (e.whitebox) g.filter='grayscale(1) brightness(.67)';
+    if (shot.background) P.media.draw(e,shot.background);
+    else P.style.background(e,shot);
+    g.restore();
+    if (!e.whitebox) return;
+    g.save();
+    g.fillStyle='rgba(18,30,40,.18)';
+    g.fillRect(0,0,w,h);
+    g.fillStyle=c.edge;
+    g.globalAlpha*=.24;
+    for(let x=0;x<w;x+=px*12)g.fillRect(x,0,1,h);
+    for(let y=0;y<h;y+=px*12)g.fillRect(0,y,w,1);
+    g.restore();
+  }
   P.scenes={eventFrame,performance(mouth,frame){const cue=mouth.find(c=>frame>=c.startFrame&&frame<c.endFrame);return cue?cue.pose:0;},
   stageBounds(e,shot){
     if(shot&&!shot.actor)return{x:e.width*.06,y:e.height*.08,width:e.width*.88,height:e.height*.70};
@@ -98,7 +115,7 @@
     return {x:s.x*e.width,y:s.y*e.height,width:s.width*e.width,height:s.height*e.height};
   },
   drawLayer(e,shot,frame,layer){
-    if(layer==='background'){if(shot.replacement)return;if(shot.background)P.media.draw(e,shot.background);else P.style.background(e,shot);}
+    if(layer==='background'){if(!shot.replacement)background(e,shot);}
     else if(layer==='actor')P.library.actor(e,shot,frame);
     else if(layer==='content'){
       if(shot.replacement)P.media.draw(e,shot.replacement);else content(e,shot,frame);
@@ -109,7 +126,7 @@
     if(shot.scene==='scenes.competition-routes.v1'&&P.competitionRoutes.drawWorld(e,shot,frame))return;
     if(shot.replacement){P.media.draw(e,shot.replacement);}
     else{
-      if(shot.background)P.media.draw(e,shot.background);else P.style.background(e,shot);
+      background(e,shot);
       P.library.actor(e,shot,frame);content(e,shot,frame);
     }
     if(shot.components?.length)P.components.draw(e,shot,frame);

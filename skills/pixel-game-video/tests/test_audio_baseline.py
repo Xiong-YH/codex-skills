@@ -54,8 +54,10 @@ class ChargeAudioTests(unittest.TestCase):
             subprocess.run([sys.executable, str(copied / 'modules/audio/gallery.py'), '--out', str(gallery)],
                            capture_output=True, text=True, check=True)
             page = (gallery / 'index.html').read_text(encoding='utf-8')
-            self.assertEqual(page.count('<audio '), 30)
+            self.assertEqual(page.count('<audio '), 27)
             self.assertNotIn('data-kind="selected"', page)
+            self.assertNotIn('data-kind="voice"', page)
+            self.assertNotIn('data-kind="music"', page)
             import base64
             for item in arcade.manifest('common')['atoms']:
                 self.assertIn(base64.b64encode(arcade.asset(item['id']).read_bytes()).decode(), page)

@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "renderBackend": "canvas",
+  "id": "beat-driven-cache-production",
+  "title": "为什么第二次读得更快？",
+  "output": {"fps": 60, "width": 1920, "height": 1080, "nativeWidth": 320, "nativeHeight": 180},
+  "style": "style.pixel-computing.v1",
+  "seed": 91,
+  "audioMode": "sfx-only",
+  "masterGain": 1.85,
+  "shots": [
+    {
+      "id": "desk", "actor": "actor.azong.v3",
+      "motions": [
+        {
+          "id": "arrive", "recipe": "motion.actor-blocking.v1", "target": "actor",
+          "start": {"event": "desk.walk"}, "durationFrames": 72,
+          "params": {"action": "walk", "from": [0.275, 0.75], "to": [0.38, 0.75], "height": 0.26}
+        },
+        {
+          "id": "touch", "recipe": "motion.actor-blocking.v1", "target": "actor",
+          "start": {"event": "desk.reach"}, "durationFrames": 36,
+          "params": {
+            "action": "reach", "from": [0.38, 0.75], "to": [0.38, 0.75], "height": 0.26,
+            "hand": [0.437, 0.60], "contact": "contact"
+          }
+        },
+        {
+          "id": "request-sparks", "recipe": "motion.contact-fx.v1", "target": "scene",
+          "start": {"event": "desk.contact"}, "durationFrames": 24,
+          "params": {"style": "sparks", "tone": "gold", "x": 0.437, "y": 0.60, "radius": 0.082, "strength": 0.67}
+        }
+      ]
+    },
+    {
+      "id": "vault", "actor": null,
+      "motions": [
+        {
+          "id": "to-origin", "recipe": "motion.component-handoff.v1", "target": "scene",
+          "start": {"event": "vault.enter"}, "durationFrames": 30,
+          "params": {"mode": "match", "roomReveal": "left", "pairs": [{"from": "record-desk", "to": "record-vault"}]}
+        },
+        {
+          "id": "receive-bloom", "recipe": "motion.contact-fx.v1", "target": "scene",
+          "start": {"event": "vault.receive"}, "durationFrames": 27,
+          "params": {"style": "bloom", "tone": "accent", "x": 0.545, "y": 0.49, "radius": 0.17, "strength": 0.55}
+        }
+      ]
+    },
+    {
+      "id": "store", "actor": null,
+      "motions": [
+        {
+          "id": "back-to-desk", "recipe": "motion.component-handoff.v1", "target": "scene",
+          "start": {"event": "store.enter"}, "durationFrames": 30,
+          "params": {"mode": "match", "roomReveal": "right", "pairs": [{"from": "record-vault", "to": "record-return"}]}
+        },
+        {
+          "id": "copy-light", "recipe": "motion.contact-fx.v1", "target": "scene",
+          "start": {"event": "store.duplicate"}, "durationFrames": 30,
+          "params": {"style": "light-sweep", "tone": "accent", "x": 0.844, "y": 0.58, "radius": 0.23, "strength": 0.70}
+        }
+      ]
+    },
+    {
+      "id": "hit", "actor": "actor.azong.v3",
+      "motions": [
+        {
+          "id": "follow-copy", "recipe": "motion.component-handoff.v1", "target": "scene",
+          "start": {"event": "hit.enter"}, "durationFrames": 30,
+          "params": {"mode": "match", "roomReveal": "left", "pairs": [{"from": "copy-side", "to": "copy-hit"}]}
+        },
+        {
+          "id": "arrive", "recipe": "motion.actor-blocking.v1", "target": "actor",
+          "start": {"event": "hit.land"}, "durationFrames": 48,
+          "params": {"action": "walk", "from": [0.33, 0.75], "to": [0.436, 0.75], "height": 0.26}
+        },
+        {
+          "id": "touch", "recipe": "motion.actor-blocking.v1", "target": "actor",
+          "start": {"event": "hit.reach"}, "durationFrames": 30,
+          "params": {
+            "action": "reach", "from": [0.436, 0.75], "to": [0.436, 0.75], "height": 0.26,
+            "hand": [0.493, 0.58], "contact": "contact"
+          }
+        },
+        {
+          "id": "hit-sparks", "recipe": "motion.contact-fx.v1", "target": "scene",
+          "start": {"event": "hit.contact"}, "durationFrames": 23,
+          "params": {"style": "sparks", "tone": "accent", "x": 0.493, "y": 0.58, "radius": 0.098, "strength": 0.71}
+        }
+      ]
+    }
+  ],
+  "text": [
+    {"cueId": "request", "role": "subtitle"},
+    {"cueId": "miss-line", "role": "subtitle"},
+    {"cueId": "fetch-line", "role": "subtitle"},
+    {"cueId": "store-line", "role": "subtitle"},
+    {"cueId": "hit-line", "role": "subtitle"}
+  ],
+  "bgm": {
+    "file": "media/bgm.wav",
+    "at": {"event": "desk.enter"},
+    "end": {"event": "hit.exit"},
+    "gain": 0.80,
+    "loop": false,
+    "fadeInFrames": 0,
+    "fadeOutFrames": 30,
+    "title": "步进",
+    "artist": "本仓库 BGM 系统"
+  },
+  "audio": [
+    {"id": "miss-press", "sound": "synth.click.v1", "at": {"event": "desk.contact"}, "level": 0.38, "x": 0.437},
+    {"id": "in-vault", "sound": "synth.swipe.v1", "at": {"event": "vault.enter", "offsetFrames": 6}, "level": 0.20, "x": 0.62, "params": {"duration": 0.4}},
+    {"id": "source-read", "sound": "synth.blip.v1", "at": {"event": "vault.receive"}, "level": 0.32, "x": 0.545},
+    {"id": "back-home", "sound": "synth.swipe.v1", "at": {"event": "store.enter", "offsetFrames": 6}, "level": 0.18, "x": 0.48, "params": {"duration": 0.4, "up": false}},
+    {"id": "local-copy", "sound": "synth.pop.v1", "at": {"event": "store.duplicate"}, "level": 0.32, "x": 0.844},
+    {"id": "hit-confirm", "sound": "synth.bell.v1", "at": {"event": "hit.contact"}, "level": 0.32, "x": 0.493}
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "shots": [
+    {
+      "id": "desk",
+      "beatId": "miss",
+      "durationFrames": 240,
+      "intent": "人物走到读取口后，观众看到首次读取为什么离开工作台。",
+      "visual": {
+        "question": "第一次能在本地读到 A 吗？",
+        "form": "scene",
+        "subject": "工作台左侧的角色和右侧的请求卡",
+        "action": "人物沿着地面走到卡的左侧，指尖按到卡边，右侧出现未命中提示。",
+        "result": "读取请求必须发往源站。",
+        "continuity": "保留请求卡的位置和完整轮廓，接着送向机房。"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {"environment": "workspace"},
+      "events": [{"id": "walk", "frame": 30}, {"id": "reach", "frame": 102}, {"id": "contact", "frame": 120}],
+      "cues": [
+        {"cueId": "request", "start": {"event": "desk.enter"}, "end": {"event": "desk.contact"}},
+        {"cueId": "miss-line", "start": {"event": "desk.contact"}, "end": {"event": "desk.exit"}}
+      ],
+      "components": [
+        {
+          "id": "record-desk", "kind": "identity", "x": 0.437, "y": 0.47, "width": 0.29, "height": 0.22,
+          "visualStyle": "paper", "features": ["stack"],
+          "data": {"title": {"labelId": "record"}, "detail": {"labelId": "serial"}}
+        },
+        {
+          "id": "miss-status", "kind": "takeaway", "x": 0.479, "y": 0.275, "width": 0.21, "height": 0.148,
+          "tone": "danger", "visualStyle": "plain", "showEvent": "contact",
+          "data": {"title": {"labelId": "missing"}}
+        }
+      ]
+    },
+    {
+      "id": "vault",
+      "beatId": "fetch",
+      "durationFrames": 240,
+      "intent": "在机房看到原请求接到响应，再带着同一资料返回。",
+      "visual": {
+        "question": "资料从哪里回来？",
+        "form": "identity",
+        "subject": "编号 001 的同一张请求卡和源站机柜",
+        "action": "卡从工作台滑到机房阅读区，收件状态随后点亮。",
+        "result": "源站已返回资料 A。",
+        "continuity": "卡上的资料名、编号、纸张和折角继续可见。"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {"environment": "archive"},
+      "events": [{"id": "land", "frame": 30}, {"id": "receive", "frame": 60}],
+      "cues": [{"cueId": "fetch-line", "start": {"event": "vault.receive"}, "end": {"event": "vault.exit"}}],
+      "components": [
+        {
+          "id": "record-vault", "kind": "identity", "x": 0.54, "y": 0.38, "width": 0.29, "height": 0.22,
+          "visualStyle": "paper", "features": ["stack"],
+          "data": {"title": {"labelId": "record"}, "detail": {"labelId": "serial"}}
+        },
+        {
+          "id": "receive-status", "kind": "identity", "x": 0.145, "y": 0.39, "width": 0.25, "height": 0.20,
+          "tone": "accent", "visualStyle": "mechanical", "showEvent": "receive",
+          "data": {"title": {"labelId": "origin"}, "detail": {"labelId": "returned"}}
+        }
+      ]
+    },
+    {
+      "id": "store",
+      "beatId": "store",
+      "durationFrames": 240,
+      "intent": "让留副本成为独立可辨的动作。",
+      "visual": {
+        "question": "为什么下一次可以直接读？",
+        "form": "identity",
+        "subject": "原资料和它右侧的新副本",
+        "action": "同一张资料卡回到工作台，一拍后在旁边落下一张副本，窄光扫过新副本。",
+        "result": "原资料和可供下次读取的副本都看得见。",
+        "continuity": "本地副本落定后留在画面里，下一镜直接接手。"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {"environment": "workspace"},
+      "events": [{"id": "land", "frame": 30}, {"id": "duplicate", "frame": 60}],
+      "cues": [{"cueId": "store-line", "start": {"event": "store.duplicate"}, "end": {"event": "store.exit"}}],
+      "components": [
+        {
+          "id": "record-return", "kind": "identity", "x": 0.437, "y": 0.47, "width": 0.29, "height": 0.22,
+          "visualStyle": "paper", "features": ["stack"],
+          "data": {"title": {"labelId": "record"}, "detail": {"labelId": "serial"}}
+        },
+        {
+          "id": "copy-side", "kind": "identity", "x": 0.753, "y": 0.484, "width": 0.192, "height": 0.192,
+          "tone": "accent", "visualStyle": "paper", "showEvent": "duplicate",
+          "data": {"title": {"labelId": "copy"}, "detail": {"labelId": "record"}}
+        }
+      ]
+    },
+    {
+      "id": "hit",
+      "beatId": "hit",
+      "durationFrames": 240,
+      "intent": "角色再次按下读取口，这次留在工作台并直接拿到结果。",
+      "visual": {
+        "question": "第二次读 A 还要去源站吗？",
+        "form": "scene",
+        "subject": "上一个镜头留下的副本",
+        "action": "视线跟着副本移到读取位，角色两步接近，指尖触卡后显示命中。",
+        "result": "这次从本地取得资料 A。",
+        "continuity": "落稳后保留副本和命中状态供阅读。"
+      },
+      "scene": "scenes.canvas.v1",
+      "params": {"environment": "workspace"},
+      "events": [
+        {"id": "land", "frame": 30}, {"id": "reach", "frame": 78}, {"id": "contact", "frame": 90}
+      ],
+      "cues": [{"cueId": "hit-line", "start": {"event": "hit.contact"}, "end": {"event": "hit.exit"}}],
+      "components": [
+        {
+          "id": "copy-hit", "kind": "identity", "x": 0.493, "y": 0.445, "width": 0.276, "height": 0.216,
+          "tone": "accent", "visualStyle": "paper",
+          "data": {"title": {"labelId": "copy"}, "detail": {"labelId": "record"}}
+        },
+        {
+          "id": "hit-status", "kind": "takeaway", "x": 0.524, "y": 0.252, "width": 0.21, "height": 0.148,
+          "tone": "accent", "visualStyle": "plain", "showEvent": "contact",
+          "data": {"title": {"labelId": "hit-badge"}}
+        }
+      ]
+    }
+  ]
+}

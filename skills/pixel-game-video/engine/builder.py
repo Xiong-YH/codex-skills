@@ -87,14 +87,21 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
     document = document.replace('__RUNTIME__', runtime).replace('__PAYLOAD__', serialized)
     target = output / 'film.html'
     target.write_text(document, encoding='utf-8')
+    (output / 'whitebox.html').write_text(
+        '<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>动态白模</title>'
+        '<meta http-equiv="refresh" content="0; url=film.html?view=whitebox">'
+        '<a href="film.html?view=whitebox">打开动态白模</a></html>\n', encoding='utf-8')
     (output / 'runtime.js').write_text(runtime, encoding='utf-8')
     (output / 'payload.json').write_text(json.dumps(payload, ensure_ascii=False), encoding='utf-8')
     (output / 'mouth-timing.json').write_text(json.dumps({'mode':'text-timed rehearsal; no mouth animation or voice alignment','mouthAnimation':False,'cues':mouth}, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+    blocking = any(motion['recipe'] == 'motion.actor-blocking.v1'
+                   for shot in resolved['shots'] for motion in shot['motions'])
     (output / 'build-report.json').write_text(json.dumps({'contractVersion':resolved['contractVersion'],'inputHash':resolved['inputHash'],
         'durationFrames':resolved['durationFrames'],'audioEnabled':audio_uri is not None,'actorVariants':library_asset_count,
-        'actorPreviewMode':'event-poses' if actions else 'reference-static','actorMouthAnimation':False,'actorSkeletalAnimation':False,
+        'actorPreviewMode':'compact-blocking' if blocking else 'event-poses' if actions else 'reference-static',
+        'actorMouthAnimation':False,'actorSkeletalAnimation':False,
         'styleAssets':len(style_assets),
-        'mouthSegments':len(mouth),'preview':'film.html'}, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+        'mouthSegments':len(mouth),'preview':'film.html','whitebox':'whitebox.html'}, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     from .canvas_workbench import build as build_workbench
     build_workbench(project_root, resolved, payload, runtime, skill_root)
     return target

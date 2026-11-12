@@ -92,6 +92,7 @@ class CanvasWorkbenchTests(unittest.TestCase):
 
     def test_pose_project_reopens_from_saved_compiled_timeline(self):
         timeline = read_json(self.root / 'timeline.json')
+        timeline['shots'][0]['actor'] = 'actor.azong.v3'
         timeline['shots'][0]['performance'] = [{'pose': 'talk', 'start': {'event': 's01.reveal'},
                                               'end': {'event': 's01.exit'}}]
         write_json(self.root / 'timeline.json', timeline)

@@ -84,12 +84,16 @@
       const width = height * image.width / image.height, facing = options.facing || 1;
       const g = e.ctx;
       g.save(); g.translate(x, baseline); g.rotate(options.tilt || 0); g.scale(facing, 1);
+      if(e.whitebox)g.filter='grayscale(1)';
       g.imageSmoothingEnabled = false;
       g.drawImage(image, -width / 2, -height, width, height); g.restore();
       return {x: x + facing * width * .25, y: baseline - height * .25};
     },
     actor(e, shot, frame) {
       if (!shot.actor || shot.scene === 'scenes.cache-adventure.v1') return;
+      if (P.actorBlocking && shot.motions?.some(m => m.recipe === P.actorBlocking.recipe)) {
+        return P.actorBlocking.draw(e, shot, frame);
+      }
       if (shot.performance?.length && P.presenterActions) return P.presenterActions.draw(e,shot,frame);
       const placement = e.style.presenter || {};
       P.library.reference(e, shot.actor, e.width * (placement.x ?? .20),

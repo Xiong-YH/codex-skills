@@ -4,40 +4,28 @@
 
 项目主画风与片段特选按基础层 [画风透传合同](../../pixel-game-video/modules/style/ART-DIRECTION-CONTRACT.md) 记录在 brief.constraints 与镜头 intent。片段有效画风必须将通用描述、人物/物种/背景/道具细化要求、规范版本和样板一起交给制作，不能只交风格名称；组件独立。现有 schema 不新增美术字段，美术 ID 不替换 production-plan.style，解析结果与样板快照为派生交接附件。
 
-前期视觉方案按 [导演四阶段](director-workflow.md) 从模块、大白话/草图逐步细化到结构化设计与白模；需要正式制作交接时再按 [设计格式](script-format.md) 和 [视觉分镜与工程映射](visual-storyboard.md) 对应现有字段，不强制创建四份 JSON 或调用基础层。用户要求制作、交接或继续已有工程时，以下源文件与时间规则保持唯一；设计稿不新增模型字段或运行时间线。制作视频时必须进入基础 skill 的工作台剪辑并最终导出，镜头、字幕与其他文字、转场、音效、配乐分别独立轨道；有旁白时另设旁白轨。
+前期视觉方案按 [导演四阶段](director-workflow.md) 从模块和草图细化到结构化设计与白模。正式交接时按 [设计格式](script-format.md) 和 [视觉分镜与工程映射](visual-storyboard.md) 对应现有字段。制作视频从基础技能的工作台剪辑并最终导出，镜头、文字、转场、音效与配乐各用独立轨道。
 
-制作交接继承 [全局创作目标](audience-experience.md)，将适用指标方向、情绪/认知目标及本片开头/核心/收尾决定记录在 brief.constraints；执行层按本片要求核对实际旁白、剪辑中的前两秒/前五秒与全片兑现。发布数据和设计检查分开，不新增运行 schema 字段。
+制作交接继承 [全局创作目标](audience-experience.md)，在 brief.constraints 记录情绪与认知目标、开头／核心／收尾、配乐来源和实际入点。执行层在当前剪辑核对开场可读性、主要触点与全片兑现。
 
-人物按镜头显式选择：production-plan 中 `actor:null` 表示不叠加库人物，完整插画或片段内部仍可自带人物。不是所有画面都要有小人；场景、物体与组件可以独立主导画面。
-
-先区分讲述者与插图角色：production-plan.shots[].actor 是侧边讲述者槽位；“第一镜放配角”只决定画面内容，不自动更换讲述者或给配角分配台词。配角通过项目插图/场景素材出现，不自动复制成第二个侧边主持人。角色 ID 和库内姓名供内部选材，不能自动生成姓名条。计算机口播系列的当前规则按 [已确认的表达方向](computing-voiceover.md) 带入 brief；历史样例不能覆盖新要求。
-
-该系列全片由一个主角承担旁白，包括开场疑问；口播期间保持同一身体、头部、手臂与站位，只做局部开闭嘴。当前整图姿态执行器不能满足局部口型要求；需要同一底图的开闭嘴素材与实际适配，不能用四五种全身动作替代。站位固定不限制完整场景的合理运镜；连续背景不可裁成局部缩放窗口，字幕和顶部矩形进度条保持独立。
-
-系列工程在 brief.singleNarrator 声明 narrator 素材 ID 和 hiddenCharacterNames。check/handoff 会拒绝侧边讲述者换成配角、全身 performance 序列，以及字幕/标签泄露内部姓名。此结构校验不能替代对插图烘焙文字、真实声源和局部嘴型的视听检查。Canvas 支持剧情用途的事件姿态与顶部进度，可通过同源 runtime 进入工作台；原生 Remotion 执行器仍不支持这两项，会在交接校验时拒绝。原生 Remotion 当前人物使用静态基准图，局部嘴型尚未接入。
-
-在分镜 `visual.subject/action` 写明口播讲述、情境演绎或无人镜头的职责。本系列有人的情境插画按 [主角优先](character-illustration.md#插画选角主角优先) 选角，多人或明确条件需要时再安排配角，情境角色不必跟随旁白张嘴；插图集合只参考风格与演绎方法，不作为必用模板。完整人物与场景先成立，再制作情境关键姿态；完整插画按 replacement 接入，见 [情境插画](character-illustration.md)。拆头拼身试样已撤回。
-
-本系列先按 [片段分类](character-illustration.md#先分片段类别再安排声音) 区分普通内容与特殊插画，声音独立安排。选为插画的镜头须是整屏完整情境，不同时安排侧边主持人、标题栏或右侧配图窗口，详见 [镜头形态与验收](character-illustration.md#本系列的插画镜头整屏情境)。即使 production-plan 已写 `actor:null`，也须检查 replacement 媒体内部的最终构图，避免把主持人和侧栏预先烘焙进视频后绕过结构校验。普通操作演示使用完整画面或关闭主持人，不因此成为插画。
-
-插画的 [具体配套讲解](character-illustration.md#插画必须有具体配套讲解) 写入 script.cues，并在 storyboard 放置对应字幕事件、production-plan.text 指定字幕角色。`sfx-only` 或无人声只影响音频，不得据此删除插画讲解字幕；画面含义、文案和阅读时段要能相互对应，不新增模型字段。
+新项目默认 `production-plan.shots[].actor: null`，由本镜的组件、物件或情境承担画面。需要人物时在 `visual.subject/action` 写明人物的动作与结果，按 [人物表演](character-performance.md) 选择素材和后端。用 [素材替换](media-replacement.md) 接入完整情境时，复核素材内部的构图与屏幕文字的阅读关系。
 
 四个 JSON 源文件是可独立继续的阶段产物；JSON Schema 在 [schemas/](../schemas/)，运行合同源在 [models.py](../scripts/directorlib/models.py)。`python scripts/director.py check PROJECT` 检查格式与交叉引用。
 
-从编剧交来的当前路线与完整文案开始，按 [导演四阶段](director-workflow.md) 接稿，再读 [视觉表达方法](visual-system.md)，对用户交付按 [脚本标注](visual-storyboard.md#脚本中的呈现类型标注) 分别写明片段类别、画面呈现和声音安排，不将旁白或组件与插画混作同层级类别；本系列插画按 [片段设计要求](character-illustration.md#从脚本到插画片段) 写出可制作的状态、动作与承接。新分镜用 storyboard.shots[].visual 记录表达决定，components 记录组件结构/位置/事件，组件文字仍引用 script.labels。production-plan 的 background/replacement 选择项目素材，操作见 [素材替换](media-replacement.md)。旧工程 visual 可缺省，check 会列出缺项；新模板空值会阻止交接。
+从编剧交来的路线和完整上屏文案开始，按 [导演四阶段](director-workflow.md) 接稿，再读 [视觉表达方法](visual-system.md)。按 [脚本标注](visual-storyboard.md#脚本中的呈现类型标注) 写明画面呈现、屏幕文字、动作与接镜。新分镜用 storyboard.shots[].visual 记录表达决定，components 记录组件结构、位置和事件，组件文字引用 script.labels。production-plan 的 background/replacement 选择项目素材。check 会列出缺失的 visual 项，新模板空值会阻止交接。
 
 | 文件 | 唯一拥有的内容 | 稳定标识 |
 | --- | --- | --- |
 | brief.json | 编剧确定的创意、受众、核心观点与约束；导演继承并补视听限制 | id |
-| script.json | 编剧拥有的逐字文案；导演添加的屏幕标签仍存同一源，内容修改按协作合同回写 | cues[].id / labels[].id |
-| storyboard.json | 镜头顺序与 durationFrames、表达意图、场景机制、物体位置、事件、文字时间 | shots[].id / events[].id / objects[].id / cues[].cueId |
+| script.json | 叙事段落、屏幕主句、标签与句意。内容修改按协作合同回写 | beats[].id / cues[].id / labels[].id |
+| storyboard.json | 镜头顺序与 durationFrames、beatId、表达意图、场景机制、物体位置、事件、文字时间 | shots[].id / events[].id / objects[].id / cues[].cueId |
 | production-plan.json | 标题、输出规格、renderBackend、风格、人物与道具素材、文字角色、运镜和声音选择 | id / shots[].id / text[].cueId / audio[].id |
 
 文字用短句表达一个意思，游戏状态变化承载因果；转场服务焦点交接。**面向用户的每份视频脚本必须显式写出接镜／转场**，包括直切、同镜继续与首尾入场／收束；按 [转场标注](visual-storyboard.md#脚本中的呈现类型标注) 写交出、过程、接住和阅读开始条件。设计意图放 `visual.continuity` / `intent`，执行选择归production-plan；候选方案不能冒充可调用配方。不是每镜都需要运镜或音效。保留用户指定角色与表现方向。
 
-**阶段三详细设计及正式交接须落实字幕形式**：按 [字幕形式描述](visual-storyboard.md#脚本必须描述字幕形式) 写明用途、位置与绑定、重点词与底板、显露／替换／收束和实现状态。此说明沿现有 intent 与事件交接，不新增未定义字段；生产须对照执行，不能只交台词或静默回退底部字幕。
+阶段三详细设计及正式交接按 [屏幕文字与阅读](visual-storyboard.md#屏幕文字与阅读) 写明用途、位置、层级、显露、稳定阅读区间和实现状态。沿现有 intent 与事件交接。
 
-声音按基础层的 [Garden 工作流](../../pixel-game-video/modules/audio/GARDEN.md) 设计。在 brief.constraints 分别记录配乐和音效的来源，写清声音对标、材质、段落起伏与有口播时的让位方式。把动作和声音重心写到同一个分镜事件。确认、碰撞默认对齐起音，换场可对齐掠过声的包络峰或蓄力声的结束点。
+声音按基础层的 [Garden 工作流](../../pixel-game-video/modules/audio/GARDEN.md) 设计。brief.constraints 记录配乐和音效来源、段落起伏、所用重音和视觉触点。动作和相应音效引用同一分镜事件。确认、碰撞对齐可听起音，换场可对齐掠过声的包络峰或蓄力声的结束点。
 
 `production-plan.audio[]` 可选 [Garden 音色或街机 WAV](../../pixel-game-video/modules/audio/SYNTHESIS.md) 的 `sound`，也可填项目内 PCM `file`。合成参数写 `params`，落点写 `align`，`at` 引用 storyboard 事件。handoff 将 cue 与引用素材交给基础工程。按本片的材质与叙事节奏决定叠层、密度和留白。
 
@@ -51,21 +39,17 @@
 
 时间只在 storyboard 定义：每镜自动有 enter/exit，本镜事件 frame 是局部整数帧；文字、运动和声音用 `{"event":"s1.choose","offsetFrames":0}` 引用。params 内的场景事件使用本镜 local ID（例如 `choose`）。坐标 x/y 为 0..1 画幅比例；输出规格当前遵循基础层已支持的 1920×1080、60 fps。
 
-script 中每个 cue 都要在 storyboard 放置一次，并在 production-plan.text 选择角色。字幕必须有拼音 phrases；它生成模拟讲述节奏计划，当前 V3 图片尚未据此产生嘴型，也不代表真人配音对齐。新增标签要放进 script.labels，不能在 scene params 复制文字。一个完整句子若需更长阅读时间，回改 storyboard 的镜头时长和事件安排。
+新无口播项目用 `script.beats[]` 接住编剧段落。每段填写 `before`、`change`、`result`、`carry` 与 `cueIds`，末段可省略 carry。分镜按段落顺序引用 `beatId`，允许同段连续跨多镜。每个 cue 在自己的叙事段中放置一次，并在 production-plan.text 选择角色。旧工程可沿用已有文案结构。
 
-有已录制或合成的旁白时，production-plan 使用 `audioMode="narration+sfx"` 与 `narration:[{id,file,at,gain}]`。WAV 路径相对创作工程、48kHz/16-bit PCM；handoff 复制到 video/，同时绑定源素材与复制件哈希。导入后按实际语音区间精调字幕和动作；不能为压缩示例时长把旁白截断。没有旁白时保留 sfx-only/silent。
+连续主句用 `subtitle`，无旁白时 `phrases` 留空。需要参与构图的关键词可用 `title` 或 `annotation`，场景内短标签放进 script.labels。需要更长阅读时间时，回改 storyboard 的镜头时长和事件。
 
-配音生成已移出制作流程，不自动打开剪映或调用其他 TTS。先完成脚本、分镜与工作台粗剪；已有旁白可作为素材导入，需要生成新配音时另行确定处理方式。没有旁白不阻塞画面制作。
-
-production-plan 可用 `speechDuck` 设置旁白期间保留的音效比例，范围0–1，默认0.28；handoff 映射到 audio.json。与每个音效的 level 配合设计，旁白素材和 gain 可独立保持。
-
-配乐使用可选的 `production-plan.bgm` 单对象；不配乐时省略或设为 `null`。`file` 是创作工程内的 48kHz/16-bit PCM WAV，`at` 与 `end` 必须引用 storyboard 事件，区间遵循 `[at,end)`，不能另写配乐秒数表。例如：
+配乐与事件音效使用 `audioMode="sfx-only"`。将选定配乐作为 `production-plan.bgm`，`file` 为创作工程内的 48 kHz、16-bit PCM WAV，`at` 与 `end` 引用 storyboard 事件，区间遵循 `[at,end)`。下面示例从首镜入场到末镜退出，使用一段连续配乐。
 
 ```json
-{"bgm":{"id":"bgm","file":"media/music.wav","at":{"event":"s1.enter"},"end":{"event":"s4.exit"},"gain":0.18,"loop":true,"trimStartSeconds":0,"fadeInFrames":60,"fadeOutFrames":90,"speechDuck":0.25}}
+{"bgm":{"id":"bgm","file":"media/music.wav","at":{"event":"s1.enter"},"end":{"event":"s4.exit"},"gain":0.45,"loop":false,"trimStartSeconds":0,"fadeInFrames":0,"fadeOutFrames":12}}
 ```
 
-`id` 缺省为 `bgm`，须与 production-plan 的其他对象 ID 区分，保证源映射可唯一定位；`gain` 与配乐自己的 `speechDuck` 范围为 0–1，默认分别为 0.18、0.25；后者设置旁白期间保留的配乐比例，与音效的顶层 `speechDuck` 分开。`loop` 默认 true；`trimStartSeconds` 默认 0；淡入/淡出为非负整数帧，默认 60/90。片段不足时可循环，关闭循环则需有足够素材覆盖所选区间。`title`、`artist`、`sourceUrl`、`licenseUrl`、`changes` 是可选署名记录，缺省为空串，按实际素材来源填写。handoff 原样传给 audio.json，复制配乐 WAV 并绑定源文件、复制件与生成参数哈希；沿源映射回改 BGM 对象。`silent` 模式拒绝显式配乐。
+`id` 缺省为 `bgm`，须与 production-plan 的其他对象 ID 区分。按实测拍点填写裁入，按实际段落选循环及淡化，按授权来源填写 `title`、`artist`、`sourceUrl`、`licenseUrl`、`changes`。参数见基础层 [配乐工作流](../../pixel-game-video/modules/audio/MUSIC.md)。handoff 传给 audio.json，复制配乐 WAV 并绑定源文件、复制件与生成参数哈希。修改沿源映射回写。
 
 `init PROJECT` 创建待填写模板，空字段会阻止交接。模板的 `intent` 保持为空，创作时须填写具体镜头意图；`durationFrames=480` 在模板 60 fps 下为 8 秒，仅是结构占位。按 [紧凑节奏与估时](visual-storyboard.md#紧凑节奏与估时) 重估每镜，结合本片目标重设 brief 的总时长范围，不能沿用占位帧数补空白。估时提示只保留在本说明，不写入待填写的 `intent`。`init PROJECT --example` 复制可运行样例，其时长也只属于该示例。`--idea` 只记录创意，写脚本和设计分镜仍由使用 skill 的 agent 完成，不把模板伪装成自动创作结果。
 
@@ -79,8 +63,9 @@ production-plan 可用 `speechDuck` 设置旁白期间保留的音效比例，�
 | --- | --- |
 | 四份源文件与基本选择机制 | [模板](../assets/templates/)、[选择机制](../examples/bounded-choice/brief.json) |
 | 缓存事件与场景编排 | [数据旅程](../examples/cache-journey/brief.json)、[人物取数](../examples/cache-adventure/brief.json)；人物真实表演范围仍按基础层能力目录 |
+| 无口播全链路与同源白模 | [资料 A 的缓存过程](../examples/beat-driven-cache/README.md) |
 | 信息结构与组件组合 | [基础五类](../examples/component-system/brief.json)、[扩展与组合](../examples/component-expansion/brief.json) |
-| 空间叙事与原生后端交接 | [跨空间叙事](../examples/cs-postgrad-narrative-18s/brief.json)、[原生书桌工程](../examples/remotion-focus-desk/README.md) |
-| 完整插画、素材与快照维护 | [插画创作源](../examples/whole-illustration/storyboard.json)，流程与审美状态见 [插画规范](character-illustration.md) |
+| 原生后端交接 | [原生书桌工程](../examples/remotion-focus-desk/README.md) |
+| 完整插画、素材与快照维护 | [插画创作源](../examples/whole-illustration/storyboard.json) 和 [插画动态设计](illustration-motion.md) |
 
-参考片的方法与真实观察从 [视觉叙事](visual-storytelling.md) 进入；该计算机口播系列的历史样例与撤回方案从 [系列要求](computing-voiceover.md) 进入。当前实现、运行核验和用户认可分别记录，不能因样例文件存在就声明本次制作已验证。
+连续组件、选拍与审片方法见 [无口播信息动效与音乐卡点](beat-driven-explainer.md)。

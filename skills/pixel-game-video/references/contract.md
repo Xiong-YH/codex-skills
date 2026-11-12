@@ -15,11 +15,11 @@
 
 每镜头 `durationFrames` 为正整数；`events` 是镜内相对帧，自动具有 `enter=0` 和 `exit=durationFrames`。外部引用为 `{ "event": "s01.enter", "offsetFrames": 6 }`。场景 params 内的事件使用本镜 local ID。
 
-direct 工程可用 [模拟口播同步](speech-rehearsal.md)：每镜 rehearsal 引用 text cue ID，事件可用 speech 关键词/句首/句尾代替 frame，编译后仍消费同一整数帧时间线。它只估时，不生成配音或真实对齐。
+已有 direct 工程中的 rehearsal 与 speech 事件仍解析到同一整数帧时间线。音乐触点使用按实际配乐量化的 frame。
 
 镜头、文字、动作区间统一为 `[startFrame,endFrame)`。音效起点不能等于总片长；转场只从后一个镜头 enter 开始，占用后一个镜头的时间，不另延长片长。碎屏需要前一镜头。
 
-`subtitle` 的 `phrases` 使用拼音短句生成模拟讲述节奏计划；V3 基准图不会随此计划张嘴，也不代表音素对齐。完整插画片段通过 replacement 导入，动作时间以镜头事件为准。字幕内容与拼音需要一起改；其他文字角色可不提供 phrases。单说话人字幕不能重叠。
+无旁白工程的 `subtitle` 按完整 cue 上屏，`phrases` 可留空。同一阅读位置的字幕区间不得重叠。有旁白时 `phrases` 提供拼音短句供模拟讲述排练，与字幕内容一起维护。V3 基准图保持整幅姿态，实际插画表演通过 replacement 导入，动作时间以镜头事件为准。
 
 `build/resolved-timeline.json` 是唯一运行时间线；`build/project-lock.json` 记录四份输入与运行代码/素材哈希。生成物不可作为下一轮编写源。
 

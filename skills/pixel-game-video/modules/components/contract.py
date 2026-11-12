@@ -6,8 +6,13 @@ def validate(component, shot, previous_ids):
     kind, data = component['kind'], component['data']
     if 'styleLayers' in component:
         raise ValueError('styleLayers has been retired: select one visualStyle and optional features=["stack"]')
-    if component.get('visualStyle', 'mechanical') not in ('plain', 'mechanical', 'energy'):
-        raise ValueError('visualStyle must select plain, mechanical or energy')
+    if component.get('visualStyle', 'mechanical') not in ('plain', 'mechanical', 'energy', 'paper'):
+        raise ValueError('visualStyle must select plain, mechanical, energy or paper')
+    if component.get('visualStyle') == 'paper':
+        if kind not in ('identity', 'checklist', 'takeaway'):
+            raise ValueError('paper supports identity, checklist and takeaway')
+        if 'image' in data or 'sourceShot' in data:
+            raise ValueError('paper identity is a text card; images use an apparatus or plain layout')
     if component.get('styleVariant', 'inset') not in ('open', 'inset', 'relay'):
         raise ValueError('styleVariant must be open, inset or relay')
     features = component.get('features', [])

@@ -99,7 +99,7 @@ class Component(Model):
     showEvent: Id = "enter"
     focusEvent: Id | None = None
     tone: Literal["accent", "gold", "danger", "secondary"] = "gold"
-    visualStyle: Literal["plain", "mechanical", "energy"] = "mechanical"
+    visualStyle: Literal["plain", "mechanical", "energy", "paper"] = "mechanical"
     styleVariant: Literal["open", "inset", "relay"] = "inset"
     features: Annotated[list[Literal["stack"]], Field(max_length=1)] = Field(default_factory=list)
     data: dict[str, Any]
@@ -122,6 +122,7 @@ class NarrativeProgress(Model):
 
 class Shot(Model):
     id: Id
+    beatId: Id | None = None
     durationFrames: PositiveFrames
     scene: Id
     actor: Id | None = "actor.azong.v3"

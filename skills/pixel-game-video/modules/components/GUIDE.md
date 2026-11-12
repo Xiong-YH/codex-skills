@@ -13,7 +13,7 @@
 | 当前任务 | 只读取相关内容 |
 | --- | --- |
 | 后端、编辑方式、示例与验证边界 | [统一能力目录](../../references/capability-catalog.md)；运行 python scripts/video.py catalog components --capabilities |
-| 选择基础组件风格与特性 | [基础组件：风格、样式与可选特性](BASIC-COMPONENTS.md)；十二类可选 plain 朴素原版；机械／能量再选 open／inset／relay，堆叠独立开关 |
+| 选择基础组件风格与特性 | [基础组件：风格、样式与可选特性](BASIC-COMPONENTS.md)。纸质适合文字身份卡、清单与结论卡 |
 | 查看全部可运行样式与自定义集合 | [完整范例集](examples/style-atlas/README.md)：84 个基础实例（含朴素十二类）与堆叠、五维动作试样 |
 | 通用动作时长与节拍 | [motion 动作节拍](../motion/TIMING.md)；组件保留状态含义，不另立时长表 |
 | 从脚本判断复用、组合或新机制，设计自定义组件 | [脚本驱动设计与五维](DESIGN.md) |

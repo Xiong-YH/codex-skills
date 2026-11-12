@@ -247,7 +247,9 @@
     },
     effects(e,motions,frame) {
       for(const m of motions) {
-        if(m.recipe!=='motion.gold-burst.v1'||frame<m.startFrame||frame>=m.endFrame)continue;
+        if(frame<m.startFrame||frame>=m.endFrame)continue;
+        if(m.recipe==='motion.contact-fx.v1'){P.contactFx.draw(e,m,frame);continue;}
+        if(m.recipe!=='motion.gold-burst.v1')continue;
         const p=P.progress(frame,m.startFrame,m.endFrame),a=m.params||{},x=(a.x===undefined?.64:a.x)*e.width,y=(a.y===undefined?.48:a.y)*e.height;
         const g=e.ctx,envelope=Math.sin(Math.PI*p)*(1-p),r=e.height*(.05+p*.27);
         g.save();g.fillStyle=e.colors.gold;g.globalAlpha=envelope*.7;

@@ -4,7 +4,7 @@
       "id": "s01",
       "durationFrames": 240,
       "scene": "scenes.focus-desk.v1",
-      "actor": "actor.azong.v3",
+      "actor": null,
       "params": {
         "phase": "choose",
         "heading": "先选一件",

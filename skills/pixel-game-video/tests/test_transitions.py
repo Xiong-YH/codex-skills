@@ -28,6 +28,7 @@ class TransitionTests(unittest.TestCase):
                 'start':{'event':'s02.enter'}, 'durationFrames':36, 'params':{}, **kwargs}
 
     def test_explicit_null_actor_survives_compilation(self):
+        self.edit(lambda shots: shots[0].update(actor='actor.azong.v3'))
         self.edit(lambda shots: shots[1].update(actor=None))
         result = compile_project(self.root)
         self.assertIsNone(result['shots'][1]['actor'])

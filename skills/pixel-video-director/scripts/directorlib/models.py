@@ -31,8 +31,18 @@ class Cue(Contract):
     meaning: str = Field(min_length=1)
 
 
+class NarrativeBeat(Contract):
+    id: str = Field(pattern=r"^[a-zA-Z][a-zA-Z0-9_-]*$")
+    before: str = Field(min_length=1)
+    change: str = Field(min_length=1)
+    result: str = Field(min_length=1)
+    carry: str = ""
+    cueIds: list[str] = Field(min_length=1)
+
+
 class Script(Contract):
     schemaVersion: Literal[1] = 1
+    beats: list[NarrativeBeat] = []
     cues: list[Cue] = Field(min_length=1)
     labels: list["Label"] = []
 
@@ -87,6 +97,7 @@ class MediaSource(Contract):
 
 class Shot(Contract):
     id: str = Field(pattern=r"^[a-zA-Z][a-zA-Z0-9_-]*$")
+    beatId: str | None = None
     durationFrames: int = Field(gt=0)
     intent: str = Field(min_length=1)
     visual: VisualIntent | None = Field(default=None, description="视觉设计说明，不是渲染指令；旧工程可缺省，但 check 会报告不完整。")

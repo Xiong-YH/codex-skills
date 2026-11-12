@@ -62,6 +62,10 @@ def validate_params(recipe, p):
                 _rect(p.get(key), key)
             for key in ('fontFrom', 'fontTo'):
                 _number(p.get(key, .045), .015, .12, key)
+        if mode == 'match':
+            allowed.add('roomReveal')
+            if 'roomReveal' in p and p['roomReveal'] not in ('left', 'right'):
+                raise ValueError('match roomReveal must be left or right')
     elif recipe == 'motion.line-handoff.v1':
         allowed = {'source', 'target', 'startLine', 'points'}
         _id(p.get('source')); _id(p.get('target'))
@@ -113,6 +117,15 @@ def validate_shots(recipe, p, previous, incoming, project, start, end):
         if mode == 'keyword' and any(p['word'] not in str(c['data'].get('title', ''))
                                      for c in (old[sources[0]], new[targets[0]])):
             raise ValueError('keyword must occur in both component titles')
+        if 'roomReveal' in p:
+            a, b = old[sources[0]], new[targets[0]]
+            if a['kind'] not in ('identity', 'takeaway') or any(
+                    a[key] != b[key] for key in ('kind', 'data', 'visualStyle', 'styleVariant', 'features', 'tone')):
+                raise ValueError('roomReveal needs the same identity or takeaway card in both shots')
+            for component, shot, last in ((a, previous, start - 1), (b, incoming, end - 1)):
+                show = next(event['frame'] for event in shot['events'] if event['id'] == component['showEvent'])
+                if show >= last:
+                    raise ValueError('roomReveal card must be visible in the outgoing frame and by landing')
     if recipe == 'motion.preview-expand.v1':
         c = old[p['source']]
         if c['kind'] != 'identity' or not c['data'].get('image') or c['data']['image'] != incoming.get('background', {}).get('file'):

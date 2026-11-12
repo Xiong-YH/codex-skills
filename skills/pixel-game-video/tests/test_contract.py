@@ -59,6 +59,7 @@ class ContractTests(unittest.TestCase):
             compile_project(self.root)
         shutil.copy2(SKILL / "assets/project-template/timeline.json", self.root)
         def overlap(data):
+            data["cues"][0].update(role="subtitle", phrases=["xian zhao dao xian suo"])
             extra = copy.deepcopy(data["cues"][0])
             extra["id"] = "overlap"
             data["cues"].append(extra)

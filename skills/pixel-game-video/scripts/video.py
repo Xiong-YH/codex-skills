@@ -167,9 +167,9 @@ def main(argv=None):
     init.add_argument("project", type=Path)
     init.add_argument("--title", default="像素视频示例")
     init.add_argument('--backend', choices=['canvas', 'remotion'], default='canvas')
-    music = subs.add_parser('import-bgm', help='Import bundled Chill Wave or a local audio file as project PCM WAV')
+    music = subs.add_parser('import-bgm', help='Import a selected local music file as project PCM WAV')
     music.add_argument('project', type=Path)
-    music.add_argument('--source', type=Path, help='Local audio source; defaults to the bundled Chill Wave')
+    music.add_argument('--source', type=Path, required=True, help='Selected local music file')
     music.add_argument('--overwrite', action='store_true')
     schema = subs.add_parser("schemas")
     schema.add_argument("--output", type=Path, default=SKILL_ROOT / "schemas")
@@ -246,7 +246,11 @@ def main(argv=None):
         data = build(root)
         if args.command == "build":
             artifact = 'remotion-build.json' if data['project']['renderBackend'] == 'remotion' else 'film.html'
-            emit({"built": str(root / 'build' / artifact), 'renderBackend': data['project']['renderBackend'], "inputHash": data["inputHash"]})
+            result = {"built": str(root / 'build' / artifact), 'renderBackend': data['project']['renderBackend'],
+                      "inputHash": data["inputHash"]}
+            if artifact == 'film.html':
+                result['whitebox'] = str(root / 'build' / 'whitebox.html')
+            emit(result)
         elif args.command == 'studio':
             if data['project']['renderBackend'] != 'remotion':
                 raise ValueError('studio requires project.renderBackend=remotion; Canvas projects use build/film.html')

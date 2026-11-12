@@ -4,7 +4,7 @@
   "title": "完整情境插画｜通知干扰到项目驱动",
   "style": "style.pixel-study.v1",
   "seed": 19,
-  "audioMode": "narration+sfx",
+  "audioMode": "sfx-only",
   "authoringMode": "direct",
   "fps": 60,
   "width": 1920,

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "beat-driven-cache",
+  "idea": "用一次未命中和一次命中解释读缓存",
+  "audience": "刚开始学习缓存的开发者",
+  "takeaway": "第一次缺失要去源站取。留下本地副本，下次可以直接读。",
+  "durationRangeSeconds": [16, 16],
+  "constraints": ["无口播", "用同一张资料卡贯穿工作台与源站", "事件音效和视觉触点共用 120 BPM 节拍"]
+}

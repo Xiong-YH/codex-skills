@@ -160,7 +160,7 @@
 | code | title, items（2–7行，每行 text/event） | language |
 | takeaway | title | eyebrow, detail |
 
-公共字段：`id,kind,x,y,width,height,data`；坐标按画幅 0–1。`visualStyle` 为 plain/mechanical/energy 三者择一（plain 保留朴素原版），`styleVariant` 为 open/inset/relay，`features` 为 [] 或 ["stack"]；组合规则仅由[基础规范](BASIC-COMPONENTS.md)维护。`showEvent` 默认 enter；可用 `focusEvent` 在指定事件后保持强调；`tone` 从 gold/accent/secondary/danger 选择色彩职责。事件使用本镜 local ID，不能引用 exit，数值的 startEvent 必须早于 endEvent。
+公共字段为 `id,kind,x,y,width,height,data`，坐标按画幅 0–1。材质 `visualStyle`、样式 `styleVariant` 和可选特性 `features` 的组合见 [基础规范](BASIC-COMPONENTS.md)。`showEvent` 默认 enter，可用 `focusEvent` 在指定事件后保持强调。`tone` 从 gold/accent/secondary/danger 选择色彩职责。事件使用本镜 local ID，不能引用 exit，数值的 startEvent 必须早于 endEvent。
 
 ```json
 {"id":"result","kind":"metric","x":0.30,"y":0.24,"width":0.58,"height":0.40,

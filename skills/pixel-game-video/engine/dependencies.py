@@ -98,7 +98,11 @@ def javascript_files(skill, resolved):
     if any(shot.get('background') or shot.get('replacement') or shot.get('components') for shot in resolved['shots']):
         paths += ['scenes/media.js']
     if any(shot.get('components') for shot in resolved['shots']):
-        paths += ['components/style-layers.js', 'components/plain.js', 'components/apparatus.js', 'components/runtime.js']
+        paths += ['components/style-layers.js', 'components/plain.js', 'components/apparatus.js']
+        if any(component.get('visualStyle') == 'paper'
+               for shot in resolved['shots'] for component in shot.get('components', [])):
+            paths.append('components/paper.js')
+        paths.append('components/runtime.js')
     scenes = {shot['scene'] for shot in resolved['shots']}
     objects = {obj['asset'] for shot in resolved['shots'] for obj in shot.get('objects', [])}
     records = read(Path(skill) / 'modules/library/catalog.json')['items']
@@ -118,8 +122,12 @@ def javascript_files(skill, resolved):
         if 'gameplay' in modes:
             paths += ['motion/game-feedback.js', 'scenes/competition-feedback.js']
     recipes = {motion['recipe'] for shot in resolved['shots'] for motion in shot.get('motions', [])}
+    if 'motion.actor-blocking.v1' in recipes:
+        paths.append('motion/actor-blocking.js')
+    if 'motion.contact-fx.v1' in recipes:
+        paths.append('motion/contact-fx.js')
     if recipes & {'motion.component-handoff.v1', 'motion.line-handoff.v1', 'motion.preview-expand.v1', 'motion.panel-occlusion.v1'}:
-        paths.append('motion/content-handoffs.js')
+        paths.extend(['motion/scene-exchange.js', 'motion/content-handoffs.js'])
     if recipes & NARRATIVE_RECIPES:
         paths.append('motion/narrative-transitions.js')
     paths += ['motion/pulse-spec.js', 'motion/pulse.js']  # Shared grammar, then runtime.
@@ -143,7 +151,7 @@ def runtime_files(skill, resolved):
     files.update({'scripts/video.py', 'requirements.txt', 'modules/library/prepare.py',
                   'modules/scenes/contract.py', 'modules/scenes/performance.py', 'modules/components/contract.py',
                   'modules/audio/narration.py', 'modules/motion/handoffs.py'})
-    files.update({'modules/motion/pulse_contract.py', 'modules/motion/FRAMETELL-NOTICE.md',
+    files.update({'modules/motion/pulse_contract.py', 'modules/motion/actor_blocking.py', 'modules/motion/FRAMETELL-NOTICE.md',
                   'modules/motion/licenses/AGPL-3.0.txt'})
     # Catalogs are validation contracts; lock these even when only one entry is selected.
     files.update('modules/' + name + '/catalog.json'

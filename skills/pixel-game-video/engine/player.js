@@ -1,11 +1,16 @@
 (function(P){
   'use strict';
-  P.createRenderer=function({canvas,createCanvas,assets,resolved,mouth,style,frameAssets}){
+  const draftColors = {
+    background:'#202b33', edge:'#60727b', panel:'#36464e', panelInset:'#243039',
+    ink:'#f0eee7', muted:'#bac5c3', accent:'#abd5d0', gold:'#e9c68a', danger:'#edafa1',
+  };
+  P.createRenderer=function({canvas,createCanvas,assets,resolved,mouth,style,frameAssets,whitebox=false}){
     for(const shot of resolved.shots)for(const motion of shot.motions||[])P.motion.validatePulse?.(motion);
     const project=resolved.project,width=project.width,height=project.height;
     canvas.width=width;canvas.height=height;
     const ctx=canvas.getContext('2d'),world=createCanvas(width,height),incoming=createCanvas(width,height),incomingWorld=createCanvas(width,height),plainScratch=createCanvas(width,height);
-    const base={width,height,pixel:width/project.nativeWidth,colors:style.colors,style,
+    const colors=whitebox?{...style.colors,...draftColors}:style.colors;
+    const base={width,height,pixel:width/project.nativeWidth,colors,style,whitebox,
                 assets,resolved,mouth,frameAssets,createCanvas,propCache:{},fps:project.fps,seed:project.seed??1};
     const history=new Map(),contentHistory=new Map(),worldHistory=new Map();
     const contentRecipes=new Set(['motion.panel-slide.v1','motion.pixel-iris.v1']);

@@ -1,5 +1,15 @@
 {
   "schemaVersion": 1,
+  "beats": [
+    {
+      "id": "b1",
+      "before": "",
+      "change": "",
+      "result": "",
+      "carry": "",
+      "cueIds": ["c1"]
+    }
+  ],
   "cues": [
     {
       "id": "c1",

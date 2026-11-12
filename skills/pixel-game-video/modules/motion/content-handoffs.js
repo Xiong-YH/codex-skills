@@ -26,6 +26,17 @@
       if(!Array.isArray(a.pairs)||a.pairs.length<1||a.pairs.length>6||(mode!=='reflow'&&a.pairs.length!==1))throw new Error('Invalid component handoff pairs');
       const oldIds=a.pairs.map(x=>x.from),newIds=a.pairs.map(x=>x.to);
       if(new Set(oldIds).size!==oldIds.length||new Set(newIds).size!==newIds.length)throw new Error('Duplicate component handoff IDs');
+      if(mode==='match'&&a.roomReveal){
+        const q=part(p,0,1), from=oldIds[0], to=newIds[0];
+        const scratch=e.propCache['scene-exchange'] ||= e.createCanvas(w,height);
+        scene(g,h,'old',[from]);
+        P.sceneExchange.reveal(g,h.scene('next',[to]),scratch,q,a.roomReveal);
+        const source=h.box('old',from), target=h.box('next',to);
+        const box=lerp(source,target,q);
+        box[1]-=Math.max(0,Math.min(.035,source[1],target[1]))*Math.sin(Math.PI*q);
+        component(g,h,q<.9?'old':'next',q<.9?from:to,box);
+        return;
+      }
       if(mode==='overview'){const from=h.box('old',oldIds[0]),to=h.box('next',newIds[0]);if(Math.abs(from[2]/from[3]-to[2]/to[3])>.001)throw new Error('overview must preserve component aspect ratio');}
       excluding(p,h,g,oldIds,newIds);
       if(mode==='keyword'){

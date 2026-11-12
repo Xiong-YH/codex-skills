@@ -46,7 +46,7 @@ def validate(scene_id, params, events, objects):
 
     allowed = {
         'scenes.focus-desk.v1': {'phase', 'heading', 'labels', 'startEvent', 'completeEvent'},
-        'scenes.canvas.v1': set(),
+        'scenes.canvas.v1': {'environment'},
         'scenes.steps.v1': {'items'},
         'scenes.counter.v1': {'from', 'to', 'label', 'unit', 'startEvent', 'endEvent'},
         'scenes.choice.v1': {'options', 'selectedIndex', 'selectEvent'},
@@ -63,6 +63,8 @@ def validate(scene_id, params, events, objects):
     extras = set(params) - allowed[scene_id]
     if extras:
         raise ValueError(f'{scene_id}: unsupported parameters {sorted(extras)}')
+    if scene_id == 'scenes.canvas.v1' and 'environment' in params:
+        label(params['environment'], 'environment')
     if scene_id in ('scenes.study-routes.v1','scenes.competition-routes.v1'):
         environments=({'question':'workspace','research':'research','practice':'workshop','decision':'atlas'}
                       if scene_id=='scenes.study-routes.v1' else

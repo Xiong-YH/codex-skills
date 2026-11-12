@@ -67,10 +67,27 @@ class ComponentStyles(unittest.TestCase):
     def test_schema_separates_style_from_features(self):
         fields=Component.model_json_schema()['properties']
         self.assertNotIn('styleLayers', fields)
-        self.assertEqual(fields['visualStyle']['enum'], ['plain','mechanical','energy'])
+        self.assertEqual(fields['visualStyle']['enum'], ['plain','mechanical','energy','paper'])
         self.assertEqual(fields['styleVariant']['enum'], ['open','inset','relay'])
         self.assertEqual(fields['features']['items']['const'], 'stack')
         self.assertEqual(fields['features']['maxItems'], 1)
+
+    def test_paper_uses_text_card_renderer_only_for_supported_forms(self):
+        for kind, data in (
+                ('identity', {'title': 'Record', 'detail': 'Ref 001'}),
+                ('takeaway', {'title': 'Keep one copy'}),
+                ('checklist', {'title': 'Review', 'items': [
+                    {'label': 'Fetch', 'event': 'begin'}, {'label': 'Store', 'event': 'land'}]})):
+            component = {**self.component(visualStyle='paper'), 'kind': kind, 'data': data}
+            self.validate(component)
+        with self.assertRaisesRegex(ValueError, 'paper supports'):
+            self.validate(self.component(visualStyle='paper'))
+        with self.assertRaisesRegex(ValueError, 'text card'):
+            self.validate({**component, 'kind': 'identity', 'data': {'title': 'Record', 'image': 'image.png'}})
+        resolved = {'project': {'style': 'style.pixel-editorial.v1'},
+                    'shots': [{'scene': 'scenes.canvas.v1', 'components': [component]}]}
+        scripts = javascript_files(ROOT, resolved)
+        self.assertLess(scripts.index('modules/components/paper.js'), scripts.index('modules/components/runtime.js'))
 
     def test_plain_is_original_simple_option_not_a_mixed_style(self):
         result=self.validate(self.component(visualStyle='plain'))

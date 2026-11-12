@@ -78,9 +78,15 @@ _handoff_spec.loader.exec_module(_handoff_contract)
 _pulse_spec = importlib.util.spec_from_file_location('pixel_pulse_contract', SKILL_ROOT / 'modules/motion/pulse_contract.py')
 _pulse_contract = importlib.util.module_from_spec(_pulse_spec)
 _pulse_spec.loader.exec_module(_pulse_contract)
+_actor_spec = importlib.util.spec_from_file_location('pixel_actor_blocking', SKILL_ROOT / 'modules/motion/actor_blocking.py')
+_actor_blocking = importlib.util.module_from_spec(_actor_spec)
+_actor_spec.loader.exec_module(_actor_blocking)
 
 
 def _motion_params(recipe, params):
+    if recipe == _actor_blocking.RECIPE:
+        _actor_blocking.validate_params(params)
+        return
     if _pulse_contract.validate(recipe, params):
         return
     if _handoff_contract.validate_params(recipe, params):
@@ -91,6 +97,8 @@ def _motion_params(recipe, params):
                                     "xFrom": (0, 1), "xTo": (0, 1), "yFrom": (0, 1), "yTo": (0, 1)},
         "motion.object-reveal.v1": {"scaleFrom": (0.05, 1), "turns": (0, 4)},
         "motion.gold-burst.v1": {"x": (0, 1), "y": (0, 1)},
+        "motion.contact-fx.v1": {"x": (0, 1), "y": (0, 1), "radius": (.04, .4),
+                                 "strength": (.05, 1), "seed": (0, 2147483647)},
         "motion.shatter-reveal.v1": {"x": (0, 1), "y": (0, 1), "seed": (0, 2147483647)},
         "motion.panel-slide.v1": {"distance": (0.1, 0.35)},
         "motion.pixel-iris.v1": {"x": (0, 1), "y": (0, 1)},
@@ -106,6 +114,11 @@ def _motion_params(recipe, params):
     if recipe not in rules:
         raise ValueError(f"motion executor unavailable: {recipe}")
     for key, value in params.items():
+        if recipe == "motion.contact-fx.v1" and key in ("style", "tone"):
+            values = ("sparks", "bloom", "light-sweep") if key == "style" else ("gold", "accent", "danger")
+            if value not in values:
+                raise ValueError(f"contact-fx.{key}: expected one of {values}")
+            continue
         if recipe == "motion.panel-slide.v1" and key == "direction":
             if value not in ("left", "right"):
                 raise ValueError("panel-slide.direction must be left or right")
@@ -116,7 +129,7 @@ def _motion_params(recipe, params):
         if type(value) not in (int, float) or not lo <= value <= hi:
             raise ValueError(f"{recipe}.{key}: expected number in [{lo}, {hi}]")
         if key == "seed" and type(value) is not int:
-            raise ValueError("shatter seed must be an integer")
+            raise ValueError(f"{recipe}.seed must be an integer")
         if key == "columns" and (type(value) is not int or value % 2 != 1):
             raise ValueError("mosaic columns must be an odd integer from 3 to 9")
     if recipe == 'motion.scene-to-card.v1':
@@ -229,6 +242,9 @@ def compile_project(project_root, skill_root=None, *, write=False):
                 raise ValueError("object IDs cannot be scene/actor; object assets must be props")
         _finite(shot["params"], shot["id"])
         validator.validate(shot["scene"], shot["params"], shot["events"], shot["objects"])
+        if shot["scene"] == "scenes.canvas.v1" and backgrounds is None and (
+                validator.background_environments(shot) - {"workspace"}):
+            raise ValueError(f"{shot['id']}: choose a style with the requested Canvas environment or supply project media")
         if backgrounds is not None:
             for environment in validator.background_environments(shot):
                 asset = backgrounds.get(environment)
@@ -275,8 +291,10 @@ def compile_project(project_root, skill_root=None, *, write=False):
             recipe = motion["recipe"]
             if recipe == "motion.object-reveal.v1" and motion["target"] in ("scene", "actor"):
                 raise ValueError("object-reveal requires an object target")
-            if recipe != "motion.object-reveal.v1" and motion["target"] != "scene":
-                raise ValueError(f"{recipe} requires target=scene")
+            if recipe != "motion.object-reveal.v1":
+                expected_target = "actor" if recipe == _actor_blocking.RECIPE else "scene"
+                if motion["target"] != expected_target:
+                    raise ValueError(f"{recipe} requires target={expected_target}")
             transition = capability.get("kind") == "transition"
             if transition and (index == 0 or start != shot["startFrame"]):
                 raise ValueError(f"{recipe}: transition requires a previous shot and must start at shot.enter")
@@ -306,6 +324,7 @@ def compile_project(project_root, skill_root=None, *, write=False):
                 raise ValueError(f"overlapping motion on {motion['target']}: {recipe}")
             intervals.setdefault(key, []).append((start, end))
             motion.update(startFrame=start, endFrame=end)
+        _actor_blocking.resolve_track(shot, project)
 
     from .backend_caps import validate as validate_backend
     validate_backend(project, shots, progress=progress)
@@ -317,12 +336,14 @@ def compile_project(project_root, skill_root=None, *, write=False):
         if not 0 <= start < end <= cursor:
             raise ValueError(f"{cue['id']}: invalid text interval")
         if cue["role"] == "subtitle":
-            if not cue["phrases"] or any(not p.strip() for p in cue["phrases"]):
-                raise ValueError(f"{cue['id']}: subtitles require nonempty pinyin phrases for text rehearsal timing; no mouth animation")
+            if project["audioMode"] == "narration+sfx" and not cue["phrases"]:
+                raise ValueError(f"{cue['id']}: narrated subtitles require phrase groups for text rehearsal timing")
+            if any(not p.strip() for p in cue["phrases"]):
+                raise ValueError(f"{cue['id']}: rehearsal phrases must be nonempty")
             if end - start < len(cue["phrases"]) * 3:
                 raise ValueError(f"{cue['id']}: insufficient frames for phrases")
             if any(start < b and a < end for a, b in subtitles):
-                raise ValueError(f"{cue['id']}: overlapping subtitles for a single speaker")
+                raise ValueError(f"{cue['id']}: overlapping subtitles in the same reading position")
             subtitles.append((start, end))
         cue.update(startFrame=start, endFrame=end)
     audio = inputs["audio.json"]["cues"]
