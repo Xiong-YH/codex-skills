@@ -6,7 +6,7 @@
 
 | 当前需要 | Skill | 交付 |
 | --- | --- | --- |
-| 讨论选题、写完整文案、修改内容 | [pixel-video-writer](skills/pixel-video-writer/SKILL.md) | 选题与叙事确认记录、完整稿、内容自查 |
+| 讨论选题、写完整文案、单独修改开头、正文或收尾 | [pixel-video-writer](skills/pixel-video-writer/SKILL.md) | 选题与叙事确认记录、完整稿或局部改稿、内容自查 |
 | 把文案演成画面、设计分镜、统筹与审片 | [pixel-video-director](skills/pixel-video-director/SKILL.md) | 视听设计、草图与动态白模、制作交接、创作审片 |
 | 按脚本或工程制作、修改并导出视频 | [pixel-game-video](skills/pixel-game-video/SKILL.md) | 可编辑工程、工作台成片、同次项目 JSON 与核验证据 |
 
