@@ -24,6 +24,7 @@
       "title": "接触点像素火花、晕染与掠光",
       "params": {
         "style": ["sparks", "bloom", "light-sweep"],
+        "profile": ["soft", "impact"],
         "tone": ["gold", "accent", "danger"],
         "x": [0, 1],
         "y": [0, 1],

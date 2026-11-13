@@ -1,5 +1,44 @@
 {
   "$defs": {
+    "AtlasPose": {
+      "additionalProperties": false,
+      "properties": {
+        "pose": {
+          "maxLength": 100,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+          "title": "Pose",
+          "type": "string"
+        },
+        "at": {
+          "$ref": "#/$defs/Ref"
+        },
+        "sourceRect": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Sourcerect",
+          "type": "array"
+        },
+        "offset": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "title": "Offset",
+          "type": "array"
+        }
+      },
+      "required": [
+        "pose",
+        "at",
+        "sourceRect"
+      ],
+      "title": "AtlasPose",
+      "type": "object"
+    },
     "CuePlacement": {
       "additionalProperties": false,
       "properties": {
@@ -70,6 +109,52 @@
         "y"
       ],
       "title": "ObjectPlacement",
+      "type": "object"
+    },
+    "PoseAtlas": {
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "minLength": 1,
+          "title": "File",
+          "type": "string"
+        },
+        "x": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Y",
+          "type": "number"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Height",
+          "type": "number"
+        },
+        "poses": {
+          "items": {
+            "$ref": "#/$defs/AtlasPose"
+          },
+          "maxItems": 120,
+          "minItems": 1,
+          "title": "Poses",
+          "type": "array"
+        }
+      },
+      "required": [
+        "file",
+        "x",
+        "y",
+        "height",
+        "poses"
+      ],
+      "title": "PoseAtlas",
       "type": "object"
     },
     "Ref": {
@@ -185,6 +270,17 @@
           },
           "title": "Performance",
           "type": "array"
+        },
+        "poseAtlas": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PoseAtlas"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "required": [

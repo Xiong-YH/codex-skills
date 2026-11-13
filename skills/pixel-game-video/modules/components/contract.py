@@ -15,6 +15,8 @@ def validate(component, shot, previous_ids):
             raise ValueError('paper identity is a text card; images use an apparatus or plain layout')
     if component.get('styleVariant', 'inset') not in ('open', 'inset', 'relay'):
         raise ValueError('styleVariant must be open, inset or relay')
+    if component.get('entryFrom') is not None and (kind != 'identity' or data.get('fit') != 'full'):
+        raise ValueError('entryFrom is available for full image identity cards')
     features = component.get('features', [])
     if not isinstance(features, list) or len(features) > 1 or any(feature != 'stack' for feature in features):
         raise ValueError('features allows only the optional stack feature')
@@ -67,8 +69,11 @@ def validate(component, shot, previous_ids):
     if component['x'] + component['width'] > 1 or component['y'] + component['height'] > 1:
         raise ValueError('Component bounds must fit inside the frame')
     if kind == 'identity':
-        keys(data, {'title'}, {'eyebrow', 'detail', 'image', 'sourceShot'})
+        keys(data, {'title'}, {'eyebrow', 'detail', 'image', 'sourceShot', 'fit'})
         picture(data)
+        if 'fit' in data and (data['fit'] != 'full' or 'image' not in data or component['visualStyle'] != 'plain' or
+                              {'eyebrow', 'detail', 'sourceShot'} & data.keys()):
+            raise ValueError('Full identity image needs plain visualStyle, an image and a title')
     elif kind == 'metric':
         keys(data, {'title', 'from', 'to', 'startEvent', 'endEvent'}, {'unit', 'detail'})
         for key in ('from', 'to'):

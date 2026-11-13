@@ -2,7 +2,7 @@
  'use strict';
  function imageBounds(e,c,b){
   if(c.kind!=='identity'||!(c.data.imageKey||c.data.sourceShot))return null;
-  if(c.visualStyle==='plain'){const p=30*e.height/1080;return{x:b.x+p,y:b.y+p,width:b.width*.37,height:b.height-2*p};}
+  if(c.visualStyle==='plain'){const p=30*e.height/1080;return c.data.fit==='full'?b:{x:b.x+p,y:b.y+p,width:b.width*.37,height:b.height-2*p};}
   const S=b.width/480,HH=b.height/S,u=e.height/1080;
   if(HH<180){const size=Math.max(1,b.height-48*u);return{x:b.x+24*u,y:b.y+24*u,width:size,height:size};}
   return{x:b.x+52*S,y:b.y+39*S,width:129*S,height:(HH-81)*S};

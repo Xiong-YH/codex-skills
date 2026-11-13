@@ -93,7 +93,7 @@
   function background(e,shot) {
     const {ctx:g,width:w,height:h,colors:c,pixel:px} = e;
     g.save();
-    if (e.whitebox) g.filter='grayscale(1) brightness(.67)';
+    if (e.whitebox) g.filter='grayscale(1) contrast(.72) brightness(.70)';
     if (shot.background) P.media.draw(e,shot.background);
     else P.style.background(e,shot);
     g.restore();

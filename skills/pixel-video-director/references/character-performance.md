@@ -37,6 +37,8 @@
 
 普通信息场景的小比例小棕可走到组件前、踩稳、伸手触发结果。先定地面与交互边缘，触点同时驱动手、组件和声音。执行由 FOUNDATION 的 `modules/motion/recipes/contact-feedback.md` 维护，可用 [无口播缓存示例](../examples/beat-driven-cache/README.md) 比对正式画面与白模。近景、持物和两人交换优先保留整幅素材、真实承托及中间姿态。
 
+项目已选定动作库里的人物形象时，沿用实际的完整姿态图，按起势、触点、收势挑帧，允许关键拍直接换姿。普通 Canvas 的 `storyboard.shots[].poseAtlas` 引用本镜事件，导演可和组件、字幕、音效一起排进同一条时间线。字段与装配方法见 FOUNDATION 的 `modules/scenes/PRESENTER-ACTIONS.md`。
+
 ## 素材缺口如何处理
 
 动作目录分别标 `existing-pose-reference`、`candidate-example`、`design-only`。前者只表示有原图，后两者不意味着 VideoSpec 可调用。需要新姿态就制作与检查，不能因为旧六姿态执行器只能选六项，就把所有剧情改成这六项。

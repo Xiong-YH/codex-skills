@@ -102,6 +102,40 @@ class CanvasWorkbenchTests(unittest.TestCase):
         self.assertIn('talk', saved['actorPoseLayout']['actor.azong.v3'])
         self.assertTrue(require_supported(self.root)['supported'])
 
+    def test_pose_atlas_and_rich_title_reach_editable_canvas_units(self):
+        from PIL import Image
+        media = self.root / 'media'
+        media.mkdir()
+        Image.new('RGBA', (128, 64), '#355846').save(media / 'poses.png')
+        project = read_json(self.root / 'project.json')
+        project['audioMode'] = 'silent'
+        write_json(self.root / 'project.json', project)
+        write_json(self.root / 'audio.json', {'cues': []})
+        timeline = read_json(self.root / 'timeline.json')
+        first = timeline['shots'][0]
+        first.update(scene='scenes.canvas.v1', actor=None, params={}, objects=[], motions=[],
+                     poseAtlas={'file': 'media/poses.png', 'x': .22, 'y': .74, 'height': .4, 'poses': [
+                         {'pose': 'ready', 'at': {'event': 's01.enter'}, 'sourceRect': [0, 0, 64, 64]},
+                         {'pose': 'touch', 'at': {'event': 's01.reveal'}, 'sourceRect': [64, 0, 64, 64]},
+                     ]})
+        write_json(self.root / 'timeline.json', timeline)
+        layout = {'left': .06, 'right': .94, 'y': .15, 'size': .069,
+                  'emphasis': [{'text': '触点', 'color': '#bff8cc', 'treatment': 'underline'}]}
+        write_json(self.root / 'text.json', {'cues': [{'id': 'title', 'role': 'title', 'text': '核对触点',
+            'start': {'event': 's01.enter'}, 'end': {'event': 's01.exit'}, 'richText': layout}]})
+        resolved, status = self.build()
+        atlas = resolved['shots'][0]['poseAtlas']
+        manifest = status['manifest']
+        self.assertEqual(atlas['poses'][1]['frame'], resolved['events']['s01.reveal'])
+        self.assertEqual(json.loads(manifest['shots'][0]['props']['poseAtlasJson']), atlas)
+        self.assertEqual(json.loads(manifest['captions'][0]['props']['richTextJson']), layout)
+        self.assertAlmostEqual(manifest['captions'][0]['props']['fontSize'], 1080 * .069)
+        self.assertIn(atlas['assetKey'], read_json(self.root / 'build/payload.json')['assets'])
+        first['poseAtlas']['poses'][1]['sourceRect'][0] = 65
+        write_json(self.root / 'timeline.json', timeline)
+        with self.assertRaisesRegex(ValueError, 'fit inside the image'):
+            compile_project(self.root)
+
 
 if __name__ == '__main__':
     unittest.main()

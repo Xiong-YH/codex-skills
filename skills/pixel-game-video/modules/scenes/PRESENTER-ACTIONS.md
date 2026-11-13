@@ -20,3 +20,19 @@ Canvas 的 `shot.performance` 将现有 V3 姿态图接入实际播放；Remotio
 导演工程的姿态区间由 storyboard.performance 拥有；人物身份仍在 production-plan。新增姿态或替换图像后重新核验身份、脚底、手部、透明边缘和实际播放。当前接入不自动代表素材已完成透明清稿或获得本次审美认可。
 
 事件选择执行器为 [presenter-actions.js](presenter-actions.js)，原图、裁切和锚点数据仍由 [素材库](../library/GUIDE.md) 维护。系列讲述者和固定姿势偏好由项目提供；安装 director 时读取其系列文件，本技能独立使用不依赖导演目录。
+
+## 在普通 Canvas 镜头使用整幅动作图集
+
+有合适的完整姿态时，使用 `shot.poseAtlas`。从动作库选择实际图集，复制到项目 `media/` 并沿用清单中的裁切和位移。设置 `actor:null`，背景和信息组件继续由镜头各层绘制。该字段使用项目图片，执行时共用 [动作库的姿态采样](character-performance/player.js)。
+
+```json
+{
+  "file": "media/poses.png", "x": 0.24, "y": 0.80, "height": 0.52,
+  "poses": [
+    {"pose": "pause", "at": {"event": "desk.enter"}, "sourceRect": [0, 0, 418, 418]},
+    {"pose": "contact", "at": {"event": "desk.touch"}, "sourceRect": [418, 0, 418, 418], "offset": [0, -4]}
+  ]
+}
+```
+
+`x/y` 指图格底边中心，`height` 指完整图格占画高的比例。首姿从镜头首帧开始，每个后续姿态持续到下一事件。选择同尺寸裁切单元，核对桌沿、身体和接触对象的位置。正常速度看实在的预备、接触和末态，再让音效与反馈共用触点。Canvas 动态白模和工作台镜头单元沿用同一批姿态键，工作台可编辑已编译的坐标与帧号。

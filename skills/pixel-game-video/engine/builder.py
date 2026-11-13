@@ -96,9 +96,11 @@ def build(project_root: Path, resolved: dict, skill_root: Path, silent=False) ->
     (output / 'mouth-timing.json').write_text(json.dumps({'mode':'text-timed rehearsal; no mouth animation or voice alignment','mouthAnimation':False,'cues':mouth}, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     blocking = any(motion['recipe'] == 'motion.actor-blocking.v1'
                    for shot in resolved['shots'] for motion in shot['motions'])
+    atlases = sum(bool(shot.get('poseAtlas')) for shot in resolved['shots'])
     (output / 'build-report.json').write_text(json.dumps({'contractVersion':resolved['contractVersion'],'inputHash':resolved['inputHash'],
         'durationFrames':resolved['durationFrames'],'audioEnabled':audio_uri is not None,'actorVariants':library_asset_count,
-        'actorPreviewMode':'compact-blocking' if blocking else 'event-poses' if actions else 'reference-static',
+        'actorPreviewMode':'atlas-poses' if atlases else 'compact-blocking' if blocking else 'event-poses' if actions else 'reference-static',
+        'actorAtlasShots':atlases,
         'actorMouthAnimation':False,'actorSkeletalAnimation':False,
         'styleAssets':len(style_assets),
         'mouthSegments':len(mouth),'preview':'film.html','whitebox':'whitebox.html'}, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')

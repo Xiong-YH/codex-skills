@@ -69,6 +69,8 @@ def _canvas_visual_manifest(resolved: dict, payload: dict) -> dict:
         'motion.scene-to-card.v1', 'motion.match-dissolve.v1', 'motion.cross-dissolve.v1', 'motion.fade-through-black.v1'}
     fields = [('params', '场景参数'), ('components', '信息组件'), ('objects', '道具'),
               ('performance', '人物姿态'), ('background', '背景素材'), ('replacement', '替换素材')]
+    if any(shot.get('poseAtlas') for shot in resolved['shots']):
+        fields.append(('poseAtlas', '人物连续姿态素材'))
     for index, shot in enumerate(resolved['shots']):
         props = {'shotIndex': index, 'sourceUnitId': shot['id'], 'actor': shot.get('actor') or ''}
         schema = [_schema('text', 'actor', '人物素材 ID（空为无人）', props['actor'])]
@@ -111,13 +113,15 @@ def _manifest_base(resolved: dict, payload: dict) -> dict:
     defaults = {'title': .105, 'subtitle': .87, 'annotation': .22, 'label': .68}
     captions = []
     for index, cue in enumerate(resolved['cues']):
+        layout = cue.get('richText')
         # Leave Canvas's own defaults in charge (its subtitle baseline differs
         # from the native HTML text unit). Inspector still exposes explicit x/y.
         y = cue.get('y')
         if y is None:
             y = defaults.get(cue['role'], .5)
         props = {'cueIndex': index, 'role': cue['role'], 'text': cue['text'],
-                 'fontSize': project['height'] * style.get('textRoles', {}).get(cue['role'], .03),
+                 'fontSize': project['height'] * ((layout or {}).get('size') or
+                                                   style.get('textRoles', {}).get(cue['role'], .03)),
                  'color': style['colors'].get('accent', '#7ed5c8') if cue.get('accent') else style['colors'].get('ink', '#f5ebd4'),
                  'x': cue['x'] if cue.get('x') is not None else .5, 'y': y}
         captions.append({'id': cue['id'], 'label': cue['text'], 'from': cue['startFrame'],
@@ -129,11 +133,16 @@ def _manifest_base(resolved: dict, payload: dict) -> dict:
                        _schema('slider', 'x', '水平位置', props['x'], min=.05, max=.95, step=.01),
                        _schema('slider', 'y', '垂直位置', props['y'], min=.03, max=.95, step=.01)],
             'cardId': cue['id'], 'cardName': cue['text']})
+        if layout:
+            captions[-1]['schema'] = captions[-1]['schema'][:2]
         if canvas and cue['role'] == 'subtitle':
             captions[-1]['props']['showBackdrop'] = True
             captions[-1]['schema'].append(_schema('boolean', 'showBackdrop', '显示本句底板', True))
         if canvas:
-            captions[-1]['schema'].append(_schema('textarea', 'richTextJson', '单行富文本布局 JSON（可留空）', ''))
+            rich = json.dumps(layout, ensure_ascii=False, indent=2) if layout else ''
+            if rich:
+                props['richTextJson'] = rich
+            captions[-1]['schema'].append(_schema('textarea', 'richTextJson', '单行富文本布局 JSON（可留空）', rich))
     return {'name': project['title'], 'fps': project['fps'], 'width': project['width'], 'height': project['height'],
             'total': resolved['durationFrames'], 'background': style['colors'].get('background', '#111820'),
             'revision': resolved['inputHash'], 'shots': [], 'transitions': [], 'captions': captions,

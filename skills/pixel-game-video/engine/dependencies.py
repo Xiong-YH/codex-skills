@@ -93,6 +93,8 @@ def javascript_files(skill, resolved):
     paths += ['text/runtime.js', 'library/runtime.js', 'motion/runtime.js', 'scenes/runtime.js']
     if actor_actions(resolved):
         paths.append('scenes/presenter-actions.js')
+    if any(shot.get('poseAtlas') for shot in resolved['shots']):
+        paths += ['scenes/character-performance/player.js', 'scenes/character-performance/atlas.js']
     if resolved.get('progress'):
         paths.append('text/narrative-progress.js')
     if any(shot.get('background') or shot.get('replacement') or shot.get('components') for shot in resolved['shots']):

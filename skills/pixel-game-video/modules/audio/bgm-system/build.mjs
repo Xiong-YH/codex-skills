@@ -4,6 +4,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { BPM, BARS, LOOP_SECONDS, presets } from './score.mjs';
+import { BARS as MINUTE_BARS, DUR as MINUTE_DURATION, sections } from './pulse-minute.mjs';
+
+const minute = 'pulse-minute';
 
 function options(args) {
   let out, preset;
@@ -11,38 +14,49 @@ function options(args) {
     const [flag, value] = args.slice(i,i+2);
     if (!value) throw new Error('Missing value for ' + flag);
     if (flag === '--out') out = path.resolve(value);
-    else if (flag === '--preset' && Object.hasOwn(presets,value)) preset = value;
-    else throw new Error('Expected --out DIRECTORY and optional --preset warm|pulse|calm');
+    else if (flag === '--preset' && (value === minute || Object.hasOwn(presets,value))) preset = value;
+    else throw new Error('Expected --out DIRECTORY and optional --preset warm|pulse|calm|pulse-minute');
   }
-  if (!out) throw new Error('Usage: node build.mjs --out DIRECTORY [--preset warm|pulse|calm]');
+  if (!out) throw new Error('Usage: node build.mjs --out DIRECTORY [--preset warm|pulse|calm|pulse-minute]');
   return { out, names: preset ? [preset] : Object.keys(presets) };
 }
 
 async function build(args) {
   const { out,names } = options(args);
-  const score = fileURLToPath(new URL('score.mjs',import.meta.url));
   const garden = fileURLToPath(new URL('../vendor/garden-skills/scripts/audio.mjs',import.meta.url));
-  const sampleRate = 48000, samples = LOOP_SECONDS*sampleRate;
+  const sampleRate = 48000, beatSamples = sampleRate * 60 / BPM;
   await mkdir(out,{recursive:true});
   const stage = await mkdtemp(path.join(out,'.build-'));
   const master = path.join(stage,'master.wav');
   const files = names.flatMap(name => [name+'.wav', name+'.beats.json']);
   try {
     for (const name of names) {
+      const long = name === minute;
+      const source = long ? 'pulse-minute.mjs' : 'score.mjs';
+      const score = fileURLToPath(new URL(source, import.meta.url));
+      const bars = long ? MINUTE_BARS : BARS;
+      const samples = (long ? MINUTE_DURATION : LOOP_SECONDS) * sampleRate;
+      const start = long ? 0 : samples;
+      const tail = 0.45;
+      const filter = 'atrim=start_sample=' + start + ':end_sample=' + (start + samples) +
+        (long ? `,afade=t=out:st=${MINUTE_DURATION-tail}:d=${tail}` : '');
       execFileSync(process.execPath,[garden,'build',score,'--out',master],{
         env:{...process.env,PIXEL_BGM_PRESET:name},stdio:['ignore','inherit','inherit'],
       });
       const filename = name+'.wav', wav = path.join(stage,filename);
       execFileSync(process.env.PIXEL_FFMPEG || 'ffmpeg',[
-        '-v','error','-y','-i',master,'-af','atrim=start_sample='+samples+':end_sample='+samples*2,
+        '-v','error','-y','-i',master,'-af',filter,
         '-ar',String(sampleRate),'-ac','2','-c:a','pcm_s16le',wav,
       ],{stdio:['ignore','inherit','inherit']});
-      const beatSamples = sampleRate*60/BPM;
       const entry = {
-        id:name,title:presets[name].title,purpose:presets[name].purpose,file:filename,
-        bpm:BPM,beatsPerBar:4,bars:BARS,sampleRate,loopStartSample:0,loopEndSample:samples,
-        beatSamples:Array.from({length:BARS*4},(_,i)=>i*beatSamples),
-        source:'score.mjs',sha256:createHash('sha256').update(await readFile(wav)).digest('hex'),
+        id:name,title:long ? '步进 · 一分钟版' : presets[name].title,
+        purpose:long ? '从建立情境到加密、留白、回归与收尾' : presets[name].purpose,
+        file:filename,bpm:BPM,beatsPerBar:4,bars,sampleRate,
+        beatSamples:Array.from({length:bars*4},(_,i)=>i*beatSamples),
+        ...(long ? {durationSamples:samples,loop:false,sections:sections.map(section => ({
+          ...section, startSample:section.bar * 4 * beatSamples,
+        }))} : {loopStartSample:0,loopEndSample:samples}),
+        source,sha256:createHash('sha256').update(await readFile(wav)).digest('hex'),
       };
       const metadata = name+'.beats.json';
       await writeFile(path.join(stage,metadata),JSON.stringify(entry,null,2)+'\n');

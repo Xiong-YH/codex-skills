@@ -24,9 +24,10 @@
     g.restore();
     return rows.length;
   }
-  // Workbench-only rich line; the independently placed plate owns its lifetime.
+  // The independently placed cue owns the lifetime of this single line.
   function richLine(e, cue) {
-    const spec=JSON.parse(cue.richTextJson),g=e.ctx,w=e.width,h=e.height,size=cue.fontSize;
+    const spec=cue.richTextJson?JSON.parse(cue.richTextJson):cue.richText;
+    const g=e.ctx,w=e.width,h=e.height,size=cue.fontSize??(spec.size??e.style.textRoles[cue.role]??.03)*h;
     const {left,right,y,label,emphasis=[],rotation=0}=spec;
     if(![left,right,y].every(Number.isFinite)||left<0||right>1||left>=right||y<0||y>1||!Array.isArray(emphasis)||!Number.isFinite(rotation))
       throw new Error(`Text ${cue.id}: invalid rich line layout`);
@@ -38,12 +39,13 @@
     }
     g.save();try{
       if(rotation){g.translate(left*w,y*h);g.rotate(rotation);g.translate(-left*w,-y*h);}
-      g.font=`600 ${size}px ${e.style.fontFamily}`;g.textBaseline='middle';g.textAlign='left';
+      g.font=`${cue.richText&&cue.role==='title'?700:600} ${size}px ${e.style.fontFamily}`;g.textBaseline='middle';g.textAlign='left';
       const pad=size*.12,width=runs.reduce((n,r)=>n+g.measureText(r.text).width+(r.treatment==='chip'?pad*2:0),0);
       if(width>(right-left)*w||y*h-size/2<0||y*h+size/2>h)throw new Error(`Text ${cue.id}: rich line overflows`);
       if(label)draw(e,label.text,label.x*w,label.y*h,label.fontSize,label.color,w*.15);
       let x=left*w;
-      for(const run of runs){const rw=g.measureText(run.text).width,col=run.color||cue.color||e.colors.ink;
+      for(const run of runs){const rw=g.measureText(run.text).width;
+        const col=e.whitebox&&cue.richText?e.colors.ink:run.color||spec.color||cue.color||e.colors.ink;
         if(run.treatment==='chip'){g.fillStyle=col;g.fillRect(x,y*h-size*.75,rw+pad*2,size*1.5);x+=pad;g.fillStyle=run.ink||'#fff2d5';}
         else g.fillStyle=col;
         g.fillText(run.text,x,y*h);
@@ -58,7 +60,7 @@
       const {ctx:g, width:w, height:h, colors:c} = e;
       for (const cue of cues) {
         if (frame < cue.startFrame || frame >= cue.endFrame) continue;
-        if(cue.richTextJson){richLine(e,cue);continue;}
+        if(cue.richTextJson||cue.richText){richLine(e,cue);continue;}
         const size = cue.fontSize === undefined ? (e.style.textRoles[cue.role] || .03) * h : cue.fontSize;
         const x = (cue.x === undefined ? .5 : cue.x) * w;
         const defaultY = {title:.105, subtitle:.87, annotation:.22, label:.68};

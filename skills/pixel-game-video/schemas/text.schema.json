@@ -21,6 +21,70 @@
       "title": "FrameRef",
       "type": "object"
     },
+    "RichText": {
+      "additionalProperties": false,
+      "properties": {
+        "left": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Left",
+          "type": "number"
+        },
+        "right": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Right",
+          "type": "number"
+        },
+        "y": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Y",
+          "type": "number"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "maximum": 0.12,
+              "minimum": 0.02,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Size"
+        },
+        "emphasis": {
+          "items": {
+            "$ref": "#/$defs/TextEmphasis"
+          },
+          "title": "Emphasis",
+          "type": "array"
+        },
+        "color": {
+          "anyOf": [
+            {
+              "pattern": "^#[0-9A-Fa-f]{6}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Color"
+        }
+      },
+      "required": [
+        "left",
+        "right",
+        "y"
+      ],
+      "title": "RichText",
+      "type": "object"
+    },
     "TextCue": {
       "additionalProperties": false,
       "properties": {
@@ -71,6 +135,17 @@
           "default": null,
           "title": "Accent"
         },
+        "richText": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RichText"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "x": {
           "anyOf": [
             {
@@ -108,6 +183,47 @@
         "end"
       ],
       "title": "TextCue",
+      "type": "object"
+    },
+    "TextEmphasis": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "color": {
+          "anyOf": [
+            {
+              "pattern": "^#[0-9A-Fa-f]{6}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Color"
+        },
+        "treatment": {
+          "anyOf": [
+            {
+              "const": "underline",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Treatment"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "title": "TextEmphasis",
       "type": "object"
     }
   },

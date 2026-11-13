@@ -114,8 +114,9 @@ def _motion_params(recipe, params):
     if recipe not in rules:
         raise ValueError(f"motion executor unavailable: {recipe}")
     for key, value in params.items():
-        if recipe == "motion.contact-fx.v1" and key in ("style", "tone"):
-            values = ("sparks", "bloom", "light-sweep") if key == "style" else ("gold", "accent", "danger")
+        if recipe == "motion.contact-fx.v1" and key in ("style", "tone", "profile"):
+            values = {"style": ("sparks", "bloom", "light-sweep"), "tone": ("gold", "accent", "danger"),
+                      "profile": ("soft", "impact")}[key]
             if value not in values:
                 raise ValueError(f"contact-fx.{key}: expected one of {values}")
             continue
@@ -235,6 +236,20 @@ def compile_project(project_root, skill_root=None, *, write=False):
                 raise ValueError('Actor poses must be ordered, nonoverlapping and inside their shot')
             pose.update(startFrame=start, endFrame=end)
             end_previous = end
+        if atlas := shot.get('poseAtlas'):
+            if project['renderBackend'] != 'canvas' or shot.get('replacement'):
+                raise ValueError('A pose atlas needs a Canvas shot with a separate character layer')
+            if shot['actor'] or shot['performance'] or shot['scene'] in ('scenes.cache-adventure.v1', 'scenes.competition-routes.v1'):
+                raise ValueError('A pose atlas supplies its own character; use actor:null, omit performance and choose an ordinary Canvas scene')
+            previous_frame = shot['startFrame'] - 1
+            local_events = {shot['id'] + '.' + event['id'] for event in shot['events']}
+            for key_index, pose in enumerate(atlas['poses']):
+                if pose['at']['event'] not in local_events:
+                    raise ValueError('Pose atlas keys must reference their own shot')
+                pose['frame'] = frame = resolve(pose.pop('at'))
+                if (key_index == 0 and frame != shot['startFrame']) or not previous_frame < frame < shot['endFrame']:
+                    raise ValueError('Pose atlas keys must start at shot.enter and advance inside the shot')
+                previous_frame = frame
         unique((o["id"] for o in shot["objects"]), f"{shot['id']}.objects")
         for obj in shot["objects"]:
             require("library", obj["asset"])
@@ -335,6 +350,11 @@ def compile_project(project_root, skill_root=None, *, write=False):
         start, end = resolve(cue.pop("start")), resolve(cue.pop("end"))
         if not 0 <= start < end <= cursor:
             raise ValueError(f"{cue['id']}: invalid text interval")
+        if layout := cue.get('richText'):
+            if project['renderBackend'] != 'canvas' or cue['role'] not in ('title', 'annotation'):
+                raise ValueError('Rich text source layout supports Canvas titles and annotations')
+            if '\n' in cue['text'] or any(term['text'] not in cue['text'] for term in layout['emphasis']):
+                raise ValueError(f"{cue['id']}: rich text uses a single line and emphasis present in its copy")
         if cue["role"] == "subtitle":
             if project["audioMode"] == "narration+sfx" and not cue["phrases"]:
                 raise ValueError(f"{cue['id']}: narrated subtitles require phrase groups for text rehearsal timing")

@@ -95,6 +95,21 @@ class MediaSource(Contract):
     shortage: Literal["error", "hold"] = "error"
 
 
+class AtlasPose(Contract):
+    pose: str = Field(pattern=r"^[A-Za-z][A-Za-z0-9_.-]*$", max_length=100)
+    at: Ref
+    sourceRect: list[int] = Field(min_length=4, max_length=4)
+    offset: list[int] = Field(default_factory=lambda: [0, 0], min_length=2, max_length=2)
+
+
+class PoseAtlas(Contract):
+    file: str = Field(min_length=1)
+    x: float = Field(ge=0, le=1)
+    y: float = Field(ge=0, le=1)
+    height: float = Field(gt=0, le=1)
+    poses: list[AtlasPose] = Field(min_length=1, max_length=120)
+
+
 class Shot(Contract):
     id: str = Field(pattern=r"^[a-zA-Z][a-zA-Z0-9_-]*$")
     beatId: str | None = None
@@ -108,6 +123,7 @@ class Shot(Contract):
     cues: list[CuePlacement] = []
     components: list[dict[str, Any]] = []
     performance: list[dict[str, Any]] = []
+    poseAtlas: PoseAtlas | None = None
 
 
 class Storyboard(Contract):
@@ -151,6 +167,7 @@ class TextPlan(Contract):
     cueId: str
     role: Literal["subtitle", "annotation", "title", "label"]
     accent: str | None = None
+    richText: dict[str, Any] | None = None
     x: float | None = Field(default=None, ge=0, le=1)
     y: float | None = Field(default=None, ge=0, le=1)
 

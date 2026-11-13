@@ -528,6 +528,19 @@
           "default": null,
           "title": "Accent"
         },
+        "richText": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Richtext"
+        },
         "x": {
           "anyOf": [
             {

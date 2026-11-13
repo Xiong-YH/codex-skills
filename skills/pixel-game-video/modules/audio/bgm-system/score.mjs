@@ -9,7 +9,7 @@ export const presets = {
   calm: { title: '归位', purpose: '结果比较和片尾', kick: .37, snare: .19, bass: .43, keys: .57, bright: .28, reverb: .25 },
 };
 
-const harmony = [
+export const harmony = [
   ['F2', ['Ab3','C4','Eb4','G4'], ['C5','Eb5','G5']],
   ['F2', ['Ab3','C4','Eb4','F4'], ['Ab4','C5','F5']],
   ['Db2', ['F3','Ab3','C4','Eb4'], ['C5','F5','Eb5']],

@@ -90,6 +90,7 @@
       return {x: x + facing * width * .25, y: baseline - height * .25};
     },
     actor(e, shot, frame) {
+      if (shot.poseAtlas) return P.poseAtlas.draw(e, shot.poseAtlas, frame);
       if (!shot.actor || shot.scene === 'scenes.cache-adventure.v1') return;
       if (P.actorBlocking && shot.motions?.some(m => m.recipe === P.actorBlocking.recipe)) {
         return P.actorBlocking.draw(e, shot, frame);

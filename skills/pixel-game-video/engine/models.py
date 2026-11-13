@@ -102,6 +102,7 @@ class Component(Model):
     visualStyle: Literal["plain", "mechanical", "energy", "paper"] = "mechanical"
     styleVariant: Literal["open", "inset", "relay"] = "inset"
     features: Annotated[list[Literal["stack"]], Field(max_length=1)] = Field(default_factory=list)
+    entryFrom: Annotated[list[Unit], Field(min_length=2, max_length=2)] | None = None
     data: dict[str, Any]
 
 
@@ -109,6 +110,21 @@ class ActorPose(Model):
     pose: Literal['neutral', 'wave', 'talk', 'dazed-left', 'dazed-right', 'overwhelmed']
     start: FrameRef
     end: FrameRef
+
+
+class AtlasPose(Model):
+    pose: Id
+    at: FrameRef
+    sourceRect: Annotated[list[Annotated[int, Field(ge=0)]], Field(min_length=4, max_length=4)]
+    offset: Annotated[list[int], Field(min_length=2, max_length=2)] = Field(default_factory=lambda: [0, 0])
+
+
+class PoseAtlas(Model):
+    file: Annotated[str, Field(min_length=1)]
+    x: Unit
+    y: Unit
+    height: Annotated[float, Field(gt=0, le=1)]
+    poses: Annotated[list[AtlasPose], Field(min_length=1, max_length=120)]
 
 
 class ProgressNode(Model):
@@ -135,11 +151,33 @@ class Shot(Model):
     background: MediaSource | None = None
     replacement: MediaSource | None = None
     performance: list[ActorPose] = Field(default_factory=list)
+    poseAtlas: PoseAtlas | None = None
 
 
 class Timeline(Model):
     shots: Annotated[list[Shot], Field(min_length=1, max_length=500)]
     progress: NarrativeProgress | None = None
+
+
+class TextEmphasis(Model):
+    text: Annotated[str, Field(min_length=1)]
+    color: Annotated[str, Field(pattern=r'^#[0-9A-Fa-f]{6}$')] | None = None
+    treatment: Literal['underline'] | None = None
+
+
+class RichText(Model):
+    left: Unit
+    right: Unit
+    y: Unit
+    size: Annotated[float, Field(ge=.02, le=.12)] | None = None
+    emphasis: list[TextEmphasis] = Field(default_factory=list)
+    color: Annotated[str, Field(pattern=r'^#[0-9A-Fa-f]{6}$')] | None = None
+
+    @model_validator(mode='after')
+    def ordered_bounds(self):
+        if self.left >= self.right:
+            raise ValueError('Rich text needs left < right')
+        return self
 
 
 class TextCue(Model):
@@ -150,6 +188,7 @@ class TextCue(Model):
     start: FrameRef
     end: FrameRef
     accent: str | None = None
+    richText: RichText | None = None
     x: Unit | None = None
     y: Unit | None = None
 

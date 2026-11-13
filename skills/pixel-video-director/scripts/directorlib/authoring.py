@@ -122,6 +122,13 @@ def load_sources(project):
         for event in events.values():
             if event["id"] in ("enter", "exit") or event["frame"] >= shot["durationFrames"]:
                 raise ValueError(f"{shot['id']}.{event['id']} 无效：enter/exit 保留，事件必须位于镜头内。")
+        if atlas := shot['poseAtlas']:
+            if plans[shot['id']]['actor'] or plans[shot['id']]['replacement'] or shot['performance']:
+                raise ValueError(f"{shot['id']} 的整幅姿态图集需要独立的人物层。")
+            for pose in atlas['poses']:
+                owner, event = pose['at']['event'].split('.')
+                if owner != shot['id'] or event not in events and event != 'enter':
+                    raise ValueError(f"{shot['id']} 的姿态必须引用本镜事件。")
         objects = unique(shot["objects"], "id", f"{shot['id']}.objects")
         assets = unique(plans[shot["id"]]["objects"], "id", f"{shot['id']}.assets")
         if objects.keys() != assets.keys():
@@ -222,6 +229,9 @@ def transform(sources):
             timeline_shot['components'] = scene_params(shot['components'], f'/shots/{i}/components', sid, '/components')
         if shot.get('performance'):
             timeline_shot['performance'] = map_value('timeline.json',f'/shots/{i}/performance',shot['performance'],'storyboard.json',sid,'/performance')
+        if shot.get('poseAtlas'):
+            timeline_shot['poseAtlas'] = map_value('timeline.json', f'/shots/{i}/poseAtlas', shot['poseAtlas'],
+                                                  'storyboard.json', sid, '/poseAtlas')
         for field in ('background', 'replacement'):
             if shot_plan[field] is not None:
                 timeline_shot[field] = map_value('timeline.json', f'/shots/{i}/{field}', shot_plan[field], 'production-plan.json', sid, '/' + field)
@@ -244,7 +254,7 @@ def transform(sources):
                       for field in ("id", "text", "phrases")}
             for field in ("start", "end"):
                 target[field] = map_value("text.json", f"/cues/{j}/{field}", placement[field], "storyboard.json", cid, "/" + field)
-            for field in ("role", "accent", "x", "y"):
+            for field in ("role", "accent", "x", "y", "richText"):
                 if look[field] is not None:
                     target[field] = map_value("text.json", f"/cues/{j}/{field}", look[field], "production-plan.json", cid, "/" + field)
             outputs["text.json"]["cues"].append(target)
@@ -294,6 +304,8 @@ def handoff(project, foundation=None):
     for shot in sources['production-plan.json']['shots']:
         visual_files.extend(shot[field] for field in ('background', 'replacement') if shot[field])
     for shot in sources['storyboard.json']['shots']:
+        if shot.get('poseAtlas'):
+            visual_files.append({'file': shot['poseAtlas']['file']})
         for component in shot['components']:
             data = component.get('data', {})
             visual_files.extend({'file': item['image']} for item in [data, *data.get('items', [])] if item.get('image'))

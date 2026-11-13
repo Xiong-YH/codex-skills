@@ -32,3 +32,5 @@ direct 工程可以编辑四份输入。director 工程通过源映射验证四�
 镜头 `actor:null` 表示不叠加库人物，导入插画或片段内部仍可含人物；Canvas 机制采用居中放大的构图，Remotion 书桌保留场景固定布局。省略 actor 则沿用默认人物。全景转场作用于整幅场景，字幕独立；轻面板转场限于 scenes 目录定义的内容舞台。
 
 Canvas 的 `shot.performance` 可在通用人物层按同镜事件切换 V3 离散姿态；区间不得重叠或越镜，人物为空、使用 replacement 或由路径专用场景拥有时拒绝。脚底锚点由素材清单声明；这不提供音素口型或骨骼补间。`timeline.progress.nodes` 可绑定全片叙事节点，首节点必须为零帧，随后严格递增。字段见人物与文字模块指南。原生 Remotion 尚未实现这两项，编译时明确拒绝；Canvas runtime 路径可将它们带入工作台。
+
+普通 Canvas 镜头可用 `shot.poseAtlas` 在独立人物层显示项目的整幅动作图集。首姿从镜头首帧开始，其余姿态引用同镜事件。字段与裁切约束见 [整幅动作图集](../modules/scenes/PRESENTER-ACTIONS.md#在普通-canvas-镜头使用整幅动作图集)。

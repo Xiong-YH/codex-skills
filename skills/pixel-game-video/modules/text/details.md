@@ -32,3 +32,7 @@
 工作台 Canvas 字幕可填写 `richTextJson`，保留 `text/fontSize/color` 为实际文案与默认样式。JSON 使用归一化 `left/right/y` 指定单行区域，可附 `label:{text,x,y,fontSize,color}` 与 `emphasis:[{text,color,treatment,ink}]`。`treatment` 可用 `chip`（色块）或 `underline`（下划线）；按最长词匹配，修改文案后自动重新测量，超宽报错。此模式只画字和强调，底板放独立轨并关闭本句底板；不新增 VideoSpec 字段，也不改变旧字幕默认行为。
 
 `richTextJson.rotation` 可选，单位为弧度，绕该行左侧基线旋转；默认0。用于贴合斜放的身份卡等物件，文字仍保留在独立轨道。
+
+## 创作源中的单行标题与标注
+
+Canvas 的 `title`、`annotation` 可以在 VideoSpec cue 中填写 `richText`。导演工程在 `production-plan.text` 中用同名字段，逐字文案继续引用 `script.cues`。填写归一化的 `left/right/y`，可用 `size` 指定画高字号比例、`color` 指定基础色、`emphasis` 给原文中的词着色或加下划线。正式 Canvas、白模和工作台都从同一 cue 绘制，时间由分镜事件控制。

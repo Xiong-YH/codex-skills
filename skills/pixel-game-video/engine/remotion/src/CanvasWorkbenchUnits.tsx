@@ -12,7 +12,7 @@ type ClipTransform = {x?: number; y?: number; scale?: number; opacity?: number};
 export type CanvasShotProps = {
   shotIndex?: number; sourceUnitId?: string; actor?: string | null;
   paramsJson?: string; objectsJson?: string; componentsJson?: string;
-  backgroundJson?: string; replacementJson?: string; performanceJson?: string; cameraJson?: string;
+  backgroundJson?: string; replacementJson?: string; performanceJson?: string; cameraJson?: string; poseAtlasJson?: string;
   paramsJSON?: string; objectsJSON?: string; componentsJSON?: string;
   backgroundJSON?: string; replacementJSON?: string; performanceJSON?: string; cameraJSON?: string;
   hideHeading?: boolean;
@@ -43,6 +43,31 @@ const editedShot = (shot: Data, props: CanvasShotProps, payload: CanvasPayload):
     value[field] = json(source[`${field}Json`] ?? source[`${field}JSON`], shot[field], field);
   }
   if (props.actor !== undefined) value.actor = props.actor || null;
+  value.poseAtlas = json(props.poseAtlasJson, shot.poseAtlas, 'pose atlas');
+  if (value.poseAtlas) {
+    const atlas = value.poseAtlas;
+    const assetKey = '@image:' + atlas.file;
+    const info = payload.resolved.media?.[assetKey];
+    if (info?.kind !== 'image' || !payload.assets[assetKey])
+      throw new Error('Character atlas is outside the compiled project assets.');
+    const position = [atlas.x, atlas.y, atlas.height];
+    if (value.actor || value.replacement || value.performance?.length ||
+        !position.every(n => Number.isFinite(n) && n >= 0 && n <= 1) || atlas.height <= 0 ||
+        !Array.isArray(atlas.poses) || !atlas.poses.length || atlas.poses[0].frame !== shot.startFrame)
+      throw new Error('Character atlas needs valid placement and a first pose at the start of the shot.');
+    let previous = shot.startFrame - 1;
+    for (const pose of atlas.poses) {
+      const rect = pose.sourceRect;
+      if (!Number.isInteger(pose.frame) || pose.frame <= previous || pose.frame >= shot.endFrame ||
+          !Array.isArray(rect) || rect.length !== 4 || !rect.every(n => Number.isInteger(n) && n >= 0) ||
+          rect[2] <= 0 || rect[3] <= 0 || rect[2] !== atlas.poses[0].sourceRect[2] || rect[3] !== atlas.poses[0].sourceRect[3] ||
+          rect[0] + rect[2] > info.width || rect[1] + rect[3] > info.height ||
+          !Array.isArray(pose.offset) || pose.offset.length !== 2 || !pose.offset.every(Number.isInteger))
+        throw new Error('Character atlas has a misaligned pose key or a cell outside the image.');
+      previous = pose.frame;
+    }
+    value.poseAtlas = {...atlas, assetKey};
+  }
   if (!Array.isArray(value.objects)) throw new Error('Editable objects JSON must be an array.');
   for (const object of value.objects) {
     if (!object || !PIXEL_CANVAS_RUNTIME.library.hasProp(object.asset))
@@ -260,6 +285,7 @@ export const CanvasCaptionUnit: React.FC<CaptionProps> = (props) => {
   if (!cue) throw new Error('Missing Canvas caption cue.');
   const request = useMemo(() => ({resolved: payload.resolved, frame: cue.startFrame, skipMedia: true, draw: (renderer: any) => {
     const overrides = Object.fromEntries(Object.entries(props).filter(([key, value]) => key !== 'cueIndex' && value !== undefined));
+    if (props.richTextJson === '') overrides.richText = null;
     renderer.drawCaption(cue, overrides);
   }}), [payload, signature]);
   return <CanvasLayer payload={payload} request={request} identity={`caption:${signature}`}/>;
