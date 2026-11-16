@@ -10,6 +10,7 @@ import {resolveRenderConcurrency,updateRenderProgress} from './render-settings.m
 import {renderWithSegments} from './segment-cache.mjs';
 import {inspectEdit} from '../src/sourceSync.js';
 import {verifyEncoded} from './media-check.mjs';
+import {prepareVideoSources} from './video-sources.mjs';
 
 export const installedBrowser = () => {
   const candidates=process.env.PIXEL_BROWSER_EXECUTABLE?[process.env.PIXEL_BROWSER_EXECUTABLE]:[
@@ -78,7 +79,6 @@ export const createExportMiddleware = ({rootDir,browserLookup=installedBrowser,s
   const runJob=async(job,project,{propsFile,renderPublic,plate,video,script,draftDir})=>{
     const started=performance.now();
     try{
-      writeFileSync(propsFile,JSON.stringify(renderPropsForKind(project,job.kind)));
       writeFileSync(path.join(rootDir,job.projectOutput),JSON.stringify(project,null,2));
       if(job.kind==='jianying'){
         job.lastLine='检查剪映导出依赖…';
@@ -93,6 +93,11 @@ export const createExportMiddleware = ({rootDir,browserLookup=installedBrowser,s
         cpSync(path.join(rootDir,'public',name),path.join(renderPublic,name),{recursive:true,dereference:true});
       }
       job.timingsMs.materials=performance.now()-copyStarted;
+      job.lastLine='准备视频素材画面…';
+      const mediaStarted=performance.now();
+      const preparedVideoFrames=await prepareVideoSources(renderPublic,project);
+      job.timingsMs.videoPreparation=performance.now()-mediaStarted;
+      writeFileSync(propsFile,JSON.stringify(renderPropsForKind(project,job.kind,preparedVideoFrames)));
       const renderer=path.join(rootDir,'node_modules','@remotion','cli','remotion-cli.js');
       const renderedOutput=job.kind==='jianying'?plate:path.join(rootDir,job.output);
       if(job.reuseSegments&&job.kind==='mp4')await renderWithSegments({rootDir,project,propsFile,publicDir:renderPublic,browser:job.browser,concurrency:job.concurrency,output:renderedOutput,job,run:runCommand});

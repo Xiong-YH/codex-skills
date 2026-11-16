@@ -76,6 +76,3 @@ Thumbs.db
 
 # Authored character-performance reference videos
 !skills/pixel-game-video/modules/scenes/character-performance/examples/relationship-studies/media/*.mp4
-!/skills/pixel-game-video/examples/narration-visual-progress/original.mp4
-!/skills/pixel-game-video/examples/narration-visual-progress/diagram-revision.mp4
-!/skills/pixel-game-video/examples/narration-visual-progress/scene-revision.mp4

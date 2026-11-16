@@ -307,12 +307,44 @@
       "preview": null
     },
     {
+      "id": "design.motion.actor-blocking",
+      "title": "小棕走位与伸手",
+      "intent": "attention",
+      "status": "ready",
+      "exposure": "primary",
+      "purpose": "让人物靠近、触碰并改变对象状态",
+      "avoid": "使用同一脚底基线，检查指尖、卡边和反馈是否在同一帧",
+      "binding": {
+        "recipe": "motion.actor-blocking.v1",
+        "params": {}
+      },
+      "documentation": "recipes/contact-feedback.md",
+      "implementation": "actor-blocking.js",
+      "preview": null
+    },
+    {
+      "id": "design.motion.contact-fx",
+      "title": "触点火花、晕染与掠光",
+      "intent": "emphasis",
+      "status": "ready",
+      "exposure": "primary",
+      "purpose": "让碰撞、激活或交付的结果可见",
+      "avoid": "光效留在需要强调的对象周边，落稳后清出阅读区",
+      "binding": {
+        "recipe": "motion.contact-fx.v1",
+        "params": {}
+      },
+      "documentation": "recipes/contact-feedback.md",
+      "implementation": "contact-fx.js",
+      "preview": null
+    },
+    {
       "id": "design.motion.component-handoff",
       "title": "组件交接：匹配、重组、回归全貌、合流、关键词",
       "intent": "handoff",
       "status": "ready",
       "exposure": "primary",
-      "purpose": "保留对象身份并重组信息",
+      "purpose": "保留对象身份、重组信息或带着同一对象换场",
       "avoid": "按本片内容与素材边界选用；查看实际参数合同",
       "binding": {
         "recipe": "motion.component-handoff.v1",

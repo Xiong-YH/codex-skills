@@ -11,7 +11,7 @@
   },
   "style": "style.pixel-computing.v1",
   "seed": 7,
-  "audioMode": "narration+sfx",
+  "audioMode": "sfx-only",
   "shots": [
     {
       "id": "s1",
@@ -283,56 +283,6 @@
       "level": 0.25,
       "x": 0.65,
       "variant": 0
-    }
-  ],
-  "narration": [
-    {
-      "id": "voice-c1",
-      "file": "media/c1.wav",
-      "at": {
-        "event": "s1.voice"
-      },
-      "gain": 0.9
-    },
-    {
-      "id": "voice-c2",
-      "file": "media/c2.wav",
-      "at": {
-        "event": "s2.voice"
-      },
-      "gain": 0.9
-    },
-    {
-      "id": "voice-c3",
-      "file": "media/c3.wav",
-      "at": {
-        "event": "s3.voice"
-      },
-      "gain": 0.9
-    },
-    {
-      "id": "voice-c4",
-      "file": "media/c4.wav",
-      "at": {
-        "event": "s4.voice"
-      },
-      "gain": 0.9
-    },
-    {
-      "id": "voice-c5",
-      "file": "media/c5.wav",
-      "at": {
-        "event": "s5.voice"
-      },
-      "gain": 0.9
-    },
-    {
-      "id": "voice-c6",
-      "file": "media/c6.wav",
-      "at": {
-        "event": "s6.voice"
-      },
-      "gain": 0.9
     }
   ]
 }

@@ -11,7 +11,7 @@
   },
   "style": "style.pixel-study.v1",
   "seed": 19,
-  "audioMode": "narration+sfx",
+  "audioMode": "sfx-only",
   "shots": [
     {
       "id": "s1",
@@ -116,32 +116,5 @@
       "x": 0.5,
       "variant": 0
     }
-  ],
-  "narration": [
-    {
-      "id": "voice_c1_1",
-      "file": "media/s1-c1.wav",
-      "at": {
-        "event": "s1.speech1"
-      },
-      "gain": 0.9
-    },
-    {
-      "id": "voice_c1_2",
-      "file": "media/s1-c2.wav",
-      "at": {
-        "event": "s1.speech2"
-      },
-      "gain": 0.9
-    },
-    {
-      "id": "voice_c6_1",
-      "file": "media/s6-c1.wav",
-      "at": {
-        "event": "s6.speech1"
-      },
-      "gain": 0.9
-    }
-  ],
-  "speechDuck": 0.25
+  ]
 }

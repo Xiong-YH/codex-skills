@@ -55,6 +55,53 @@
       ],
       "title": "Label",
       "type": "object"
+    },
+    "NarrativeBeat": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "before": {
+          "minLength": 1,
+          "title": "Before",
+          "type": "string"
+        },
+        "change": {
+          "minLength": 1,
+          "title": "Change",
+          "type": "string"
+        },
+        "result": {
+          "minLength": 1,
+          "title": "Result",
+          "type": "string"
+        },
+        "carry": {
+          "default": "",
+          "title": "Carry",
+          "type": "string"
+        },
+        "cueIds": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Cueids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "before",
+        "change",
+        "result",
+        "cueIds"
+      ],
+      "title": "NarrativeBeat",
+      "type": "object"
     }
   },
   "additionalProperties": false,
@@ -64,6 +111,14 @@
       "default": 1,
       "title": "Schemaversion",
       "type": "integer"
+    },
+    "beats": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/NarrativeBeat"
+      },
+      "title": "Beats",
+      "type": "array"
     },
     "cues": {
       "items": {

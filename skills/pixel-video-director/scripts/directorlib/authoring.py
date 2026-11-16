@@ -23,6 +23,38 @@ def unique(items, key, context):
     return result
 
 
+def validate_beats(script, shots, cues):
+    beats = unique(script["beats"], "id", "script.beats")
+    if not beats:
+        if any(shot["beatId"] is not None for shot in shots.values()):
+            raise ValueError("storyboard.beatId 需要 script.beats。")
+        return
+    cue_owners = {}
+    for index, beat in enumerate(beats.values()):
+        if any(not beat[key].strip() for key in ("before", "change", "result")):
+            raise ValueError(f"{beat['id']} 需要填写初态、变化和结果。")
+        if index + 1 < len(beats) and not beat["carry"].strip():
+            raise ValueError(f"{beat['id']} 需要写清交给下一段的结果。")
+        for cue_id in beat["cueIds"]:
+            if cue_id not in cues or cue_id in cue_owners:
+                raise ValueError(f"{beat['id']} 的 {cue_id} 必须是唯一归属的已知文案。")
+            cue_owners[cue_id] = beat["id"]
+    if cue_owners.keys() != cues.keys():
+        raise ValueError("script.beats 必须覆盖全部上屏 cue。")
+    order = []
+    for shot in shots.values():
+        beat_id = shot["beatId"]
+        if beat_id not in beats:
+            raise ValueError(f"{shot['id']} 必须引用一个已知的 beatId。")
+        if not order or beat_id != order[-1]:
+            order.append(beat_id)
+        for placement in shot["cues"]:
+            if cue_owners.get(placement["cueId"]) != beat_id:
+                raise ValueError(f"{shot['id']} 的文案 {placement['cueId']} 不属于叙事段 {beat_id}。")
+    if order != list(beats):
+        raise ValueError("分镜必须按 script.beats 的顺序完整兑现叙事段。")
+
+
 def load_sources(project):
     data = {name: MODELS[Path(name).stem].model_validate(read_json(Path(project) / name)).model_dump()
             for name in SOURCES}
@@ -38,6 +70,7 @@ def load_sources(project):
     if cues.keys() & labels.keys():
         raise ValueError("script 的 cue 与 label ID 不能重复。")
     shots = unique(board["shots"], "id", "storyboard.shots")
+    validate_beats(script, shots, cues)
     plans = unique(plan["shots"], "id", "production-plan.shots")
     text = unique(plan["text"], "cueId", "production-plan.text")
     if shots.keys() != plans.keys():
@@ -89,6 +122,13 @@ def load_sources(project):
         for event in events.values():
             if event["id"] in ("enter", "exit") or event["frame"] >= shot["durationFrames"]:
                 raise ValueError(f"{shot['id']}.{event['id']} 无效：enter/exit 保留，事件必须位于镜头内。")
+        if atlas := shot['poseAtlas']:
+            if plans[shot['id']]['actor'] or plans[shot['id']]['replacement'] or shot['performance']:
+                raise ValueError(f"{shot['id']} 的整幅姿态图集需要独立的人物层。")
+            for pose in atlas['poses']:
+                owner, event = pose['at']['event'].split('.')
+                if owner != shot['id'] or event not in events and event != 'enter':
+                    raise ValueError(f"{shot['id']} 的姿态必须引用本镜事件。")
         objects = unique(shot["objects"], "id", f"{shot['id']}.objects")
         assets = unique(plans[shot["id"]]["objects"], "id", f"{shot['id']}.assets")
         if objects.keys() != assets.keys():
@@ -103,8 +143,8 @@ def load_sources(project):
     if set(used_cues) != set(cues) or set(text) != set(cues):
         raise ValueError("script、storyboard cue 引用与 production-plan.text 必须覆盖同一组 cue ID。")
     for cue_id, appearance in text.items():
-        if appearance["role"] == "subtitle" and not cues[cue_id]["phrases"]:
-            raise ValueError(f"字幕 {cue_id} 缺少 phrases；文字排练节奏需要脚本短句，不生成嘴型。")
+        if plan["audioMode"] == "narration+sfx" and appearance["role"] == "subtitle" and not cues[cue_id]["phrases"]:
+            raise ValueError(f"有旁白的字幕 {cue_id} 缺少文字排练所需的 phrases。")
     if plan["audioMode"] == "silent" and plan["audio"]:
         raise ValueError("silent 模式不能同时安排音效，请回改 production-plan.audio。")
     if plan["audioMode"] == "silent" and plan["bgm"] is not None:
@@ -181,11 +221,17 @@ def transform(sources):
         timeline_shot = {}
         for field in ("id", "durationFrames", "scene", "events"):
             timeline_shot[field] = map_value("timeline.json", f"/shots/{i}/{field}", shot[field], "storyboard.json", sid, "/" + field)
+        if shot["beatId"] is not None:
+            timeline_shot["beatId"] = map_value("timeline.json", f"/shots/{i}/beatId", shot["beatId"],
+                                                "storyboard.json", sid, "/beatId")
         timeline_shot["params"] = scene_params(shot["params"], f"/shots/{i}/params", sid, "/params")
         if shot['components']:
             timeline_shot['components'] = scene_params(shot['components'], f'/shots/{i}/components', sid, '/components')
         if shot.get('performance'):
             timeline_shot['performance'] = map_value('timeline.json',f'/shots/{i}/performance',shot['performance'],'storyboard.json',sid,'/performance')
+        if shot.get('poseAtlas'):
+            timeline_shot['poseAtlas'] = map_value('timeline.json', f'/shots/{i}/poseAtlas', shot['poseAtlas'],
+                                                  'storyboard.json', sid, '/poseAtlas')
         for field in ('background', 'replacement'):
             if shot_plan[field] is not None:
                 timeline_shot[field] = map_value('timeline.json', f'/shots/{i}/{field}', shot_plan[field], 'production-plan.json', sid, '/' + field)
@@ -208,13 +254,18 @@ def transform(sources):
                       for field in ("id", "text", "phrases")}
             for field in ("start", "end"):
                 target[field] = map_value("text.json", f"/cues/{j}/{field}", placement[field], "storyboard.json", cid, "/" + field)
-            for field in ("role", "accent", "x", "y"):
+            for field in ("role", "accent", "x", "y", "richText"):
                 if look[field] is not None:
                     target[field] = map_value("text.json", f"/cues/{j}/{field}", look[field], "production-plan.json", cid, "/" + field)
             outputs["text.json"]["cues"].append(target)
-    outputs["audio.json"]["cues"] = [map_value("audio.json", f"/cues/{i}", cue, "production-plan.json", cue["id"], "")
-                                            for i, cue in enumerate(plan["audio"])]
+    outputs["audio.json"]["cues"] = [
+        map_value("audio.json", f"/cues/{i}", {key: value for key, value in cue.items() if value is not None},
+                  "production-plan.json", cue["id"], "")
+        for i, cue in enumerate(plan["audio"])
+    ]
     outputs['audio.json']['speechDuck'] = map_value('audio.json', '/speechDuck', plan['speechDuck'], 'production-plan.json', plan['id'], '/speechDuck')
+    if plan['masterGain'] is not None:
+        outputs['audio.json']['masterGain'] = map_value('audio.json', '/masterGain', plan['masterGain'], 'production-plan.json', plan['id'], '/masterGain')
     if plan['narration']:
         outputs['audio.json']['narration'] = [map_value('audio.json', f'/narration/{i}', cue, 'production-plan.json', cue['id'], '') for i,cue in enumerate(plan['narration'])]
     if plan['bgm'] is not None:
@@ -246,12 +297,15 @@ def handoff(project, foundation=None):
                   "mappings": mappings}
     media = {}
     media_refs = list(sources['production-plan.json']['narration'])
+    media_refs.extend(cue for cue in sources['production-plan.json']['audio'] if cue['file'])
     if sources['production-plan.json']['bgm'] is not None:
         media_refs.append(sources['production-plan.json']['bgm'])
     visual_files = []
     for shot in sources['production-plan.json']['shots']:
         visual_files.extend(shot[field] for field in ('background', 'replacement') if shot[field])
     for shot in sources['storyboard.json']['shots']:
+        if shot.get('poseAtlas'):
+            visual_files.append({'file': shot['poseAtlas']['file']})
         for component in shot['components']:
             data = component.get('data', {})
             visual_files.extend({'file': item['image']} for item in [data, *data.get('items', [])] if item.get('image'))

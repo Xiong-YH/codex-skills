@@ -90,6 +90,7 @@ def main():
             sources = load_sources(args.project)
             result = {"valid": True, "shots": len(sources["storyboard.json"]["shots"]),
                       "cues": len(sources["script.json"]["cues"]),
+                      "beats": [beat["id"] for beat in sources["script.json"]["beats"]],
                       "visualIntentMissing": [s['id'] for s in sources['storyboard.json']['shots'] if not s['visual']]}
             result.update(valid=not result["visualIntentMissing"], scope="authoring-structure-and-references",
                           foundationValidation="not_run", actionImplementation="not_reviewed",

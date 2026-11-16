@@ -160,7 +160,7 @@
 | code | title, items（2–7行，每行 text/event） | language |
 | takeaway | title | eyebrow, detail |
 
-公共字段：`id,kind,x,y,width,height,data`；坐标按画幅 0–1。`visualStyle` 为 plain/mechanical/energy 三者择一（plain 保留朴素原版），`styleVariant` 为 open/inset/relay，`features` 为 [] 或 ["stack"]；组合规则仅由[基础规范](BASIC-COMPONENTS.md)维护。`showEvent` 默认 enter；可用 `focusEvent` 在指定事件后保持强调；`tone` 从 gold/accent/secondary/danger 选择色彩职责。事件使用本镜 local ID，不能引用 exit，数值的 startEvent 必须早于 endEvent。
+公共字段为 `id,kind,x,y,width,height,data`，坐标按画幅 0–1。材质 `visualStyle`、样式 `styleVariant` 和可选特性 `features` 的组合见 [基础规范](BASIC-COMPONENTS.md)。`showEvent` 默认 enter，可用 `focusEvent` 在指定事件后保持强调。`tone` 从 gold/accent/secondary/danger 选择色彩职责。事件使用本镜 local ID，不能引用 exit，数值的 startEvent 必须早于 endEvent。
 
 ```json
 {"id":"result","kind":"metric","x":0.30,"y":0.24,"width":0.58,"height":0.40,
@@ -171,6 +171,8 @@
 在基础 timeline.shots[].components 中使用以上结构。导演工程在 storyboard 同名字段安排布局和事件，title/eyebrow/detail/label/unit/index/rootTitle/language/text 等显示文字全部引用 script.labels；comparison.value 也是文字引用，bars.value 是数值。其余数值与事件直接写入。自由布局可用 `scenes.canvas.v1`，保留 props、人物、项目背景或替换片段，组件绘制在其上，字幕最后叠加。
 
 `image` 是项目 media/ 内的 PNG/JPG/WebP 路径；`sourceShot` 引用更早镜头的最终完整画面（不含独立字幕），二者互斥。快照保留源场景身份，适合回顾与比较。不会递归引用当前或未来镜头。数值变化在终点精确落到 to 并保持，不循环计数。
+
+要使用项目自己的整张卡面，可给 `plain` 的身份卡填写 `data.fit:"full"`、`image` 与 `title`。图片提供材质、叠层和边框，标题独立绘制。卡要从另一处飞入时，用可选 `entryFrom:[x,y]` 指定起始左上角，沿 `showEvent` 起动、在四分之一秒到达编排位置，再短促收束。需要跨镜交接时用同一张卡面和文案。
 
 组件形态不同：身份卡组织图像/名称/特征，数据卡突出数值，对比组维持同构结构并按事件显露，标注连接实际对象，章节用编号与标题组织段落。共用留白、描边、角饰与显露时间。组件文字溢出会报错，应扩展布局或缩短标签，不会自动缩成小字或静默裁切。
 

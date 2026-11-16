@@ -72,6 +72,21 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual((owner["sourceFile"], owner["stableId"], owner["field"]),
                          ("../script.json", "optionA", "/text"))
 
+    def test_beat_driven_handoff_preserves_both_narrative_and_runtime_references(self):
+        sample = SKILL / 'examples/beat-driven-cache'
+        for name in ('brief.json', 'script.json', 'storyboard.json', 'production-plan.json'):
+            write_json(self.project / name, read_json(sample / name))
+        self.change('production-plan.json', lambda data: data.pop('bgm'))
+        self.assertEqual(handoff(self.project, self.foundation)['durationFrames'], 960)
+        shots = read_json(self.project / 'video/timeline.json')['shots']
+        self.assertEqual([shot['beatId'] for shot in shots], ['miss', 'fetch', 'store', 'hit'])
+        self.assertEqual(shots[1]['motions'][0]['params']['roomReveal'], 'left')
+        cues = read_json(self.project / 'video/text.json')['cues']
+        self.assertTrue(all(cue['role'] == 'subtitle' and not cue['phrases'] for cue in cues))
+        self.change('storyboard.json', lambda data: data['shots'][0].update(beatId='fetch'))
+        with self.assertRaisesRegex(ValueError, 'desk'):
+            load_sources(self.project)
+
     def test_generated_edit_is_not_silently_overwritten(self):
         handoff(self.project, self.foundation)
         target = self.project / "video/text.json"

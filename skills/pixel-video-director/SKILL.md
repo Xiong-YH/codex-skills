@@ -1,6 +1,6 @@
 ---
 name: pixel-video-director
-description: 接手完整文案，拆大模块和片段，以大白话及可弃用线框草图讨论，再共同迭代结构化设计与动态白模，统筹正式制作和审片。分镜、片段衔接或观看体验设计时使用。选题文案归 pixel-video-writer，正式执行归 pixel-game-video。
+description: 为无口播像素信息动效设计分镜、组件承接、音乐卡点和动态白模，统筹正式制作和审片。选题与屏幕文案归 pixel-video-writer，工程执行归 pixel-game-video。
 ---
 
 # Pixel Video Director
@@ -8,6 +8,8 @@ description: 接手完整文案，拆大模块和片段，以大白话及可弃�
 负责全片视听设计、制作统筹与创作审片。按 [协作定位与接稿](references/collaboration.md) 接手当前文案和确认记录。观点与逐字文案回到编剧修订。已有有效确认和项目进度直接继承。
 
 创作、续作或复盘前，按 [依赖定位](references/handoff.md) 找到 FOUNDATION，读取其 `references/production-principles.md`。构思视听方案前先读 [《惊艳手法库》](references/garden-skills/craft.md)。新增或修改镜头必读 [动态规范与兑现合同](references/motion-direction.md)，在第一轮镜头说明中写清观看顺序、可见变化和动静安排。只做设计时按所需阶段交付。
+
+**接稿先排信息变化。** 把编剧的段落和主句带进 `script.beats` 与 `storyboard.beatId`。按 [无口播信息动效与音乐卡点](references/beat-driven-explainer.md) 设计各段可见结果和组件承接，再用实际配乐排动作落点、主句与阅读窗口。用 [无口播缓存示例](examples/beat-driven-cache/README.md) 核对动态白模与正式 Canvas 的同源链路。
 
 ## 按阶段继续
 
@@ -26,7 +28,6 @@ description: 接手完整文案，拆大模块和片段，以大白话及可弃�
 | 需要 | 入口 |
 | --- | --- |
 | 人物操作、姿态或连贯表演 | [人物表演设计](references/character-performance.md)，新动作制作与入库沿 FOUNDATION 制作总则的授权范围 |
-| 延续计算机口播系列 | [系列要求](references/computing-voiceover.md)、[插画分类与选角](references/character-illustration.md) |
 | 插画局部动态 | [插画动态设计](references/illustration-motion.md) |
 | 背景或独立片段接入 | [素材替换](references/media-replacement.md) |
 | 组件需求与表现 | [组件需求](references/visual-storyboard.md#脚本中的组件需求)，再读 FOUNDATION 的 `modules/components/GUIDE.md` |

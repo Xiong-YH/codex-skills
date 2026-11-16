@@ -22,6 +22,7 @@
 | 相机与辅助动作 | [配方选型](details.md#相机与辅助动作)、[能力目录](catalog.json) |
 | 新镜头的短促运镜／图层动画／页面接续 | [非3D运镜与页面接续](recipes/pulse-camera.md)：五预设、关键帧、分组变换；Canvas与工作台 |
 | 组件动作时长和配乐触点 | [离散动作与节拍](TIMING.md) |
+| 普通镜头内的小棕走位与局部反馈 | [人物动作、火花、晕染和掠光](recipes/contact-feedback.md) |
 | 参数、相机和转场边界 | [编排与验收](details.md#编排与验收)、[公共合同](../../references/contract.md) |
 | 游戏反馈与声音 | [场景反馈](../scenes/GAME_FEEL.md)、[声音](../audio/GUIDE.md) |
 | 字幕、道具或组件的冲入、回弹与衰减震动 | [个体冲击逐帧参考](IMPACT.md) |

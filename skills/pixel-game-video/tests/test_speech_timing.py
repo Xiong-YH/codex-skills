@@ -16,7 +16,7 @@ class SpeechTimingTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name) / 'project'
-        shutil.copytree(SKILL / 'examples/speech-rehearsal', self.root)
+        shutil.copytree(SKILL / 'tests/fixtures/speech-rehearsal', self.root)
 
     def tearDown(self):
         self.temp.cleanup()

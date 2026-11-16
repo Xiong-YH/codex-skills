@@ -4,6 +4,8 @@
 
 从 [可浏览动作库](index.html) 按行为选型，数据来自 `actions.json` 与 `sequences.json`。导演先按场景目标设计，目录是开放候选，不能变成剧情菜单。动作ID、序列ID不能写进 `shot.performance.pose`；该字段仍只接受 [已接入姿态](../PRESENTER-ACTIONS.md)。
 
+带完整图集的动作可通过普通 Canvas 的 [整幅动作图集字段](../PRESENTER-ACTIONS.md#在普通-canvas-镜头使用整幅动作图集) 接入。引用实际图片和清单中的裁切范围，以本片事件安排原姿态。
+
 ## 当前审核版本
 
 最新一轮用户要求补齐参考视频：八项现各有一段独立5秒代码人物排练MP4，详情页直接播放；旧选段保留在previousExamples作为出处，不再充当主参考。视频、源码、复现录制脚本和哈希见examples/relationship-studies/。原九格素材的人物侧桌脚缺失已撤回为结构失败，当前用seated-actions-v2.png；纠错范围、已知限制与本轮核验见 [review-v3.md](review-v3.md)。

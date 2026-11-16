@@ -51,7 +51,11 @@
       const s=state(c,shot,f,e.fps);if(!s.visible||s.alpha<=0)continue;
       const t=P.componentStyles.prepare(e,c,shot,f,tokens(e,c)),b=box(c.x*e.width,c.y*e.height,c.width*e.width,c.height*e.height);
       e.ctx.save();e.ctx.globalAlpha*=s.alpha;
-      try{P.componentStyles.entry(e,t);if(!P.componentApparatus.draw(e,c,b,t,s,{text,picture}))throw Error('Unsupported component kind: '+c.kind);}finally{e.ctx.restore();}
+      try{
+        P.componentStyles.entry(e,t);
+        if(c.visualStyle==='paper')P.componentPaper.draw(e,c,b,t,s,text);
+        else if(!P.componentApparatus.draw(e,c,b,t,s,{text,picture}))throw Error('Unsupported component kind: '+c.kind);
+      }finally{e.ctx.restore();}
     }
   }};
 })(globalThis.PixelVideo=globalThis.PixelVideo||{});

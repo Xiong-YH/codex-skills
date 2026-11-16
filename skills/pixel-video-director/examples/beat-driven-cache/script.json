@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "beats": [
+    {
+      "id": "miss",
+      "before": "发出读取资料 A 的请求，本地缓存为空。",
+      "change": "人物走到读取口，按下请求卡。",
+      "result": "本地未命中，需要向源站读取。",
+      "carry": "把编号 001 的资料 A 请求交给源站。",
+      "cueIds": ["request", "miss-line"]
+    },
+    {
+      "id": "fetch",
+      "before": "源站接到编号 001 的请求。",
+      "change": "沿着同一张卡切进机房，源站将资料交还。",
+      "result": "找到了资料 A。",
+      "carry": "带着资料 A 返回工作台。",
+      "cueIds": ["fetch-line"]
+    },
+    {
+      "id": "store",
+      "before": "源站响应回到工作台，缓存仍为空。",
+      "change": "交付原资料时，旁边落下一张副本。",
+      "result": "本地缓存里有了资料 A。",
+      "carry": "保留刚落下的副本，让下一次请求直接读取。",
+      "cueIds": ["store-line"]
+    },
+    {
+      "id": "hit",
+      "before": "再次请求资料 A，上一段的副本还在。",
+      "change": "把视线带到副本，人物直接按到副本。",
+      "result": "直接从本地读取，省去源站往返。",
+      "cueIds": ["hit-line"]
+    }
+  ],
+  "cues": [
+    {"id": "request", "text": "读取资料 A", "meaning": "明确两次读取的对象"},
+    {"id": "miss-line", "text": "本地没有 A，去源站取。", "meaning": "未命中触发向源站读取"},
+    {"id": "fetch-line", "text": "源站找到 A，把资料送回。", "meaning": "交代响应的来源和去向"},
+    {"id": "store-line", "text": "读到 A，同时留一份在本地。", "meaning": "交付资料时建立副本"},
+    {"id": "hit-line", "text": "再读 A，直接用本地副本。", "meaning": "用第二次读取兑现省去的往返"}
+  ],
+  "labels": [
+    {"id": "record", "text": "资料 A"},
+    {"id": "serial", "text": "请求编号 001"},
+    {"id": "missing", "text": "缓存未命中"},
+    {"id": "origin", "text": "源站"},
+    {"id": "returned", "text": "已取回"},
+    {"id": "copy", "text": "本地副本"},
+    {"id": "hit-badge", "text": "缓存命中"}
+  ]
+}

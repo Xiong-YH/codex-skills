@@ -10,7 +10,7 @@
  "background":{"file":"media/room.png","kind":"image","fit":"cover","dim":0.15}}
 ```
 
-支持 PNG/JPG/WebP 与 MP4/WebM。视频源音轨不加入混音，原旁白/音效继续播放；需要源声音时另提供符合旁白合同的 WAV。`fit=cover` 等比铺满、`contain` 保留完整画幅；`anchorX/anchorY`（0–1）选择裁切焦点，`dim`（0–0.85）控制压暗。
+支持 PNG/JPG/WebP 与 MP4/WebM。替换视频仅消费画面，已有音效和配乐沿各自轨道播放。需要素材里的声音时，转成符合音频合同的项目 WAV 并加入对应轨。`fit=cover` 等比铺满，`contain` 保留完整画幅。`anchorX/anchorY`（0–1）选择裁切焦点，`dim`（0–0.85）控制压暗。
 
 以下入口导入素材、只改指定镜头的选择，执行 handoff 并验证；失败恢复原计划，导入文件留在 media/ 可继续使用：
 

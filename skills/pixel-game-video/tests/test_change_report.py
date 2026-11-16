@@ -46,7 +46,7 @@ class ChangeReportTests(unittest.TestCase):
         self.assertEqual(report['preflight']['visualReview'],'not_reviewed')
 
     def test_component_usage_and_runtime_version(self):
-        resolved=compile_project(SKILL/'examples/speech-rehearsal')
+        resolved=compile_project(SKILL/'tests/fixtures/speech-rehearsal')
         report=plan(snapshot(resolved,SKILL),resolved=resolved)
         self.assertEqual(report['components']['components.identity.v1']['shots'],['s01'])
         self.assertEqual(report['preflight']['issues'][0]['kind'],'tail-hold')

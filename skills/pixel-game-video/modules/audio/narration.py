@@ -32,19 +32,25 @@ def duck_envelope(samples, intervals, amount):
     return duck
 
 
+def read_pcm(root, cue, *, label='Narration'):
+    import numpy as np
+    path, info = inspect_clip(root, cue['file'], label=label)
+    if info['sha256'] != cue['sha256']:
+        raise ValueError(f'{label} changed after compilation; rebuild')
+    with wave.open(str(path), 'rb') as stream:
+        data = np.frombuffer(stream.readframes(stream.getnframes()), dtype='<i2').reshape(-1, stream.getnchannels())
+    if data.shape[1] == 1:
+        data = np.repeat(data, 2, axis=1)
+    return data.astype(float) / 32768
+
+
 def mix(resolved, root, sfx):
     import numpy as np
     voice = np.zeros_like(sfx)
     speech_duck = resolved.get('mix', {}).get('speechDuck', .28)
     records = []
     for cue in resolved.get('narration', []):
-        path, info = inspect_clip(root, cue['file'])
-        if info['sha256'] != cue['sha256']:
-            raise ValueError('Narration changed after compilation; rebuild')
-        with wave.open(str(path), 'rb') as stream:
-            data = np.frombuffer(stream.readframes(stream.getnframes()), dtype='<i2').reshape(-1, stream.getnchannels()).astype(float) / 32768
-        if data.shape[1] == 1:
-            data = np.repeat(data, 2, axis=1)
+        data = read_pcm(root, cue)
         start = round(cue['frame'] / resolved['project']['fps'] * 48000)
         end = start + len(data)
         rms = max(float(np.sqrt(np.mean(data ** 2))), 1e-8)

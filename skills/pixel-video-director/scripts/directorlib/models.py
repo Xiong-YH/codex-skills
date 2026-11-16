@@ -1,7 +1,7 @@
 """Versioned authoring contracts. JSON schemas are generated from these models."""
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class Contract(BaseModel):
@@ -31,8 +31,18 @@ class Cue(Contract):
     meaning: str = Field(min_length=1)
 
 
+class NarrativeBeat(Contract):
+    id: str = Field(pattern=r"^[a-zA-Z][a-zA-Z0-9_-]*$")
+    before: str = Field(min_length=1)
+    change: str = Field(min_length=1)
+    result: str = Field(min_length=1)
+    carry: str = ""
+    cueIds: list[str] = Field(min_length=1)
+
+
 class Script(Contract):
     schemaVersion: Literal[1] = 1
+    beats: list[NarrativeBeat] = []
     cues: list[Cue] = Field(min_length=1)
     labels: list["Label"] = []
 
@@ -85,8 +95,24 @@ class MediaSource(Contract):
     shortage: Literal["error", "hold"] = "error"
 
 
+class AtlasPose(Contract):
+    pose: str = Field(pattern=r"^[A-Za-z][A-Za-z0-9_.-]*$", max_length=100)
+    at: Ref
+    sourceRect: list[int] = Field(min_length=4, max_length=4)
+    offset: list[int] = Field(default_factory=lambda: [0, 0], min_length=2, max_length=2)
+
+
+class PoseAtlas(Contract):
+    file: str = Field(min_length=1)
+    x: float = Field(ge=0, le=1)
+    y: float = Field(ge=0, le=1)
+    height: float = Field(gt=0, le=1)
+    poses: list[AtlasPose] = Field(min_length=1, max_length=120)
+
+
 class Shot(Contract):
     id: str = Field(pattern=r"^[a-zA-Z][a-zA-Z0-9_-]*$")
+    beatId: str | None = None
     durationFrames: int = Field(gt=0)
     intent: str = Field(min_length=1)
     visual: VisualIntent | None = Field(default=None, description="视觉设计说明，不是渲染指令；旧工程可缺省，但 check 会报告不完整。")
@@ -97,6 +123,7 @@ class Shot(Contract):
     cues: list[CuePlacement] = []
     components: list[dict[str, Any]] = []
     performance: list[dict[str, Any]] = []
+    poseAtlas: PoseAtlas | None = None
 
 
 class Storyboard(Contract):
@@ -140,17 +167,27 @@ class TextPlan(Contract):
     cueId: str
     role: Literal["subtitle", "annotation", "title", "label"]
     accent: str | None = None
+    richText: dict[str, Any] | None = None
     x: float | None = Field(default=None, ge=0, le=1)
     y: float | None = Field(default=None, ge=0, le=1)
 
 
 class Sound(Contract):
     id: str
-    sound: str
+    sound: str | None = None
+    file: str | None = Field(default=None, min_length=1)
     at: Ref
     level: float = Field(ge=0, le=1)
     x: float = Field(default=0.5, ge=0, le=1)
     variant: int = Field(default=0, ge=0)
+    params: dict[str, bool | int | float | str | list[bool | int | float | str]] | None = None
+    align: Literal["start", "peak", "end"] | None = None
+
+    @model_validator(mode="after")
+    def require_source(self):
+        if (self.sound is None) == (self.file is None):
+            raise ValueError("音效须填写 sound 或 file 中的一项")
+        return self
 
 
 class Narration(Contract):
@@ -193,6 +230,7 @@ class Plan(Contract):
     narration: list[Narration] = []
     bgm: Bgm | None = None
     speechDuck: float = Field(default=0.28, ge=0, le=1)
+    masterGain: float | None = Field(default=None, gt=0, le=4)
 
 
 class Evidence(Contract):

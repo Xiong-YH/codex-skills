@@ -18,6 +18,7 @@ class PresenterProgressTests(unittest.TestCase):
         self.project=Path(self.temp.name)/'project'
         shutil.copytree(ROOT/'assets/project-template',self.project)
         self.timeline=read_json(self.project/'timeline.json')
+        self.timeline['shots'][0]['actor']='actor.azong.v3'
         self.timeline['shots'][0]['performance']=[dict(pose='talk',start={'event':'s01.reveal'},end={'event':'s01.exit'})]
         self.timeline['progress']={'nodes':[dict(label='问题',at={'event':'s01.enter'}),dict(label='结果',at={'event':'s02.enter'})]}
         self.save()

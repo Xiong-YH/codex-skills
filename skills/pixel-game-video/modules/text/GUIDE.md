@@ -18,6 +18,7 @@
 | 借鉴参考片中的字幕与反馈手法，并按新主题原创转化 | [可迁移手法参考](EXPRESSION.md#可迁移手法参考按主题重新设计)、[原创检查](EXPRESSION.md#参考转化与原创检查)；设计参考不等于固定效果预设 |
 | 角色选型与布局 | [角色与排版细节](details.md)、[能力目录](catalog.json) |
 | 位置、强调、换行、底板与事件区间 | [字段与绘制约束](details.md)、[公共合同](../../references/contract.md) |
+| 让标题、重点词和标注随同一源进入白模 | [创作源中的单行标题与标注](details.md#创作源中的单行标题与标注) |
 | 工作台 Canvas 的独立底板、富文本强调与旋转 | [工作台字幕属性](details.md#工作台-canvas-字幕属性)；不新增 VideoSpec 字段 |
 | 全片叙事进度 | [叙事节点进度条](NARRATIVE-PROGRESS.md)；Canvas 支持，原生 Remotion 拒绝 |
 | 字体皮肤与场景关系 | [风格](../style/GUIDE.md)、[场景](../scenes/GUIDE.md)；不把文字烘焙进背景 |

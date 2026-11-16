@@ -272,6 +272,1330 @@
       "durationSeconds": 0.32,
       "anchorSeconds": 0,
       "suggestedMinGapSeconds": 0.4
+    },
+    {
+      "id": "synth.click.v1",
+      "name": "干脆点击",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "click",
+        "params": {
+          "tone": {
+            "type": "number",
+            "minimum": 0.35,
+            "maximum": 2.4,
+            "default": 0.9
+          },
+          "seed": {
+            "type": "integer",
+            "default": 61,
+            "minimum": 0,
+            "maximum": 2147483647
+          }
+        }
+      },
+      "bank": "garden",
+      "group": "动作与界面"
+    },
+    {
+      "id": "synth.tick.v1",
+      "name": "轻刻度",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "tick",
+        "params": {
+          "tone": {
+            "type": "number",
+            "minimum": 0.35,
+            "maximum": 2.4,
+            "default": 0.75
+          }
+        }
+      },
+      "bank": "garden",
+      "group": "动作与界面"
+    },
+    {
+      "id": "synth.pop.v1",
+      "name": "气泡弹出",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "pop",
+        "params": {
+          "note": {
+            "type": "note",
+            "default": 72
+          },
+          "decay": {
+            "type": "number",
+            "minimum": 0.015,
+            "maximum": 0.8,
+            "default": 0.055
+          }
+        }
+      },
+      "bank": "garden",
+      "group": "动作与界面"
+    },
+    {
+      "id": "synth.blip.v1",
+      "name": "短电子提示",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "blip",
+        "params": {
+          "note": {
+            "type": "note",
+            "default": 76
+          },
+          "duration": {
+            "type": "number",
+            "minimum": 0.025,
+            "maximum": 1,
+            "default": 0.065
+          }
+        }
+      },
+      "bank": "garden",
+      "group": "动作与界面"
+    },
+    {
+      "id": "synth.swipe.v1",
+      "name": "短滑动",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "swipe",
+        "params": {
+          "duration": {
+            "type": "number",
+            "minimum": 0.06,
+            "maximum": 4,
+            "default": 0.22
+          },
+          "up": {
+            "type": "boolean",
+            "default": true
+          },
+          "seed": {
+            "type": "integer",
+            "default": 71,
+            "minimum": 0,
+            "maximum": 2147483647
+          }
+        }
+      },
+      "bank": "garden",
+      "group": "动作与界面"
+    },
+    {
+      "id": "synth.whoosh.v1",
+      "name": "立体掠过",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "whoosh",
+        "params": {
+          "duration": {
+            "type": "number",
+            "minimum": 0.12,
+            "maximum": 4,
+            "default": 0.45
+          },
+          "from": {
+            "type": "number",
+            "minimum": 40,
+            "maximum": 12000,
+            "default": 350
+          },
+          "to": {
+            "type": "number",
+            "minimum": 40,
+            "maximum": 12000,
+            "default": 4500
+          },
+          "peak": {
+            "type": "number",
+            "minimum": 0.05,
+            "maximum": 0.95,
+            "default": 0.7
+          },
+          "pan": {
+            "type": "number",
+            "default": 0.55,
+            "minimum": 0,
+            "maximum": 1
+          },
+          "seed": {
+            "type": "integer",
+            "default": 41,
+            "minimum": 0,
+            "maximum": 2147483647
+          }
+        },
+        "peakAlignment": true
+      },
+      "bank": "garden",
+      "group": "过渡与冲击"
+    },
+    {
+      "id": "synth.riser.v1",
+      "name": "上扬扫频",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "riser",
+        "params": {
+          "duration": {
+            "type": "number",
+            "minimum": 0.15,
+            "maximum": 8,
+            "default": 0.7
+          },
+          "from": {
+            "type": "number",
+            "minimum": 40,
+            "maximum": 12000,
+            "default": 150
+          },
+          "to": {
+            "type": "number",
+            "minimum": 40,
+            "maximum": 12000,
+            "default": 3200
+          },
+          "noise": {
+            "type": "number",
+            "default": 0.6,
+            "minimum": 0,
+            "maximum": 1
+          },
+          "seed": {
+            "type": "integer",
+            "default": 31,
+            "minimum": 0,
+            "maximum": 2147483647
+          }
+        },
+        "endAlignment": true
+      },
+      "bank": "garden",
+      "group": "过渡与冲击"
+    },
+    {
+      "id": "synth.downlifter.v1",
+      "name": "下落扫频",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "downlifter",
+        "params": {
+          "duration": {
+            "type": "number",
+            "minimum": 0.12,
+            "maximum": 6,
+            "default": 0.5
+          },
+          "from": {
+            "type": "number",
+            "minimum": 40,
+            "maximum": 12000,
+            "default": 2500
+          },
+          "to": {
+            "type": "number",
+            "minimum": 40,
+            "maximum": 12000,
+            "default": 100
+          },
+          "seed": {
+            "type": "integer",
+            "default": 33,
+            "minimum": 0,
+            "maximum": 2147483647
+          }
+        }
+      },
+      "bank": "garden",
+      "group": "过渡与冲击"
+    },
+    {
+      "id": "synth.reverse-cymbal.v1",
+      "name": "反向镲",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "reverseCymbal",
+        "params": {
+          "duration": {
+            "type": "number",
+            "minimum": 0.15,
+            "maximum": 6,
+            "default": 0.65
+          },
+          "seed": {
+            "type": "integer",
+            "default": 13,
+            "minimum": 0,
+            "maximum": 2147483647
+          }
+        },
+        "endAlignment": true
+      },
+      "bank": "garden",
+      "group": "过渡与冲击"
+    },
+    {
+      "id": "synth.impact.v1",
+      "name": "低频撞击",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "impact",
+        "params": {
+          "size": {
+            "type": "number",
+            "minimum": 0.25,
+            "maximum": 4,
+            "default": 0.6
+          },
+          "seed": {
+            "type": "integer",
+            "default": 51,
+            "minimum": 0,
+            "maximum": 2147483647
+          }
+        }
+      },
+      "bank": "garden",
+      "group": "过渡与冲击"
+    },
+    {
+      "id": "synth.boom.v1",
+      "name": "低频闷响",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "boom",
+        "params": {
+          "size": {
+            "type": "number",
+            "minimum": 0.25,
+            "maximum": 4,
+            "default": 0.6
+          },
+          "seed": {
+            "type": "integer",
+            "default": 51,
+            "minimum": 0,
+            "maximum": 2147483647
+          }
+        }
+      },
+      "bank": "garden",
+      "group": "过渡与冲击"
+    },
+    {
+      "id": "synth.glitch.v1",
+      "name": "故障脉冲",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "glitch",
+        "params": {
+          "duration": {
+            "type": "number",
+            "minimum": 0.12,
+            "maximum": 4,
+            "default": 0.22
+          },
+          "bits": {
+            "type": "integer",
+            "default": 4,
+            "minimum": 2,
+            "maximum": 8
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "default": 81
+          }
+        }
+      },
+      "bank": "garden",
+      "group": "动作与界面"
+    },
+    {
+      "id": "synth.shimmer.v1",
+      "name": "闪光音簇",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "shimmer",
+        "params": {
+          "duration": {
+            "type": "number",
+            "minimum": 0.12,
+            "maximum": 6,
+            "default": 0.6
+          },
+          "note": {
+            "type": "note",
+            "default": 76
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 24,
+            "default": 6
+          },
+          "seed": {
+            "type": "integer",
+            "default": 91,
+            "minimum": 0,
+            "maximum": 2147483647
+          }
+        }
+      },
+      "bank": "garden",
+      "group": "过渡与冲击"
+    },
+    {
+      "id": "synth.bell.v1",
+      "name": "清亮铃音",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "bell",
+        "params": {
+          "note": {
+            "type": "note",
+            "default": 76
+          },
+          "duration": {
+            "type": "number",
+            "minimum": 0.12,
+            "maximum": 6,
+            "default": 0.42
+          },
+          "decay": {
+            "type": "number",
+            "minimum": 0.04,
+            "maximum": 4,
+            "default": 0.18
+          },
+          "index": {
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 8,
+            "default": 1.8
+          },
+          "ratio": {
+            "type": "number",
+            "minimum": 0.25,
+            "maximum": 8,
+            "default": 3.5
+          }
+        }
+      },
+      "bank": "garden",
+      "group": "旋律与和声"
+    },
+    {
+      "id": "synth.mallet.v1",
+      "name": "材质敲击",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "mallet",
+        "params": {
+          "note": {
+            "type": "note",
+            "default": 60
+          },
+          "duration": {
+            "type": "number",
+            "minimum": 0.12,
+            "maximum": 6,
+            "default": 0.28
+          },
+          "material": {
+            "type": "string",
+            "default": "marimba",
+            "enum": [
+              "marimba",
+              "xylo",
+              "vibes",
+              "glock",
+              "kalimba",
+              "steel",
+              "wood"
+            ]
+          },
+          "bright": {
+            "type": "number",
+            "default": 0.45,
+            "minimum": 0,
+            "maximum": 1
+          },
+          "decay": {
+            "type": "number",
+            "minimum": 0.02,
+            "maximum": 4
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "default": 101
+          }
+        }
+      },
+      "bank": "garden",
+      "group": "旋律与和声"
+    },
+    {
+      "id": "synth.kick.v1",
+      "name": "底鼓",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "鼓与打击",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "kick",
+        "params": {
+          "tone": {
+            "type": "number",
+            "minimum": 24,
+            "maximum": 140,
+            "default": 48
+          },
+          "start": {
+            "type": "number",
+            "minimum": 50,
+            "maximum": 450,
+            "default": 165
+          },
+          "pitchDecay": {
+            "type": "number",
+            "minimum": 0.004,
+            "maximum": 0.25,
+            "default": 0.045
+          },
+          "decay": {
+            "type": "number",
+            "minimum": 0.04,
+            "maximum": 1.3,
+            "default": 0.42
+          },
+          "click": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.5
+          },
+          "drive": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.35
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.snare.v1",
+      "name": "军鼓",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "鼓与打击",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "snare",
+        "params": {
+          "tone": {
+            "type": "number",
+            "minimum": 80,
+            "maximum": 550,
+            "default": 185
+          },
+          "decay": {
+            "type": "number",
+            "minimum": 0.025,
+            "maximum": 1.2,
+            "default": 0.18
+          },
+          "snappy": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.75
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "default": 11
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.clap.v1",
+      "name": "拍手",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "鼓与打击",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "clap",
+        "params": {
+          "decay": {
+            "type": "number",
+            "minimum": 0.03,
+            "maximum": 1.2,
+            "default": 0.22
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "default": 5
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.hat.v1",
+      "name": "踩镲（开／闭）",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "鼓与打击",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "hat",
+        "params": {
+          "open": {
+            "type": "boolean",
+            "default": false
+          },
+          "decay": {
+            "type": "number",
+            "minimum": 0.012,
+            "maximum": 1.2
+          },
+          "tone": {
+            "type": "number",
+            "minimum": 0.35,
+            "maximum": 2.4,
+            "default": 1
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "default": 9
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.crash.v1",
+      "name": "冲击镲",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "鼓与打击",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "crash",
+        "params": {
+          "duration": {
+            "type": "number",
+            "minimum": 0.12,
+            "maximum": 6,
+            "default": 2.4
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "default": 13
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.tom.v1",
+      "name": "通鼓",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "鼓与打击",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "tom",
+        "params": {
+          "note": {
+            "type": "note",
+            "default": "A2"
+          },
+          "decay": {
+            "type": "number",
+            "minimum": 0.025,
+            "maximum": 1.2,
+            "default": 0.35
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.shaker.v1",
+      "name": "沙锤",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "鼓与打击",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "shaker",
+        "params": {
+          "decay": {
+            "type": "number",
+            "minimum": 0.015,
+            "maximum": 0.75,
+            "default": 0.06
+          },
+          "attack": {
+            "type": "number",
+            "minimum": 0.001,
+            "maximum": 0.15,
+            "default": 0.008
+          },
+          "tone": {
+            "type": "number",
+            "minimum": 0.35,
+            "maximum": 2.4,
+            "default": 1
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "default": 15
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.rim.v1",
+      "name": "干木边击",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "鼓与打击",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "rim",
+        "params": {
+          "tone": {
+            "type": "number",
+            "minimum": 0.35,
+            "maximum": 2.4,
+            "default": 1
+          },
+          "decay": {
+            "type": "number",
+            "minimum": 0.004,
+            "maximum": 0.4,
+            "default": 0.018
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "default": 17
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.cowbell.v1",
+      "name": "808 牛铃",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "鼓与打击",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "cowbell",
+        "params": {
+          "tone": {
+            "type": "number",
+            "minimum": 0.35,
+            "maximum": 2.4,
+            "default": 1
+          },
+          "decay": {
+            "type": "number",
+            "minimum": 0.02,
+            "maximum": 1.2,
+            "default": 0.22
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.bass.v1",
+      "name": "合成贝斯",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "旋律与和声",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "bass",
+        "params": {
+          "note": {
+            "type": "note",
+            "default": "A2"
+          },
+          "duration": {
+            "type": "number",
+            "minimum": 0.04,
+            "maximum": 8,
+            "default": 0.45
+          },
+          "wave": {
+            "type": "string",
+            "enum": [
+              "sine",
+              "saw",
+              "square",
+              "tri"
+            ],
+            "default": "saw"
+          },
+          "cutoff": {
+            "type": "number",
+            "minimum": 40,
+            "maximum": 12000,
+            "default": 600
+          },
+          "q": {
+            "type": "number",
+            "minimum": 0.35,
+            "maximum": 6,
+            "default": 1.2
+          },
+          "envAmt": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 8,
+            "default": 3
+          },
+          "envDecay": {
+            "type": "number",
+            "minimum": 0.01,
+            "maximum": 2,
+            "default": 0.16
+          },
+          "drive": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.45
+          },
+          "sub": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.6
+          },
+          "glideFrom": {
+            "type": "note"
+          },
+          "glide": {
+            "type": "number",
+            "minimum": 0.004,
+            "maximum": 0.8,
+            "default": 0.06
+          },
+          "release": {
+            "type": "number",
+            "minimum": 0.004,
+            "maximum": 3,
+            "default": 0.04
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.sub.v1",
+      "name": "次低音",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "旋律与和声",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "sub",
+        "params": {
+          "note": {
+            "type": "note",
+            "default": "A1"
+          },
+          "duration": {
+            "type": "number",
+            "minimum": 0.04,
+            "maximum": 8,
+            "default": 0.55
+          },
+          "release": {
+            "type": "number",
+            "minimum": 0.004,
+            "maximum": 3,
+            "default": 0.08
+          },
+          "harm": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.15
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.pad.v1",
+      "name": "立体铺底",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "旋律与和声",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "pad",
+        "params": {
+          "notes": {
+            "type": "notes",
+            "default": [
+              "C4",
+              "E4",
+              "G4"
+            ]
+          },
+          "duration": {
+            "type": "number",
+            "minimum": 0.12,
+            "maximum": 8,
+            "default": 2.4
+          },
+          "voices": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8,
+            "default": 5
+          },
+          "cents": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 50,
+            "default": 14
+          },
+          "cutoff": {
+            "type": "number",
+            "minimum": 40,
+            "maximum": 12000,
+            "default": 1800
+          },
+          "q": {
+            "type": "number",
+            "minimum": 0.35,
+            "maximum": 5,
+            "default": 0.6
+          },
+          "attack": {
+            "type": "number",
+            "minimum": 0.005,
+            "maximum": 3,
+            "default": 0.5
+          },
+          "release": {
+            "type": "number",
+            "minimum": 0.004,
+            "maximum": 3,
+            "default": 1.2
+          },
+          "wave": {
+            "type": "string",
+            "enum": [
+              "sine",
+              "saw",
+              "square",
+              "tri"
+            ],
+            "default": "saw"
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "default": 21
+          },
+          "wobble": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.15
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.pluck.v1",
+      "name": "拨弦",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "旋律与和声",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "pluck",
+        "params": {
+          "note": {
+            "type": "note",
+            "default": "D4"
+          },
+          "duration": {
+            "type": "number",
+            "minimum": 0.04,
+            "maximum": 8,
+            "default": 0.8
+          },
+          "bright": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.55
+          },
+          "damp": {
+            "type": "number",
+            "minimum": 0.85,
+            "maximum": 0.9999,
+            "default": 0.996
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "default": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.keys.v1",
+      "name": "FM 电钢琴",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "旋律与和声",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "keys",
+        "params": {
+          "notes": {
+            "type": "notes",
+            "default": [
+              "D4",
+              "F4",
+              "A4"
+            ]
+          },
+          "duration": {
+            "type": "number",
+            "minimum": 0.04,
+            "maximum": 8,
+            "default": 0.9
+          },
+          "decay": {
+            "type": "number",
+            "minimum": 0.04,
+            "maximum": 4,
+            "default": 1.4
+          },
+          "index": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 8,
+            "default": 2.5
+          },
+          "release": {
+            "type": "number",
+            "minimum": 0.004,
+            "maximum": 3,
+            "default": 0.25
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.lead.v1",
+      "name": "合成主奏",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "旋律与和声",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "lead",
+        "params": {
+          "note": {
+            "type": "note",
+            "default": "A4"
+          },
+          "duration": {
+            "type": "number",
+            "minimum": 0.04,
+            "maximum": 8,
+            "default": 0.75
+          },
+          "wave": {
+            "type": "string",
+            "enum": [
+              "sine",
+              "saw",
+              "square",
+              "tri"
+            ],
+            "default": "saw"
+          },
+          "cutoff": {
+            "type": "number",
+            "minimum": 40,
+            "maximum": 12000,
+            "default": 3200
+          },
+          "q": {
+            "type": "number",
+            "minimum": 0.35,
+            "maximum": 6,
+            "default": 0.9
+          },
+          "vibrato": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.12
+          },
+          "rate": {
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 20,
+            "default": 5.5
+          },
+          "glideFrom": {
+            "type": "note"
+          },
+          "glide": {
+            "type": "number",
+            "minimum": 0.004,
+            "maximum": 0.8,
+            "default": 0.05
+          },
+          "detune": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 45,
+            "default": 7
+          },
+          "release": {
+            "type": "number",
+            "minimum": 0.004,
+            "maximum": 3,
+            "default": 0.12
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.organ.v1",
+      "name": "拉杆风琴",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "旋律与和声",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "organ",
+        "params": {
+          "notes": {
+            "type": "notes",
+            "default": [
+              "C4",
+              "E4",
+              "G4"
+            ]
+          },
+          "duration": {
+            "type": "number",
+            "minimum": 0.04,
+            "maximum": 8,
+            "default": 0.9
+          },
+          "drawbars": {
+            "type": "string",
+            "pattern": "[0-8]{9}",
+            "default": "888000000"
+          },
+          "click": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.3
+          },
+          "leslie": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.4
+          },
+          "rate": {
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 18,
+            "default": 6.2
+          },
+          "release": {
+            "type": "number",
+            "minimum": 0.004,
+            "maximum": 3,
+            "default": 0.06
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "default": 111
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.vox.v1",
+      "name": "元音合唱铺底",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "旋律与和声",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "vox",
+        "params": {
+          "notes": {
+            "type": "notes",
+            "default": [
+              "A3",
+              "E4",
+              "G4"
+            ]
+          },
+          "duration": {
+            "type": "number",
+            "minimum": 0.12,
+            "maximum": 8,
+            "default": 1.4
+          },
+          "vowel": {
+            "type": "string",
+            "enum": [
+              "a",
+              "e",
+              "i",
+              "o",
+              "u"
+            ],
+            "default": "a"
+          },
+          "voices": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8,
+            "default": 3
+          },
+          "cents": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 50,
+            "default": 12
+          },
+          "attack": {
+            "type": "number",
+            "minimum": 0.005,
+            "maximum": 3,
+            "default": 0.35
+          },
+          "release": {
+            "type": "number",
+            "minimum": 0.004,
+            "maximum": 3,
+            "default": 0.8
+          },
+          "vibrato": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.1
+          },
+          "breath": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.12
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "default": 121
+          }
+        }
+      }
+    },
+    {
+      "id": "synth.ambience.v1",
+      "name": "环境与媒介底噪",
+      "kind": "synthesis",
+      "bank": "garden",
+      "group": "环境",
+      "maxVariant": 0,
+      "synthesis": {
+        "voice": "ambience",
+        "params": {
+          "duration": {
+            "type": "number",
+            "minimum": 0.2,
+            "maximum": 12,
+            "default": 2.6
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "tape",
+              "vinyl",
+              "wind",
+              "rain",
+              "room"
+            ],
+            "default": "room"
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 1
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "default": 131
+          }
+        }
+      }
     }
   ]
 }

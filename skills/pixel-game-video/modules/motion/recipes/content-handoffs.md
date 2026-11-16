@@ -17,6 +17,12 @@
 
 `motion.component-handoff.v1`的match／overview各一组pair，reflow可多组；overview保持组件比例。
 
+同一张身份卡或结论卡跨场时，可给 match 加 `roomReveal`。方向指定揭景边缘的行进方向。两侧卡片沿用相同的内容、风格和色调，填写各自的稳定位置与尺寸。接镜期间只绘制一张卡，卡随视线移动，两边环境沿软边依次交接。先确定角色、接触面和卡片的避让，再通过落位事件触发后续变化。
+
+```json
+{"mode":"match","roomReveal":"left","pairs":[{"from":"desk-note","to":"counter-note"}]}
+```
+
 ```json
 {"mode":"reflow","pairs":[{"from":"record-a","to":"row-a"},{"from":"record-b","to":"row-b"}]}
 ```

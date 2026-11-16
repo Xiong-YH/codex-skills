@@ -27,7 +27,7 @@ python scripts/video.py export-project work/my-film /path/outside-project/delive
 
 制作时运行 `python scripts/video.py workbench PROJECT --port 5208 --no-open`，再打开实际打印的地址。Canvas 通过同源逐帧 runtime 接入，原生 Remotion 使用已有场景执行器；初次使用需安装 `workbench/` 锁定的 Node 依赖。镜头、字幕与其他文字、转场、音效、配乐分别独立轨道，有旁白时另轨；场景内部参数、组件、人物和素材通过 props 编辑。初始音频分轨须通过本次 PCM 重组核对。工作台编辑另存项目 JSON，不回写 VideoSpec；最终从工作台导出到 `workbench/exports/`，MP4 与该次「导出版本 JSON」配对交付。导入一致性、真实分轨编辑、保存/重开与导出验收见 [本地工作台](workbench.md)。
 
-需要配乐时先运行 `python scripts/video.py import-bgm PROJECT`，用 FFmpeg 将内置 Chill Wave 转为项目 WAV，再将输出的 `bgm` 配置加入对应创作源。可调音量、淡入淡出与旁白压低；详见 [配乐工作流](../modules/audio/MUSIC.md)。
+用 `python scripts/video.py import-bgm PROJECT --source LOCAL_AUDIO` 将所选配乐转为项目 WAV。将输出的 `bgm` 配置加入对应创作源，按实际拍点填写裁入和淡化。详见 [配乐工作流](../modules/audio/MUSIC.md)。
 
 独立导出包含整个基础运行模块与素材、四份输入、工作台源码与依赖清单，不包含 Python/Node/浏览器/字体二进制、node_modules 或渲染缓存。工作台编辑过的分支另存下载的项目 JSON；浏览器缓存不能代替交付。director 工程导出为明确标记的 direct 快照，并另存创作源供追溯。
 

@@ -3,6 +3,7 @@
   "shots": [
     {
       "id": "s1",
+      "beatId": "b1",
       "durationFrames": 480,
       "intent": "",
       "scene": "scenes.focus.v1",

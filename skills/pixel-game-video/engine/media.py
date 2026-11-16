@@ -65,6 +65,19 @@ def compile_media(root, shots, fps):
                 records[key] = {**source, **inspect(root, source, shot['durationFrames']/fps, fps),
                                 'shotStartFrame': shot['startFrame'], 'shotEndFrame': shot['endFrame']}
                 source['assetKey'] = key
+        if atlas := shot.get('poseAtlas'):
+            key = '@image:' + atlas['file']
+            if key not in records:
+                source = {'file': atlas['file'], 'kind': 'image'}
+                records[key] = {**source, **inspect(root, source, 0, fps)}
+            record = records[key]
+            first_size = atlas['poses'][0]['sourceRect'][2:]
+            for pose in atlas['poses']:
+                x, y, width, height = pose['sourceRect']
+                if (width <= 0 or height <= 0 or [width, height] != first_size or
+                        x + width > record['width'] or y + height > record['height']):
+                    raise ValueError('Pose atlas cells must share a positive size and fit inside the image')
+            atlas['assetKey'] = key
         for component in shot['components']:
             data = component['data']
             for item in [data, *data.get('items', [])]:

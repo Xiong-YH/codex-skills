@@ -154,7 +154,7 @@ function render() {
         const excerpt = document.createElement('td');
         excerpt.className = 'shot-excerpt';
         excerpt.textContent = shot.cells[1].value
-            .replace(/^\s*c\d+\s*(?:｜旁白（逐字）：|[：:])\s*/i, '')
+            .replace(/^\s*c\d+\s*(?:｜(?:上屏主句|旁白（逐字）)[：:]|[：:])\s*/i, '')
             .split(/\n\s*(?:屏幕辅助标签|字幕T01|字幕|呈现)[：:]/, 1)[0].trim();
         const actions = document.createElement('td');
         const details = document.createElement('button');

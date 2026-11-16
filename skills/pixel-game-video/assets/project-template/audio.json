@@ -1,11 +1,10 @@
 {
   "cues": [
-    {"id": "book-open", "sound": "panel-open", "at": {"event": "s01.reveal"}, "level": 0.5, "x": 0.68, "variant": 0},
-    {"id": "transition", "sound": "extract", "at": {"event": "s02.enter"}, "level": 0.30, "x": 0.65, "variant": 0},
-    {"id": "choice-panel", "sound": "system-unfold", "at": {"event": "s03.enter"}, "level": 0.28, "x": 0.68, "variant": 0},
-    {"id": "step1", "sound": "select", "at": {"event": "s02.observe"}, "level": 0.4, "x": 0.6, "variant": 0},
-    {"id": "step2", "sound": "select", "at": {"event": "s02.verify"}, "level": 0.4, "x": 0.65, "variant": 1},
-    {"id": "step3", "sound": "verified", "at": {"event": "s02.record"}, "level": 0.5, "x": 0.7, "variant": 0},
-    {"id": "choice", "sound": "complete", "at": {"event": "s03.choose"}, "level": 0.5, "x": 0.65, "variant": 0}
+    {"id": "book-open", "sound": "synth.swipe.v1", "at": {"event": "s01.reveal"}, "level": 0.35, "x": 0.68, "params": {"duration": 0.17}},
+    {"id": "transition", "sound": "synth.whoosh.v1", "at": {"event": "s02.enter"}, "align": "peak", "level": 0.36, "params": {"duration": 0.38}},
+    {"id": "step1", "sound": "synth.rim.v1", "at": {"event": "s02.observe"}, "level": 0.3},
+    {"id": "step3", "sound": "synth.bell.v1", "at": {"event": "s02.record"}, "level": 0.38, "params": {"note": "E5"}},
+    {"id": "choice-panel", "sound": "synth.riser.v1", "at": {"event": "s03.enter"}, "align": "end", "level": 0.28, "params": {"duration": 0.4}},
+    {"id": "choice", "sound": "arcade-reward", "at": {"event": "s03.choose"}, "level": 0.5}
   ]
 }

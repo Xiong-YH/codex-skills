@@ -56,34 +56,5 @@
       "variant": 0
     }
   ],
-  "speechDuck": 0.25,
-  "narration": [
-    {
-      "id": "voice_c1_1",
-      "file": "media/s1-c1.wav",
-      "at": {
-        "event": "s1.speech1",
-        "offsetFrames": 0
-      },
-      "gain": 0.9
-    },
-    {
-      "id": "voice_c1_2",
-      "file": "media/s1-c2.wav",
-      "at": {
-        "event": "s1.speech2",
-        "offsetFrames": 0
-      },
-      "gain": 0.9
-    },
-    {
-      "id": "voice_c6_1",
-      "file": "media/s6-c1.wav",
-      "at": {
-        "event": "s6.speech1",
-        "offsetFrames": 0
-      },
-      "gain": 0.9
-    }
-  ]
+  "speechDuck": 0.28
 }

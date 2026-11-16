@@ -14,7 +14,7 @@ def localize(value, start):
         return [localize(x, start) for x in value]
     if not isinstance(value, dict):
         return value
-    return {k: v - start if k in ('frame', 'startFrame', 'endFrame') and isinstance(v, int)
+    return {k: v - start if k in ('frame', 'startFrame', 'endFrame', 'anchorFrame') and isinstance(v, int)
             else localize(v, start) for k, v in value.items()}
 
 
@@ -22,6 +22,7 @@ def snapshot(resolved, skill):
     from .dependencies import runtime_files
     shots = {}
     components = {}
+    fps = resolved['project']['fps']
     for shot in resolved['shots']:
         sid, start, end = shot['id'], shot['startFrame'], shot['endFrame']
         # Runtime dependency discovery is the same contract used by build locking.
@@ -30,9 +31,10 @@ def snapshot(resolved, skill):
         files = runtime_files(skill, used)
         dependencies = {f: hashlib.sha256((Path(skill) / f).read_bytes()).hexdigest() for f in files}
         text = [c for c in resolved['cues'] if c['startFrame'] < end and c['endFrame'] > start]
-        audio = [c for c in resolved['audio'] if start <= c['frame'] < end]
+        audio = [c for c in resolved['audio'] if c['frame'] < end and (
+            c.get('anchorFrame', c['frame']) >= start or c.get('samples', 0) > (start - c['frame']) * 48000 / fps)]
         narration = [c for c in resolved['narration'] if c['frame'] < end and
-                     c['frame'] / resolved['project']['fps'] + c['samples'] / 48000 > start / resolved['project']['fps']]
+                     c['frame'] / fps + c['samples'] / 48000 > start / fps]
         content = localize(copy.deepcopy(shot), start)
         content.pop('startFrame', None)
         content.pop('endFrame', None)
@@ -44,7 +46,7 @@ def snapshot(resolved, skill):
                 record['shots'].append(sid)
         shots[sid] = {'startFrame': start, 'endFrame': end,
                       'visual': digest(content), 'text': digest(localize(text, start)),
-                      'audio': digest(localize([audio, narration, resolved.get('bgm')], start)),
+                      'audio': digest(localize([audio, narration, resolved.get('bgm'), resolved.get('mix')], start)),
                       'dependencies': dependencies,
                       'project': digest(resolved['project']),
                       'media': digest(resolved.get('media', {}))}

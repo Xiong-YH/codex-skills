@@ -39,7 +39,7 @@
 | `motion/runtime.js`、`staging.js`、`content-handoffs.js`、`narrative-transitions.js`、`handoffs.py`、recipes/catalog | 通用运动与转场，部分为空间专用实现 | 保留 motion；专用能力不能仅因存于 motion 就宣称通用 | 保留 |
 | `motion/game-feedback.js` | 几何、缓动、回弹、角标和粒子辅助 | 保留 motion；业务状态和资源规则由 scenes 拥有 | 保留 |
 | `motion/TIMING.md` | 原入口内的通用离散动作与节拍规则 | 独立保留在 motion；components 的设计/基础规则直接引用，旧 GUIDE/details 锚点转发 | 已归一；没有新增组件计时表或公共运动 API |
-| `audio/` catalog、WAV 母版/manifest、Python 音源/导入/混音工具、ARCADE/MUSIC/VOICES、试听页 | 声音素材与执行 | 保留 audio；历史音色与正式可选库分开，生成配音不因资料存在而成为能力 | 保留 |
+| `audio/` catalog、WAV 母版/manifest、声音导入与混音、ARCADE/MUSIC、试听页 | 声音素材与执行 | 配乐与事件音效消费共用时间线，由 audio 维护 | 保留 |
 | `scenes/catalog.json`、`contract.py`、`runtime.js`、各场景 JS/MD | 状态机制、场景绘制与局部专用效果 | 场景状态/布局留 scenes；发现重复原子能力时才提取至相应模块 | 保留，重复实现待逐项核对 |
 | `scenes/GAME_FEEL.md`、`competition-feedback.js`、`competition-*.js` | 通用反馈索引与竞赛专用实现 | 通用页只讲状态与模块协作；固定数量/路径由 competition-routes 专用合同与实现维护，新场景自行定义规则 | 已去除通用页中的单片限制和重复数值；专用执行器保持兼容，尚未泛化为通用参数 |
 | `scenes/media.js`、`whole-illustration.md`、`character-illustration.md`、`performance.py` | 素材接入、完整插画及模拟讲述节奏 | 接入/状态编排留 scenes；插画单片创作源留 director 工程，基础例子是有哈希的独立快照，不另复制成通用素材库 | 保留源/快照关系及能力缺口；未来确有跨项目素材复用再提取 library |
@@ -55,7 +55,7 @@
 | 工作台编辑、保存、导出 | `workbench/`；[工作台说明](workbench.md) | 各模块只补充能力验收，不重复全套交付流程 |
 | 核心通用要求、常见踩坑与沉淀方式 | [制作总则](production-principles.md) | 制作先读唯一摘要；技术细节归模块，原话/版本/认可证据归历史 |
 | 选题、叙事、文案、观众目标与内容交接 | writer 的 SKILL.md、references/script-workflow.md、audience-experience.md、handoff.md；项目内容源 | 导演继承当前版本，旧编剧参考页只作兼容路由，不复制规则 |
-| 系列偏好、创作源、review | director 的 `references/computing-voiceover.md`、创作/审片合同；单片 brief/review | 基础 skill 独立使用时由项目提供，不硬依赖 director 相对路径 |
+| 卡点制作方向、创作源、review | director 的 `references/beat-driven-explainer.md`、创作和审片合同、单片 brief/review | 基础技能独立使用时由项目提供本片要求 |
 | 历史认可与失败记录 | [迭代记录](iteration-history.md) | 现行模块保留必要限制和链接，不复制历史叙述 |
 
 ## 本轮迁移与后续验证
@@ -82,11 +82,11 @@
 | 通用原则与要求层级 | [制作总则](production-principles.md) | 制作、续作和复盘先读；按当前项目应用偏好 |
 | 工程字段与统一事件 | [制作合同](contract.md)；导演的 references/authoring.md | 四份输入/创作源分工、源映射回改与时间线唯一 |
 | 画面叙事、接镜与参考片 | 导演的 references/visual-storytelling.md、visual-storyboard.md | 设计先确定理解推进，逐镜显式标注交出、接住和落稳 |
-| 系列选角、固定姿势、插画分类与讲解 | 导演的 references/computing-voiceover.md、character-illustration.md | 该系列创作先读所属要求，其他项目不自动继承 |
+| 组件承接、主句、配乐拍点 | 导演的 references/beat-driven-explainer.md | 从可见信息变化安排拍点、动作与阅读 |
 | 后端、参数与能力缺口 | [能力目录](capability-catalog.md)、各模块 GUIDE 与合同 | 按任务选模块，区分已注册、试样、设计索引与未实现项 |
 | 工作台、分轨与交付 | [工作台](workbench.md)、[制作流程](production-workflow.md)；导演的 references/handoff.md | 必须工作台剪辑/导出、独立剪辑分支、实测编辑与保存重开、配对交付 |
 | 审片与历史反馈 | 导演的 references/review.md；[迭代记录](iteration-history.md) | 实际播放、核字与听音绑定当前版本，未审保留 not_reviewed |
-| 创作源示例与素材维护 | 导演的 references/authoring.md 样例入口、character-illustration.md | 按任务找例子，不在主入口列整套案例或复制历史 |
+| 创作源示例与素材维护 | 导演的 references/authoring.md 样例入口、illustration-motion.md | 按当前任务选择技术样例 |
 
 本次角色拆分调整技能描述、任务路由、内容规则归属与创作器展示；不修改工程命令、VideoSpec、时间线合同或已确认素材。引用与元数据核验不等同于新的视频运行或审美验收。
 
