@@ -3,6 +3,7 @@
 const M=window.DirectorModel,R=window.DirectorRender,$=id=>document.getElementById(id);
 let base=M.clone(CREATOR_PROJECT),working=M.clone(base),paths=new Set(),notes={},phase=1,role='director',selected='',writerStage=3,storageOK=true,conflict=null,legacyDrafts=[],history=[],importedReviews=[],undo=[],pending='',player=null,exporting=false,exportAbort=null,startupError='';
 const key=()=>`director-workspace-${base.projectId}-revision-${base.revision}`;
+let disposeNarration=null;
 function node(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
 function button(label,fn,cls){const b=node('button',label,cls);b.type='button';b.addEventListener('click',fn);return b;}
 function download(data,name,type='application/json'){const blob=data instanceof Blob?data:new Blob([JSON.stringify(data,null,2)],{type}),url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
@@ -40,13 +41,19 @@ function request(action){pending=action;const report=record(),d=M.view(working),
 function actionBar(host,label,action){const row=node('div',undefined,'action-bar');row.append(node('p','继续处理会携带当前稿和本轮意见。'),button(label,()=>request(action),'primary'));host.append(row);}
 function render(){
  if(player){player.dispose();player=null;}
+ if(disposeNarration){disposeNarration();disposeNarration=null;}
  const d=M.view(working);if(!d.segments.some(s=>s.id===selected))selected=d.segments[0]?.id||'';
  $('project-title').textContent=working.title||'新视频';$('actual-progress').textContent=base.activeStage===0?'新项目 · 先讨论选题':base.activeStage<=3?'项目进度：编剧 · '+['','选题讨论','叙事路线','完整文案'][base.activeStage]:'项目进度：导演 · '+M.PHASES[d.phase-1];$('example-banner').hidden=!working.isExample;
  $('writer-view').setAttribute('aria-pressed',String(role==='writer'));$('director-view').setAttribute('aria-pressed',String(role==='director'));
+ $('narration-view').setAttribute('aria-pressed',String(role==='narration'));
  $('legacy-banner').hidden=!d.legacy;$('legacy-banner').textContent='旧版分镜与原文已保留。大模块、独立构思草图和动态设计需要导演补充；页面不会从旧描述猜出动画。';
  $('conflict-banner').hidden=!conflict&&!startupError;$('conflict-banner').textContent=startupError||(conflict?'发现来源不同的本地草稿，已保留且未覆盖当前项目。可在下方查看或下载修改记录。':'');
- const nav=$('phase-nav');nav.replaceChildren();nav.hidden=role==='writer';M.PHASES.forEach((name,i)=>{const b=button('',()=>{if(exporting)return;phase=i+1;save();render();});b.setAttribute('aria-selected',String(phase===i+1));b.append(node('span','0'+(i+1)),document.createTextNode(name));nav.append(b);});
- const host=$('workspace-content');host.replaceChildren();if(role==='writer')renderWriter(host);else if(phase===1)renderModules(host);else if(phase===4)renderProduction(host);else renderSegments(host);
+ const nav=$('phase-nav');nav.replaceChildren();nav.hidden=role!=='director';M.PHASES.forEach((name,i)=>{const b=button('',()=>{if(exporting)return;phase=i+1;save();render();});b.setAttribute('aria-selected',String(phase===i+1));b.append(node('span','0'+(i+1)),document.createTextNode(name));nav.append(b);});
+ const host=$('workspace-content');
+ for(const video of host.querySelectorAll('video'))video.pause();
+ host.replaceChildren();
+ if(role==='narration')disposeNarration=window.DirectorNarration.mount(host,working,{node,button,download});
+ else if(role==='writer')renderWriter(host);else if(phase===1)renderModules(host);else if(phase===4)renderProduction(host);else renderSegments(host);
  const historyHost=$('history-area');historyHost.replaceChildren();historyHost.hidden=!history.length&&!importedReviews.length;if(history.length||importedReviews.length){const details=fold(`保留的草稿与审阅记录（${history.length+importedReviews.length}）`);details.content.append(node('p','这些记录没有覆盖当前稿。旧页面草稿和审阅记录会随修改请求一并交回，来源仍需核对。'));details.content.append(button('下载保留记录',()=>download({history,importedReviews},'retained-drafts.json')));details.content.append(node('pre',compact({history,importedReviews})));historyHost.append(details.root);}status();
 }
 function renderModules(host){const d=M.view(working);host.append(node('p','先按叙事任务分块，再决定每块需要哪些片段。','phase-description'));
@@ -67,9 +74,41 @@ function plain(host,s){const box=node('section',undefined,'paper'),grid=node('di
  if(s.legacyIndex===undefined){const req=fold('明确要求 · 会继续传递到后续阶段');req.content.append(field('用户已明确提出的约束',s.requirements||'',v=>change(M.segmentPath(working,s.id,'requirements'),v),{rows:3}));box.append(req.root);}else{const original=fold('原稿中的动作、声音与制作备注');original.content.append(node('p',[s.legacyAction,s.legacyAudio,s.legacyNotes].filter(Boolean).join('\n')));box.append(original.root);}host.append(box);
 }
 function seams(host,s){const all=M.view(working).segments,i=all.findIndex(x=>x.id===s.id),before=all[i-1],after=all[i+1],box=node('section',undefined,'seams'),heading=node('div',undefined,'seam-title');heading.append(node('h3','前后怎么接'));if(before&&s.plan&&before.plan)heading.append(button('连看前段与本段',()=>playPair([before.id,s.id]),'quiet'));box.append(heading);const row=node('div',undefined,'seam-row'),a=node('div'),b=node('div');a.append(node('small',before?'上一段交出':'开场'),node('p',before?.plan?.stateOut||before?.description||'首镜入场，按本段起态建立。'));b.append(node('small','这一段接住'),node('p',s.plan?.stateIn||s.description||'本段起态待设计'));row.append(a,node('span','→','muted'),b);box.append(row);if(after){const f=fold('这一段交给下一段');f.content.append(node('p',(s.plan?.stateOut||s.description||'待设计')+' → '+(after.plan?.stateIn||after.description||'待设计')));box.append(f.root);}host.append(box);}
+function renderIndependentPreview(host,segment){
+ const box=node('section',undefined,'paper');
+ const board=segment.plan.artifacts||{},color=segment.production;
+ const colorArtifacts=color?.artifacts||{};
+ const livePreview=!M.localArtifactPath(colorArtifacts.video)&&M.localPreviewPath(colorArtifacts.preview)
+  ?colorArtifacts.preview:undefined;
+ const hasColor=M.localArtifactPath(colorArtifacts.video)||Boolean(livePreview);
+ const versions=[{
+  title:'动态白板',
+  description:M.readiness(working,segment).plan==='current'
+   ?'独立白板视频。'
+   :'这份白板的设计或文案待复核。',
+  artifacts:board,
+ }];
+ if(hasColor)versions.unshift({
+  title:color.title||'彩色预览',description:color.description,artifacts:colorArtifacts,livePreview,
+ });
+ const copy=M.cueText(working,segment);
+ box.append(node('h2',hasColor?'镜头预览':'独立动态白模'),node('p',copy,'copy-quote'));
+ renderVersionPlayer(box,versions,[['video','下载 MP4'],['webm','下载 WebM'],['review','核验记录']]);
+ for(const [key,label]of [['preview','打开独立预览'],['design','结构化设计']]){
+  if(!M.localArtifactPath(board[key]))continue;
+  const link=node('a',label,'button');link.href=board[key];link.target='_blank';link.rel='noopener';box.append(link);
+ }
+ const detail=fold('对应文案与完整设计');
+ detail.content.append(node('p',copy,'copy-quote'));
+ for(const [key,label]of [['layout','画面布局'],['action','动作时序'],['stateIn','起态'],['stateOut','末态'],['continuity','前后连接'],['audio','声音与字幕']]){
+  detail.content.append(node('h3',label),node('p',segment.plan[key]||'待补'));
+ }
+ box.append(detail.root);
+ host.append(box);
+}
 function dynamic(host,s){
  if(!s.plan){const empty=node('section',undefined,'empty');empty.append(node('h2','这一段还没有动态设计'),node('p','导演需要独立选择方案，补齐背景、占位对象、字幕与动作时序。构思草图不会自动套用。'),button('请导演生成动态设计',()=>request(3),'primary'));host.append(empty);return;}
- if(s.plan.rendererSource){const box=node('section',undefined,'paper'),artifacts=s.plan.artifacts||{},local=value=>typeof value==='string'&&/^[a-z\d_./-]+$/i.test(value)&&!value.startsWith('/')&&!value.split('/').includes('..');box.append(node('h2','独立动态白模'),node('p',M.readiness(working,s).plan==='current'?'此试样使用片段独立执行器；本页播放已导出视频，实时编辑与重新导出请进入独立预览。':'设计或相邻描述已变化，以下保留的视频待重新核对与导出。','basis-note'));box.append(node('p',M.cueText(working,s),'copy-quote'));if(local(artifacts.video)){const video=node('video');video.src=window.DirectorMedia?.[artifacts.video]||artifacts.video;video.controls=true;video.preload='metadata';video.style.width='100%';video.style.maxHeight='60vh';video.setAttribute('aria-label','独立片段白模');box.append(video);}for(const [key,label]of [['preview','打开独立预览'],['video','下载 MP4'],['webm','下载 WebM'],['design','结构化设计'],['review','核验记录']])if(local(artifacts[key])){const a=node('a',label,'button');a.href=artifacts[key];a.target='_blank';a.rel='noopener';box.append(a);}const detail=fold('对应文案与完整设计');detail.content.append(node('p',M.cueText(working,s),'copy-quote'));for(const [key,label]of [['layout','画面布局'],['action','动作时序'],['stateIn','起态'],['stateOut','末态'],['continuity','前后连接'],['audio','声音与字幕']])detail.content.append(node('h3',label),node('p',s.plan[key]||'待补'));box.append(detail.root);host.append(box);return;}
+ if(s.plan.rendererSource){renderIndependentPreview(host,s);return;}
  const box=node('section',undefined,'paper'),layout=node('div',undefined,'preview-layout'),preview=node('div',undefined,'preview'),canvas=node('canvas');canvas.width=960;canvas.height=540;canvas.setAttribute('aria-label','当前片段动态白模');preview.append(canvas);const controls=node('div',undefined,'player-controls'),play=button('播放',()=>player?.toggle()),range=node('input');range.type='range';range.min=0;range.max=s.plan.duration;range.step='.01';range.value=0;range.setAttribute('aria-label','样板视频时间');const timer=node('output','0.0 / '+s.plan.duration.toFixed(1)+' s');controls.append(play,range,timer);preview.append(controls,node('p','粗略样板 · 无音轨，时长预估；正式素材与表演仍需制作核验。','player-caption'));const ready=node('p','','basis-note');preview.append(ready);
  const exportRow=node('div',undefined,'export-row'),exportButton=button('导出本段样板',()=>exportSample([s.id],exportButton)),full=button('连播全片',()=>playPair()),progress=node('span','','muted');exportRow.append(exportButton,full,progress);preview.append(exportRow);const allExport=button('导出整片样板',()=>exportSample(undefined,allExport),'quiet');preview.append(allExport);
  let time=0,running=false,raf=0,last=0,sequence=null,token=0;
@@ -92,11 +131,72 @@ async function playPair(ids){try{if(phase!==3){phase=3;render();}if(!player)thro
 async function exportSample(ids,b){if(exporting)return;let list;const snapshot=M.clone(working);try{list=M.timeline(snapshot,ids);}catch(error){alert(error.message);return;}if(player)player.dispose();exporting=true;exportAbort=new AbortController();$('cancel-export').hidden=false;const canvas=node('canvas');canvas.width=960;canvas.height=540;const original=b.textContent;b.disabled=true;
  try{const blob=await R.exportVideo(canvas,snapshot,list,p=>b.textContent='正在导出 '+Math.round(p*100)+'%',exportAbort.signal);download(blob,'animatic-'+(ids?.[0]||'full')+'.webm');download({schema:'director-animatic/1',projectId:snapshot.projectId,revision:snapshot.revision,designHash:M.hash(snapshot),segments:list.map(t=>({id:t.segment.id,planHash:M.hash(t.segment.plan),start:t.start,end:t.end})),audio:'none',timing:'estimated',finalVideoReviewed:false},'animatic-'+(ids?.[0]||'full')+'.manifest.json');$('draft-status').textContent='已导出样板视频和同次设计记录；正式成片仍未核验。';}
  catch(error){if(error.message==='已取消导出。')$('draft-status').textContent=error.message;else alert(error.message);}finally{exporting=false;exportAbort=null;$('cancel-export').hidden=true;b.textContent=original;b.disabled=false;}}
-function renderProduction(host){host.append(node('p','用收敛后的方案交接制作，再对照实际成片核验。','phase-description'));const box=node('section',undefined,'paper');box.append(node('h2','制作与审片记录'),node('p',working.stages.director?.production?.summary||'当前没有绑定正式成片的审片结论。','approval'));
- const artifacts=working.stages.director?.production?.artifacts||{},local=value=>typeof value==='string'&&/^[a-z\d_./-]+$/i.test(value)&&!value.startsWith('/')&&!value.split('/').includes('..');
- if(local(artifacts.video)){const video=node('video');video.controls=true;video.preload='metadata';video.src=window.DirectorMedia?.[artifacts.video]||artifacts.video;video.style.width='100%';video.style.maxHeight='65vh';video.setAttribute('aria-label','当前正式样片');box.append(video);}
- for(const [key,label]of [['video','下载 MP4'],['project','同次导出工程 JSON'],['review','本次核验记录']])if(local(artifacts[key])){const link=node('a',label,'button');link.href=artifacts[key];link.download='';box.append(link);}
- const f=fold('查看本阶段交接资料');f.content.append(node('p','唯一文案、模块与片段映射、白模版本、继承的叙事和节奏、按正式参考重做的占位造型、素材与能力缺口。'));box.append(f.root);host.append(box,feedback('production','对正式制作或成片的意见'));actionBar(host,'请导演处理制作交接与审片',4);}
+function renderVersionPlayer(host,versions,downloadLinks){
+ const preview=node('div');
+ let disposePreview;
+ function clearPreview(){
+  disposePreview?.();
+  disposePreview=null;
+  preview.querySelector('video')?.pause();
+  preview.replaceChildren();
+ }
+ function showVersion({title,description,artifacts,livePreview,renderPreview}){
+  clearPreview();
+  if(description)preview.append(node('p',description,'muted'));
+  if(renderPreview){
+   disposePreview=renderPreview(preview);
+   return;
+  }
+  const previewPath=livePreview??artifacts.preview;
+  if(M.localArtifactPath(artifacts.video)){
+   const video=node('video');
+   video.controls=true;video.playsInline=true;video.preload='metadata';video.src=window.DirectorMedia?.[artifacts.video]||artifacts.video;
+   video.style.width='100%';video.style.maxHeight='65vh';video.setAttribute('aria-label',title);
+   preview.append(video);
+  }else if(M.localPreviewPath(previewPath)){
+   const frame=node('iframe');
+   frame.src=previewPath;frame.title=title;frame.allowFullscreen=true;
+   frame.style.width='100%';frame.style.border='0';
+   if(livePreview)frame.style.height='min(70vh, 620px)';
+   else frame.style.aspectRatio='16 / 11';
+   preview.append(frame);
+  }
+  for(const [key,label]of downloadLinks){
+   if(!M.localArtifactPath(artifacts[key]))continue;
+   const linkLabel=key==='project'&&!artifacts.video?'当前剪辑工程 JSON':label;
+   const link=node('a',linkLabel,'button');link.href=artifacts[key];link.download='';preview.append(link);
+  }
+ }
+ if(versions.length>1){
+  const label=node('label',undefined,'field'),select=node('select',undefined,'button');
+  label.append(node('span','预览版本'),select);
+  versions.forEach(({title},index)=>{const option=node('option',title);option.value=String(index);select.append(option);});
+  select.addEventListener('change',()=>showVersion(versions[select.selectedIndex]));
+  host.append(label);
+ }
+ host.append(preview);showVersion(versions[0]);
+ return clearPreview;
+}
+function renderProduction(host){
+ host.append(node('p','用收敛后的方案交接制作，再对照实际成片核验。','phase-description'));
+ const production=working.stages.director?.production,box=node('section',undefined,'paper');
+ box.append(node('h2','制作与审片记录'),node('p',production?.summary||'当前没有绑定正式成片的审片结论。','approval'));
+ const versions=[...M.productionVersions(production)];
+ const narration=working.stages.director?.narration;
+ if(narration?.clips?.length&&M.localArtifactPath(narration.picture?.video)){
+  versions.splice(1,0,{
+   title:'全片配音版',
+   description:'工作台试听 · 画面按当前保存的旁白切点换镜。',
+   renderPreview:target=>window.DirectorNarration.mount(target,working,{node,button,download},{reviewOnly:true}),
+  });
+ }
+ disposeNarration=renderVersionPlayer(box,versions,[['video','下载 MP4'],['project','同次导出工程 JSON'],['review','本次核验记录']]);
+ const f=fold('查看本阶段交接资料');
+ f.content.append(node('p','唯一文案、模块与片段映射、白模版本、继承的叙事和节奏、按正式参考重做的占位造型、素材与能力缺口。'));
+ box.append(f.root);
+ host.append(box,feedback('production','对正式制作或成片的意见'));
+ actionBar(host,'请导演处理制作交接与审片',4);
+}
 function renderWriter(host){const box=node('section',undefined,'source-view'),nav=node('nav',undefined,'writer-controls');['选题','叙事路线','完整文案'].forEach((name,i)=>{const b=button(name,()=>{writerStage=i+1;save();render();});b.setAttribute('aria-pressed',String(writerStage===i+1));nav.append(b);});box.append(nav);
  if(writerStage===1){const paper=node('section',undefined,'paper'),brief=working.stages.brief||{};for(const [k,label]of [['topic','讲什么'],['audience','帮谁'],['problem','解决什么问题'],['value','提供什么价值'],['takeaway','补充记忆点']])paper.append(field(label,brief[k]||'',v=>change('/stages/brief/'+k,v),{rows:2}));paper.append(node('p',brief.confirmationEvidence?'已有确认依据：'+brief.confirmationEvidence:'选题确认依据待补；旧记忆点不代替问题与价值。','approval'));box.append(paper);}
  else if(writerStage===2){const n=working.stages.narrative||{},paper=node('section',undefined,'paper');for(const [k,label]of [['opening','开头'],['closing','收尾'],['emotionalArc','情绪与认知路线']])paper.append(field(label,n[k]||'',v=>change('/stages/narrative/'+k,v),{rows:3}));const route=fold('核心推进与已有参考',true);route.content.append(node('pre',compact({route:n.route||[],references:n.references||[]})));paper.append(route.root);box.append(paper);}
@@ -105,6 +205,7 @@ function renderWriter(host){const box=node('section',undefined,'source-view'),na
  box.append(feedback('writer','对内容和表达的意见'));actionBar(box,'交给编剧修订','writer');host.append(box);
 }
 $('writer-view').onclick=()=>{if(exporting)return;role='writer';save();render();};$('director-view').onclick=()=>{if(exporting)return;role='director';save();render();};
+$('narration-view').onclick=()=>{if(exporting)return;role='narration';render();};
 $('review-changes').onclick=()=>request('revisions');$('close-request').onclick=()=>$('request-dialog').close();$('show-help').onclick=()=>$('help-dialog').showModal();$('close-help').onclick=()=>$('help-dialog').close();
 $('send-request').onclick=async()=>{const prompt=$('request-payload').value;try{if(typeof window.openai?.sendFollowUpMessage==='function'){await window.openai.sendFollowUpMessage({prompt});$('request-status').textContent='已交给聊天接口，等待处理；本页尚未标为已应用。';}else{await navigator.clipboard.writeText(prompt);$('request-status').textContent='已复制，尚未发送。请粘贴到当前聊天。';}}catch{$('request-payload').focus();$('request-payload').select();$('request-status').textContent='无法自动提交，请复制所选文本到聊天。';}};
 $('download-request').onclick=$('download-record').onclick=()=>download({...record(),conflict,retained:history},'director-modifications.json');
@@ -117,6 +218,7 @@ window.DirectorWorkspace={getProject:()=>M.clone(working),getRecord:record,load,
 try{if(location.hash.startsWith('#creator-state='))CREATOR_PROJECT=M.validate(JSON.parse(decodeURIComponent(location.hash.slice(15))));}catch(error){startupError='导入地址无效：'+error.message;}
 load(CREATOR_PROJECT);
 if(location.hash==='#production'){phase=4;role='director';render();}
+if(location.hash==='#narration'){role='narration';render();}
 if(location.hash==='#s02a'){const target=M.view(working).segments.find(s=>s.title.startsWith('S02A'));if(target){selected=target.id;phase=3;role='director';render();}}
 try{if(location.hash.startsWith('#review-return=')){const value=window.ScriptReviewBridge.decode(location.hash.slice(15));if(value.kind!=='return')throw Error('这不是修订记录。');importedReviews.push(value);save();render();}}catch(error){$('conflict-banner').hidden=false;$('conflict-banner').textContent='审阅记录无法导入：'+error.message;}
 })();

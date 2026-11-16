@@ -15,7 +15,7 @@ description: 接手完整文案，拆大模块和片段，以大白话及可弃�
 | --- | --- |
 | 新创意、选题或内容改写 | 按 [协作合同](references/collaboration.md) 转 pixel-video-writer |
 | 文案画面化、分镜或接镜修改 | [导演四阶段](references/director-workflow.md)，按当前阶段完成模块划分、可弃用草图或结构化设计与动态白模 |
-| 确定视觉结构与逐镜表达 | [视觉表达](references/visual-system.md)、[文画对应](references/visual-storytelling.md#把讲述推进落实到画面)、[分镜标注与预算](references/visual-storyboard.md) |
+| 确定视觉结构与逐镜表达 | 先确定[整段理解推进](references/visual-storytelling.md#先确定整段如何推进理解)，再读 [视觉表达](references/visual-system.md)、[文画对应](references/visual-storytelling.md#把讲述推进落实到画面)、[分镜标注与预算](references/visual-storyboard.md)。采用动静反差时读 [预期与注意力交接](references/visual-storytelling.md#重复预期与动静反差) |
 | 建工程与制作交接 | 先按 [白模交接与采用记录](references/handoff.md#白模交接与采用记录) 区分要继承的叙事和节奏与需重做的占位造型，再按 [创作合同](references/authoring.md) 使用 [scripts/director.py](scripts/director.py) |
 | 审片与定向修复 | [Review](references/review.md)，绑定实际导演源或工作台剪辑分支与本次证据 |
 

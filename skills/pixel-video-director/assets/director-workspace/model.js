@@ -8,6 +8,29 @@ function text(value,max=30000){return typeof value==='string'&&value.length<=max
 function assert(ok,message){if(!ok)throw Error(message);}
 function number(value,min,max){return Number.isFinite(value)&&value>=min&&value<=max;}
 function imageURL(value){return !value||typeof value==='string'&&value.length<=3000000&&/^data:image\/(?:png|jpeg|webp);base64,[a-z\d+/=\s]+$/i.test(value);}
+function localArtifactPath(value) {
+ return typeof value==='string'&&/^[-a-z\d_./]+$/i.test(value)&&!value.startsWith('/')&&!value.split('/').includes('..');
+}
+function localPreviewPath(value) {
+ return typeof value==='string'&&localArtifactPath(value.replace(/^\//,''));
+}
+function productionVersions(production) {
+ return production?.versions ?? [{title:'当前正式样片',artifacts:production?.artifacts||{}}];
+}
+function validateProductionVersions(versions) {
+ assert(Array.isArray(versions)&&versions.length>0&&versions.length<=24,'制作与审片需要 1–24 个预览版本。');
+ for(const version of versions){
+  assert(version&&text(version.title,160)&&version.title.trim()&&text(version.description??''),'制作版本需要标题和有效说明。');
+  const preview=version.artifacts?.preview;
+  assert(localArtifactPath(version.artifacts?.video)||localPreviewPath(preview),
+    '制作版本需要本地视频或同一服务的预览路径。');
+  assert(preview===undefined||localPreviewPath(preview),'实时预览需要同一服务的本地路径。');
+  for(const key of ['video','project','review']){
+   const value=version.artifacts[key];
+   assert(value===undefined||localArtifactPath(value),'制作版本的附件需要本地路径。');
+  }
+ }
+}
 function elements(items,animated=false,duration=0){
  assert(Array.isArray(items)&&items.length<=24,'画面最多包含 24 个占位元素。');const ids=new Set();
  for(const e of items){assert(e&&text(e.id,100)&&e.id&&!ids.has(e.id),'元素 ID 需要唯一。');ids.add(e.id);assert(text(e.label,120)&&['box','person'].includes(e.kind||'box'),'占位元素需要文字和合法类型。');
@@ -47,6 +70,7 @@ function validate(project){
  const copy=project.stages.copy||[];assert(Array.isArray(copy)&&copy.length<=200,'文案格式不正确。');const cues=new Set();for(const c of copy){assert(c&&text(c.id,100)&&c.id&&!cues.has(c.id)&&text(c.text),'文案需要唯一 ID 和文字。');cues.add(c.id);}
  if(project.stages.visuals!==undefined){assert(Array.isArray(project.stages.visuals)&&project.stages.visuals.length<=200,'旧分镜格式不正确。');const oldIds=new Set();for(const s of project.stages.visuals){assert(s&&text(s.id,100)&&s.id&&!oldIds.has(s.id),'旧分镜 ID 需要唯一。');oldIds.add(s.id);for(const key of ['duration','copy','visual','action','audio','notes'])if(s[key]!==undefined)assert(text(s[key]),'旧分镜字段应为文字。');}}
  const d=project.stages.director;if(!d)return project;assert(d&&Number.isInteger(d.phase)&&d.phase>=1&&d.phase<=4,'导演阶段应为 1–4。');assert(text(d.agreements||''),'全片共识格式不正确。');
+ if(d.production?.versions!==undefined)validateProductionVersions(d.production.versions);
  assert(Array.isArray(d.modules)&&d.modules.length<=100&&Array.isArray(d.segments)&&d.segments.length<=200,'导演需要 modules 和 segments 数组。');
  const modules=new Set();for(const m of d.modules){assert(m&&text(m.id,100)&&m.id&&!modules.has(m.id)&&text(m.title,300)&&text(m.purpose||''),'大模块标识或说明不正确。');modules.add(m.id);}
  const ids=new Set();for(const s of d.segments){assert(s&&text(s.id,100)&&s.id&&!ids.has(s.id)&&modules.has(s.moduleId)&&text(s.title||'',300)&&text(s.description||''),'片段 ID、模块归属或描述不正确。');ids.add(s.id);assert(Array.isArray(s.cueIds)&&s.cueIds.length<=200&&s.cueIds.every(id=>cues.has(id)),'片段须引用已有文案 ID。');assert(Array.isArray(s.dependsOn||[])&&(s.dependsOn||[]).length<=200,'关联片段格式不正确。');if(s.requirements!==undefined)assert(text(s.requirements),'明确要求格式不正确。');if(s.sketch)validateSketch(s.sketch);if(s.plan)validatePlan(s.plan,cues);}
@@ -77,5 +101,5 @@ function applyDraft(project,record){assert(record?.projectId===project.projectId
 function affected(project,id){const list=view(project).segments,i=list.findIndex(s=>s.id===id);return list.filter((s,j)=>Math.abs(j-i)<=1||(s.dependsOn||[]).includes(id)||(list[i]?.dependsOn||[]).includes(s.id)).map(s=>s.id);}
 function timeline(project,ids){let time=0;return view(project).segments.filter(s=>!ids||ids.includes(s.id)).map(s=>{assert(s.plan&&readiness(project,s).plan==='current','请先补齐或复核当前片段的动态设计。');assert(!s.plan.rendererSource,'此片段使用独立白模执行器，请进入独立预览播放或导出。');const item={segment:s,start:time,end:time+s.plan.duration};time=item.end;return item;});}
 function position(element,at){const base={x:element.x,y:element.y,opacity:1,scale:1,rotation:0};let frames=[{at:0,...base}];for(const k of element.keyframes||[]){const last=frames[frames.length-1],item={...last,...k};if(k.at===0)frames[0]=item;else frames.push(item);}let a=frames[0],b=a;for(const f of frames){if(f.at<=at)a=f;else{b=f;break;}b=a;}const t=b.at===a.at?0:Math.max(0,Math.min(1,(at-a.at)/(b.at-a.at)));return Object.fromEntries(['x','y','opacity','scale','rotation'].map(key=>[key,a[key]+(b[key]-a[key])*t]));}
-const api={PHASES,clone,hash,validate,validateSketch,validatePlan,imageURL,view,segmentBasis,cueText,readiness,segmentPath,legacyKeyPath,get,set,changes,applyDraft,affected,timeline,position};root.DirectorModel=api;if(typeof module!=='undefined')module.exports=api;
+const api={PHASES,clone,hash,validate,validateSketch,validatePlan,imageURL,localArtifactPath,localPreviewPath,productionVersions,view,segmentBasis,cueText,readiness,segmentPath,legacyKeyPath,get,set,changes,applyDraft,affected,timeline,position};root.DirectorModel=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

@@ -29,6 +29,8 @@
 
 具体能力的合同、素材与案例从所属模块进入。当前状态以能力目录、实际执行器和本次核验为准。
 
+[《黑天鹅》观片案例](skills/pixel-video-director/references/black-swan-case.md)记录动静交互、推入显示器、状态条与反转的实际观察及核验范围；通用的[重复预期与注意力交接](skills/pixel-video-director/references/visual-storytelling.md#重复预期与动静反差)已接入导演分镜和审片。案例不新增效果预设，也不固定新片的角色、配色、长度或镜头顺序。
+
 ## 安装与仓库维护
 
 将所需的 `skills/<技能名称>/` 完整复制到 Codex 的 skills 目录。编剧可独立使用。导演的制作工具需要基础技能，跨安装目录的定位方式见 [协作合同](skills/pixel-video-writer/references/handoff.md)。
