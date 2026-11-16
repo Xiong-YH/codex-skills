@@ -2,6 +2,7 @@
 'use strict';
 const M=window.DirectorModel,R=window.DirectorRender,$=id=>document.getElementById(id);
 let base=M.clone(CREATOR_PROJECT),working=M.clone(base),paths=new Set(),notes={},phase=1,role='director',selected='',writerStage=3,storageOK=true,conflict=null,legacyDrafts=[],history=[],importedReviews=[],undo=[],pending='',player=null,exporting=false,exportAbort=null,startupError='';
+let filmReview=null, browseFilmSegment=null;
 const key=()=>`director-workspace-${base.projectId}-revision-${base.revision}`;
 function node(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
 function button(label,fn,cls){const b=node('button',label,cls);b.type='button';b.addEventListener('click',fn);return b;}
@@ -31,6 +32,10 @@ function field(label,value,onchange,options={}){const wrap=node('label',undefine
 function fold(title,open=false){const d=node('details',undefined,'fold');d.open=open;d.append(node('summary',title));const content=node('div',undefined,'fold-content');d.append(content);return {root:d,content};}
 function feedback(key,label='这一段，你希望怎么改？'){const box=node('div',undefined,'feedback'),id='feedback-'+key.replace(/[^a-z\d-]/gi,'-'),l=node('label',label);l.htmlFor=id;const area=node('textarea');area.id=id;area.rows=2;area.maxLength=30000;area.placeholder='说说哪里不顺，或你希望看到什么。';area.value=notes[key]||'';area.addEventListener('input',()=>{notes[key]=area.value;save();});box.append(l,area);return box;}
 function current(){return M.view(working).segments.find(s=>s.id===selected)||M.view(working).segments[0];}
+function filmTake(){
+ const take=window.DirectorFilmTake;
+ return take?.projectId===base.projectId&&take.revision===base.revision&&take.sourceHash===M.hash(base)?take:null;
+}
 function request(action){pending=action;const report=record(),d=M.view(working),s=current(),snapshot={title:working.title,brief:working.stages.brief,narrative:working.stages.narrative,copy:working.stages.copy,director:working.stages.director||{legacyVisuals:working.stages.visuals||[]}};
  const instructions={1:'请按导演阶段一拆大模块：每块的叙事任务、文案范围、前后推进和全片共识；不要重写已确认文案。',2:'请按导演阶段二用大白话写清事件、角色视线、观看顺序、动作或因果及前后接镜，配粗线框草图说明关系。草图是可调整的构思参考。',3:'请按导演阶段三修订同一片段的设计与白模。用线条、方框、箭头和极少文字说明状态，只给必须实播验证的关键变化加动态。检查相邻片段及字幕阅读，核对设计后再更新 plan.basis。',4:'请按导演阶段四交接。记录要继承的叙事、焦点、动作、节奏与接镜，以及要重做的临时人物、机位、构图、道具比例和坐标。正式画面按已确认的系列参考与本片视觉约定重定，沿已授权范围完成制作与实际成片核验。',writer:'请由 pixel-video-writer 处理文案和选题修改，尊重当前确认与授权，不要求先补导演细节。'};
  const instruction=action==='revisions'?'请核对本地改稿记录，按问题归属修订唯一源：内容问题归编剧，视听问题归导演，实现问题归制作；同步关联片段、复核草图及白模并更新同一入口。':instructions[action];
@@ -40,6 +45,7 @@ function request(action){pending=action;const report=record(),d=M.view(working),
 function actionBar(host,label,action){const row=node('div',undefined,'action-bar');row.append(node('p','继续处理会携带当前稿和本轮意见。'),button(label,()=>request(action),'primary'));host.append(row);}
 function render(){
  if(player){player.dispose();player=null;}
+ if(filmReview){filmReview.dispose();filmReview=null;browseFilmSegment=null;}
  const d=M.view(working);if(!d.segments.some(s=>s.id===selected))selected=d.segments[0]?.id||'';
  $('project-title').textContent=working.title||'新视频';$('actual-progress').textContent=base.activeStage===0?'新项目 · 先讨论选题':base.activeStage<=3?'项目进度：编剧 · '+['','选题讨论','叙事路线','完整文案'][base.activeStage]:'项目进度：导演 · '+M.PHASES[d.phase-1];$('example-banner').hidden=!working.isExample;
  $('writer-view').setAttribute('aria-pressed',String(role==='writer'));$('director-view').setAttribute('aria-pressed',String(role==='director'));
@@ -57,11 +63,75 @@ function renderModules(host){const d=M.view(working);host.append(node('p','先�
  });
  if(working.stages.director){const f=fold('全片共识与必须保留的要求');f.content.append(field('人物、视角、场所、道具与信息顺序',working.stages.director.agreements||'',v=>change('/stages/director/agreements',v),{rows:4}));host.append(f.root);}host.append(feedback('global','对整支视频的想法'));actionBar(host,'请导演完善模块与拆段',1);
 }
-function renderSegments(host){const d=M.view(working),layout=node('div',undefined,'layout'),nav=node('nav',undefined,'segment-list');nav.setAttribute('aria-label','片段选择');d.modules.forEach(m=>{nav.append(node('h3',m.title));d.segments.filter(s=>s.moduleId===m.id).forEach((s,i)=>{const b=button('',()=>{if(exporting)return;selected=s.id;save();render();});b.setAttribute('aria-current',String(s.id===selected));b.append(node('span',s.title||s.id),node('small',M.cueText(working,s).slice(0,36)||'文案待关联'));nav.append(b);});});const main=node('div',undefined,'content');layout.append(nav,main);host.append(layout);
- const s=current();if(!s){const empty=node('div',undefined,'empty');empty.append(node('h2','这一阶段还没有片段'),node('p','先由导演按大模块拆分，再补大白话和构思草图。'),button('请求拆分片段',()=>request(2),'primary'));main.append(empty);return;}
- const heading=node('div',undefined,'section-head'),left=node('div');left.append(node('h2',s.title||s.id),node('p',d.modules.find(m=>m.id===s.moduleId)?.title||''));const controls=node('div',undefined,'navigation'),index=d.segments.findIndex(x=>x.id===s.id);const previous=button('←',()=>{selected=d.segments[index-1].id;save();render();}),next=button('→',()=>{selected=d.segments[index+1].id;save();render();});previous.disabled=index===0;next.disabled=index===d.segments.length-1;previous.setAttribute('aria-label','上一片段');next.setAttribute('aria-label','下一片段');controls.append(previous,next);heading.append(left,controls);main.append(heading);
- if(phase===2)plain(main,s);else dynamic(main,s);
- seams(main,s);main.append(feedback('segment:'+s.id));const ids=M.affected(working,s.id),changed=M.changes(base,working,[...paths]);if(changed.length)main.append(node('p','本轮修改后请连同这些片段复核：'+ids.join('、'),'impact'));actionBar(main,phase===2?'请导演修订这一段与草图':'请导演修订设计与白模',phase);
+function renderSegments(host){
+ const d=M.view(working),layout=node('div',undefined,'layout'),nav=node('nav',undefined,'segment-list');
+ const main=node('div',undefined,'content'),head=node('div'),details=node('div');
+ const rows=new Map();
+ function browse(id,{keepTime=false}={}){
+  if(exporting||!rows.has(id))return;
+  const {scrollX,scrollY}=window;
+  const focusLabel=document.activeElement?.closest('.navigation button')?.getAttribute('aria-label');
+  selected=id;save();
+  if(!filmReview){render();return;}
+  for(const [key,row] of rows)row.setAttribute('aria-current',String(key===id));
+  showSelected();
+  filmReview.select(id,{keepTime});
+  if(keepTime){
+   const row=rows.get(id).getBoundingClientRect(),before=nav.getBoundingClientRect();
+   if(row.top<before.top)nav.scrollTop+=row.top-before.top;
+   if(row.bottom>before.bottom)nav.scrollTop+=row.bottom-before.bottom;
+   if(row.left<before.left)nav.scrollLeft+=row.left-before.left;
+   if(row.right>before.right)nav.scrollLeft+=row.right-before.right;
+  }
+  if(focusLabel)head.querySelector('[aria-label="'+focusLabel+'"]:not(:disabled)')?.focus({preventScroll:true});
+  if(window.scrollX!==scrollX||window.scrollY!==scrollY)window.scrollTo(scrollX,scrollY);
+ }
+ function showSelected(){
+  const s=current();
+  const heading=node('div',undefined,'section-head'),left=node('div'),controls=node('div',undefined,'navigation');
+  const index=d.segments.findIndex(x=>x.id===s.id);
+  left.append(node('h2',s.title||s.id),node('p',d.modules.find(m=>m.id===s.moduleId)?.title||''));
+  const previous=button('←',()=>browse(d.segments[index-1].id)),next=button('→',()=>browse(d.segments[index+1].id));
+  previous.disabled=index===0;next.disabled=index===d.segments.length-1;
+  previous.setAttribute('aria-label','上一片段');next.setAttribute('aria-label','下一片段');
+  controls.append(previous,next);heading.append(left,controls);head.replaceChildren(heading);
+  details.replaceChildren();
+  if(phase===2){
+   if(filmReview){
+    const description=fold('分镜描述与构思图');plain(description.content,s);details.append(description.root);
+   }else plain(details,s);
+  }else dynamic(details,s);
+  seams(details,s);
+  if(!filmReview?.has(s.id))details.append(feedback('segment:'+s.id));
+  const ids=M.affected(working,s.id),changed=M.changes(base,working,[...paths]);
+  if(changed.length)details.append(node('p','本轮修改后请连同这些片段复核：'+ids.join('、'),'impact'));
+  actionBar(details,phase===2?'请导演修订这一段与草图':'请导演修订设计与白模',phase);
+ }
+ nav.setAttribute('aria-label','片段选择');
+ for(const module of d.modules){
+  nav.append(node('h3',module.title));
+  for(const s of d.segments.filter(s=>s.moduleId===module.id)){
+   const row=button('',()=>browse(s.id));
+   row.dataset.segmentId=s.id;row.setAttribute('aria-current',String(s.id===selected));
+   row.append(node('span',s.title||s.id),node('small',M.cueText(working,s).slice(0,36)||'文案待关联'));
+   rows.set(s.id,row);nav.append(row);
+  }
+ }
+ layout.append(nav,main);host.append(layout);
+ if(!current()){
+  const empty=node('div',undefined,'empty');
+  empty.append(node('h2','这一阶段还没有片段'),node('p','先由导演按大模块拆分，再补大白话和构思草图。'),button('请求拆分片段',()=>request(2),'primary'));
+  main.append(empty);return;
+ }
+ main.append(head);
+ const take=phase===2?filmTake():null;
+ if(take){
+  filmReview=window.DirectorFilmReview.create(take,{node,button,feedback,browse,download,notes:()=>notes,segments:d.segments});
+  browseFilmSegment=browse;
+  main.append(filmReview.panel);
+  filmReview.select(current().id);
+ }
+ main.append(details);showSelected();
 }
 function plain(host,s){const box=node('section',undefined,'paper'),grid=node('div',undefined,'plain-grid'),words=node('div');words.append(node('p',M.cueText(working,s)||'对应文案待导演关联','copy-quote'));words.append(field('大白话：看见什么，怎样变化',s.description,v=>{change(M.segmentPath(working,s.id,'description'),v);const status=M.readiness(working,current());basis.textContent=status.sketch==='current'?'':current().sketch?'描述已变化，草图需要重新核对。':'';},{rows:7,id:'plain-description'}));const visual=node('div');visual.append(R.sketch(document,s.sketch));const basis=node('p',M.readiness(working,s).sketch==='stale'?'这张参考图的依据需要重新核对。':'','basis-note');visual.append(basis);grid.append(words,visual);box.append(grid);
  if(s.legacyIndex===undefined){const req=fold('明确要求 · 会继续传递到后续阶段');req.content.append(field('用户已明确提出的约束',s.requirements||'',v=>change(M.segmentPath(working,s.id,'requirements'),v),{rows:3}));box.append(req.root);}else{const original=fold('原稿中的动作、声音与制作备注');original.content.append(node('p',[s.legacyAction,s.legacyAudio,s.legacyNotes].filter(Boolean).join('\n')));box.append(original.root);}host.append(box);
@@ -114,6 +184,7 @@ function renderProduction(host){
   box.append(video);
  }
  const links=preview?[['review','本次画面记录']]:[['video','下载 MP4'],['project','同次导出工程 JSON'],['review','本次核验记录']];
+ if(filmTake())box.append(button('进入逐段审片',()=>{phase=2;save();render();},'primary'));
  for(const [key,label]of links)if(local(artifacts[key])){
   const link=node('a',label,'button');
   link.href=artifacts[key];link.download='';box.append(link);
@@ -140,7 +211,7 @@ $('import-project').onchange=async event=>{const file=event.target.files[0];if(!
 $('undo-change').onclick=()=>{if(exporting)return;const entry=undo.pop();if(entry){M.set(working,entry.path,entry.before);save();render();}};
 $('cancel-export').onclick=()=>exportAbort?.abort();
 window.addEventListener('beforeunload',()=>{if(exporting)exportAbort?.abort();});
-window.DirectorWorkspace={getProject:()=>M.clone(working),getRecord:record,load,request,selectPhase(value){if(exporting)return;phase=value;role='director';save();render();},selectSegment(id){if(exporting)return;selected=id;save();render();}};
+window.DirectorWorkspace={getProject:()=>M.clone(working),getRecord:record,load,request,selectPhase(value){if(exporting)return;phase=value;role='director';save();render();},selectSegment(id){if(exporting)return;if(browseFilmSegment){browseFilmSegment(id);return;}selected=id;save();render();}};
 try{if(location.hash.startsWith('#creator-state='))CREATOR_PROJECT=M.validate(JSON.parse(decodeURIComponent(location.hash.slice(15))));}catch(error){startupError='导入地址无效：'+error.message;}
 load(CREATOR_PROJECT);
 if(location.hash==='#production'){phase=4;role='director';render();}

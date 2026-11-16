@@ -11,6 +11,8 @@ description: 为无口播像素信息动效设计分镜、组件承接、音乐�
 
 **接稿先排信息变化。** 把编剧的段落和主句带进 `script.beats` 与 `storyboard.beatId`。在现有分镜写清每个关键转折的可见结果，白模和成片按同一套 [画面检查](references/visual-storytelling.md#关键转折的画面检查) 复核。配乐落点、主句与阅读窗口见 [无口播信息动效与音乐卡点](references/beat-driven-explainer.md)。用 [无口播缓存示例](examples/beat-driven-cache/README.md) 核对动态白模与正式 Canvas 的同源链路。
 
+现行无口播视听参考是 [《提问的艺术》动态选段](references/asking-motion-reference.md)。设计进鼓、对话反应、物件堆叠、状态气泡、焦点转移、接镜或行动收尾时，可按可定位的动作步骤和图层说明核对选段，再决定本片的镜头行为。
+
 本系列无口播像素信息动效采用 [《步进》配乐与卡点要求](references/beat-driven-explainer.md#步进配乐与卡点要求)。拆段时先锁定本片配乐版本与真实拍位，再写关键事件的落帧。
 
 ## 按阶段继续

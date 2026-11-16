@@ -1,11 +1,72 @@
 /* Optional real-browser regression. node test_workspace_browser.cjs [packages-dir] [browser-channel] */
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),{pathToFileURL}=require('node:url');
+const {createHash}=require('node:crypto');
 const {chromium}=require(process.argv[2]?path.join(process.argv[2],'playwright'):'playwright');
 const builder=require('../scripts/build-workspace.cjs'),M=require('../assets/director-workspace/model.js');
 const root=path.resolve(__dirname,'../../..'),out=path.join(root,'.tmp/director-browser-tests');fs.mkdirSync(out,{recursive:true});
 const project=builder.readJSON(path.resolve(__dirname,'../examples/director-workflow/project.json'));
 const pageFile=path.join(out,'script-creator.html');builder.build(project,pageFile);
+
+async function checkFilmReview(browser){
+ const reviewPage=path.join(out,'film-review.html'),videoFile='review-fixture.mp4';
+ const media=fs.readFileSync(path.resolve(__dirname,'../examples/whole-illustration/media/whole-illustration.mp4'));
+ fs.writeFileSync(path.join(out,videoFile),media);
+ const source=M.clone(project),director=source.stages.director;
+ source.projectId+='-film-review';source.activeStage=4;director.phase=4;
+ const [first,second,third]=director.segments;
+ const sha256=createHash('sha256').update(media).digest('hex');
+ director.production={artifacts:{video:videoFile},reviewTake:{revision:source.revision,fps:60,frames:302,sha256,shots:[
+  {id:first.id,start:0,frames:84},{id:second.id,start:84,frames:96},{id:third.id,start:180,frames:122},
+ ]}};
+ const mismatch=M.clone(source);
+ mismatch.stages.director.production.reviewTake.sha256='f'.repeat(64);
+ assert.throws(()=>builder.build(mismatch,reviewPage),/审片视频摘要不一致/);
+ builder.build(source,reviewPage);
+ const context=await browser.newContext({viewport:{width:1280,height:920},acceptDownloads:true});
+ try{
+  const page=await context.newPage(),errors=[];
+  page.on('pageerror',error=>errors.push(error.message));
+  await page.goto(pathToFileURL(reviewPage).href);
+  await page.getByRole('button',{name:'进入逐段审片',exact:true}).click();
+  const video=page.locator('.film-review video');
+  await page.waitForFunction(()=>!document.querySelector('.film-review-live button').disabled);
+  await video.evaluate(element=>{element.muted=true;});
+  await page.getByRole('button',{name:'从本段播放',exact:true}).click();
+  await page.waitForFunction(title=>document.querySelector('.film-review-current').textContent.includes(title),second.title);
+  assert.equal(await page.locator('.segment-list button[aria-current=true]').getAttribute('data-segment-id'),first.id);
+  const at=await video.evaluate(element=>element.currentTime);
+  await page.getByRole('button',{name:'定位到播放片段',exact:true}).click();
+  assert.equal(await page.locator('.segment-list button[aria-current=true]').getAttribute('data-segment-id'),second.id);
+  assert(await video.evaluate(element=>element.currentTime)>=at);
+
+  const y=await page.evaluate(()=>{window.scrollTo(0,240);return window.scrollY;});
+  assert(y>0);
+  await page.locator('.segment-list button[data-segment-id="'+first.id+'"]').evaluate(row=>row.click());
+  assert.equal(await page.evaluate(()=>window.scrollY),y);
+  assert.equal(await video.evaluate(element=>element.currentTime),0);
+
+  await video.evaluate(element=>{element.currentTime=1.75;});
+  await page.waitForFunction(title=>document.querySelector('.film-review-current').textContent.includes(title),second.title);
+  await page.getByRole('button',{name:'记下当前时间',exact:true}).click();
+  const note=page.locator('.film-review-notes textarea');
+  const recorded=await note.inputValue();
+  assert(recorded.includes('[00:01.75 · '+second.id+']'));
+  await note.fill(recorded+'对应片段的审片意见');
+  await page.reload();
+  assert.equal(await note.inputValue(),recorded+'对应片段的审片意见');
+  const download=page.waitForEvent('download');
+  await page.getByRole('button',{name:'下载逐段意见',exact:true}).click();
+  const report=JSON.parse(fs.readFileSync(await (await download).path(),'utf8'));
+  assert.equal(report.sourceRevision,source.revision);
+  assert.equal(report.sourceHash,M.hash(source));
+  assert.equal(report.videoSha256,sha256);
+  assert.deepEqual(report.notes,[{id:second.id,startFrame:84,endFrame:180,timeRange:'00:01.40–00:03.00',
+   text:recorded+'对应片段的审片意见'}]);
+  assert.deepEqual(errors,[]);
+ }finally{await context.close();}
+}
+
 (async()=>{
  const browser=await chromium.launch({headless:true,...(process.argv[3]?{channel:process.argv[3]}:{})});
  try{
@@ -76,6 +137,8 @@ const pageFile=path.join(out,'script-creator.html');builder.build(project,pageFi
   assert.equal(await page.evaluate(()=>DirectorWorkspace.getProject().projectId),project.projectId);
   assert.deepEqual(errors,[]);await context.close();
   console.log('PASS: sketches, stale-preview blocking, real movement, adjacent playback, actual decodable WebM+manifest, comments, source conflicts, legacy drafts and mobile layout.');
+  await checkFilmReview(browser);
+  console.log('PASS: verified film binding, live shot across playback, position-preserving jump, scroll, persisted notes and same-version feedback export.');
   console.log('Artifacts: '+out);
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

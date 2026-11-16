@@ -1,16 +1,30 @@
 /* Build the portable workspace from maintained source modules and one project. */
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
+const {createHash}=require('node:crypto');
 const skill=path.resolve(__dirname,'..'),assets=path.join(skill,'assets/director-workspace');
 const template=path.join(skill,'assets/templates/workflow-overview.html'),welcomePath=path.join(skill,'assets/templates/creator-welcome.json');
 const model=require(path.join(assets,'model.js'));
 function readJSON(file){if(fs.statSync(file).size>12000000)throw Error('Project JSON exceeds 12 MB.');return JSON.parse(fs.readFileSync(file,'utf8').replace(/^\uFEFF/,''));}
 function literal(value){return JSON.stringify(value).replace(/</g,'\\u003c').replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029');}
+function bindReview(project,output,media){
+ const production=project.stages.director?.production,take=production?.reviewTake;
+ if(!output||!take||take.revision!==project.revision)return null;
+ const file=production.artifacts.video;
+ const embedded=media[file];
+ const bytes=embedded?Buffer.from(embedded.slice(embedded.indexOf(',')+1),'base64'):fs.readFileSync(path.resolve(path.dirname(output),file));
+ const actual=createHash('sha256').update(bytes).digest('hex');
+ if(actual!==take.sha256)throw Error('审片视频摘要不一致，请核对同次导出的 MP4 和帧范围。');
+ return {...take,file,projectId:project.projectId,sourceHash:model.hash(project)};
+}
 function build(project,output){
  model.validate(project);let html=fs.readFileSync(template,'utf8').replace(/\r\n/g,'\n');
  const media={};
  if(output){const outputDir=path.dirname(output),director=project.stages.director;const videos=[director?.production?.artifacts?.video,...(director?.segments||[]).flatMap(segment=>[segment.plan?.artifacts?.video,segment.production?.artifacts?.video])];for(const video of new Set(videos)){if(typeof video!=='string'||!/^[-a-z\d_./]+\.mp4$/i.test(video)||video.startsWith('/')||video.split('/').includes('..'))continue;const file=path.join(outputDir,video);if(fs.existsSync(file)&&fs.statSync(file).size<=20000000)media[video]='data:video/mp4;base64,'+fs.readFileSync(file).toString('base64');}}
- const runtime='window.DirectorMedia='+literal(media)+';\n'+['model.js','renderer.js'].map(file=>fs.readFileSync(path.join(assets,file),'utf8')).concat(fs.readFileSync(path.join(skill,'assets/segment-review/script-bridge.js'),'utf8'),fs.readFileSync(path.join(assets,'workspace.js'),'utf8')).join('\n');
+ const binding=bindReview(project,output,media);
+ const runtime='window.DirectorMedia='+literal(media)+';\nwindow.DirectorFilmTake='+literal(binding)+';\n'+
+  ['model.js','renderer.js','film-review.js'].map(file=>fs.readFileSync(path.join(assets,file),'utf8'))
+    .concat(fs.readFileSync(path.join(skill,'assets/segment-review/script-bridge.js'),'utf8'),fs.readFileSync(path.join(assets,'workspace.js'),'utf8')).join('\n');
  for(const marker of ['/* workspace-style */','/* workspace-project */','/* workspace-runtime */'])if(!html.includes(marker))throw Error('Workspace marker missing: '+marker);
  html=html.replace('/* workspace-style */',()=>fs.readFileSync(path.join(assets,'workspace.css'),'utf8')).replace('/* workspace-project */',()=>'let CREATOR_PROJECT='+literal(project)+';').replace('/* workspace-runtime */',()=>runtime);
  new vm.Script(html.match(/<script>([\s\S]*?)<\/script>/)[1]);

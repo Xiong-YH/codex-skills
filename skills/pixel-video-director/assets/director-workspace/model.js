@@ -40,6 +40,20 @@ function validatePlan(plan,cueIds){
  assert(['cut','continue','fade'].includes(plan.transition||'cut'),'白模仅支持直切、同场继续与淡入。');
  for(const key of ['layout','action','stateIn','stateOut','audio','continuity'])if(plan[key]!==undefined)assert(text(plan[key]),'设计说明过长。');
 }
+function validateReviewTake(take, video, ids){
+ assert(typeof video==='string'&&/^[-a-z\d_./]+\.mp4$/i.test(video)&&!video.startsWith('/')&&!video.split('/').includes('..'),
+   '逐段审片需要项目内的 MP4 路径。');
+ assert(take&&Number.isInteger(take.revision)&&take.revision>=0&&Number.isFinite(take.fps)&&take.fps>0&&
+   Number.isSafeInteger(take.frames)&&take.frames>0&&/^[a-f\d]{64}$/.test(take.sha256||''),'成片版本、帧率、总帧数或摘要无效。');
+ const seen=new Set();let frame=0;
+ assert(Array.isArray(take.shots)&&take.shots.length>0&&take.shots.length<=ids.size,'成片需要关联实际片段。');
+ for(const shot of take.shots){
+  assert(shot&&ids.has(shot.id)&&!seen.has(shot.id)&&shot.start===frame&&Number.isSafeInteger(shot.frames)&&shot.frames>0,
+    '成片片段须引用稳定 ID，并按实际帧范围连续排列。');
+  seen.add(shot.id);frame+=shot.frames;
+ }
+ assert(frame===take.frames,'成片片段帧数与导出总帧数不一致。');
+}
 function validate(project){
  assert(project&&project.schemaVersion===1&&text(project.projectId,120)&&project.projectId&&Number.isInteger(project.revision)&&project.revision>=0&&project.stages&&typeof project.stages==='object'&&!Array.isArray(project.stages)&&text(project.title,300),'项目需要有效的标识、版本与 stages。');
  for(const key of ['brief','narrative'])if(project.stages[key]!==undefined)assert(project.stages[key]&&typeof project.stages[key]==='object'&&!Array.isArray(project.stages[key]),key+' 应为对象。');
@@ -51,6 +65,7 @@ function validate(project){
  const modules=new Set();for(const m of d.modules){assert(m&&text(m.id,100)&&m.id&&!modules.has(m.id)&&text(m.title,300)&&text(m.purpose||''),'大模块标识或说明不正确。');modules.add(m.id);}
  const ids=new Set();for(const s of d.segments){assert(s&&text(s.id,100)&&s.id&&!ids.has(s.id)&&modules.has(s.moduleId)&&text(s.title||'',300)&&text(s.description||''),'片段 ID、模块归属或描述不正确。');ids.add(s.id);assert(Array.isArray(s.cueIds)&&s.cueIds.length<=200&&s.cueIds.every(id=>cues.has(id)),'片段须引用已有文案 ID。');assert(Array.isArray(s.dependsOn||[])&&(s.dependsOn||[]).length<=200,'关联片段格式不正确。');if(s.requirements!==undefined)assert(text(s.requirements),'明确要求格式不正确。');if(s.sketch)validateSketch(s.sketch);if(s.plan)validatePlan(s.plan,cues);}
  for(const s of d.segments)assert((s.dependsOn||[]).every(id=>ids.has(id)&&id!==s.id),'关联片段不存在或引用自身。');
+ if(d.production?.reviewTake!==undefined)validateReviewTake(d.production.reviewTake,d.production.artifacts?.video,ids);
  return project;
 }
 function legacyKeyPath(project,key){
