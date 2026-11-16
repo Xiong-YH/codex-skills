@@ -1142,9 +1142,136 @@
         "features": []
       },
       "optionalFeatures": []
+    },
+    {
+      "id": "identity.paper.open",
+      "sourceProject": "../guide",
+      "sourceShot": "paper-identity",
+      "title": "开放纸面",
+      "overrides": {
+        "visualStyle": "paper",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "identity.paper.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "paper-identity",
+      "title": "带内线的纸面",
+      "overrides": {
+        "visualStyle": "paper",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "identity.paper.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "paper-identity",
+      "title": "纸边传递",
+      "overrides": {
+        "visualStyle": "paper",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "checklist.paper.open",
+      "sourceProject": "../guide",
+      "sourceShot": "paper-checklist",
+      "title": "开放纸面",
+      "overrides": {
+        "visualStyle": "paper",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "checklist.paper.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "paper-checklist",
+      "title": "带内线的纸面",
+      "overrides": {
+        "visualStyle": "paper",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "checklist.paper.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "paper-checklist",
+      "title": "纸边传递",
+      "overrides": {
+        "visualStyle": "paper",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "takeaway.paper.open",
+      "sourceProject": "../guide",
+      "sourceShot": "paper-takeaway",
+      "title": "开放纸面",
+      "overrides": {
+        "visualStyle": "paper",
+        "styleVariant": "open",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "takeaway.paper.inset",
+      "sourceProject": "../guide",
+      "sourceShot": "paper-takeaway",
+      "title": "带内线的纸面",
+      "overrides": {
+        "visualStyle": "paper",
+        "styleVariant": "inset",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
+    },
+    {
+      "id": "takeaway.paper.relay",
+      "sourceProject": "../guide",
+      "sourceShot": "paper-takeaway",
+      "title": "纸边传递",
+      "overrides": {
+        "visualStyle": "paper",
+        "styleVariant": "relay",
+        "features": []
+      },
+      "optionalFeatures": [
+        "stack"
+      ]
     }
   ],
   "plainExamples": 12,
-  "totalExamples": 84,
-  "totalConfigurations": 156
+  "totalExamples": 93,
+  "totalConfigurations": 174,
+  "paperExamples": 9
 }

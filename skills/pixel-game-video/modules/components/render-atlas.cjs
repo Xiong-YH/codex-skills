@@ -1,16 +1,73 @@
-// Capture all six style variants from the actual guide renderer inside the atlas.
-// Build guide + examples/style-atlas/build.py first. Optional argv[2] is atlas HTML.
-const fs=require('node:fs/promises'),path=require('node:path'),crypto=require('node:crypto'),{pathToFileURL}=require('node:url');
-const {chromium}=require(process.env.PIXEL_NODE_MODULES?path.join(process.env.PIXEL_NODE_MODULES,'playwright'):'playwright');
-const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
-(async()=>{const moduleRoot=__dirname,skill=path.resolve(__dirname,'../..'),file=path.resolve(process.argv[2]||path.join(__dirname,'examples/style-atlas/build/index.html')),out=path.join(__dirname,'assets/reference/style-atlas');await fs.mkdir(out,{recursive:true});
- const browser=await chromium.launch({headless:true,...(process.env.PIXEL_BROWSER_EXECUTABLE?{executablePath:process.env.PIXEL_BROWSER_EXECUTABLE}:{})});
- try{const page=await browser.newPage({viewport:{width:1500,height:1000}}),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(pathToFileURL(file).href,{waitUntil:'domcontentloaded',timeout:90000});await page.waitForFunction(()=>window.atlasGalleryReady,null,{timeout:90000});
- const result=await page.evaluate(async()=>{const win=componentAtlas.engine(),styles=['mechanical','energy','plain'],variants=['open','inset','relay'],kinds=Array.from(document.querySelector('#kind').options,o=>o.value),names={mechanical:'机械',energy:'能量',plain:'朴素'},vn={open:'开放',inset:'一体',relay:'传递'},records=[];
-  const sheet=async(items,cols=3)=>{const c=document.createElement('canvas');c.width=1920;c.height=Math.ceil(items.length/cols)*402;const g=c.getContext('2d');g.fillStyle='#102029';g.fillRect(0,0,c.width,c.height);for(let i=0;i<items.length;i++){const item=items[i],im=new Image();im.src=item.src;await im.decode();const x=i%cols*640,y=Math.floor(i/cols)*402;g.drawImage(im,x,y,640,360);g.font='600 20px "Microsoft YaHei",sans-serif';g.fillStyle='#e7d5b2';g.fillText(item.label,x+18,y+389)}return c.toDataURL('image/jpeg',.90)};
-  const sheets={},chapters=[],states=[];for(const style of styles)for(const variant of (style==='plain'?['inset']:variants)){win.atlasConfigure({visualStyle:style,styleVariant:variant,features:[]},true);const images=[];for(const kind of kinds){const src=await win.atlasDraw(kind,215),label=names[style]+' / '+vn[variant]+' / '+kind;images.push({src,label});records.push({kind,visualStyle:style,styleVariant:variant,features:[],frame:215,sheet:style==='plain'?'plain.jpg':style+'-'+variant+'.jpg'});if(kind==='chapter'){chapters.push({src,label});for(const f of [12,24,239])states.push({src:await win.atlasDraw(kind,f),label:label+' · frame '+f})}}sheets[style==='plain'?'plain.jpg':style+'-'+variant+'.jpg']=await sheet(images)}sheets['overview.jpg']=await sheet(chapters);sheets['chapter-states.jpg']=await sheet(states);return {sheets,records};});
- if(errors.length)throw Error(errors.join('\n'));const files={};for(const [name,uri] of Object.entries(result.sheets)){const bytes=Buffer.from(uri.split(',')[1],'base64');await fs.writeFile(path.join(out,name),bytes);files[name]={sha256:sha(bytes),bytes:bytes.length}}
- const sources={};for(const rel of ['modules/components/plain.js','modules/components/style-layers.js','modules/components/apparatus.js','modules/components/runtime.js','modules/components/catalog.json','modules/components/examples/guide/timeline.json','modules/components/examples/style-atlas/template.html','modules/components/examples/style-atlas/variants.json'])sources[rel]=sha((await fs.readFile(path.join(skill,rel),'utf8')).replace(/\r\n/g,'\n'));
- const manifest={schemaVersion:1,source:'actual Canvas runtime via style-atlas, no separate mock renderer',sourceHashEncoding:'UTF-8 with LF line endings',sources,background:true,records:result.records,files,scope:'84 no-stack final examples including the original plain renderer; seven chapter state strips. Full stack/time checks recorded by component-styles.cjs; aesthetic approval remains separate.'};await fs.writeFile(path.join(out,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');console.log(JSON.stringify({examples:result.records.length,sheets:Object.keys(files).length,errors}));
- }finally{await browser.close()}
-})().catch(e=>{console.error(e);process.exit(1)});
+// Capture every style-atlas entry from the compiled guide, including paper.
+const fs = require('node:fs/promises');
+const path = require('node:path');
+const { open, read, sha, skill } = require('./reference-renderer.cjs');
+
+const styles = { mechanical:'机械', energy:'能量', plain:'朴素', paper:'纸质' };
+const variants = { open:'开放', inset:'一体', relay:'传递' };
+const sheetName = ({visualStyle,styleVariant}) => {
+  if (visualStyle === 'plain' || visualStyle === 'paper') return visualStyle + '.jpg';
+  return visualStyle + '-' + styleVariant + '.jpg';
+};
+
+async function main() {
+  const project = path.resolve(process.argv[2] || path.join(__dirname, 'examples/guide'));
+  const output = path.resolve(process.argv[3] || path.join(__dirname, 'assets/reference/style-atlas'));
+  const atlas = path.join(__dirname, 'examples/style-atlas');
+  const background = path.join(skill, 'modules/library/backgrounds/engineering-workshop-v1.png');
+  const [index, gallery, render] = await Promise.all([
+    read(path.join(atlas, 'variants.json')), read(path.join(project, 'gallery.json')), open(project, background)
+  ]);
+  const titles = new Map(gallery.entries.map(entry => [entry.id, entry.title]));
+  const groups = new Map(), records = [], chapters = [], states = [];
+  let current = '';
+  for (const entry of index.entries) {
+    const config = { styleVariant:'inset', ...entry.overrides };
+    const key = JSON.stringify(config);
+    if (key !== current) {
+      render.configure(config);
+      current = key;
+    }
+    const name = sheetName(config);
+    if (!groups.has(name)) groups.set(name, []);
+    const kind = entry.id.split('.')[0];
+    const label = titles.get(kind) + ' · ' + styles[config.visualStyle] + ' / ' + variants[config.styleVariant];
+    const image = render.capture(entry.sourceShot, 215, 88);
+    groups.get(name).push({ image, label });
+    records.push({ kind, shotId:entry.sourceShot, ...config, frame:215, sheet:name });
+    if (kind === 'chapter') {
+      chapters.push({ image, label });
+      for (const frame of [12,24,239]) states.push({
+        image:render.capture(entry.sourceShot,frame,88), label:label + ' · ' + frame + ' 帧'
+      });
+    }
+  }
+  if (records.length !== index.totalExamples) throw Error('Atlas count does not match its index.');
+  groups.set('overview.jpg',chapters);
+  groups.set('chapter-states.jpg',states);
+  await fs.mkdir(output,{recursive:true});
+  const files = {};
+  for (const [name,items] of groups) {
+    const bytes = await render.sheet(items);
+    await fs.writeFile(path.join(output,name),bytes);
+    files[name] = { sha256:sha(bytes), bytes:bytes.length };
+  }
+  const sources = {};
+  for (const rel of ['modules/components/plain.js','modules/components/style-layers.js',
+    'modules/components/apparatus.js','modules/components/paper.js','modules/components/materials.js',
+    'modules/components/runtime.js','modules/components/catalog.json','modules/motion/runtime.js',
+    'modules/components/examples/style-atlas/template.html','modules/components/examples/style-atlas/variants.json',
+    'modules/library/backgrounds/engineering-workshop-v1.png']) {
+    sources[rel] = sha(await fs.readFile(path.join(skill,rel)));
+  }
+  sources['modules/components/examples/guide/timeline.json'] = sha(await fs.readFile(path.join(project,'timeline.json')));
+  const manifest = {
+    schemaVersion:1, source:'Compiled guide Canvas runtime with style-atlas settings', ...render.provenance,
+    sources, background:true, records, files,
+    scope:'Final no-stack views and selected chapter frames. The interactive atlas also exposes stack and background settings.'
+  };
+  await fs.writeFile(path.join(output,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');
+  console.log(JSON.stringify({ examples:records.length, sheets:Object.keys(files).length, ...render.provenance }));
+}
+
+main().catch(error => { console.error(error); process.exitCode = 1; });

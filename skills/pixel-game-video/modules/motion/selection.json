@@ -179,7 +179,10 @@
       },
       "documentation": "recipes/shatter-reveal.md",
       "implementation": "runtime.js",
-      "preview": null
+      "preview": {
+        "path": "examples/particles/index.html",
+        "effect": "shatter"
+      }
     },
     {
       "id": "design.motion.object-reveal",
@@ -211,7 +214,10 @@
       },
       "documentation": "recipes/gold-burst.md",
       "implementation": "runtime.js",
-      "preview": null
+      "preview": {
+        "path": "examples/particles/index.html",
+        "effect": "gold"
+      }
     },
     {
       "id": "design.motion.book-sweep",
@@ -336,7 +342,10 @@
       },
       "documentation": "recipes/contact-feedback.md",
       "implementation": "contact-fx.js",
-      "preview": null
+      "preview": {
+        "path": "examples/particles/index.html",
+        "effect": "sparks"
+      }
     },
     {
       "id": "design.motion.component-handoff",

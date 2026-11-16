@@ -25,3 +25,17 @@
 先核对角色、触点和结果，再加光效。检查触点前后、正常速度和缩小阅读，特别关注脚底支撑、手和物件边缘、粒子是否盖住字、掠光是否离开应强调的对象。正式预览、动态白模和工作台 Canvas 单元均使用相同的事件。
 
 主拍需要更清楚的画面反馈时，给同一个配方填 `profile:"impact"`。火花扩散带方形冲击边缘，晕染扩到对象周边，掠光有清楚的斜向高亮前沿。默认 `soft` 保留原效果。先试对象附近的实际效果，再调整覆盖范围和持续时间。
+
+已知受力方向时，给 `impact` 火花设 `direction`，单位为屏幕坐标的度，0 朝右、90 朝下、±180 朝左。短尾沿运动方向扇出，接缝从 `x/y` 起亮。省略时沿用径向火花。传导的路径、接收事件和阅读窗口由镜头提供。
+
+```json
+{"id":"stop-feedback","recipe":"motion.contact-fx.v1","target":"scene","start":{"event":"stop.contact"},"durationFrames":24,"params":{"style":"sparks","profile":"impact","direction":0,"x":0.64,"y":0.37,"radius":0.25,"seed":13}}
+```
+
+示例绑定镜内 `stop.contact`。按实际接缝位置、受力方向和项目帧率调整数值。
+
+## 用粒子传递状态
+
+粒子形态跟随对象材质和动作含义。需要表现信号交接时，可以让几枚像素块从触点聚入导槽，沿路径到达接收端。碰撞强度由止挡的短促受力位移、像素块的聚拢和接收端的状态变化共同体现。
+
+[凭条落槽试样](../../components/examples/slot-transfer/index.html)直接调用 [signal-particles.js](../signal-particles.js) 的 `PixelVideo.signalParticles.draw(ctx, options, frame)`。先加载 `style/runtime.js` 和 `motion/runtime.js`。传入同一坐标系的折线路径 `points`，首段从止挡出发，末点落在接收端。用递增的 `contact`、`release`、`arrival` 整数帧指定触碰、放行和到达。 `size`、`color` 和 `highlight` 由宿主提供。粒子在到达帧交给按钮或其他接收对象。该绘制入口用于独立 Canvas 试样。汇聚、扬尘、轻确认与碎片的对照见[粒子选型](../PARTICLES.md)。

@@ -9,7 +9,9 @@ description: 为无口播像素信息动效设计分镜、组件承接、音乐�
 
 创作、续作或复盘前，按 [依赖定位](references/handoff.md) 找到 FOUNDATION，读取其 `references/production-principles.md`。构思视听方案前先读 [《惊艳手法库》](references/garden-skills/craft.md)。新增或修改镜头必读 [动态规范与兑现合同](references/motion-direction.md)，在第一轮镜头说明中写清观看顺序、可见变化和动静安排。只做设计时按所需阶段交付。
 
-**接稿先排信息变化。** 把编剧的段落和主句带进 `script.beats` 与 `storyboard.beatId`。按 [无口播信息动效与音乐卡点](references/beat-driven-explainer.md) 设计各段可见结果和组件承接，再用实际配乐排动作落点、主句与阅读窗口。用 [无口播缓存示例](examples/beat-driven-cache/README.md) 核对动态白模与正式 Canvas 的同源链路。
+**接稿先排信息变化。** 把编剧的段落和主句带进 `script.beats` 与 `storyboard.beatId`。在现有分镜写清每个关键转折的可见结果，白模和成片按同一套 [画面检查](references/visual-storytelling.md#关键转折的画面检查) 复核。配乐落点、主句与阅读窗口见 [无口播信息动效与音乐卡点](references/beat-driven-explainer.md)。用 [无口播缓存示例](examples/beat-driven-cache/README.md) 核对动态白模与正式 Canvas 的同源链路。
+
+本系列无口播像素信息动效采用 [《步进》配乐与卡点要求](references/beat-driven-explainer.md#步进配乐与卡点要求)。拆段时先锁定本片配乐版本与真实拍位，再写关键事件的落帧。
 
 ## 按阶段继续
 
@@ -27,7 +29,7 @@ description: 为无口播像素信息动效设计分镜、组件承接、音乐�
 
 | 需要 | 入口 |
 | --- | --- |
-| 人物操作、姿态或连贯表演 | [人物表演设计](references/character-performance.md)，新动作制作与入库沿 FOUNDATION 制作总则的授权范围 |
+| 人物造型选型、姿态或连贯表演 | [人物表演设计](references/character-performance.md#按镜头任务选画法和表演)，新动作制作与入库沿 FOUNDATION 制作总则的授权范围 |
 | 插画局部动态 | [插画动态设计](references/illustration-motion.md) |
 | 背景或独立片段接入 | [素材替换](references/media-replacement.md) |
 | 组件需求与表现 | [组件需求](references/visual-storyboard.md#脚本中的组件需求)，再读 FOUNDATION 的 `modules/components/GUIDE.md` |

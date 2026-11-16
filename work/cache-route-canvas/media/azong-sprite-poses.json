@@ -1,0 +1,121 @@
+{
+  "reference": "skills/pixel-game-video/modules/library/characters/style-variants/ultra-sprite.png",
+  "method": "内置 imagegen 按已认可的超粗像素小棕原图出整幅姿态。左侧站姿来自透明提取结果。",
+  "sheets": {
+    "azong-sprite-motion.png": {
+      "prompt": "Use case: stylized-concept. Generate a 3 by 2 game sprite sheet of SIX discrete full-body poses of the exact same compact ultra-coarse pixel-art human boy Xiaozong. The single attached image is the definitive identity and pixel-art reference. Match it faithfully: same broad tousled amber-brown hair silhouette with three upturned points and large golden highlight clusters, same front-facing round peach face with two separate dark rectangular eyes, same mint open jacket with white cuffs, white shirt with small gold pin on his left chest, navy trousers, chunky shoes with distinct white tops. Preserve the relative head width, round face, garment shapes and compact two-feet silhouette. The head occupies roughly 58% of the standing height. The same human silhouette and clothes in all six frames. Warm top-left light, crisp large stepped pixel clusters, very few flat color steps. Use a fixed near-front camera and consistent scale across cells. The poses suggest traveling screen-right through stance and leg direction. Face stays recognizably near-front with both eyes and no sticking-out nose.\n\nRead left to right, top to bottom. Top left: rightward run contact with near foot forward, far foot behind, natural opposing arms. Top middle: opposite run contact with near foot behind, far foot forward, natural opposing arms. Top right: low crouch preparing to jump, two feet firmly planted and separated, knees bent and hands lowered at sides. Bottom left: push-off, back foot extended toward floor, front knee lifted, hands at mid body. Bottom middle: airborne tuck with two distinct shoes below jacket and no ground. Bottom right: braced landing, both feet flat and wide, two bent knees, head slightly down but both eyes visible. Whole character visible in all six. Large safe padding on all sides of each cell, no overlap, no connecting sprites. Exactly six images, with centers at 1/6, 1/2, 5/6 of width and at 1/4, 3/4 of height. Keep the head size constant across poses. The character must read cleanly at about 105px tall in actual play. Transparent background, no panel, borders, checkerboard, shadow, text, labels, particles, props, extra characters, highlights outside the body, gradients, rim glow, realistic depth, blur or vector antialiasing. Output one landscape 3:2 sheet."
+    },
+    "azong-sprite-stance.png": {
+      "prompt": "Use case: background-extraction and identity-preserve for a pixel-art game sprite. The attached image is the exact approved Xiaozong design. Make one landscape sheet with two full-body sprites side by side, both on genuine transparent alpha, with a generous gap between them. On the LEFT, extract the exact original standing boy, removing only the ivory background and border. Preserve the original boy pixel for pixel as closely as possible. Keep the original pose, amber-brown tousled head, both rectangular eyes, both small separate hands, mint open jacket, little gold pin, white shirt and cuffs, navy trousers, the two separate chunky white-topped shoes, all proportions and colors. On the RIGHT draw one matching frame of this exact boy in the passing position of running screen-right: pelvis over a single planted forward-facing foot directly under the torso, opposite knee lifted forward and the rear shoe visibly in the air higher than the planted shoe. Arms tucked close in a small opposite swing. His head is the SAME shape, size, and nearly front-on camera, with two eyes. This passing step must be a narrow vertical silhouette, not a spread-leg running contact, and it still has two distinct shoes. Both tiles at the same size and with aligned ground baselines. The same large stepped pixel clusters and broad original haircut. All source pixels belong to the two complete characters with clean outside transparency. No typography, shadows, props, duplicate parts, colored glow, lighting outside character or background image."
+    }
+  },
+  "atlas": {
+    "tileWidth": 112,
+    "tileHeight": 128,
+    "foot": [
+      56,
+      119
+    ],
+    "headWidth": 78
+  },
+  "poses": [
+    {
+      "name": "idle",
+      "sheet": "azong-sprite-stance.png",
+      "crop": [
+        234,
+        89,
+        717,
+        790
+      ],
+      "foot": [
+        490,
+        790
+      ]
+    },
+    {
+      "name": "runA",
+      "sheet": "azong-sprite-motion.png",
+      "crop": [
+        167,
+        28,
+        462,
+        476
+      ],
+      "foot": [
+        319,
+        476
+      ]
+    },
+    {
+      "name": "runB",
+      "sheet": "azong-sprite-stance.png",
+      "crop": [
+        1042,
+        88,
+        1532,
+        790
+      ],
+      "foot": [
+        1286,
+        790
+      ]
+    },
+    {
+      "name": "brace",
+      "sheet": "azong-sprite-motion.png",
+      "crop": [
+        1103,
+        70,
+        1397,
+        476
+      ],
+      "foot": [
+        1255,
+        476
+      ]
+    },
+    {
+      "name": "launch",
+      "sheet": "azong-sprite-motion.png",
+      "crop": [
+        154,
+        542,
+        451,
+        992
+      ],
+      "foot": [
+        303,
+        992
+      ]
+    },
+    {
+      "name": "air",
+      "sheet": "azong-sprite-motion.png",
+      "crop": [
+        619,
+        523,
+        916,
+        935
+      ],
+      "foot": [
+        767,
+        935
+      ]
+    },
+    {
+      "name": "land",
+      "sheet": "azong-sprite-motion.png",
+      "crop": [
+        1106,
+        587,
+        1412,
+        995
+      ],
+      "foot": [
+        1257,
+        995
+      ]
+    }
+  ]
+}

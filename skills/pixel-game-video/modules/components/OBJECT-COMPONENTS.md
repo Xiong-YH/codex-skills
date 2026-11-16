@@ -12,6 +12,10 @@
 
 `object.state-meter-break.v1`：[播放](examples/state-meter/index.html) · [设计与调用](examples/state-meter/design.md)。由脚本需要推导出数值/分段条联动和原条块脱离；组件状态与绘制独立于播放器，支持事件绑定、稳定 ID、非顺序取帧、数量和布局变化。纯 Canvas 独立试样，未注册 shot.components.kind 或工作台适配器；不宣称任意物体碎裂。
 
+## 无口播状态交接：凭条落槽与展开
+
+`object.slot-transfer.v1` 复用同一对象在来源、运动中、槽内、结果四处的独占归属和中间形状。触点发生后由连线传导解锁，提交完成后凭条展开。场景提供事件、尺寸与内容，适合需要连续展示选择、传递与确认结果的固定视角。试样可暂停和逐帧拖动。[播放](examples/slot-transfer/index.html) · [状态调用](CUSTOM-RUNTIME.md#同一对象落槽传导和展开)。
+
 ## 当前五维动作范例：筹码入托盘
 
 `object.resource-bundle-into-tray.v1`：[播放与五维约定](examples/resource-into-tray/index.html)。同一组筹码短弧线转移，容器内部平面定位落点，真实前壁与近侧壁轮廓负责遮挡。主运动 20 帧、收尾 6 帧，60fps；不是所有组件的固定秒数。支持原固定视角与两种位置／尺寸布局，不宣称任意容器或逐枚搬运可用。

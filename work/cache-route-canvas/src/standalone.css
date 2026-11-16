@@ -1,0 +1,22 @@
+:root {
+  color-scheme: dark;
+  --background: #131c23;
+  --foreground: #e5efea;
+  --muted-foreground: #b6c6c4;
+  --primary: #a6e4ce;
+  --primary-foreground: #162622;
+  --border: #3b5056;
+  --accent: #283c43;
+  font: 15px/1.5 Inter, "Microsoft YaHei UI", "PingFang SC", sans-serif;
+}
+body { margin: 16px auto; padding: 0 12px; width: min(100% - 24px, 1140px); background: var(--background); color: var(--foreground); }
+.viz-controls, .viz-row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.btn { color: inherit; background: transparent; border: 1px solid transparent; border-radius: 4px; padding: 5px 10px; font: inherit; cursor: pointer; }
+.btn:hover { background: var(--accent); }
+.btn-primary { background: var(--primary); color: var(--primary-foreground); }
+.btn-primary:hover { background: #c1f3de; }
+.btn:focus-visible, .form-range:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
+.form-range { width: 100%; margin: 2px 0 4px; accent-color: var(--primary); }
+.text-small { font-size: .86rem; }
+.tabular-nums { font-variant-numeric: tabular-nums; }
+@media (pointer: coarse) { .btn { min-height: 44px; } }

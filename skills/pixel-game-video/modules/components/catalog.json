@@ -106,8 +106,16 @@
       "features": []
     },
     "plainExamples": 12,
-    "totalExamples": 84,
-    "totalConfigurations": 156,
-    "plainRuntime": "plain.js"
+    "totalExamples": 93,
+    "totalConfigurations": 174,
+    "plainRuntime": "plain.js",
+    "paperSelection": {
+      "visualStyle": "paper",
+      "kinds": ["identity", "checklist", "takeaway"],
+      "variants": ["open", "inset", "relay"],
+      "features": ["stack"],
+      "runtime": "paper.js",
+      "scope": "text-only identity; no image or previous-shot snapshot"
+    }
   }
 }

@@ -35,4 +35,4 @@
 
 将所需的 `skills/<技能名称>/` 完整复制到 Codex 的 skills 目录。编剧可独立使用。导演的制作工具需要基础技能，跨安装目录的定位方式见 [协作合同](skills/pixel-video-writer/references/handoff.md)。
 
-仓库维护遵守 [AGENTS.md](AGENTS.md)。技能源码、必要素材、示例与测试保存在 `skills/`。本地 `work/`、`outputs/`、`docs/` 和 `legacy/` 按忽略规则保存工程、产物和历史材料。许可与第三方署名随各自模块保留，详见 [模块归属清单](skills/pixel-game-video/references/module-ownership.md)。
+仓库维护遵守 [AGENTS.md](AGENTS.md)。技能源码、必要素材、示例与测试保存在 `skills/`。跨电脑协作的工程按 [work 项目索引](work/README.md) 逐项纳入版本管理。许可与第三方署名随各自模块保留，详见 [模块归属清单](skills/pixel-game-video/references/module-ownership.md)。

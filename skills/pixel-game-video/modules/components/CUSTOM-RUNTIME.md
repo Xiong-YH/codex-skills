@@ -30,6 +30,12 @@
 
 完整示例：[state-meter.js](custom/state-meter.js)、[可播放试样](examples/state-meter/index.html)、[设计与边界](examples/state-meter/design.md)。这是接口示例，不要求所有组件采用仪表、条块或风险反转。
 
+## 同一对象落槽、传导和展开
+
+[落槽试样](examples/slot-transfer/index.html)用 [slot-transfer.js](custom/slot-transfer.js) 求值。一张凭条从来源进入止挡，沿线传达后可提交，最后原位展开。先给同一对象一个稳定 ID，传入同一局部坐标系中的来源、槽位和结果矩形，以及递增的 `launch → contact → signal → armed → submit → unfold → settled` 整数帧。按 `owner` 只绘制一张凭条，初态、飞行、槽内和结果使用相同内容。接触在卡边到达止挡的那一帧，反向入槽使用左侧触点。
+
+宿主按 `bounds`、`stopShift` 和 `fold` 绘制。`contact` 提供触点坐标，`signal` 提供传导进度，抵达才读取 `ready`，用 `sent` 和 `confirmed` 选择文案和末态。试样用[像素粒子沿导槽传递](../motion/recipes/contact-feedback.md#用粒子传递状态)，接收事件由组件状态与粒子共用。材料、连线、反馈形态、文本和停留长度由宿主给定。此状态模块适用于单对象水平入槽，工作台内使用需要场景适配器。
+
 ## 正式工程接入
 
 | 项目需要 | 实际路径 | 必须说明 |

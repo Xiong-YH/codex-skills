@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>为什么第二次读得更快？</title>
+  <link rel="stylesheet" href="src/standalone.css">
+</head>
+<body>
+<!-- preview:start -->
+<main id="cache-route-canvas">
+  <canvas width="1280" height="720" role="img" aria-label="缓存读取动画。小棕先遇到空缓存，再跳上源站踏板取回资料，最后直接从本地缓存读到资料。"></canvas>
+  <audio data-track preload="auto" hidden></audio>
+  <div class="scrub-readout text-small tabular-nums">
+    <label for="cache-route-frame">时间轴</label>
+    <span data-time>0.00 / 14.00 秒</span>
+  </div>
+  <input class="form-range" id="cache-route-frame" type="range" min="0" max="839" step="1" value="0">
+  <div class="viz-controls">
+    <button type="button" class="btn btn-primary" data-play>播放</button>
+    <button type="button" class="btn btn-ghost" data-step="-1">上一帧</button>
+    <button type="button" class="btn btn-ghost" data-step="1">下一帧</button>
+    <button type="button" class="btn btn-ghost" data-rate aria-label="半速播放" aria-pressed="false">1×</button>
+    <button type="button" class="btn btn-ghost" data-sound aria-pressed="true">声音开</button>
+  </div>
+  <div class="viz-row" aria-label="关键画面">
+    <button type="button" class="btn btn-ghost" data-cue="miss">未命中</button>
+    <button type="button" class="btn btn-ghost" data-cue="land">踩板</button>
+    <button type="button" class="btn btn-ghost" data-cue="open">取回 A</button>
+    <button type="button" class="btn btn-ghost" data-cue="complete">本地返回</button>
+  </div>
+  <p class="text-small" data-status role="status" hidden></p>
+</main>
+<style>
+  #cache-route-canvas { min-width: 0; display: grid; gap: 4px; }
+  #cache-route-canvas canvas { display: block; width: 100%; height: auto; background: #131f29; }
+  #cache-route-canvas .scrub-readout { display: flex; justify-content: space-between; margin-top: 6px; }
+  #cache-route-canvas .viz-controls, #cache-route-canvas .viz-row { justify-content: flex-start; }
+  #cache-route-canvas [data-status] { color: var(--muted-foreground); }
+</style>
+<script src="src/timeline.js"></script>
+<script src="src/film.js"></script>
+<script src="src/player.js"></script>
+<!-- preview:end -->
+</body>
+</html>

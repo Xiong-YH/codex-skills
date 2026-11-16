@@ -1,0 +1,325 @@
+{
+  "modern": {
+    "file": {
+      "path": "work/cache-route-canvas/media/modern-poses.webp",
+      "sha256": "b82c89d26de3a2d5923db14d4e75c52bd07d1785c95a256690d5ca14c23b9403"
+    },
+    "poses": [
+      {
+        "name": "neutral",
+        "source": {
+          "path": "skills/pixel-game-video/modules/library/characters/actions/00-lead/neutral.png",
+          "sha256": "29133a79a638699acba84f72a36bc568748f4aa7be44fc9ba7ed28bb8bc9fe87"
+        },
+        "sourceCropLTRB": [
+          140,
+          6,
+          442,
+          494
+        ],
+        "sourceFoot": [
+          299,
+          494
+        ],
+        "atlasRectXYWH": [
+          0,
+          0,
+          200,
+          280
+        ],
+        "atlasFoot": [
+          100,
+          276
+        ]
+      },
+      {
+        "name": "dazed-right",
+        "source": {
+          "path": "skills/pixel-game-video/modules/library/characters/actions/00-lead/dazed-right.png",
+          "sha256": "4033d927a9a53505fd13a550c4fcc4de68f446c8a2635d0b2b88119fd1cfe0c4"
+        },
+        "sourceCropLTRB": [
+          132,
+          0,
+          429,
+          492
+        ],
+        "sourceFoot": [
+          240,
+          492
+        ],
+        "atlasRectXYWH": [
+          200,
+          0,
+          200,
+          280
+        ],
+        "atlasFoot": [
+          100,
+          276
+        ]
+      }
+    ]
+  },
+  "sprite": {
+    "file": {
+      "path": "work/cache-route-canvas/media/azong-sprite.webp",
+      "sha256": "049ca95ac33ce1a12138cdc03008cf7e86cc59b267bd1750f3426c98d46bce71"
+    },
+    "manifest": {
+      "path": "work/cache-route-canvas/media/azong-sprite-poses.json",
+      "sha256": "e2f476a3a20c274107a594f8a62455b22ef19fe379e5702dc6326375fe029569"
+    },
+    "visualReference": {
+      "path": "skills/pixel-game-video/modules/library/characters/style-variants/ultra-sprite.png",
+      "sha256": "af25bf26f167462eac5e4d429826069aa3e97dbc2eeedd4b4fa60e3e704a828c"
+    },
+    "sheets": [
+      {
+        "path": "work/cache-route-canvas/media/azong-sprite-motion.png",
+        "sha256": "e3499edb41f8dc321d509d651ea8ca9d9201dd5d080c02e4b9d86041fa3eb14b"
+      },
+      {
+        "path": "work/cache-route-canvas/media/azong-sprite-stance.png",
+        "sha256": "86ba5aabe0013aeb68e352e50695188e9d53d0daad54c147c8994de7aba62a22"
+      }
+    ],
+    "poses": [
+      {
+        "name": "idle",
+        "source": "azong-sprite-stance.png",
+        "sourceCropLTRB": [
+          234,
+          89,
+          717,
+          790
+        ],
+        "sourceFoot": [
+          490,
+          790
+        ],
+        "atlasRectXYWH": [
+          0,
+          0,
+          112,
+          128
+        ],
+        "atlasFoot": [
+          56,
+          119
+        ]
+      },
+      {
+        "name": "runA",
+        "source": "azong-sprite-motion.png",
+        "sourceCropLTRB": [
+          167,
+          28,
+          462,
+          476
+        ],
+        "sourceFoot": [
+          319,
+          476
+        ],
+        "atlasRectXYWH": [
+          112,
+          0,
+          112,
+          128
+        ],
+        "atlasFoot": [
+          56,
+          119
+        ]
+      },
+      {
+        "name": "runB",
+        "source": "azong-sprite-stance.png",
+        "sourceCropLTRB": [
+          1042,
+          88,
+          1532,
+          790
+        ],
+        "sourceFoot": [
+          1286,
+          790
+        ],
+        "atlasRectXYWH": [
+          224,
+          0,
+          112,
+          128
+        ],
+        "atlasFoot": [
+          56,
+          119
+        ]
+      },
+      {
+        "name": "brace",
+        "source": "azong-sprite-motion.png",
+        "sourceCropLTRB": [
+          1103,
+          70,
+          1397,
+          476
+        ],
+        "sourceFoot": [
+          1255,
+          476
+        ],
+        "atlasRectXYWH": [
+          336,
+          0,
+          112,
+          128
+        ],
+        "atlasFoot": [
+          56,
+          119
+        ]
+      },
+      {
+        "name": "launch",
+        "source": "azong-sprite-motion.png",
+        "sourceCropLTRB": [
+          154,
+          542,
+          451,
+          992
+        ],
+        "sourceFoot": [
+          303,
+          992
+        ],
+        "atlasRectXYWH": [
+          448,
+          0,
+          112,
+          128
+        ],
+        "atlasFoot": [
+          56,
+          119
+        ]
+      },
+      {
+        "name": "air",
+        "source": "azong-sprite-motion.png",
+        "sourceCropLTRB": [
+          619,
+          523,
+          916,
+          935
+        ],
+        "sourceFoot": [
+          767,
+          935
+        ],
+        "atlasRectXYWH": [
+          560,
+          0,
+          112,
+          128
+        ],
+        "atlasFoot": [
+          56,
+          119
+        ]
+      },
+      {
+        "name": "land",
+        "source": "azong-sprite-motion.png",
+        "sourceCropLTRB": [
+          1106,
+          587,
+          1412,
+          995
+        ],
+        "sourceFoot": [
+          1257,
+          995
+        ],
+        "atlasRectXYWH": [
+          672,
+          0,
+          112,
+          128
+        ],
+        "atlasFoot": [
+          56,
+          119
+        ]
+      }
+    ]
+  },
+  "audio": {
+    "file": {
+      "path": "work/cache-route-canvas/media/pulse-preview.mp3",
+      "sha256": "c26de2a2403bd3b8137ae519dc8a35823cf5c7f58e1bf06fd040fb6190720fdc"
+    },
+    "score": {
+      "path": "skills/pixel-game-video/modules/audio/bgm-system/pulse-minute.mjs",
+      "sha256": "9a01d1cbc7fafab0305343458902f4069957d0b06fe39e1004b87e7e61edc870"
+    },
+    "masterSha256": "ab0e245910a478fa9099654e4a763131afcc8c14ccc736a62b9ffe86f5c59425",
+    "scoreInSeconds": 26,
+    "scoreOutSeconds": 40.0,
+    "bpm": 120,
+    "sampleRate": 48000,
+    "events": [
+      {
+        "cue": "miss",
+        "frame": 90,
+        "delaySamples": 72000,
+        "gain": 0.47,
+        "source": {
+          "path": "skills/pixel-game-video/modules/audio/assets/arcade-motion/reject.wav",
+          "sha256": "74f8f56782db5ce7529e9b5b91bf77177f05103d319dee617b47095632e1eec0"
+        }
+      },
+      {
+        "cue": "land",
+        "frame": 360,
+        "delaySamples": 288000,
+        "gain": 0.64,
+        "source": {
+          "path": "skills/pixel-game-video/modules/audio/assets/arcade-motion/seat.wav",
+          "sha256": "3fcd30fcb55ceff3a99029869de3e0f6fa05cb7aa3c6f08c0de49e0a43153f38"
+        }
+      },
+      {
+        "cue": "open",
+        "frame": 390,
+        "delaySamples": 312000,
+        "gain": 0.49,
+        "source": {
+          "path": "skills/pixel-game-video/modules/audio/assets/arcade-motion/pickup.wav",
+          "sha256": "f14930647772ac75b78acfed7ae669ae85db96302c8908a8ccfc128dd50267e4"
+        }
+      },
+      {
+        "cue": "copy",
+        "frame": 480,
+        "delaySamples": 384000,
+        "gain": 0.34,
+        "source": {
+          "path": "skills/pixel-game-video/modules/audio/assets/arcade-motion/select.wav",
+          "sha256": "eee6443a9b8d30e38d14db3ea2ca6c61239a06e823369f69a72ca7758de4d0dc"
+        }
+      },
+      {
+        "cue": "complete",
+        "frame": 600,
+        "delaySamples": 480000,
+        "gain": 0.49,
+        "source": {
+          "path": "skills/pixel-game-video/modules/audio/assets/arcade-motion/reward.wav",
+          "sha256": "6668de1065602e4a5412d66dca9dc3edc780ce42ed7797958ddbb226d0ee6ac7"
+        }
+      }
+    ]
+  }
+}

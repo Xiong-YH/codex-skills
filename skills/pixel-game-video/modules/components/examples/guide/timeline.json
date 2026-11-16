@@ -1052,6 +1052,64 @@
           }
         }
       ]
+    },
+    {
+      "id": "paper-identity",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "events": [{"id":"reveal","frame":12},{"id":"e1","frame":40}],
+      "components": [
+        {
+          "id": "identity",
+          "kind": "identity",
+          "x": 0.24, "y": 0.25, "width": 0.52, "height": 0.47,
+          "showEvent": "reveal",
+          "focusEvent": "e1",
+          "tone": "accent",
+          "visualStyle": "paper",
+          "data": {"eyebrow":"预约记录","title":"岗位试做","detail":"周五 14:00"}
+        }
+      ]
+    },
+    {
+      "id": "paper-checklist",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "events": [{"id":"reveal","frame":12},{"id":"e1","frame":40},{"id":"e2","frame":90},{"id":"e3","frame":140}],
+      "components": [
+        {
+          "id": "checklist",
+          "kind": "checklist",
+          "x": 0.24, "y": 0.18, "width": 0.52, "height": 0.60,
+          "showEvent": "reveal",
+          "tone": "accent",
+          "visualStyle": "paper",
+          "data": {
+            "title": "确认预约",
+            "items": [{"label":"选择时段","event":"e1"},{"label":"提交预约","event":"e2"},{"label":"收到回执","event":"e3"}]
+          }
+        }
+      ]
+    },
+    {
+      "id": "paper-takeaway",
+      "durationFrames": 240,
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "events": [{"id":"reveal","frame":12}],
+      "components": [
+        {
+          "id": "takeaway",
+          "kind": "takeaway",
+          "x": 0.22, "y": 0.27, "width": 0.56, "height": 0.43,
+          "showEvent": "reveal",
+          "tone": "accent",
+          "visualStyle": "paper",
+          "data": {"title":"预约成功","detail":"岗位试做 · 周五 14:00"}
+        }
+      ]
     }
   ]
 }

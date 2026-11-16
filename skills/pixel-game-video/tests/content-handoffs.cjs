@@ -1,11 +1,13 @@
 // Actual compiled scenes/components, plus parity with independent workbench units.
 const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path'),assert=require('node:assert/strict');
-const {createCanvas,loadImage}=require(path.join(process.env.PIXEL_NODE_MODULES,'@napi-rs/canvas'));
-const root=path.resolve(__dirname,'..'),example=path.join(root,'examples/content-handoffs'),output=process.argv[2]||path.join(root,'outputs/content-handoffs');
+const {canvasRuntime,loadImages}=require('../modules/components/reference-renderer.cjs');
+const {createCanvas,loadImage}=canvasRuntime();
+const root=path.resolve(__dirname,'..'),example=path.resolve(process.argv[3]||path.join(root,'examples/content-handoffs'));
+const output=process.argv[2]||path.join(example,'build','handoff-frames');
 async function main(){
  const payload=JSON.parse(fs.readFileSync(path.join(example,'build/payload.json'),'utf8')),gallery=JSON.parse(fs.readFileSync(path.join(example,'gallery.json'),'utf8'));
  vm.runInThisContext(fs.readFileSync(path.join(example,'build/runtime.js'),'utf8'));
- const assets={},cache=new Map();await Promise.all(Object.keys(payload.assets).map(async key=>{const media=payload.resolved.media?.[key],file=media?path.join(example,media.file):path.join(root,'modules/style',payload.style.assets[key]);if(!cache.has(file))cache.set(file,loadImage(file));assets[key]=await cache.get(file)}));
+ const assets=await loadImages(example,payload,loadImage);
  fs.mkdirSync(output,{recursive:true});const w=payload.resolved.project.width,h=payload.resolved.project.height;
  const canvas=createCanvas(w,h),renderer=PixelVideo.createRenderer({...payload,canvas,createCanvas,assets});
  const other=createCanvas(w,h),independent=PixelVideo.createRenderer({...payload,canvas:other,createCanvas,assets});
@@ -28,7 +30,8 @@ async function main(){
      if(p===.5){const first=pixels(canvas);renderer.draw((shot.endFrame-2)/payload.resolved.project.fps);renderer.draw(frame/payload.resolved.project.fps);assert.deepEqual(pixels(canvas),first,'Random seeking must be deterministic');}
      if(p===1||p===0)fs.writeFileSync(path.join(output,`${String(pair.number).padStart(2,'0')}-${p}.png`),canvas.toBuffer('image/png'));
    }
-   cg.fillStyle='#c2a26e';cg.font='12px sans-serif';cg.fillText(String(pair.number).padStart(2,'0')+'  '+pair.title,8,row*152+148);
+   cg.fillStyle='#c2a26e';cg.font='12px "Microsoft YaHei", sans-serif';
+   cg.fillText(String(pair.number).padStart(2,'0')+'  '+pair.title,8,row*152+148);
    // Workbench peers may be moved independently; their edit must be consumed.
    const f=motion.startFrame+Math.floor((motion.endFrame-motion.startFrame)/4);independent.drawTransition(f,index,motion);const baseline=pixels(other);
    independent.drawTransition(f,index,motion,{incomingTransform:{x:15,scale:.94},outgoingTransform:{x:-12,scale:.96}});

@@ -62,7 +62,9 @@ class ComponentStyles(unittest.TestCase):
         resolved={'project':{'style':'style.pixel-editorial.v1'},'shots':[{'scene':'scenes.canvas.v1','components':[self.component()]}]}
         scripts=javascript_files(ROOT,resolved)
         self.assertLess(scripts.index('modules/components/style-layers.js'), scripts.index('modules/components/runtime.js'))
+        self.assertLess(scripts.index('modules/components/materials.js'), scripts.index('modules/components/apparatus.js'))
         self.assertLess(scripts.index('modules/components/apparatus.js'), scripts.index('modules/components/runtime.js'))
+        self.assertLess(scripts.index('modules/components/paper.js'), scripts.index('modules/components/runtime.js'))
 
     def test_schema_separates_style_from_features(self):
         fields=Component.model_json_schema()['properties']
@@ -88,6 +90,7 @@ class ComponentStyles(unittest.TestCase):
                     'shots': [{'scene': 'scenes.canvas.v1', 'components': [component]}]}
         scripts = javascript_files(ROOT, resolved)
         self.assertLess(scripts.index('modules/components/paper.js'), scripts.index('modules/components/runtime.js'))
+        self.assertLess(scripts.index('modules/components/materials.js'), scripts.index('modules/components/paper.js'))
 
     def test_plain_is_original_simple_option_not_a_mixed_style(self):
         result=self.validate(self.component(visualStyle='plain'))

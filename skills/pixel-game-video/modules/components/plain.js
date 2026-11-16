@@ -1,29 +1,9 @@
 // Original simple component renderer, retained as explicit visualStyle="plain".
 (function(P){
   'use strict';
-  function state(c,shot,frame,fps=60){
-    const at=id=>P.scenes.eventFrame(shot,id),show=at(c.showEvent);
-    const result={visible:frame>=show,alpha:P.ease((frame-show)/(fps*.24)),focused:!!c.focusEvent&&frame>=at(c.focusEvent)};
-    if(c.kind==='metric'){
-      const d=c.data,p=P.clamp((frame-at(d.startEvent))/Math.max(1,at(d.endEvent)-at(d.startEvent)));
-      result.value=p===1?d.to:p===0?d.from:Number((d.from+(d.to-d.from)*p).toFixed(2));
-    }
-    if(c.kind==='comparison')result.items=c.data.items.map(i=>frame>=at(i.event));
-    if(['flow','timeline','checklist','hierarchy','bars','code'].includes(c.kind)){
-      result.items=c.data.items.map(i=>frame>=at(i.event));
-      result.current=-1;result.items.forEach((active,i)=>{if(active)result.current=i});
-      result.completed=result.items.filter(Boolean).length;
-    }
-    if(c.kind==='bars')result.progress=c.data.items.map(i=>P.clamp((frame-at(i.event))/Math.max(1,at(i.endEvent)-at(i.event))));
-    return result;
-  }
-  const box=(x,y,width,height)=>({x,y,width,height});
-  function tokens(e,c){
-    const s=e.style.components||{};
-    return {unit:e.height/1080,edge:e.colors[c.tone]||e.colors.gold,ink:e.colors.ink,muted:e.colors.muted,
-      panel:s.panel||e.colors.panel,inset:s.inset||e.colors.panelInset||e.colors.background,
-      shadow:e.colors.background,grid:s.grid||4};
-  }
+  const box=(...args)=>P.componentLayout.box(...args);
+  const text=(...args)=>P.componentLayout.text(...args);
+  const picture=(...args)=>P.componentLayout.picture(...args);
   function frame(e,b,t,focus=false){
     const g=e.ctx,u=t.unit,k=8*u;
     g.fillStyle=t.shadow;g.fillRect(b.x+6*u,b.y+8*u,b.width,b.height);
@@ -34,28 +14,6 @@
     g.fillStyle=t.edge;
     for(const [x,y] of [[b.x+8*u,b.y+8*u],[b.x+b.width-28*u,b.y+8*u],[b.x+8*u,b.y+b.height-10*u],[b.x+b.width-28*u,b.y+b.height-10*u]])g.fillRect(x,y,20*u,2*u);
     if(focus)g.fillRect(b.x+18*u,b.y+17*u,5*u,b.height-34*u);
-  }
-  function text(e,value,b,size,color,align='left',maxLines=2){
-    if(value===undefined)return;
-    const g=e.ctx,u=e.height/1080,s=size*u,rows=[];
-    g.save();g.font=`600 ${s}px ${e.style.fontFamily}`;
-    for(const paragraph of String(value).split('\n')){
-      let row='';
-      for(const char of Array.from(paragraph)){
-        if(g.measureText(char).width>b.width)throw new Error('Component column is too narrow');
-        if(row&&g.measureText(row+char).width>b.width){rows.push(row);row=char;}else row+=char;
-      }
-      rows.push(row);
-    }
-    if(rows.length>maxLines||s+(rows.length-1)*s*1.3>b.height){g.restore();throw new Error(`Component text overflows: ${value}. Enlarge the component or shorten the label.`);}
-    g.fillStyle=color;g.textBaseline='middle';g.textAlign=align;
-    const x=b.x+(align==='center'?b.width/2:align==='right'?b.width:0),cy=b.y+b.height/2;
-    rows.forEach((row,i)=>g.fillText(row,x,cy+(i-(rows.length-1)/2)*s*1.3));g.restore();
-  }
-  function picture(e,data,b){
-    const source=data.sourceShot?e.shotPreview(data.sourceShot):data.imageKey?(e.frameAssets?.(data.imageKey,e.frame)||e.assets[data.imageKey]):null;
-    if(source)P.media.image(e,source,b,data.sourceShot?'cover':'contain');
-    return Boolean(source);
   }
   function arrival(e,c,shot,f,b) {
     const start=P.scenes.eventFrame(shot,c.showEvent);
@@ -239,12 +197,14 @@
     if(d.detail)text(e,d.detail,box(x,b.y+b.height*.75,w,b.height*.20),29,t.muted,'left',2);
   }
   const renderers={identity,metric,comparison,annotation,chapter,flow,timeline,checklist,hierarchy,bars,code,takeaway};
-  P.componentPlain={state,draw(e,shot,f){
-    for(const c of shot.components||[]){
-      const s=state(c,shot,f,e.fps);if(!s.visible||s.alpha<=0)continue;
-      const t=tokens(e,c),b=box(c.x*e.width,c.y*e.height,c.width*e.width,c.height*e.height);
-      e.ctx.save();e.ctx.globalAlpha*=s.alpha;
-      renderers[c.kind](e,c,c.entryFrom?arrival(e,c,shot,f,b):b,t,s);e.ctx.restore();
+  P.componentPlain={
+    state(...args){return P.componentRenderer.state(...args);},
+    draw(e,shot,f){
+      const components=(shot.components||[]).map(c=>({...c,visualStyle:'plain',styleVariant:'inset',features:[]}));
+      P.componentRenderer.draw(e,{...shot,components},f);
+    },
+    drawCard(e,c,shot,f,b,t,s){
+      renderers[c.kind](e,c,c.entryFrom?arrival(e,c,shot,f,b):b,t,s);
     }
-  }};
+  };
 })(globalThis.PixelVideo=globalThis.PixelVideo||{});

@@ -174,7 +174,7 @@
 
 要使用项目自己的整张卡面，可给 `plain` 的身份卡填写 `data.fit:"full"`、`image` 与 `title`。图片提供材质、叠层和边框，标题独立绘制。卡要从另一处飞入时，用可选 `entryFrom:[x,y]` 指定起始左上角，沿 `showEvent` 起动、在四分之一秒到达编排位置，再短促收束。需要跨镜交接时用同一张卡面和文案。
 
-组件形态不同：身份卡组织图像/名称/特征，数据卡突出数值，对比组维持同构结构并按事件显露，标注连接实际对象，章节用编号与标题组织段落。共用留白、描边、角饰与显露时间。组件文字溢出会报错，应扩展布局或缩短标签，不会自动缩成小字或静默裁切。
+身份卡组织图像、名称与特征，数据卡突出数值，对比组维持同构结构并按事件显露，标注连接实际对象，章节用编号与标题组织段落。纸质组件会在原字号到当前建议字号之间选择可容纳的字号。可用空间依然不足时会报错，可扩展布局或缩短标签。
 
 ## 扩展组件的语义与状态
 
@@ -196,7 +196,7 @@
 
 实现：runtime.js 绘制与状态，contract.py 验证，catalog.json 发现；引擎按实际使用锁定与导出依赖。主题属性归 style，项目文案归 script，帧事件归 storyboard。当前支持三种样式的组件级显露与上述内部状态；没有开放任意 CSS/HTML 渲染。
 
-最新六样式与堆叠集合见[完整可运行范例](examples/style-atlas/README.md)。本页单张图用于职责选型，不能代替六样式总览。
+各风格、样式和堆叠的实际效果见[完整可运行范例](examples/style-atlas/README.md)。
 
 ## 参考图来源与更新
 
@@ -209,6 +209,6 @@ python scripts/video.py build modules/components/examples/guide
 node modules/components/render-reference.cjs
 ```
 
-运行依赖和环境变量按 [运行说明](../../references/runtime.md) 配置。第一条生成可播放的 `examples/guide/build/film.html`；第二条生成本页引用的 JPEG、大图总览与 [来源清单](assets/reference/manifest.json)。`build/` 是忽略的缓存，正式参考图片保留在 `assets/reference/`。
+取帧依赖见 [guide](examples/guide/README.md)。构建生成可播放的 `examples/guide/build/film.html`，取帧脚本生成 JPEG、大图总览与 [来源清单](assets/reference/manifest.json)。`build/` 是忽略的缓存，参考图片保留在 `assets/reference/`。
 
 组件形态或示例源修改后应重新构建、截图并查看中间状态，不能沿用旧图证明新实现。状态对照是取帧参考，不替代动态播放、声音或审美验收；实际字体也受运行环境影响。

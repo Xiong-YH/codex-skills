@@ -66,7 +66,7 @@
 
 ## 播放、导出与记录
 
-正式制作记录可在 `stages.director.production.summary` 说明当前范围，`artifacts.video / project / review` 引用相对同一 HTML 的本地文件。阶段四显示原生视频播放器与下载入口；这里只接受无上级跳转的相对文件路径。提供视频不代表已审片通过。
+制作记录可在 `stages.director.production.summary` 说明当前范围。调优时以 `artifacts.preview` 引用同一目录或子目录内的 Canvas HTML。阶段四将它作为当前入口，并显示本次记录。正式导出后可用 `artifacts.video / project / review` 绑定视频、工程和审片记录。入口只接受无上级跳转的相对文件路径。成片审片状态由实际核验决定。
 
 片段使用独立执行器时，`plan.rendererSource` 只记录来源，不能让项目 JSON 指定任意脚本加载。`plan.artifacts` 可记录相对入口的 preview、video、webm、design、review；主页面播放已导出白模并链接独立预览，不能用通用矩形播放器空跑或导出冒充该执行器。内容变化后仍需核对并重新导出；独立片段暂不进入通用全片白模导出。
 

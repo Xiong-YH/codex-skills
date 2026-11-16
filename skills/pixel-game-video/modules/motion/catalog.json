@@ -30,7 +30,8 @@
         "y": [0, 1],
         "radius": [0.04, 0.4],
         "strength": [0.05, 1],
-        "seed": "non-negative integer"
+        "seed": "non-negative integer",
+        "direction": [-180, 180]
       },
       "backends": ["canvas"]
     },

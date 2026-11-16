@@ -7,7 +7,7 @@ description: 按分镜或工程制作无口播像素信息动效，在工作台�
 
 负责工程执行与技术交付。只有创意或需要文案时由 pixel-video-writer 接手，需要分镜时由 pixel-video-director 接手。已有工程直接从当前阶段继续。跨安装目录按实际技能根目录定位。
 
-开始制作、续作或复盘先读 [制作总则](references/production-principles.md)，继承当前项目的确认与约束。只加载本次模块与所选配方。新机制先做可播放试样，再按本镜方案兑现动作和阅读。
+开始制作、续作或复盘先读 [制作总则](references/production-principles.md)，继承当前项目的确认与约束。只加载本次模块与所选配方。新机制先做 [可播放试样](references/production-workflow.md#新动作失败时先回退不带缺口扩片)，再按本镜方案兑现动作和阅读。
 
 ## 制作路径
 
@@ -24,7 +24,7 @@ description: 按分镜或工程制作无口播像素信息动效，在工作台�
 | [library](modules/library/GUIDE.md) | 人物、道具、背景的身份、变体、锚点与来源 |
 | [components](modules/components/GUIDE.md) | 按 [脚本需求](modules/components/DESIGN.md) 判断复用或定制。新组件先读 [共同画风](modules/style/COMPONENT-ART.md) 和 [实现协议](modules/components/CUSTOM-RUNTIME.md) |
 | [text](modules/text/GUIDE.md) | 按 [文字表现](modules/text/EXPRESSION.md) 选择屏幕主句和对象标注，复核阅读区间 |
-| [motion](modules/motion/GUIDE.md) | 从 [动效选型](modules/motion/SELECTION.md) 查真实调用。离散组件动作必读 [动作与阅读预算](modules/motion/TIMING.md) |
+| [motion](modules/motion/GUIDE.md) | 从 [动效选型](modules/motion/SELECTION.md) 查真实调用。粒子按[状态变化选型](modules/motion/PARTICLES.md)，离散组件动作必读 [动作与阅读预算](modules/motion/TIMING.md) |
 | [audio](modules/audio/GUIDE.md) | [可复用 BGM](modules/audio/bgm-system/README.md)、配乐原轨取拍、关键事件音效、分轨混音与审片 |
 | [scenes](modules/scenes/GUIDE.md) | 空间、对象关系、状态机制、表演与项目片段合成 |
 

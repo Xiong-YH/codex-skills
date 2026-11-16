@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>粒子效果对照</title>
+  <style>
+    *{box-sizing:border-box}
+    :root{color-scheme:dark;--bg:#111d24;--ink:#f1eee2;--muted:#b7c5c3;--edge:#526968;--panel:#21363b;--active:#a9dfca}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,"Microsoft YaHei",sans-serif}
+    main{max-width:1040px;margin:auto;padding:clamp(12px,3vw,26px)}
+    h1{font-size:clamp(22px,4vw,30px);margin:0 0 12px}
+    h2{font-size:18px;margin:0}
+    a{color:var(--active)}
+    button,select{font:inherit;color:inherit;background:var(--panel);border:1px solid var(--edge);border-radius:4px;padding:6px 10px}
+    button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--active);outline-offset:3px}
+    fieldset{border:0;margin:0 0 12px;padding:0;display:flex;flex-wrap:wrap;gap:8px 20px}
+    legend{padding:0;margin-bottom:5px;color:var(--muted)}
+    fieldset label{display:flex;flex:1 1 265px;align-items:center;gap:10px}
+    fieldset select{min-width:0;flex:1}
+    .stages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    article{min-width:0;display:grid;align-content:start;gap:8px}
+    canvas{display:block;width:100%;height:auto;border:1px solid var(--edge);background:#16282d}
+    dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 9px;margin:0;font-size:14px}
+    dt{color:var(--muted)}
+    dd{margin:0;overflow-wrap:anywhere}
+    .controls{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:12px 0 16px}
+    .controls output{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--muted)}
+    .seek{flex:1 1 210px;display:flex;align-items:center;gap:7px}
+    .seek input{width:100%;min-width:65px;accent-color:var(--active)}
+    body[data-embed] h1,body[data-embed] fieldset,body[data-embed] #right-panel{display:none}
+    body[data-embed] .stages{grid-template-columns:minmax(0,1fr)}
+    body[data-embed] main{padding:12px;max-width:780px}
+    @media(max-width:600px){.stages{grid-template-columns:minmax(0,1fr)}.controls output{margin-left:0}}
+    @media(pointer:coarse){button,select,input{min-height:44px}}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>粒子效果对照</h1>
+    <fieldset>
+      <legend>选择两种效果对照</legend>
+      <label for="left-effect">左侧<select id="left-effect"></select></label>
+      <label for="right-effect">右侧<select id="right-effect"></select></label>
+    </fieldset>
+    <section class="stages" aria-label="效果预览">
+      <article id="left-panel">
+        <h2 id="left-title"></h2>
+        <canvas id="left-canvas" width="640" height="360" role="img" aria-labelledby="left-title"></canvas>
+        <dl>
+          <dt>适合</dt><dd id="left-use"></dd>
+          <dt>触发</dt><dd id="left-trigger"></dd>
+          <dt>收束</dt><dd id="left-end"></dd>
+          <dt>调用</dt><dd id="left-call"></dd>
+        </dl>
+      </article>
+      <article id="right-panel">
+        <h2 id="right-title"></h2>
+        <canvas id="right-canvas" width="640" height="360" role="img" aria-labelledby="right-title"></canvas>
+        <dl>
+          <dt>适合</dt><dd id="right-use"></dd>
+          <dt>触发</dt><dd id="right-trigger"></dd>
+          <dt>收束</dt><dd id="right-end"></dd>
+          <dt>调用</dt><dd id="right-call"></dd>
+        </dl>
+      </article>
+    </section>
+    <div class="controls" aria-label="同步播放控制">
+      <button id="play" type="button">播放</button>
+      <label for="speed">速度<select id="speed"><option value="1">原速</option><option value=".5">半速</option></select></label>
+      <button id="contact" type="button">看触发</button>
+      <button id="end" type="button">看收束</button>
+      <label class="seek" for="seek">进度<input id="seek" type="range" min="0" max="95" step="1" value="0"></label>
+      <output id="clock" aria-live="off"></output>
+    </div>
+    <a href="../../PARTICLES.md">调用方法与选型说明</a>
+  </main>
+  <script src="../../../style/runtime.js"></script>
+  <script src="../../runtime.js"></script>
+  <script src="../../contact-fx.js"></script>
+  <script src="../../game-feedback.js"></script>
+  <script src="../../signal-particles.js"></script>
+  <script src="../../particle-effects.js"></script>
+  <script src="preview.js"></script>
+</body>
+</html>

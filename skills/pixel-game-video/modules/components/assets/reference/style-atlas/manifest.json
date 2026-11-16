@@ -1,729 +1,912 @@
 {
   "schemaVersion": 1,
-  "source": "actual Canvas runtime via style-atlas, no separate mock renderer",
+  "source": "Compiled guide Canvas runtime with style-atlas settings",
+  "inputHash": "f08af907d054ee3dd91a5b830d54574558e86237fb52e56bf5518b4f946e1af6",
+  "runtimeSha256": "6743692aae711314773c9e16f4ead6cfe3a0f71844f0f74d58ac3b61170ebcf4",
+  "backend": "node-canvas",
+  "sourceDimensions": [
+    1920,
+    1080
+  ],
+  "fontFiles": [
+    "msyh.ttc",
+    "msyhbd.ttc"
+  ],
   "sources": {
-    "modules/components/plain.js": "a3d7a4119e169fb3c18fb5606798588a837a30ff70f2e9945575426eeef20070",
-    "modules/components/style-layers.js": "8c00a6d46d6666e3000ecba846d8813f7fb8f5ba4e08e8eca73b179cc329846a",
-    "modules/components/apparatus.js": "7e9e2379b29637ea7c31c27e9adcba03eabc8fe643655eb8dc4ae9eb5512aead",
-    "modules/components/runtime.js": "19a1fac2efb05d686ced8d3dfa6a2bd3249c85ec8b39355695559139a759ddc1",
-    "modules/components/catalog.json": "676a69350671f5e54d1ea5e5abbf5ade8f612a44a2b9e3ad0a362a77ebde970c",
-    "modules/components/examples/guide/timeline.json": "cf48112601c30706a71c89bb541480ace9205258e20506267f7c5a491d30b438",
-    "modules/components/examples/style-atlas/template.html": "452d9613efff1e99eec9438f9151df27b198e65f412060c14625fbeaed8f88a1",
-    "modules/components/examples/style-atlas/variants.json": "b2e93ef1e165dbd1544d9713571bc1e1fa31ac6ddd37f9f37ee5b3e805bce2c0"
+    "modules/components/plain.js": "c9fd6ed7c6b76159dec3e75bb3d85750cef150308e83f95890964f1c3f2c5f35",
+    "modules/components/style-layers.js": "aa2f3a837e151619f4f27e6df42b85e435b14508947326173c8824da49d34616",
+    "modules/components/apparatus.js": "2bccce273ff603bc05e15700d44093cb74a3b8129a0eee18fd13c68a379a0391",
+    "modules/components/paper.js": "0de375f5df16ca7e789cdcb741da73ee061c179971811ebac43462706a3e6f4a",
+    "modules/components/materials.js": "eda12946d2b3926d20e0f65b1281055c34b33b206d0c3f7f7338190e5acce402",
+    "modules/components/runtime.js": "50110c00202d5c581ee295c52402440a30f9fddd151307a1324e715871db7b34",
+    "modules/components/catalog.json": "573b119b85fa930c57a8f56453fc9414c3981b65b858d1231da9c6d320ac778d",
+    "modules/motion/runtime.js": "bf5458d75612619c472507874fde7521c30aa63bf8fa1ce21897bc3c5a056377",
+    "modules/components/examples/style-atlas/template.html": "1eb726528d26ee51dac6c739b41c7a52aab782fcde858a610ced2cb90ec4177e",
+    "modules/components/examples/style-atlas/variants.json": "9a52d6e6dd8d7d414a76c468cf6abd3bae187e0c0e1bc37ecc87a29e19767708",
+    "modules/library/backgrounds/engineering-workshop-v1.png": "6bad8b73d981fd149773d813390ad594474d333042a64f79453139f3959d397e",
+    "modules/components/examples/guide/timeline.json": "4bfa4671b4cb597372fbed0334ff6f55a205d5106061c696b1596da548fc2635"
   },
   "background": true,
   "records": [
     {
       "kind": "identity",
-      "visualStyle": "mechanical",
+      "shotId": "identity",
       "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-open.jpg"
-    },
-    {
-      "kind": "metric",
       "visualStyle": "mechanical",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-open.jpg"
-    },
-    {
-      "kind": "comparison",
-      "visualStyle": "mechanical",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-open.jpg"
-    },
-    {
-      "kind": "annotation",
-      "visualStyle": "mechanical",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-open.jpg"
-    },
-    {
-      "kind": "chapter",
-      "visualStyle": "mechanical",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-open.jpg"
-    },
-    {
-      "kind": "flow",
-      "visualStyle": "mechanical",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-open.jpg"
-    },
-    {
-      "kind": "timeline",
-      "visualStyle": "mechanical",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-open.jpg"
-    },
-    {
-      "kind": "checklist",
-      "visualStyle": "mechanical",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-open.jpg"
-    },
-    {
-      "kind": "hierarchy",
-      "visualStyle": "mechanical",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-open.jpg"
-    },
-    {
-      "kind": "bars",
-      "visualStyle": "mechanical",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-open.jpg"
-    },
-    {
-      "kind": "code",
-      "visualStyle": "mechanical",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-open.jpg"
-    },
-    {
-      "kind": "takeaway",
-      "visualStyle": "mechanical",
-      "styleVariant": "open",
       "features": [],
       "frame": 215,
       "sheet": "mechanical-open.jpg"
     },
     {
       "kind": "identity",
-      "visualStyle": "mechanical",
+      "shotId": "identity",
       "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-inset.jpg"
-    },
-    {
-      "kind": "metric",
       "visualStyle": "mechanical",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-inset.jpg"
-    },
-    {
-      "kind": "comparison",
-      "visualStyle": "mechanical",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-inset.jpg"
-    },
-    {
-      "kind": "annotation",
-      "visualStyle": "mechanical",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-inset.jpg"
-    },
-    {
-      "kind": "chapter",
-      "visualStyle": "mechanical",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-inset.jpg"
-    },
-    {
-      "kind": "flow",
-      "visualStyle": "mechanical",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-inset.jpg"
-    },
-    {
-      "kind": "timeline",
-      "visualStyle": "mechanical",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-inset.jpg"
-    },
-    {
-      "kind": "checklist",
-      "visualStyle": "mechanical",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-inset.jpg"
-    },
-    {
-      "kind": "hierarchy",
-      "visualStyle": "mechanical",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-inset.jpg"
-    },
-    {
-      "kind": "bars",
-      "visualStyle": "mechanical",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-inset.jpg"
-    },
-    {
-      "kind": "code",
-      "visualStyle": "mechanical",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-inset.jpg"
-    },
-    {
-      "kind": "takeaway",
-      "visualStyle": "mechanical",
-      "styleVariant": "inset",
       "features": [],
       "frame": 215,
       "sheet": "mechanical-inset.jpg"
     },
     {
       "kind": "identity",
-      "visualStyle": "mechanical",
+      "shotId": "identity",
       "styleVariant": "relay",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-relay.jpg"
-    },
-    {
-      "kind": "metric",
       "visualStyle": "mechanical",
-      "styleVariant": "relay",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-relay.jpg"
-    },
-    {
-      "kind": "comparison",
-      "visualStyle": "mechanical",
-      "styleVariant": "relay",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-relay.jpg"
-    },
-    {
-      "kind": "annotation",
-      "visualStyle": "mechanical",
-      "styleVariant": "relay",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-relay.jpg"
-    },
-    {
-      "kind": "chapter",
-      "visualStyle": "mechanical",
-      "styleVariant": "relay",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-relay.jpg"
-    },
-    {
-      "kind": "flow",
-      "visualStyle": "mechanical",
-      "styleVariant": "relay",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-relay.jpg"
-    },
-    {
-      "kind": "timeline",
-      "visualStyle": "mechanical",
-      "styleVariant": "relay",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-relay.jpg"
-    },
-    {
-      "kind": "checklist",
-      "visualStyle": "mechanical",
-      "styleVariant": "relay",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-relay.jpg"
-    },
-    {
-      "kind": "hierarchy",
-      "visualStyle": "mechanical",
-      "styleVariant": "relay",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-relay.jpg"
-    },
-    {
-      "kind": "bars",
-      "visualStyle": "mechanical",
-      "styleVariant": "relay",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-relay.jpg"
-    },
-    {
-      "kind": "code",
-      "visualStyle": "mechanical",
-      "styleVariant": "relay",
-      "features": [],
-      "frame": 215,
-      "sheet": "mechanical-relay.jpg"
-    },
-    {
-      "kind": "takeaway",
-      "visualStyle": "mechanical",
-      "styleVariant": "relay",
       "features": [],
       "frame": 215,
       "sheet": "mechanical-relay.jpg"
     },
     {
       "kind": "identity",
-      "visualStyle": "energy",
+      "shotId": "identity",
       "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-open.jpg"
-    },
-    {
-      "kind": "metric",
       "visualStyle": "energy",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-open.jpg"
-    },
-    {
-      "kind": "comparison",
-      "visualStyle": "energy",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-open.jpg"
-    },
-    {
-      "kind": "annotation",
-      "visualStyle": "energy",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-open.jpg"
-    },
-    {
-      "kind": "chapter",
-      "visualStyle": "energy",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-open.jpg"
-    },
-    {
-      "kind": "flow",
-      "visualStyle": "energy",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-open.jpg"
-    },
-    {
-      "kind": "timeline",
-      "visualStyle": "energy",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-open.jpg"
-    },
-    {
-      "kind": "checklist",
-      "visualStyle": "energy",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-open.jpg"
-    },
-    {
-      "kind": "hierarchy",
-      "visualStyle": "energy",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-open.jpg"
-    },
-    {
-      "kind": "bars",
-      "visualStyle": "energy",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-open.jpg"
-    },
-    {
-      "kind": "code",
-      "visualStyle": "energy",
-      "styleVariant": "open",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-open.jpg"
-    },
-    {
-      "kind": "takeaway",
-      "visualStyle": "energy",
-      "styleVariant": "open",
       "features": [],
       "frame": 215,
       "sheet": "energy-open.jpg"
     },
     {
       "kind": "identity",
-      "visualStyle": "energy",
+      "shotId": "identity",
       "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-inset.jpg"
-    },
-    {
-      "kind": "metric",
       "visualStyle": "energy",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-inset.jpg"
-    },
-    {
-      "kind": "comparison",
-      "visualStyle": "energy",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-inset.jpg"
-    },
-    {
-      "kind": "annotation",
-      "visualStyle": "energy",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-inset.jpg"
-    },
-    {
-      "kind": "chapter",
-      "visualStyle": "energy",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-inset.jpg"
-    },
-    {
-      "kind": "flow",
-      "visualStyle": "energy",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-inset.jpg"
-    },
-    {
-      "kind": "timeline",
-      "visualStyle": "energy",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-inset.jpg"
-    },
-    {
-      "kind": "checklist",
-      "visualStyle": "energy",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-inset.jpg"
-    },
-    {
-      "kind": "hierarchy",
-      "visualStyle": "energy",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-inset.jpg"
-    },
-    {
-      "kind": "bars",
-      "visualStyle": "energy",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-inset.jpg"
-    },
-    {
-      "kind": "code",
-      "visualStyle": "energy",
-      "styleVariant": "inset",
-      "features": [],
-      "frame": 215,
-      "sheet": "energy-inset.jpg"
-    },
-    {
-      "kind": "takeaway",
-      "visualStyle": "energy",
-      "styleVariant": "inset",
       "features": [],
       "frame": 215,
       "sheet": "energy-inset.jpg"
     },
     {
       "kind": "identity",
-      "visualStyle": "energy",
+      "shotId": "identity",
       "styleVariant": "relay",
+      "visualStyle": "energy",
       "features": [],
       "frame": 215,
       "sheet": "energy-relay.jpg"
     },
     {
       "kind": "metric",
-      "visualStyle": "energy",
+      "shotId": "metric",
+      "styleVariant": "open",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "metric",
+      "shotId": "metric",
+      "styleVariant": "inset",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "metric",
+      "shotId": "metric",
       "styleVariant": "relay",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "metric",
+      "shotId": "metric",
+      "styleVariant": "open",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "metric",
+      "shotId": "metric",
+      "styleVariant": "inset",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "metric",
+      "shotId": "metric",
+      "styleVariant": "relay",
+      "visualStyle": "energy",
       "features": [],
       "frame": 215,
       "sheet": "energy-relay.jpg"
     },
     {
       "kind": "comparison",
-      "visualStyle": "energy",
+      "shotId": "comparison",
+      "styleVariant": "open",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "comparison",
+      "shotId": "comparison",
+      "styleVariant": "inset",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "comparison",
+      "shotId": "comparison",
       "styleVariant": "relay",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "comparison",
+      "shotId": "comparison",
+      "styleVariant": "open",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "comparison",
+      "shotId": "comparison",
+      "styleVariant": "inset",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "comparison",
+      "shotId": "comparison",
+      "styleVariant": "relay",
+      "visualStyle": "energy",
       "features": [],
       "frame": 215,
       "sheet": "energy-relay.jpg"
     },
     {
       "kind": "annotation",
-      "visualStyle": "energy",
+      "shotId": "annotation",
+      "styleVariant": "open",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "annotation",
+      "shotId": "annotation",
+      "styleVariant": "inset",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "annotation",
+      "shotId": "annotation",
       "styleVariant": "relay",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "annotation",
+      "shotId": "annotation",
+      "styleVariant": "open",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "annotation",
+      "shotId": "annotation",
+      "styleVariant": "inset",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "annotation",
+      "shotId": "annotation",
+      "styleVariant": "relay",
+      "visualStyle": "energy",
       "features": [],
       "frame": 215,
       "sheet": "energy-relay.jpg"
     },
     {
       "kind": "chapter",
-      "visualStyle": "energy",
+      "shotId": "chapter",
+      "styleVariant": "open",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "chapter",
+      "shotId": "chapter",
+      "styleVariant": "inset",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "chapter",
+      "shotId": "chapter",
       "styleVariant": "relay",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "chapter",
+      "shotId": "chapter",
+      "styleVariant": "open",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "chapter",
+      "shotId": "chapter",
+      "styleVariant": "inset",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "chapter",
+      "shotId": "chapter",
+      "styleVariant": "relay",
+      "visualStyle": "energy",
       "features": [],
       "frame": 215,
       "sheet": "energy-relay.jpg"
     },
     {
       "kind": "flow",
-      "visualStyle": "energy",
+      "shotId": "flow",
+      "styleVariant": "open",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "flow",
+      "shotId": "flow",
+      "styleVariant": "inset",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "flow",
+      "shotId": "flow",
       "styleVariant": "relay",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "flow",
+      "shotId": "flow",
+      "styleVariant": "open",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "flow",
+      "shotId": "flow",
+      "styleVariant": "inset",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "flow",
+      "shotId": "flow",
+      "styleVariant": "relay",
+      "visualStyle": "energy",
       "features": [],
       "frame": 215,
       "sheet": "energy-relay.jpg"
     },
     {
       "kind": "timeline",
-      "visualStyle": "energy",
+      "shotId": "timeline",
+      "styleVariant": "open",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "timeline",
+      "shotId": "timeline",
+      "styleVariant": "inset",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "timeline",
+      "shotId": "timeline",
       "styleVariant": "relay",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "timeline",
+      "shotId": "timeline",
+      "styleVariant": "open",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "timeline",
+      "shotId": "timeline",
+      "styleVariant": "inset",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "timeline",
+      "shotId": "timeline",
+      "styleVariant": "relay",
+      "visualStyle": "energy",
       "features": [],
       "frame": 215,
       "sheet": "energy-relay.jpg"
     },
     {
       "kind": "checklist",
-      "visualStyle": "energy",
+      "shotId": "checklist",
+      "styleVariant": "open",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "checklist",
+      "shotId": "checklist",
+      "styleVariant": "inset",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "checklist",
+      "shotId": "checklist",
       "styleVariant": "relay",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "checklist",
+      "shotId": "checklist",
+      "styleVariant": "open",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "checklist",
+      "shotId": "checklist",
+      "styleVariant": "inset",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "checklist",
+      "shotId": "checklist",
+      "styleVariant": "relay",
+      "visualStyle": "energy",
       "features": [],
       "frame": 215,
       "sheet": "energy-relay.jpg"
     },
     {
       "kind": "hierarchy",
-      "visualStyle": "energy",
+      "shotId": "hierarchy",
+      "styleVariant": "open",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "hierarchy",
+      "shotId": "hierarchy",
+      "styleVariant": "inset",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "hierarchy",
+      "shotId": "hierarchy",
       "styleVariant": "relay",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "hierarchy",
+      "shotId": "hierarchy",
+      "styleVariant": "open",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "hierarchy",
+      "shotId": "hierarchy",
+      "styleVariant": "inset",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "hierarchy",
+      "shotId": "hierarchy",
+      "styleVariant": "relay",
+      "visualStyle": "energy",
       "features": [],
       "frame": 215,
       "sheet": "energy-relay.jpg"
     },
     {
       "kind": "bars",
-      "visualStyle": "energy",
+      "shotId": "bars",
+      "styleVariant": "open",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "bars",
+      "shotId": "bars",
+      "styleVariant": "inset",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "bars",
+      "shotId": "bars",
       "styleVariant": "relay",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "bars",
+      "shotId": "bars",
+      "styleVariant": "open",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "bars",
+      "shotId": "bars",
+      "styleVariant": "inset",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "bars",
+      "shotId": "bars",
+      "styleVariant": "relay",
+      "visualStyle": "energy",
       "features": [],
       "frame": 215,
       "sheet": "energy-relay.jpg"
     },
     {
       "kind": "code",
-      "visualStyle": "energy",
+      "shotId": "code",
+      "styleVariant": "open",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "code",
+      "shotId": "code",
+      "styleVariant": "inset",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "code",
+      "shotId": "code",
       "styleVariant": "relay",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "code",
+      "shotId": "code",
+      "styleVariant": "open",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "code",
+      "shotId": "code",
+      "styleVariant": "inset",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "code",
+      "shotId": "code",
+      "styleVariant": "relay",
+      "visualStyle": "energy",
       "features": [],
       "frame": 215,
       "sheet": "energy-relay.jpg"
     },
     {
       "kind": "takeaway",
-      "visualStyle": "energy",
+      "shotId": "takeaway",
+      "styleVariant": "open",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-open.jpg"
+    },
+    {
+      "kind": "takeaway",
+      "shotId": "takeaway",
+      "styleVariant": "inset",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-inset.jpg"
+    },
+    {
+      "kind": "takeaway",
+      "shotId": "takeaway",
       "styleVariant": "relay",
+      "visualStyle": "mechanical",
+      "features": [],
+      "frame": 215,
+      "sheet": "mechanical-relay.jpg"
+    },
+    {
+      "kind": "takeaway",
+      "shotId": "takeaway",
+      "styleVariant": "open",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-open.jpg"
+    },
+    {
+      "kind": "takeaway",
+      "shotId": "takeaway",
+      "styleVariant": "inset",
+      "visualStyle": "energy",
+      "features": [],
+      "frame": 215,
+      "sheet": "energy-inset.jpg"
+    },
+    {
+      "kind": "takeaway",
+      "shotId": "takeaway",
+      "styleVariant": "relay",
+      "visualStyle": "energy",
       "features": [],
       "frame": 215,
       "sheet": "energy-relay.jpg"
     },
     {
       "kind": "identity",
-      "visualStyle": "plain",
+      "shotId": "identity",
       "styleVariant": "inset",
+      "visualStyle": "plain",
       "features": [],
       "frame": 215,
       "sheet": "plain.jpg"
     },
     {
       "kind": "metric",
-      "visualStyle": "plain",
+      "shotId": "metric",
       "styleVariant": "inset",
+      "visualStyle": "plain",
       "features": [],
       "frame": 215,
       "sheet": "plain.jpg"
     },
     {
       "kind": "comparison",
-      "visualStyle": "plain",
+      "shotId": "comparison",
       "styleVariant": "inset",
+      "visualStyle": "plain",
       "features": [],
       "frame": 215,
       "sheet": "plain.jpg"
     },
     {
       "kind": "annotation",
-      "visualStyle": "plain",
+      "shotId": "annotation",
       "styleVariant": "inset",
+      "visualStyle": "plain",
       "features": [],
       "frame": 215,
       "sheet": "plain.jpg"
     },
     {
       "kind": "chapter",
-      "visualStyle": "plain",
+      "shotId": "chapter",
       "styleVariant": "inset",
+      "visualStyle": "plain",
       "features": [],
       "frame": 215,
       "sheet": "plain.jpg"
     },
     {
       "kind": "flow",
-      "visualStyle": "plain",
+      "shotId": "flow",
       "styleVariant": "inset",
+      "visualStyle": "plain",
       "features": [],
       "frame": 215,
       "sheet": "plain.jpg"
     },
     {
       "kind": "timeline",
-      "visualStyle": "plain",
+      "shotId": "timeline",
       "styleVariant": "inset",
+      "visualStyle": "plain",
       "features": [],
       "frame": 215,
       "sheet": "plain.jpg"
     },
     {
       "kind": "checklist",
-      "visualStyle": "plain",
+      "shotId": "checklist",
       "styleVariant": "inset",
+      "visualStyle": "plain",
       "features": [],
       "frame": 215,
       "sheet": "plain.jpg"
     },
     {
       "kind": "hierarchy",
-      "visualStyle": "plain",
+      "shotId": "hierarchy",
       "styleVariant": "inset",
+      "visualStyle": "plain",
       "features": [],
       "frame": 215,
       "sheet": "plain.jpg"
     },
     {
       "kind": "bars",
-      "visualStyle": "plain",
+      "shotId": "bars",
       "styleVariant": "inset",
+      "visualStyle": "plain",
       "features": [],
       "frame": 215,
       "sheet": "plain.jpg"
     },
     {
       "kind": "code",
-      "visualStyle": "plain",
+      "shotId": "code",
       "styleVariant": "inset",
+      "visualStyle": "plain",
       "features": [],
       "frame": 215,
       "sheet": "plain.jpg"
     },
     {
       "kind": "takeaway",
-      "visualStyle": "plain",
+      "shotId": "takeaway",
       "styleVariant": "inset",
+      "visualStyle": "plain",
       "features": [],
       "frame": 215,
       "sheet": "plain.jpg"
+    },
+    {
+      "kind": "identity",
+      "shotId": "paper-identity",
+      "styleVariant": "open",
+      "visualStyle": "paper",
+      "features": [],
+      "frame": 215,
+      "sheet": "paper.jpg"
+    },
+    {
+      "kind": "identity",
+      "shotId": "paper-identity",
+      "styleVariant": "inset",
+      "visualStyle": "paper",
+      "features": [],
+      "frame": 215,
+      "sheet": "paper.jpg"
+    },
+    {
+      "kind": "identity",
+      "shotId": "paper-identity",
+      "styleVariant": "relay",
+      "visualStyle": "paper",
+      "features": [],
+      "frame": 215,
+      "sheet": "paper.jpg"
+    },
+    {
+      "kind": "checklist",
+      "shotId": "paper-checklist",
+      "styleVariant": "open",
+      "visualStyle": "paper",
+      "features": [],
+      "frame": 215,
+      "sheet": "paper.jpg"
+    },
+    {
+      "kind": "checklist",
+      "shotId": "paper-checklist",
+      "styleVariant": "inset",
+      "visualStyle": "paper",
+      "features": [],
+      "frame": 215,
+      "sheet": "paper.jpg"
+    },
+    {
+      "kind": "checklist",
+      "shotId": "paper-checklist",
+      "styleVariant": "relay",
+      "visualStyle": "paper",
+      "features": [],
+      "frame": 215,
+      "sheet": "paper.jpg"
+    },
+    {
+      "kind": "takeaway",
+      "shotId": "paper-takeaway",
+      "styleVariant": "open",
+      "visualStyle": "paper",
+      "features": [],
+      "frame": 215,
+      "sheet": "paper.jpg"
+    },
+    {
+      "kind": "takeaway",
+      "shotId": "paper-takeaway",
+      "styleVariant": "inset",
+      "visualStyle": "paper",
+      "features": [],
+      "frame": 215,
+      "sheet": "paper.jpg"
+    },
+    {
+      "kind": "takeaway",
+      "shotId": "paper-takeaway",
+      "styleVariant": "relay",
+      "visualStyle": "paper",
+      "features": [],
+      "frame": 215,
+      "sheet": "paper.jpg"
     }
   ],
   "files": {
     "mechanical-open.jpg": {
-      "sha256": "19dccea0a959fe76054bb88d54d9ca26b05ebe722f383b05c7c94d9086e802b8",
-      "bytes": 747433
+      "sha256": "94e13c5b0e395a4d417621ad4e32ffd1716d6411c14fbfc3a14ddce2d8faccf7",
+      "bytes": 934791
     },
     "mechanical-inset.jpg": {
-      "sha256": "f5b1e148510b2572437c819eab1538789d4164e119b20df291b25087f0ec4e0c",
-      "bytes": 732128
+      "sha256": "acc954b81835ba6a00d7ad1704e3e625f97e771a18f52155e23b69ed4c19b064",
+      "bytes": 901630
     },
     "mechanical-relay.jpg": {
-      "sha256": "a723a7512dc9ec5b7927c49482bb9dfc30741691dc9162ec2935b06ac12d7215",
-      "bytes": 770388
+      "sha256": "204dbcea4cc88b3c3bf1827bf0d3ef8fe9f416248c98d78b8669e599289394b8",
+      "bytes": 959691
     },
     "energy-open.jpg": {
-      "sha256": "30baa4918ad1550818d987e218a1abd496efbff7b95fe0448c837e74e8a1f157",
-      "bytes": 726350
+      "sha256": "1bbacdf081c7d23065fcda9358c2cd6056aa542b2788b87436774c587f44c440",
+      "bytes": 902537
     },
     "energy-inset.jpg": {
-      "sha256": "76ede6a136103643fa377e7ffa14544972b460be943c7fecef51875b14cc1e64",
-      "bytes": 720297
+      "sha256": "d6623a5c66e9fd4185230280ad7c0c687a15183a6f10ea7fc98ca05702ae32f0",
+      "bytes": 879062
     },
     "energy-relay.jpg": {
-      "sha256": "afc1be5c2d797456070015a0b0e96a623a87381aede9b9e055b1008d1f373fb5",
-      "bytes": 727615
+      "sha256": "430f5575496cce3ee327c2b666515a7d465a9f64b66eb29f795b064bba25dd7b",
+      "bytes": 900028
     },
     "plain.jpg": {
-      "sha256": "674111b5f81f5ab04be34302dec8016a5b0cdc00b24d2ee726be270c5c5effbf",
-      "bytes": 633640
+      "sha256": "6b45f1040803b23f6191e94dd3582ac21cd26467157763e6c15beec3f048a1c5",
+      "bytes": 793777
+    },
+    "paper.jpg": {
+      "sha256": "523983b14f0eb47fdd93509d8a4f05fcb401c0e4254af830927791950b8662ab",
+      "bytes": 579216
     },
     "overview.jpg": {
-      "sha256": "0e57ba304759a36f18d40bb832bf3ce33e1975788f9431c5e72d6723c433bc6a",
-      "bytes": 411374
+      "sha256": "606b480ccd80ee956c67e09fa3fd3e03d0bc5aa35ddecb1830e49ee079591705",
+      "bytes": 511953
     },
     "chapter-states.jpg": {
-      "sha256": "0fbc480a90c5b818fc7e4cd3270ddda1b33dd38bba7f720db6a47f9726c31168",
-      "bytes": 1215760
+      "sha256": "7a6ec6e90a7dfb64350b4523d291a3e2dc0a87b3b93da9c747bb7eae41e51d54",
+      "bytes": 1510705
     }
   },
-  "scope": "84 no-stack final examples including the original plain renderer; seven chapter state strips. Full stack/time checks recorded by component-styles.cjs; aesthetic approval remains separate.",
-  "sourceHashEncoding": "UTF-8 with LF line endings"
+  "scope": "Final no-stack views and selected chapter frames. The interactive atlas also exposes stack and background settings."
 }

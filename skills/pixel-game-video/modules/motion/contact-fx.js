@@ -78,6 +78,37 @@
     }
   }
 
+  function directedSparks(g,p,x,y,r,pixel,seed,color,direction){
+    const angle=direction*Math.PI/180,cos=Math.cos(angle),sin=Math.sin(angle);
+    const point=(along,across)=>[x+along*cos-across*sin,y+along*sin+across*cos];
+    const travel=P.ease(p),opacity=(1-p)**1.4;
+    if(p<.32){
+      g.save();
+      g.globalAlpha*=1-p/.32;
+      g.translate(x,y);g.rotate(angle);
+      g.fillStyle='#fff5d4';g.fillRect(-pixel,-r*.24,pixel*2,r*.48);
+      g.fillStyle=color;g.fillRect(pixel,-r*.13,pixel*5,pixel);
+      g.fillRect(pixel*2,r*.07,pixel*5,pixel);
+      g.restore();
+    }
+    g.globalAlpha*=opacity;
+    for(let i=0;i<22;i++){
+      const stagger=(i%4)*.041;
+      if(p<stagger)continue;
+      const distance=(.35+.79*random(seed,i))*P.ease((p-stagger)/(1-stagger))*r;
+      const across=(i/21-.5)*1.3*r*travel;
+      const [px,py]=point(pixel+distance,across);
+      const size=pixel*(i%5===0?2.6:i%2===0?1.55:1);
+      if(i%2===0&&distance>pixel*4){
+        const tail=Math.min(distance,pixel*4.5);
+        g.strokeStyle=color;g.lineWidth=pixel*.6;g.beginPath();
+        g.moveTo(px-tail*cos,py-tail*sin);g.lineTo(px,py);g.stroke();
+      }
+      g.fillStyle=i%3===0?'#fff1c7':color;
+      g.fillRect(Math.round(px/pixel)*pixel,Math.round(py/pixel)*pixel,size,size);
+    }
+  }
+
   function impactBloom(g, p, x, y, r, pixel, color) {
     const spread = P.ease(p), fade = (1-p) ** 1.5;
     const radius = r * (.43 + .57 * spread);
@@ -120,7 +151,7 @@
   }
 
   function draw(e, motion, frame) {
-    const {style='sparks',profile='soft',tone='gold',x=.65,y=.48,radius=.15,strength=.7,seed=e.seed} = motion.params;
+    const {style='sparks',profile='soft',tone='gold',x=.65,y=.48,radius=.15,strength=.7,seed=e.seed,direction} = motion.params;
     const g = e.ctx, p = P.progress(frame,motion.startFrame,motion.endFrame);
     const cx = x*e.width, cy = y*e.height, r = radius*e.height;
     const color = e.colors[tone] || e.colors.gold;
@@ -129,6 +160,7 @@
     if (profile === 'impact') {
       if (style === 'bloom') impactBloom(g,p,cx,cy,r,e.pixel,color);
       else if (style === 'light-sweep') impactSweep(g,p,cx,cy,r,e.pixel,color);
+      else if (direction !== undefined) directedSparks(g,p,cx,cy,r,e.pixel,seed ?? 1,color,direction);
       else impactSparks(g,p,cx,cy,r,e.pixel,seed || 1,color);
     }
     else if (style === 'bloom') bloom(g,p,cx,cy,r,color);

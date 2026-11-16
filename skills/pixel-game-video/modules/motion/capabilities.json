@@ -31,5 +31,26 @@
       "转场可独立成轨；相机、物体动作与局部特效在镜头 props 中编辑。设计索引与竞赛专用空间交接不能直接填为 recipe。",
       "新增非3D pulse相机、路径、震动、图层组与page-turn；仅Canvas及同源工作台，不扩大原生Remotion白名单。来源与AGPL许可随模块分发。"
     ]
+  },
+  "items": {
+    "motion.contact-fx.v1": {
+      "references": {
+        "documentation": ["modules/motion/recipes/contact-feedback.md", "modules/motion/PARTICLES.md"],
+        "examples": ["modules/motion/examples/particles/index.html"]
+      },
+      "notes": ["定向火花使用 impact 与 direction。独立 Canvas 粒子辅助的调用入口另见粒子选型。"]
+    },
+    "motion.gold-burst.v1": {
+      "references": {
+        "documentation": ["modules/motion/recipes/gold-burst.md", "modules/motion/PARTICLES.md"],
+        "examples": ["modules/motion/examples/particles/index.html"]
+      }
+    },
+    "motion.shatter-reveal.v1": {
+      "references": {
+        "documentation": ["modules/motion/recipes/shatter-reveal.md", "modules/motion/PARTICLES.md"],
+        "examples": ["modules/motion/examples/particles/index.html"]
+      }
+    }
   }
 }

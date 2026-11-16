@@ -9,6 +9,7 @@
       "execution": "standalone-canvas",
       "scope": "fixed three-quarter view, one bundle, two relative layouts, true polygon occlusion",
       "notRegisteredAsShotComponentKind": true,
+      "selection": "一组筹码进入容器，近侧壁接住遮挡，原筹码停在落点。",
       "currentUse": "current five-dimensional design and motion reference; no arbitrary-container support"
     },
     {
@@ -22,6 +23,7 @@
       "scope": "fixed view, three modules, no audio, transparent component over project background",
       "notRegisteredAsShotComponentKind": true,
       "preview": "assets/reference/energy-actuator-assembly.png",
+      "selection": "三块资源逐件加工、移交和装配，保留原件身份和数量。外观保留历史版本。",
       "currentUse": "historical five-dimensional example; redesign into one exclusive visual style before new production"
     },
     {
@@ -107,6 +109,7 @@
       "execution": "standalone-canvas",
       "scope": "fixed front view; count 4..40, event-bound growth/warning/fall/hold, contain layout; no generic fracture",
       "notRegisteredAsShotComponentKind": true,
+      "selection": "原条块由积累变为失效，再脱离仪表。末态保留原天数和落地的条块。",
       "currentUse": "script-driven component architecture example; no scene adapter or workbench integration"
     },
     {
@@ -117,7 +120,27 @@
       "execution": "standalone-canvas",
       "scope": "fixed view; two finite arrival scenarios; deterministic single-server processing and finite queue; no generic scheduling or workbench adapter",
       "notRegisteredAsShotComponentKind": true,
+      "selection": "保持加工周期，改变请求到达间隔。编号筹码占满缓冲架，等待成为可见结果。",
       "currentUse": "user-approved content-driven design study; mechanical appearance applies only to this example"
+    },
+    {
+      "id": "object.slot-transfer.v1",
+      "title": "凭条落槽与展开",
+      "status": "standalone",
+      "runtime": "custom/slot-transfer.js",
+      "dependencies": [
+        "custom/runtime.js",
+        "materials.js",
+        "../style/runtime.js",
+        "../motion/runtime.js",
+        "../motion/signal-particles.js"
+      ],
+      "example": "examples/slot-transfer/index.html",
+      "execution": "standalone-canvas",
+      "scope": "one persistent item; horizontal stop contact, signal, enable, submit and unfold; local integer frames and host-supplied rectangles",
+      "notRegisteredAsShotComponentKind": true,
+      "selection": "凭条撞到止挡，信号抵达按钮才解锁。确认后同一张凭条从原位展开成回执。",
+      "currentUse": "event-state reference with standalone drawing sample; host supplies visual treatment, labels, route and result"
     }
   ]
 }

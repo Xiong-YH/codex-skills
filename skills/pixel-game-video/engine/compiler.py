@@ -98,7 +98,7 @@ def _motion_params(recipe, params):
         "motion.object-reveal.v1": {"scaleFrom": (0.05, 1), "turns": (0, 4)},
         "motion.gold-burst.v1": {"x": (0, 1), "y": (0, 1)},
         "motion.contact-fx.v1": {"x": (0, 1), "y": (0, 1), "radius": (.04, .4),
-                                 "strength": (.05, 1), "seed": (0, 2147483647)},
+                                 "strength": (.05, 1), "seed": (0, 2147483647), "direction": (-180, 180)},
         "motion.shatter-reveal.v1": {"x": (0, 1), "y": (0, 1), "seed": (0, 2147483647)},
         "motion.panel-slide.v1": {"distance": (0.1, 0.35)},
         "motion.pixel-iris.v1": {"x": (0, 1), "y": (0, 1)},
@@ -113,6 +113,9 @@ def _motion_params(recipe, params):
     }
     if recipe not in rules:
         raise ValueError(f"motion executor unavailable: {recipe}")
+    if recipe == "motion.contact-fx.v1" and "direction" in params:
+        if params.get("style", "sparks") != "sparks" or params.get("profile") != "impact":
+            raise ValueError("contact-fx.direction requires impact sparks")
     for key, value in params.items():
         if recipe == "motion.contact-fx.v1" and key in ("style", "tone", "profile"):
             values = {"style": ("sparks", "bloom", "light-sweep"), "tone": ("gold", "accent", "danger"),

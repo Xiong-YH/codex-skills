@@ -9,8 +9,8 @@
     if(visualStyle==='plain'&&(features.length||styleVariant!=='inset'))throw Error('plain uses original simple components without styled variants or stack');
     return {visualStyle,styleVariant,features:[...features]};
   }
-  function prepare(e,c,shot,f,t){
-    const config=normalize(c),mechanical=config.visualStyle==='mechanical',at=id=>P.scenes.eventFrame(shot,id),fps=e.fps||60;
+  function prepare(e,c,shot,f,t,config=normalize(c)){
+    const mechanical=config.visualStyle==='mechanical',at=id=>P.scenes.eventFrame(shot,id),fps=e.fps||60;
     const phase=id=>P.clamp((f-at(id))/(fps*.36));
     const ids=[c.showEvent,...(c.focusEvent?[c.focusEvent]:[]),...(c.data.startEvent?[c.data.startEvent,c.data.endEvent]:[]),...(c.data.items||[]).flatMap(i=>[i.event,...(i.endEvent?[i.endEvent]:[])])];
     const latest=ids.map(at).filter(v=>v<=f).sort((a,b)=>b-a)[0]??at(c.showEvent);

@@ -11,7 +11,7 @@
 | 当前任务 | 读取入口 |
 | --- | --- |
 | 后端、编辑方式、示例与验证边界 | [统一能力目录](../../references/capability-catalog.md)；运行 python scripts/video.py catalog style --capabilities |
-| 新组件画风、素材生成与局部改版 | [组件共同画风](COMPONENT-ART.md)；按材质、厚度、接触和主次生成，原图库整体迁移待后续 |
+| 新组件画风、素材生成与局部改版 | [组件共同画风](COMPONENT-ART.md)和[实际执行器图册](../components/examples/style-atlas/README.md)，按材质、厚度、接触和主次核对 |
 | 背景与同镜美术设计 | [美术方向](ART-DIRECTION.md)；先按内容设计空间，样板不是场所菜单 |
 | 八类画风、分支提示词与片段透传 | [八类画风](PIXEL-STYLES.md)、[画廊](references/index.html)、[透传合同](ART-DIRECTION-CONTRACT.md)；用 resolve-art-direction.cjs 展开，非运行时预设 |
 | 风格选型、网格、字段和接入 | [预设与接入细节](details.md)、[风格目录](catalog.json) |

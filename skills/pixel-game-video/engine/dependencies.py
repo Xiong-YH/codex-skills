@@ -100,11 +100,8 @@ def javascript_files(skill, resolved):
     if any(shot.get('background') or shot.get('replacement') or shot.get('components') for shot in resolved['shots']):
         paths += ['scenes/media.js']
     if any(shot.get('components') for shot in resolved['shots']):
-        paths += ['components/style-layers.js', 'components/plain.js', 'components/apparatus.js']
-        if any(component.get('visualStyle') == 'paper'
-               for shot in resolved['shots'] for component in shot.get('components', [])):
-            paths.append('components/paper.js')
-        paths.append('components/runtime.js')
+        paths += ['components/style-layers.js', 'components/materials.js', 'components/plain.js',
+                  'components/apparatus.js', 'components/paper.js', 'components/runtime.js']
     scenes = {shot['scene'] for shot in resolved['shots']}
     objects = {obj['asset'] for shot in resolved['shots'] for obj in shot.get('objects', [])}
     records = read(Path(skill) / 'modules/library/catalog.json')['items']

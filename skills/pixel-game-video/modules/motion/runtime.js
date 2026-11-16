@@ -1,6 +1,26 @@
 (function (P) {
   'use strict';
   const smooth = p => {p=P.clamp(p);return p*p*(3-2*p);};
+  function tracePath(points,progress){
+    if(progress>=1)return {trace:points.slice(),head:points.at(-1)};
+    const lengths=points.slice(1).map(([x,y],i)=>Math.hypot(x-points[i][0],y-points[i][1]));
+    const total=lengths.reduce((sum,length)=>sum+length,0);
+    const trace=[points[0]];
+    let remaining=P.clamp(progress)*total;
+    for(const [index,length] of lengths.entries()){
+      if(length===0)continue;
+      if(remaining<=0)break;
+      const from=points[index],to=points[index+1];
+      if(remaining<length){
+        const p=remaining/length;
+        trace.push([from[0]+(to[0]-from[0])*p,from[1]+(to[1]-from[1])*p]);
+        break;
+      }
+      trace.push(to);
+      remaining-=length;
+    }
+    return {trace,head:trace.at(-1)};
+  }
   function glassCells(e,a){
     const w=e.width,h=e.height,cx=(a.x??.62)*w,cy=(a.y??.5)*h,seed=a.seed??e.seed??1;
     const key=['glass',w,h,cx,cy,seed].join(':');e.propCache=e.propCache||{};
@@ -170,6 +190,7 @@
     g.restore();
   }
   P.motion = {
+    tracePath,
     worldTransition(e,outgoing,incoming,motion,frame) {
       const p=P.progress(frame,motion.startFrame,motion.endFrame);
       if(p<=0){e.ctx.drawImage(outgoing,0,0,e.width,e.height);return;}

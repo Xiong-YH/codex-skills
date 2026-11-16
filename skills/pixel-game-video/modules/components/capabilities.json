@@ -50,6 +50,17 @@
         ]
       }
     },
+    "object.slot-transfer.v1": {
+      "references": {
+        "documentation": [
+          "modules/components/CUSTOM-RUNTIME.md",
+          "modules/components/OBJECT-COMPONENTS.md"
+        ],
+        "tests": [
+          "tests/slot-transfer.test.cjs"
+        ]
+      }
+    },
     "object.request-queue-study.v1": {
       "references": {
         "documentation": [

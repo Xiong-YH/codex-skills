@@ -1,24 +1,27 @@
 {
   "schemaVersion": 1,
-  "source": "Actual canvas output from the current pixel-game-video engine",
-  "inputHash": "5d1ee1aa9877f023d9d9728fb134527832b1eff301396e2d3b3e077d734e4d91",
-  "style": "style.pixel-editorial.v1",
+  "source": "Compiled pixel-game-video Canvas runtime",
+  "inputHash": "f08af907d054ee3dd91a5b830d54574558e86237fb52e56bf5518b4f946e1af6",
+  "runtimeSha256": "6743692aae711314773c9e16f4ead6cfe3a0f71844f0f74d58ac3b61170ebcf4",
+  "backend": "node-canvas",
   "sourceDimensions": [
     1920,
     1080
   ],
+  "fontFiles": [
+    "msyh.ttc",
+    "msyhbd.ttc"
+  ],
+  "style": "style.pixel-editorial.v1",
   "sourceHashes": {
     "examples/guide/project.json": "ec5e515ccae69669fd40eeb612613f3e4cae991049b3630faac328d8eb6ebdca",
-    "examples/guide/timeline.json": "eca4b6abbfaf9518e55a8e93e5fc265cedacc0e8f76aaf9387e29883740e3d9b",
+    "examples/guide/timeline.json": "4bfa4671b4cb597372fbed0334ff6f55a205d5106061c696b1596da548fc2635",
     "examples/guide/text.json": "64f1011cd82a2b229a2f42876ae4216f62b10e95cca8aea63e6d32457080cdf0",
     "examples/guide/audio.json": "64f1011cd82a2b229a2f42876ae4216f62b10e95cca8aea63e6d32457080cdf0",
     "examples/guide/gallery.json": "7a3ef15ecbf65f6ac977f110c5840081475ef9e7c8390f34c767476e8735cfab",
     "examples/guide/media/azong.png": "f876797f5f919ed0d0a4675bdc102a65e9a387e83620c198f646709a9d0e2f0a"
   },
-  "runtimeSha256": "187ee0d617080f157632dfeae9aca45d2de775b89f5f502d305092610db7ecb8",
-  "browser": "155.0.4283.62",
-  "pageErrors": [],
-  "framesExercised": 3360,
+  "framesExercised": 620,
   "captures": [
     {
       "id": "identity",
@@ -202,80 +205,80 @@
   "screenshots": [
     {
       "file": "assets/reference/identity.jpg",
-      "sha256": "66bdecc9d25bc0c24d07d92ae51215566bcff566b0a7af0b7ee43e38cf10ad01"
+      "sha256": "e78bc8122939c7444411328ad9d2f4b7da121877e5300a71ef0b95284356cd9c"
     },
     {
       "file": "assets/reference/metric.jpg",
-      "sha256": "a892f56bb89377c9a653e74680ad37843fd8c964b844ae53c73f4cb9881c5527"
+      "sha256": "ff5f4015982f80dbcc74d10cb177feaeb4e062f2cf93990c776be4b1a0a776d8"
     },
     {
       "file": "assets/reference/metric-states.jpg",
-      "sha256": "95679cf0855d35712de4cf25a63c239d6de156a36b8e31f4f9d3fad38776d0c1"
+      "sha256": "9104d8513f2f503e358ca346942686948051b9dc531387a407a89539a7395b5f"
     },
     {
       "file": "assets/reference/comparison.jpg",
-      "sha256": "0d31fe7e2f3526853d033dfa7a480b00751a519eef1e28e82efd0073a9324982"
+      "sha256": "9a7fb8efc797277b17f55a5d0c619df03203ff6dd2fcaccfcbda068ac8d09a6e"
     },
     {
       "file": "assets/reference/annotation.jpg",
-      "sha256": "d87d736d9c85411ed6e5f89cda6e2ec7b9c613d525b74b1952f6556de148a52c"
+      "sha256": "5f8bd7abf99ddc356624efead238431f297e43d89a820bf7170b242a2af2ecd7"
     },
     {
       "file": "assets/reference/chapter.jpg",
-      "sha256": "5f1d1bd4f090557ce7d1f268f151d16a1ba087ee0231cdbd1cad3a9bd23001f1"
+      "sha256": "0504bc60080ce0d065ea0b21255739f1ac90d651f40e0c3ae9cd3d29c6c406f0"
     },
     {
       "file": "assets/reference/flow.jpg",
-      "sha256": "b88eb1eabb1f0c6f9de49b92623b06e3324845d80a794a077cd1d5051a3a7d89"
+      "sha256": "a5722bc7c4cc6ab1cb6f51b05e814a4100dac0c3db0fe1d1a275185bb744c27d"
     },
     {
       "file": "assets/reference/flow-states.jpg",
-      "sha256": "7504c983373aa4c96ce772aa67f2ce412da251f4c82345c9601d42db9fdaae34"
+      "sha256": "939d6faaefce6f7b336e003ab07396a4877aaccee57a2bcb7fbe1165da29894c"
     },
     {
       "file": "assets/reference/timeline.jpg",
-      "sha256": "c044c432aaccb983fd94fa4995b8e5cb6c9e840902032ba64ab5608fc13316ed"
+      "sha256": "e6ffe590301a370a7abd551d6963f65810d241ae168f3699cb1aadb36e6b0129"
     },
     {
       "file": "assets/reference/checklist.jpg",
-      "sha256": "d3f35a42575c8d5f1b220e636a2cd63f73463943422a1d23c25e93a073b87f2d"
+      "sha256": "6789faca41c4ed83bc690f9b42c2b1e1d87a141924e0b4bbad9176806ea1ea34"
     },
     {
       "file": "assets/reference/checklist-states.jpg",
-      "sha256": "224b7d1dbeea9542de098da5ccf01f8a1d340e4bcf0ba1d86b5d890239aed216"
+      "sha256": "fe29a6cec75cb5d7bc759d7b7423a43bf50fa315253e4811a0a66fad3ff2b8d8"
     },
     {
       "file": "assets/reference/hierarchy.jpg",
-      "sha256": "91d7c486d85f908562d00b6662277bafdec1051c8bef618f42766acce9303a99"
+      "sha256": "2c3745fc61b3933bac3086d7b7394f16f3090c762d3650131525e191f0cc9823"
     },
     {
       "file": "assets/reference/bars.jpg",
-      "sha256": "396af000953a6e4526733cf85328016de3bd29bca402ea58dc2848df187ab693"
+      "sha256": "a8e3b2b578686a7b5d81941a18aa2d477df45864e30e799b5c8e5d4a2a59f106"
     },
     {
       "file": "assets/reference/code.jpg",
-      "sha256": "de863fdc910159d1192016b84c5288c3ea83f3dfc43b9a9115bbaf09113f7bc7"
+      "sha256": "a89005a59dd268b2dc95af4ad3b359f5afc0bcb050b52808aada6cb2b51104ac"
     },
     {
       "file": "assets/reference/code-states.jpg",
-      "sha256": "11ebb11d276f05f6b6fe15050dd8aa97f0a7e9eb44ed84722185cdf4b30aeb66"
+      "sha256": "ce00c833a7c0678b883971712369bb31f28747f840a8f63f55ab54988998c75a"
     },
     {
       "file": "assets/reference/takeaway.jpg",
-      "sha256": "2a1ee82d133c2fc0dd69dca92590195bcb95a54983038527e090750563341ad0"
+      "sha256": "91d2bbd630a0e5cd67f14719a636d3aff5659ecbd91f2aa62258c086bc3363c9"
     },
     {
       "file": "assets/reference/flow-checklist.jpg",
-      "sha256": "f0d955fa7ffc4e7d928679305dc4cd23f46e5a003a9cc5b5b552ce4b548b0738"
+      "sha256": "2af5e2dc847e78754e39636a572bf1f3449c07c71704ac1921a0909ceb3d9cf4"
     },
     {
       "file": "assets/reference/code-annotation.jpg",
-      "sha256": "e164906fc282bd8a182ec862596094c4e1afb262e78b25747507d0d910ae2fb0"
+      "sha256": "ba645881e7e1fdbcec8724aeee229671f08e8f8c77509a7e464348e66c3cbb71"
     },
     {
       "file": "assets/reference/overview.jpg",
-      "sha256": "a79ac33af314d172decef7b07325084e8f12fa24568e513197c3e84c350e364f"
+      "sha256": "7a60471922dc14b3cc4b993613fc91f6b61478d6a70c435e5e556c911fc88fcf"
     }
   ],
-  "note": "State strips are sampled states; no claim of continuous motion/audio review. Neutral plate is for documentation comparison, not a project default."
+  "scope": "Sampled visuals and frame execution. Continuous playback and aesthetic approval are separate."
 }

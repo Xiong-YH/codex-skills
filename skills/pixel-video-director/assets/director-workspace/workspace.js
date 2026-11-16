@@ -92,11 +92,38 @@ async function playPair(ids){try{if(phase!==3){phase=3;render();}if(!player)thro
 async function exportSample(ids,b){if(exporting)return;let list;const snapshot=M.clone(working);try{list=M.timeline(snapshot,ids);}catch(error){alert(error.message);return;}if(player)player.dispose();exporting=true;exportAbort=new AbortController();$('cancel-export').hidden=false;const canvas=node('canvas');canvas.width=960;canvas.height=540;const original=b.textContent;b.disabled=true;
  try{const blob=await R.exportVideo(canvas,snapshot,list,p=>b.textContent='正在导出 '+Math.round(p*100)+'%',exportAbort.signal);download(blob,'animatic-'+(ids?.[0]||'full')+'.webm');download({schema:'director-animatic/1',projectId:snapshot.projectId,revision:snapshot.revision,designHash:M.hash(snapshot),segments:list.map(t=>({id:t.segment.id,planHash:M.hash(t.segment.plan),start:t.start,end:t.end})),audio:'none',timing:'estimated',finalVideoReviewed:false},'animatic-'+(ids?.[0]||'full')+'.manifest.json');$('draft-status').textContent='已导出样板视频和同次设计记录；正式成片仍未核验。';}
  catch(error){if(error.message==='已取消导出。')$('draft-status').textContent=error.message;else alert(error.message);}finally{exporting=false;exportAbort=null;$('cancel-export').hidden=true;b.textContent=original;b.disabled=false;}}
-function renderProduction(host){host.append(node('p','用收敛后的方案交接制作，再对照实际成片核验。','phase-description'));const box=node('section',undefined,'paper');box.append(node('h2','制作与审片记录'),node('p',working.stages.director?.production?.summary||'当前没有绑定正式成片的审片结论。','approval'));
- const artifacts=working.stages.director?.production?.artifacts||{},local=value=>typeof value==='string'&&/^[a-z\d_./-]+$/i.test(value)&&!value.startsWith('/')&&!value.split('/').includes('..');
- if(local(artifacts.video)){const video=node('video');video.controls=true;video.preload='metadata';video.src=window.DirectorMedia?.[artifacts.video]||artifacts.video;video.style.width='100%';video.style.maxHeight='65vh';video.setAttribute('aria-label','当前正式样片');box.append(video);}
- for(const [key,label]of [['video','下载 MP4'],['project','同次导出工程 JSON'],['review','本次核验记录']])if(local(artifacts[key])){const link=node('a',label,'button');link.href=artifacts[key];link.download='';box.append(link);}
- const f=fold('查看本阶段交接资料');f.content.append(node('p','唯一文案、模块与片段映射、白模版本、继承的叙事和节奏、按正式参考重做的占位造型、素材与能力缺口。'));box.append(f.root);host.append(box,feedback('production','对正式制作或成片的意见'));actionBar(host,'请导演处理制作交接与审片',4);}
+function renderProduction(host){
+ const production=working.stages.director?.production||{};
+ const artifacts=production.artifacts||{};
+ const local=value=>typeof value==='string'&&/^[a-z\d_./-]+$/i.test(value)&&!value.startsWith('/')&&!value.split('/').includes('..');
+ const preview=local(artifacts.preview)&&/\.html?$/i.test(artifacts.preview);
+ const box=node('section',undefined,'paper');
+ host.append(node('p',preview?'先在 Canvas 核对画面、时点与读屏。':'用收敛后的方案交接制作，再对照实际成片核验。','phase-description'));
+ box.append(node('h2',preview?'当前 Canvas 调优稿':'制作与审片记录'),
+   node('p',production.summary||'当前没有绑定正式成片的审片结论。','approval'));
+ if(preview){
+  const link=node('a','打开 Canvas 调优','button primary');
+  link.href=artifacts.preview;
+  const actions=node('div',undefined,'export-row');
+  actions.append(link);
+  box.append(actions);
+ }else if(local(artifacts.video)){
+  const video=node('video');
+  video.controls=true;video.preload='metadata';video.src=window.DirectorMedia?.[artifacts.video]||artifacts.video;
+  video.style.width='100%';video.style.maxHeight='65vh';video.setAttribute('aria-label','当前正式样片');
+  box.append(video);
+ }
+ const links=preview?[['review','本次画面记录']]:[['video','下载 MP4'],['project','同次导出工程 JSON'],['review','本次核验记录']];
+ for(const [key,label]of links)if(local(artifacts[key])){
+  const link=node('a',label,'button');
+  link.href=artifacts[key];link.download='';box.append(link);
+ }
+ const handoff=fold('查看本阶段交接资料');
+ handoff.content.append(node('p','唯一文案、模块与片段映射、白模版本、继承的叙事和节奏、按正式参考重做的占位造型、素材与能力缺口。'));
+ box.append(handoff.root);
+ host.append(box,feedback('production',preview?'对当前画面与节奏的意见':'对正式制作或成片的意见'));
+ actionBar(host,preview?'请导演继续调优':'请导演处理制作交接与审片',4);
+}
 function renderWriter(host){const box=node('section',undefined,'source-view'),nav=node('nav',undefined,'writer-controls');['选题','叙事路线','完整文案'].forEach((name,i)=>{const b=button(name,()=>{writerStage=i+1;save();render();});b.setAttribute('aria-pressed',String(writerStage===i+1));nav.append(b);});box.append(nav);
  if(writerStage===1){const paper=node('section',undefined,'paper'),brief=working.stages.brief||{};for(const [k,label]of [['topic','讲什么'],['audience','帮谁'],['problem','解决什么问题'],['value','提供什么价值'],['takeaway','补充记忆点']])paper.append(field(label,brief[k]||'',v=>change('/stages/brief/'+k,v),{rows:2}));paper.append(node('p',brief.confirmationEvidence?'已有确认依据：'+brief.confirmationEvidence:'选题确认依据待补；旧记忆点不代替问题与价值。','approval'));box.append(paper);}
  else if(writerStage===2){const n=working.stages.narrative||{},paper=node('section',undefined,'paper');for(const [k,label]of [['opening','开头'],['closing','收尾'],['emotionalArc','情绪与认知路线']])paper.append(field(label,n[k]||'',v=>change('/stages/narrative/'+k,v),{rows:3}));const route=fold('核心推进与已有参考',true);route.content.append(node('pre',compact({route:n.route||[],references:n.references||[]})));paper.append(route.root);box.append(paper);}

@@ -55,6 +55,18 @@ class PulseMotionTests(unittest.TestCase):
         self.assertNotIn('motion.page-turn',manifest['shots'][1]['props']['cameraJson'])
         self.assertEqual(json.loads(unit['props']['paramsJson']),{'blur':5})
 
+    def test_direction_only_applies_to_impact_sparks(self):
+        recipe = 'motion.contact-fx.v1'
+        params = {'profile':'impact', 'style':'sparks', 'direction':0}
+        resolved = self.compile(recipe, params)
+        self.assertEqual(resolved['shots'][1]['motions'][0]['params'], params)
+        self.assertIn('modules/motion/contact-fx.js', javascript_files(SKILL, resolved))
+        self.compile(recipe, {'profile':'impact'})
+        for invalid in ({**params, 'direction':181}, {**params, 'direction':True},
+                        {**params, 'profile':'soft'}, {**params, 'style':'bloom'}):
+            with self.subTest(invalid=invalid), self.assertRaisesRegex(ValueError, 'direction'):
+                self.compile(recipe, invalid)
+
     def test_shake_can_overlay_camera_but_framing_cannot_overlap(self):
         extra={'id':'overlay','recipe':'motion.camera-shake.v1','target':'scene',
                'start':{'event':'s02.enter'},'durationFrames':15,'params':{}}
