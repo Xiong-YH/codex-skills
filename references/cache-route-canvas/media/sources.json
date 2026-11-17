@@ -1,7 +1,7 @@
 {
   "modern": {
     "file": {
-      "path": "work/cache-route-canvas/media/modern-poses.webp",
+      "path": "references/cache-route-canvas/media/modern-poses.webp",
       "sha256": "b82c89d26de3a2d5923db14d4e75c52bd07d1785c95a256690d5ca14c23b9403"
     },
     "poses": [
@@ -63,11 +63,11 @@
   },
   "sprite": {
     "file": {
-      "path": "work/cache-route-canvas/media/azong-sprite.webp",
+      "path": "references/cache-route-canvas/media/azong-sprite.webp",
       "sha256": "049ca95ac33ce1a12138cdc03008cf7e86cc59b267bd1750f3426c98d46bce71"
     },
     "manifest": {
-      "path": "work/cache-route-canvas/media/azong-sprite-poses.json",
+      "path": "references/cache-route-canvas/media/azong-sprite-poses.json",
       "sha256": "e2f476a3a20c274107a594f8a62455b22ef19fe379e5702dc6326375fe029569"
     },
     "visualReference": {
@@ -76,11 +76,11 @@
     },
     "sheets": [
       {
-        "path": "work/cache-route-canvas/media/azong-sprite-motion.png",
+        "path": "references/cache-route-canvas/media/azong-sprite-motion.png",
         "sha256": "e3499edb41f8dc321d509d651ea8ca9d9201dd5d080c02e4b9d86041fa3eb14b"
       },
       {
-        "path": "work/cache-route-canvas/media/azong-sprite-stance.png",
+        "path": "references/cache-route-canvas/media/azong-sprite-stance.png",
         "sha256": "86ba5aabe0013aeb68e352e50695188e9d53d0daad54c147c8994de7aba62a22"
       }
     ],
@@ -257,7 +257,7 @@
   },
   "audio": {
     "file": {
-      "path": "work/cache-route-canvas/media/pulse-preview.mp3",
+      "path": "references/cache-route-canvas/media/pulse-preview.mp3",
       "sha256": "c26de2a2403bd3b8137ae519dc8a35823cf5c7f58e1bf06fd040fb6190720fdc"
     },
     "score": {

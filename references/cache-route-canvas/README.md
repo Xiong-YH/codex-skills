@@ -18,8 +18,8 @@
 项目自带预览所需的 WebP 和 MP3，以及角色图集的 PNG 原图。从仓库根目录可运行下列命令。重新构建素材需要 Python 3、Pillow、Node.js 和支持 MP3 编码的 FFmpeg。可通过 `--ffmpeg` 指定路径，或通过 `--pulse-wav` 使用已有的《步进》一分钟版母带。
 
 ```text
-python work/cache-route-canvas/src/build-media.py
-node work/cache-route-canvas/src/build-preview.mjs <输出 HTML 片段路径>
+python references/cache-route-canvas/src/build-media.py
+node references/cache-route-canvas/src/build-preview.mjs <输出 HTML 片段路径>
 ```
 
 `index.html` 是可直接打开的入口。第二条命令将相同画面和媒体内嵌为对话内预览片段。`src/timeline.js` 维护关键帧，改动音效触点后重新构建素材。

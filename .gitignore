@@ -42,12 +42,25 @@ sfx-bank/
 Thumbs.db
 .segment-cache/
 
-# Existing local work stays in place. Open individual portable projects here
-# once their entry point, source assets and dependencies are ready to share.
+# Local work and the portable catalogue instructions.
 !/work/
 /work/*
 !/work/README.md
-!/work/cache-route-canvas/
+!/work/catalog/
+/work/catalog/local.json
+
+# Local staging for tasks outside video production.
+/scratch/
+
+# Reference videos live outside the work directory.
+!/references/
+/references/*
+!/references/README.md
+!/references/cache-route-canvas/
+/references/**/.tmp/
+/references/**/exports/
+/references/**/frames/
+/references/**/profile*/
 
 # Local builds, caches and renders within any selected project.
 /work/**/.tmp/

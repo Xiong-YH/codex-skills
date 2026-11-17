@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1b1b1d">
+  <title>工作视频</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      color: #f2f0ea;
+      background: #151517;
+      font: 15px/1.55 Inter, "Microsoft YaHei UI", system-ui, sans-serif;
+      --muted: #aba8a3;
+      --line: #303033;
+      --control: #232325;
+      --surface: #1b1b1d;
+      --accent: #ebe5d7;
+      --accent-ink: #24231f;
+      --gutter: clamp(16px, 4vw, 48px);
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; }
+    h1, h2, p, figure { margin: 0; }
+    a { color: inherit; overflow-wrap: anywhere; text-underline-offset: .23em; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .shell { width: min(1160px, calc(100% - 2 * var(--gutter))); margin-inline: auto; }
+    .site-header { background: var(--surface); border-bottom: 1px solid var(--line); }
+    .header-content {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(210px, 310px) minmax(0, 1fr);
+      align-items: center;
+      gap: 10px clamp(12px, 2.5vw, 32px);
+      padding-block: 13px;
+    }
+    h1 { font-size: 1.13rem; font-weight: 650; white-space: nowrap; }
+    .header-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: end;
+      gap: 5px 16px;
+      color: var(--muted);
+      font-size: .87rem;
+    }
+    .header-links a, .utilities a { text-decoration: none; }
+    .header-links a:hover, .utilities a:hover { color: var(--accent); text-decoration: underline; }
+
+    .search { position: relative; min-width: 0; }
+    .search input {
+      width: 100%;
+      min-height: 36px;
+      padding: 6px 10px 6px 34px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--control);
+      color: inherit;
+      font: inherit;
+      font-size: .9rem;
+    }
+    .search input::placeholder { color: var(--muted); opacity: 1; }
+    .search-icon {
+      position: absolute;
+      top: calc(50% - 6px);
+      left: 12px;
+      width: 11px;
+      height: 11px;
+      border: 1px solid var(--muted);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .search-icon::after {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      width: 5px;
+      height: 1px;
+      background: var(--muted);
+      transform: rotate(45deg);
+      transform-origin: left;
+    }
+
+    main { padding-block: clamp(20px, 3.5vw, 44px) 48px; }
+    #result-count { margin-bottom: 12px; color: var(--muted); font-size: .82rem; text-align: end; }
+    .video-row + .video-row { border-top: 1px solid var(--line); margin-top: 30px; padding-top: 32px; }
+    .video-feature {
+      display: grid;
+      align-items: center;
+      gap: clamp(18px, 4.5vw, 56px);
+    }
+    .video-feature.has-preview { grid-template-columns: minmax(0, 1.7fr) minmax(240px, 1fr); }
+    .poster {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--control);
+    }
+    .poster:hover { border-color: #77746d; }
+    .poster img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .poster .play-icon { transform: scale(1.6); }
+    .preview-caption {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 4px 18px;
+      margin-top: 9px;
+      font-size: .86rem;
+    }
+    .video-details { min-width: 0; }
+    .video-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 650;
+      line-height: 1.16;
+      overflow-wrap: anywhere;
+    }
+    .video-date { margin-top: 8px; color: var(--muted); font-size: .87rem; font-variant-numeric: tabular-nums; }
+    .video-topic { max-width: 38em; margin-top: 13px; line-height: 1.75; overflow-wrap: anywhere; }
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 20px; }
+    .action {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      min-height: 40px;
+      padding: 7px 12px;
+      border: 1px solid #424245;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: .91rem;
+      font-weight: 600;
+    }
+    .action.primary { background: var(--accent); border-color: transparent; color: var(--accent-ink); }
+    .action.primary:hover { background: #fff8ea; }
+    .action:not(.primary):hover { background: var(--control); border-color: #77746d; }
+    .play-icon {
+      flex: none;
+      width: 0;
+      height: 0;
+      border-block: 4px solid transparent;
+      border-left: 7px solid currentColor;
+    }
+    .link-meta {
+      display: block;
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 400;
+      font-variant-numeric: tabular-nums;
+    }
+    .action.primary .link-meta { color: inherit; }
+    .utilities {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 16px;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: .87rem;
+    }
+    .utilities a { display: inline-block; padding-block: 6px; }
+    .no-video { margin-top: 9px; color: var(--muted); font-size: .87rem; }
+
+    .more { margin-top: 26px; border-top: 1px solid var(--line); font-size: .9rem; }
+    .more summary { width: fit-content; padding-block: 12px; color: var(--muted); cursor: pointer; }
+    .more summary:hover, .more[open] summary { color: var(--accent); }
+    .history-list, .link-list { margin: 0; padding: 0; list-style: none; }
+    .history-link {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 4px 16px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+    }
+    .history-link:hover { color: var(--accent); }
+    .history-list + .link-list { margin-top: 12px; }
+    .link-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(235px, 100%), 1fr));
+      gap: 2px 16px;
+      color: var(--muted);
+    }
+    .link-list a { display: inline-block; padding-block: 6px; text-decoration: none; }
+    .link-list a:hover { color: var(--accent); text-decoration: underline; }
+    .empty { padding: 20px 0; color: var(--muted); }
+
+    @media (max-width: 640px) {
+      .header-content { grid-template-columns: minmax(0, 1fr) auto; }
+      .search { grid-column: 1 / -1; grid-row: 2; }
+      .search input { font-size: 16px; }
+      .video-feature.has-preview { grid-template-columns: minmax(0, 1fr); }
+      .actions { margin-top: 16px; }
+      .more { margin-top: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell header-content">
+      <h1>工作视频</h1>
+      <div class="search" role="search">
+        <span class="search-icon" aria-hidden="true"></span>
+        <input type="search" id="search" aria-label="查找工作项目" placeholder="搜片名、主题、日期或工程" autocomplete="off">
+      </div>
+      <nav class="header-links" aria-label="目录维护">
+        <a href="./README.md" target="_blank" rel="noopener">登记说明</a>
+        <a id="migration-link" href="./%E8%BF%81%E7%A7%BB%E7%B4%A2%E5%BC%95.md" target="_blank" rel="noopener" hidden>旧路径对照</a>
+      </nav>
+    </div>
+  </header>
+  <main class="shell">
+    <p id="result-count" aria-live="polite"></p>
+    <section id="videos" aria-label="工作项目"></section>
+    <p id="empty" class="empty" hidden></p>
+  </main>
+
+  <script type="application/json" id="catalog-data"><!-- catalog-data --></script>
+  <script>
+    const data = JSON.parse(document.getElementById('catalog-data').textContent);
+    const search = document.getElementById('search');
+    const videos = document.getElementById('videos');
+    const empty = document.getElementById('empty');
+    const watchKinds = new Set(['published', 'video', 'preview']);
+
+    function localURL(target) {
+      return './' + target.split('/').map(encodeURIComponent).join('/');
+    }
+
+    function element(tag, className, label) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (label) node.textContent = label;
+      return node;
+    }
+
+    function anchor(target, label, className, external = false) {
+      const link = element('a', className, label);
+      link.href = external ? target : localURL(target);
+      link.target = '_blank';
+      link.rel = 'noopener';
+      return link;
+    }
+
+    function dateElement(date) {
+      const time = element('time', '', date);
+      time.dateTime = date;
+      return time;
+    }
+
+    function versionMeta(record) {
+      if (!record.date && record.durationSeconds === undefined) return null;
+      const meta = element('span', 'link-meta');
+      if (record.date) meta.append(dateElement(record.date));
+      if (record.durationSeconds !== undefined) {
+        const seconds = Math.round(record.durationSeconds);
+        const minutes = Math.floor(seconds / 60);
+        const remaining = seconds % 60;
+        const duration = element('time', '', `${minutes}:${String(remaining).padStart(2, '0')}`);
+        duration.dateTime = `PT${seconds}S`;
+        duration.setAttribute('aria-label', `${minutes} 分 ${remaining} 秒`);
+        if (record.date) meta.append(' · ');
+        meta.append(duration);
+      }
+      return meta;
+    }
+
+    function versionLink(record, className) {
+      const link = anchor(record.target, record.label, className, record.kind === 'published');
+      const meta = versionMeta(record);
+      if (meta) link.append(meta);
+      return link;
+    }
+
+    function playIcon() {
+      const icon = element('span', 'play-icon');
+      icon.setAttribute('aria-hidden', 'true');
+      return icon;
+    }
+
+    function watchLabel(record) {
+      return record.kind === 'video' ? `播放 ${record.label}` : record.label;
+    }
+
+    function videoPreview(record, title) {
+      const figure = element('figure');
+      const poster = anchor(record.target, '', 'poster', record.kind === 'published');
+      poster.setAttribute('aria-label', `${title} · ${watchLabel(record)}`);
+      if (record.poster) {
+        const image = element('img');
+        image.src = localURL(record.poster);
+        image.alt = '';
+        image.loading = 'lazy';
+        poster.append(image);
+      } else {
+        poster.append(playIcon());
+      }
+      const caption = element('figcaption', 'preview-caption', record.label);
+      const meta = versionMeta(record);
+      if (meta) caption.append(meta);
+      figure.append(poster, caption);
+      return figure;
+    }
+
+    function item(list, link) {
+      const node = document.createElement('li');
+      node.append(link);
+      list.append(node);
+    }
+
+    function historyDetails(links, related) {
+      const detail = element('details', 'more');
+      const history = element('ul', 'history-list');
+      const files = element('ul', 'link-list');
+      for (const link of links) {
+        if (watchKinds.has(link.kind)) {
+          item(history, versionLink(link, 'history-link'));
+        } else {
+          item(files, versionLink(link, ''));
+        }
+      }
+      for (const target of related) item(files, anchor(target, target));
+      detail.append(element('summary', '', '历史版本与资料'));
+      if (history.childElementCount) detail.append(history);
+      if (files.childElementCount) detail.append(files);
+      return detail;
+    }
+
+    function videoRow(entry) {
+      const row = element('article', 'video-row');
+      row.id = 'video-' + entry.id;
+      const details = element('div', 'video-details');
+      const title = element('h2', 'video-title', entry.title);
+      title.id = row.id + '-title';
+      row.setAttribute('aria-labelledby', title.id);
+      details.append(title);
+      if (entry.updatedOn) {
+        const date = element('p', 'video-date', '最近制作 ');
+        date.append(dateElement(entry.updatedOn));
+        details.append(date);
+      }
+      details.append(element('p', 'video-topic', entry.topic));
+
+      const links = entry.links ?? [];
+      const featured = links.find((link) => link.target === entry.featuredTarget && watchKinds.has(link.kind));
+      const current = ['published', 'video', 'preview', 'source', 'review']
+        .map((role) => links.find((link) => link.kind === role && link !== featured))
+        .filter(Boolean);
+      const watch = featured ?? current.find((link) => watchKinds.has(link.kind));
+      const source = current.find((link) => link.kind === 'source');
+      const feature = element('div', 'video-feature');
+      const actions = element('div', 'actions');
+      if (watch) {
+        feature.classList.add('has-preview');
+        feature.append(videoPreview(watch, entry.title));
+        const play = anchor(watch.target, watchLabel(watch), 'action primary', watch.kind === 'published');
+        play.prepend(playIcon());
+        actions.append(play);
+      }
+      if (source) actions.append(versionLink(source, watch ? 'action' : 'action primary'));
+      if (actions.childElementCount) details.append(actions);
+
+      const utilities = element('div', 'utilities');
+      for (const link of current) {
+        if (link !== watch && link !== source) utilities.append(versionLink(link, ''));
+      }
+      utilities.append(anchor(entry.project, '工程目录'));
+      details.append(utilities);
+      if (!watch) details.append(element('p', 'no-video', '待登记观看入口'));
+      feature.append(details);
+      row.append(feature);
+
+      const otherLinks = links.filter((link) => link !== watch && !current.includes(link));
+      const related = [...new Set(entry.related ?? [])];
+      if (otherLinks.length || related.length) row.append(historyDetails(otherLinks, related));
+      return row;
+    }
+
+    const rows = data.entries.map((entry) => {
+      const terms = [entry.title, entry.topic, entry.id, entry.project, entry.updatedOn, ...(entry.related ?? [])];
+      for (const link of entry.links ?? []) terms.push(link.label, link.target, link.date);
+      return { node: videoRow(entry), text: terms.join(' ').toLocaleLowerCase() };
+    });
+    videos.append(...rows.map(({ node }) => node));
+
+    function render() {
+      const terms = search.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+      const matches = (text) => terms.every((term) => text.includes(term));
+      let count = 0;
+      for (const row of rows) {
+        const show = matches(row.text);
+        row.node.hidden = !show;
+        count += Number(show);
+      }
+      videos.hidden = !count;
+      empty.hidden = count > 0;
+      empty.textContent = rows.length ? '没有符合条件的工作项目' : '暂无工作项目';
+      document.getElementById('result-count').textContent = terms.length
+        ? `显示 ${count} / ${rows.length} 个工作项目`
+        : `${rows.length} 个工作项目`;
+    }
+
+    search.addEventListener('input', render);
+    document.getElementById('migration-link').hidden = !data.hasMigrationIndex;
+    render();
+  </script>
+</body>
+</html>

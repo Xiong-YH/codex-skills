@@ -14,7 +14,7 @@
 
 `check_dimensions.py` 从现有创作源投影列值及来源，不新增创作源。缺失字段显示待补/未声明，不推断为“无”；多片段共享镜头时动作、标签和声音保留镜头上下文，显露范围需另核。工程帧区间不声称已对齐音轨，所有列默认未审。十列表可逐项提意见，导出包含维度及源字段引用、当前设计快照；建议与快照分开，配置建议不会自动改变当前设计。
 
-启动：`python docs/prototypes/segment-review/server.py --port 5337 --project work/save-first-6s-20261101`。
+用本机参考样例启动 `python docs/prototypes/segment-review/server.py --port 5337 --project references/save-first-6s-20261101`。
 
 读取 brief、script、storyboard、production-plan 及真实 MP4 的哈希。片段按镜头和明确的 copy/edit 语义事件拆分；不猜测任意动作的业务含义。原生对象引用实际稳定 ID；自定义视频的内部对象由项目 review-map.json 明确声明来源、位置和能力类别，没有映射时不声称可自动拆出人物或组件。
 

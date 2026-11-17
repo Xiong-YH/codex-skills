@@ -158,7 +158,7 @@ class Handler(SimpleHTTPRequestHandler):
         except OSError:self.reply(500,{'error':'本地收藏写入失败，原收藏保持不变'})
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--port',type=int,default=5337);p.add_argument('--project',type=Path,default=ROOT/'work/save-first-6s-20261101');p.add_argument('--favorites-file',type=Path,default=ROOT/'collections/favorites/catalog.json');a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--port',type=int,default=5337);p.add_argument('--project',type=Path,default=ROOT/'references/save-first-6s-20261101');p.add_argument('--favorites-file',type=Path,default=ROOT/'collections/favorites/catalog.json');a=p.parse_args()
     server=ThreadingHTTPServer(('127.0.0.1',a.port),Handler);server.favorites_file=a.favorites_file.resolve();server.project_root=a.project.resolve()
     print(f'Preview: http://127.0.0.1:{server.server_port}/',flush=True)
     try:server.serve_forever()
