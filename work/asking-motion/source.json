@@ -1,0 +1,266 @@
+{
+  "version": "R38 · 步进 V5 卡点版",
+  "scriptRevision": 35,
+  "dimensions": {
+    "width": 1280,
+    "height": 720
+  },
+  "fps": 60,
+  "frames": 5280,
+  "durationSeconds": 88,
+  "bgm": {
+    "title": "步进 V5 · 街机版",
+    "sha256": "de7ee21566ccf74bb55c5ddf60c735de8e943b061feb558cc28595ecb729bc55",
+    "duration": 88,
+    "bpm": 120,
+    "beatsPerBar": 4,
+    "sampleRate": 48000,
+    "firstDrumSeconds": 4.000020833333333,
+    "sections": [
+      {
+        "name": "起步",
+        "seconds": [
+          0,
+          22
+        ],
+        "key": "F 小调",
+        "harmonyCueSeconds": 6
+      },
+      {
+        "name": "回应",
+        "seconds": [
+          22,
+          44
+        ],
+        "key": "F 小调",
+        "harmonyCueSeconds": 28
+      },
+      {
+        "name": "高潮",
+        "seconds": [
+          44,
+          66
+        ],
+        "key": "G 小调",
+        "harmonyCueSeconds": 50
+      },
+      {
+        "name": "归位",
+        "seconds": [
+          66,
+          88
+        ],
+        "key": "F 小调",
+        "harmonyCueSeconds": 72
+      }
+    ],
+    "sourceMix": {
+      "lufs": -13.9,
+      "truePeakDb": -1.8
+    }
+  },
+  "original": {
+    "previewSha256": "965af625a680937743887ace68a44ec3b82f8649bf58062a4737e67c7e6cb567",
+    "mixSha256": "f31c6ec9e8233e73512fbaf1cce2737833bf260b2bc86a5473fd681ec970be84",
+    "exportSha256": "507b6f3aec669745f91e6ed504f3269606894e665da7c0eb78dba9bd7ee20abd",
+    "mixSamplePeakDbfs": -1.41,
+    "revealLead": {
+      "seconds": 0.28,
+      "reduction": 0.34
+    }
+  },
+  "alignment": [
+    {
+      "id": "opening-attention",
+      "at": 0.75,
+      "frame": 45,
+      "lane": "arcade"
+    },
+    {
+      "id": "hook-hit",
+      "at": 1.996,
+      "frame": 120,
+      "lane": "keyboard"
+    },
+    {
+      "id": "first-drum",
+      "at": 4,
+      "frame": 240,
+      "lane": "drum"
+    },
+    {
+      "id": "chat-c02",
+      "at": 13.258,
+      "frame": 795,
+      "lane": "arcade"
+    },
+    {
+      "id": "question-turn",
+      "at": 14.5,
+      "frame": 870,
+      "lane": "drum"
+    },
+    {
+      "id": "opening-resume",
+      "at": 18,
+      "frame": 1080,
+      "lane": "bass"
+    },
+    {
+      "id": "counter-500",
+      "at": 20,
+      "frame": 1200,
+      "lane": "drum"
+    },
+    {
+      "id": "invitations-zero",
+      "at": 20.5,
+      "frame": 1230,
+      "lane": "low"
+    },
+    {
+      "id": "no-reply",
+      "at": 21,
+      "frame": 1260,
+      "lane": "drum"
+    },
+    {
+      "id": "title-land",
+      "at": 28,
+      "frame": 1680,
+      "lane": "drum"
+    },
+    {
+      "id": "title-touches-paper",
+      "at": 29.5,
+      "frame": 1770,
+      "lane": "drum"
+    },
+    {
+      "id": "found-gap",
+      "at": 41.25,
+      "frame": 2475,
+      "lane": "keyboard"
+    },
+    {
+      "id": "lift-project-note",
+      "at": 43.246,
+      "frame": 2595,
+      "lane": "keyboard"
+    },
+    {
+      "id": "chapter-three-key",
+      "at": 44,
+      "frame": 2640,
+      "lane": "drum"
+    },
+    {
+      "id": "chapter-three-reprise",
+      "at": 46,
+      "frame": 2760,
+      "lane": "drum"
+    },
+    {
+      "id": "following",
+      "at": 72,
+      "frame": 4320,
+      "lane": "drum"
+    },
+    {
+      "id": "begin-practice",
+      "at": 77.754,
+      "frame": 4665,
+      "lane": "bass"
+    },
+    {
+      "id": "summary-0",
+      "at": 79.754,
+      "frame": 4785,
+      "lane": "arcade"
+    },
+    {
+      "id": "template-strike",
+      "at": 84.008,
+      "frame": 5040,
+      "lane": "keyboard"
+    }
+  ],
+  "reference": {
+    "renderer": {
+      "file": "picture.js",
+      "sha256": "50936f57d4d96c7b89bff39f1954a285e5a9070c766d8994cd65dd419b86d64c"
+    },
+    "mix": {
+      "file": "mix.m4a",
+      "codec": "aac",
+      "sampleRate": 48000,
+      "channels": 2,
+      "sha256": "3ff9e93f02a04ef2e9d49b46f5862fe04b4c96e669bb23e8c66d6bfa556afb6c"
+    },
+    "frameRanges": {
+      "endExclusive": true,
+      "full": [
+        0,
+        5280
+      ],
+      "clips": [
+        {
+          "id": "first-drum",
+          "frames": [
+            0,
+            396
+          ]
+        },
+        {
+          "id": "chat-reaction",
+          "frames": [
+            414,
+            903
+          ]
+        },
+        {
+          "id": "course-stack",
+          "frames": [
+            870,
+            1122
+          ]
+        },
+        {
+          "id": "count-reveal",
+          "frames": [
+            1097,
+            1355
+          ]
+        },
+        {
+          "id": "outcome-bubbles",
+          "frames": [
+            1227,
+            1425
+          ]
+        },
+        {
+          "id": "question-title",
+          "frames": [
+            1440,
+            1863
+          ]
+        },
+        {
+          "id": "paper-handoff",
+          "frames": [
+            2115,
+            2817
+          ]
+        },
+        {
+          "id": "practice",
+          "frames": [
+            4620,
+            4812
+          ]
+        }
+      ]
+    }
+  }
+}
