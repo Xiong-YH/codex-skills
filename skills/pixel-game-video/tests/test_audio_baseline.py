@@ -28,7 +28,7 @@ class ChargeAudioTests(unittest.TestCase):
     def test_retired_ids_fail_before_project_build(self):
         with tempfile.TemporaryDirectory() as folder:
             project = Path(folder) / 'project'
-            shutil.copytree(ROOT / 'assets/project-template', project)
+            shutil.copytree(ROOT / 'tests/fixtures/runtime-smoke', project)
             for kind in ['arcade-charge', 'arcade-navigate', 'arcade-unlock']:
                 cue = {'id': 'event', 'sound': kind, 'at': {'event': 's01.reveal'}, 'level': .6}
                 write_json(project / 'audio.json', {'cues': [cue]})
@@ -67,7 +67,7 @@ class ChargeAudioTests(unittest.TestCase):
         from engine.dependencies import runtime_files
         with tempfile.TemporaryDirectory() as folder:
             project = Path(folder) / 'project'
-            shutil.copytree(ROOT / 'assets/project-template', project)
+            shutil.copytree(ROOT / 'tests/fixtures/runtime-smoke', project)
             ids = ['arcade-confirm-soft', 'arcade-focus', 'arcade-unfold']
             write_json(project / 'audio.json', {'cues': [
                 {'id': kind, 'sound': kind, 'at': {'event': 's01.reveal'}, 'level': .5}

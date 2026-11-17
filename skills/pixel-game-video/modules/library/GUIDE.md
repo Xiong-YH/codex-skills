@@ -11,7 +11,7 @@
 | 当前任务 | 读取入口 |
 | --- | --- |
 | 后端、编辑方式、示例与验证边界 | [统一能力目录](../../references/capability-catalog.md)；运行 python scripts/video.py catalog library --capabilities |
-| 选人物与动作参考 | [人物库](CHARACTERS.md)、[素材目录](catalog.json) |
+| 选人物与动作参考 | 先看 [当前风格](../../references/current-style.md) 与 [超粗精灵原图](characters/style-variants/README.md)，再从 [人物库](CHARACTERS.md) 取身份、从本片素材取真实动作；[目录](catalog.json) 供接入查询 |
 | 扩展物种、拟人程度与角色身份 | [角色设计与物种候选](CHARACTER-DESIGN.md)、[选型画廊](characters/design-atlas/index.html)；样板不等于运行时角色 |
 | 背景与来源 | [背景库](backgrounds/README.md)、[背景目录](backgrounds/catalog.json) |
 | 物体、锚点、放置及新增素材 | [素材接入细节](details.md) |
@@ -21,7 +21,7 @@
 
 ## 验收重点
 
-人物、物种、背景和场景道具制作前必须读取 [画风透传合同](../style/ART-DIRECTION-CONTRACT.md)，取得本片段有效画风的通用与对应分支提示词、参考图及版本。不能各分支独立换画风；组件素材按组件自己的合同。
+人物、物种、背景和场景道具制作前必须读取 [画风透传合同](../style/ART-DIRECTION-CONTRACT.md)，取得本片段有效画风的通用与对应分支提示词、参考图及版本。按本片明确的颗粒分工制作，不由各分支独立换风格；组件素材按组件自己的合同。
 
 核对真实尺寸、哈希、身份、裁切、锚点、比例和透明度。当前没有通用音素对齐、骨骼补间或同姿势局部口型适配，特定样例不扩大为全库能力。
 

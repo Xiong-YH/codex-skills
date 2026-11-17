@@ -18,7 +18,7 @@ class ComponentMediaTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
         self.project=Path(self.tmp.name)/'project'
-        shutil.copytree(ROOT/'assets/project-template',self.project)
+        shutil.copytree(ROOT/'tests/fixtures/runtime-smoke',self.project)
         config=read_json(self.project/'project.json');config.update(style='style.pixel-editorial.v1',audioMode='silent');write_json(self.project/'project.json',config)
         write_json(self.project/'audio.json',{'cues':[]});write_json(self.project/'text.json',{'cues':[]})
         self.shot={'id':'s1','scene':'scenes.canvas.v1','actor':None,'durationFrames':180,'events':[{'id':'begin','frame':10},{'id':'done','frame':100}],

@@ -101,7 +101,7 @@
 
 ## 人物自然感
 
-画风统一按基础层 [主画风与片段透传](../../pixel-game-video/modules/style/ART-DIRECTION-CONTRACT.md)：项目主画风、片段可特选，人物、其他物种、背景、场景道具遵循本片段同一有效画风。组件独立；本页“统一视觉语言”的一般建议不得用来覆盖组件自身美术。
+画风按基础层 [分层美术合同](../../pixel-game-video/modules/style/ART-DIRECTION-CONTRACT.md)：本系列默认超粗人物与粗像素环境，明确颗粒分工，共同核对光源、支撑与接触；其他完整单画风按本片需要选择。组件独立，本页一般建议不能覆盖组件自身美术。
 
 比喻场景的物种、拟人程度与身份按基础层 [角色设计](../../pixel-game-video/modules/library/CHARACTER-DESIGN.md) 选择；像素颗粒、比例、轮廓和视角按 [多样式指南](../../pixel-game-video/modules/style/PIXEL-STYLES.md) 选择。脚本写明隐喻对应与限制，以及画法变化的适用范围；两项独立决策，不把动物固定成某种性格，也不把不同画法混贴进同镜。样板未提供的组合按需制作。
 

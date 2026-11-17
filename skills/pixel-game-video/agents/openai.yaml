@@ -1,4 +1,4 @@
 interface:
   display_name: "Pixel Game Video"
-  short_description: "模块化像素视频制作、运镜、音效与核验"
-  default_prompt: "使用 $pixel-game-video，根据我的制作要求生成结构化工程并构建像素游戏感视频。"
+  short_description: "超粗像素人物与实体组件视频制作，短促动效、音乐触点和可编辑分轨交付"
+  default_prompt: "使用 $pixel-game-video，按当前超粗像素人物与实体组件风格，从本次文案和空工程制作视频，并核对动效、接镜与分轨导出。"

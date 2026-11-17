@@ -20,7 +20,7 @@ class RemotionContractTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.project = Path(self.temp.name) / "project"
-        shutil.copytree(SKILL / "assets/project-template", self.project)
+        shutil.copytree(SKILL / "tests/fixtures/runtime-smoke", self.project)
 
     def tearDown(self):
         self.temp.cleanup()

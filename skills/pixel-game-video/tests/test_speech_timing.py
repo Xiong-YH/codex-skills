@@ -57,7 +57,7 @@ class SpeechTimingTests(unittest.TestCase):
         for data in [dict(id='a'), dict(id='a', frame=0, speech=dict(cueId='line1', word='命中'))]:
             with self.assertRaises(ValueError):
                 Event.model_validate(data)
-        legacy = compile_project(SKILL / 'assets/project-template')
+        legacy = compile_project(SKILL / 'tests/fixtures/runtime-smoke')
         self.assertEqual(legacy['durationFrames'], 720)
         self.assertNotIn('speechRehearsal', legacy)
 

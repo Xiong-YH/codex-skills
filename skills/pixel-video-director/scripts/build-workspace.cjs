@@ -33,7 +33,7 @@ function build(project,output){
 }
 function main(){
  const args=process.argv.slice(2);
- let stateFile=path.resolve('work/script-creator/script-creator.json'),output;
+ let stateFile,output;
  for(let i=0;i<args.length;i++){
   const arg=args[i];
   if(arg==='--state'||arg==='--output'){
@@ -43,6 +43,7 @@ function main(){
   }else if(!arg.startsWith('-'))output=path.resolve(arg);
   else throw Error('Unknown argument: '+arg);
  }
+ if(!stateFile)throw Error('Pass --state PROJECT/script-creator.json; no default work project is selected.');
  output??=path.join(path.dirname(stateFile),'script-creator.html');
  if(!fs.existsSync(stateFile)){
   fs.mkdirSync(path.dirname(stateFile),{recursive:true});

@@ -14,7 +14,7 @@ contract=importlib.util.module_from_spec(spec);spec.loader.exec_module(contract)
 class StudyRoutesTests(unittest.TestCase):
     def test_scene_previews_cannot_recurse_or_reference_future(self):
         with tempfile.TemporaryDirectory() as directory:
-            root=Path(directory)/'project';shutil.copytree(ROOT/'assets/project-template',root)
+            root=Path(directory)/'project';shutil.copytree(ROOT/'tests/fixtures/runtime-smoke',root)
             project=read_json(root/'project.json');project['style']='style.pixel-study.v1';write_json(root/'project.json',project)
             timeline=read_json(root/'timeline.json');shot=timeline['shots'][-1]
             shot.update(scene='scenes.study-routes.v1',objects=[],motions=[],params={

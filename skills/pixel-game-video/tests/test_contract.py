@@ -16,7 +16,7 @@ class ContractTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name) / "project"
-        shutil.copytree(SKILL / "assets/project-template", self.root)
+        shutil.copytree(SKILL / "tests/fixtures/runtime-smoke", self.root)
 
     def tearDown(self):
         self.temp.cleanup()
@@ -48,7 +48,7 @@ class ContractTests(unittest.TestCase):
         self.change("audio.json", lambda d: d["cues"][0]["at"].update(event="s01.missing"))
         with self.assertRaisesRegex(ValueError, "unknown event"):
             compile_project(self.root)
-        shutil.copy2(SKILL / "assets/project-template/audio.json", self.root)
+        shutil.copy2(SKILL / "tests/fixtures/runtime-smoke/audio.json", self.root)
         self.change("timeline.json", lambda d: d["shots"][0]["motions"][0].update(recipe="motion.imaginary.v1"))
         with self.assertRaisesRegex(ValueError, "unavailable capability"):
             compile_project(self.root)
@@ -57,7 +57,7 @@ class ContractTests(unittest.TestCase):
         self.change("timeline.json", lambda d: d["shots"][0]["motions"][0].update(durationFrames=300))
         with self.assertRaisesRegex(ValueError, "outside shot"):
             compile_project(self.root)
-        shutil.copy2(SKILL / "assets/project-template/timeline.json", self.root)
+        shutil.copy2(SKILL / "tests/fixtures/runtime-smoke/timeline.json", self.root)
         def overlap(data):
             data["cues"][0].update(role="subtitle", phrases=["xian zhao dao xian suo"])
             extra = copy.deepcopy(data["cues"][0])
@@ -71,7 +71,7 @@ class ContractTests(unittest.TestCase):
         self.change("audio.json", lambda d: d["cues"][0].update(variant=99))
         with self.assertRaisesRegex(ValueError, "variant"):
             compile_project(self.root)
-        shutil.copy2(SKILL / "assets/project-template/audio.json", self.root)
+        shutil.copy2(SKILL / "tests/fixtures/runtime-smoke/audio.json", self.root)
         self.change("timeline.json", lambda d: d["shots"][0]["params"].update(unknown=1))
         with self.assertRaisesRegex(ValueError, "unsupported parameters"):
             compile_project(self.root)
@@ -80,7 +80,7 @@ class ContractTests(unittest.TestCase):
         self.change("timeline.json", lambda d: d["shots"][0].update(durationFrames=240.5))
         with self.assertRaises(ValueError):
             compile_project(self.root)
-        shutil.copy2(SKILL / "assets/project-template/timeline.json", self.root)
+        shutil.copy2(SKILL / "tests/fixtures/runtime-smoke/timeline.json", self.root)
         self.change("audio.json", lambda d: d["cues"][0]["at"].update(event="s03.exit"))
         with self.assertRaisesRegex(ValueError, "outside video"):
             compile_project(self.root)
@@ -109,7 +109,7 @@ class ContractTests(unittest.TestCase):
         self.change("timeline.json", counter)
         with self.assertRaises(ValueError):
             compile_project(self.root)
-        shutil.copy2(SKILL / "assets/project-template/timeline.json", self.root)
+        shutil.copy2(SKILL / "tests/fixtures/runtime-smoke/timeline.json", self.root)
         self.change("timeline.json", lambda d: d["shots"][1]["params"]["items"][0].update(event="exit"))
         with self.assertRaises(ValueError):
             compile_project(self.root)

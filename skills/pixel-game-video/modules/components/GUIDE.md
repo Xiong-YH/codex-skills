@@ -13,11 +13,11 @@
 | 当前任务 | 只读取相关内容 |
 | --- | --- |
 | 后端、编辑方式、示例与验证边界 | [统一能力目录](../../references/capability-catalog.md)；运行 python scripts/video.py catalog components --capabilities |
-| 选择基础组件风格与特性 | [基础组件：风格、样式与可选特性](BASIC-COMPONENTS.md)。纸质适合文字身份卡、清单与结论卡 |
+| 新片组件选型 | 先看 [当前风格与独立参考](../../references/current-style.md)，按解释对象设计纸签、纸页、消息、托盘与读数；基础字段再查 [样式与特性](BASIC-COMPONENTS.md)，机械／能量只在题材需要时选用 |
 | 按动作找组件，再核对基础样式 | [组件图册](examples/style-atlas/README.md)。可看状态交接、排队与积压、状态失效、转移遮挡和逐件装配，也可查 93 个基础范例 |
 | 通用动作时长与节拍 | [motion 动作节拍](../motion/TIMING.md)；组件保留状态含义，不另立时长表 |
 | 从脚本判断复用、组合或新机制，设计自定义组件 | [脚本驱动设计与五维](DESIGN.md) |
-| 普通片段少字、延续已确认的组件风格 | [设计约定与认可对照](DESIGN.md#少字与组件风格延续)；含同对象机械／能量试样 |
+| 普通片段少字、延续本片组件风格 | [设计约定](DESIGN.md#少字与组件风格延续)，已选纸质或实体风格优先；历史机械／能量试样仅为各自范围的对照 |
 | 实现可暂停、倒拖、复用的自定义试样，准备工程接入 | [自定义实现协议](CUSTOM-RUNTIME.md)、[状态仪表](examples/state-meter/design.md)、[凭条落槽与展开](examples/slot-transfer/index.html) |
 | 查看实体牌组、悬停印章与任务试做台 | [面试牌桌统一预览](examples/interview-components/index.html)，含五维约定、两种布局与本地表单试做；当前是独立试样 |
 | 复用已认可的物体效果 | [物体组件与调用边界](OBJECT-COMPONENTS.md) |

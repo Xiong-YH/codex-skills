@@ -21,7 +21,7 @@ class StyleBuildTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name) / 'project'
-        shutil.copytree(SKILL / 'assets/project-template', self.root)
+        shutil.copytree(SKILL / 'tests/fixtures/runtime-smoke', self.root)
 
     def use_style(self, ident):
         project = read_json(self.root / 'project.json')

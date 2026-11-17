@@ -17,7 +17,7 @@ python modules/components/examples/style-atlas/build.py
 - 「按动作找组件」收纳五个可播放试样。状态交接、排队与积压、状态失效、转移与遮挡、逐件装配使用各自已收录的示例源。按[物体组件目录](../../OBJECT-COMPONENTS.md)查看案例的能力与认可范围。
 - [章节样式对照](../../assets/reference/style-atlas/overview.jpg)、[朴素十二类](../../assets/reference/style-atlas/plain.jpg)和[纸质三类](../../assets/reference/style-atlas/paper.jpg)由同一 Canvas 执行器捕获，取帧和哈希见[清单](../../assets/reference/style-atlas/manifest.json)。
 
-样式用于组织内容。早期合集和八组件美术试样的认可范围见[组件共同画风](../../../style/COMPONENT-ART.md#验收与参考迁移)。当前图片记录技术取帧，新内容、布局和实际运动仍需审看。
+样式用于组织内容。早期合集和八组件美术试样的认可范围见[组件共同画风](../../../style/COMPONENT-ART.md#能力与验收)。当前图片记录技术取帧，新内容、布局和实际运动仍需审看。
 
 ## 生成时只看选中样式的实际参考
 

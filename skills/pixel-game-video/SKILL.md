@@ -1,35 +1,33 @@
 ---
 name: pixel-game-video
-description: 按分镜或工程制作无口播像素信息动效，在工作台核对组件触点、配乐与文字阅读并分轨导出。选题与上屏文案归 pixel-video-writer，视听设计归 pixel-video-director。
+description: 制作和修改超粗像素人物与实体组件结合的无口播视频，落实短促动效、音乐触点、同物接镜与可编辑分轨交付。选题文案归 pixel-video-writer，分镜设计归 pixel-video-director。
 ---
 
 # Pixel Game Video
 
-负责工程执行与技术交付。只有创意或需要文案时由 pixel-video-writer 接手，需要分镜时由 pixel-video-director 接手。已有工程直接从当前阶段继续。跨安装目录按实际技能根目录定位。
-
-开始制作、续作或复盘先读 [制作总则](references/production-principles.md)，继承当前项目的确认与约束。只加载本次模块与所选配方。新机制先做 [可播放试样](references/production-workflow.md#新动作失败时先回退不带缺口扩片)，再按本镜方案兑现动作和阅读。
+负责工程执行与交付。先读 [制作总则](references/production-principles.md) 与 [当前系列风格](references/current-style.md)，继承本片已确认内容。新片从空工程开始，续作从实际编辑源继续，历史工程和旧样片不作初始化输入。
 
 ## 制作路径
 
-1. **确认编辑源。** 按 [制作流程](references/production-workflow.md#1-把分镜落实到唯一初始创作源) 判断 direct、director 或工作台剪辑分支，再修改对应源。接手白模时区分要继承的叙事节奏与按正式参考重做的占位。重建前保存当前剪辑。
-2. **准备工程。** 读 [制作合同](references/contract.md) 与 [运行说明](references/runtime.md)。新工程用 `python scripts/video.py init PROJECT`，再 `validate` → `build` → `workbench`。Canvas 构建同时给出动态白模和正式预览，用同一时间线检查触点、字幕和接镜。原生 Remotion 先查 [后端范围](references/remotion.md)。
-3. **落实画面。** 从下表选择模块，用 `python scripts/video.py catalog MODULE --capabilities` 核对 [能力状态与调用方式](references/capability-catalog.md)。制作与复核沿 [制作流程](references/production-workflow.md) 执行。
-4. **剪辑与交付。** 必读 [工作台](references/workbench.md)，完成分轨编辑、保存重开和最终导出，主动打开实际地址。交付 MP4、同次导出项目 JSON 与核验证据。`preview/render` 用于调试与一致性对照，局部能力试样可在试样阶段交付。
+1. **确定本次源。** 按 [制作流程](references/production-workflow.md#1-把分镜落实到唯一初始创作源) 确定 direct、director 或工作台分支。只有创意／文案需求时由编剧接手，需要分镜时由导演接手；不重复已完成的阶段。
+2. **准备工程。** 读 [制作合同](references/contract.md) 与 [运行说明](references/runtime.md)。`python scripts/video.py init PROJECT` 创建中性占位工程，再按本片文案、人物和组件设计填入真实素材与事件；占位预览不作成片。`validate` → `build` → `workbench`。原生 Remotion 先查 [后端范围](references/remotion.md)。
+3. **先做代表片段。** 人物完整姿态回应事件，组件按触点改变状态，关键动效短促收束并保留阅读，接镜可追踪同一对象。从下表只加载所需能力；新机制先做 [可播放试样](references/production-workflow.md#新动作失败时先回退不带缺口扩片)。
+4. **剪辑与交付。** 按 [工作台](references/workbench.md) 分轨编辑、保存重开和最终导出，主动打开实际地址。正速核对动作、文字与声音，交付 MP4、同次 JSON 与实际审片证据；技术导出成功不表示审片通过。
 
 ## 按任务选模块
 
-| 模块 | 任务入口 |
+| 模块 | 入口 |
 | --- | --- |
-| [style](modules/style/GUIDE.md) | 场景美术先读 [画风透传](modules/style/ART-DIRECTION-CONTRACT.md)，再选 [八类画风](modules/style/PIXEL-STYLES.md) |
-| [library](modules/library/GUIDE.md) | 人物、道具、背景的身份、变体、锚点与来源 |
-| [components](modules/components/GUIDE.md) | 按 [脚本需求](modules/components/DESIGN.md) 判断复用或定制。新组件先读 [共同画风](modules/style/COMPONENT-ART.md) 和 [实现协议](modules/components/CUSTOM-RUNTIME.md) |
-| [text](modules/text/GUIDE.md) | 按 [文字表现](modules/text/EXPRESSION.md) 选择屏幕主句和对象标注，复核阅读区间 |
-| [motion](modules/motion/GUIDE.md) | 从 [动效选型](modules/motion/SELECTION.md) 查真实调用。粒子按[状态变化选型](modules/motion/PARTICLES.md)，离散组件动作必读 [动作与阅读预算](modules/motion/TIMING.md) |
-| [audio](modules/audio/GUIDE.md) | [可复用 BGM](modules/audio/bgm-system/README.md)、配乐原轨取拍、关键事件音效、分轨混音与审片 |
-| [scenes](modules/scenes/GUIDE.md) | 空间、对象关系、状态机制、表演与项目片段合成 |
+| [style](modules/style/GUIDE.md) | [分层美术合同](modules/style/ART-DIRECTION-CONTRACT.md)：超粗人物、粗像素环境与独立组件；其他画风按明确需要选用 |
+| [library](modules/library/GUIDE.md) | 角色身份、完整姿态、来源与锚点；已有原图不等于本镜动作已完成 |
+| [components](modules/components/GUIDE.md) | [组件美术](modules/style/COMPONENT-ART.md) 与 [内容驱动设计](modules/components/DESIGN.md)，按对象判断复用、组合或定制 |
+| [text](modules/text/GUIDE.md) | [文字表现](modules/text/EXPRESSION.md)：主句、标签与数字分工，稳定阅读与同屏避让 |
+| [motion](modules/motion/GUIDE.md) | [动作预算](modules/motion/TIMING.md)、[选型](modules/motion/SELECTION.md)，实现短促反馈、焦点接力与同物交接 |
+| [audio](modules/audio/GUIDE.md) | 实际音源与起音、少量触点音效、BGM 与事件分轨 |
+| [scenes](modules/scenes/GUIDE.md) | 人物表演、支撑与接触、对象状态、场景合成 |
+
+使用 `python scripts/video.py catalog MODULE --capabilities` 查 [真实能力与后端](references/capability-catalog.md)。[R38 独立参考包](examples/asking-motion/index.html) 用于观察实际效果，不是可直接改名的新片模板。
 
 ## 续作与扩展
 
-改文案、时间、素材或共用组件后，按 [局部更新](references/change-management.md) 查询 `changes PROJECT`，复查受影响镜头与接镜。技术检查和实际审片分别记录。
-
-按需读取 [剪映草稿](references/jianying-export.md)。扩展能力读 [模块维护](references/module-development.md) 与 [职责归属](references/module-ownership.md)。人物新动作与共享入库按制作总则沿用当前授权。
+修改文案、时间、素材或共享实现后，按 [局部更新](references/change-management.md) 查询 `changes PROJECT`，复看受影响镜头与接镜。扩展能力读 [模块维护](references/module-development.md) 与 [职责归属](references/module-ownership.md)。仅在需要时读 [剪映草稿](references/jianying-export.md)、其他后端或历史案例。

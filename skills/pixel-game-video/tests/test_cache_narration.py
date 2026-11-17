@@ -12,7 +12,7 @@ N=importlib.util.module_from_spec(spec);spec.loader.exec_module(N)
 class CacheNarrationTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
-        self.root=Path(self.tmp.name)/'project';shutil.copytree(SKILL/'assets/project-template',self.root)
+        self.root=Path(self.tmp.name)/'project';shutil.copytree(SKILL/'tests/fixtures/runtime-smoke',self.root)
         self.media=self.root/'media';self.media.mkdir()
         self.clip=self.media/'voice.wav'
         with wave.open(str(self.clip),'wb') as f:

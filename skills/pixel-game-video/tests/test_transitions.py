@@ -15,7 +15,7 @@ class TransitionTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name) / 'project'
-        shutil.copytree(SKILL / 'assets/project-template', self.root)
+        shutil.copytree(SKILL / 'tests/fixtures/runtime-smoke', self.root)
 
     def edit(self, change):
         data = read_json(self.root / 'timeline.json')
@@ -39,7 +39,7 @@ class TransitionTests(unittest.TestCase):
         self.edit(lambda shots: shots[0].update(motions=[self.motion(start={'event':'s01.enter'})]))
         with self.assertRaisesRegex(ValueError, 'previous shot'):
             compile_project(self.root)
-        shutil.copy2(SKILL / 'assets/project-template/timeline.json', self.root)
+        shutil.copy2(SKILL / 'tests/fixtures/runtime-smoke/timeline.json', self.root)
         self.edit(lambda shots: shots[1].update(motions=[self.motion(start={'event':'s02.enter','offsetFrames':1})]))
         with self.assertRaisesRegex(ValueError, 'shot.enter'):
             compile_project(self.root)

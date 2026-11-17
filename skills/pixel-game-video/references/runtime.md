@@ -17,13 +17,15 @@ python scripts/video.py init work/my-film --title "我的主题"
 python scripts/video.py validate work/my-film
 python scripts/video.py build work/my-film
 python scripts/video.py workbench work/my-film --port 5208 --no-open
-python scripts/video.py preview work/my-film --start-frame 120 --end-frame 240
+python scripts/video.py preview work/my-film --start-frame 0 --end-frame 120
 python scripts/video.py render work/my-film
 python scripts/video.py inspect work/my-film
 python scripts/video.py export-project work/my-film /path/outside-project/delivery
 ```
 
-`build` 根据 `project.renderBackend` 生成 Canvas HTML 或 Remotion 原生工程，并写编译合同、非静音 WAV 及工作台同源入口。`studio` 只用于原生 Remotion 调试；`preview` 导出默认前三秒的 MP4，可选任意帧区间；`render` 导出源合成 MP4 与解码证据，用于调试和一致性对照。最终剪辑与成片必须从工作台完成，不能用 `render` 绕过。重复输出需显式 `--overwrite`。工程目录不用包含手工复制的引擎源码。
+`init` 的中性占位不预选人物、背景、转场或音效，初始 `audioMode=silent`；按本次设计填入素材与事件，采用音乐或音效时设为 `sfx-only`，再导入实际音源。旧运行演示仅用于回归测试，不作为创作模板。
+
+`build` 根据 `project.renderBackend` 生成 Canvas HTML 或 Remotion 原生工程，并写编译合同与工作台同源入口；有声工程另写混音 WAV。`studio` 只用于原生 Remotion 调试；`preview` 导出默认前三秒的 MP4，可选任意帧区间；`render` 导出源合成 MP4 与解码证据，用于调试和一致性对照。最终剪辑与成片必须从工作台完成，不能用 `render` 绕过。重复输出需显式 `--overwrite`。工程目录不用包含手工复制的引擎源码。
 
 制作时运行 `python scripts/video.py workbench PROJECT --port 5208 --no-open`，再打开实际打印的地址。Canvas 通过同源逐帧 runtime 接入，原生 Remotion 使用已有场景执行器；初次使用需安装 `workbench/` 锁定的 Node 依赖。镜头、字幕与其他文字、转场、音效、配乐分别独立轨道，有旁白时另轨；场景内部参数、组件、人物和素材通过 props 编辑。初始音频分轨须通过本次 PCM 重组核对。工作台编辑另存项目 JSON，不回写 VideoSpec；最终从工作台导出到 `workbench/exports/`，MP4 与该次「导出版本 JSON」配对交付。导入一致性、真实分轨编辑、保存/重开与导出验收见 [本地工作台](workbench.md)。
 

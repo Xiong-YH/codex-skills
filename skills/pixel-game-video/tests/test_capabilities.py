@@ -84,7 +84,7 @@ class CapabilityTests(unittest.TestCase):
         original_read = capabilities._read
         with tempfile.TemporaryDirectory() as folder:
             project = Path(folder) / 'project'
-            shutil.copytree(ROOT / 'assets/project-template', project)
+            shutil.copytree(ROOT / 'tests/fixtures/runtime-smoke', project)
             ident = read_json(project / 'project.json')['style']
             for status in ('planned', 'draft', 'unavailable', 'not_implemented'):
                 source = catalog()
@@ -115,7 +115,7 @@ class CapabilityTests(unittest.TestCase):
         self.assertTrue(any('replacement:' in note for note in self.item('motion.stage-focus-punch.v1')['notes']))
         with tempfile.TemporaryDirectory() as folder:
             project = Path(folder) / 'project'
-            shutil.copytree(ROOT / 'assets/project-template', project)
+            shutil.copytree(ROOT / 'tests/fixtures/runtime-smoke', project)
             timeline = read_json(project / 'timeline.json')
             timeline['shots'][0]['scene'] = 'scenes.actor-performance.v1'
             write_json(project / 'timeline.json', timeline)

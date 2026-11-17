@@ -1,6 +1,6 @@
 # 导演设计格式：大白话、草图与详细设计
 
-按 [导演四阶段](director-workflow.md) 使用不同深度的表达。[模板](../assets/templates/segment-script.md) 按阶段组织，连续组件和节拍参考 [求职样片](beat-driven-explainer.md#16-秒求职样片)。
+按 [导演四阶段](director-workflow.md) 使用不同深度的表达。[模板](../assets/templates/segment-script.md) 按阶段组织，连续组件和节拍参考 [当前 R38 参考](../../pixel-game-video/references/current-style.md)。
 
 ## 阶段二：大白话与构思参考
 

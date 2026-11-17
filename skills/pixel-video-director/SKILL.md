@@ -1,45 +1,30 @@
 ---
 name: pixel-video-director
-description: 为无口播像素信息动效设计分镜、组件承接、音乐卡点和动态白模，统筹正式制作和审片。选题与屏幕文案归 pixel-video-writer，工程执行归 pixel-game-video。
+description: 为超粗像素人物与实体组件结合的无口播视频设计表演、分镜、短促动效、音乐卡点和同物接镜，制作动态白模并统筹审片。文案归 pixel-video-writer，工程执行归 pixel-game-video。
 ---
 
 # Pixel Video Director
 
-负责全片视听设计、制作统筹与创作审片。按 [协作定位与接稿](references/collaboration.md) 接手当前文案和确认记录。观点与逐字文案回到编剧修订。已有有效确认和项目进度直接继承。
+负责视听设计、制作统筹与创作审片。按 [协作定位](references/collaboration.md) 接当前文案，按 [依赖定位](references/handoff.md) 找到 FOUNDATION。先读其 `references/production-principles.md` 与 `references/current-style.md`，沿用本片确认与进度。
 
-创作、续作或复盘前，按 [依赖定位](references/handoff.md) 找到 FOUNDATION，读取其 `references/production-principles.md`。构思视听方案前先读 [《惊艳手法库》](references/garden-skills/craft.md)。新增或修改镜头必读 [动态规范与兑现合同](references/motion-direction.md)，在第一轮镜头说明中写清观看顺序、可见变化和动静安排。只做设计时按所需阶段交付。
+当前表现基线为 FOUNDATION 随包的《提问的艺术》R38：超粗像素人物回应事件，实体组件演出过程，短促动作后稳定阅读，同一对象带视线接镜。参考片台词、场所、镜序和绝对时间不复制到新片。需要具体效果时查 [逐镜参考](../pixel-game-video/references/asking-motion-reference.md)，无需打开工作工程。
 
-**接稿先排信息变化。** 把编剧的段落和主句带进 `script.beats` 与 `storyboard.beatId`。在现有分镜写清每个关键转折的可见结果，白模和成片按同一套 [画面检查](references/visual-storytelling.md#关键转折的画面检查) 复核。配乐落点、主句与阅读窗口见 [无口播信息动效与音乐卡点](references/beat-driven-explainer.md)。用 [无口播缓存示例](examples/beat-driven-cache/README.md) 核对动态白模与正式 Canvas 的同源链路。
+## 设计与制作
 
-现行无口播视听参考是 [《提问的艺术》动态选段](references/asking-motion-reference.md)。设计进鼓、对话反应、物件堆叠、状态气泡、焦点转移、接镜或行动收尾时，可按可定位的动作步骤和图层说明核对选段，再决定本片的镜头行为。
+1. **排信息变化。** 把编剧段落放进 `script.beats` 与 `storyboard.beatId`。每段确定初态、变化、结果与承接，优先想清对象如何改变以及留给下一镜什么。
+2. **设计表演与组件。** 按 [人物表演](references/character-performance.md) 定行为、触点和反应，按 [视觉表达](references/visual-system.md) 选择对象与布局。在首轮说明中写清先看谁、怎样发生变化、哪里停稳供读；不能用摇晃、缩放和卡片出现代替内容推进。
+3. **排运动与音乐。** 读 [动态合同](references/motion-direction.md) 与 [配乐卡点](references/beat-driven-explainer.md)。从 FOUNDATION 的动态目录选择真实能力，按本次音源倒排关键事件；整体相机、主体动作、内容组和转场分开描述。原片有效果不表示现成可调用。
+4. **白模到成片。** 按 [导演流程](references/director-workflow.md) 继续当前阶段。沿 [交接合同](references/handoff.md) 记录采用的叙事／节奏与要替换的占位；通过 [创作工具](references/authoring.md) 建立唯一源。制作依 FOUNDATION 的流程与工作台完成分轨交付，再按 [Review](references/review.md) 审实际分支与同次导出。
 
-本系列无口播像素信息动效采用 [《步进》配乐与卡点要求](references/beat-driven-explainer.md#步进配乐与卡点要求)。拆段时先锁定本片配乐版本与真实拍位，再写关键事件的落帧。
+## 按任务读取
 
-## 按阶段继续
-
-| 当前任务 | 必读与交付 |
+| 当前需要 | 入口 |
 | --- | --- |
-| 新创意、选题或内容改写 | 按 [协作合同](references/collaboration.md) 转 pixel-video-writer |
-| 文案画面化、分镜或接镜修改 | [导演四阶段](references/director-workflow.md)，按当前阶段完成模块划分、可弃用草图或结构化设计与动态白模 |
-| 确定视觉结构与逐镜表达 | [视觉表达](references/visual-system.md)、[文画对应](references/visual-storytelling.md#把讲述推进落实到画面)、[分镜标注与预算](references/visual-storyboard.md) |
-| 建工程与制作交接 | 先按 [白模交接与采用记录](references/handoff.md#白模交接与采用记录) 区分要继承的叙事和节奏与需重做的占位造型，再按 [创作合同](references/authoring.md) 使用 [scripts/director.py](scripts/director.py) |
-| 审片与定向修复 | [Review](references/review.md)，绑定实际导演源或工作台剪辑分支与本次证据 |
+| 只有创意、改观点或逐字文案 | 转 pixel-video-writer，继承当前有效确认 |
+| 文案画面化、镜头划分与接镜 | [文画对应](references/visual-storytelling.md)、[分镜与预算](references/visual-storyboard.md) |
+| 人物动作与组件互动 | [人物表演](references/character-performance.md)，再查 FOUNDATION 的人物素材和动作合同 |
+| 需要整幅插画或外部片段 | [插画动态](references/illustration-motion.md)、[素材替换](references/media-replacement.md)，仅按本镜需要采用 |
+| 创作器、设计页与播放 | [同一项目 JSON](references/script-creator.md)、[设计数据](references/director-project.md)、[审阅工作台](references/script-review-workspace.md) |
+| 需要更多表现方法 | [手法参考](references/garden-skills/craft.md)，仅提炼适合当前内容的机制 |
 
-创作器继续使用 [同一入口和项目 JSON](references/script-creator.md)。设计页面、播放与样板导出按 [设计数据](references/director-project.md) 和 [审阅工作台](references/script-review-workspace.md)。草图、白模、正式成片按各阶段分别核验。
-
-## 按镜头需要读取
-
-| 需要 | 入口 |
-| --- | --- |
-| 人物造型选型、姿态或连贯表演 | [人物表演设计](references/character-performance.md#按镜头任务选画法和表演)，新动作制作与入库沿 FOUNDATION 制作总则的授权范围 |
-| 插画局部动态 | [插画动态设计](references/illustration-motion.md) |
-| 背景或独立片段接入 | [素材替换](references/media-replacement.md) |
-| 组件需求与表现 | [组件需求](references/visual-storyboard.md#脚本中的组件需求)，再读 FOUNDATION 的 `modules/components/GUIDE.md` |
-
-FOUNDATION 指已定位的 pixel-game-video 根目录。按观看任务读取其 style、library、components、text、motion、audio 或 scenes 的 `modules/<模块>/GUIDE.md`，用 `catalog MODULE --capabilities` 核对实际状态、后端与编辑边界。参数和执行器由所属模块维护。
-
-## 制作与交付
-
-制作前按交接合同运行对应后端 doctor。按 [交接](references/handoff.md) 沿唯一创作源生成工程，制作方按 FOUNDATION 的 `references/production-workflow.md` 与 `references/workbench.md` 完成工作台剪辑、保存重开和最终导出，交付 MP4、同次项目 JSON 与核验证据。
-
-`check/handoff` 的结构或输入校验结果与实际动作、视听审查分别记录，具体判据和未关闭项沿 [Review](references/review.md) 维护。
+纯设计按所需阶段交付；正式制作需完成实际播放与核验。未审、设计待接入和失败分别记录，结构检查不能代替动作、文字或听音审查。

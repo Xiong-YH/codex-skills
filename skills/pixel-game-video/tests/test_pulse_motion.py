@@ -17,10 +17,10 @@ class PulseMotionTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
-        shutil.copytree(SKILL / 'assets/project-template', self.root, dirs_exist_ok=True)
+        shutil.copytree(SKILL / 'tests/fixtures/runtime-smoke', self.root, dirs_exist_ok=True)
 
     def compile(self, recipe, params, extra=None, duration=60):
-        timeline = read_json(SKILL / 'assets/project-template/timeline.json')
+        timeline = read_json(SKILL / 'tests/fixtures/runtime-smoke/timeline.json')
         timeline['shots'][1]['motions'] = [{'id':'pulse', 'recipe':recipe, 'target':'scene',
             'start':{'event':'s02.enter'}, 'durationFrames':duration, 'params':params}, *(extra or [])]
         write_json(self.root / 'timeline.json', timeline)

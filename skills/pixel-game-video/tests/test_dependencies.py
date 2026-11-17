@@ -27,7 +27,7 @@ class DependencyTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.project = self.root / 'project'
-        shutil.copytree(ROOT / 'assets/project-template', self.project)
+        shutil.copytree(ROOT / 'tests/fixtures/runtime-smoke', self.project)
         project = read_json(self.project / 'project.json')
         project['style'] = 'style.modern-pixel.v1'
         write_json(self.project / 'project.json', project)

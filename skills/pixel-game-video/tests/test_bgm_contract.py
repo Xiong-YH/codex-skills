@@ -28,7 +28,7 @@ class BgmContractTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.project = Path(self.temp.name) / 'project'
-        shutil.copytree(ROOT / 'assets/project-template', self.project)
+        shutil.copytree(ROOT / 'tests/fixtures/runtime-smoke', self.project)
         self.clip = self.project / 'media/music.wav'
         self.clip.parent.mkdir()
         self.write_clip(440)

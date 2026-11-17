@@ -16,7 +16,7 @@ class PresenterProgressTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.project=Path(self.temp.name)/'project'
-        shutil.copytree(ROOT/'assets/project-template',self.project)
+        shutil.copytree(ROOT/'tests/fixtures/runtime-smoke',self.project)
         self.timeline=read_json(self.project/'timeline.json')
         self.timeline['shots'][0]['actor']='actor.azong.v3'
         self.timeline['shots'][0]['performance']=[dict(pose='talk',start={'event':'s01.reveal'},end={'event':'s01.exit'})]

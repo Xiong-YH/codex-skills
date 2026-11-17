@@ -261,6 +261,25 @@
           ]
         }
       ]
+    },
+    "overview": {
+      "file": "overview.jpg",
+      "sha256": "aaf2aec5e58003a538dcf4708973eea02deed40fdf6d288f98fa19ed7315138b",
+      "sourceExportSha256": "507b6f3aec669745f91e6ed504f3269606894e665da7c0eb78dba9bd7ee20abd",
+      "frames": [
+        363,
+        831,
+        1065,
+        1244,
+        1680,
+        2482,
+        2674,
+        4665,
+        5040
+      ],
+      "columns": 3,
+      "tileWidth": 480,
+      "purpose": "Actual R38 export frames for visual style inspection; not motion review evidence."
     }
   }
 }

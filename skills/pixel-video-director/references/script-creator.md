@@ -2,11 +2,10 @@
 
 ## 启动与更新
 
-在 `work/<项目>/` 中保存 `script-creator.json` 和同目录的 `script-creator.html`。已有项目继续用同一份 JSON。每次形成实际内容修订后递增 revision，设置实际阶段，再构建和打开同一入口。目录约定见 [项目文件放在哪里](../../pixel-game-video/references/production-principles.md#项目文件放在哪里)。
+在 `work/<项目>/` 中保存 `script-creator.json` 和同目录的 `script-creator.html`。已有项目继续用同一份 JSON。每次形成实际内容修订后递增 revision，设置实际阶段，再构建和打开同一入口。目录约定见 [项目文件放在哪里](../../pixel-game-video/references/production-principles.md#文件与依赖)。
 
 ```text
-node DIRECTOR/scripts/build-workspace.cjs
-node DIRECTOR/scripts/build-workspace.cjs --state work/PROJECT/script-creator.json --output work/PROJECT/script-creator.html
+node DIRECTOR/scripts/build-workspace.cjs --state PROJECT/script-creator.json --output PROJECT/script-creator.html
 ```
 
 DIRECTOR 按 [协作定位](collaboration.md) 解析，默认 state 不存在时才创建空项目。构建器只读取模板/模块并写所选输出，不改原项目 JSON，也不再向模板塞回当前项目或示例缓存。

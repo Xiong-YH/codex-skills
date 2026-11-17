@@ -10,7 +10,7 @@
 | --- | --- |
 | 新增或修改镜头，包括局部改动 | 先读 [动态规范与兑现合同](motion-direction.md) 和 [文画对应检查](visual-storytelling.md#把讲述推进落实到画面)，将实际动作、焦点顺序与阅读安排写入本镜设计 |
 | 结构化分镜 | 按 [分镜标注](visual-storyboard.md) 记录画面呈现、屏幕文字、音乐触点与接镜 |
-| 场景与组件美术 | 先看 [求职样片](beat-driven-explainer.md#16-秒求职样片)，再按 FOUNDATION 的 `modules/style/ART-DIRECTION-CONTRACT.md` 确定本片画风。组件设计沿 `modules/components/DESIGN.md` 与 `modules/style/COMPONENT-ART.md` |
+| 场景与组件美术 | 先看 [当前 R38 参考](../../pixel-game-video/references/current-style.md)，再按 FOUNDATION 的 `modules/style/ART-DIRECTION-CONTRACT.md` 确定本片画风。组件设计沿 `modules/components/DESIGN.md` 与 `modules/style/COMPONENT-ART.md` |
 | 人物、姿态与新动作 | 按 [人物表演](character-performance.md) 及 FOUNDATION 制作总则检查结构与支撑，沿用当前授权。插画母图按 [Review 前置审查](review.md) 检查后进入制作 |
 | 屏幕文字与组件动作 | 按 FOUNDATION 的 `modules/text/EXPRESSION.md` 选主句和标注形式。按 `modules/motion/TIMING.md` 安排离散动作及落稳后的阅读 |
 | 交接与审片 | 按 [交接](handoff.md) 传递采用的设计，按 [Review](review.md#推进节奏与观看距离的复核) 检查实际分支，交付说明记录检查范围和未关闭项 |

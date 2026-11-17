@@ -1,7 +1,3 @@
 {
-  "cues": [
-    {"id": "line1", "role": "title", "text": "先找到线索，再决定方向。", "start": {"event": "s01.enter", "offsetFrames": 12}, "end": {"event": "s01.exit", "offsetFrames": -12}},
-    {"id": "line2", "role": "title", "text": "观察、验证，把发现记下来。", "start": {"event": "s02.enter", "offsetFrames": 40}, "end": {"event": "s02.exit", "offsetFrames": -12}},
-    {"id": "line3", "role": "title", "text": "有了依据，选择就更清楚。", "start": {"event": "s03.enter", "offsetFrames": 52}, "end": {"event": "s03.exit", "offsetFrames": -12}}
-  ]
+  "cues": []
 }

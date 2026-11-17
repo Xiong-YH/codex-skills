@@ -115,8 +115,8 @@
       "approval": "user_approved_art_direction",
       "runtimePreset": false,
       "usage": {
-        "tier": "optional",
-        "recommendation": "适合精灵式角色、小尺寸行动与极简场景演绎；以《元气骑士》的游戏内小角色概括程度为参考，不参考高精度宣传立绘，不把该游戏角色、服装或关卡直接复制到项目。"
+        "tier": "common",
+        "recommendation": "本系列默认人物画法参考：超粗精灵剪影、色块和完整姿态；人物与环境的默认分工见 current-style.md。整套单画风仍按本片需要选择。"
       },
       "characterReferenceStatus": "approved_lead_sprite_reference",
       "visualInspiration": {
@@ -199,8 +199,8 @@
       "approval": "user_approved_art_direction",
       "runtimePreset": false,
       "usage": {
-        "tier": "common",
-        "recommendation": "常用：轻松、亲和、人物互动、情绪表达和故事类解释。大头短肢与手脚统一，背景与道具保持简洁亲和。"
+        "tier": "optional",
+        "recommendation": "按需选择：可爱比例的人物互动与情绪表达，不作为本系列新片默认。"
       },
       "characterReferenceStatus": "new_lead_style_candidate_pending_user_approval",
       "dimensions": {
@@ -331,7 +331,7 @@
   ],
   "selection": {
     "common": [
-      "cute",
+      "ultra-coarse",
       "chunky"
     ],
     "thematic": {
@@ -342,7 +342,7 @@
         "空间布局与协作"
       ]
     },
-    "policy": "新项目优先在两种常用风格中按主题选择；游戏模拟类优先考虑等距空间。其余风格仍可作为主画风或片段特选。用户明确选择与已确认项目优先，不按关键词强制切换。"
+    "policy": "本系列新片默认按 current-style.md 采用超粗人物与粗像素环境的明确分工；此目录只解析可选的完整单画风，不能自动生成组合。项目已确认方案与本次要求优先。"
   },
   "dimensionPolicy": "八类是完整画风方案，名称强调的维度不同；七项维度用于明确方案，不是人物、背景各自换画法的开关。新组合先在项目或片段层写齐并统一验证，不能仅凭现有单项参考视为组合已制作。"
 }

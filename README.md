@@ -1,6 +1,6 @@
 # Codex Skills
 
-无口播像素信息动效的编剧、导演与制作技能。用组件变化和屏幕主句讲清信息，按实际配乐排关键动作与转场。
+无口播像素信息动效的编剧、导演与制作技能。以《提问的艺术》R38 为当前表现参考，用超粗像素人物、实体组件、短促动效与同物接镜讲清信息，按实际配乐排触点。
 
 ## 选择技能
 
@@ -23,7 +23,7 @@
 | 剪辑、保存和最终导出 | [工作台](skills/pixel-game-video/references/workbench.md) |
 | 当前通用要求与常见问题 | [制作总则](skills/pixel-game-video/references/production-principles.md) |
 | 设计组件承接、配乐卡点和冲击 | [无口播信息动效与音乐卡点](skills/pixel-video-director/references/beat-driven-explainer.md) |
-| 体验无口播、普通人物动作和同源白模 | [缓存过程示例](skills/pixel-video-director/examples/beat-driven-cache/README.md) |
+| 当前风格与可播放参考 | [风格方法](skills/pixel-game-video/references/current-style.md)、[R38 完整有声 Canvas 与八段选段](skills/pixel-game-video/examples/asking-motion/index.html) |
 | 选择可循环底乐和实际拍位 | [可复用 BGM](skills/pixel-game-video/modules/audio/bgm-system/README.md) |
 | 追溯用户反馈、失败与认可范围 | [迭代记录](skills/pixel-game-video/references/iteration-history.md) |
 | 维护模块与新增能力 | [职责归属](skills/pixel-game-video/references/module-ownership.md)、[模块维护](skills/pixel-game-video/references/module-development.md) |

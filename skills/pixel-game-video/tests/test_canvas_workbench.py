@@ -18,7 +18,7 @@ class CanvasWorkbenchTests(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name) / 'project'
-        shutil.copytree(SKILL / 'assets/project-template', self.root)
+        shutil.copytree(SKILL / 'tests/fixtures/runtime-smoke', self.root)
 
     def build(self):
         resolved = compile_project(self.root, write=True)
