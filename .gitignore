@@ -48,6 +48,7 @@ Thumbs.db
 !/work/README.md
 !/work/catalog/
 /work/catalog/local.json
+!/work/art-of-asking-20261107/
 
 # Local staging for tasks outside video production.
 /scratch/

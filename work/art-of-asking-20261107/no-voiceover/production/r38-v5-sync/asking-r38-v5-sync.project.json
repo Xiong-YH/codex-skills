@@ -1,0 +1,2435 @@
+{
+  "format": "asking-canvas-recut",
+  "version": "R38 · 步进 V5 卡点版",
+  "adoptedScriptRevision": 35,
+  "dimensions": {
+    "width": 1280,
+    "height": 720
+  },
+  "duration": 88,
+  "fps": 60,
+  "frames": 5280,
+  "timeline": [
+    {
+      "id": "s01",
+      "label": "还在这样提问",
+      "start": 0,
+      "frames": 240,
+      "cues": [
+        "opening",
+        "opening-result"
+      ]
+    },
+    {
+      "id": "s02",
+      "label": "小棕的处境",
+      "start": 240,
+      "frames": 270,
+      "cues": [
+        "context",
+        "context-senior"
+      ]
+    },
+    {
+      "id": "s03",
+      "label": "第一次请教",
+      "start": 510,
+      "frames": 360,
+      "cues": [
+        "c01",
+        "first-answer",
+        "first-reply",
+        "c02"
+      ]
+    },
+    {
+      "id": "autumn-setup",
+      "label": "假如等到秋招",
+      "start": 870,
+      "frames": 210,
+      "cues": [
+        "preview-title",
+        "preview-wait"
+      ]
+    },
+    {
+      "id": "autumn-outcome",
+      "label": "没有面试邀请",
+      "start": 1080,
+      "frames": 285,
+      "cues": [
+        "preview-resume",
+        "preview-result"
+      ]
+    },
+    {
+      "id": "s04",
+      "label": "回到现在",
+      "start": 1365,
+      "frames": 270,
+      "cues": [
+        "return-now",
+        "still-stuck",
+        "why-vague"
+      ]
+    },
+    {
+      "id": "s05",
+      "label": "提问的艺术",
+      "start": 1635,
+      "frames": 120,
+      "cues": [
+        "title"
+      ]
+    },
+    {
+      "id": "chapter-one",
+      "label": "先缩小问题",
+      "start": 1755,
+      "frames": 135,
+      "cues": [
+        "chapter-directions",
+        "question-scope"
+      ]
+    },
+    {
+      "id": "ask-directions",
+      "label": "问软件开发方向",
+      "start": 1890,
+      "frames": 225,
+      "cues": [
+        "c04",
+        "direction-answer"
+      ]
+    },
+    {
+      "id": "chapter-two",
+      "label": "自己查，找到卡点",
+      "start": 2115,
+      "frames": 180,
+      "cues": [
+        "chapter-research"
+      ]
+    },
+    {
+      "id": "s06",
+      "label": "对照岗位和课程作业",
+      "start": 2295,
+      "frames": 345,
+      "cues": [
+        "research-jobs",
+        "research-directions",
+        "research-gap"
+      ]
+    },
+    {
+      "id": "chapter-three",
+      "label": "说清处境，再追问",
+      "start": 2640,
+      "frames": 150,
+      "cues": [
+        "chapter-follow-up"
+      ]
+    },
+    {
+      "id": "s07",
+      "label": "带着卡点回到聊天",
+      "start": 2790,
+      "frames": 315,
+      "cues": [
+        "c06",
+        "practice-question"
+      ]
+    },
+    {
+      "id": "practice-reply",
+      "label": "学长的建议",
+      "start": 3105,
+      "frames": 165,
+      "cues": [
+        "practice-answer"
+      ]
+    },
+    {
+      "id": "chapter-four",
+      "label": "让回答变成行动",
+      "start": 3270,
+      "frames": 165,
+      "cues": [
+        "chapter-try",
+        "after-summary"
+      ]
+    },
+    {
+      "id": "confirm-understanding",
+      "label": "用自己的话确认",
+      "start": 3435,
+      "frames": 195,
+      "cues": [
+        "confirm-answer",
+        "confirm-reply"
+      ]
+    },
+    {
+      "id": "s11",
+      "label": "谢谢学长",
+      "start": 3630,
+      "frames": 120,
+      "cues": [
+        "thanks"
+      ]
+    },
+    {
+      "id": "schedule-action",
+      "label": "写下开始时间",
+      "start": 3750,
+      "frames": 210,
+      "cues": [
+        "after-plan"
+      ]
+    },
+    {
+      "id": "record-progress",
+      "label": "记录尝试",
+      "start": 3960,
+      "frames": 180,
+      "cues": [
+        "after-record"
+      ]
+    },
+    {
+      "id": "follow-up-results",
+      "label": "带着结果继续问",
+      "start": 4140,
+      "frames": 270,
+      "cues": [
+        "after-follow-up"
+      ]
+    },
+    {
+      "id": "reflect-direction",
+      "label": "看见兴趣和缺口",
+      "start": 4410,
+      "frames": 210,
+      "cues": [
+        "after-choice"
+      ]
+    },
+    {
+      "id": "s13",
+      "label": "开始今天的练习",
+      "start": 4620,
+      "frames": 135,
+      "cues": [
+        "closing"
+      ]
+    },
+    {
+      "id": "s16",
+      "label": "三点总结",
+      "start": 4755,
+      "frames": 255,
+      "cues": [
+        "summary-title",
+        "summary-before",
+        "summary-during",
+        "summary-after"
+      ]
+    },
+    {
+      "id": "comment-invite",
+      "label": "改写自己的提问",
+      "start": 5010,
+      "frames": 270,
+      "cues": [
+        "c14"
+      ]
+    }
+  ],
+  "marks": {
+    "attention": 45,
+    "hook": 120,
+    "identity": [
+      30,
+      60,
+      90,
+      120
+    ],
+    "remember": 180,
+    "contextPhone": 255,
+    "lessonLands": [
+      30,
+      75,
+      120,
+      165
+    ],
+    "lessonSaves": [
+      45,
+      90,
+      135,
+      180
+    ],
+    "applications": {
+      "ticks": [
+        15,
+        30,
+        45,
+        53,
+        60,
+        75,
+        90,
+        98,
+        105,
+        113,
+        120
+      ],
+      "full": 120,
+      "move": 124,
+      "wide": 146,
+      "zero": 150,
+      "rejects": 180,
+      "maximum": 500,
+      "start": 15
+    },
+    "returnNow": {
+      "reply": 45,
+      "message": 75,
+      "languages": [
+        90,
+        105,
+        120
+      ],
+      "question": 165,
+      "narration": 150,
+      "gather": 180,
+      "travel": 210
+    },
+    "title": 45,
+    "chapterLand": 15,
+    "rails": [
+      [
+        30,
+        45,
+        67,
+        90
+      ],
+      [
+        30,
+        60,
+        90,
+        120
+      ],
+      [
+        30,
+        45,
+        60,
+        75
+      ],
+      [
+        15,
+        45,
+        75,
+        105
+      ]
+    ],
+    "badgeDock": [
+      30,
+      30,
+      15,
+      30
+    ],
+    "researchBadgeLead": 30,
+    "directionCards": [
+      180,
+      210
+    ],
+    "study": {
+      "tabs": [
+        16,
+        45,
+        75
+      ],
+      "cards": [
+        105,
+        135
+      ],
+      "gap": 180,
+      "gather": 240,
+      "settle": 270,
+      "peel": 300
+    },
+    "chapterThreeTitle": 30,
+    "chapterThreeReprise": 120,
+    "cheer": 60,
+    "responseNod": 75,
+    "plan": {
+      "words": 30,
+      "flag": 90,
+      "time": 120,
+      "done": 150
+    },
+    "record": [
+      30,
+      120
+    ],
+    "more": [
+      30,
+      105,
+      180
+    ],
+    "reflectPanels": [
+      15,
+      90
+    ],
+    "reflection": [
+      30,
+      60,
+      120,
+      150
+    ],
+    "beginAction": 45,
+    "summary": [
+      30,
+      105,
+      165
+    ],
+    "inviteStrike": 30,
+    "invite": [
+      60,
+      120,
+      180
+    ],
+    "questionOffsets": [
+      0,
+      8,
+      15
+    ]
+  },
+  "subtitleCues": {
+    "s02": [
+      [
+        "context",
+        0
+      ],
+      [
+        "context-senior",
+        171
+      ]
+    ],
+    "autumn-setup": [
+      [
+        "preview-title",
+        0
+      ],
+      [
+        "preview-wait",
+        90
+      ]
+    ],
+    "autumn-outcome": [
+      [
+        "preview-resume",
+        0
+      ]
+    ],
+    "s04": [
+      [
+        "why-vague",
+        150
+      ]
+    ],
+    "chapter-one": [
+      [
+        "question-scope",
+        30
+      ]
+    ],
+    "s06": [
+      [
+        "research-jobs",
+        0
+      ],
+      [
+        "research-gap",
+        180
+      ]
+    ],
+    "chapter-four": [
+      [
+        "after-summary",
+        23
+      ]
+    ],
+    "schedule-action": [
+      [
+        "after-plan",
+        0
+      ]
+    ],
+    "record-progress": [
+      [
+        "after-record",
+        0
+      ]
+    ],
+    "follow-up-results": [
+      [
+        "after-follow-up",
+        0
+      ]
+    ],
+    "reflect-direction": [
+      [
+        "after-choice",
+        0
+      ]
+    ],
+    "s13": [
+      [
+        "closing",
+        0
+      ]
+    ],
+    "s16": [
+      [
+        "summary-title",
+        0
+      ]
+    ],
+    "comment-invite": [
+      [
+        "c14",
+        0
+      ]
+    ]
+  },
+  "conversations": {
+    "first": [
+      {
+        "cue": "c01",
+        "frame": 540,
+        "own": true
+      },
+      {
+        "cue": "first-answer",
+        "frame": 630,
+        "own": false
+      },
+      {
+        "cue": "first-reply",
+        "frame": 720,
+        "own": true
+      },
+      {
+        "cue": "c02",
+        "frame": 795,
+        "own": false
+      }
+    ],
+    "directions": [
+      {
+        "cue": "c04",
+        "frame": 1935,
+        "own": true
+      },
+      {
+        "cue": "direction-answer",
+        "frame": 2040,
+        "own": false
+      }
+    ],
+    "specific": [
+      {
+        "cue": "c06",
+        "frame": 2835,
+        "own": true
+      },
+      {
+        "cue": "practice-question",
+        "frame": 3000,
+        "own": true
+      },
+      {
+        "cue": "practice-answer",
+        "frame": 3120,
+        "own": false
+      },
+      {
+        "cue": "confirm-answer",
+        "frame": 3480,
+        "own": true
+      },
+      {
+        "cue": "confirm-reply",
+        "frame": 3570,
+        "own": false
+      },
+      {
+        "cue": "thanks",
+        "frame": 3645,
+        "own": true
+      }
+    ]
+  },
+  "chapters": [
+    [
+      "s03",
+      "第一次问"
+    ],
+    [
+      "autumn-outcome",
+      "从 500 到 0"
+    ],
+    [
+      "ask-directions",
+      "方向落位"
+    ],
+    [
+      "s06",
+      "找到卡点"
+    ],
+    [
+      "s07",
+      "带资料追问"
+    ],
+    [
+      "schedule-action",
+      "写下第一步"
+    ],
+    [
+      "comment-invite",
+      "评论区"
+    ]
+  ],
+  "screenCopy": {
+    "opening": "还在这样提问的同学，一定要注意了！",
+    "opening-result": "你的提问很可能都是无效的",
+    "context": "毕业后做什么，你还没想好。",
+    "context-senior": "你想起做过软件开发实习的学长。",
+    "c01": "学长，我这个专业以后能做什么工作啊？",
+    "first-answer": "方向不少，主要看你对什么感兴趣。",
+    "first-reply": "可我也不知道自己适合什么。",
+    "c02": "那就多了解，多尝试。",
+    "preview-title": "假如问完，你就把这事搁下了……",
+    "preview-wait": "教程越存越多，计划一拖再拖。",
+    "preview-resume": "等到秋招，你才发现简历的「项目经历」一栏还是空的。",
+    "preview-result": "已投递 500　｜　面试邀请 0",
+    "return-now": "回到现在",
+    "still-stuck": "那我先试什么？",
+    "why-vague": "你想找个起点。\n学长却不知道你试过什么。",
+    "title": "提问的艺术",
+    "chapter-directions": "第一章　先缩小问题",
+    "question-scope": "再大的迷茫，也可以先挑一件事问。",
+    "c04": "学长，我学过一点代码，想了解软件开发。可以从哪儿看起？",
+    "direction-answer": "可以先从前端、后端这些细分方向看起。",
+    "chapter-research": "第二章　自己查，找到卡点",
+    "research-jobs": "你查了工作内容和岗位要求，再对照自己学过的东西。",
+    "research-directions": "前端　｜　后端　｜　AI 全栈",
+    "research-gap": "你对后端有点兴趣。可岗位要项目经历，你只做过课程作业。",
+    "chapter-follow-up": "第三章　说清处境，再追问",
+    "c06": "学长，我看的后端实习，都提到项目经历。课上的练习我能做完。",
+    "practice-question": "接下来该继续看课，还是可以开始做项目了？",
+    "practice-answer": "先挑个小案例，用学过的知识做起来，边做边补。",
+    "chapter-try": "第四章　让回答变成行动",
+    "after-summary": "听完回答，先用自己的话确认一下。",
+    "confirm-answer": "也就是说，我可以边做边学，不用等所有课程学完？",
+    "confirm-reply": "对，就从你现在会的开始。",
+    "thanks": "谢谢学长！",
+    "after-plan": "接下来，写下今天要做的第一件事，给它定个开始时间。",
+    "after-record": "动手的过程、遇到的问题，都留个记录。",
+    "after-follow-up": "下次请教，就能说清「我试了什么，具体卡在哪一步」。",
+    "after-choice": "做过几次，你也会更清楚自己喜欢什么、还需要学什么。",
+    "closing": "这次放下手机，你知道今天该做什么了。",
+    "summary-title": "好问题，能帮你找到下一步。",
+    "summary-before": "问之前　先查一查，找到卡点。",
+    "summary-during": "提问时　说清处境，问一件具体的事。",
+    "summary-after": "问之后　动手试，再带着结果继续问。",
+    "c14": "把你一直想问的问题，按这个方法改一遍，留在评论区。"
+  },
+  "alignments": [
+    {
+      "id": "opening-attention",
+      "shotId": "s01",
+      "nominal": 0.75,
+      "at": 0.75,
+      "frame": 45,
+      "local": 45,
+      "lane": "arcade",
+      "rise": 0.05845,
+      "driftMs": 0
+    },
+    {
+      "id": "hook-hit",
+      "shotId": "s01",
+      "nominal": 2,
+      "at": 1.996,
+      "frame": 120,
+      "local": 120,
+      "lane": "keyboard",
+      "rise": 0.08544,
+      "driftMs": 4
+    },
+    {
+      "id": "first-drum",
+      "shotId": "s02",
+      "nominal": 4,
+      "at": 4,
+      "frame": 240,
+      "local": 0,
+      "lane": "drum",
+      "rise": 0.57482,
+      "driftMs": 0
+    },
+    {
+      "id": "identity-0",
+      "shotId": "s02",
+      "nominal": 4.5,
+      "at": 4.5,
+      "frame": 270,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.17897,
+      "driftMs": 0
+    },
+    {
+      "id": "identity-1",
+      "shotId": "s02",
+      "nominal": 5,
+      "at": 5,
+      "frame": 300,
+      "local": 60,
+      "lane": "drum",
+      "rise": 0.46713,
+      "driftMs": 0
+    },
+    {
+      "id": "identity-2",
+      "shotId": "s02",
+      "nominal": 5.5,
+      "at": 5.5,
+      "frame": 330,
+      "local": 90,
+      "lane": "drum",
+      "rise": 0.17989,
+      "driftMs": 0
+    },
+    {
+      "id": "identity-3",
+      "shotId": "s02",
+      "nominal": 6,
+      "at": 6,
+      "frame": 360,
+      "local": 120,
+      "lane": "drum",
+      "rise": 0.56527,
+      "driftMs": 0
+    },
+    {
+      "id": "mentor-memory",
+      "shotId": "s02",
+      "nominal": 7,
+      "at": 7,
+      "frame": 420,
+      "local": 180,
+      "lane": "drum",
+      "rise": 0.35798,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-opens",
+      "shotId": "s03",
+      "nominal": 8.5,
+      "at": 8.5,
+      "frame": 510,
+      "local": 0,
+      "lane": "drum",
+      "rise": 0.17937,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-c01",
+      "shotId": "s03",
+      "nominal": 9,
+      "at": 9,
+      "frame": 540,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.46473,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-first-answer",
+      "shotId": "s03",
+      "nominal": 10.5,
+      "at": 10.5,
+      "frame": 630,
+      "local": 120,
+      "lane": "drum",
+      "rise": 0.17952,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-first-reply",
+      "shotId": "s03",
+      "nominal": 12,
+      "at": 12,
+      "frame": 720,
+      "local": 210,
+      "lane": "drum",
+      "rise": 0.29201,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-c02",
+      "shotId": "s03",
+      "nominal": 13.25,
+      "at": 13.258,
+      "frame": 795,
+      "local": 285,
+      "lane": "arcade",
+      "rise": 0.13293,
+      "driftMs": -8
+    },
+    {
+      "id": "question-turn",
+      "shotId": "autumn-setup",
+      "nominal": 14.5,
+      "at": 14.5,
+      "frame": 870,
+      "local": 0,
+      "lane": "drum",
+      "rise": 0.20735,
+      "driftMs": 0
+    },
+    {
+      "id": "lesson-land-0",
+      "shotId": "autumn-setup",
+      "nominal": 15,
+      "at": 15,
+      "frame": 900,
+      "local": 30,
+      "lane": "arcade",
+      "rise": 0.14052,
+      "driftMs": 0
+    },
+    {
+      "id": "saved-0",
+      "shotId": "autumn-setup",
+      "nominal": 15.25,
+      "at": 15.254,
+      "frame": 915,
+      "local": 45,
+      "lane": "keyboard",
+      "rise": 0.02871,
+      "driftMs": -4
+    },
+    {
+      "id": "lesson-land-1",
+      "shotId": "autumn-setup",
+      "nominal": 15.75,
+      "at": 15.75,
+      "frame": 945,
+      "local": 75,
+      "lane": "drum",
+      "rise": 0.15579,
+      "driftMs": 0
+    },
+    {
+      "id": "saved-1",
+      "shotId": "autumn-setup",
+      "nominal": 16,
+      "at": 16,
+      "frame": 960,
+      "local": 90,
+      "lane": "bass",
+      "rise": 0.25265,
+      "driftMs": 0
+    },
+    {
+      "id": "lesson-land-2",
+      "shotId": "autumn-setup",
+      "nominal": 16.5,
+      "at": 16.5,
+      "frame": 990,
+      "local": 120,
+      "lane": "drum",
+      "rise": 0.35315,
+      "driftMs": 0
+    },
+    {
+      "id": "saved-2",
+      "shotId": "autumn-setup",
+      "nominal": 16.75,
+      "at": 16.75,
+      "frame": 1005,
+      "local": 135,
+      "lane": "drum",
+      "rise": 0.10504,
+      "driftMs": 0
+    },
+    {
+      "id": "lesson-land-3",
+      "shotId": "autumn-setup",
+      "nominal": 17.25,
+      "at": 17.25,
+      "frame": 1035,
+      "local": 165,
+      "lane": "drum",
+      "rise": 0.16267,
+      "driftMs": 0
+    },
+    {
+      "id": "saved-3",
+      "shotId": "autumn-setup",
+      "nominal": 17.5,
+      "at": 17.504,
+      "frame": 1050,
+      "local": 180,
+      "lane": "arcade",
+      "rise": 0.08951,
+      "driftMs": -4
+    },
+    {
+      "id": "opening-resume",
+      "shotId": "autumn-outcome",
+      "nominal": 18,
+      "at": 18,
+      "frame": 1080,
+      "local": 0,
+      "lane": "bass",
+      "rise": 0.24727,
+      "driftMs": 0
+    },
+    {
+      "id": "counter-0",
+      "shotId": "autumn-outcome",
+      "nominal": 18.25,
+      "at": 18.25,
+      "frame": 1095,
+      "local": 15,
+      "lane": "drum",
+      "rise": 0.17184,
+      "driftMs": 0
+    },
+    {
+      "id": "counter-1",
+      "shotId": "autumn-outcome",
+      "nominal": 18.5,
+      "at": 18.508,
+      "frame": 1110,
+      "local": 30,
+      "lane": "arcade",
+      "rise": 0.09391,
+      "driftMs": -8
+    },
+    {
+      "id": "counter-2",
+      "shotId": "autumn-outcome",
+      "nominal": 18.75,
+      "at": 18.75,
+      "frame": 1125,
+      "local": 45,
+      "lane": "drum",
+      "rise": 0.36232,
+      "driftMs": 0
+    },
+    {
+      "id": "counter-3",
+      "shotId": "autumn-outcome",
+      "nominal": 18.875,
+      "at": 18.875,
+      "frame": 1133,
+      "local": 53,
+      "lane": "drum",
+      "rise": 0.01587,
+      "driftMs": 8.33
+    },
+    {
+      "id": "counter-4",
+      "shotId": "autumn-outcome",
+      "nominal": 19,
+      "at": 19.008,
+      "frame": 1140,
+      "local": 60,
+      "lane": "bass",
+      "rise": 0.23381,
+      "driftMs": -8
+    },
+    {
+      "id": "counter-5",
+      "shotId": "autumn-outcome",
+      "nominal": 19.25,
+      "at": 19.25,
+      "frame": 1155,
+      "local": 75,
+      "lane": "drum",
+      "rise": 0.181,
+      "driftMs": 0
+    },
+    {
+      "id": "counter-6",
+      "shotId": "autumn-outcome",
+      "nominal": 19.5,
+      "at": 19.5,
+      "frame": 1170,
+      "local": 90,
+      "lane": "drum",
+      "rise": 0.39855,
+      "driftMs": 0
+    },
+    {
+      "id": "counter-7",
+      "shotId": "autumn-outcome",
+      "nominal": 19.625,
+      "at": 19.625,
+      "frame": 1178,
+      "local": 98,
+      "lane": "drum",
+      "rise": 0.02436,
+      "driftMs": 8.33
+    },
+    {
+      "id": "counter-8",
+      "shotId": "autumn-outcome",
+      "nominal": 19.75,
+      "at": 19.75,
+      "frame": 1185,
+      "local": 105,
+      "lane": "drum",
+      "rise": 0.19216,
+      "driftMs": 0
+    },
+    {
+      "id": "counter-9",
+      "shotId": "autumn-outcome",
+      "nominal": 19.875,
+      "at": 19.879,
+      "frame": 1193,
+      "local": 113,
+      "lane": "arcade",
+      "rise": 0.0922,
+      "driftMs": 4.33
+    },
+    {
+      "id": "counter-500",
+      "shotId": "autumn-outcome",
+      "nominal": 20,
+      "at": 20,
+      "frame": 1200,
+      "local": 120,
+      "lane": "drum",
+      "rise": 0.44773,
+      "driftMs": 0
+    },
+    {
+      "id": "invitations-zero",
+      "shotId": "autumn-outcome",
+      "nominal": 20.5,
+      "at": 20.5,
+      "frame": 1230,
+      "local": 150,
+      "lane": "low",
+      "rise": 0.24726,
+      "driftMs": 0
+    },
+    {
+      "id": "no-reply",
+      "shotId": "autumn-outcome",
+      "nominal": 21,
+      "at": 21,
+      "frame": 1260,
+      "local": 180,
+      "lane": "drum",
+      "rise": 0.44457,
+      "driftMs": 0
+    },
+    {
+      "id": "back-to-now",
+      "shotId": "s04",
+      "nominal": 22.75,
+      "at": 22.75,
+      "frame": 1365,
+      "local": 0,
+      "lane": "drum",
+      "rise": 0.07549,
+      "driftMs": 0
+    },
+    {
+      "id": "now-last-reply",
+      "shotId": "s04",
+      "nominal": 23.5,
+      "at": 23.496,
+      "frame": 1410,
+      "local": 45,
+      "lane": "drum",
+      "rise": 0.1251,
+      "driftMs": 4
+    },
+    {
+      "id": "now-question",
+      "shotId": "s04",
+      "nominal": 24,
+      "at": 24,
+      "frame": 1440,
+      "local": 75,
+      "lane": "drum",
+      "rise": 0.33388,
+      "driftMs": 0
+    },
+    {
+      "id": "language-0",
+      "shotId": "s04",
+      "nominal": 24.25,
+      "at": 24.258,
+      "frame": 1455,
+      "local": 90,
+      "lane": "arcade",
+      "rise": 0.15313,
+      "driftMs": -8
+    },
+    {
+      "id": "language-1",
+      "shotId": "s04",
+      "nominal": 24.5,
+      "at": 24.5,
+      "frame": 1470,
+      "local": 105,
+      "lane": "drum",
+      "rise": 0.2874,
+      "driftMs": 0
+    },
+    {
+      "id": "language-2",
+      "shotId": "s04",
+      "nominal": 24.75,
+      "at": 24.75,
+      "frame": 1485,
+      "local": 120,
+      "lane": "drum",
+      "rise": 0.3494,
+      "driftMs": 0
+    },
+    {
+      "id": "now-narration",
+      "shotId": "s04",
+      "nominal": 25.25,
+      "at": 25.258,
+      "frame": 1515,
+      "local": 150,
+      "lane": "drum",
+      "rise": 0.1021,
+      "driftMs": -8
+    },
+    {
+      "id": "language-question-mark",
+      "shotId": "s04",
+      "nominal": 25.5,
+      "at": 25.496,
+      "frame": 1530,
+      "local": 165,
+      "lane": "drum",
+      "rise": 0.1301,
+      "driftMs": 4
+    },
+    {
+      "id": "title-land",
+      "shotId": "s05",
+      "nominal": 28,
+      "at": 28,
+      "frame": 1680,
+      "local": 45,
+      "lane": "drum",
+      "rise": 0.57164,
+      "driftMs": 0
+    },
+    {
+      "id": "chapter-one-change",
+      "shotId": "chapter-one",
+      "nominal": 29.25,
+      "at": 29.254,
+      "frame": 1755,
+      "local": 0,
+      "lane": "drum",
+      "rise": 0.08084,
+      "driftMs": -4
+    },
+    {
+      "id": "title-touches-paper",
+      "shotId": "chapter-one",
+      "nominal": 29.5,
+      "at": 29.5,
+      "frame": 1770,
+      "local": 15,
+      "lane": "drum",
+      "rise": 0.2178,
+      "driftMs": 0
+    },
+    {
+      "id": "rail-one-0",
+      "shotId": "chapter-one",
+      "nominal": 29.75,
+      "at": 29.75,
+      "frame": 1785,
+      "local": 30,
+      "lane": "arcade",
+      "rise": 0.10656,
+      "driftMs": 0
+    },
+    {
+      "id": "rail-one-1",
+      "shotId": "chapter-one",
+      "nominal": 30,
+      "at": 30,
+      "frame": 1800,
+      "local": 45,
+      "lane": "drum",
+      "rise": 0.5697,
+      "driftMs": 0
+    },
+    {
+      "id": "rail-one-2",
+      "shotId": "chapter-one",
+      "nominal": 30.375,
+      "at": 30.371,
+      "frame": 1822,
+      "local": 67,
+      "lane": "drum",
+      "rise": 0.02061,
+      "driftMs": -4.33
+    },
+    {
+      "id": "rail-one-3",
+      "shotId": "chapter-one",
+      "nominal": 30.75,
+      "at": 30.754,
+      "frame": 1845,
+      "local": 90,
+      "lane": "arcade",
+      "rise": 0.1406,
+      "driftMs": -4
+    },
+    {
+      "id": "scope-enters-chat",
+      "shotId": "ask-directions",
+      "nominal": 32,
+      "at": 32,
+      "frame": 1920,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.50181,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-c04",
+      "shotId": "ask-directions",
+      "nominal": 32.25,
+      "at": 32.254,
+      "frame": 1935,
+      "local": 45,
+      "lane": "drum",
+      "rise": 0.0934,
+      "driftMs": -4
+    },
+    {
+      "id": "chat-direction-answer",
+      "shotId": "ask-directions",
+      "nominal": 34,
+      "at": 34,
+      "frame": 2040,
+      "local": 150,
+      "lane": "drum",
+      "rise": 0.57511,
+      "driftMs": 0
+    },
+    {
+      "id": "directions-left",
+      "shotId": "ask-directions",
+      "nominal": 34.5,
+      "at": 34.5,
+      "frame": 2070,
+      "local": 180,
+      "lane": "drum",
+      "rise": 0.17951,
+      "driftMs": 0
+    },
+    {
+      "id": "directions-right",
+      "shotId": "ask-directions",
+      "nominal": 35,
+      "at": 35,
+      "frame": 2100,
+      "local": 210,
+      "lane": "drum",
+      "rise": 0.53793,
+      "driftMs": 0
+    },
+    {
+      "id": "heading-second",
+      "shotId": "chapter-two",
+      "nominal": 35.25,
+      "at": 35.254,
+      "frame": 2115,
+      "local": 0,
+      "lane": "drum",
+      "rise": 0.05509,
+      "driftMs": -4
+    },
+    {
+      "id": "rail-two-0",
+      "shotId": "chapter-two",
+      "nominal": 35.75,
+      "at": 35.758,
+      "frame": 2145,
+      "local": 30,
+      "lane": "arcade",
+      "rise": 0.07516,
+      "driftMs": -8
+    },
+    {
+      "id": "rail-two-1",
+      "shotId": "chapter-two",
+      "nominal": 36.25,
+      "at": 36.254,
+      "frame": 2175,
+      "local": 60,
+      "lane": "arcade",
+      "rise": 0.08219,
+      "driftMs": -4
+    },
+    {
+      "id": "rail-two-2",
+      "shotId": "chapter-two",
+      "nominal": 36.75,
+      "at": 36.754,
+      "frame": 2205,
+      "local": 90,
+      "lane": "arcade",
+      "rise": 0.12827,
+      "driftMs": -4
+    },
+    {
+      "id": "rail-two-3",
+      "shotId": "chapter-two",
+      "nominal": 37.25,
+      "at": 37.25,
+      "frame": 2235,
+      "local": 120,
+      "lane": "keyboard",
+      "rise": 0.0387,
+      "driftMs": 0
+    },
+    {
+      "id": "direction-tab-0",
+      "shotId": "s06",
+      "nominal": 38.5,
+      "at": 38.512,
+      "frame": 2311,
+      "local": 16,
+      "lane": "keyboard",
+      "rise": 0.0204,
+      "driftMs": 4.67
+    },
+    {
+      "id": "research-badge",
+      "shotId": "s06",
+      "nominal": 38.75,
+      "at": 38.754,
+      "frame": 2325,
+      "local": 30,
+      "lane": "arcade",
+      "rise": 0.1118,
+      "driftMs": -4
+    },
+    {
+      "id": "direction-tab-1",
+      "shotId": "s06",
+      "nominal": 39,
+      "at": 38.996,
+      "frame": 2340,
+      "local": 45,
+      "lane": "keyboard",
+      "rise": 0.03695,
+      "driftMs": 4
+    },
+    {
+      "id": "direction-tab-2",
+      "shotId": "s06",
+      "nominal": 39.5,
+      "at": 39.504,
+      "frame": 2370,
+      "local": 75,
+      "lane": "arcade",
+      "rise": 0.12102,
+      "driftMs": -4
+    },
+    {
+      "id": "comparison-card-0",
+      "shotId": "s06",
+      "nominal": 40,
+      "at": 40.008,
+      "frame": 2400,
+      "local": 105,
+      "lane": "keyboard",
+      "rise": 0.00978,
+      "driftMs": -8
+    },
+    {
+      "id": "comparison-card-1",
+      "shotId": "s06",
+      "nominal": 40.5,
+      "at": 40.5,
+      "frame": 2430,
+      "local": 135,
+      "lane": "drum",
+      "rise": 0.35313,
+      "driftMs": 0
+    },
+    {
+      "id": "found-gap",
+      "shotId": "s06",
+      "nominal": 41.25,
+      "at": 41.25,
+      "frame": 2475,
+      "local": 180,
+      "lane": "keyboard",
+      "rise": 0.031,
+      "driftMs": 0
+    },
+    {
+      "id": "gather-difference",
+      "shotId": "s06",
+      "nominal": 42.25,
+      "at": 42.25,
+      "frame": 2535,
+      "local": 240,
+      "lane": "drum",
+      "rise": 0.05875,
+      "driftMs": 0
+    },
+    {
+      "id": "difference-strip",
+      "shotId": "s06",
+      "nominal": 42.75,
+      "at": 42.754,
+      "frame": 2565,
+      "local": 270,
+      "lane": "arcade",
+      "rise": 0.10456,
+      "driftMs": -4
+    },
+    {
+      "id": "lift-project-note",
+      "shotId": "s06",
+      "nominal": 43.25,
+      "at": 43.246,
+      "frame": 2595,
+      "local": 300,
+      "lane": "keyboard",
+      "rise": 0.02733,
+      "driftMs": 4
+    },
+    {
+      "id": "chapter-three-key",
+      "shotId": "chapter-three",
+      "nominal": 44,
+      "at": 44,
+      "frame": 2640,
+      "local": 0,
+      "lane": "drum",
+      "rise": 0.56067,
+      "driftMs": 0
+    },
+    {
+      "id": "rail-three-0",
+      "shotId": "chapter-three",
+      "nominal": 44.5,
+      "at": 44.5,
+      "frame": 2670,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.2819,
+      "driftMs": 0
+    },
+    {
+      "id": "chapter-three-title",
+      "shotId": "chapter-three",
+      "nominal": 44.5,
+      "at": 44.5,
+      "frame": 2670,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.2819,
+      "driftMs": 0
+    },
+    {
+      "id": "rail-three-1",
+      "shotId": "chapter-three",
+      "nominal": 44.75,
+      "at": 44.75,
+      "frame": 2685,
+      "local": 45,
+      "lane": "drum",
+      "rise": 0.33489,
+      "driftMs": 0
+    },
+    {
+      "id": "rail-three-2",
+      "shotId": "chapter-three",
+      "nominal": 45,
+      "at": 45.004,
+      "frame": 2700,
+      "local": 60,
+      "lane": "arcade",
+      "rise": 0.10712,
+      "driftMs": -4
+    },
+    {
+      "id": "rail-three-3",
+      "shotId": "chapter-three",
+      "nominal": 45.25,
+      "at": 45.258,
+      "frame": 2715,
+      "local": 75,
+      "lane": "drum",
+      "rise": 0.10209,
+      "driftMs": -8
+    },
+    {
+      "id": "chapter-three-reprise",
+      "shotId": "chapter-three",
+      "nominal": 46,
+      "at": 46,
+      "frame": 2760,
+      "local": 120,
+      "lane": "drum",
+      "rise": 0.57549,
+      "driftMs": 0
+    },
+    {
+      "id": "question-badge",
+      "shotId": "s07",
+      "nominal": 46.75,
+      "at": 46.75,
+      "frame": 2805,
+      "local": 15,
+      "lane": "drum",
+      "rise": 0.22494,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-c06",
+      "shotId": "s07",
+      "nominal": 47.25,
+      "at": 47.258,
+      "frame": 2835,
+      "local": 45,
+      "lane": "drum",
+      "rise": 0.1021,
+      "driftMs": -8
+    },
+    {
+      "id": "chat-practice-question",
+      "shotId": "s07",
+      "nominal": 50,
+      "at": 50,
+      "frame": 3000,
+      "local": 210,
+      "lane": "drum",
+      "rise": 0.53136,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-practice-answer",
+      "shotId": "practice-reply",
+      "nominal": 52,
+      "at": 52,
+      "frame": 3120,
+      "local": 15,
+      "lane": "drum",
+      "rise": 0.4833,
+      "driftMs": 0
+    },
+    {
+      "id": "nod-at-advice",
+      "shotId": "practice-reply",
+      "nominal": 53,
+      "at": 53,
+      "frame": 3180,
+      "local": 75,
+      "lane": "drum",
+      "rise": 0.43616,
+      "driftMs": 0
+    },
+    {
+      "id": "rail-four-0",
+      "shotId": "chapter-four",
+      "nominal": 54.75,
+      "at": 54.754,
+      "frame": 3285,
+      "local": 15,
+      "lane": "arcade",
+      "rise": 0.14316,
+      "driftMs": -4
+    },
+    {
+      "id": "rail-four-1",
+      "shotId": "chapter-four",
+      "nominal": 55.25,
+      "at": 55.246,
+      "frame": 3315,
+      "local": 45,
+      "lane": "drum",
+      "rise": 0.26005,
+      "driftMs": 4
+    },
+    {
+      "id": "rail-four-2",
+      "shotId": "chapter-four",
+      "nominal": 55.75,
+      "at": 55.758,
+      "frame": 3345,
+      "local": 75,
+      "lane": "arcade",
+      "rise": 0.12832,
+      "driftMs": -8
+    },
+    {
+      "id": "rail-four-3",
+      "shotId": "chapter-four",
+      "nominal": 56.25,
+      "at": 56.254,
+      "frame": 3375,
+      "local": 105,
+      "lane": "drum",
+      "rise": 0.06108,
+      "driftMs": -4
+    },
+    {
+      "id": "next-step-badge",
+      "shotId": "confirm-understanding",
+      "nominal": 57.75,
+      "at": 57.754,
+      "frame": 3465,
+      "local": 30,
+      "lane": "arcade",
+      "rise": 0.12397,
+      "driftMs": -4
+    },
+    {
+      "id": "chat-confirm-answer",
+      "shotId": "confirm-understanding",
+      "nominal": 58,
+      "at": 58,
+      "frame": 3480,
+      "local": 45,
+      "lane": "drum",
+      "rise": 0.28368,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-confirm-reply",
+      "shotId": "confirm-understanding",
+      "nominal": 59.5,
+      "at": 59.5,
+      "frame": 3570,
+      "local": 135,
+      "lane": "drum",
+      "rise": 0.15181,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-thanks",
+      "shotId": "s11",
+      "nominal": 60.75,
+      "at": 60.75,
+      "frame": 3645,
+      "local": 15,
+      "lane": "drum",
+      "rise": 0.04527,
+      "driftMs": 0
+    },
+    {
+      "id": "self-cheer",
+      "shotId": "s11",
+      "nominal": 61.5,
+      "at": 61.496,
+      "frame": 3690,
+      "local": 60,
+      "lane": "keyboard",
+      "rise": 0.04863,
+      "driftMs": 4
+    },
+    {
+      "id": "plan-main-line",
+      "shotId": "schedule-action",
+      "nominal": 63,
+      "at": 62.996,
+      "frame": 3780,
+      "local": 30,
+      "lane": "keyboard",
+      "rise": 0.03052,
+      "driftMs": 4
+    },
+    {
+      "id": "plan-flag",
+      "shotId": "schedule-action",
+      "nominal": 64,
+      "at": 64.008,
+      "frame": 3840,
+      "local": 90,
+      "lane": "arcade",
+      "rise": 0.1176,
+      "driftMs": -8
+    },
+    {
+      "id": "set-time",
+      "shotId": "schedule-action",
+      "nominal": 64.5,
+      "at": 64.496,
+      "frame": 3870,
+      "local": 120,
+      "lane": "keyboard",
+      "rise": 0.03089,
+      "driftMs": 4
+    },
+    {
+      "id": "confirm-time",
+      "shotId": "schedule-action",
+      "nominal": 65,
+      "at": 65,
+      "frame": 3900,
+      "local": 150,
+      "lane": "drum",
+      "rise": 0.35222,
+      "driftMs": 0
+    },
+    {
+      "id": "action-record-key",
+      "shotId": "record-progress",
+      "nominal": 66,
+      "at": 66,
+      "frame": 3960,
+      "local": 0,
+      "lane": "drum",
+      "rise": 0.55812,
+      "driftMs": 0
+    },
+    {
+      "id": "logged",
+      "shotId": "record-progress",
+      "nominal": 66.5,
+      "at": 66.5,
+      "frame": 3990,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.28822,
+      "driftMs": 0
+    },
+    {
+      "id": "record-blocked",
+      "shotId": "record-progress",
+      "nominal": 68,
+      "at": 68,
+      "frame": 4080,
+      "local": 120,
+      "lane": "drum",
+      "rise": 0.54613,
+      "driftMs": 0
+    },
+    {
+      "id": "more-work",
+      "shotId": "follow-up-results",
+      "nominal": 69.5,
+      "at": 69.496,
+      "frame": 4170,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.20663,
+      "driftMs": 4
+    },
+    {
+      "id": "more-gap",
+      "shotId": "follow-up-results",
+      "nominal": 70.75,
+      "at": 70.75,
+      "frame": 4245,
+      "local": 105,
+      "lane": "drum",
+      "rise": 0.34957,
+      "driftMs": 0
+    },
+    {
+      "id": "following",
+      "shotId": "follow-up-results",
+      "nominal": 72,
+      "at": 72,
+      "frame": 4320,
+      "local": 180,
+      "lane": "drum",
+      "rise": 0.57996,
+      "driftMs": 0
+    },
+    {
+      "id": "reflect-panel-0",
+      "shotId": "reflect-direction",
+      "nominal": 73.75,
+      "at": 73.758,
+      "frame": 4425,
+      "local": 15,
+      "lane": "drum",
+      "rise": 0.05101,
+      "driftMs": -8
+    },
+    {
+      "id": "reflect-0",
+      "shotId": "reflect-direction",
+      "nominal": 74,
+      "at": 74,
+      "frame": 4440,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.58256,
+      "driftMs": 0
+    },
+    {
+      "id": "reflect-1",
+      "shotId": "reflect-direction",
+      "nominal": 74.5,
+      "at": 74.5,
+      "frame": 4470,
+      "local": 60,
+      "lane": "drum",
+      "rise": 0.17937,
+      "driftMs": 0
+    },
+    {
+      "id": "reflect-panel-1",
+      "shotId": "reflect-direction",
+      "nominal": 75,
+      "at": 75,
+      "frame": 4500,
+      "local": 90,
+      "lane": "drum",
+      "rise": 0.51041,
+      "driftMs": 0
+    },
+    {
+      "id": "reflect-2",
+      "shotId": "reflect-direction",
+      "nominal": 75.5,
+      "at": 75.5,
+      "frame": 4530,
+      "local": 120,
+      "lane": "drum",
+      "rise": 0.17989,
+      "driftMs": 0
+    },
+    {
+      "id": "reflect-3",
+      "shotId": "reflect-direction",
+      "nominal": 76,
+      "at": 76,
+      "frame": 4560,
+      "local": 150,
+      "lane": "drum",
+      "rise": 0.52628,
+      "driftMs": 0
+    },
+    {
+      "id": "begin-practice",
+      "shotId": "s13",
+      "nominal": 77.75,
+      "at": 77.754,
+      "frame": 4665,
+      "local": 45,
+      "lane": "bass",
+      "rise": 0.17875,
+      "driftMs": -4
+    },
+    {
+      "id": "summary-0",
+      "shotId": "s16",
+      "nominal": 79.75,
+      "at": 79.754,
+      "frame": 4785,
+      "local": 30,
+      "lane": "arcade",
+      "rise": 0.09742,
+      "driftMs": -4
+    },
+    {
+      "id": "summary-1",
+      "shotId": "s16",
+      "nominal": 81,
+      "at": 81,
+      "frame": 4860,
+      "local": 105,
+      "lane": "keyboard",
+      "rise": 0.0343,
+      "driftMs": 0
+    },
+    {
+      "id": "summary-2",
+      "shotId": "s16",
+      "nominal": 82,
+      "at": 82,
+      "frame": 4920,
+      "local": 165,
+      "lane": "bass",
+      "rise": 0.22783,
+      "driftMs": 0
+    },
+    {
+      "id": "template-strike",
+      "shotId": "comment-invite",
+      "nominal": 84,
+      "at": 84.008,
+      "frame": 5040,
+      "local": 30,
+      "lane": "keyboard",
+      "rise": 0.02747,
+      "driftMs": -8
+    },
+    {
+      "id": "template-0",
+      "shotId": "comment-invite",
+      "nominal": 84.5,
+      "at": 84.5,
+      "frame": 5070,
+      "local": 60,
+      "lane": "keyboard",
+      "rise": 0.09049,
+      "driftMs": 0
+    },
+    {
+      "id": "template-1",
+      "shotId": "comment-invite",
+      "nominal": 85.5,
+      "at": 85.5,
+      "frame": 5130,
+      "local": 120,
+      "lane": "keyboard",
+      "rise": 0.11723,
+      "driftMs": 0
+    },
+    {
+      "id": "template-2",
+      "shotId": "comment-invite",
+      "nominal": 86.5,
+      "at": 86.5,
+      "frame": 5190,
+      "local": 180,
+      "lane": "keyboard",
+      "rise": 0.1312,
+      "driftMs": 0
+    }
+  ],
+  "sfx": [
+    {
+      "id": "hook-hit",
+      "shotId": "s01",
+      "frame": 120,
+      "voice": "title",
+      "level": 0.161109,
+      "pan": 0
+    },
+    {
+      "id": "identity-0",
+      "shotId": "s02",
+      "frame": 270,
+      "voice": "paper",
+      "level": 0.0805545,
+      "pan": -0.45
+    },
+    {
+      "id": "identity-1",
+      "shotId": "s02",
+      "frame": 300,
+      "voice": "paper",
+      "level": 0.06175845,
+      "pan": 0.45
+    },
+    {
+      "id": "identity-2",
+      "shotId": "s02",
+      "frame": 330,
+      "voice": "paper",
+      "level": 0.0805545,
+      "pan": -0.45
+    },
+    {
+      "id": "identity-3",
+      "shotId": "s02",
+      "frame": 360,
+      "voice": "paper",
+      "level": 0.1045143,
+      "pan": 0.45
+    },
+    {
+      "id": "chat-c01",
+      "shotId": "s03",
+      "frame": 540,
+      "voice": "send",
+      "level": 0.07125975,
+      "pan": 0.2
+    },
+    {
+      "id": "chat-first-answer",
+      "shotId": "s03",
+      "frame": 630,
+      "voice": "receive",
+      "level": 0.0929475,
+      "pan": 0.46
+    },
+    {
+      "id": "chat-first-reply",
+      "shotId": "s03",
+      "frame": 720,
+      "voice": "send",
+      "level": 0.0929475,
+      "pan": 0.2
+    },
+    {
+      "id": "chat-c02",
+      "shotId": "s03",
+      "frame": 795,
+      "voice": "receive",
+      "level": 0.0929475,
+      "pan": 0.46
+    },
+    {
+      "id": "question-turn",
+      "shotId": "autumn-setup",
+      "frame": 870,
+      "voice": "burst",
+      "level": 0.14561775000000002,
+      "pan": -0.27
+    },
+    {
+      "id": "saved-0",
+      "shotId": "autumn-setup",
+      "frame": 915,
+      "voice": "clip",
+      "level": 0.09914400000000002,
+      "pan": -0.3
+    },
+    {
+      "id": "saved-1",
+      "shotId": "autumn-setup",
+      "frame": 960,
+      "voice": "clip",
+      "level": 0.09914400000000002,
+      "pan": 0.3
+    },
+    {
+      "id": "saved-2",
+      "shotId": "autumn-setup",
+      "frame": 1005,
+      "voice": "clip",
+      "level": 0.09914400000000002,
+      "pan": -0.3
+    },
+    {
+      "id": "saved-3",
+      "shotId": "autumn-setup",
+      "frame": 1050,
+      "voice": "clip",
+      "level": 0.09914400000000002,
+      "pan": 0.3
+    },
+    {
+      "id": "counter-0",
+      "shotId": "autumn-outcome",
+      "frame": 1095,
+      "voice": "step",
+      "level": 0.071442,
+      "pan": -0.23
+    },
+    {
+      "id": "counter-1",
+      "shotId": "autumn-outcome",
+      "frame": 1110,
+      "voice": "step",
+      "level": 0.07348320000000001,
+      "pan": -0.23
+    },
+    {
+      "id": "counter-2",
+      "shotId": "autumn-outcome",
+      "frame": 1125,
+      "voice": "step",
+      "level": 0.05790204000000001,
+      "pan": -0.23
+    },
+    {
+      "id": "counter-3",
+      "shotId": "autumn-outcome",
+      "frame": 1133,
+      "voice": "step",
+      "level": 0.07756560000000001,
+      "pan": -0.23
+    },
+    {
+      "id": "counter-4",
+      "shotId": "autumn-outcome",
+      "frame": 1140,
+      "voice": "step",
+      "level": 0.07960680000000002,
+      "pan": -0.23
+    },
+    {
+      "id": "counter-5",
+      "shotId": "autumn-outcome",
+      "frame": 1155,
+      "voice": "step",
+      "level": 0.081648,
+      "pan": -0.23
+    },
+    {
+      "id": "counter-6",
+      "shotId": "autumn-outcome",
+      "frame": 1170,
+      "voice": "step",
+      "level": 0.06416171999999999,
+      "pan": -0.23
+    },
+    {
+      "id": "counter-7",
+      "shotId": "autumn-outcome",
+      "frame": 1178,
+      "voice": "step",
+      "level": 0.08573040000000001,
+      "pan": -0.23
+    },
+    {
+      "id": "counter-8",
+      "shotId": "autumn-outcome",
+      "frame": 1185,
+      "voice": "step",
+      "level": 0.08777160000000002,
+      "pan": -0.23
+    },
+    {
+      "id": "counter-9",
+      "shotId": "autumn-outcome",
+      "frame": 1193,
+      "voice": "step",
+      "level": 0.08981280000000001,
+      "pan": -0.23
+    },
+    {
+      "id": "counter-500",
+      "shotId": "autumn-outcome",
+      "frame": 1200,
+      "voice": "lock",
+      "level": 0.121141575,
+      "pan": 0
+    },
+    {
+      "id": "invitations-zero",
+      "shotId": "autumn-outcome",
+      "frame": 1230,
+      "voice": "zero",
+      "level": 0.27,
+      "pan": 0.22
+    },
+    {
+      "id": "no-reply",
+      "frame": 1260,
+      "shotId": "autumn-outcome",
+      "voice": "empty",
+      "level": 0.12016349999999999,
+      "pan": 0.24
+    },
+    {
+      "id": "languages-land",
+      "shotId": "s04",
+      "frame": 1485,
+      "voice": "paper",
+      "level": 0.08675100000000002,
+      "pan": 0.28
+    },
+    {
+      "id": "title-land",
+      "frame": 1680,
+      "shotId": "s05",
+      "voice": "title",
+      "level": 0.08383499999999999,
+      "pan": 0
+    },
+    {
+      "id": "title-touches-paper",
+      "shotId": "chapter-one",
+      "frame": 1770,
+      "voice": "paper",
+      "level": 0.11463525000000001,
+      "pan": 0
+    },
+    {
+      "id": "scope-enters-chat",
+      "shotId": "ask-directions",
+      "frame": 1920,
+      "voice": "flip",
+      "level": 0.0760104,
+      "pan": 0
+    },
+    {
+      "id": "chat-c04",
+      "shotId": "ask-directions",
+      "frame": 1935,
+      "voice": "send",
+      "level": 0.0929475,
+      "pan": 0.2
+    },
+    {
+      "id": "chat-direction-answer",
+      "shotId": "ask-directions",
+      "frame": 2040,
+      "voice": "receive",
+      "level": 0.07125975,
+      "pan": 0.46
+    },
+    {
+      "id": "directions-left",
+      "shotId": "ask-directions",
+      "frame": 2070,
+      "voice": "paper",
+      "level": 0.11153700000000001,
+      "pan": -0.35
+    },
+    {
+      "id": "directions-right",
+      "shotId": "ask-directions",
+      "frame": 2100,
+      "voice": "paper",
+      "level": 0.08076105000000001,
+      "pan": 0.13
+    },
+    {
+      "id": "found-gap",
+      "shotId": "s06",
+      "frame": 2475,
+      "voice": "clip",
+      "level": 0.09914400000000002,
+      "pan": 0
+    },
+    {
+      "id": "chat-c06",
+      "shotId": "s07",
+      "frame": 2835,
+      "voice": "send",
+      "level": 0.0929475,
+      "pan": 0.2
+    },
+    {
+      "id": "chat-practice-question",
+      "shotId": "s07",
+      "frame": 3000,
+      "voice": "send",
+      "level": 0.07125975,
+      "pan": 0.2
+    },
+    {
+      "id": "chat-practice-answer",
+      "shotId": "practice-reply",
+      "frame": 3120,
+      "voice": "receive",
+      "level": 0.07125975,
+      "pan": 0.46
+    },
+    {
+      "id": "chat-confirm-answer",
+      "shotId": "confirm-understanding",
+      "frame": 3480,
+      "voice": "send",
+      "level": 0.06816150000000001,
+      "pan": 0.2
+    },
+    {
+      "id": "chat-confirm-reply",
+      "shotId": "confirm-understanding",
+      "frame": 3570,
+      "voice": "receive",
+      "level": 0.06816150000000001,
+      "pan": 0.46
+    },
+    {
+      "id": "chat-thanks",
+      "shotId": "s11",
+      "frame": 3645,
+      "voice": "send",
+      "level": 0.06816150000000001,
+      "pan": 0.2
+    },
+    {
+      "id": "self-cheer",
+      "shotId": "s11",
+      "frame": 3690,
+      "level": 0.108,
+      "pan": -0.22,
+      "voice": "paper"
+    },
+    {
+      "id": "plan-main-line",
+      "frame": 3780,
+      "shotId": "schedule-action",
+      "voice": "paper",
+      "level": 0.09112500000000001,
+      "pan": 0
+    },
+    {
+      "id": "set-time",
+      "shotId": "schedule-action",
+      "frame": 3870,
+      "voice": "clip",
+      "level": 0.11153700000000001,
+      "pan": 0
+    },
+    {
+      "id": "confirm-time",
+      "shotId": "schedule-action",
+      "frame": 3900,
+      "voice": "lock",
+      "level": 0.08076105000000001,
+      "pan": 0.16
+    },
+    {
+      "id": "logged",
+      "shotId": "record-progress",
+      "frame": 3990,
+      "voice": "paper",
+      "level": 0.0929475,
+      "pan": 0.21
+    },
+    {
+      "id": "following",
+      "shotId": "follow-up-results",
+      "frame": 4320,
+      "voice": "clip",
+      "level": 0.07030961999999999,
+      "pan": 0
+    },
+    {
+      "id": "summary-0",
+      "shotId": "s16",
+      "frame": 4785,
+      "voice": "paper",
+      "level": 0.08675100000000002,
+      "pan": -0.11
+    },
+    {
+      "id": "summary-1",
+      "shotId": "s16",
+      "frame": 4860,
+      "voice": "paper",
+      "level": 0.08675100000000002,
+      "pan": 0.009999999999999995
+    },
+    {
+      "id": "summary-2",
+      "shotId": "s16",
+      "frame": 4920,
+      "voice": "paper",
+      "level": 0.08675100000000002,
+      "pan": 0.13
+    },
+    {
+      "id": "start-template",
+      "shotId": "comment-invite",
+      "frame": 5070,
+      "voice": "clip",
+      "level": 0.0929475,
+      "pan": 0
+    }
+  ],
+  "pictureSource": {
+    "file": "../r37-reading-pass/index.html",
+    "sha256": "2060dd88c384465864d4d0a658f4db9c0bbf136460ad8feca3579b1b4ec419b7"
+  },
+  "reviewedFeedback": "feedback.json",
+  "bgm": {
+    "file": "../../media/music/pulse-v5.flac",
+    "sha256": "de7ee21566ccf74bb55c5ddf60c735de8e943b061feb558cc28595ecb729bc55",
+    "title": "步进 V5 · 街机版",
+    "version": "pulse-v5",
+    "sampleRate": 48000,
+    "bpm": 120,
+    "beatsPerBar": 4,
+    "startSeconds": 0,
+    "duration": 88,
+    "sections": [
+      {
+        "name": "起步",
+        "seconds": [
+          0,
+          22
+        ],
+        "key": "F 小调",
+        "harmonyCueSeconds": 6
+      },
+      {
+        "name": "回应",
+        "seconds": [
+          22,
+          44
+        ],
+        "key": "F 小调",
+        "harmonyCueSeconds": 28
+      },
+      {
+        "name": "高潮",
+        "seconds": [
+          44,
+          66
+        ],
+        "key": "G 小调",
+        "harmonyCueSeconds": 50
+      },
+      {
+        "name": "归位",
+        "seconds": [
+          66,
+          88
+        ],
+        "key": "F 小调",
+        "harmonyCueSeconds": 72
+      }
+    ],
+    "sourceMix": {
+      "lufs": -13.9,
+      "truePeakDb": -1.8
+    },
+    "firstDrumSeconds": 4.000020833333333,
+    "approvedScore": "../../review/history/pulse-v5.json"
+  },
+  "audio": {
+    "file": "asking-r38-v5-sync.wav",
+    "sha256": "f31c6ec9e8233e73512fbaf1cce2737833bf260b2bc86a5473fd681ec970be84",
+    "rate": 48000,
+    "samplePeakDbfs": -1.41,
+    "revealLead": {
+      "seconds": 0.28,
+      "reduction": 0.34
+    }
+  },
+  "preview": {
+    "file": "index.html",
+    "sha256": "965af625a680937743887ace68a44ec3b82f8649bf58062a4737e67c7e6cb567"
+  },
+  "export": {
+    "file": "asking-r38-v5-sync.mp4",
+    "sha256": "507b6f3aec669745f91e6ed504f3269606894e665da7c0eb78dba9bd7ee20abd",
+    "sourcePreviewSha256": "965af625a680937743887ace68a44ec3b82f8649bf58062a4737e67c7e6cb567",
+    "sourceMixSha256": "f31c6ec9e8233e73512fbaf1cce2737833bf260b2bc86a5473fd681ec970be84",
+    "width": 1280,
+    "height": 720,
+    "fps": 60,
+    "frames": 5280,
+    "duration": 88,
+    "codecs": {
+      "video": "h264",
+      "audio": "aac"
+    },
+    "audioSnrDb": 33.79
+  }
+}

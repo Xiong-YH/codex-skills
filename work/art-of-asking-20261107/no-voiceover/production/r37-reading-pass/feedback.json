@@ -1,0 +1,19 @@
+{
+  "projectId": "art-of-asking-no-voiceover",
+  "sourceRevision": 33,
+  "sourceHash": "ed3d54b2",
+  "pictureSha256": "3682351a5dd53ef3f28004f0afd84d5137b8cc987f9a8a7ffeaeab03cd2d1f10",
+  "reviewEdition": "R36",
+  "reviewedPreview": "../r36-drive-review/index.html",
+  "audio": {
+    "file": "../../review/pulse-v4-drive/media/pulse-v4-drive.flac",
+    "sha256": "9df681aa1c6ea9aa44709bc1d1413649cfcd27e35ed051c79f85f86e360e351e",
+    "name": "步进 · 动感版"
+  },
+  "notes": {
+    "chapter-two": "[R36 00:44.55 · chapter-two] \n这一块 下面四个出现的太快了\n",
+    "s06": "[R36 00:47.62 · s06] \n画面出现太快了，每个按钮都逐一出现\n[R36 00:50.68 · s06] \n这一块增加画面变化 ",
+    "reflect-direction": "[R36 01:28.48 · reflect-direction] \n这一块 画面内容太快了\n",
+    "s13": "[R36 01:30.32 · s13] 这里不知道在讲什么 画面内容和之前也一样"
+  }
+}

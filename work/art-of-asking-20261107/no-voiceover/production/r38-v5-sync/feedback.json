@@ -1,0 +1,13 @@
+{
+  "projectId": "art-of-asking-no-voiceover",
+  "sourceRevision": 34,
+  "sourceHash": "af67d0de",
+  "pictureSha256": "2060dd88c384465864d4d0a658f4db9c0bbf136460ad8feca3579b1b4ec419b7",
+  "request": "《步进》V5出来了，接下来你把这个视频按照 v5 配好节奏感，可以吗？",
+  "audio": {
+    "approval": "../../review/history/pulse-v5.json",
+    "name": "步进 V5 · 街机版",
+    "sha256": "de7ee21566ccf74bb55c5ddf60c735de8e943b061feb558cc28595ecb729bc55"
+  },
+  "decision": "用 88 秒定版 V5 的真实乐句重新剪全片。文案、构图和片段 ID 沿 R37。主要收紧进场、过场和重复停顿，保留逐项阅读、零邀约停留、道谢、两栏回顾与结论。"
+}

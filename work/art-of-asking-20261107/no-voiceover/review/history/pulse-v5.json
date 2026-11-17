@@ -1,0 +1,39 @@
+{
+  "id": "pulse-v5",
+  "title": "步进 V5 · 街机版",
+  "status": "approved",
+  "approval": {
+    "date": "2026-11-17",
+    "feedback": "记录为v5吧",
+    "scope": "1 分 28 秒的街机纯音乐整曲与五声部分轨"
+  },
+  "master": "../../media/music/pulse-v5.flac",
+  "masterSha256": "DE7EE21566CCF74BB55C5DDF60C735DE8E943B061FEB558CC28595ECB729BC55",
+  "audition": "../pulse-v5/index.html",
+  "render": "../pulse-v5/render.mjs",
+  "basedOn": "pulse-v4.json",
+  "auditionHistory": "pulse-v4-arcade-feedback.json",
+  "durationSeconds": 88,
+  "bpm": 120,
+  "beatsPerBar": 4,
+  "mix": {
+    "lufs": -13.9,
+    "truePeakDb": -1.8
+  },
+  "rounds": [
+    { "name": "起步", "seconds": [0, 22], "key": "F 小调", "harmonyCueSeconds": 6 },
+    { "name": "回应", "seconds": [22, 44], "key": "F 小调", "harmonyCueSeconds": 28 },
+    { "name": "高潮", "seconds": [44, 66], "key": "G 小调", "harmonyCueSeconds": 50 },
+    { "name": "归位", "seconds": [66, 88], "key": "F 小调", "harmonyCueSeconds": 72 }
+  ],
+  "clipData": {
+    "path": "../pulse-v5/clip-data.js",
+    "sha256": "DA47EAF30B9C0A9B718E623130AFA60C54CDC505E0F70351176B35E91DFF0525"
+  },
+  "stemBanks": [
+    { "path": "../pulse-v5/media/segments/opening.js", "sha256": "6505AE25C56CF94D03D11E11F68DEC873767E5A7CD0E00DFDA69A835ED939978" },
+    { "path": "../pulse-v5/media/segments/count.js", "sha256": "354D2C98F403B945DC041CD6DE9FC43E011722398E7552F527570B8B2DE91F03" },
+    { "path": "../pulse-v5/media/segments/question.js", "sha256": "154DC7AAFCE92F70C80B9597A99673D56DC4EB0504121F0BE045AB24D88EC622" },
+    { "path": "../pulse-v5/media/segments/end.js", "sha256": "8BF8AAE9E5402B41290E27FCE3370FE8A59E92E71A684150417124AFA590E99C" }
+  ]
+}

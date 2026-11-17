@@ -1,1 +1,70 @@
-[]
+[
+  {
+    "id": "art-of-asking",
+    "title": "提问的艺术",
+    "topic": "从低效提问的例子出发，讲怎样准备问题、说明上下文和请求帮助。",
+    "kind": "film",
+    "project": "art-of-asking-20261107/no-voiceover",
+    "updatedOn": "2026-11-17",
+    "featuredTarget": "art-of-asking-20261107/no-voiceover/production/r38-v5-sync/index.html",
+    "links": [
+      {
+        "kind": "preview",
+        "label": "R38 步进 V5 · Canvas 审片",
+        "date": "2026-11-17",
+        "durationSeconds": 88,
+        "target": "art-of-asking-20261107/no-voiceover/production/r38-v5-sync/index.html"
+      },
+      {
+        "kind": "video",
+        "label": "R38 步进 V5 · MP4",
+        "date": "2026-11-17",
+        "durationSeconds": 88,
+        "target": "art-of-asking-20261107/no-voiceover/production/r38-v5-sync/asking-r38-v5-sync.mp4"
+      },
+      {
+        "kind": "source",
+        "label": "当前创作器",
+        "target": "art-of-asking-20261107/no-voiceover/script-creator.html"
+      },
+      {
+        "kind": "source",
+        "label": "当前工程 JSON",
+        "target": "art-of-asking-20261107/no-voiceover/script-creator.json"
+      },
+      {
+        "kind": "source",
+        "label": "R38 画面与拍点工程",
+        "target": "art-of-asking-20261107/no-voiceover/production/r38-v5-sync/asking-r38-v5-sync.project.json"
+      },
+      {
+        "kind": "review",
+        "label": "R38 调整依据",
+        "target": "art-of-asking-20261107/no-voiceover/production/r38-v5-sync/feedback.json"
+      },
+      {
+        "kind": "preview",
+        "label": "R37 无口播审片版",
+        "date": "2026-11-16",
+        "durationSeconds": 104,
+        "poster": "art-of-asking-20261107/no-voiceover/production/r37-reading-pass/catalog-poster.jpg",
+        "target": "art-of-asking-20261107/no-voiceover/production/r37-reading-pass/index.html"
+      },
+      {
+        "kind": "source",
+        "label": "R37 工作台工程",
+        "target": "art-of-asking-20261107/no-voiceover/production/r37-reading-pass/asking-r37-reading-pass.project.json"
+      },
+      {
+        "kind": "review",
+        "label": "R37 修订依据",
+        "target": "art-of-asking-20261107/no-voiceover/production/r37-reading-pass/feedback.json"
+      },
+      {
+        "kind": "file",
+        "label": "工程说明和重建命令",
+        "target": "art-of-asking-20261107/README.md"
+      }
+    ]
+  }
+]
