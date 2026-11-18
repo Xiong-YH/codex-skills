@@ -48,9 +48,6 @@ def _records(root, module):
         source = 'modules/library/backgrounds/catalog.json'
         records += [({'id': ident, **item}, 'background', source)
                     for ident, item in _read(root / source)['assets'].items()]
-    elif module == 'components':
-        source = 'modules/components/object-components.json'
-        records += [(item, 'standalone', source) for item in _read(root / source)['items']]
     return records
 
 
@@ -67,7 +64,8 @@ def _resources(module, raw, source_kind):
     if module == 'library' and raw.get('path'):
         return [root + raw['path']]
     if module == 'audio' and raw.get('synthesis'):
-        return [root + 'synthesis.py', root + 'render-sfx.mjs', root + 'vendor/garden-skills/scripts/lib/synth.mjs']
+        return [root + name for name in ('synthesis.py', 'render-sfx.mjs', 'tactile.mjs',
+                                         'vendor/garden-skills/scripts/lib/synth.mjs')]
     return []
 
 

@@ -1,10 +1,10 @@
-# 已确认人物与表演参考
+# 人物素材与表演
 
-本系列新片优先采用 [超粗像素游戏精灵](characters/style-variants/README.md) 与本片实际动作素材，按 [当前风格](../../references/current-style.md) 制作。小棕（素材旧称阿棕）的 V3 原图用于身份核对，精细比例与六张旧姿态不自动成为新片造型或动作菜单。其他选角按本片需求决定。
+按 [当前风格](../../references/current-style.md) 为本片选角色，围绕触发、姿态、接触与结果准备完整素材。看 [R41 消息与反应](../../examples/asking-motion/index.html#chat-reaction) 和 [感谢特写](../../examples/asking-motion/index.html#thanks-closeup) 校准动作幅度及阅读时机。[超粗像素静态试样](characters/style-variants/README.md) 用于观察轮廓和色块。需要其他物种时查 [角色扩展](CHARACTER-DESIGN.md)。
 
-需要动物、植物、幻想生物或人造角色来演绎比喻时，从 [角色扩展](CHARACTER-DESIGN.md) 与 [物种／样式画廊](characters/design-atlas/index.html) 选型。V3 是已确认人物基准，新物种与新画法另记候选状态；不自动替换现有人物或新增可调用 actor。
+## V3 人物参考
 
-当前仅保留 2026-10-19 用户确认的 V3。打开 [人物与动作浏览器](characters/index.html)，按角色查看人设、基准图、六张动作与可复制提示词；机器读取 [目录](characters/catalog.json)、[人设](characters/character-bible.json)、[动作说明](characters/action-guide.json)。
+下表记录 2026-10-19 用户确认的 V3 人物。采用这组角色时，从 [人物与动作浏览器](characters/index.html) 查看基准图、动作和提示词，也可查 [目录](characters/catalog.json)、[人设](characters/character-bible.json) 和 [姿态说明](characters/action-guide.json)。
 
 | 素材 ID | 人物 | 分工与识别 |
 | --- | --- | --- |

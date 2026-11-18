@@ -3,127 +3,21 @@
   "defaults": {
     "references": {
       "documentation": [
-        "modules/components/BASIC-COMPONENTS.md",
-        "modules/components/INFORMATION-COMPONENTS.md",
-        "modules/components/OBJECT-COMPONENTS.md"
+        "modules/style/COMPONENT-ART.md",
+        "modules/components/INFORMATION-COMPONENTS.md"
       ],
       "examples": [
         "modules/components/examples/style-atlas/README.md"
       ],
       "tests": [
         "tests/test_component_styles.py",
-        "tests/test_component_expansion.py",
+        "tests/component-atlas.cjs",
         "tests/test_components_media.py"
       ]
     },
     "notes": [
-      "十二类已注册信息组件在镜头内编辑；组件不是独立轨道。独立物体试样不自动成为 shot.components.kind。"
+      "组件在 Canvas 工作台镜头的「信息组件 JSON」内编辑。"
     ]
   },
-  "items": {
-    "object.resource-bundle-into-tray.v1": {
-      "references": {
-        "documentation": [
-          "modules/components/DESIGN.md",
-          "modules/components/OBJECT-COMPONENTS.md"
-        ],
-        "tests": []
-      }
-    },
-    "object.energy-actuator-assembly.v1": {
-      "references": {
-        "documentation": [
-          "modules/components/OBJECT-COMPONENTS.md"
-        ],
-        "tests": []
-      }
-    },
-    "object.state-meter-break.v1": {
-      "references": {
-        "documentation": [
-          "modules/components/DESIGN.md",
-          "modules/components/CUSTOM-RUNTIME.md",
-          "modules/components/examples/state-meter/design.md"
-        ],
-        "tests": [
-          "tests/custom-components.test.cjs"
-        ]
-      }
-    },
-    "object.slot-transfer.v1": {
-      "references": {
-        "documentation": [
-          "modules/components/CUSTOM-RUNTIME.md",
-          "modules/components/OBJECT-COMPONENTS.md"
-        ],
-        "tests": [
-          "tests/slot-transfer.test.cjs"
-        ]
-      }
-    },
-    "object.request-queue-study.v1": {
-      "references": {
-        "documentation": [
-          "modules/components/DESIGN.md",
-          "modules/components/examples/request-queue/design.md"
-        ],
-        "tests": []
-      }
-    },
-    "object.interview-cards.v1": {
-      "references": {
-        "documentation": [
-          "modules/components/DESIGN.md",
-          "modules/components/OBJECT-COMPONENTS.md"
-        ],
-        "tests": [
-          "tests/interview-components.cjs"
-        ]
-      }
-    },
-    "object.judgment-stamp.v1": {
-      "references": {
-        "documentation": [
-          "modules/components/DESIGN.md",
-          "modules/components/OBJECT-COMPONENTS.md"
-        ],
-        "tests": [
-          "tests/interview-components.cjs"
-        ]
-      }
-    },
-    "object.task-workbench.v1": {
-      "references": {
-        "documentation": [
-          "modules/components/DESIGN.md",
-          "modules/components/OBJECT-COMPONENTS.md"
-        ],
-        "tests": [
-          "tests/interview-components.cjs"
-        ]
-      }
-    },
-    "object.character-offer-receive.v1": {
-      "references": {
-        "documentation": [
-          "modules/components/OBJECT-COMPONENTS.md",
-          "modules/components/character/README.md"
-        ],
-        "tests": [
-          "tests/offer-receive.cjs"
-        ]
-      }
-    },
-    "object.transcript-reach-hold.v1": {
-      "references": {
-        "documentation": [
-          "modules/components/OBJECT-COMPONENTS.md",
-          "modules/components/character/README.md"
-        ],
-        "tests": [
-          "tests/transcript-reach.cjs"
-        ]
-      }
-    }
-  }
+  "items": {}
 }

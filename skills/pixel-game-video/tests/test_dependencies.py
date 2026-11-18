@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT))
 from engine.builder import build
 from engine.compiler import compile_project, read_json, write_json
 from engine.delivery import copy_skill, skill_files
+from engine.dependencies import runtime_files
 from engine.render import _build_bindings
 from engine.workbench_bridge import require_supported
 
@@ -75,12 +76,13 @@ class DependencyTests(unittest.TestCase):
         self.assertNotIn('P.cacheAdventure=', runtime)
         self.assertNotIn('getContext(\'webgl\'', runtime)
 
-    def test_export_and_install_package_share_rejected_file_policy_and_build(self):
+    def test_export_copies_selected_runtime_and_rebuilds_independently(self):
         source = self.root / 'source-skill'
         copy_skill(ROOT, source)
         forbidden = ['modules/audio/charge.py', 'modules/audio/assets/arcade-charge/charge.wav',
                      'modules/audio/assets/arcade-expanded/experiment.wav',
-                     'node_modules/package/index.js', 'engine/__pycache__/cached.pyc', 'tools/runtime.exe']
+                     'node_modules/package/index.js', 'engine/__pycache__/cached.pyc', 'tools/runtime.exe',
+                     'scratch/archived-project/file.json', '.tmp/report.json']
         for relative in forbidden:
             path = source / relative
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -92,7 +94,15 @@ class DependencyTests(unittest.TestCase):
             cli.export_project(self.project, exported)
         exported_files = {path.relative_to(exported / 'pixel-game-video').as_posix()
                           for path in (exported / 'pixel-game-video').rglob('*') if path.is_file()}
-        self.assertEqual(exported_files, {p.as_posix() for p in skill_files(source, include_tests=False)})
+        resolved = compile_project(self.project, source)
+        self.assertLess(exported_files, installable)
+        self.assertTrue(set(runtime_files(source, resolved)).issubset(exported_files))
+        self.assertTrue({'workbench/package-lock.json', 'workbench/scripts/open.mjs',
+                         'modules/text/soft-highlight.mjs'}.issubset(exported_files))
+        self.assertIn('examples/asking-motion/index.html', installable)
+        self.assertFalse(any(name.startswith(('examples/', 'tests/', 'workbench/tests/')) for name in exported_files))
+        self.assertNotIn('modules/library/backgrounds/cyberpunk-city.png', exported_files)
+        self.assertNotIn('modules/scenes/competition-cinematic.js', exported_files)
         bridge = require_supported(exported / 'project')
         self.assertTrue(bridge['supported'])
         self.assertTrue(all(unit['component'] == 'CanvasShotUnit' for unit in bridge['manifest']['shots']))

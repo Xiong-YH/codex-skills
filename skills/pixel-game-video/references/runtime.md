@@ -31,9 +31,9 @@ python scripts/video.py export-project work/my-film /path/outside-project/delive
 
 用 `python scripts/video.py import-bgm PROJECT --source LOCAL_AUDIO` 将所选配乐转为项目 WAV。将输出的 `bgm` 配置加入对应创作源，按实际拍点填写裁入和淡化。详见 [配乐工作流](../modules/audio/MUSIC.md)。
 
-独立导出包含整个基础运行模块与素材、四份输入、工作台源码与依赖清单，不包含 Python/Node/浏览器/字体二进制、node_modules 或渲染缓存。工作台编辑过的分支另存下载的项目 JSON；浏览器缓存不能代替交付。director 工程导出为明确标记的 direct 快照，并另存创作源供追溯。
+独立导出随本项目携带四份输入、已用的运行源码和素材、工作台源码及依赖清单。下载工作台项目 JSON 以继续编辑剪辑分支。director 工程以 direct 快照运行，创作源另存供追溯。需要加入新的画风或场景能力时，从完整技能的源工程补齐并重新导出。
 
-安装包与 `export-project` 共用 `engine/delivery.py` 的文件规则，排除缓存、运行时二进制和撤回实验。输入哈希按 `engine/dependencies.py` 选择后端源码、风格预设和实际音效母版；工作台桥接与实际使用的执行器、依赖锁须参与有效构建检查。目录合同及公共引擎仍共同绑定。修改被绑定文件需重新构建，修改未使用的场景实现或实验素材不影响本工程。风格素材按整个选定预设绑定，暂不细分到单镜背景。
+安装包与 `export-project` 共用 `engine/delivery.py` 的文件规则。R41 等参考样例随完整技能提供。独立工程按 `engine/dependencies.py` 的运行依赖和工作台支持文件复制，在交付目录验证重建及工作台清单。所选风格预设的素材以整套为单位绑定，工作台自带的基础音效入口随编辑器保留。
 
 机器核验状态与人工视听状态分别保存；只有实际运行结果才能扩大平台支持范围。旧 Swift 和 Windows 原生 Canvas 实验保留在 legacy，未作为新命令后端。
 

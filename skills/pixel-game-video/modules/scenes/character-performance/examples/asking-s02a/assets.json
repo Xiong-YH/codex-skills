@@ -147,21 +147,5 @@
         -4
       ]
     }
-  },
-  "previousAtlas": {
-    "file": "assets/seated-actions.png",
-    "sha256": "5c55207df77f118a763f6430f9b58ae5710048eee7f4c1e4ef14b9b44bef5127",
-    "nativeSize": [
-      1254,
-      1254
-    ],
-    "grid": [
-      3,
-      3
-    ],
-    "alpha": true,
-    "source": "built-in image_gen; whole-pose sprite atlas then alpha cleanup; see prompts.md",
-    "status": "failed: student-side desk support absent; retained for history",
-    "registration": "project-local; not added to actor.azong.v3 pose whitelist"
   }
 }

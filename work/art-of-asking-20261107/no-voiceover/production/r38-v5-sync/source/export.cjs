@@ -7,15 +7,17 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 
-const directory = path.resolve(__dirname, '..');
+const defaultManifest = path.resolve(__dirname, '../asking-r38-v5-sync.project.json');
+const manifestPath = path.resolve(process.argv[2] || defaultManifest);
+const directory = path.dirname(manifestPath);
 const project = path.resolve(directory, '../..');
 const repo = path.resolve(project, '../../..');
-const temp = path.join(project, '.tmp/r38-pulse-v5');
-const manifestPath = path.join(directory, 'asking-r38-v5-sync.project.json');
+const stem = path.basename(manifestPath, '.project.json');
+const temp = path.join(project, '.tmp', stem);
 const cut = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 const entry = path.join(directory, cut.preview.file);
 const wave = path.join(directory, cut.audio.file);
-const name = 'asking-r38-v5-sync.mp4';
+const name = stem + '.mp4';
 const raw = path.join(temp, 'picture.h264');
 const encoded = path.join(temp, 'picture-with-v5.mp4');
 const sha = file => createHash('sha256').update(fs.readFileSync(file)).digest('hex');
@@ -88,7 +90,7 @@ async function encode() {
           fs.writeSync(fd, Buffer.from(data, 'base64'));
           completed++;
         }
-        if (completed % 1200 === 0 || completed === frames) console.log(`R38 rendered ${completed}/${frames} frames`);
+        if (completed % 1200 === 0 || completed === frames) console.log(`${stem} rendered ${completed}/${frames} frames`);
       }
     } finally { fs.closeSync(fd); }
     await page.evaluate(() => window.exportState.encoder.close());
@@ -102,7 +104,7 @@ function mux() {
   const run = (app,args) => execFileSync(app,args,{ windowsHide:true,maxBuffer:64 * 1024 * 1024 });
   run(ffmpeg,['-hide_banner','-v','error','-xerror','-y','-r',String(fps),'-i',raw,'-i',wave,
     '-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','256k','-movflags','+faststart',
-    '-metadata','title=提问的艺术 · 步进 V5 卡点版',encoded]);
+    '-metadata','title=提问的艺术 · '+cut.version.replace(/^R\d+ · /,''),encoded]);
   const probe = JSON.parse(run(ffprobe,['-v','error','-count_frames','-show_streams','-of','json',encoded]).toString('utf8'));
   const picture = probe.streams.find(s => s.codec_type === 'video');
   const audio = probe.streams.find(s => s.codec_type === 'audio');

@@ -1,7 +1,6 @@
 {
   "version": 3,
   "catalog_type": "character_and_acting_reference",
-  "default_lead": "00-lead",
   "generation_method": "built_in_image_gen",
   "names_are_provisional": true,
   "current_entries": [

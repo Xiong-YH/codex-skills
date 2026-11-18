@@ -1,185 +1,530 @@
 {
   "schemaVersion": 1,
-  "title": "12 类像素信息组件",
-  "note": "Screenshots from the current engine. Neutral background is used only for component comparison, not as a default video setting. State strips are sampled frames, not animation playback evidence.",
-  "entries": [
+  "initial": "deck",
+  "categories": {
+    "paper": "纸面与资料",
+    "message": "对话与状态",
+    "number": "数量与结果",
+    "sequence": "关系与步骤",
+    "action": "章节与操作",
+    "text": "识别与阅读"
+  },
+  "clips": [
     {
-      "id": "identity",
-      "title": "身份卡",
-      "detail": "名称、图像与简要特征",
-      "shotId": "identity",
-      "localFrame": 215,
-      "states": [],
-      "group": "component"
-    },
-    {
-      "id": "metric",
-      "title": "数值卡",
-      "detail": "从 0 到 3，终值保持",
-      "shotId": "metric",
-      "localFrame": 215,
-      "states": [
+      "id": "deck",
+      "kind": "deck",
+      "title": "资料卡组",
+      "category": "paper",
+      "description": "资料从不同方向拍进手账，卡片落位和收藏章分拍，底部保留尚未开始的行动。",
+      "frames": 240,
+      "poster": 208,
+      "markers": [
         {
-          "frame": 30,
-          "label": "起点 · 0 层"
+          "frame": 41,
+          "label": "首卡落位"
         },
         {
-          "frame": 40,
-          "label": "变化中"
+          "frame": 59,
+          "label": "收藏盖章"
         },
         {
-          "frame": 215,
-          "label": "终值 · 3 层"
+          "frame": 185,
+          "label": "四张资料保留"
         }
       ],
-      "group": "component"
+      "reference": {
+        "label": "课程卡盖章",
+        "frame": 1130,
+        "clip": "course-stack"
+      }
     },
     {
       "id": "comparison",
-      "title": "对比组",
-      "detail": "同构对照，可嵌入前镜真实快照",
-      "shotId": "comparison",
-      "localFrame": 215,
-      "states": [],
-      "group": "component"
-    },
-    {
-      "id": "annotation",
-      "title": "指向标注",
-      "detail": "短标签与引线连接到实物",
-      "shotId": "annotation",
-      "localFrame": 215,
-      "states": [],
-      "group": "component"
-    },
-    {
-      "id": "chapter",
-      "title": "章节标题",
-      "detail": "编号、主题与内容承诺",
-      "shotId": "chapter",
-      "localFrame": 215,
-      "states": [],
-      "group": "component"
-    },
-    {
-      "id": "flow",
-      "title": "流程链",
-      "detail": "依次点亮当前步骤，结果保持",
-      "shotId": "flow",
-      "localFrame": 215,
-      "states": [
+      "kind": "comparison",
+      "title": "并排对照",
+      "category": "paper",
+      "description": "同一页放两张不同证据。标题带、图标和纸签分三层，左卡与右卡分别到位。",
+      "frames": 240,
+      "poster": 208,
+      "markers": [
         {
-          "frame": 48,
-          "label": "第一步"
+          "frame": 54,
+          "label": "读左卡"
         },
         {
-          "frame": 108,
-          "label": "第二步"
+          "frame": 114,
+          "label": "两边同屏"
+        }
+      ],
+      "reference": {
+        "label": "研究对照页",
+        "frame": 3420,
+        "clip": "research-compare"
+      }
+    },
+    {
+      "id": "chat",
+      "kind": "chat",
+      "title": "聊天窗口",
+      "category": "message",
+      "description": "消息分侧落位，超过三条时同一列消息连续上推，由窗口边缘裁切。",
+      "frames": 285,
+      "poster": 245,
+      "markers": [
+        {
+          "frame": 80,
+          "label": "来信落稳"
+        },
+        {
+          "frame": 169,
+          "label": "旧消息上推"
+        },
+        {
+          "frame": 225,
+          "label": "结果读稳"
+        }
+      ],
+      "reference": {
+        "label": "消息与人物反应",
+        "frame": 630,
+        "clip": "chat-reaction"
+      }
+    },
+    {
+      "id": "applications",
+      "kind": "tray",
+      "title": "投递槽和结果揭晓",
+      "category": "number",
+      "description": "纸堆、计数、零邀请、浮出反馈依次接力。进槽的纸被近侧前沿挡住。",
+      "frames": 310,
+      "poster": 238,
+      "markers": [
+        {
+          "frame": 92,
+          "label": "纸张正进槽"
+        },
+        {
+          "frame": 179,
+          "label": "500 锁定"
         },
         {
           "frame": 215,
-          "label": "完整流程"
+          "label": "0 面试读稳"
+        },
+        {
+          "frame": 251,
+          "label": "反馈错峰浮起"
         }
       ],
-      "group": "component"
+      "reference": {
+        "label": "投递槽与回执",
+        "frame": 1442,
+        "clip": "count-reveal"
+      }
     },
     {
-      "id": "timeline",
-      "title": "时间轴",
-      "detail": "等距阶段节点，表示先后顺序",
-      "shotId": "timeline",
-      "localFrame": 215,
-      "states": [],
-      "group": "component"
+      "id": "metric",
+      "kind": "metric",
+      "title": "计数与结果",
+      "category": "number",
+      "description": "共用三个读数格，数字慢起加速，在终值处锁住。",
+      "frames": 240,
+      "poster": 208,
+      "markers": [
+        {
+          "frame": 55,
+          "label": "慢起"
+        },
+        {
+          "frame": 117,
+          "label": "翻动加快"
+        },
+        {
+          "frame": 169,
+          "label": "128 读稳"
+        }
+      ]
     },
     {
       "id": "checklist",
-      "title": "检查清单",
-      "detail": "条件满足后累计勾选与计数",
-      "shotId": "checklist",
-      "localFrame": 215,
-      "states": [
+      "kind": "checklist",
+      "title": "状态清单",
+      "category": "paper",
+      "description": "装订页和三个独立条目承载总结，图标、阶段和正文分列。",
+      "frames": 240,
+      "poster": 208,
+      "markers": [
         {
-          "frame": 25,
-          "label": "未完成 · 0 / 3"
+          "frame": 49,
+          "label": "第一项确认"
         },
         {
-          "frame": 90,
-          "label": "部分完成 · 2 / 3"
-        },
-        {
-          "frame": 215,
-          "label": "完成 · 3 / 3"
+          "frame": 149,
+          "label": "三项保留"
         }
       ],
-      "group": "component"
+      "reference": {
+        "label": "总结纸页",
+        "frame": 6155,
+        "clip": "practice"
+      }
+    },
+    {
+      "id": "action",
+      "kind": "action",
+      "title": "操作台与按钮",
+      "category": "action",
+      "description": "实体设备提供承载面。按钮按压是因，暖色切到确认色并保留进行状态。",
+      "frames": 240,
+      "poster": 208,
+      "markers": [
+        {
+          "frame": 64,
+          "label": "待开始"
+        },
+        {
+          "frame": 91,
+          "label": "按钮压下"
+        },
+        {
+          "frame": 126,
+          "label": "进行状态保留"
+        }
+      ],
+      "reference": {
+        "label": "行动台",
+        "frame": 5878,
+        "clip": "practice"
+      }
+    },
+    {
+      "id": "chapter",
+      "kind": "chapter",
+      "title": "篇章牌",
+      "category": "action",
+      "description": "深绿双框、浅金文字与短阴影形成标题牌，用在叙事切换。",
+      "frames": 240,
+      "poster": 208,
+      "markers": [
+        {
+          "frame": 9,
+          "label": "篇章牌入场"
+        },
+        {
+          "frame": 35,
+          "label": "标题停稳"
+        }
+      ],
+      "reference": {
+        "label": "片名铭牌",
+        "frame": 2200,
+        "clip": "question-title"
+      }
+    },
+    {
+      "id": "choice",
+      "kind": "choice",
+      "title": "选项轨",
+      "category": "sequence",
+      "description": "多个选项共用一条纸轨，选中项压下、着色，其他候选仍可对照。",
+      "frames": 240,
+      "poster": 208,
+      "markers": [
+        {
+          "frame": 85,
+          "label": "选项齐全"
+        },
+        {
+          "frame": 131,
+          "label": "选中项保留"
+        }
+      ]
+    },
+    {
+      "id": "template",
+      "kind": "template",
+      "title": "填空模板",
+      "category": "paper",
+      "description": "三格逐行写入，上一格留在原处，便于读者照着填。",
+      "frames": 240,
+      "poster": 208,
+      "markers": [
+        {
+          "frame": 50,
+          "label": "先说做过什么"
+        },
+        {
+          "frame": 99,
+          "label": "再说卡点"
+        },
+        {
+          "frame": 154,
+          "label": "给出具体请求"
+        }
+      ],
+      "reference": {
+        "label": "片尾提问模板",
+        "frame": 6360,
+        "clip": "full-reference"
+      }
+    },
+    {
+      "id": "notebook",
+      "kind": "notebook",
+      "title": "手账和记录页",
+      "category": "paper",
+      "description": "粗像素装订与细横线共用纸页，文字按行写入，留白用于继续记录。",
+      "frames": 240,
+      "poster": 208,
+      "markers": [
+        {
+          "frame": 48,
+          "label": "记下第一步"
+        },
+        {
+          "frame": 96,
+          "label": "写开始时间"
+        },
+        {
+          "frame": 153,
+          "label": "留下复盘项"
+        }
+      ]
+    },
+    {
+      "id": "tags",
+      "kind": "tag",
+      "title": "状态贴片",
+      "category": "message",
+      "description": "暖色、浅绿与淡绯各承担一种状态，瞬时反馈上浮离场，稳定状态留着读。",
+      "frames": 240,
+      "poster": 155,
+      "markers": [
+        {
+          "frame": 76,
+          "label": "两个稳定状态"
+        },
+        {
+          "frame": 143,
+          "label": "短反馈出现"
+        },
+        {
+          "frame": 214,
+          "label": "反馈离场"
+        }
+      ]
+    },
+    {
+      "id": "flow",
+      "kind": "flow",
+      "title": "流程接力",
+      "category": "sequence",
+      "description": "节点按事件露出，连线交代同一对象的去向。已完成的步骤仍留在纸面。",
+      "frames": 240,
+      "poster": 208,
+      "markers": [
+        {
+          "frame": 42,
+          "label": "找到记录"
+        },
+        {
+          "frame": 101,
+          "label": "下一步接住"
+        },
+        {
+          "frame": 156,
+          "label": "结果落稳"
+        }
+      ]
+    },
+    {
+      "id": "timeline",
+      "kind": "timeline",
+      "title": "阶段书签",
+      "category": "sequence",
+      "description": "阶段标签沿同一条纸面基线推进，用书签和位置建立先后。",
+      "frames": 240,
+      "poster": 208,
+      "markers": [
+        {
+          "frame": 44,
+          "label": "准备"
+        },
+        {
+          "frame": 99,
+          "label": "到场"
+        },
+        {
+          "frame": 151,
+          "label": "复盘"
+        }
+      ]
     },
     {
       "id": "hierarchy",
-      "title": "层级结构",
-      "detail": "一个主体展开少量组成与职责",
-      "shotId": "hierarchy",
-      "localFrame": 215,
-      "states": [],
-      "group": "component"
+      "kind": "hierarchy",
+      "title": "分支便签",
+      "category": "sequence",
+      "description": "主签固定在上，分支各自露出，不用数量或层级大小暗示重要性。",
+      "frames": 240,
+      "poster": 208,
+      "markers": [
+        {
+          "frame": 52,
+          "label": "第一条分工"
+        },
+        {
+          "frame": 141,
+          "label": "三条并列"
+        }
+      ]
     },
     {
       "id": "bars",
-      "title": "条形比较",
-      "detail": "相同尺度、零起点；数值为示意",
-      "shotId": "bars",
-      "localFrame": 215,
-      "states": [],
-      "group": "component"
+      "kind": "bars",
+      "title": "同尺度比较",
+      "category": "number",
+      "description": "用纸面裁线容纳等比例条带和读数，所有条带起点和刻度共用。",
+      "frames": 240,
+      "poster": 208,
+      "markers": [
+        {
+          "frame": 52,
+          "label": "共同零点"
+        },
+        {
+          "frame": 166,
+          "label": "读三组结果"
+        }
+      ]
     },
     {
       "id": "code",
-      "title": "代码讲解",
-      "detail": "保留缩进，逐行强调，不执行代码",
-      "shotId": "code",
-      "localFrame": 215,
-      "states": [
+      "kind": "code",
+      "title": "代码摘录",
+      "category": "text",
+      "description": "深绿固定代码视口，逐行指出当前动作，原缩进和行号始终可追踪。",
+      "frames": 240,
+      "poster": 161,
+      "markers": [
         {
-          "frame": 48,
-          "label": "强调第一行"
+          "frame": 54,
+          "label": "变量就绪"
         },
         {
-          "frame": 98,
-          "label": "强调第二行"
-        },
-        {
-          "frame": 150,
-          "label": "强调第三行"
+          "frame": 140,
+          "label": "强调启用行"
         }
-      ],
-      "group": "component"
+      ]
+    },
+    {
+      "id": "identity",
+      "kind": "identity",
+      "title": "身份卡",
+      "category": "text",
+      "description": "三层纸沿让身份卡有可触摸的重量，类别、名称和时间位置分开。",
+      "frames": 240,
+      "poster": 208,
+      "markers": [
+        {
+          "frame": 31,
+          "label": "对应对象"
+        },
+        {
+          "frame": 83,
+          "label": "交接标记"
+        }
+      ]
+    },
+    {
+      "id": "annotation",
+      "kind": "annotation",
+      "title": "对象标注",
+      "category": "text",
+      "description": "短签留在对象外，引线把注意力指到实际有信息的位置。",
+      "frames": 240,
+      "poster": 208,
+      "markers": [
+        {
+          "frame": 55,
+          "label": "先看原对象"
+        },
+        {
+          "frame": 86,
+          "label": "标注连到读点"
+        }
+      ]
     },
     {
       "id": "takeaway",
-      "title": "结论组件",
-      "detail": "以开放式主句收束，保留场景空间",
-      "shotId": "takeaway",
-      "localFrame": 215,
-      "states": [],
-      "group": "component"
+      "kind": "takeaway",
+      "title": "结论牌",
+      "category": "text",
+      "description": "深色低亮承载面让主句先读，补充说明从细线之后接住。",
+      "frames": 240,
+      "poster": 208,
+      "markers": [
+        {
+          "frame": 20,
+          "label": "结论牌到位"
+        },
+        {
+          "frame": 126,
+          "label": "稳定阅读"
+        }
+      ]
     },
     {
-      "id": "flow-checklist",
-      "title": "流程 + 清单",
-      "detail": "主流程与执行条件相互补充",
-      "shotId": "flow-checklist",
-      "localFrame": 215,
-      "states": [],
-      "group": "combination"
+      "id": "tray",
+      "kind": "tray",
+      "title": "投递和收件槽",
+      "category": "number",
+      "description": "木槽的上面、内侧和近边分别绘制。纸落下后裁切到同一槽口内。",
+      "frames": 240,
+      "poster": 197,
+      "markers": [
+        {
+          "frame": 31,
+          "label": "纸张入场"
+        },
+        {
+          "frame": 104,
+          "label": "槽口压住纸边"
+        },
+        {
+          "frame": 195,
+          "label": "纸叠稳定"
+        }
+      ]
     },
     {
-      "id": "code-annotation",
-      "title": "代码 + 标注",
-      "detail": "主讲解行与指认信息分清主次",
-      "shotId": "code-annotation",
-      "localFrame": 98,
-      "states": [],
-      "group": "combination"
+      "id": "handoff-out",
+      "kind": "identity",
+      "title": "同一张纸签跨镜",
+      "category": "action",
+      "description": "资料页退场时只带走凭条，下一页接住同样的文字、边沿与颜色。",
+      "frames": 240,
+      "poster": 155,
+      "markers": [
+        {
+          "frame": 62,
+          "label": "纸签仍在资料页"
+        },
+        {
+          "frame": 108,
+          "label": "同一张纸签在途"
+        },
+        {
+          "frame": 141,
+          "label": "新页接住原凭条"
+        }
+      ],
+      "fromOffset": 144,
+      "reference": {
+        "label": "纸签接镜",
+        "frame": 3680,
+        "clip": "paper-handoff"
+      }
     }
   ]
 }

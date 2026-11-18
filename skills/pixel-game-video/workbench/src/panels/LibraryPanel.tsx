@@ -155,6 +155,7 @@ export const LibraryPanel: React.FC = () => {
   const t = useT();
   const tx = useTx();
   const setPreview = useStore((s) => s.setPreview);
+  const fps = useStore((s) => s.project.fps);
   const [tab, setTab] = useState<TabId>(PROJ_LINKED ? "media" : "cards");
   // 折叠分组默认收起，点击标题展开
   const [openCats, setOpenCats] = useState<Set<string>>(new Set());
@@ -349,6 +350,23 @@ export const LibraryPanel: React.FC = () => {
 
         {tab === "sfx" && (
           <>
+            {groupBy(SFX_LIB, (s) => s.cat).map(([cat, items]) => (
+              <Group key={cat} id={`sfx:${cat}`} label={t("lib.sfxLib", { cat: tx(cat) })} count={items.length}
+                defaultOpen={cat === "系列常用"}>
+                {items.map((s) => (
+                  <Row
+                    key={s.file}
+                    dot="#ff9f0a"
+                    name={s.name}
+                    meta={s.hint}
+                    onClick={() => setPreview({ kind: "audio", file: s.file, label: s.name })}
+                    payload={s.durationSeconds
+                      ? audioPayload(s.file, s.name, s.initialVolume ?? 0.5, Math.ceil(s.durationSeconds * fps))
+                      : audioPayload(s.file, s.name, 0.4, 90)}
+                  />
+                ))}
+              </Group>
+            ))}
             {projectAudio.length > 0 && (
               <Group id="sfx:proj" label={t("lib.projectAudio")} count={projectAudio.length} defaultOpen>
                 {projectAudio.map((m) => (
@@ -376,19 +394,6 @@ export const LibraryPanel: React.FC = () => {
                 ))}
               </Group>
             )}
-            {groupBy(SFX_LIB, (s) => s.cat).map(([cat, items]) => (
-              <Group key={cat} id={`sfx:${cat}`} label={t("lib.sfxLib", { cat: tx(cat) })} count={items.length}>
-                {items.map((s) => (
-                  <Row
-                    key={s.file}
-                    dot="#ff9f0a"
-                    name={s.name}
-                    onClick={() => setPreview({ kind: "audio", file: s.file, label: s.name })}
-                    payload={audioPayload(s.file, s.name, 0.4, 90)}
-                  />
-                ))}
-              </Group>
-            ))}
           </>
         )}
       </div>

@@ -8,9 +8,9 @@
 
 ## 共同前提
 
-- 当前只接入Canvas，两镜不能配置motion.camera-*；当前合同按固定相机工作。转场中重新排版组件与文字，使用项目自己的data、visualStyle与features；不会自动识别印章、生成数据环或判断语义是否相关。
+- 当前接入 Canvas 的固定相机镜头。转场中按项目的文字、组件数据与纸层重排对象。
 - source／sources、pair.from引用前镜component ID；target、pair.to引用后镜component ID。来源末态和目标落稳时须可见。中间尺寸必须能正常排版，过长文字或过小组件需调整，不回退成截图缩放。
-- 组件交接不把独立口播人物收进组件；烘焙在媒体里的小人须先提供干净素材。背景和组件的材质、像素尺度及受光仍按当前项目核对，不绑定某个工坊或配色。
+- 人物和组件分别放在自己的层。背景、组件的像素尺度和受光按当前项目核对，实体造型参考 [R41 组件规范](../../style/COMPONENT-ART.md)。
 - 工作台使用独立CanvasTransitionUnit，组件JSON和转场参数JSON分别编辑；正式成片仍走工作台流程。
 
 ## component-handoff

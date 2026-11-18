@@ -20,5 +20,3 @@
 ## 验收重点
 
 检查同镜明暗、材质、像素尺度与轮廓，小屏可读、运动无明显像素跳动；目标平台字体须实际核验。
-
-全片分轨、保存重开和最终导出统一按 [工作台](../../references/workbench.md) 验证，本页不表示已完成当前项目验收。新增能力查 [模块维护](../../references/module-development.md)，职责调整查 [归属与迁移清单](../../references/module-ownership.md)。

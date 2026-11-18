@@ -76,8 +76,9 @@ class CuePlacement(Contract):
 
 class VisualIntent(Contract):
     question: str = Field(min_length=1)
-    form: Literal["scene", "process", "identity", "metric", "comparison", "annotation", "chapter",
-                  "flow", "timeline", "checklist", "hierarchy", "bars", "code", "takeaway"]
+    form: Literal["scene", "process", "identity", "metric", "comparison", "annotation", "chapter", "flow", "timeline",
+                  "checklist", "hierarchy", "bars", "code", "takeaway", "chat", "tag", "notebook", "deck", "tray",
+                  "choice", "action", "template"]
     subject: str = Field(min_length=1)
     action: str = Field(min_length=1, description="设计意图，不自动执行；须由真实场景参数、事件、素材或已实现机制兑现。")
     result: str = Field(min_length=1)

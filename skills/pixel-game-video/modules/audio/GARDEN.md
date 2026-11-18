@@ -1,6 +1,6 @@
 # Garden 声音工作流
 
-分镜、混音和审片共用这条工作流。详细配方、词汇和命令见随包的 [声音原文](vendor/garden-skills/references/sound.md) 与 [审片原文](vendor/garden-skills/references/review.md)。本页把 Garden 的声音方法接到 VideoSpec 和工作台。
+分镜先用 [音效设计与试听](SOUND-DESIGN.md) 选择要听见的触点。本页把 Garden 的配乐分析、进阶合成和声音检查接到 VideoSpec 和工作台。详细配方、词汇和命令见随包的 [声音原文](vendor/garden-skills/references/sound.md) 与 [审片原文](vendor/garden-skills/references/review.md)。
 
 ## 声音方向
 

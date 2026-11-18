@@ -1,5 +1,6 @@
 """Music is event-owned, content-bound, portable, and shared by both backends."""
 import importlib.util
+import json
 from pathlib import Path
 import shutil
 import subprocess
@@ -94,6 +95,8 @@ class BgmContractTests(unittest.TestCase):
                                  'build', str(exported)], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertTrue(read_json(exported / 'build/sfx-events.json')['musicBed'])
+        self.assertEqual(json.loads(result.stdout)['soundDesign']['warningCodes'], ['bgm-without-sfx'])
+        self.assertEqual(read_json(exported / 'build/change-report.json')['preflight']['audioReview'], 'not_reviewed')
 
     def test_native_build_contains_the_same_mixed_music_track(self):
         shutil.copytree(ROOT / 'assets/remotion-project-template', self.project, dirs_exist_ok=True)

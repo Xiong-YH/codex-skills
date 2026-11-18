@@ -12,7 +12,7 @@
 
 ## 可选的历史关系排练
 
-最新一轮用户要求补齐参考视频：八项现各有一段独立5秒代码人物排练MP4，详情页直接播放；旧选段保留在previousExamples作为出处，不再充当主参考。视频、源码、复现录制脚本和哈希见examples/relationship-studies/。原九格素材的人物侧桌脚缺失已撤回为结构失败，当前用seated-actions-v2.png；纠错范围、已知限制与本轮核验见 [review-v3.md](review-v3.md)。
+八种关系各有一段独立的 5 秒代码人物排练。视频、录制脚本和哈希见 [关系试样](examples/relationship-studies/README.md)。当前 S02A 候选使用修正承重结构的图集。 [修正记录](review-v3.md)
 
 schemaVersion=2的sequences.json改为8项抽象关系草案，分“行为关系”“变化与节奏”“段落衔接”，各层可以叠加。每项保存关系、可调变量、分支与不变量；不将写字、拿手机等具体动词当作顶层模式。原12条故事动作链保存在archive/sequences-v1.json，旧案例plan的seq.*引用按该历史表解释，新pattern.*不替换或重制旧片段。
 

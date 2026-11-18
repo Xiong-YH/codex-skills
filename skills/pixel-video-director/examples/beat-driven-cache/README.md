@@ -1,6 +1,6 @@
 # 资料 A 的两次读取
 
-16 秒无口播示例。第一次读取从工作台去源站，资料回来时落一份副本，第二次读取直接用副本。小棕在普通 Canvas 场景走到卡边触发状态，同一张资料卡在两个场所间交接。
+16 秒技术样例，用来核对同源白模、事件和 Canvas 构建。第一次读取从工作台去源站，资料回来时落一份副本，第二次读取直接用副本。当前成片风格与动态方法见 [R41 逐镜参考](../../../pixel-game-video/references/asking-motion-reference.md)。
 
 | 时间 | 动作 |
 | --- | --- |
@@ -13,10 +13,10 @@
 
 ## 构建两种预览
 
-在仓库根目录执行下列 PowerShell 命令。项目目录可自行替换。运行环境沿基础技能的 [运行说明](../../../pixel-game-video/references/runtime.md)。
+在仓库根目录执行下列 PowerShell 命令。将 `$cacheDemo` 改成本次试样使用的新目录。运行环境沿基础技能的 [运行说明](../../../pixel-game-video/references/runtime.md)。
 
 ```powershell
-$cacheDemo = 'work/beat-driven-cache'
+$cacheDemo = 'PROJECT'
 New-Item -ItemType Directory -Path $cacheDemo -Force | Out-Null
 Get-ChildItem -LiteralPath 'skills/pixel-video-director/examples/beat-driven-cache' -Filter '*.json' -File |
   Copy-Item -Destination $cacheDemo

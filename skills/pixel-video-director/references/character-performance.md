@@ -20,7 +20,7 @@
 | 过程 | 完整起姿、关键中间／接触姿、末姿，位移轨迹与遮挡层 |
 | 收束 | 哪个结果保留、对象归谁，何时落稳阅读及交给下一镜 |
 
-手机对话可按 [R38 消息与反应](../../pixel-game-video/references/asking-motion-reference.md#按镜头任务选段) 观察消息先落、人物再反应、镜头才移焦的顺序；不复制原台词与动作链。跨镜接物须看交出、在途、接住，不能用放大的纸牌挡住接收者。
+手机对话可看 [消息与反应](../../pixel-game-video/examples/asking-motion/index.html#chat-reaction) 和 [人物感谢特写](../../pixel-game-video/examples/asking-motion/index.html#thanks-closeup)。先让消息被读到，再由疑惑或举拳启动运镜。运镜期间让触发这次反应的那条气泡保持可读。跨镜接物要看交出、在途和接住，给接收者留出辨认空间。
 
 ## 素材与实现
 

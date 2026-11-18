@@ -1,198 +1,128 @@
 {
   "shots": [
     {
-      "id": "identity",
-      "durationFrames": 240,
+      "id": "deck",
       "scene": "scenes.canvas.v1",
       "actor": null,
-      "params": {},
-      "objects": [],
+      "durationFrames": 240,
       "events": [
         {
-          "id": "reveal",
-          "frame": 12
+          "id": "intro",
+          "frame": 23
         },
         {
-          "id": "e1",
-          "frame": 30
+          "id": "saved-1",
+          "frame": 45
         },
         {
-          "id": "e2",
-          "frame": 80
+          "id": "project",
+          "frame": 61
         },
         {
-          "id": "e3",
-          "frame": 130
+          "id": "saved-2",
+          "frame": 82
         },
         {
-          "id": "e4",
-          "frame": 180
+          "id": "frame",
+          "frame": 98
         },
         {
-          "id": "finish1",
-          "frame": 50
+          "id": "saved-3",
+          "frame": 121
         },
         {
-          "id": "finish2",
-          "frame": 100
+          "id": "practice",
+          "frame": 142
         },
         {
-          "id": "finish3",
-          "frame": 150
+          "id": "saved-4",
+          "frame": 164
         }
       ],
-      "motions": [],
       "components": [
         {
-          "id": "identity",
-          "kind": "identity",
-          "x": 0.2,
-          "y": 0.18,
+          "id": "lessons",
+          "kind": "deck",
+          "x": 0.225,
+          "y": 0.23,
           "width": 0.6,
-          "height": 0.58,
-          "showEvent": "reveal",
-          "tone": "gold",
+          "height": 0.6,
           "data": {
-            "eyebrow": "讲述者 · CHARACTER",
-            "title": "阿棕",
-            "detail": "提问 · 串讲 · 观点收束",
-            "image": "media/azong.png"
-          }
-        }
-      ]
-    },
-    {
-      "id": "metric",
-      "durationFrames": 240,
-      "scene": "scenes.canvas.v1",
-      "actor": null,
-      "params": {},
-      "objects": [],
-      "events": [
-        {
-          "id": "reveal",
-          "frame": 12
-        },
-        {
-          "id": "e1",
-          "frame": 30
-        },
-        {
-          "id": "e2",
-          "frame": 80
-        },
-        {
-          "id": "e3",
-          "frame": 130
-        },
-        {
-          "id": "e4",
-          "frame": 180
-        },
-        {
-          "id": "finish1",
-          "frame": 50
-        },
-        {
-          "id": "finish2",
-          "frame": 100
-        },
-        {
-          "id": "finish3",
-          "frame": 150
-        }
-      ],
-      "motions": [],
-      "components": [
-        {
-          "id": "metric",
-          "kind": "metric",
-          "x": 0.25,
-          "y": 0.19,
-          "width": 0.5,
-          "height": 0.55,
-          "showEvent": "reveal",
-          "tone": "gold",
-          "data": {
-            "title": "信息层级",
-            "from": 0,
-            "to": 3,
-            "unit": "层",
-            "detail": "主句 · 证据 · 补充说明",
-            "startEvent": "e1",
-            "endEvent": "finish1"
-          }
+            "title": "今天要做",
+            "detail": "动手做一次",
+            "items": [
+              {
+                "title": "零基础入门",
+                "icon": "play",
+                "event": "intro",
+                "label": "已收藏",
+                "markEvent": "saved-1"
+              },
+              {
+                "title": "项目跟练",
+                "icon": "project",
+                "event": "project",
+                "label": "已收藏",
+                "markEvent": "saved-2"
+              },
+              {
+                "title": "框架速成",
+                "icon": "grid",
+                "event": "frame",
+                "label": "已收藏",
+                "markEvent": "saved-3"
+              },
+              {
+                "title": "面试实战",
+                "icon": "chat",
+                "event": "practice",
+                "label": "已收藏",
+                "markEvent": "saved-4"
+              }
+            ],
+            "status": "还没开始"
+          },
+          "tone": "danger"
         }
       ]
     },
     {
       "id": "comparison",
-      "durationFrames": 240,
       "scene": "scenes.canvas.v1",
       "actor": null,
-      "params": {},
-      "objects": [],
+      "durationFrames": 240,
       "events": [
         {
-          "id": "reveal",
-          "frame": 12
+          "id": "left",
+          "frame": 36
         },
         {
-          "id": "e1",
-          "frame": 30
-        },
-        {
-          "id": "e2",
-          "frame": 80
-        },
-        {
-          "id": "e3",
-          "frame": 130
-        },
-        {
-          "id": "e4",
-          "frame": 180
-        },
-        {
-          "id": "finish1",
-          "frame": 50
-        },
-        {
-          "id": "finish2",
-          "frame": 100
-        },
-        {
-          "id": "finish3",
-          "frame": 150
+          "id": "right",
+          "frame": 95
         }
       ],
-      "motions": [],
       "components": [
         {
-          "id": "comparison",
+          "id": "evidence",
           "kind": "comparison",
-          "x": 0.08,
-          "y": 0.15,
-          "width": 0.84,
+          "x": 0.176,
+          "y": 0.224,
+          "width": 0.65,
           "height": 0.62,
-          "showEvent": "reveal",
-          "tone": "gold",
           "data": {
-            "title": "同一主题，选择不同解释形式",
+            "title": "把岗位要求和做过的事放在一起",
             "items": [
               {
-                "title": "介绍对象",
-                "event": "e1",
-                "sourceShot": "identity",
-                "value": "身份卡",
-                "detail": "这个人是谁？"
+                "title": "岗位要的",
+                "icon": "project",
+                "value": "项目经历",
+                "event": "left"
               },
               {
-                "title": "解释数量",
-                "event": "e2",
-                "sourceShot": "metric",
-                "value": "数值卡",
-                "detail": "一共有多少？"
+                "title": "我做过的",
+                "icon": "paper",
+                "value": "课程作业",
+                "event": "right"
               }
             ]
           }
@@ -200,221 +130,700 @@
       ]
     },
     {
-      "id": "annotation",
-      "durationFrames": 240,
+      "id": "chat",
       "scene": "scenes.canvas.v1",
       "actor": null,
-      "params": {},
-      "objects": [
-        {
-          "id": "book",
-          "asset": "prop.book.v1",
-          "x": 0.5,
-          "y": 0.48
-        }
-      ],
+      "durationFrames": 285,
       "events": [
         {
-          "id": "reveal",
-          "frame": 12
+          "id": "q1",
+          "frame": 22
         },
         {
-          "id": "e1",
+          "id": "a1",
+          "frame": 62
+        },
+        {
+          "id": "q2",
+          "frame": 103
+        },
+        {
+          "id": "a2",
+          "frame": 153
+        },
+        {
+          "id": "done",
+          "frame": 200
+        }
+      ],
+      "components": [
+        {
+          "id": "thread",
+          "kind": "chat",
+          "x": 0.215,
+          "y": 0.144,
+          "width": 0.57,
+          "height": 0.684,
+          "data": {
+            "title": "学长",
+            "visibleRows": 3,
+            "items": [
+              {
+                "side": "outgoing",
+                "text": "学长，我想做活动引导。",
+                "event": "q1"
+              },
+              {
+                "side": "incoming",
+                "text": "你试过现场引导吗？",
+                "event": "a1"
+              },
+              {
+                "side": "outgoing",
+                "text": "我只协助过签到。",
+                "event": "q2"
+              },
+              {
+                "side": "incoming",
+                "text": "周六来跟一场，你先看入口。",
+                "event": "a2"
+              },
+              {
+                "side": "outgoing",
+                "text": "好，周六我来。",
+                "event": "done"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "applications",
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "durationFrames": 310,
+      "events": [
+        {
+          "id": "paper",
+          "frame": 8
+        },
+        {
+          "id": "count",
+          "frame": 31
+        },
+        {
+          "id": "sheet-1",
+          "frame": 26
+        },
+        {
+          "id": "sheet-2",
+          "frame": 47
+        },
+        {
+          "id": "sheet-3",
+          "frame": 66
+        },
+        {
+          "id": "sheet-4",
+          "frame": 82
+        },
+        {
+          "id": "sheet-5",
+          "frame": 96
+        },
+        {
+          "id": "sheet-6",
+          "frame": 108
+        },
+        {
+          "id": "sheet-7",
+          "frame": 119
+        },
+        {
+          "id": "sheet-8",
+          "frame": 127
+        },
+        {
+          "id": "sheet-9",
+          "frame": 134
+        },
+        {
+          "id": "sheet-10",
+          "frame": 141
+        },
+        {
+          "id": "sheet-11",
+          "frame": 148
+        },
+        {
+          "id": "lock",
+          "frame": 164
+        },
+        {
+          "id": "result",
+          "frame": 192
+        },
+        {
+          "id": "hold",
+          "frame": 208
+        },
+        {
+          "id": "reply-1",
+          "frame": 224
+        },
+        {
+          "id": "reply-2",
+          "frame": 239
+        },
+        {
+          "id": "reply-1-out",
+          "frame": 265
+        },
+        {
+          "id": "reply-2-out",
+          "frame": 278
+        }
+      ],
+      "components": [
+        {
+          "id": "resume",
+          "kind": "identity",
+          "x": 0.258,
+          "y": 0.232,
+          "width": 0.414,
+          "height": 0.158,
+          "data": {
+            "title": "简历 · 项目经历",
+            "detail": "这一栏还是空的"
+          },
+          "features": [
+            "stack"
+          ],
+          "dimEvent": "result"
+        },
+        {
+          "id": "tray",
+          "kind": "tray",
+          "x": 0.15,
+          "y": 0.432,
+          "width": 0.178,
+          "height": 0.263,
+          "data": {
+            "items": [
+              {
+                "event": "sheet-1"
+              },
+              {
+                "event": "sheet-2"
+              },
+              {
+                "event": "sheet-3"
+              },
+              {
+                "event": "sheet-4"
+              },
+              {
+                "event": "sheet-5"
+              },
+              {
+                "event": "sheet-6"
+              },
+              {
+                "event": "sheet-7"
+              },
+              {
+                "event": "sheet-8"
+              },
+              {
+                "event": "sheet-9"
+              },
+              {
+                "event": "sheet-10"
+              },
+              {
+                "event": "sheet-11"
+              }
+            ]
+          },
+          "dimEvent": "result"
+        },
+        {
+          "id": "submitted",
+          "kind": "metric",
+          "x": 0.326,
+          "y": 0.451,
+          "width": 0.346,
+          "height": 0.3,
+          "data": {
+            "title": "已投递",
+            "from": 0,
+            "to": 500,
+            "startEvent": "count",
+            "endEvent": "lock",
+            "curve": "accelerate"
+          },
+          "showEvent": "paper",
+          "dimEvent": "result"
+        },
+        {
+          "id": "interviews",
+          "kind": "metric",
+          "x": 0.705,
+          "y": 0.465,
+          "width": 0.188,
+          "height": 0.265,
+          "data": {
+            "title": "面试邀请",
+            "from": 0,
+            "to": 0,
+            "startEvent": "result",
+            "endEvent": "hold"
+          },
+          "showEvent": "result",
+          "tone": "danger"
+        },
+        {
+          "id": "unread",
+          "kind": "tag",
+          "x": 0.648,
+          "y": 0.254,
+          "width": 0.121,
+          "height": 0.059,
+          "data": {
+            "title": "暂无回复",
+            "endEvent": "reply-1-out"
+          },
+          "showEvent": "reply-1",
+          "tone": "secondary"
+        },
+        {
+          "id": "declined",
+          "kind": "tag",
+          "x": 0.799,
+          "y": 0.269,
+          "width": 0.111,
+          "height": 0.058,
+          "data": {
+            "title": "不合适",
+            "endEvent": "reply-2-out"
+          },
+          "showEvent": "reply-2",
+          "tone": "danger"
+        }
+      ]
+    },
+    {
+      "id": "metric",
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "durationFrames": 240,
+      "events": [
+        {
+          "id": "start",
+          "frame": 28
+        },
+        {
+          "id": "lock",
+          "frame": 147
+        }
+      ],
+      "components": [
+        {
+          "id": "total",
+          "kind": "metric",
+          "x": 0.315,
+          "y": 0.295,
+          "width": 0.37,
+          "height": 0.362,
+          "data": {
+            "title": "已收资料",
+            "from": 0,
+            "to": 128,
+            "startEvent": "start",
+            "endEvent": "lock",
+            "curve": "accelerate",
+            "unit": "份"
+          }
+        }
+      ]
+    },
+    {
+      "id": "checklist",
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "durationFrames": 240,
+      "events": [
+        {
+          "id": "before",
           "frame": 30
         },
         {
-          "id": "e2",
-          "frame": 80
+          "id": "during",
+          "frame": 81
         },
         {
-          "id": "e3",
-          "frame": 130
-        },
-        {
-          "id": "e4",
-          "frame": 180
-        },
-        {
-          "id": "finish1",
-          "frame": 50
-        },
-        {
-          "id": "finish2",
-          "frame": 100
-        },
-        {
-          "id": "finish3",
-          "frame": 150
+          "id": "after",
+          "frame": 129
         }
       ],
-      "motions": [],
       "components": [
         {
-          "id": "name",
-          "kind": "annotation",
-          "x": 0.12,
-          "y": 0.22,
-          "width": 0.25,
-          "height": 0.1,
-          "showEvent": "reveal",
-          "tone": "gold",
+          "id": "summary",
+          "kind": "checklist",
+          "x": 0.177,
+          "y": 0.215,
+          "width": 0.65,
+          "height": 0.62,
           "data": {
-            "label": "像素书封",
-            "targetX": 0.46,
-            "targetY": 0.44
+            "title": "总结",
+            "items": [
+              {
+                "label": "问之前",
+                "detail": "先查一查，找到卡点。",
+                "icon": "search",
+                "event": "before"
+              },
+              {
+                "label": "提问时",
+                "detail": "说清处境，问一件具体的事。",
+                "icon": "chat",
+                "event": "during"
+              },
+              {
+                "label": "问之后",
+                "detail": "动手试，再带着结果继续问。",
+                "icon": "check",
+                "event": "after"
+              }
+            ]
           }
-        },
+        }
+      ]
+    },
+    {
+      "id": "action",
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "durationFrames": 240,
+      "events": [
         {
-          "id": "edge",
-          "kind": "annotation",
-          "x": 0.65,
-          "y": 0.56,
-          "width": 0.24,
-          "height": 0.1,
-          "showEvent": "reveal",
-          "tone": "accent",
+          "id": "press",
+          "frame": 87
+        }
+      ],
+      "components": [
+        {
+          "id": "task",
+          "kind": "action",
+          "x": 0.244,
+          "y": 0.202,
+          "width": 0.515,
+          "height": 0.596,
           "data": {
-            "label": "底部边缘",
-            "targetX": 0.52,
-            "targetY": 0.57
+            "title": "软件开发练习",
+            "eyebrow": "19:00",
+            "label": "基础练习",
+            "button": "开始练习",
+            "detail": "练习进行中",
+            "icon": "project",
+            "startEvent": "press"
           }
         }
       ]
     },
     {
       "id": "chapter",
-      "durationFrames": 240,
       "scene": "scenes.canvas.v1",
       "actor": null,
-      "params": {},
-      "objects": [],
-      "events": [
-        {
-          "id": "reveal",
-          "frame": 12
-        },
-        {
-          "id": "e1",
-          "frame": 30
-        },
-        {
-          "id": "e2",
-          "frame": 80
-        },
-        {
-          "id": "e3",
-          "frame": 130
-        },
-        {
-          "id": "e4",
-          "frame": 180
-        },
-        {
-          "id": "finish1",
-          "frame": 50
-        },
-        {
-          "id": "finish2",
-          "frame": 100
-        },
-        {
-          "id": "finish3",
-          "frame": 150
-        }
-      ],
-      "motions": [],
+      "durationFrames": 240,
+      "events": [],
       "components": [
         {
           "id": "chapter",
           "kind": "chapter",
           "x": 0.15,
-          "y": 0.26,
-          "width": 0.72,
-          "height": 0.34,
-          "showEvent": "reveal",
-          "tone": "gold",
+          "y": 0.3,
+          "width": 0.7,
+          "height": 0.341,
           "data": {
             "index": "02",
-            "title": "从接口到数据",
-            "detail": "这一节，跑通一次完整请求"
+            "title": "把问题缩小",
+            "detail": "先找到一个能开始的动作"
           }
         }
       ]
     },
     {
-      "id": "flow",
-      "durationFrames": 240,
+      "id": "choice",
       "scene": "scenes.canvas.v1",
       "actor": null,
-      "params": {},
-      "objects": [],
+      "durationFrames": 240,
       "events": [
         {
-          "id": "reveal",
-          "frame": 12
+          "id": "first",
+          "frame": 19
         },
         {
-          "id": "e1",
-          "frame": 30
+          "id": "second",
+          "frame": 43
         },
         {
-          "id": "e2",
-          "frame": 80
+          "id": "third",
+          "frame": 70
         },
         {
-          "id": "e3",
-          "frame": 130
-        },
-        {
-          "id": "e4",
-          "frame": 180
-        },
-        {
-          "id": "finish1",
-          "frame": 50
-        },
-        {
-          "id": "finish2",
-          "frame": 100
-        },
-        {
-          "id": "finish3",
-          "frame": 150
+          "id": "selected",
+          "frame": 112
         }
       ],
-      "motions": [],
       "components": [
         {
-          "id": "flow",
-          "kind": "flow",
-          "x": 0.07,
-          "y": 0.16,
-          "width": 0.86,
-          "height": 0.61,
-          "showEvent": "reveal",
-          "tone": "accent",
+          "id": "options",
+          "kind": "choice",
+          "x": 0.193,
+          "y": 0.254,
+          "width": 0.614,
+          "height": 0.472,
           "data": {
-            "title": "一次问答，经过哪几步？",
+            "title": "今天从哪个练习开始？",
+            "detail": "先做出一个能运行的小页面",
+            "selectionEvent": "selected",
+            "selectedIndex": 1,
             "items": [
               {
-                "title": "输入问题",
-                "event": "e1",
-                "detail": "用户输入"
+                "title": "读示例",
+                "icon": "book",
+                "event": "first"
               },
               {
-                "title": "检索资料",
-                "event": "e2",
-                "detail": "找到相关片段"
+                "title": "做页面",
+                "icon": "project",
+                "event": "second"
               },
               {
-                "title": "模型生成",
-                "event": "e3",
-                "detail": "结合上下文"
+                "title": "写复盘",
+                "icon": "paper",
+                "event": "third"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "template",
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "durationFrames": 240,
+      "events": [
+        {
+          "id": "context",
+          "frame": 29
+        },
+        {
+          "id": "stuck",
+          "frame": 78
+        },
+        {
+          "id": "ask",
+          "frame": 130
+        }
+      ],
+      "components": [
+        {
+          "id": "draft",
+          "kind": "template",
+          "x": 0.18,
+          "y": 0.19,
+          "width": 0.64,
+          "height": 0.64,
+          "data": {
+            "title": "把问题说具体",
+            "items": [
+              {
+                "label": "我试了",
+                "detail": "先跟着示例做了一遍",
+                "event": "context"
               },
               {
-                "title": "返回答案",
-                "event": "e4",
-                "detail": "展示与引用"
+                "label": "我卡在",
+                "detail": "按钮点了没反应",
+                "event": "stuck"
+              },
+              {
+                "label": "想请你帮我",
+                "detail": "看看该从哪里排查",
+                "event": "ask"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "notebook",
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "durationFrames": 240,
+      "events": [
+        {
+          "id": "step",
+          "frame": 27
+        },
+        {
+          "id": "at",
+          "frame": 74
+        },
+        {
+          "id": "record",
+          "frame": 131
+        }
+      ],
+      "components": [
+        {
+          "id": "note",
+          "kind": "notebook",
+          "x": 0.204,
+          "y": 0.19,
+          "width": 0.592,
+          "height": 0.64,
+          "data": {
+            "title": "记录第一步",
+            "items": [
+              {
+                "label": "做什么",
+                "detail": "挑一个练习，先做一遍",
+                "event": "step"
+              },
+              {
+                "label": "什么时候",
+                "detail": "今天 19:00 开始",
+                "event": "at"
+              },
+              {
+                "label": "做完记下",
+                "detail": "耗时和真正卡住的一步",
+                "event": "record"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "tags",
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "durationFrames": 240,
+      "events": [
+        {
+          "id": "pending",
+          "frame": 20
+        },
+        {
+          "id": "ready",
+          "frame": 63
+        },
+        {
+          "id": "reply",
+          "frame": 110
+        },
+        {
+          "id": "end",
+          "frame": 190
+        }
+      ],
+      "components": [
+        {
+          "id": "blocked",
+          "kind": "tag",
+          "x": 0.26,
+          "y": 0.32,
+          "width": 0.21,
+          "height": 0.105,
+          "data": {
+            "title": "待确认",
+            "icon": "clock"
+          },
+          "tone": "gold",
+          "showEvent": "pending"
+        },
+        {
+          "id": "ready",
+          "kind": "tag",
+          "x": 0.53,
+          "y": 0.32,
+          "width": 0.21,
+          "height": 0.105,
+          "data": {
+            "title": "已准备",
+            "icon": "check"
+          },
+          "tone": "accent",
+          "showEvent": "ready"
+        },
+        {
+          "id": "reply",
+          "kind": "tag",
+          "x": 0.385,
+          "y": 0.53,
+          "width": 0.23,
+          "height": 0.105,
+          "data": {
+            "title": "暂未回复",
+            "icon": "chat",
+            "endEvent": "end"
+          },
+          "tone": "danger",
+          "showEvent": "reply"
+        }
+      ]
+    },
+    {
+      "id": "flow",
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "durationFrames": 240,
+      "events": [
+        {
+          "id": "record",
+          "frame": 24
+        },
+        {
+          "id": "scan",
+          "frame": 82
+        },
+        {
+          "id": "returned",
+          "frame": 136
+        }
+      ],
+      "components": [
+        {
+          "id": "path",
+          "kind": "flow",
+          "x": 0.176,
+          "y": 0.227,
+          "width": 0.65,
+          "height": 0.53,
+          "data": {
+            "title": "归还一本书",
+            "items": [
+              {
+                "title": "找到借阅记录",
+                "detail": "确定归还地点",
+                "event": "record"
+              },
+              {
+                "title": "送到借还台",
+                "detail": "扫描图书",
+                "event": "scan"
+              },
+              {
+                "title": "核对回执",
+                "detail": "看见已归还",
+                "event": "returned"
               }
             ]
           }
@@ -423,157 +832,48 @@
     },
     {
       "id": "timeline",
-      "durationFrames": 240,
       "scene": "scenes.canvas.v1",
       "actor": null,
-      "params": {},
-      "objects": [],
+      "durationFrames": 240,
       "events": [
         {
-          "id": "reveal",
-          "frame": 12
+          "id": "prep",
+          "frame": 23
         },
         {
-          "id": "e1",
-          "frame": 30
-        },
-        {
-          "id": "e2",
+          "id": "event",
           "frame": 80
         },
         {
-          "id": "e3",
-          "frame": 130
-        },
-        {
-          "id": "e4",
-          "frame": 180
-        },
-        {
-          "id": "finish1",
-          "frame": 50
-        },
-        {
-          "id": "finish2",
-          "frame": 100
-        },
-        {
-          "id": "finish3",
-          "frame": 150
+          "id": "review",
+          "frame": 135
         }
       ],
-      "motions": [],
       "components": [
         {
-          "id": "timeline",
+          "id": "phases",
           "kind": "timeline",
-          "x": 0.08,
-          "y": 0.16,
-          "width": 0.84,
-          "height": 0.6,
-          "showEvent": "reveal",
-          "tone": "accent",
+          "x": 0.185,
+          "y": 0.229,
+          "width": 0.63,
+          "height": 0.52,
           "data": {
-            "title": "用项目串起学习顺序",
+            "title": "活动从周五排到周日",
             "items": [
               {
-                "label": "阶段一",
-                "title": "前端",
-                "detail": "先把页面做出来",
-                "event": "e1"
+                "label": "周五",
+                "title": "准备指示牌",
+                "event": "prep"
               },
               {
-                "label": "阶段二",
-                "title": "后端",
-                "detail": "接口连上数据库",
-                "event": "e2"
+                "label": "周六",
+                "title": "到场引导",
+                "event": "event"
               },
               {
-                "label": "阶段三",
-                "title": "AI 应用",
-                "detail": "模型接入与评测",
-                "event": "e3"
-              },
-              {
-                "label": "阶段四",
-                "title": "上线",
-                "detail": "部署并收集反馈",
-                "event": "e4"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "checklist",
-      "durationFrames": 240,
-      "scene": "scenes.canvas.v1",
-      "actor": null,
-      "params": {},
-      "objects": [],
-      "events": [
-        {
-          "id": "reveal",
-          "frame": 12
-        },
-        {
-          "id": "e1",
-          "frame": 30
-        },
-        {
-          "id": "e2",
-          "frame": 80
-        },
-        {
-          "id": "e3",
-          "frame": 130
-        },
-        {
-          "id": "e4",
-          "frame": 180
-        },
-        {
-          "id": "finish1",
-          "frame": 50
-        },
-        {
-          "id": "finish2",
-          "frame": 100
-        },
-        {
-          "id": "finish3",
-          "frame": 150
-        }
-      ],
-      "motions": [],
-      "components": [
-        {
-          "id": "checklist",
-          "kind": "checklist",
-          "x": 0.21,
-          "y": 0.15,
-          "width": 0.58,
-          "height": 0.62,
-          "showEvent": "reveal",
-          "tone": "accent",
-          "data": {
-            "title": "交付前，核对这三项",
-            "items": [
-              {
-                "label": "核心功能可用",
-                "detail": "用实际输入跑通主要路径",
-                "event": "e1"
-              },
-              {
-                "label": "异常情况可恢复",
-                "detail": "报错后仍能继续操作",
-                "event": "e2"
-              },
-              {
-                "label": "结果可以追溯",
-                "detail": "保留记录与必要证据",
-                "event": "e3"
+                "label": "周日",
+                "title": "整理反馈",
+                "event": "review"
               }
             ]
           }
@@ -582,75 +882,46 @@
     },
     {
       "id": "hierarchy",
-      "durationFrames": 240,
       "scene": "scenes.canvas.v1",
       "actor": null,
-      "params": {},
-      "objects": [],
+      "durationFrames": 240,
       "events": [
         {
-          "id": "reveal",
-          "frame": 12
+          "id": "space",
+          "frame": 35
         },
         {
-          "id": "e1",
-          "frame": 30
+          "id": "story",
+          "frame": 82
         },
         {
-          "id": "e2",
-          "frame": 80
-        },
-        {
-          "id": "e3",
-          "frame": 130
-        },
-        {
-          "id": "e4",
-          "frame": 180
-        },
-        {
-          "id": "finish1",
-          "frame": 50
-        },
-        {
-          "id": "finish2",
-          "frame": 100
-        },
-        {
-          "id": "finish3",
-          "frame": 150
+          "id": "guide",
+          "frame": 117
         }
       ],
-      "motions": [],
       "components": [
         {
-          "id": "hierarchy",
+          "id": "layers",
           "kind": "hierarchy",
-          "x": 0.08,
-          "y": 0.16,
-          "width": 0.84,
-          "height": 0.6,
-          "showEvent": "reveal",
-          "tone": "gold",
+          "x": 0.176,
+          "y": 0.205,
+          "width": 0.65,
+          "height": 0.588,
           "data": {
-            "title": "一个问答项目，由哪些模块组成？",
-            "rootTitle": "问答应用",
-            "detail": "职责分开",
+            "title": "一次展览如何分工",
+            "rootTitle": "活动筹备",
             "items": [
               {
-                "title": "前端交互",
-                "event": "e1",
-                "detail": "接收问题，展示回答"
+                "title": "场地",
+                "event": "space"
               },
               {
-                "title": "后端服务",
-                "event": "e2",
-                "detail": "鉴权、接口与数据"
+                "title": "讲解",
+                "event": "story"
               },
               {
-                "title": "AI 能力",
-                "event": "e3",
-                "detail": "提示词、检索与生成"
+                "title": "引导",
+                "event": "guide"
               }
             ]
           }
@@ -659,78 +930,65 @@
     },
     {
       "id": "bars",
-      "durationFrames": 240,
       "scene": "scenes.canvas.v1",
       "actor": null,
-      "params": {},
-      "objects": [],
+      "durationFrames": 240,
       "events": [
         {
-          "id": "reveal",
-          "frame": 12
+          "id": "s",
+          "frame": 21
         },
         {
-          "id": "e1",
-          "frame": 30
+          "id": "s-end",
+          "frame": 48
         },
         {
-          "id": "e2",
-          "frame": 80
+          "id": "h",
+          "frame": 74
         },
         {
-          "id": "e3",
-          "frame": 130
+          "id": "h-end",
+          "frame": 103
         },
         {
-          "id": "e4",
-          "frame": 180
+          "id": "n",
+          "frame": 119
         },
         {
-          "id": "finish1",
-          "frame": 50
-        },
-        {
-          "id": "finish2",
-          "frame": 100
-        },
-        {
-          "id": "finish3",
-          "frame": 150
+          "id": "n-end",
+          "frame": 153
         }
       ],
-      "motions": [],
       "components": [
         {
-          "id": "bars",
+          "id": "chart",
           "kind": "bars",
-          "x": 0.1,
-          "y": 0.16,
-          "width": 0.8,
+          "x": 0.17,
+          "y": 0.2,
+          "width": 0.66,
           "height": 0.6,
-          "showEvent": "reveal",
-          "tone": "secondary",
           "data": {
-            "title": "同一尺度下比较结果｜示意数据",
+            "title": "馆藏借阅数量",
             "max": 100,
-            "unit": "分",
+            "unit": "本",
             "items": [
               {
-                "label": "方案 A",
-                "value": 36,
-                "event": "e1",
-                "endEvent": "finish1"
+                "label": "故事",
+                "value": 74,
+                "event": "s",
+                "endEvent": "s-end"
               },
               {
-                "label": "方案 B",
-                "value": 62,
-                "event": "e2",
-                "endEvent": "finish2"
+                "label": "历史",
+                "value": 48,
+                "event": "h",
+                "endEvent": "h-end"
               },
               {
-                "label": "方案 C",
-                "value": 84,
-                "event": "e3",
-                "endEvent": "finish3"
+                "label": "自然",
+                "value": 86,
+                "event": "n",
+                "endEvent": "n-end"
               }
             ]
           }
@@ -739,226 +997,223 @@
     },
     {
       "id": "code",
-      "durationFrames": 240,
       "scene": "scenes.canvas.v1",
       "actor": null,
-      "params": {},
-      "objects": [],
+      "durationFrames": 240,
       "events": [
         {
-          "id": "reveal",
-          "frame": 12
+          "id": "first",
+          "frame": 29
         },
         {
-          "id": "e1",
-          "frame": 30
+          "id": "second",
+          "frame": 76
         },
         {
-          "id": "e2",
-          "frame": 80
+          "id": "third",
+          "frame": 119
         },
         {
-          "id": "e3",
-          "frame": 130
-        },
-        {
-          "id": "e4",
-          "frame": 180
-        },
-        {
-          "id": "finish1",
-          "frame": 50
-        },
-        {
-          "id": "finish2",
-          "frame": 100
-        },
-        {
-          "id": "finish3",
-          "frame": 150
+          "id": "fourth",
+          "frame": 208
         }
       ],
-      "motions": [],
       "components": [
         {
           "id": "code",
           "kind": "code",
-          "x": 0.13,
-          "y": 0.18,
-          "width": 0.74,
-          "height": 0.55,
-          "showEvent": "reveal",
-          "tone": "accent",
+          "x": 0.198,
+          "y": 0.205,
+          "width": 0.604,
+          "height": 0.547,
           "data": {
-            "title": "先校验，再应用",
-            "language": "JavaScript",
+            "title": "一个按钮怎样被启用",
+            "language": "JS",
             "items": [
               {
-                "text": "const range = locate(target);",
-                "event": "e1"
+                "text": "const ready = form.valid;",
+                "event": "first"
               },
               {
-                "text": "const valid = verify(range);",
-                "event": "e2"
+                "text": "if (ready) {",
+                "event": "second"
               },
               {
-                "text": "if (valid) highlight(range);",
-                "event": "e3"
+                "text": "  button.disabled = false;",
+                "event": "third"
+              },
+              {
+                "text": "}",
+                "event": "fourth"
               }
             ]
           }
+        }
+      ]
+    },
+    {
+      "id": "identity",
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "durationFrames": 240,
+      "events": [
+        {
+          "id": "focus",
+          "frame": 64
+        }
+      ],
+      "components": [
+        {
+          "id": "label",
+          "kind": "identity",
+          "x": 0.248,
+          "y": 0.305,
+          "width": 0.505,
+          "height": 0.348,
+          "data": {
+            "eyebrow": "值班交接",
+            "title": "入口引导",
+            "detail": "活动室 A · 周六 14:00"
+          },
+          "tone": "accent",
+          "features": [
+            "stack"
+          ],
+          "focusEvent": "focus"
+        }
+      ]
+    },
+    {
+      "id": "annotation",
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "durationFrames": 240,
+      "events": [
+        {
+          "id": "callout",
+          "frame": 62
+        }
+      ],
+      "components": [
+        {
+          "id": "card",
+          "kind": "identity",
+          "x": 0.49,
+          "y": 0.28,
+          "width": 0.34,
+          "height": 0.4,
+          "data": {
+            "eyebrow": "预约记录",
+            "title": "活动引导",
+            "detail": "周六 14:00"
+          }
+        },
+        {
+          "id": "focus",
+          "kind": "annotation",
+          "x": 0.18,
+          "y": 0.5,
+          "width": 0.24,
+          "height": 0.08,
+          "data": {
+            "label": "约定时间",
+            "targetX": 0.52,
+            "targetY": 0.595
+          },
+          "showEvent": "callout",
+          "tone": "accent"
         }
       ]
     },
     {
       "id": "takeaway",
-      "durationFrames": 240,
       "scene": "scenes.canvas.v1",
       "actor": null,
-      "params": {},
-      "objects": [],
-      "events": [
-        {
-          "id": "reveal",
-          "frame": 12
-        },
-        {
-          "id": "e1",
-          "frame": 30
-        },
-        {
-          "id": "e2",
-          "frame": 80
-        },
-        {
-          "id": "e3",
-          "frame": 130
-        },
-        {
-          "id": "e4",
-          "frame": 180
-        },
-        {
-          "id": "finish1",
-          "frame": 50
-        },
-        {
-          "id": "finish2",
-          "frame": 100
-        },
-        {
-          "id": "finish3",
-          "frame": 150
-        }
-      ],
-      "motions": [],
+      "durationFrames": 240,
+      "events": [],
       "components": [
         {
-          "id": "takeaway",
+          "id": "result",
           "kind": "takeaway",
-          "x": 0.17,
-          "y": 0.25,
-          "width": 0.72,
-          "height": 0.4,
-          "showEvent": "reveal",
-          "tone": "gold",
+          "x": 0.195,
+          "y": 0.245,
+          "width": 0.61,
+          "height": 0.478,
           "data": {
-            "eyebrow": "记住这个原则",
-            "title": "学一层，跑通一步",
-            "detail": "把新知识，变成项目中能验证的增量"
-          }
+            "eyebrow": "收尾",
+            "title": "好问题，能帮你找到下一步。",
+            "detail": "说清你做过什么，再问一件能往下做的事。"
+          },
+          "tone": "accent"
         }
       ]
     },
     {
-      "id": "flow-checklist",
-      "durationFrames": 240,
+      "id": "tray",
       "scene": "scenes.canvas.v1",
       "actor": null,
-      "params": {},
-      "objects": [],
+      "durationFrames": 240,
       "events": [
         {
-          "id": "reveal",
-          "frame": 12
+          "id": "paper-1",
+          "frame": 23
         },
         {
-          "id": "e1",
-          "frame": 30
+          "id": "paper-2",
+          "frame": 44
         },
         {
-          "id": "e2",
-          "frame": 80
+          "id": "paper-3",
+          "frame": 66
         },
         {
-          "id": "e3",
-          "frame": 130
+          "id": "paper-4",
+          "frame": 95
         },
         {
-          "id": "e4",
-          "frame": 180
+          "id": "paper-5",
+          "frame": 114
         },
         {
-          "id": "finish1",
-          "frame": 50
+          "id": "paper-6",
+          "frame": 142
         },
         {
-          "id": "finish2",
-          "frame": 100
-        },
-        {
-          "id": "finish3",
-          "frame": 150
+          "id": "paper-7",
+          "frame": 168
         }
       ],
-      "motions": [],
       "components": [
         {
-          "id": "path",
-          "kind": "flow",
-          "x": 0.06,
-          "y": 0.17,
-          "width": 0.55,
-          "height": 0.57,
-          "showEvent": "reveal",
-          "tone": "accent",
-          "data": {
-            "title": "处理路径",
-            "items": [
-              {
-                "title": "定位",
-                "event": "e1"
-              },
-              {
-                "title": "校验",
-                "event": "e2"
-              },
-              {
-                "title": "应用",
-                "event": "e3"
-              }
-            ]
-          }
-        },
-        {
-          "id": "gate",
-          "kind": "checklist",
-          "x": 0.65,
-          "y": 0.23,
-          "width": 0.29,
+          "id": "received",
+          "kind": "tray",
+          "x": 0.34,
+          "y": 0.345,
+          "width": 0.31,
           "height": 0.44,
-          "showEvent": "reveal",
-          "tone": "gold",
           "data": {
-            "title": "执行条件",
+            "title": "收件槽",
             "items": [
               {
-                "label": "内容一致",
-                "event": "e2"
+                "event": "paper-1"
               },
               {
-                "label": "范围有效",
-                "event": "e3"
+                "event": "paper-2"
+              },
+              {
+                "event": "paper-3"
+              },
+              {
+                "event": "paper-4"
+              },
+              {
+                "event": "paper-5"
+              },
+              {
+                "event": "paper-6"
+              },
+              {
+                "event": "paper-7"
               }
             ]
           }
@@ -966,148 +1221,118 @@
       ]
     },
     {
-      "id": "code-annotation",
-      "durationFrames": 240,
+      "id": "handoff-out",
       "scene": "scenes.canvas.v1",
       "actor": null,
-      "params": {},
-      "objects": [],
+      "durationFrames": 240,
+      "events": [],
+      "components": [
+        {
+          "id": "note-a",
+          "kind": "notebook",
+          "x": 0.17,
+          "y": 0.125,
+          "width": 0.46,
+          "height": 0.49,
+          "data": {
+            "title": "现场资料",
+            "items": [
+              {
+                "label": "活动地点",
+                "detail": "社区活动室 A",
+                "event": "enter"
+              },
+              {
+                "label": "岗位",
+                "detail": "入口引导",
+                "event": "enter"
+              }
+            ]
+          }
+        },
+        {
+          "id": "ticket-from",
+          "kind": "identity",
+          "x": 0.25,
+          "y": 0.64,
+          "width": 0.247,
+          "height": 0.174,
+          "data": {
+            "eyebrow": "报名凭条",
+            "title": "周六 14:00"
+          },
+          "tone": "accent"
+        }
+      ]
+    },
+    {
+      "id": "handoff-in",
+      "scene": "scenes.canvas.v1",
+      "actor": null,
+      "durationFrames": 240,
       "events": [
         {
-          "id": "reveal",
-          "frame": 12
-        },
-        {
-          "id": "e1",
-          "frame": 30
-        },
-        {
-          "id": "e2",
-          "frame": 80
-        },
-        {
-          "id": "e3",
-          "frame": 130
-        },
-        {
-          "id": "e4",
-          "frame": 180
-        },
-        {
-          "id": "finish1",
-          "frame": 50
-        },
-        {
-          "id": "finish2",
-          "frame": 100
-        },
-        {
-          "id": "finish3",
-          "frame": 150
+          "id": "checked",
+          "frame": 38
         }
       ],
-      "motions": [],
       "components": [
         {
-          "id": "code",
-          "kind": "code",
-          "x": 0.07,
-          "y": 0.24,
-          "width": 0.65,
-          "height": 0.48,
-          "showEvent": "reveal",
-          "tone": "accent",
+          "id": "note-b",
+          "kind": "notebook",
+          "x": 0.38,
+          "y": 0.125,
+          "width": 0.46,
+          "height": 0.49,
           "data": {
-            "title": "读取文件并返回内容",
-            "language": "JavaScript",
+            "title": "签到台核对",
             "items": [
               {
-                "text": "const file = pickFile();",
-                "event": "e1"
+                "label": "时段",
+                "detail": "下午场",
+                "event": "checked"
               },
               {
-                "text": "const text = await read(file);",
-                "event": "e2"
-              },
-              {
-                "text": "return text.trim();",
-                "event": "e3"
+                "label": "状态",
+                "detail": "凭条已确认",
+                "event": "checked"
               }
             ]
           }
         },
         {
-          "id": "pointer",
-          "kind": "annotation",
-          "x": 0.77,
-          "y": 0.455,
-          "width": 0.19,
-          "height": 0.1,
-          "showEvent": "reveal",
-          "tone": "gold",
-          "data": {
-            "label": "当前讲解行",
-            "targetX": 0.69,
-            "targetY": 0.505
-          }
-        }
-      ]
-    },
-    {
-      "id": "paper-identity",
-      "durationFrames": 240,
-      "scene": "scenes.canvas.v1",
-      "actor": null,
-      "events": [{"id":"reveal","frame":12},{"id":"e1","frame":40}],
-      "components": [
-        {
-          "id": "identity",
+          "id": "ticket-to",
           "kind": "identity",
-          "x": 0.24, "y": 0.25, "width": 0.52, "height": 0.47,
-          "showEvent": "reveal",
-          "focusEvent": "e1",
-          "tone": "accent",
-          "visualStyle": "paper",
-          "data": {"eyebrow":"预约记录","title":"岗位试做","detail":"周五 14:00"}
-        }
-      ]
-    },
-    {
-      "id": "paper-checklist",
-      "durationFrames": 240,
-      "scene": "scenes.canvas.v1",
-      "actor": null,
-      "events": [{"id":"reveal","frame":12},{"id":"e1","frame":40},{"id":"e2","frame":90},{"id":"e3","frame":140}],
-      "components": [
-        {
-          "id": "checklist",
-          "kind": "checklist",
-          "x": 0.24, "y": 0.18, "width": 0.52, "height": 0.60,
-          "showEvent": "reveal",
-          "tone": "accent",
-          "visualStyle": "paper",
+          "x": 0.49,
+          "y": 0.64,
+          "width": 0.247,
+          "height": 0.174,
           "data": {
-            "title": "确认预约",
-            "items": [{"label":"选择时段","event":"e1"},{"label":"提交预约","event":"e2"},{"label":"收到回执","event":"e3"}]
-          }
+            "eyebrow": "报名凭条",
+            "title": "周六 14:00"
+          },
+          "tone": "accent"
         }
-      ]
-    },
-    {
-      "id": "paper-takeaway",
-      "durationFrames": 240,
-      "scene": "scenes.canvas.v1",
-      "actor": null,
-      "events": [{"id":"reveal","frame":12}],
-      "components": [
+      ],
+      "motions": [
         {
-          "id": "takeaway",
-          "kind": "takeaway",
-          "x": 0.22, "y": 0.27, "width": 0.56, "height": 0.43,
-          "showEvent": "reveal",
-          "tone": "accent",
-          "visualStyle": "paper",
-          "data": {"title":"预约成功","detail":"岗位试做 · 周五 14:00"}
+          "id": "pass",
+          "recipe": "motion.component-handoff.v1",
+          "target": "scene",
+          "start": {
+            "event": "handoff-in.enter"
+          },
+          "durationFrames": 25,
+          "params": {
+            "mode": "match",
+            "roomReveal": "right",
+            "pairs": [
+              {
+                "from": "ticket-from",
+                "to": "ticket-to"
+              }
+            ]
+          }
         }
       ]
     }

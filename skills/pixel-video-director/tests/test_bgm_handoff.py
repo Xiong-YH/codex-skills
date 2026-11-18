@@ -67,9 +67,15 @@ class BgmHandoffTests(unittest.TestCase):
                            fadeOutFrames=20, speechDuck=0.2, title="Test track", artist="Test artist",
                            sourceUrl="https://example.org/music", licenseUrl="https://example.org/license",
                            changes="Trimmed and looped")
+        plan = read_json(self.project / "production-plan.json")
+        plan["audio"][0].update(sound="synth.message-reply.v1", variant=0, params={"pitch": 72})
+        write_json(self.project / "production-plan.json", plan)
         sources = load_sources(self.project)
         handoff(self.project, self.foundation)
-        bgm = read_json(self.project / "video/audio.json")["bgm"]
+        video_audio = read_json(self.project / "video/audio.json")
+        bgm = video_audio["bgm"]
+        authored = sources["production-plan.json"]["audio"][0]
+        self.assertEqual(video_audio["cues"][0], {key: value for key, value in authored.items() if value is not None})
         self.assertEqual(bgm, sources["production-plan.json"]["bgm"])
         self.assertEqual(self.clip.read_bytes(), (self.project / "video/media/music.wav").read_bytes())
         mapping = read_json(self.project / "video/source-map.json")

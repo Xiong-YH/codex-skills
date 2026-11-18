@@ -43,7 +43,7 @@ Node 依赖锁定 Remotion 4.0.534、React 19.2.0，存于 `engine/remotion/pack
 
 scene params 必须提供 `heading`、恰好三项 `labels`（第一项是主任务）、`startEvent` 与 `completeEvent`。事件引用本镜 local ID，必须前后有序且早于 exit；动作开始前保持初态，完成后保持终态。字符串上限属于输入合同，实际排版仍需检查长文本与字体。
 
-当前场景拥有固定桌面道具，不接受额外 `objects`、十二类 `components`、项目 `background/replacement`；Canvas 的 `shot.performance` 事件姿态和 `timeline.progress` 叙事进度条尚未接入，也会在编译时拒绝。其他风格、人物、场景和 motion 会明确报错。需要扩展时补原生执行器和验证，再扩大能力白名单。不能把可用目录 ID 等同于两种后端都已实现。
+当前场景拥有固定桌面道具。编译会拒绝额外的 `objects`、Canvas `components`、项目 `background/replacement`、`shot.performance` 事件姿态、`timeline.progress` 叙事进度条，以及能力目录以外的风格、人物、场景和 motion。需要扩展时补原生执行器和验证，再更新能力白名单。
 
 ## 构建与可迁移性
 
@@ -51,6 +51,6 @@ scene params 必须提供 `heading`、恰好三项 `labels`（第一项是主任
 
 工作台的 `build/remotion/src/workbench.ts`、`src/workbench-payload.json` 与独立音频也由构建结果生成。工作台清单和原合成共用 payload；首次导入通过 parity 后才交付。开始在工作台修改后，项目 JSON 是独立分支，不能把它与原导演源或生成 TSX 混为一个编辑入口。
 
-`export-project` 继续导出可编辑 direct 快照，附完整基础源码、工作台与资产，排除 node_modules、缓存、浏览器和字体二进制。工作台编辑分支另存项目 JSON；移到新环境后按导出 RUN.md 安装依赖、重新构建并导入该 JSON。生成目录的本机依赖链接只是预览便利，不是交付依赖。
+`export-project` 生成可编辑 direct 快照，附当前项目运行依赖、素材和工作台。保存工作台项目 JSON，换环境后按导出 RUN.md 安装依赖、重建并导入该 JSON。
 
 原验证环境为 macOS。2026-10-20 合并验证补充 Windows + 已安装 Edge：12 秒导演样例成功交接，并实际导出 `[228,300)` 的72帧片段，60 fps、1920×1080，编码与解码技术检查通过；覆盖切镜前与书页转场区间，不代表 Windows Studio、全片连续播放或听音已经验收。其他平台不据路径候选列表宣称已支持。技术检查不代替视听审查，未检查状态保持 `not_reviewed`。

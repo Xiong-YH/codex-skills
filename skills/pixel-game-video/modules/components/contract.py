@@ -1,27 +1,17 @@
 """Semantic component contracts; positions and timing remain shot-owned."""
 import math
 
+ICONS = {'project', 'paper', 'book', 'search', 'chat', 'check', 'clock', 'person', 'folder',
+         'play', 'pin', 'arrow', 'grid'}
+
 
 def validate(component, shot, previous_ids):
     kind, data = component['kind'], component['data']
-    if 'styleLayers' in component:
-        raise ValueError('styleLayers has been retired: select one visualStyle and optional features=["stack"]')
-    if component.get('visualStyle', 'mechanical') not in ('plain', 'mechanical', 'energy', 'paper'):
-        raise ValueError('visualStyle must select plain, mechanical, energy or paper')
-    if component.get('visualStyle') == 'paper':
-        if kind not in ('identity', 'checklist', 'takeaway'):
-            raise ValueError('paper supports identity, checklist and takeaway')
-        if 'image' in data or 'sourceShot' in data:
-            raise ValueError('paper identity is a text card; images use an apparatus or plain layout')
-    if component.get('styleVariant', 'inset') not in ('open', 'inset', 'relay'):
-        raise ValueError('styleVariant must be open, inset or relay')
     if component.get('entryFrom') is not None and (kind != 'identity' or data.get('fit') != 'full'):
         raise ValueError('entryFrom is available for full image identity cards')
     features = component.get('features', [])
     if not isinstance(features, list) or len(features) > 1 or any(feature != 'stack' for feature in features):
         raise ValueError('features allows only the optional stack feature')
-    if component.get('visualStyle') == 'plain' and (features or component.get('styleVariant', 'inset') != 'inset'):
-        raise ValueError('plain uses the original simple renderer without styled variants or stack')
     events = {e['id']: e.get('localFrame', e['frame']) for e in shot['events']}
 
     def event(name):
@@ -47,6 +37,10 @@ def validate(component, shot, previous_ids):
             if item['sourceShot'] not in previous_ids:
                 raise ValueError('Component snapshots must refer to preceding shots')
 
+    def icon(item):
+        if 'icon' in item and (not isinstance(item['icon'], str) or item['icon'] not in ICONS):
+            raise ValueError(f"{component['id']}: unknown component icon {item['icon']!r}")
+
     def items(minimum, maximum, required, optional, ordered=False):
         entries = data.get('items')
         if not isinstance(entries, list) or not minimum <= len(entries) <= maximum:
@@ -61,21 +55,26 @@ def validate(component, shot, previous_ids):
             for field in ('title', 'label', 'detail', 'text'):
                 if field in item:
                     text(item[field], field, 96 if field == 'text' else 48)
+            icon(item)
         return entries
 
     show = event(component['showEvent'])
     if component.get('focusEvent') and event(component['focusEvent']) < show:
         raise ValueError('Component focus must follow its reveal')
+    if component.get('dimEvent') and event(component['dimEvent']) < show:
+        raise ValueError('Component dimming must follow its reveal')
     if component['x'] + component['width'] > 1 or component['y'] + component['height'] > 1:
         raise ValueError('Component bounds must fit inside the frame')
     if kind == 'identity':
         keys(data, {'title'}, {'eyebrow', 'detail', 'image', 'sourceShot', 'fit'})
         picture(data)
-        if 'fit' in data and (data['fit'] != 'full' or 'image' not in data or component['visualStyle'] != 'plain' or
+        if 'fit' in data and (data['fit'] != 'full' or 'image' not in data or
                               {'eyebrow', 'detail', 'sourceShot'} & data.keys()):
-            raise ValueError('Full identity image needs plain visualStyle, an image and a title')
+            raise ValueError('Full identity image needs an image and a title')
     elif kind == 'metric':
-        keys(data, {'title', 'from', 'to', 'startEvent', 'endEvent'}, {'unit', 'detail'})
+        keys(data, {'title', 'from', 'to', 'startEvent', 'endEvent'}, {'unit', 'detail', 'curve'})
+        if data.get('curve', 'linear') not in ('linear', 'accelerate'):
+            raise ValueError('Metric curve must be linear or accelerate')
         for key in ('from', 'to'):
             if type(data[key]) not in (int, float) or not math.isfinite(data[key]) or abs(data[key]) > 2**53-1:
                 raise ValueError('Metric values must be finite JavaScript-safe numbers')
@@ -86,10 +85,11 @@ def validate(component, shot, previous_ids):
         if not isinstance(data['items'], list) or not 2 <= len(data['items']) <= 3:
             raise ValueError('Comparison requires two or three items')
         for item in data['items']:
-            keys(item, {'title', 'event'}, {'value', 'detail', 'image', 'sourceShot'})
+            keys(item, {'title', 'event'}, {'value', 'detail', 'image', 'sourceShot', 'icon'})
             if event(item['event']) < show:
                 raise ValueError('Comparison items must follow the group reveal')
             picture(item)
+            icon(item)
             for field in ('title', 'value', 'detail'):
                 if field in item:
                     text(item[field], field)
@@ -107,7 +107,7 @@ def validate(component, shot, previous_ids):
         items(2 if kind == 'flow' else 3, 5, required, {'detail'}, ordered=True)
     elif kind == 'checklist':
         keys(data, {'title', 'items'}, set())
-        items(2, 5, {'label', 'event'}, {'detail'})
+        items(2, 5, {'label', 'event'}, {'detail', 'icon'})
     elif kind == 'hierarchy':
         keys(data, {'title', 'rootTitle', 'items'}, {'detail'})
         items(2, 4, {'title', 'event'}, {'detail'})
@@ -129,7 +129,50 @@ def validate(component, shot, previous_ids):
                 raise ValueError('Code items are single lines; use spaces for indentation')
     elif kind == 'takeaway':
         keys(data, {'title'}, {'eyebrow', 'detail'})
-    for field in ('title', 'label', 'eyebrow', 'detail', 'unit', 'rootTitle', 'language'):
+    elif kind == 'chat':
+        keys(data, {'title', 'items'}, {'visibleRows'})
+        rows = data.get('visibleRows', 3)
+        if type(rows) is not int or not 2 <= rows <= 4:
+            raise ValueError('Chat visibleRows must be an integer between 2 and 4')
+        for item in items(1, 8, {'side', 'text', 'event'}, {'image'}, ordered=True):
+            if item['side'] not in ('incoming', 'outgoing'):
+                raise ValueError('Chat message side must be incoming or outgoing')
+            if '\r' in item['text'] or '\n' in item['text']:
+                raise ValueError('Chat wraps message text automatically; use one string per bubble')
+            picture(item)
+    elif kind == 'tag':
+        keys(data, {'title'}, {'icon', 'endEvent'})
+        if 'endEvent' in data and event(data['endEvent']) <= show:
+            raise ValueError('Tag endEvent must follow reveal')
+    elif kind in ('notebook', 'template'):
+        keys(data, {'title', 'items'}, set())
+        items(1 if kind == 'notebook' else 2, 5, {'label', 'detail', 'event'}, set(), ordered=True)
+    elif kind == 'deck':
+        keys(data, {'title', 'items'}, {'detail', 'status'})
+        if 'status' in data and 'detail' not in data:
+            raise ValueError('Deck status needs a footer label in detail')
+        for item in items(2, 6, {'title', 'event'}, {'detail', 'icon', 'label', 'markEvent'}, ordered=True):
+            if ('label' in item) != ('markEvent' in item):
+                raise ValueError('Deck stamp needs both label and markEvent')
+            if 'markEvent' in item and event(item['markEvent']) < event(item['event']):
+                raise ValueError('Deck stamp must land after its card')
+    elif kind == 'tray':
+        keys(data, {'items'}, {'title'})
+        items(1, 12, {'event'}, set(), ordered=True)
+    elif kind == 'choice':
+        keys(data, {'title', 'items', 'selectionEvent', 'selectedIndex'}, {'detail'})
+        options = items(2, 5, {'title', 'event'}, {'icon'}, ordered=True)
+        index = data['selectedIndex']
+        if type(index) is not int or not 0 <= index < len(options):
+            raise ValueError('Choice selectedIndex must address an item')
+        if event(data['selectionEvent']) < event(options[index]['event']):
+            raise ValueError('Choice selection must follow its option reveal')
+    elif kind == 'action':
+        keys(data, {'title', 'label', 'button', 'detail', 'startEvent'}, {'eyebrow', 'icon'})
+        if event(data['startEvent']) < show:
+            raise ValueError('Action starts after its control appears')
+    icon(data)
+    for field in ('title', 'label', 'button', 'status', 'eyebrow', 'detail', 'unit', 'rootTitle', 'language'):
         if field in data:
             text(data[field], field)
 

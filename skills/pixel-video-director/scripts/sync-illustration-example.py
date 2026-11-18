@@ -29,8 +29,7 @@ def main():
     if args.check:
         if not provenance.exists() or read_json(provenance)['sourceHashes']!=hashes:raise ValueError('Standalone example needs regeneration')
         print(json.dumps(foundation_validate(foundation,destination),ensure_ascii=False));return
-    work=Path.cwd()/'work';work.mkdir(exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix='whole-example-',dir=work) as temporary:
+    with tempfile.TemporaryDirectory(prefix='whole-example-') as temporary:
         stage=Path(temporary)
         for name,value in outputs.items():write_json(stage/name,value)
         for name in media:

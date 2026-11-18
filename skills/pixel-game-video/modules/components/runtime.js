@@ -1,100 +1,122 @@
 (function(P){
   'use strict';
+  const L=P.componentLook;
+  const words=new Intl.Segmenter('zh',{granularity:'word'});
+
+  function countProgress(p,curve){
+    if(curve!=='accelerate')return p;
+    const knee=.86, head=.81, power=2.5;
+    if(p<knee)return head*(p/knee)**power;
+    const tail=head*power*(1-knee)/(knee*(1-head));
+    return 1-(1-head)*((1-p)/(1-knee))**tail;
+  }
+
   function state(c,shot,frame,fps=60){
-    const at=id=>P.scenes.eventFrame(shot,id),show=at(c.showEvent);
-    const result={visible:frame>=show,alpha:P.ease((frame-show)/(fps*.24)),focused:!!c.focusEvent&&frame>=at(c.focusEvent)};
-    if(c.kind==='metric'){
-      const d=c.data,p=P.clamp((frame-at(d.startEvent))/Math.max(1,at(d.endEvent)-at(d.startEvent)));
-      result.value=p===1?d.to:p===0?d.from:Number((d.from+(d.to-d.from)*p).toFixed(2));
-    }
-    if(c.kind==='comparison')result.items=c.data.items.map(i=>frame>=at(i.event));
-    if(['flow','timeline','checklist','hierarchy','bars','code'].includes(c.kind)){
-      result.items=c.data.items.map(i=>frame>=at(i.event));
-      result.current=-1;result.items.forEach((active,i)=>{if(active)result.current=i});
+    const at=id=>P.scenes.eventFrame(shot,id), show=at(c.showEvent), d=c.data;
+    const result={visible:frame>=show,alpha:L.out((frame-show)/(fps*.16)),focused:!!c.focusEvent&&frame>=at(c.focusEvent)};
+    if(d.items){
+      result.items=d.items.map(item=>frame>=at(item.event));
+      result.current=result.items.lastIndexOf(true);
       result.completed=result.items.filter(Boolean).length;
     }
-    if(c.kind==='bars')result.progress=c.data.items.map(i=>P.clamp((frame-at(i.event))/Math.max(1,at(i.endEvent)-at(i.event))));
+    if(c.kind==='metric'){
+      const p=P.clamp((frame-at(d.startEvent))/Math.max(1,at(d.endEvent)-at(d.startEvent)));
+      result.metricProgress=p;
+      result.exact=d.from+(d.to-d.from)*countProgress(p,d.curve);
+      result.value=p===1?d.to:p===0?d.from:Number(result.exact.toFixed(2));
+    }
+    if(c.kind==='bars'){
+      result.progress=d.items.map(i=>P.clamp((frame-at(i.event))/Math.max(1,at(i.endEvent)-at(i.event))));
+    }
     return result;
   }
-  const box=(x,y,width,height)=>({x,y,width,height});
-  function tokens(e,c){
-    const s=e.style.components||{};
-    return {unit:e.height/1080,edge:e.colors[c.tone]||e.colors.gold,ink:e.colors.ink,muted:e.colors.muted,
-      panel:s.panel||e.colors.panel,inset:s.inset||e.colors.panelInset||e.colors.background,
-      shadow:e.colors.background,grid:s.grid||4};
-  }
-  function textRows(g,value,width){
-    const rows=[];
+
+  function lines(g,value,width){
+    const result=[];
     for(const paragraph of String(value).split('\n')){
       let row='';
-      for(const char of Array.from(paragraph)){
-        if(g.measureText(char).width>width)return null;
-        if(row&&g.measureText(row+char).width>width){rows.push(row);row=char;}else row+=char;
+      for(const {segment} of words.segment(paragraph)){
+        const breaksBefore=/^[，。！？、；：」）》]/u.test(segment);
+        if(row&&!breaksBefore&&g.measureText(row+segment).width>width){result.push(row);row='';}
+        row+=segment;
       }
-      rows.push(row);
+      result.push(row);
     }
-    return rows;
+    return result;
   }
-  function fitTextSize(e,value,width,height,size,maxLines,minimum){
-    const g=e.ctx,unit=e.height/1080;
+
+  function text(e,value,b,size,color,{align='left',rows=1,weight=760,font=e.style.fontFamily}={}){
+    if(value===undefined||value===''||b.w<=0||b.h<=0)return;
+    const g=e.ctx;
+    // Standard hundreds are interpreted consistently by browser Canvas and Skia.
+    const fontWeight=Math.round(weight/100)*100;
+    let px=Math.min(size,b.h*.82), fitted=[String(value)];
     g.save();
     try{
-      function fits(candidate){
-        const px=candidate*unit;
-        g.font=`600 ${px}px ${e.style.fontFamily}`;
-        const rows=textRows(g,value,width);
-        return rows&&rows.length<=maxLines&&px*(1+(rows.length-1)*1.3)<=height;
+      // Fit inside the authored geometry, then leave the same alignment for every frame.
+      for(let attempt=0;attempt<16;attempt++){
+        g.font=`${fontWeight} ${px}px ${font}`;
+        if(rows>1)fitted=lines(g,value,b.w);
+        const widest=Math.max(...fitted.map(row=>g.measureText(row).width));
+        if(fitted.length<=rows&&widest<=b.w+.01&&px*(1+(fitted.length-1)*1.19)<=b.h)break;
+        const ratio=Math.min(1,b.w/Math.max(1,widest),b.h/(px*(1+(fitted.length-1)*1.19)));
+        px*=Math.min(.91,ratio);
       }
-      if(fits(size))return size;
-      let lower=minimum,upper=size;
-      while(upper-lower>1){
-        const middle=(lower+upper)/2;
-        if(fits(middle))lower=middle;
-        else upper=middle;
-      }
-      return lower;
+      g.textAlign=align;
+      g.textBaseline='middle';
+      g.fillStyle=color;
+      const x=b.x+(align==='center'?b.w/2:align==='right'?b.w:0), y=L.cy(b);
+      fitted.forEach((row,i)=>g.fillText(row,Math.round(x),Math.round(y+px*1.19*(i-(fitted.length-1)/2)),b.w));
     }finally{g.restore();}
   }
-  function text(e,value,b,size,color,align='left',maxLines=2){
-    if(value===undefined)return;
-    const g=e.ctx,u=e.height/1080,s=size*u;
-    g.save();
-    try {
-      g.font=`600 ${s}px ${e.style.fontFamily}`;
-      const rows=textRows(g,value,b.width);
-      if(!rows)throw new Error('Component column is too narrow');
-      if(rows.length>maxLines||s+(rows.length-1)*s*1.3>b.height)
-        throw new Error(`Component text overflows: ${value}. Enlarge the component or shorten the label.`);
-      g.fillStyle=color;g.textBaseline='middle';g.textAlign=align;
-      const x=b.x+(align==='center'?b.width/2:align==='right'?b.width:0),cy=b.y+b.height/2;
-      rows.forEach((row,i)=>g.fillText(row,x,cy+(i-(rows.length-1)/2)*s*1.3));
-    }finally{g.restore();}
+
+  function picture(e,data,b,fit='contain'){
+    const img=data.sourceShot?e.shotPreview(data.sourceShot):data.imageKey&&
+      (e.frameAssets?.(data.imageKey,e.frame)||e.assets[data.imageKey]);
+    if(!img)return false;
+    P.media.image(e,img,{x:b.x,y:b.y,width:b.w,height:b.h},data.sourceShot?'cover':fit);
+    return true;
   }
-  function picture(e,data,b){
-    const source=data.sourceShot?e.shotPreview(data.sourceShot):data.imageKey?(e.frameAssets?.(data.imageKey,e.frame)||e.assets[data.imageKey]):null;
-    if(source)P.media.image(e,source,b,data.sourceShot?'cover':'contain');
-    return Boolean(source);
+
+  function portraitBounds(b){
+    const gap=Math.min(23,b.w*.062,b.h*.14);
+    return L.box(b.x+gap,b.y+gap,b.w*.36-gap,b.h-2*gap);
   }
-  const layout={box,tokens,text,picture,fitTextSize};
-  P.componentLayout=layout;
-  P.componentRenderer=P.components={state,draw};
-  function draw(e,shot,f){
+
+  function imageBounds(e,component,b){
+    const scale=e.height/720;
+    if(component.data.fit==='full')return b;
+    const q=portraitBounds(L.box(b.x/scale,b.y/scale,b.width/scale,b.height/scale));
+    return {x:q.x*scale,y:q.y*scale,width:q.w*scale,height:q.h*scale};
+  }
+
+  function draw(e,shot,frame){
+    const p=L.colors(e), fps=e.fps||60, g=e.ctx, scale=e.height/720;
     for(const c of shot.components||[]){
-      const config=c.visualStyle==='plain'?P.componentStyles.normalize(c):null;
-      const s=state(c,shot,f,e.fps);if(!s.visible||s.alpha<=0)continue;
-      const b=box(c.x*e.width,c.y*e.height,c.width*e.width,c.height*e.height);
-      const style=config||P.componentStyles.normalize(c),base=tokens(e,c);
-      e.ctx.save();e.ctx.globalAlpha*=s.alpha;
-      try{
-        if(style.visualStyle==='plain'){
-          P.componentPlain.drawCard(e,c,shot,f,b,base,s);
-          continue;
-        }
-        const t=P.componentStyles.prepare(e,c,shot,f,base,style);
-        P.componentStyles.entry(e,t);
-        if(style.visualStyle==='paper')P.componentPaper.draw(e,c,b,t,s,text);
-        else if(!P.componentApparatus.draw(e,c,b,t,s,layout))throw Error('Unsupported component kind: '+c.kind);
-      }finally{e.ctx.restore();}
+      const s=state(c,shot,frame,fps);
+      if(!s.visible||!s.alpha)continue;
+      const w=e.width/scale,h=e.height/scale;
+      const home=L.box(c.x*w,c.y*h,c.width*w,c.height*h);
+      const age=id=>frame-P.scenes.eventFrame(shot,id);
+      const phase=(id,duration=.24)=>P.clamp(age(id)/Math.max(1,Math.round(duration*fps)));
+      const since=(id,duration=.24)=>age(id)/Math.max(1,Math.round(duration*fps));
+      const t={phase,since,age,ink: L.tone(e,c.tone),layers:c.features?.includes('stack')?3:1};
+      let b=home;
+      if(c.entryFrom){
+        const travel=L.out(phase(c.showEvent,.26));
+        b=L.offset(home,(c.entryFrom[0]*w-home.x)*(1-travel),
+          (c.entryFrom[1]*h-home.y)*(1-travel)-Math.sin(travel*Math.PI)*h*.035);
+      }
+      const renderer=P.componentElements[c.kind]||P.componentCollections[c.kind]||P.componentInformation[c.kind];
+      if(!renderer)throw Error('Unsupported component kind: '+c.kind);
+      const dim=c.dimEvent?L.out(phase(c.dimEvent,.33))*.28:0;
+      L.alpha(g,s.alpha*(1-dim),()=>{
+        g.scale(scale,scale);
+        renderer(e,c,b,p,s,t);
+      });
     }
   }
+
+  P.componentText={text,picture,portraitBounds};
+  P.components=P.componentRenderer={state,draw,imageBounds};
 })(globalThis.PixelVideo=globalThis.PixelVideo||{});

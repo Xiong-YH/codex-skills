@@ -100,8 +100,8 @@ def javascript_files(skill, resolved):
     if any(shot.get('background') or shot.get('replacement') or shot.get('components') for shot in resolved['shots']):
         paths += ['scenes/media.js']
     if any(shot.get('components') for shot in resolved['shots']):
-        paths += ['components/style-layers.js', 'components/materials.js', 'components/plain.js',
-                  'components/apparatus.js', 'components/paper.js', 'components/runtime.js']
+        paths += ['components/look.js', 'components/elements.js', 'components/collections.js',
+                  'components/information.js', 'components/runtime.js']
     scenes = {shot['scene'] for shot in resolved['shots']}
     objects = {obj['asset'] for shot in resolved['shots'] for obj in shot.get('objects', [])}
     records = read(Path(skill) / 'modules/library/catalog.json')['items']
@@ -149,17 +149,12 @@ def runtime_files(skill, resolved):
         files.update({'engine/player.html', 'engine/render_frames.cjs', 'package.json'})
     files.update({'scripts/video.py', 'requirements.txt', 'modules/library/prepare.py',
                   'modules/scenes/contract.py', 'modules/scenes/performance.py', 'modules/components/contract.py',
-                  'modules/audio/narration.py', 'modules/motion/handoffs.py'})
+                  'modules/audio/narration.py', 'modules/audio/synthesis.py', 'modules/motion/handoffs.py'})
     files.update({'modules/motion/pulse_contract.py', 'modules/motion/actor_blocking.py', 'modules/motion/FRAMETELL-NOTICE.md',
                   'modules/motion/licenses/AGPL-3.0.txt'})
     # Catalogs are validation contracts; lock these even when only one entry is selected.
     files.update('modules/' + name + '/catalog.json'
                  for name in ('style', 'library', 'text', 'motion', 'audio', 'scenes', 'components'))
-    if any(shot.get('components') for shot in resolved['shots']):
-        component_root = skill / 'modules/components'
-        files.add('modules/components/assets/gears/manifest.json')
-        for item in read(component_root / 'assets/gears/manifest.json')['items']:
-            files.add(inside(component_root, item['file']).relative_to(skill).as_posix())
     selected, style = selected_style(skill, resolved)
     files.add('modules/style/' + selected['file'])
     if selected.get('scenePreset'):
@@ -186,7 +181,7 @@ def runtime_files(skill, resolved):
         sounds = {cue['sound'] for cue in resolved.get('audio', []) if 'sound' in cue}
         if any(cue.get('synthesis') for cue in resolved.get('audio', [])):
             files.update('modules/audio/' + name for name in (
-                'synthesis.py', 'render-sfx.mjs', 'vendor/garden-skills/scripts/lib/synth.mjs',
+                'render-sfx.mjs', 'tactile.mjs', 'vendor/garden-skills/scripts/lib/synth.mjs',
                 'vendor/garden-skills/LICENSE', 'vendor/garden-skills/NOTICE.md'))
         for bank in ('arcade-motion', 'common-motion'):
             directory = 'modules/audio/assets/' + bank + '/'

@@ -31,4 +31,4 @@ python modules/audio/preview.py --out <试听目录>
 python modules/audio/gallery.py --out <单文件试听目录>
 ```
 
-`preview.py` 默认导出九种及原六种分层。`--bank arcade-core` 选原六种，`--bank common` 选另外三种，`--bank library` 一起试听 Garden 的 33 种合成音色。`gallery.py` 导出包含九种、18 个分层、配乐、人声参考和规范快照的单文件 HTML。
+`preview.py` 默认导出九种及原六种分层。`--bank arcade-core` 选原六种，`--bank common` 选另外三种，`--bank library` 一起试听轻拟音、界面反馈和 Garden 音色。`gallery.py` 导出包含九种、18 个分层、配乐、人声参考和规范快照的单文件 HTML。

@@ -1,8 +1,7 @@
 {
   "version": 3,
   "names_are_provisional": true,
-  "naming_note": "名字是方便选角与提示词调用的暂定昵称，可更换；主角与配角分工是本轮方案。",
-  "default_lead": "00-lead",
+  "naming_note": "昵称和角色分工适用于选用这套 V3 阵容的项目。",
   "characters": [
     {
       "id": "00-lead",

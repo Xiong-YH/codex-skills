@@ -90,20 +90,32 @@ class MediaSource(Model):
 
 class Component(Model):
     id: Id
-    kind: Literal["identity", "metric", "comparison", "annotation", "chapter",
-                  "flow", "timeline", "checklist", "hierarchy", "bars", "code", "takeaway"]
+    kind: Literal["identity", "metric", "comparison", "annotation", "chapter", "flow", "timeline", "checklist",
+                  "hierarchy", "bars", "code", "takeaway", "chat", "tag", "notebook", "deck", "tray", "choice",
+                  "action", "template"]
     x: Unit
     y: Unit
     width: Annotated[float, Field(gt=0, le=1)]
     height: Annotated[float, Field(gt=0, le=1)]
     showEvent: Id = "enter"
     focusEvent: Id | None = None
+    dimEvent: Id | None = None
     tone: Literal["accent", "gold", "danger", "secondary"] = "gold"
-    visualStyle: Literal["plain", "mechanical", "energy", "paper"] = "mechanical"
-    styleVariant: Literal["open", "inset", "relay"] = "inset"
     features: Annotated[list[Literal["stack"]], Field(max_length=1)] = Field(default_factory=list)
     entryFrom: Annotated[list[Unit], Field(min_length=2, max_length=2)] | None = None
     data: dict[str, Any]
+
+    @model_validator(mode='before')
+    @classmethod
+    def upgrade_saved_appearance(cls, value):
+        if not isinstance(value, dict):
+            return value
+        current = dict(value)
+        for key, retired in (('visualStyle', ('plain', 'mechanical', 'energy', 'paper')),
+                             ('styleVariant', ('open', 'inset', 'relay'))):
+            if current.get(key) in retired:
+                del current[key]
+        return current
 
 
 class ActorPose(Model):

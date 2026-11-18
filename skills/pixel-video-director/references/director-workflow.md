@@ -9,8 +9,8 @@
 | 阶段与条件 | 规则维护处与应用方式 |
 | --- | --- |
 | 新增或修改镜头，包括局部改动 | 先读 [动态规范与兑现合同](motion-direction.md) 和 [文画对应检查](visual-storytelling.md#把讲述推进落实到画面)，将实际动作、焦点顺序与阅读安排写入本镜设计 |
-| 结构化分镜 | 按 [分镜标注](visual-storyboard.md) 记录画面呈现、屏幕文字、音乐触点与接镜 |
-| 场景与组件美术 | 先看 [当前 R38 参考](../../pixel-game-video/references/current-style.md)，再按 FOUNDATION 的 `modules/style/ART-DIRECTION-CONTRACT.md` 确定本片画风。组件设计沿 `modules/components/DESIGN.md` 与 `modules/style/COMPONENT-ART.md` |
+| 结构化分镜 | 按 [分镜标注](visual-storyboard.md) 记录画面呈现、屏幕文字、音乐与接镜；从 [音效设计](../../pixel-game-video/modules/audio/SOUND-DESIGN.md) 选声和留白 |
+| 场景与组件美术 | 先看 [当前风格](../../pixel-game-video/references/current-style.md)，再按 FOUNDATION 的 `modules/style/ART-DIRECTION-CONTRACT.md` 确定本片画风。组件设计沿 `modules/components/DESIGN.md` 与 `modules/style/COMPONENT-ART.md` |
 | 人物、姿态与新动作 | 按 [人物表演](character-performance.md) 及 FOUNDATION 制作总则检查结构与支撑，沿用当前授权。插画母图按 [Review 前置审查](review.md) 检查后进入制作 |
 | 屏幕文字与组件动作 | 按 FOUNDATION 的 `modules/text/EXPRESSION.md` 选主句和标注形式。按 `modules/motion/TIMING.md` 安排离散动作及落稳后的阅读 |
 | 交接与审片 | 按 [交接](handoff.md) 传递采用的设计，按 [Review](review.md#推进节奏与观看距离的复核) 检查实际分支，交付说明记录检查范围和未关闭项 |
@@ -31,7 +31,7 @@
 
 **第一轮镜头说明就定好观看过程。** 围绕本段的关键表达节点，把以下决定写进同一段说明。
 
-- 标明组件落点或揭示、主句可读区间以及和下一段共享的对象或状态。注明实际音乐位置或待定拍位。
+- 标明组件落点或揭示、主句可读区间以及和下一段共享的对象或状态。注明实际音乐位置或待定拍位，以及哪些接触或结果要听见、哪些阅读和等待留白。
 - 写清观众先看哪里、下一处看哪里、到哪里停下来理解。涉及情绪转折时，决定哪一刻通过视线、表情、姿态或短暂的视觉标记让观众察觉。
 - 按关键句选择表达形式。讲处境、行为、流程或因果时，先考虑[情境插画与组件怎样分工](visual-system.md#组件家族与场景)，写清哪个镜头演出动作、哪个组件交代关系或反馈。
 - 分配画面空间。由道具或信息组件承担解释时，写出触发、状态变化和落定后的信息。需要留白时，说明它是为了聚焦、稳定阅读，还是给接下来出现的信息留位置。

@@ -1,5 +1,6 @@
 import {readFileSync} from 'node:fs';
 import * as synth from './vendor/garden-skills/scripts/lib/synth.mjs';
+import * as tactile from './tactile.mjs';
 
 const timed = voice => ({duration, ...options}) => voice(duration, options);
 const pitched = voice => ({note, duration, ...options}) => voice(note, duration, options);
@@ -40,6 +41,7 @@ const voices = {
   glitch: timed(synth.glitch),
   shimmer: ({duration, note, ...options}) => synth.fade(synth.shimmer(duration, {root: note, ...options}), 0, .02),
   ambience: timed(synth.ambience),
+  ...tactile,
 };
 
 function render({voice, params}) {

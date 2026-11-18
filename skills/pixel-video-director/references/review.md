@@ -53,7 +53,7 @@ review-init 检查完整成片、当前源文件、基础输入哈希和 MP4 SHA
 
 实际连续观看成片、查看关键静帧/转场并听音后填写 checks。证据路径相对 PROJECT，`checked:true` 只表示确实已检查。内容/视觉/运动通过必须有 playback 证据，文字可引用解码 frame，音频需 audio 或 playback，技术需 metadata。静音工程可用媒体报告证明没有音轨。未检查项不能通过，元数据不能证明视觉或听觉质量。
 
-声音按 [Garden 审片](../../pixel-game-video/modules/audio/GARDEN.md#预览与审片) 对照声音 brief、同次工作台 JSON 与真实 MP4。核对实际重音、视觉接触或揭示帧、事件音效和段落曲线。用波形与频谱定位问题，按需单听分轨，并在修订后复听关联区间。审片记录时间码、技术结果与听感。未实际听音时保留 `not_reviewed`。
+声音按 [音效对照与混音](../../pixel-game-video/modules/audio/SOUND-DESIGN.md#先对照听再收混音) 对照声音 brief、同次工作台 JSON 与真实 MP4。听清触点、揭示和留白：同画面开关音效比较，单听分轨定位问题，修订后复听关联区间。使用 [Garden 审片](../../pixel-game-video/modules/audio/GARDEN.md#预览与审片) 核对波形与成片技术指标。审片记录时间码、技术结果与听感；未实际听音时保留 `not_reviewed`。
 
 使用 Remotion 时，同时核对 Studio 与实际 MP4 对应当前 handoff 和有效构建，镜头起止、字幕区间、动作与声音落点保持一致。当前基础后端由 Remotion 采集画面帧、Python 预混音，再用 FFmpeg 编码封装；额外用 FFmpeg 裁切、拼接、变速或移动声音不会回写创作源。源合成调试发现差异时沿源映射修正并重新 handoff、build，再显式导入工作台；工作台剪辑分支的问题则修改其项目 JSON 并重新导出。最终 MP4 以工作台导出为准，绑定该次导出 JSON 与证据；只审过 Studio 不能将最终 MP4 标为通过。
 

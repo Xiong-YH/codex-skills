@@ -1,20 +1,23 @@
 # 完整音色库与工程调用
 
-先按 [Garden 声音工作流](GARDEN.md) 定声部、材质、密度和音画关系，再从目录选音色。使用同一画面比较拟音方向，按片段实际用途取舍。
+先按 [音效设计与试听](SOUND-DESIGN.md) 定声部、材质和音画关系，再从目录选音色。使用同一画面比较拟音方向。
 
 ## 试听
 
 从基础 skill 根目录执行，输出到当前项目的试听目录。
 
 ```sh
-python modules/audio/preview.py --bank library --out AUDITION_DIR
+python modules/audio/preview.py --bank all --out AUDITION_DIR
 python scripts/video.py catalog audio
 ```
 
-打开 `AUDITION_DIR/index.html`。全库含 Garden 的 33 种发生器和 [9 个街机 WAV](ARCADE.md)。`--bank garden` 只试听合成音色，`--bank arcade` 只试听街机，`--bank all` 另列历史 G2 音色。试听样本用默认参数，开镲、七种敲击材质、五种元音和五种环境均从同一音色切换参数。
+打开 `AUDITION_DIR/index.html`。每个 ID 用默认参数试听，街机分层可在母版下展开。`--bank series` 选八个当前系列常用声，`--bank library` 试听街机、合成与轻拟音，`--bank tactile` 选轻拟音与界面声，`--bank arcade` 选九个街机母版。 [街机母版](ARCADE.md)
 
-| 家族 | `synth.<名称>.v1` |
+| 家族 | 音色 ID 中的名称 |
 | --- | --- |
+| 系列合成 | series-paper-land.v1、series-empty-result.v1、series-send.v1、series-reply.v1 |
+| 轻拟音 | paper-slide、paper-seat、wood-seat、metal-latch |
+| 轻界面反馈 | message-send、message-reply、ack-soft、block-soft |
 | 动作与界面 | click、tick、pop、blip、swipe、glitch |
 | 过渡与冲击 | whoosh、riser、downlifter、reverse-cymbal、impact、boom、shimmer |
 | 鼓与打击 | kick、snare、clap、hat、crash、tom、shaker、rim、cowbell |

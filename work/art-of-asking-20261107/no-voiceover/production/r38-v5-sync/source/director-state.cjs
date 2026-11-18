@@ -128,3 +128,5 @@ module.exports = function revise(model, original, previous, cut, feedback, paths
   }
   return model.validate(updated);
 };
+
+module.exports.frameMap = frameMap;

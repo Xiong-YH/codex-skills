@@ -10,7 +10,7 @@ from PIL import Image
 
 SKILL = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(SKILL))
-from engine.builder import build, style_file
+from engine.builder import build
 from engine.compiler import compile_project, read_json, write_json
 from engine.dependencies import selected_style, visual_asset_files
 from engine.delivery import copy_skill
@@ -50,9 +50,8 @@ class StyleBuildTests(unittest.TestCase):
             (SKILL / 'modules/library/backgrounds/cyberpunk-city.png').read_bytes()).decode('ascii'), document)
 
     def test_style_paths_are_confined_to_the_module(self):
-        style_root = (SKILL / 'modules/style').resolve()
-        with self.assertRaisesRegex(ValueError, 'inside the style module'):
-            style_file(style_root, '../library/runtime.js')
+        with self.assertRaisesRegex(ValueError, 'inside its module'):
+            visual_asset_files(SKILL, {'assets': {'outside': '../library/runtime.js'}})
 
     def cache_scene(self, *, scene='scenes.cache-journey.v1', phase='fetch', environment='archive'):
         timeline = read_json(self.root / 'timeline.json')

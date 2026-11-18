@@ -100,7 +100,7 @@
       },previewBox(id){
         const c=find('old',id),asset=base.assets[c.data.imageKey];
         if(!asset||Math.abs(asset.width/asset.height-width/height)>.001)throw new Error('preview-expand image must match the project aspect ratio');
-        const b=box('old',id),bounds=P.componentApparatus.imageBounds(base,c,{x:b[0]*width,y:b[1]*height,width:b[2]*width,height:b[3]*height});
+        const b=box('old',id),bounds=P.components.imageBounds(base,c,{x:b[0]*width,y:b[1]*height,width:b[2]*width,height:b[3]*height});
         if(!bounds)throw new Error('preview-expand source requires an image viewport');
         const {x:bx,y:by,width:bw,height:bh}=bounds;
         const scale=Math.min(bw/asset.width,bh/asset.height),rw=asset.width*scale,rh=asset.height*scale;

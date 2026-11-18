@@ -1,9 +1,6 @@
 # 运动与转场：任务入口
 
-导演先打开[统一选型目录](library.html)，或按[选型规则](SELECTION.md)查询当前解释目的；
-默认只看当前后端可调用的常用项。选定后再读取对应合同、曲线和动态预览，不先通读所有配方。
-目录与CLI共用 selection.json，参数和后端支持仍从正式目录读取；design.*不是可执行recipe。
-效果图不作为规范来源，已认可待接入设计及旧配方显式展开。
+先对照 [R41 选段](../../references/asking-motion-reference.md#按镜头任务选段) 确定这段要发生的变化和落点。再从 [选型目录](library.html) 查当前后端可调用的配方、曲线和动态预览。需要查看研究候选或历史配方时，按 [选型规则](SELECTION.md) 展开相应条目。
 
 维护通用运动、缓动、相机、转场、遮挡与几何反馈，消费编译后的事件与进度。
 
@@ -13,8 +10,6 @@
 
 ## 按任务读取
 
-本轮新增[六效果动态设计库](recipes/advanced-2d.md)：焦点接力、分层视差、甩镜、对象匹配、前景遮挡和弹性落稳。设计已认可，尚不能把整组视为已接入正式配方；与现有能力的关系逐项列明。该版弧线移焦不收纳。
-
 | 当前任务 | 读取入口 |
 | --- | --- |
 | 后端、编辑方式、示例与验证边界 | [统一能力目录](../../references/capability-catalog.md)；运行 python scripts/video.py catalog motion --capabilities |
@@ -23,7 +18,8 @@
 | 新镜头的短促运镜／图层动画／页面接续 | [非3D运镜与页面接续](recipes/pulse-camera.md)：五预设、关键帧、分组变换；Canvas与工作台 |
 | 组件动作时长和配乐触点 | [离散动作与节拍](TIMING.md) |
 | 粒子怎么选、怎样写触发与收束 | [粒子效果与选型](PARTICLES.md)，附[同步动态对照](examples/particles/index.html) |
-| 普通镜头内的小棕走位与局部反馈 | [人物动作、火花、晕染和掠光](recipes/contact-feedback.md) |
+| 人物触点与局部反馈 | [走位、火花、晕染和掠光](recipes/contact-feedback.md)，走位配方的角色限制见其合同 |
+| 需要扩展焦点、遮挡或分层视差的做法 | [动态设计试样](recipes/advanced-2d.md) 逐项附执行状态 |
 | 参数、相机和转场边界 | [编排与验收](details.md#编排与验收)、[公共合同](../../references/contract.md) |
 | 游戏反馈与声音 | [场景反馈](../scenes/GAME_FEEL.md)、[声音](../audio/GUIDE.md) |
 | 字幕、道具或组件的冲入、回弹与衰减震动 | [个体冲击逐帧参考](IMPACT.md) |
@@ -31,8 +27,6 @@
 ## 验收重点
 
 检查首中末帧与连续播放的交出/接住、遮挡和末态保持；无裸底、镜像字与残片。运动与阅读停留分开，声音引用同一事件。
-
-全片分轨、保存重开和最终导出统一按 [工作台](../../references/workbench.md) 验证，本页不表示已完成当前项目验收。新增能力查 [模块维护](../../references/module-development.md)，职责调整查 [归属与迁移清单](../../references/module-ownership.md)。
 
 ## 组件内部的离散动作与节拍
 

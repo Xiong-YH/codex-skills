@@ -5,6 +5,7 @@
       "documentation": [
         "modules/audio/ARCADE.md",
         "modules/audio/GARDEN.md",
+        "modules/audio/SOUND-DESIGN.md",
         "modules/audio/SYNTHESIS.md",
         "modules/audio/details.md"
       ],
@@ -15,11 +16,12 @@
         "tests/test_audio_baseline.py",
         "tests/test_game_audio.py",
         "tests/test_synth_sfx.py",
-        "tests/test_workbench_bridge.py"
+        "tests/test_workbench_bridge.py",
+        "workbench/tests/tactile-bank.test.mjs"
       ]
     },
     "notes": [
-      "Garden 合成、街机母版和旧版兼容音色分别列出。工作台使用本次混音的独立 PCM 片段，修改后按当前版本复听。"
+      "轻拟音与界面、Garden、街机母版和旧版兼容音色分别列出。工作台使用本次混音的独立 PCM 片段，修改后按当前版本复听。"
     ]
   },
   "features": [

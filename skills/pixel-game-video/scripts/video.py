@@ -72,12 +72,13 @@ def init_project(destination, title, backend='canvas'):
     project["title"] = title
     project['renderBackend'] = backend
     write_json(destination / "project.json", project)
-    return {"project": str(destination), "mode": "direct", "note": "Replace example content; duration and theme are editable."}
+    return {"project": str(destination), "mode": "direct", "note": "Neutral project created. Add the current film's scenes, text and audio."}
 
 
 def export_project(root, destination):
     from engine.compiler import compile_project, INPUT_MODELS, read_json, write_json
-    from engine.delivery import copy_skill
+    from engine.delivery import copy_project_runtime
+    root, destination = Path(root).resolve(), Path(destination).resolve()
     resolved = compile_project(root)
     if destination.exists():
         raise ValueError(f"destination already exists: {destination}")
@@ -85,7 +86,7 @@ def export_project(root, destination):
         raise ValueError("export destination must be outside the source project and skill")
     destination.mkdir(parents=True)
     runtime = destination / "pixel-game-video"
-    copy_skill(SKILL_ROOT, runtime, include_tests=False)
+    copy_project_runtime(SKILL_ROOT, runtime, resolved)
     target = destination / "project"
     target.mkdir()
     for name in INPUT_MODELS:
@@ -119,22 +120,20 @@ def export_project(root, destination):
         project["authoringMode"] = "direct"
         write_json(target / "project.json", project)
     write_json(destination / "export-manifest.json", {"sourceInputHash": resolved["inputHash"], "mode": "standalone-direct-snapshot", "runtime": "pixel-game-video", "project": "project"})
-    # Rebuild with the copied runtime and copied media, then verify its live
-    # workbench manifest. This exercises portability for Canvas and native
-    # Remotion equally; no source build directory or cached film is copied.
-    from engine.builder import build as build_media
+    # Start the copied CLI so the validation only imports the delivered modules.
+    # The workspace's Python module cache must not leak into a standalone build.
     from engine.workbench_bridge import require_supported
-    previous_bytecode_policy = sys.dont_write_bytecode
-    sys.dont_write_bytecode = True
-    try:
-        exported = compile_project(target, skill_root=runtime, write=True)
-        build_media(target, exported, runtime, silent=exported['project']['audioMode'] == 'silent')
-        require_supported(target, exported)
-    finally:
-        sys.dont_write_bytecode = previous_bytecode_policy
+    rebuilt = subprocess.run(
+        [sys.executable, '-B', '-X', 'utf8', str(runtime / 'scripts/video.py'), 'build', str(target)],
+        cwd=destination, capture_output=True, encoding='utf-8',
+    )
+    if rebuilt.returncode:
+        raise ValueError('Standalone runtime failed to rebuild: ' + (rebuilt.stderr or rebuilt.stdout).strip())
+    require_supported(target)
     (destination / "RUN.md").write_text(
         "# Standalone video snapshot\n\n"
-        "Install Python dependencies in pixel-game-video/requirements.txt and configure Chrome and FFmpeg as described in pixel-game-video/references/runtime.md. "
+        "Install Python dependencies with `python -m pip install -r pixel-game-video/requirements.txt`. "
+        "Use installed Chrome/Chromium and FFmpeg. Set PIXEL_BROWSER_EXECUTABLE, PIXEL_FFMPEG and PIXEL_FFPROBE when needed. "
         "Install the bundled editor dependencies with `npm ci` in pixel-game-video/workbench. Runtime binaries, installed packages and fonts are not bundled.\n\n"
         "Video editing and final export must use the local workbench for both Canvas and native Remotion projects. "
         "Open it with `python pixel-game-video/scripts/video.py workbench project --port 5208`. "
@@ -145,7 +144,8 @@ def export_project(root, destination):
         "Import a saved workbench JSON to continue its edits after reopening. The bundled VideoSpec is a direct source snapshot; "
         "it does not automatically include later workbench edits, and rebuilding the source does not rewrite a saved editing branch. "
         "The original render command is only for source debugging or parity comparison, not final delivery. "
-        "Director sources, when present, are preserved under authoring-sources. Generated build files in this export were rebuilt from the copied source and may be regenerated.\n",
+        "Director sources, when present, are preserved under authoring-sources. Generated build files in this export were rebuilt from the copied source and may be regenerated. "
+        "The portable runtime covers the current project and editor. Add new style or scene dependencies using the installed skill, then export the updated snapshot.\n",
         encoding="utf-8")
     return {"exported": str(destination), "sourceInputHash": resolved["inputHash"]}
 
@@ -165,7 +165,7 @@ def main(argv=None):
     cat.add_argument('--check', action='store_true', help='Check all capability references without executing tests; requires --capabilities')
     init = subs.add_parser("init")
     init.add_argument("project", type=Path)
-    init.add_argument("--title", default="像素视频示例")
+    init.add_argument("--title", default="新视频")
     init.add_argument('--backend', choices=['canvas', 'remotion'], default='canvas')
     music = subs.add_parser('import-bgm', help='Import a selected local music file as project PCM WAV')
     music.add_argument('project', type=Path)
@@ -250,6 +250,15 @@ def main(argv=None):
                       "inputHash": data["inputHash"]}
             if artifact == 'film.html':
                 result['whitebox'] = str(root / 'build' / 'whitebox.html')
+            audio_report = root / 'build/sfx-events.json'
+            if data["project"]["audioMode"] != "silent":
+                design = read_json(audio_report)['soundDesign']
+                result['soundDesign'] = {'report': str(audio_report), 'cueCount': design['cueCount'],
+                                         'nonzeroCueCount': design['nonzeroCueCount'],
+                                         'warningCodes': sorted({issue['code'] for issue in design['warnings']})}
+            elif data['audio']:
+                result['soundDesign'] = {'cueCount': len(data['audio']), 'nonzeroCueCount': 0,
+                                         'warningCodes': ['sfx-disabled-by-silent-mode']}
             emit(result)
         elif args.command == 'studio':
             if data['project']['renderBackend'] != 'remotion':

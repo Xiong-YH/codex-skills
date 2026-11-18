@@ -1,27 +1,29 @@
 {
-  "version": "R38 · 步进 V5 卡点版",
-  "scriptRevision": 35,
+  "version": "R41 · 阅读节奏与人物特写",
+  "scriptRevision": 38,
   "dimensions": {
     "width": 1280,
     "height": 720
   },
   "fps": 60,
-  "frames": 5280,
-  "durationSeconds": 88,
+  "frames": 6480,
+  "durationSeconds": 108,
+  "shotCount": 24,
   "bgm": {
-    "title": "步进 V5 · 街机版",
-    "sha256": "de7ee21566ccf74bb55c5ddf60c735de8e943b061feb558cc28595ecb729bc55",
-    "duration": 88,
+    "title": "步进 V5 · 108 秒编排",
+    "version": "pulse-v5-r41",
+    "sha256": "df4762a2b603078cd18dbd21ef701c015777825bd398860e30430735e8c4cdc4",
+    "sampleRate": 48000,
     "bpm": 120,
     "beatsPerBar": 4,
-    "sampleRate": 48000,
-    "firstDrumSeconds": 4.000020833333333,
+    "startSeconds": 0,
+    "duration": 108,
     "sections": [
       {
         "name": "起步",
         "seconds": [
           0,
-          22
+          26
         ],
         "key": "F 小调",
         "harmonyCueSeconds": 6
@@ -29,41 +31,49 @@
       {
         "name": "回应",
         "seconds": [
-          22,
-          44
+          26,
+          52
         ],
         "key": "F 小调",
-        "harmonyCueSeconds": 28
+        "harmonyCueSeconds": 36
       },
       {
-        "name": "高潮",
+        "name": "升调",
         "seconds": [
-          44,
-          66
+          52,
+          82
         ],
         "key": "G 小调",
-        "harmonyCueSeconds": 50
+        "harmonyCueSeconds": 66
       },
       {
         "name": "归位",
         "seconds": [
-          66,
-          88
+          82,
+          108
         ],
         "key": "F 小调",
-        "harmonyCueSeconds": 72
+        "harmonyCueSeconds": 92
       }
     ],
-    "sourceMix": {
-      "lufs": -13.9,
-      "truePeakDb": -1.8
+    "firstDrumSeconds": 4.000020833333333,
+    "edit": {
+      "sourceSha256": "2cf926d08bb77f4786b75bf6f6acebe4958734f34d61108f489d9be6361e55bd",
+      "sectionSeconds": [
+        56,
+        60
+      ],
+      "repeatedAtSeconds": 60,
+      "addedSeconds": 4,
+      "prerollBlendSeconds": 0.018,
+      "samplePeakDbfs": -1.8
     }
   },
   "original": {
-    "previewSha256": "965af625a680937743887ace68a44ec3b82f8649bf58062a4737e67c7e6cb567",
-    "mixSha256": "f31c6ec9e8233e73512fbaf1cce2737833bf260b2bc86a5473fd681ec970be84",
-    "exportSha256": "507b6f3aec669745f91e6ed504f3269606894e665da7c0eb78dba9bd7ee20abd",
-    "mixSamplePeakDbfs": -1.41,
+    "previewSha256": "a57fb7efe0b9a8ee4bca764e3c60f4f8f698e17d1fa98ce12c729a48df0d60ab",
+    "mixSha256": "2ddc27fff3b2f63d6a260ffbd5a54bb0dacdc4a61172d26639c47a0048a52ccc",
+    "exportSha256": "32c9cd6664a1316b2bcb3bb36e67eaa156e5829b260a8cd4c91c4fb06848e4ad",
+    "mixSamplePeakDbfs": -1.8,
     "revealLead": {
       "seconds": 0.28,
       "reduction": 0.34
@@ -72,136 +82,1435 @@
   "alignment": [
     {
       "id": "opening-attention",
+      "shotId": "s01",
+      "nominal": 0.75,
       "at": 0.75,
       "frame": 45,
-      "lane": "arcade"
+      "local": 45,
+      "lane": "arcade",
+      "rise": 0.05845,
+      "driftMs": 0
     },
     {
       "id": "hook-hit",
+      "shotId": "s01",
+      "nominal": 2,
       "at": 1.996,
       "frame": 120,
-      "lane": "keyboard"
+      "local": 120,
+      "lane": "keyboard",
+      "rise": 0.08544,
+      "driftMs": 4
     },
     {
       "id": "first-drum",
+      "shotId": "s02",
+      "nominal": 4,
       "at": 4,
       "frame": 240,
-      "lane": "drum"
+      "local": 0,
+      "lane": "drum",
+      "rise": 0.57482,
+      "driftMs": 0
+    },
+    {
+      "id": "identity-0",
+      "shotId": "s02",
+      "nominal": 4.5,
+      "at": 4.5,
+      "frame": 270,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.17897,
+      "driftMs": 0
+    },
+    {
+      "id": "identity-1",
+      "shotId": "s02",
+      "nominal": 5,
+      "at": 5,
+      "frame": 300,
+      "local": 60,
+      "lane": "drum",
+      "rise": 0.46713,
+      "driftMs": 0
+    },
+    {
+      "id": "identity-2",
+      "shotId": "s02",
+      "nominal": 5.5,
+      "at": 5.5,
+      "frame": 330,
+      "local": 90,
+      "lane": "drum",
+      "rise": 0.17989,
+      "driftMs": 0
+    },
+    {
+      "id": "identity-3",
+      "shotId": "s02",
+      "nominal": 6,
+      "at": 6,
+      "frame": 360,
+      "local": 120,
+      "lane": "drum",
+      "rise": 0.56527,
+      "driftMs": 0
+    },
+    {
+      "id": "mentor-memory",
+      "shotId": "s02",
+      "nominal": 7,
+      "at": 7,
+      "frame": 420,
+      "local": 180,
+      "lane": "drum",
+      "rise": 0.35798,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-opens",
+      "shotId": "s03",
+      "nominal": 8.5,
+      "at": 8.5,
+      "frame": 510,
+      "local": 0,
+      "lane": "drum",
+      "rise": 0.17937,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-c01",
+      "shotId": "s03",
+      "nominal": 9,
+      "at": 9,
+      "frame": 540,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.46473,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-first-answer",
+      "shotId": "s03",
+      "nominal": 10.5,
+      "at": 10.5,
+      "frame": 630,
+      "local": 120,
+      "lane": "drum",
+      "rise": 0.17952,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-first-reply",
+      "shotId": "s03",
+      "nominal": 12,
+      "at": 12,
+      "frame": 720,
+      "local": 210,
+      "lane": "drum",
+      "rise": 0.55103,
+      "driftMs": 0
     },
     {
       "id": "chat-c02",
-      "at": 13.258,
+      "shotId": "s03",
+      "nominal": 13.25,
+      "at": 13.254,
       "frame": 795,
-      "lane": "arcade"
+      "local": 285,
+      "lane": "drum",
+      "rise": 0.08135,
+      "driftMs": -4
     },
     {
       "id": "question-turn",
+      "shotId": "autumn-setup",
+      "nominal": 14.5,
       "at": 14.5,
       "frame": 870,
-      "lane": "drum"
+      "local": 0,
+      "lane": "drum",
+      "rise": 0.17952,
+      "driftMs": 0
+    },
+    {
+      "id": "lesson-land-0",
+      "shotId": "autumn-setup",
+      "nominal": 15.5,
+      "at": 15.5,
+      "frame": 930,
+      "local": 60,
+      "lane": "drum",
+      "rise": 0.28543,
+      "driftMs": 0
+    },
+    {
+      "id": "saved-0",
+      "shotId": "autumn-setup",
+      "nominal": 16,
+      "at": 16,
+      "frame": 960,
+      "local": 90,
+      "lane": "drum",
+      "rise": 0.29201,
+      "driftMs": 0
+    },
+    {
+      "id": "lesson-land-1",
+      "shotId": "autumn-setup",
+      "nominal": 16.5,
+      "at": 16.496,
+      "frame": 990,
+      "local": 120,
+      "lane": "keyboard",
+      "rise": 0.04507,
+      "driftMs": 4
+    },
+    {
+      "id": "saved-1",
+      "shotId": "autumn-setup",
+      "nominal": 17,
+      "at": 17,
+      "frame": 1020,
+      "local": 150,
+      "lane": "keyboard",
+      "rise": 0.0343,
+      "driftMs": 0
+    },
+    {
+      "id": "lesson-land-2",
+      "shotId": "autumn-setup",
+      "nominal": 17.75,
+      "at": 17.754,
+      "frame": 1065,
+      "local": 195,
+      "lane": "arcade",
+      "rise": 0.08293,
+      "driftMs": -4
+    },
+    {
+      "id": "saved-2",
+      "shotId": "autumn-setup",
+      "nominal": 18.25,
+      "at": 18.254,
+      "frame": 1095,
+      "local": 225,
+      "lane": "arcade",
+      "rise": 0.12163,
+      "driftMs": -4
+    },
+    {
+      "id": "lesson-land-3",
+      "shotId": "autumn-setup",
+      "nominal": 19.25,
+      "at": 19.254,
+      "frame": 1155,
+      "local": 285,
+      "lane": "keyboard",
+      "rise": 0.02871,
+      "driftMs": -4
+    },
+    {
+      "id": "saved-3",
+      "shotId": "autumn-setup",
+      "nominal": 19.75,
+      "at": 19.75,
+      "frame": 1185,
+      "local": 315,
+      "lane": "drum",
+      "rise": 0.15579,
+      "driftMs": 0
     },
     {
       "id": "opening-resume",
-      "at": 18,
-      "frame": 1080,
-      "lane": "bass"
+      "shotId": "autumn-outcome",
+      "nominal": 20.5,
+      "at": 20.5,
+      "frame": 1230,
+      "local": 0,
+      "lane": "drum",
+      "rise": 0.35315,
+      "driftMs": 0
+    },
+    {
+      "id": "counter-0",
+      "shotId": "autumn-outcome",
+      "nominal": 20.75,
+      "at": 20.75,
+      "frame": 1245,
+      "local": 15,
+      "lane": "drum",
+      "rise": 0.10504,
+      "driftMs": 0
+    },
+    {
+      "id": "counter-1",
+      "shotId": "autumn-outcome",
+      "nominal": 21,
+      "at": 21.008,
+      "frame": 1260,
+      "local": 30,
+      "lane": "arcade",
+      "rise": 0.08946,
+      "driftMs": -8
+    },
+    {
+      "id": "counter-2",
+      "shotId": "autumn-outcome",
+      "nominal": 21.25,
+      "at": 21.25,
+      "frame": 1275,
+      "local": 45,
+      "lane": "drum",
+      "rise": 0.16267,
+      "driftMs": 0
+    },
+    {
+      "id": "counter-3",
+      "shotId": "autumn-outcome",
+      "nominal": 21.375,
+      "at": 21.371,
+      "frame": 1282,
+      "local": 52,
+      "lane": "keyboard",
+      "rise": 0.03271,
+      "driftMs": -4.33
+    },
+    {
+      "id": "counter-4",
+      "shotId": "autumn-outcome",
+      "nominal": 21.5,
+      "at": 21.504,
+      "frame": 1290,
+      "local": 60,
+      "lane": "arcade",
+      "rise": 0.08951,
+      "driftMs": -4
+    },
+    {
+      "id": "counter-5",
+      "shotId": "autumn-outcome",
+      "nominal": 21.625,
+      "at": 21.621,
+      "frame": 1297,
+      "local": 67,
+      "lane": "bass",
+      "rise": 0.199,
+      "driftMs": -4.33
+    },
+    {
+      "id": "counter-6",
+      "shotId": "autumn-outcome",
+      "nominal": 21.875,
+      "at": 21.875,
+      "frame": 1313,
+      "local": 83,
+      "lane": "drum",
+      "rise": 0.0144,
+      "driftMs": 8.33
+    },
+    {
+      "id": "counter-7",
+      "shotId": "autumn-outcome",
+      "nominal": 22,
+      "at": 22,
+      "frame": 1320,
+      "local": 90,
+      "lane": "bass",
+      "rise": 0.24727,
+      "driftMs": 0
+    },
+    {
+      "id": "counter-8",
+      "shotId": "autumn-outcome",
+      "nominal": 22.125,
+      "at": 22.121,
+      "frame": 1327,
+      "local": 97,
+      "lane": "bass",
+      "rise": 0.05871,
+      "driftMs": -4.33
+    },
+    {
+      "id": "counter-9",
+      "shotId": "autumn-outcome",
+      "nominal": 22.25,
+      "at": 22.25,
+      "frame": 1335,
+      "local": 105,
+      "lane": "arcade",
+      "rise": 0.12458,
+      "driftMs": 0
     },
     {
       "id": "counter-500",
-      "at": 20,
-      "frame": 1200,
-      "lane": "drum"
+      "shotId": "autumn-outcome",
+      "nominal": 22.5,
+      "at": 22.508,
+      "frame": 1350,
+      "local": 120,
+      "lane": "arcade",
+      "rise": 0.09391,
+      "driftMs": -8
     },
     {
       "id": "invitations-zero",
-      "at": 20.5,
-      "frame": 1230,
-      "lane": "low"
+      "shotId": "autumn-outcome",
+      "nominal": 23,
+      "at": 23.008,
+      "frame": 1380,
+      "local": 150,
+      "lane": "bass",
+      "rise": 0.23381,
+      "driftMs": -8
     },
     {
       "id": "no-reply",
-      "at": 21,
-      "frame": 1260,
-      "lane": "drum"
+      "shotId": "autumn-outcome",
+      "nominal": 23.5,
+      "at": 23.5,
+      "frame": 1410,
+      "local": 180,
+      "lane": "drum",
+      "rise": 0.39855,
+      "driftMs": 0
+    },
+    {
+      "id": "back-to-now",
+      "shotId": "s04",
+      "nominal": 26,
+      "at": 26,
+      "frame": 1560,
+      "local": 0,
+      "lane": "drum",
+      "rise": 0.55293,
+      "driftMs": 0
+    },
+    {
+      "id": "now-last-reply",
+      "shotId": "s04",
+      "nominal": 27.25,
+      "at": 27.258,
+      "frame": 1635,
+      "local": 75,
+      "lane": "drum",
+      "rise": 0.06249,
+      "driftMs": -8
+    },
+    {
+      "id": "now-question",
+      "shotId": "s04",
+      "nominal": 28.5,
+      "at": 28.5,
+      "frame": 1710,
+      "local": 150,
+      "lane": "drum",
+      "rise": 0.2874,
+      "driftMs": 0
+    },
+    {
+      "id": "language-0",
+      "shotId": "s04",
+      "nominal": 29.75,
+      "at": 29.746,
+      "frame": 1785,
+      "local": 225,
+      "lane": "drum",
+      "rise": 0.01394,
+      "driftMs": 4
+    },
+    {
+      "id": "language-1",
+      "shotId": "s04",
+      "nominal": 30.75,
+      "at": 30.75,
+      "frame": 1845,
+      "local": 285,
+      "lane": "drum",
+      "rise": 0.2042,
+      "driftMs": 0
+    },
+    {
+      "id": "language-2",
+      "shotId": "s04",
+      "nominal": 31.75,
+      "at": 31.754,
+      "frame": 1905,
+      "local": 345,
+      "lane": "arcade",
+      "rise": 0.075,
+      "driftMs": -4
+    },
+    {
+      "id": "now-narration",
+      "shotId": "s04",
+      "nominal": 32.5,
+      "at": 32.5,
+      "frame": 1950,
+      "local": 390,
+      "lane": "drum",
+      "rise": 0.17782,
+      "driftMs": 0
+    },
+    {
+      "id": "language-question-mark",
+      "shotId": "s04",
+      "nominal": 33.5,
+      "at": 33.5,
+      "frame": 2010,
+      "local": 450,
+      "lane": "drum",
+      "rise": 0.18944,
+      "driftMs": 0
     },
     {
       "id": "title-land",
-      "at": 28,
-      "frame": 1680,
-      "lane": "drum"
+      "shotId": "s05",
+      "nominal": 36,
+      "at": 36,
+      "frame": 2160,
+      "local": 45,
+      "lane": "keyboard",
+      "rise": 0.05603,
+      "driftMs": 0
+    },
+    {
+      "id": "chapter-one-change",
+      "shotId": "chapter-one",
+      "nominal": 37.25,
+      "at": 37.254,
+      "frame": 2235,
+      "local": 0,
+      "lane": "drum",
+      "rise": 0.08084,
+      "driftMs": -4
     },
     {
       "id": "title-touches-paper",
-      "at": 29.5,
-      "frame": 1770,
-      "lane": "drum"
+      "shotId": "chapter-one",
+      "nominal": 37.5,
+      "at": 37.5,
+      "frame": 2250,
+      "local": 15,
+      "lane": "drum",
+      "rise": 0.2178,
+      "driftMs": 0
+    },
+    {
+      "id": "chapter-one-letter-0",
+      "shotId": "chapter-one",
+      "nominal": 37.75,
+      "at": 37.758,
+      "frame": 2265,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.04661,
+      "driftMs": -8
+    },
+    {
+      "id": "chapter-one-letter-1",
+      "shotId": "chapter-one",
+      "nominal": 38,
+      "at": 38,
+      "frame": 2280,
+      "local": 45,
+      "lane": "drum",
+      "rise": 0.5697,
+      "driftMs": 0
+    },
+    {
+      "id": "chapter-one-letter-2",
+      "shotId": "chapter-one",
+      "nominal": 38.25,
+      "at": 38.254,
+      "frame": 2295,
+      "local": 60,
+      "lane": "drum",
+      "rise": 0.05011,
+      "driftMs": -4
+    },
+    {
+      "id": "chapter-one-letter-3",
+      "shotId": "chapter-one",
+      "nominal": 38.5,
+      "at": 38.5,
+      "frame": 2310,
+      "local": 75,
+      "lane": "drum",
+      "rise": 0.17937,
+      "driftMs": 0
+    },
+    {
+      "id": "chapter-one-letter-4",
+      "shotId": "chapter-one",
+      "nominal": 38.75,
+      "at": 38.758,
+      "frame": 2325,
+      "local": 90,
+      "lane": "drum",
+      "rise": 0.04737,
+      "driftMs": -8
+    },
+    {
+      "id": "chapter-one-caption",
+      "shotId": "chapter-one",
+      "nominal": 39,
+      "at": 39,
+      "frame": 2340,
+      "local": 105,
+      "lane": "drum",
+      "rise": 0.2552,
+      "driftMs": 0
+    },
+    {
+      "id": "rail-one-0",
+      "shotId": "chapter-one",
+      "nominal": 39.25,
+      "at": 39.254,
+      "frame": 2355,
+      "local": 120,
+      "lane": "drum",
+      "rise": 0.13538,
+      "driftMs": -4
+    },
+    {
+      "id": "rail-one-1",
+      "shotId": "chapter-one",
+      "nominal": 39.75,
+      "at": 39.75,
+      "frame": 2385,
+      "local": 150,
+      "lane": "arcade",
+      "rise": 0.09599,
+      "driftMs": 0
+    },
+    {
+      "id": "rail-one-2",
+      "shotId": "chapter-one",
+      "nominal": 40.25,
+      "at": 40.254,
+      "frame": 2415,
+      "local": 180,
+      "lane": "drum",
+      "rise": 0.0934,
+      "driftMs": -4
+    },
+    {
+      "id": "rail-one-3",
+      "shotId": "chapter-one",
+      "nominal": 40.75,
+      "at": 40.758,
+      "frame": 2445,
+      "local": 210,
+      "lane": "drum",
+      "rise": 0.05109,
+      "driftMs": -8
+    },
+    {
+      "id": "scope-enters-chat",
+      "shotId": "ask-directions",
+      "nominal": 41.75,
+      "at": 41.758,
+      "frame": 2505,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.02792,
+      "driftMs": -8
+    },
+    {
+      "id": "chat-c04",
+      "shotId": "ask-directions",
+      "nominal": 42.5,
+      "at": 42.5,
+      "frame": 2550,
+      "local": 75,
+      "lane": "drum",
+      "rise": 0.17951,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-direction-answer",
+      "shotId": "ask-directions",
+      "nominal": 44.25,
+      "at": 44.254,
+      "frame": 2655,
+      "local": 180,
+      "lane": "arcade",
+      "rise": 0.08219,
+      "driftMs": -4
+    },
+    {
+      "id": "directions-left",
+      "shotId": "ask-directions",
+      "nominal": 45,
+      "at": 45,
+      "frame": 2700,
+      "local": 225,
+      "lane": "keyboard",
+      "rise": 0.0343,
+      "driftMs": 0
+    },
+    {
+      "id": "directions-right",
+      "shotId": "ask-directions",
+      "nominal": 45.5,
+      "at": 45.5,
+      "frame": 2730,
+      "local": 255,
+      "lane": "drum",
+      "rise": 0.15183,
+      "driftMs": 0
+    },
+    {
+      "id": "heading-second",
+      "shotId": "chapter-two",
+      "nominal": 46,
+      "at": 46.008,
+      "frame": 2760,
+      "local": 0,
+      "lane": "arcade",
+      "rise": 0.12757,
+      "driftMs": -8
+    },
+    {
+      "id": "research-heading",
+      "shotId": "chapter-two",
+      "nominal": 46.75,
+      "at": 46.75,
+      "frame": 2805,
+      "local": 45,
+      "lane": "drum",
+      "rise": 0.04464,
+      "driftMs": 0
+    },
+    {
+      "id": "research-directions-row",
+      "shotId": "chapter-two",
+      "nominal": 47.5,
+      "at": 47.504,
+      "frame": 2850,
+      "local": 90,
+      "lane": "arcade",
+      "rise": 0.12102,
+      "driftMs": -4
+    },
+    {
+      "id": "rail-two-0",
+      "shotId": "chapter-two",
+      "nominal": 48.5,
+      "at": 48.5,
+      "frame": 2910,
+      "local": 150,
+      "lane": "drum",
+      "rise": 0.35313,
+      "driftMs": 0
+    },
+    {
+      "id": "rail-two-1",
+      "shotId": "chapter-two",
+      "nominal": 49,
+      "at": 48.996,
+      "frame": 2940,
+      "local": 180,
+      "lane": "bass",
+      "rise": 0.02376,
+      "driftMs": 4
+    },
+    {
+      "id": "rail-two-2",
+      "shotId": "chapter-two",
+      "nominal": 49.5,
+      "at": 49.5,
+      "frame": 2970,
+      "local": 210,
+      "lane": "drum",
+      "rise": 0.0409,
+      "driftMs": 0
+    },
+    {
+      "id": "rail-two-3",
+      "shotId": "chapter-two",
+      "nominal": 50,
+      "at": 50.008,
+      "frame": 3000,
+      "local": 240,
+      "lane": "keyboard",
+      "rise": 0.01258,
+      "driftMs": -8
+    },
+    {
+      "id": "direction-tab-0",
+      "shotId": "s06",
+      "nominal": 50.75,
+      "at": 50.75,
+      "frame": 3045,
+      "local": 15,
+      "lane": "keyboard",
+      "rise": 0.00909,
+      "driftMs": 0
+    },
+    {
+      "id": "research-badge",
+      "shotId": "s06",
+      "nominal": 51,
+      "at": 51,
+      "frame": 3060,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.35262,
+      "driftMs": 0
+    },
+    {
+      "id": "direction-tab-1",
+      "shotId": "s06",
+      "nominal": 51.125,
+      "at": 51.133,
+      "frame": 3068,
+      "local": 38,
+      "lane": "keyboard",
+      "rise": 0.04038,
+      "driftMs": 0.33
+    },
+    {
+      "id": "direction-tab-2",
+      "shotId": "s06",
+      "nominal": 51.5,
+      "at": 51.496,
+      "frame": 3090,
+      "local": 60,
+      "lane": "keyboard",
+      "rise": 0.03673,
+      "driftMs": 4
+    },
+    {
+      "id": "backend-interest",
+      "shotId": "s06",
+      "nominal": 52,
+      "at": 52,
+      "frame": 3120,
+      "local": 90,
+      "lane": "keyboard",
+      "rise": 0.02807,
+      "driftMs": 0
+    },
+    {
+      "id": "research-gap-lead",
+      "shotId": "s06",
+      "nominal": 53.25,
+      "at": 53.246,
+      "frame": 3195,
+      "local": 165,
+      "lane": "arcade",
+      "rise": 0.17986,
+      "driftMs": 4
+    },
+    {
+      "id": "comparison-card-0",
+      "shotId": "s06",
+      "nominal": 53.75,
+      "at": 53.754,
+      "frame": 3225,
+      "local": 195,
+      "lane": "bass",
+      "rise": 0.16755,
+      "driftMs": -4
+    },
+    {
+      "id": "comparison-card-1",
+      "shotId": "s06",
+      "nominal": 55.5,
+      "at": 55.496,
+      "frame": 3330,
+      "local": 300,
+      "lane": "drum",
+      "rise": 0.21968,
+      "driftMs": 4
     },
     {
       "id": "found-gap",
-      "at": 41.25,
-      "frame": 2475,
-      "lane": "keyboard"
+      "shotId": "s06",
+      "nominal": 56.5,
+      "at": 56.5,
+      "frame": 3390,
+      "local": 360,
+      "lane": "drum",
+      "rise": 0.27685,
+      "driftMs": 0
+    },
+    {
+      "id": "research-gap-full",
+      "shotId": "s06",
+      "nominal": 56.75,
+      "at": 56.754,
+      "frame": 3405,
+      "local": 375,
+      "lane": "arcade",
+      "rise": 0.10676,
+      "driftMs": -4
+    },
+    {
+      "id": "gather-difference",
+      "shotId": "s06",
+      "nominal": 57.75,
+      "at": 57.754,
+      "frame": 3465,
+      "local": 435,
+      "lane": "bass",
+      "rise": 0.16988,
+      "driftMs": -4
+    },
+    {
+      "id": "difference-strip",
+      "shotId": "s06",
+      "nominal": 58.5,
+      "at": 58.5,
+      "frame": 3510,
+      "local": 480,
+      "lane": "drum",
+      "rise": 0.17898,
+      "driftMs": 0
     },
     {
       "id": "lift-project-note",
-      "at": 43.246,
-      "frame": 2595,
-      "lane": "keyboard"
+      "shotId": "s06",
+      "nominal": 60.5,
+      "at": 60.504,
+      "frame": 3630,
+      "local": 600,
+      "lane": "bass",
+      "rise": 0.19539,
+      "driftMs": -4
     },
     {
       "id": "chapter-three-key",
-      "at": 44,
-      "frame": 2640,
-      "lane": "drum"
+      "shotId": "chapter-three",
+      "nominal": 61,
+      "at": 61.004,
+      "frame": 3660,
+      "local": 0,
+      "lane": "drum",
+      "rise": 0.02551,
+      "driftMs": -4
+    },
+    {
+      "id": "rail-three-0",
+      "shotId": "chapter-three",
+      "nominal": 61.5,
+      "at": 61.496,
+      "frame": 3690,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.14557,
+      "driftMs": 4
+    },
+    {
+      "id": "chapter-three-title",
+      "shotId": "chapter-three",
+      "nominal": 61.5,
+      "at": 61.496,
+      "frame": 3690,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.14557,
+      "driftMs": 4
+    },
+    {
+      "id": "rail-three-1",
+      "shotId": "chapter-three",
+      "nominal": 62,
+      "at": 62,
+      "frame": 3720,
+      "local": 60,
+      "lane": "drum",
+      "rise": 0.56766,
+      "driftMs": 0
+    },
+    {
+      "id": "rail-three-2",
+      "shotId": "chapter-three",
+      "nominal": 62.5,
+      "at": 62.5,
+      "frame": 3750,
+      "local": 90,
+      "lane": "arcade",
+      "rise": 0.02085,
+      "driftMs": 0
+    },
+    {
+      "id": "rail-three-3",
+      "shotId": "chapter-three",
+      "nominal": 62.75,
+      "at": 62.758,
+      "frame": 3765,
+      "local": 105,
+      "lane": "drum",
+      "rise": 0.05108,
+      "driftMs": -8
     },
     {
       "id": "chapter-three-reprise",
-      "at": 46,
-      "frame": 2760,
-      "lane": "drum"
+      "shotId": "chapter-three",
+      "nominal": 63.25,
+      "at": 63.254,
+      "frame": 3795,
+      "local": 135,
+      "lane": "drum",
+      "rise": 0.04095,
+      "driftMs": -4
+    },
+    {
+      "id": "question-badge",
+      "shotId": "s07",
+      "nominal": 64,
+      "at": 64,
+      "frame": 3840,
+      "local": 15,
+      "lane": "drum",
+      "rise": 0.57465,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-c06",
+      "shotId": "s07",
+      "nominal": 64.25,
+      "at": 64.25399999999999,
+      "frame": 3855,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.04265,
+      "driftMs": -4
+    },
+    {
+      "id": "chat-practice-question",
+      "shotId": "s07",
+      "nominal": 66,
+      "at": 66,
+      "frame": 3960,
+      "local": 135,
+      "lane": "drum",
+      "rise": 0.53147,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-practice-answer",
+      "shotId": "practice-reply",
+      "nominal": 69.5,
+      "at": 69.5,
+      "frame": 4170,
+      "local": 15,
+      "lane": "drum",
+      "rise": 0.15258,
+      "driftMs": 0
+    },
+    {
+      "id": "nod-at-advice",
+      "shotId": "practice-reply",
+      "nominal": 70.75,
+      "at": 70.758,
+      "frame": 4245,
+      "local": 90,
+      "lane": "drum",
+      "rise": 0.04983,
+      "driftMs": -8
+    },
+    {
+      "id": "rail-four-0",
+      "shotId": "chapter-four",
+      "nominal": 73,
+      "at": 73,
+      "frame": 4380,
+      "local": 15,
+      "lane": "drum",
+      "rise": 0.32195,
+      "driftMs": 0
+    },
+    {
+      "id": "rail-four-1",
+      "shotId": "chapter-four",
+      "nominal": 73.5,
+      "at": 73.5,
+      "frame": 4410,
+      "local": 45,
+      "lane": "drum",
+      "rise": 0.28882,
+      "driftMs": 0
+    },
+    {
+      "id": "rail-four-2",
+      "shotId": "chapter-four",
+      "nominal": 74,
+      "at": 74.008,
+      "frame": 4440,
+      "local": 75,
+      "lane": "arcade",
+      "rise": 0.10127,
+      "driftMs": -8
+    },
+    {
+      "id": "rail-four-3",
+      "shotId": "chapter-four",
+      "nominal": 74.5,
+      "at": 74.5,
+      "frame": 4470,
+      "local": 105,
+      "lane": "drum",
+      "rise": 0.03636,
+      "driftMs": 0
+    },
+    {
+      "id": "next-step-badge",
+      "shotId": "confirm-understanding",
+      "nominal": 76.5,
+      "at": 76.504,
+      "frame": 4590,
+      "local": 30,
+      "lane": "arcade",
+      "rise": 0.11615,
+      "driftMs": -4
+    },
+    {
+      "id": "chat-confirm-answer",
+      "shotId": "confirm-understanding",
+      "nominal": 76.75,
+      "at": 76.75,
+      "frame": 4605,
+      "local": 45,
+      "lane": "drum",
+      "rise": 0.04527,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-confirm-reply",
+      "shotId": "confirm-understanding",
+      "nominal": 78,
+      "at": 78,
+      "frame": 4680,
+      "local": 120,
+      "lane": "bass",
+      "rise": 0.28726,
+      "driftMs": 0
+    },
+    {
+      "id": "chat-thanks",
+      "shotId": "s11",
+      "nominal": 79.75,
+      "at": 79.758,
+      "frame": 4785,
+      "local": 15,
+      "lane": "arcade",
+      "rise": 0.08923,
+      "driftMs": -8
+    },
+    {
+      "id": "self-cheer",
+      "shotId": "s11",
+      "nominal": 80.5,
+      "at": 80.496,
+      "frame": 4830,
+      "local": 60,
+      "lane": "keyboard",
+      "rise": 0.03089,
+      "driftMs": 4
+    },
+    {
+      "id": "thanks-closeup-land",
+      "shotId": "s11",
+      "nominal": 81,
+      "at": 81,
+      "frame": 4860,
+      "local": 90,
+      "lane": "drum",
+      "rise": 0.35222,
+      "driftMs": 0
+    },
+    {
+      "id": "plan-main-line",
+      "shotId": "schedule-action",
+      "nominal": 82.25,
+      "at": 82.25,
+      "frame": 4935,
+      "local": 30,
+      "lane": "keyboard",
+      "rise": 0.02891,
+      "driftMs": 0
+    },
+    {
+      "id": "plan-flag",
+      "shotId": "schedule-action",
+      "nominal": 83.25,
+      "at": 83.258,
+      "frame": 4995,
+      "local": 90,
+      "lane": "drum",
+      "rise": 0.1021,
+      "driftMs": -8
+    },
+    {
+      "id": "set-time",
+      "shotId": "schedule-action",
+      "nominal": 84,
+      "at": 84,
+      "frame": 5040,
+      "local": 135,
+      "lane": "keyboard",
+      "rise": 0.02285,
+      "driftMs": 0
+    },
+    {
+      "id": "confirm-time",
+      "shotId": "schedule-action",
+      "nominal": 84.5,
+      "at": 84.5,
+      "frame": 5070,
+      "local": 165,
+      "lane": "drum",
+      "rise": 0.28738,
+      "driftMs": 0
+    },
+    {
+      "id": "action-record-key",
+      "shotId": "record-progress",
+      "nominal": 85.5,
+      "at": 85.496,
+      "frame": 5130,
+      "local": 0,
+      "lane": "drum",
+      "rise": 0.20663,
+      "driftMs": 4
+    },
+    {
+      "id": "logged",
+      "shotId": "record-progress",
+      "nominal": 86,
+      "at": 86,
+      "frame": 5160,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.56656,
+      "driftMs": 0
+    },
+    {
+      "id": "record-blocked",
+      "shotId": "record-progress",
+      "nominal": 87.5,
+      "at": 87.496,
+      "frame": 5250,
+      "local": 120,
+      "lane": "drum",
+      "rise": 0.11618,
+      "driftMs": 4
+    },
+    {
+      "id": "more-work",
+      "shotId": "follow-up-results",
+      "nominal": 89,
+      "at": 89,
+      "frame": 5340,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.47335,
+      "driftMs": 0
+    },
+    {
+      "id": "more-gap",
+      "shotId": "follow-up-results",
+      "nominal": 90.25,
+      "at": 90.254,
+      "frame": 5415,
+      "local": 105,
+      "lane": "drum",
+      "rise": 0.09476,
+      "driftMs": -4
     },
     {
       "id": "following",
-      "at": 72,
-      "frame": 4320,
-      "lane": "drum"
+      "shotId": "follow-up-results",
+      "nominal": 92,
+      "at": 92,
+      "frame": 5520,
+      "local": 210,
+      "lane": "keyboard",
+      "rise": 0.05839,
+      "driftMs": 0
+    },
+    {
+      "id": "reflect-panel-0",
+      "shotId": "reflect-direction",
+      "nominal": 93.75,
+      "at": 93.758,
+      "frame": 5625,
+      "local": 15,
+      "lane": "drum",
+      "rise": 0.05101,
+      "driftMs": -8
+    },
+    {
+      "id": "reflect-0",
+      "shotId": "reflect-direction",
+      "nominal": 94,
+      "at": 94,
+      "frame": 5640,
+      "local": 30,
+      "lane": "drum",
+      "rise": 0.58256,
+      "driftMs": 0
+    },
+    {
+      "id": "reflect-1",
+      "shotId": "reflect-direction",
+      "nominal": 94.5,
+      "at": 94.5,
+      "frame": 5670,
+      "local": 60,
+      "lane": "drum",
+      "rise": 0.17937,
+      "driftMs": 0
+    },
+    {
+      "id": "reflect-panel-1",
+      "shotId": "reflect-direction",
+      "nominal": 94.75,
+      "at": 94.758,
+      "frame": 5685,
+      "local": 75,
+      "lane": "drum",
+      "rise": 0.05109,
+      "driftMs": -8
+    },
+    {
+      "id": "reflect-2",
+      "shotId": "reflect-direction",
+      "nominal": 95.25,
+      "at": 95.254,
+      "frame": 5715,
+      "local": 105,
+      "lane": "drum",
+      "rise": 0.05447,
+      "driftMs": -4
+    },
+    {
+      "id": "reflect-3",
+      "shotId": "reflect-direction",
+      "nominal": 96,
+      "at": 96,
+      "frame": 5760,
+      "local": 150,
+      "lane": "drum",
+      "rise": 0.52628,
+      "driftMs": 0
     },
     {
       "id": "begin-practice",
-      "at": 77.754,
-      "frame": 4665,
-      "lane": "bass"
+      "shotId": "s13",
+      "nominal": 97.5,
+      "at": 97.5,
+      "frame": 5850,
+      "local": 45,
+      "lane": "drum",
+      "rise": 0.28883,
+      "driftMs": 0
     },
     {
       "id": "summary-0",
-      "at": 79.754,
-      "frame": 4785,
-      "lane": "arcade"
+      "shotId": "s16",
+      "nominal": 99.75,
+      "at": 99.754,
+      "frame": 5985,
+      "local": 30,
+      "lane": "arcade",
+      "rise": 0.09742,
+      "driftMs": -4
+    },
+    {
+      "id": "summary-1",
+      "shotId": "s16",
+      "nominal": 101,
+      "at": 101,
+      "frame": 6060,
+      "local": 105,
+      "lane": "keyboard",
+      "rise": 0.0343,
+      "driftMs": 0
+    },
+    {
+      "id": "summary-2",
+      "shotId": "s16",
+      "nominal": 102.25,
+      "at": 102.246,
+      "frame": 6135,
+      "local": 180,
+      "lane": "bass",
+      "rise": 0.05139,
+      "driftMs": 4
     },
     {
       "id": "template-strike",
-      "at": 84.008,
-      "frame": 5040,
-      "lane": "keyboard"
+      "shotId": "comment-invite",
+      "nominal": 104.25,
+      "at": 104.246,
+      "frame": 6255,
+      "local": 30,
+      "lane": "keyboard",
+      "rise": 0.05664,
+      "driftMs": 4
+    },
+    {
+      "id": "template-0",
+      "shotId": "comment-invite",
+      "nominal": 104.5,
+      "at": 104.5,
+      "frame": 6270,
+      "local": 45,
+      "lane": "keyboard",
+      "rise": 0.09049,
+      "driftMs": 0
+    },
+    {
+      "id": "template-1",
+      "shotId": "comment-invite",
+      "nominal": 105.5,
+      "at": 105.5,
+      "frame": 6330,
+      "local": 105,
+      "lane": "keyboard",
+      "rise": 0.11723,
+      "driftMs": 0
+    },
+    {
+      "id": "template-2",
+      "shotId": "comment-invite",
+      "nominal": 106.5,
+      "at": 106.5,
+      "frame": 6390,
+      "local": 165,
+      "lane": "keyboard",
+      "rise": 0.1312,
+      "driftMs": 0
     }
   ],
   "reference": {
     "renderer": {
       "file": "picture.js",
-      "sha256": "50936f57d4d96c7b89bff39f1954a285e5a9070c766d8994cd65dd419b86d64c"
+      "sha256": "8137d66c385f35c14e5d1163cdd11db5b88385c25bb68142793eb8075e815463"
+    },
+    "clips": {
+      "file": "clips.js",
+      "sha256": "0a6d0e838e15b65d1fc56cf0d49e8497b809501fc1f079ee3b3ecf7a8aa6b0ef"
     },
     "mix": {
       "file": "mix.m4a",
+      "sha256": "5469bd65fc2fced06b2b4653908636f49e528a42df1490ee4172c7586ccb6162",
       "codec": "aac",
       "sampleRate": 48000,
       "channels": 2,
-      "sha256": "3ff9e93f02a04ef2e9d49b46f5862fe04b4c96e669bb23e8c66d6bfa556afb6c"
+      "sourceExportSha256": "32c9cd6664a1316b2bcb3bb36e67eaa156e5829b260a8cd4c91c4fb06848e4ad"
     },
     "frameRanges": {
       "endExclusive": true,
       "full": [
         0,
-        5280
+        6480
       ],
       "clips": [
         {
@@ -215,71 +1524,85 @@
           "id": "chat-reaction",
           "frames": [
             414,
-            903
+            924
           ]
         },
         {
           "id": "course-stack",
           "frames": [
             870,
-            1122
+            1281
           ]
         },
         {
           "id": "count-reveal",
           "frames": [
-            1097,
-            1355
+            1230,
+            1420
           ]
         },
         {
           "id": "outcome-bubbles",
           "frames": [
-            1227,
-            1425
+            1374,
+            1595
           ]
         },
         {
           "id": "question-title",
           "frames": [
-            1440,
-            1863
+            1950,
+            2475
+          ]
+        },
+        {
+          "id": "research-compare",
+          "frames": [
+            3030,
+            3624
           ]
         },
         {
           "id": "paper-handoff",
           "frames": [
-            2115,
-            2817
+            3456,
+            3892
+          ]
+        },
+        {
+          "id": "thanks-closeup",
+          "frames": [
+            4734,
+            4950
           ]
         },
         {
           "id": "practice",
           "frames": [
-            4620,
-            4812
+            5805,
+            6225
           ]
         }
       ]
     },
     "overview": {
       "file": "overview.jpg",
-      "sha256": "aaf2aec5e58003a538dcf4708973eea02deed40fdf6d288f98fa19ed7315138b",
-      "sourceExportSha256": "507b6f3aec669745f91e6ed504f3269606894e665da7c0eb78dba9bd7ee20abd",
+      "sha256": "17d8a73b3dc624f265bfcbf15b735bf2245b225e31ac3b0ff06b3a69e53f4fb2",
+      "sourceExportSha256": "32c9cd6664a1316b2bcb3bb36e67eaa156e5829b260a8cd4c91c4fb06848e4ad",
       "frames": [
-        363,
+        386,
         831,
-        1065,
-        1244,
-        1680,
-        2482,
-        2674,
-        4665,
-        5040
+        1206,
+        1432,
+        2185,
+        3141,
+        3434,
+        4880,
+        5910
       ],
       "columns": 3,
       "tileWidth": 480,
-      "purpose": "Actual R38 export frames for visual style inspection; not motion review evidence."
+      "purpose": "R41 export frames for composition review."
     }
   }
 }

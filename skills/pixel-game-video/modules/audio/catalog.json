@@ -1,5 +1,15 @@
 {
   "module": "audio",
+  "series": [
+    {"id":"synth.paper-slide.v1","name":"纸签抽出","hint":"纸签开始抽出、滑动或跨镜递过去时","level":0.22,"previousIds":["synth.series-paper-pull.v2"]},
+    {"id":"synth.series-paper-land.v1","name":"纸卡落位","hint":"薄纸卡接住桌面或卡槽的那一帧","level":0.5,"previousIds":["synth.series-paper-land.v2"]},
+    {"id":"arcade-confirm-soft","name":"选中与盖章","hint":"选项成立、按钮确认或印章压实","level":0.7,"previousIds":["synth.series-stamp.v2"]},
+    {"id":"arcade-seat","name":"数字锁定","hint":"终值定格或重要物件真正卡稳","level":0.42,"previousIds":["synth.series-lock.v2"]},
+    {"id":"synth.series-empty-result.v1","name":"结果落空","hint":"零结果或明确无回音出现时","level":0.47,"previousIds":["synth.series-empty-result.v2"]},
+    {"id":"synth.series-send.v1","name":"消息发出","hint":"自己的消息实际送出","level":0.45,"previousIds":["synth.series-send.v2"]},
+    {"id":"synth.series-reply.v1","name":"收到回复","hint":"对方的回复到达并接过焦点","level":0.5,"previousIds":["synth.series-reply.v2"]},
+    {"id":"arcade-unfold","name":"结构展开","hint":"一组新步骤或有层次的信息揭开","level":0.6,"previousIds":["synth.series-unfold.v2"]}
+  ],
   "items": [
     {
       "id": "code-tap",
@@ -272,6 +282,286 @@
       "durationSeconds": 0.32,
       "anchorSeconds": 0,
       "suggestedMinGapSeconds": 0.4
+    },
+    {
+      "id": "synth.paper-slide.v1",
+      "name": "纸面擦过",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "tactile",
+      "group": "材质拟音",
+      "use": ["纸签开始抽出","翻页或纸边经过"],
+      "avoid": ["移动的是电子光标","纸签已经停稳才起音"],
+      "synthesis": {
+        "voice": "paperSlide",
+        "params": {"seed": {"type": "integer", "minimum": 0, "maximum": 2147483647, "default": 241}}
+      }
+    },
+    {
+      "id": "synth.paper-seat.v1",
+      "name": "薄纸落位",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "tactile",
+      "group": "材质拟音",
+      "use": ["纸签或卡片接触桌面","薄卡推入后贴合"],
+      "avoid": ["给每张入场卡配声","厚木或金属部件的抵达"],
+      "synthesis": {
+        "voice": "paperSeat",
+        "params": {"seed": {"type": "integer", "minimum": 0, "maximum": 2147483647, "default": 251}}
+      }
+    },
+    {
+      "id": "synth.wood-seat.v1",
+      "name": "木件沉落",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "tactile",
+      "group": "材质拟音",
+      "use": ["木块落在桌面","有重量的物件抵达木托盘"],
+      "avoid": ["纸页或小界面变化"],
+      "synthesis": {
+        "voice": "woodSeat",
+        "params": {"seed": {"type": "integer", "minimum": 0, "maximum": 2147483647, "default": 271}}
+      }
+    },
+    {
+      "id": "synth.metal-latch.v1",
+      "name": "机械咬合",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "tactile",
+      "group": "材质拟音",
+      "use": ["卡扣闭合","金属件卡入止点"],
+      "avoid": ["还未咬合的移动","只有逻辑反馈的按钮"],
+      "synthesis": {
+        "voice": "metalLatch",
+        "params": {"seed": {"type": "integer", "minimum": 0, "maximum": 2147483647, "default": 281}}
+      }
+    },
+    {
+      "id": "synth.message-send.v1",
+      "name": "消息已发出",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "tactile",
+      "group": "界面反馈",
+      "use": ["发送动作完成","请求离开当前一侧"],
+      "avoid": ["打字过程","收到回复"],
+      "synthesis": {
+        "voice": "messageSend",
+        "params": {"pitch": {"type": "integer", "minimum": 48, "maximum": 84, "default": 69}}
+      }
+    },
+    {
+      "id": "synth.message-reply.v1",
+      "name": "回复到达",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "tactile",
+      "group": "界面反馈",
+      "use": ["新回复可见","对方反馈接过焦点"],
+      "avoid": ["气泡里逐字出现","重复提示同一条消息"],
+      "synthesis": {
+        "voice": "messageReply",
+        "params": {"pitch": {"type": "integer", "minimum": 48, "maximum": 84, "default": 69}}
+      }
+    },
+    {
+      "id": "synth.ack-soft.v1",
+      "name": "轻确认",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "tactile",
+      "group": "界面反馈",
+      "use": ["关键步骤完成","选中或保存结果落定"],
+      "avoid": ["扫过选项","和同一结果的奖励声叠加"],
+      "synthesis": {
+        "voice": "ackSoft",
+        "params": {"pitch": {"type": "integer", "minimum": 48, "maximum": 84, "default": 67}}
+      }
+    },
+    {
+      "id": "synth.block-soft.v1",
+      "name": "轻阻挡",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "tactile",
+      "group": "界面反馈",
+      "use": ["操作明确没有通过","因条件不足而停下"],
+      "avoid": ["单纯等待","需要留白的失败或情绪反应"],
+      "synthesis": {
+        "voice": "blockSoft",
+        "params": {"pitch": {"type": "integer", "minimum": 48, "maximum": 84, "default": 57}}
+      }
+    },
+    {
+      "id": "synth.series-paper-land.v1",
+      "name": "纸卡落位",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "series",
+      "group": "材质拟音",
+      "use": ["薄纸卡接触桌面或卡槽", "纸签落稳"],
+      "avoid": ["只扫过卡片", "厚木或金属件抵达"],
+      "synthesis": {
+        "voice": "seriesPaperLand",
+        "params": {"seed": {"type": "integer", "minimum": 0, "maximum": 2147483647, "default": 401}}
+      }
+    },
+    {
+      "id": "synth.series-empty-result.v1",
+      "name": "结果落空",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "series",
+      "group": "结果反馈",
+      "use": ["零结果出现", "有明确结论的无回音"],
+      "avoid": ["还在等待结果", "设备故障"],
+      "synthesis": {
+        "voice": "seriesEmptyResult",
+        "params": {"pitch": {"type": "integer", "minimum": 48, "maximum": 84, "default": 61}}
+      }
+    },
+    {
+      "id": "synth.series-send.v1",
+      "name": "消息发出",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "series",
+      "group": "聊天反馈",
+      "use": ["发送动作完成", "请求离开自己一侧"],
+      "avoid": ["打字过程", "对方回复到达"],
+      "synthesis": {
+        "voice": "seriesSend",
+        "params": {"pitch": {"type": "integer", "minimum": 48, "maximum": 84, "default": 65}}
+      }
+    },
+    {
+      "id": "synth.series-reply.v1",
+      "name": "收到回复",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "series",
+      "group": "聊天反馈",
+      "use": ["对方回复到达", "对话焦点交给对方"],
+      "avoid": ["之前的消息被移到别处", "同一气泡逐字出现"],
+      "synthesis": {
+        "voice": "seriesReply",
+        "params": {"pitch": {"type": "integer", "minimum": 48, "maximum": 84, "default": 65}}
+      }
+    },
+    {
+      "id": "synth.series-paper-pull.v2",
+      "status": "legacy-compatibility",
+      "name": "纸签抽出（V2）",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "series",
+      "group": "材质拟音",
+      "use": ["纸签从纸堆抽出或跨镜滑动"],
+      "synthesis": {
+        "voice": "seriesPaperPullV2",
+        "params": {"seed": {"type": "integer", "minimum": 0, "maximum": 2147483647, "default": 607}}
+      }
+    },
+    {
+      "id": "synth.series-paper-land.v2",
+      "status": "legacy-compatibility",
+      "name": "纸卡落位（V2）",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "series",
+      "group": "材质拟音",
+      "use": ["薄纸卡触桌或落进卡槽"],
+      "synthesis": {
+        "voice": "seriesPaperLandV2",
+        "params": {"seed": {"type": "integer", "minimum": 0, "maximum": 2147483647, "default": 619}}
+      }
+    },
+    {
+      "id": "synth.series-stamp.v2",
+      "status": "legacy-compatibility",
+      "name": "选中与盖章（V2）",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "series",
+      "group": "操作反馈",
+      "use": ["选项确认或印章压实"],
+      "synthesis": {
+        "voice": "seriesStampV2",
+        "params": {"pitch": {"type": "integer", "minimum": 48, "maximum": 84, "default": 65}}
+      }
+    },
+    {
+      "id": "synth.series-lock.v2",
+      "status": "legacy-compatibility",
+      "name": "数字锁定（V2）",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "series",
+      "group": "操作反馈",
+      "use": ["终值定格或物件触槽卡稳"],
+      "synthesis": {
+        "voice": "seriesLockV2",
+        "params": {"pitch": {"type": "integer", "minimum": 48, "maximum": 84, "default": 60}}
+      }
+    },
+    {
+      "id": "synth.series-empty-result.v2",
+      "status": "legacy-compatibility",
+      "name": "结果落空（V2）",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "series",
+      "group": "结果反馈",
+      "use": ["零结果或明确的无回音出现"],
+      "synthesis": {
+        "voice": "seriesEmptyResultV2",
+        "params": {"pitch": {"type": "integer", "minimum": 48, "maximum": 84, "default": 61}}
+      }
+    },
+    {
+      "id": "synth.series-send.v2",
+      "status": "legacy-compatibility",
+      "name": "消息发出（V2）",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "series",
+      "group": "聊天反馈",
+      "use": ["自己的消息实际送出"],
+      "synthesis": {
+        "voice": "seriesSendV2",
+        "params": {"pitch": {"type": "integer", "minimum": 48, "maximum": 84, "default": 65}}
+      }
+    },
+    {
+      "id": "synth.series-reply.v2",
+      "status": "legacy-compatibility",
+      "name": "收到回复（V2）",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "series",
+      "group": "聊天反馈",
+      "use": ["回复到达并接过焦点"],
+      "synthesis": {
+        "voice": "seriesReplyV2",
+        "params": {"pitch": {"type": "integer", "minimum": 48, "maximum": 84, "default": 65}}
+      }
+    },
+    {
+      "id": "synth.series-unfold.v2",
+      "status": "legacy-compatibility",
+      "name": "结构展开（V2）",
+      "kind": "synthesis",
+      "maxVariant": 0,
+      "bank": "series",
+      "group": "操作反馈",
+      "use": ["一组新步骤或有层次的信息开始揭开"],
+      "synthesis": {
+        "voice": "seriesUnfoldV2",
+        "params": {"pitch": {"type": "integer", "minimum": 48, "maximum": 84, "default": 60}}
+      }
     },
     {
       "id": "synth.click.v1",

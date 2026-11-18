@@ -25,7 +25,7 @@
 
 阶段三详细设计及正式交接按 [屏幕文字与阅读](visual-storyboard.md#屏幕文字与阅读) 写明用途、位置、层级、显露、稳定阅读区间和实现状态。沿现有 intent 与事件交接。
 
-声音按基础层的 [Garden 工作流](../../pixel-game-video/modules/audio/GARDEN.md) 设计。brief.constraints 记录配乐和音效来源、段落起伏、所用重音和视觉触点。动作和相应音效引用同一分镜事件。确认、碰撞对齐可听起音，换场可对齐掠过声的包络峰或蓄力声的结束点。
+声音先按基础层的 [音效设计与试听](../../pixel-game-video/modules/audio/SOUND-DESIGN.md) 决定声部、材质、用声理由和留白。brief.constraints 记录本片声音方向和来源；采用的音效写入 `production-plan.audio[]`，绑定 `storyboard` 的实际接触、状态变化或揭示事件。确认和碰撞用起音，支持峰／末对齐的转场声按同一合同设置。已有用户指定静音或纯配乐时沿用。
 
 `production-plan.audio[]` 可选 [Garden 音色或街机 WAV](../../pixel-game-video/modules/audio/SYNTHESIS.md) 的 `sound`，也可填项目内 PCM `file`。合成参数写 `params`，落点写 `align`，`at` 引用 storyboard 事件。handoff 将 cue 与引用素材交给基础工程。按本片的材质与叙事节奏决定叠层、密度和留白。
 
@@ -63,7 +63,8 @@
 | --- | --- |
 | 四份源文件与基本选择机制 | [模板](../assets/templates/)、[选择机制](../examples/bounded-choice/brief.json) |
 | 缓存事件与场景编排 | [数据旅程](../examples/cache-journey/brief.json)、[人物取数](../examples/cache-adventure/brief.json)；人物真实表演范围仍按基础层能力目录 |
-| 无口播全链路与同源白模 | [资料 A 的缓存过程](../examples/beat-driven-cache/README.md) |
+| 当前无口播视听表达 | [R41 成片的逐镜参考](../../pixel-game-video/references/asking-motion-reference.md) |
+| 验证同源白模与 Canvas 构建 | [缓存过程技术样例](../examples/beat-driven-cache/README.md) |
 | 信息结构与组件组合 | [基础五类](../examples/component-system/brief.json)、[扩展与组合](../examples/component-expansion/brief.json) |
 | 原生后端交接 | [原生书桌工程](../examples/remotion-focus-desk/README.md) |
 | 完整插画、素材与快照维护 | [插画创作源](../examples/whole-illustration/storyboard.json) 和 [插画动态设计](illustration-motion.md) |

@@ -12,7 +12,7 @@ python scripts/video.py workbench PROJECT --port 5208 --no-open
 
 命令构建当前工程，生成同源清单，再把工程连接到工作台。首次使用按 `workbench/package-lock.json` 安装 Node 依赖；Node.js 需 18.18+，Remotion 固定 4.0.534、React 固定 19.2.0。默认端口 5208，仅监听 `127.0.0.1`；终端打印的实际地址是入口。省略 `--no-open` 时自动打开浏览器；交付时主动打开实际地址供用户编辑。
 
-`renderBackend=canvas` 继续使用现有 Canvas 绘制器，在 React Canvas 单元内按指定帧执行同源 runtime；不把整条 MP4 作为导入片段，也不要求将全部场景重写为 React。原生 `remotion` 使用其已有 React 场景执行器，能力边界仍见 [Remotion 后端](remotion.md)。Canvas 的场景、十二类组件、背景/replacement、物体、人物事件姿态与现有转场通过 runtime 桥接；叙事进度作为独立叠加单元。两种执行器都由工作台管理最终剪辑和导出。
+`renderBackend=canvas` 继续使用现有 Canvas 绘制器，在 React Canvas 单元内按指定帧执行同源 runtime。原生 `remotion` 使用其已有 React 场景执行器，能力边界仍见 [Remotion 后端](remotion.md)。Canvas 的场景、注册组件、背景/replacement、物体、人物事件姿态与现有转场通过 runtime 桥接，叙事进度作为独立叠加单元。两种执行器都由工作台管理最终剪辑和导出。
 
 工作台的「保存工程 JSON」立即保存当前状态并下载快照，「导入」恢复该 JSON 分支；「导出成片」完成后下载 MP4。每次导出还会在 `workbench/exports/` 持久保存与 MP4 同名的 `.project.json`，顶栏「导出版本 JSON」下载该次提交的时间线。导出期间继续编辑后，「保存工程 JSON」得到的当前状态可能不同，交付 MP4 时必须配对「导出版本 JSON」。
 

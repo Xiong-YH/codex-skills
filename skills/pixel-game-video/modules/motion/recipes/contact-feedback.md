@@ -38,4 +38,4 @@
 
 粒子形态跟随对象材质和动作含义。需要表现信号交接时，可以让几枚像素块从触点聚入导槽，沿路径到达接收端。碰撞强度由止挡的短促受力位移、像素块的聚拢和接收端的状态变化共同体现。
 
-[凭条落槽试样](../../components/examples/slot-transfer/index.html)直接调用 [signal-particles.js](../signal-particles.js) 的 `PixelVideo.signalParticles.draw(ctx, options, frame)`。先加载 `style/runtime.js` 和 `motion/runtime.js`。传入同一坐标系的折线路径 `points`，首段从止挡出发，末点落在接收端。用递增的 `contact`、`release`、`arrival` 整数帧指定触碰、放行和到达。 `size`、`color` 和 `highlight` 由宿主提供。粒子在到达帧交给按钮或其他接收对象。该绘制入口用于独立 Canvas 试样。汇聚、扬尘、轻确认与碎片的对照见[粒子选型](../PARTICLES.md)。
+[signal-particles.js](../signal-particles.js) 的 `PixelVideo.signalParticles.draw(ctx, options, frame)` 可沿指定折线路径表现触点到接收端。先加载 `style/runtime.js` 和 `motion/runtime.js`，在同一坐标系传入 `points`。用递增的 `contact`、`release`、`arrival` 整数帧指定触碰、放行和到达。`size`、`color` 和 `highlight` 由宿主提供。汇聚、扬尘、轻确认与碎片见 [粒子选型](../PARTICLES.md)。

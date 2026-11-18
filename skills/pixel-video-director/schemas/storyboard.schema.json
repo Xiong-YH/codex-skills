@@ -315,7 +315,15 @@
             "hierarchy",
             "bars",
             "code",
-            "takeaway"
+            "takeaway",
+            "chat",
+            "tag",
+            "notebook",
+            "deck",
+            "tray",
+            "choice",
+            "action",
+            "template"
           ],
           "title": "Form",
           "type": "string"

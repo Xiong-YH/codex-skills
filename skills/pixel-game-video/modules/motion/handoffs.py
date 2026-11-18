@@ -120,7 +120,7 @@ def validate_shots(recipe, p, previous, incoming, project, start, end):
         if 'roomReveal' in p:
             a, b = old[sources[0]], new[targets[0]]
             if a['kind'] not in ('identity', 'takeaway') or any(
-                    a[key] != b[key] for key in ('kind', 'data', 'visualStyle', 'styleVariant', 'features', 'tone')):
+                    a[key] != b[key] for key in ('kind', 'data', 'features', 'tone')):
                 raise ValueError('roomReveal needs the same identity or takeaway card in both shots')
             for component, shot, last in ((a, previous, start - 1), (b, incoming, end - 1)):
                 show = next(event['frame'] for event in shot['events'] if event['id'] == component['showEvent'])

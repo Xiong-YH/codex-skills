@@ -70,9 +70,11 @@ def preflight(resolved):
                 issues.append({'shotId': shot['id'], 'kind': 'tail-hold', 'level': 'review',
                     'startFrame': last, 'endFrame': end,
                     'message': '已知讲述/文字/动作区间结束后仍有停留；请核对阅读、情绪或接镜目的，不自动裁短。'})
+    has_audio = resolved['project'].get('audioMode') != 'silent' and (
+        resolved['narration'] or resolved['audio'] or resolved.get('bgm'))
     return {'status': 'needs_review' if issues else 'no_findings', 'issues': issues,
             'coverage': 'compiled timing only; no pixel-layout, listening or semantic approval',
-            'visualReview': 'not_reviewed', 'audioReview': 'not_reviewed' if resolved['narration'] or resolved['audio'] else 'not_applicable'}
+            'visualReview': 'not_reviewed', 'audioReview': 'not_reviewed' if has_audio else 'not_applicable'}
 
 
 def plan(current, previous=None, resolved=None):

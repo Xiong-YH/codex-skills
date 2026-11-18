@@ -145,6 +145,31 @@ class BgmMixTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'BGM changed after compilation'):
             music.render(resolved, self.project, RATE * 3)
 
+    def test_source_report_distinguishes_bgm_only_muted_and_clipped_cues(self):
+        resolved = self.resolved(self.cue(self.pcm('bed.wav', np.full(RATE, .3))))
+        clip_file = self.pcm('tap.wav', np.full(RATE // 10, .25))
+        _, info = narration.inspect_clip(self.project, clip_file, label='SFX')
+        clip = {'id': 'late', 'file': clip_file, 'frame': 179, **info, 'level': 0}
+        out = self.project / 'build'
+        for audio in ([], [clip]):
+            resolved['audio'] = audio
+            mixer.render(resolved, out, self.project)
+            report = json.loads((out / 'sfx-events.json').read_text())
+            design = report['soundDesign']
+            self.assertEqual(design['nonzeroCueCount'], 0)
+            self.assertIn('bgm-without-sfx', {warn['code'] for warn in design['warnings']})
+        self.assertIn({'code': 'sfx-zero-signal', 'cueIds': ['late']}, design['warnings'])
+        resolved['audio'] = [{**clip, 'level': .25}]
+        mixer.render(resolved, out, self.project)
+        report = json.loads((out / 'sfx-events.json').read_text())
+        self.assertEqual(report['events'][0]['playedSamples'], 800)
+        levels = report['events'][0]['onsetLevels']
+        self.assertEqual((levels['startSample'], levels['endSample']), (179 * 800, 180 * 800))
+        self.assertAlmostEqual(levels['sfxVsBgmDb'], 20 * np.log10(.25 * .25 / .018), places=2)
+        self.assertEqual(report['soundDesign']['nonzeroCueCount'], 1)
+        self.assertEqual(report['soundDesign']['warnings'],
+                         [{'code': 'sfx-tail-trimmed', 'cueIds': ['late'], 'samples': 4000}])
+
     def test_absent_music_keeps_a_silent_bed_and_existing_narration_errors(self):
         bed, record = music.render(self.resolved(None), self.project, RATE)
         np.testing.assert_array_equal(bed, 0)

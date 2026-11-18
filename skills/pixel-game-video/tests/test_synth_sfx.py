@@ -66,7 +66,8 @@ class SynthRenderTests(unittest.TestCase):
                 cue = {'id': sound['id']}
                 resolve_sfx(cue, sound, 30, 60)
                 recipes.append(cue['synthesis'])
-        self.assertEqual(len(recipes), 33)
+        self.assertEqual(sum(sound.get('bank') == 'garden' for sound in SOUNDS.values()), 33)
+        self.assertEqual(sum(sound.get('bank') == 'tactile' for sound in SOUNDS.values()), 8)
         altered = {'id': 'higher', 'params': {'note': 84}}
         resolve_sfx(altered, POP, 30, 60)
         recipes.append(altered['synthesis'])
@@ -88,6 +89,22 @@ class SynthRenderTests(unittest.TestCase):
         self.assertFalse(np.array_equal(clip[:, 0], clip[:, 1]))
         np.testing.assert_array_equal(clip, render_many([whoosh])[recipe_key(whoosh)])
 
+    def test_tactile_seed_and_pitch_change_the_sound_without_moving_the_cue(self):
+        for ident, params in (('synth.paper-slide.v1', {'seed': 537}), ('synth.message-reply.v1', {'pitch': 72}),
+                              ('synth.series-paper-land.v2', {'seed': 622}), ('synth.series-reply.v2', {'pitch': 70})):
+            sound = SOUNDS[ident]
+            cues = [{'id': 'preset'}, {'id': 'variation', 'params': params}]
+            for cue in cues:
+                resolve_sfx(cue, sound, 30, 60)
+                self.assertEqual(cue['frame'], 30)
+            specs = [cue['synthesis'] for cue in cues]
+            rendered = render_many(specs)
+            base, variant = (rendered[recipe_key(spec)] for spec in specs)
+            self.assertEqual(base.shape, variant.shape)
+            self.assertLess(len(base), RATE // 4)
+            np.testing.assert_array_equal(base[[0, -1]], 0)
+            self.assertFalse(np.array_equal(base, variant))
+
     def test_same_mixed_sound_and_independent_stems_on_both_backends(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder) / 'film'
@@ -98,7 +115,7 @@ class SynthRenderTests(unittest.TestCase):
             write_json(root / 'audio.json', {'masterGain': 1.3, 'cues': [
                 {'id': 'air', 'sound': WHOOSH['id'], 'at': {'event': 's01.choose'},
                  'align': 'peak', 'params': {'duration': .38, 'peak': .63}},
-                {'id': 'button', 'sound': 'arcade-select', 'at': {'event': 's01.choose'}},
+                {'id': 'button', 'sound': 'synth.series-stamp.v2', 'at': {'event': 's01.choose'}, 'params': {'pitch': 67}},
                 {'id': 'foley', 'file': 'foley.wav', 'at': {'event': 's01.parked'}},
             ]})
             mixes = []
@@ -118,7 +135,17 @@ class SynthRenderTests(unittest.TestCase):
                 self.assertEqual(air['from'], resolved['audio'][0]['frame'])
                 self.assertEqual(button['from'], resolved['audio'][0]['anchorFrame'])
                 self.assertEqual(foley['from'], resolved['audio'][2]['frame'])
-                self.assertIn('foley.wav', read_json(root / 'build/project-lock.json')['inputFiles'])
+                lock = read_json(root / 'build/project-lock.json')
+                self.assertIn('foley.wav', lock['inputFiles'])
+                self.assertIn('modules/audio/tactile.mjs', lock['runtimeFiles'])
+                report = read_json(root / 'build/sfx-events.json')
+                self.assertEqual(report['inputHash'], resolved['inputHash'])
+                edge = report['events'][0]
+                self.assertEqual(edge['at']['event'], 's01.choose')
+                self.assertEqual(edge['signalStartSample'] + edge['peakOffsetSamples'], edge['anchorSample'])
+                self.assertEqual(report['soundDesign']['nonzeroCueCount'], 3)
+                self.assertIn({'code': 'sfx-shared-anchor', 'cueIds': ['air', 'button'],
+                               'anchorFrame': button['from']}, report['soundDesign']['warnings'])
                 self.assertEqual(status['audioReport']['maxAbsPcmError'], 0)
                 mixes.append((root / 'build/animation-sfx.wav').read_bytes())
             self.assertEqual(mixes[0], mixes[1])

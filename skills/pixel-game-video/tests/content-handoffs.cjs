@@ -1,13 +1,31 @@
 // Actual compiled scenes/components, plus parity with independent workbench units.
 const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path'),assert=require('node:assert/strict');
-const {canvasRuntime,loadImages}=require('../modules/components/reference-renderer.cjs');
-const {createCanvas,loadImage}=canvasRuntime();
+const {createCanvas,loadImage,GlobalFonts}=require(process.env.PIXEL_NODE_MODULES
+ ?path.join(process.env.PIXEL_NODE_MODULES,'@napi-rs/canvas'):'@napi-rs/canvas');
+for(const font of (process.env.PIXEL_REFERENCE_FONT_FILES||'').split(path.delimiter).filter(Boolean)){
+ assert(GlobalFonts.registerFromPath(font),'Reference font could not load');
+}
 const root=path.resolve(__dirname,'..'),example=path.resolve(process.argv[3]||path.join(root,'examples/content-handoffs'));
 const output=process.argv[2]||path.join(example,'build','handoff-frames');
 async function main(){
  const payload=JSON.parse(fs.readFileSync(path.join(example,'build/payload.json'),'utf8')),gallery=JSON.parse(fs.readFileSync(path.join(example,'gallery.json'),'utf8'));
  vm.runInThisContext(fs.readFileSync(path.join(example,'build/runtime.js'),'utf8'));
- const assets=await loadImages(example,payload,loadImage);
+ const textCanvas=createCanvas(420,130),textContext=textCanvas.getContext('2d');
+ PixelVideo.componentText.text({ctx:textContext,style:payload.style},'项目经历',{x:15,y:15,w:390,h:100},32,'#ffffff');
+ const glyph=textContext.getImageData(0,0,420,130).data;
+ let painted=0;
+ for(let y=0;y<130;y++)for(let x=0;x<420;x++)if(glyph[(y*420+x)*4+3]){
+   painted++;
+   assert(x>=15&&x<405&&y>=15&&y<115,'Text must fit the authored bounds on offline Canvas');
+ }
+ assert(painted>80,'The text probe must paint real glyphs');
+ const imageDir=path.join(output,'source-assets');fs.mkdirSync(imageDir,{recursive:true});
+ const assets=Object.fromEntries(await Promise.all(Object.entries(payload.assets).map(async([id,source],index)=>{
+   const comma=source.indexOf(',');
+   const file=path.resolve(imageDir,index+'.png');
+   fs.writeFileSync(file,Buffer.from(source.slice(comma+1),'base64'));
+   return [id,await loadImage(file)];
+ })));
  fs.mkdirSync(output,{recursive:true});const w=payload.resolved.project.width,h=payload.resolved.project.height;
  const canvas=createCanvas(w,h),renderer=PixelVideo.createRenderer({...payload,canvas,createCanvas,assets});
  const other=createCanvas(w,h),independent=PixelVideo.createRenderer({...payload,canvas:other,createCanvas,assets});

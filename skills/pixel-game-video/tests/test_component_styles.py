@@ -1,124 +1,116 @@
+"""R41 appearance migration and component event contracts."""
+import copy
 import importlib.util
-import base64
-import hashlib
 import json
 from pathlib import Path
+import shutil
 import sys
-import unittest
 import tempfile
+import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from engine.models import Component
-from engine.dependencies import javascript_files
-from engine.dependencies import runtime_files
-from engine.compiler import compile_project, write_json
+from engine.dependencies import javascript_files, runtime_files
+from engine.compiler import compile_project
 from engine.builder import build
 
-spec = importlib.util.spec_from_file_location('component_style_contract', ROOT / 'modules/components/contract.py')
+spec = importlib.util.spec_from_file_location('component_contract', ROOT / 'modules/components/contract.py')
 contract = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(contract)
+SOURCE = ROOT / 'modules/components/examples/guide'
 
 
 class ComponentStyles(unittest.TestCase):
-    def component(self, **extra):
-        return Component.model_validate(dict(id='m', kind='metric', x=.1, y=.1, width=.8, height=.6,
-            data={'title':'完成', 'from':0, 'to':3, 'startEvent':'begin', 'endEvent':'land'}, **extra)).model_dump()
+    def setUp(self):
+        self.shots = json.loads((SOURCE / 'timeline.json').read_text(encoding='utf-8'))['shots']
 
-    def validate(self, component):
-        shot={'durationFrames':180,'events':[{'id':'enter','frame':0},{'id':'begin','frame':30},{'id':'land','frame':50}]}
-        contract.validate(component, shot, set())
-        return component
+    def fixture(self, kind):
+        for shot in self.shots:
+            for component in shot['components']:
+                if component['kind'] == kind:
+                    return copy.deepcopy(component), copy.deepcopy(shot)
+        self.fail(kind)
 
-    def test_all_twelve_forms_and_default(self):
-        self.assertEqual(self.component()['visualStyle'], 'mechanical')
-        self.assertEqual(self.component()['styleVariant'], 'inset')
-        self.assertEqual(self.component()['features'], [])
-        for style in ('mechanical', 'energy'):
+    def validate(self, component, shot):
+        shot['events'].append({'id': 'enter', 'frame': 0})
+        data = Component.model_validate(component).model_dump()
+        contract.validate(data, shot, set())
+        return data
+
+    def test_saved_appearances_upgrade_without_changing_content_or_input(self):
+        component, shot = self.fixture('metric')
+        for old in ('plain', 'mechanical', 'energy', 'paper'):
             for variant in ('open', 'inset', 'relay'):
-                for features in ([], ['stack']):
-                    result=self.validate(self.component(visualStyle=style,styleVariant=variant,features=features))
-                    self.assertEqual((result['visualStyle'],result['styleVariant'],result['features']), (style,variant,features))
+                source = {**component, 'visualStyle': old, 'styleVariant': variant}
+                original = copy.deepcopy(source)
+                result = self.validate(source, copy.deepcopy(shot))
+                self.assertEqual(source, original)
+                self.assertEqual(result['data'], component['data'])
+                self.assertNotIn('visualStyle', result)
+                self.assertNotIn('styleVariant', result)
+        for old in ('unknown', ['energy', 'mechanical']):
+            with self.assertRaises(ValueError):
+                Component.model_validate({**component, 'visualStyle': old})
+        self.assertNotIn('visualStyle', Component.model_json_schema()['properties'])
 
-    def test_feature_preserves_style_and_information_semantics(self):
-        before=self.component(visualStyle='energy',features=['stack'])
-        after=self.validate(before)
-        self.assertEqual(after['visualStyle'], 'energy')
-        self.assertEqual(after['data'], self.component()['data'])
-
-    def test_mixed_styles_unknown_features_and_retired_field_fail(self):
-        for style in ('stack','mechanical+energy',['mechanical','energy']):
-            with self.assertRaises(ValueError):self.validate(self.component(visualStyle=style))
-        for features in (['unknown'],['stack','stack'],['energy']):
-            with self.assertRaises(ValueError):self.validate(self.component(features=features))
-        for extra in ({'styleLayers':['mechanical']},{'stylePreset':'gear'}):
-            with self.assertRaises(ValueError):self.component(**extra)
-        for variant in ('unknown', ['open', 'inset']):
-            with self.assertRaises(ValueError):self.component(styleVariant=variant)
-        invalid=self.component();invalid['styleVariant']='unknown'
-        with self.assertRaises(ValueError):self.validate(invalid)
-
-    def test_style_runtime_is_locked_before_component_runtime(self):
-        resolved={'project':{'style':'style.pixel-editorial.v1'},'shots':[{'scene':'scenes.canvas.v1','components':[self.component()]}]}
-        scripts=javascript_files(ROOT,resolved)
-        self.assertLess(scripts.index('modules/components/style-layers.js'), scripts.index('modules/components/runtime.js'))
-        self.assertLess(scripts.index('modules/components/materials.js'), scripts.index('modules/components/apparatus.js'))
-        self.assertLess(scripts.index('modules/components/apparatus.js'), scripts.index('modules/components/runtime.js'))
-        self.assertLess(scripts.index('modules/components/paper.js'), scripts.index('modules/components/runtime.js'))
-
-    def test_schema_separates_style_from_features(self):
-        fields=Component.model_json_schema()['properties']
-        self.assertNotIn('styleLayers', fields)
-        self.assertEqual(fields['visualStyle']['enum'], ['plain','mechanical','energy','paper'])
-        self.assertEqual(fields['styleVariant']['enum'], ['open','inset','relay'])
-        self.assertEqual(fields['features']['items']['const'], 'stack')
-        self.assertEqual(fields['features']['maxItems'], 1)
-
-    def test_paper_uses_text_card_renderer_only_for_supported_forms(self):
-        for kind, data in (
-                ('identity', {'title': 'Record', 'detail': 'Ref 001'}),
-                ('takeaway', {'title': 'Keep one copy'}),
-                ('checklist', {'title': 'Review', 'items': [
-                    {'label': 'Fetch', 'event': 'begin'}, {'label': 'Store', 'event': 'land'}]})):
-            component = {**self.component(visualStyle='paper'), 'kind': kind, 'data': data}
-            self.validate(component)
-        with self.assertRaisesRegex(ValueError, 'paper supports'):
-            self.validate(self.component(visualStyle='paper'))
-        with self.assertRaisesRegex(ValueError, 'text card'):
-            self.validate({**component, 'kind': 'identity', 'data': {'title': 'Record', 'image': 'image.png'}})
-        resolved = {'project': {'style': 'style.pixel-editorial.v1'},
-                    'shots': [{'scene': 'scenes.canvas.v1', 'components': [component]}]}
-        scripts = javascript_files(ROOT, resolved)
-        self.assertLess(scripts.index('modules/components/paper.js'), scripts.index('modules/components/runtime.js'))
-        self.assertLess(scripts.index('modules/components/materials.js'), scripts.index('modules/components/paper.js'))
-
-    def test_plain_is_original_simple_option_not_a_mixed_style(self):
-        result=self.validate(self.component(visualStyle='plain'))
-        self.assertEqual(result['features'], [])
-        for extra in ({'features':['stack']}, {'styleVariant':'relay'}):
-            with self.assertRaises(ValueError):self.validate(self.component(visualStyle='plain',**extra))
-        resolved={'project':{'style':'style.pixel-editorial.v1'},'shots':[{'scene':'scenes.canvas.v1','components':[result]}]}
-        scripts=javascript_files(ROOT,resolved)
-        self.assertLess(scripts.index('modules/components/plain.js'),scripts.index('modules/components/runtime.js'))
-
-    def test_exact_gear_images_embedded_and_locked_even_for_energy(self):
+    def test_new_catalog_and_entire_sample_compile_with_current_runtime(self):
         with tempfile.TemporaryDirectory() as folder:
-            project=Path(folder)
-            write_json(project/'project.json',{'title':'Gear assets','style':'style.pixel-editorial.v1','audioMode':'silent'})
-            write_json(project/'timeline.json',{'shots':[{'id':'s1','scene':'scenes.canvas.v1','actor':None,'durationFrames':180,
-                'components':[{'id':'chapter','kind':'chapter','x':.1,'y':.2,'width':.8,'height':.4,'visualStyle':'energy',
-                    'data':{'index':'02','title':'章节'}}]}]})
-            for name in ('text','audio'):write_json(project/(name+'.json'),{'cues':[]})
-            resolved=compile_project(project,write=True)
-            build(project,resolved,ROOT,silent=True)
-            payload=json.loads((project/'build/payload.json').read_text(encoding='utf-8'))
-            manifest=json.loads((ROOT/'modules/components/assets/gears/manifest.json').read_text(encoding='utf-8'))
-            locked=set(runtime_files(ROOT,resolved))
-            self.assertEqual(len(payload['style']['componentGearAssets']),3)
-            for item in manifest['items']:
-                encoded=payload['assets'][item['assetKey']].split(',',1)[1]
-                self.assertEqual(hashlib.sha256(base64.b64decode(encoded)).hexdigest(),item['sha256'])
-                self.assertIn('modules/components/'+item['file'],locked)
+            project = Path(folder)
+            for name in ('project.json', 'timeline.json', 'text.json', 'audio.json'):
+                shutil.copy2(SOURCE / name, project / name)
+            resolved = compile_project(project, write=True)
+            names = {item['kind'] for item in json.loads((ROOT / 'modules/components/catalog.json').read_text(encoding='utf-8'))['items']}
+            self.assertEqual({c['kind'] for shot in resolved['shots'] for c in shot['components']}, names)
+            self.assertEqual(len(names), 20)
+            build(project, resolved, ROOT, silent=True)
+            payload = json.loads((project / 'build/payload.json').read_text(encoding='utf-8'))
+            self.assertFalse(any(key.startswith('@components.gear.') for key in payload['assets']))
+            locked = runtime_files(ROOT, resolved)
+            self.assertTrue(all('gears' not in path for path in locked))
+            scripts = javascript_files(ROOT, resolved)
+            self.assertLess(scripts.index('modules/components/look.js'), scripts.index('modules/components/runtime.js'))
+
+    def test_partial_deck_stamp_and_out_of_range_choice_are_rejected(self):
+        component, shot = self.fixture('deck')
+        del component['data']['items'][0]['markEvent']
+        with self.assertRaisesRegex(ValueError, 'stamp'):
+            self.validate(component, shot)
+        component, shot = self.fixture('choice')
+        component['data']['selectedIndex'] = len(component['data']['items'])
+        with self.assertRaisesRegex(ValueError, 'selectedIndex'):
+            self.validate(component, shot)
+        component, shot = self.fixture('tag')
+        component['dimEvent'] = 'missing'
+        with self.assertRaisesRegex(ValueError, 'unreachable'):
+            self.validate(component, shot)
+
+    def test_chat_event_order_count_side_and_viewport_are_checked(self):
+        component, shot = self.fixture('chat')
+        self.validate(component, copy.deepcopy(shot))
+        mutations = [
+            {'visibleRows': 1}, {'visibleRows': True},
+            {'items': component['data']['items'][::-1]},
+            {'items': [{**component['data']['items'][0], 'side': 'middle'}]},
+            {'items': component['data']['items'] * 2},
+        ]
+        for mutation in mutations:
+            with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                self.validate({**component, 'data': {**component['data'], **mutation}}, copy.deepcopy(shot))
+
+    def test_metric_curve_and_shared_feature_validation(self):
+        component, shot = self.fixture('metric')
+        for curve in ('linear', 'accelerate'):
+            component['data']['curve'] = curve
+            self.validate(component, copy.deepcopy(shot))
+        component['data']['curve'] = 'bounce'
+        with self.assertRaisesRegex(ValueError, 'curve'):
+            self.validate(component, copy.deepcopy(shot))
+        component, shot = self.fixture('identity')
+        for features in (['unknown'], ['stack', 'stack']):
+            with self.assertRaises(ValueError):
+                self.validate({**component, 'features': features}, copy.deepcopy(shot))
 
 
-if __name__=='__main__':unittest.main()
+if __name__ == '__main__':
+    unittest.main()

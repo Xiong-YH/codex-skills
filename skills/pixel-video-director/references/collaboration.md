@@ -4,10 +4,11 @@
 
 ## 定位其他技能
 
-按“用户明确指定目录 → 对应环境变量 → 本技能同级目录 → `$CODEX_HOME/skills/<技能名称>`（未设置则 `~/.codex/skills/<技能名称>`）”查找，核对 SKILL.md 的 name 与所需文件。显式目录或变量无效时报告错误，不静默使用另一份版本。
+按“用户明确指定目录 → 对应环境变量（如有）→ 本技能同级目录 → `$CODEX_HOME/skills/<技能名称>`（未设置则 `~/.codex/skills/<技能名称>`）”查找，核对 SKILL.md 的 name 与所需文件。显式目录或变量无效时报告错误，不静默使用另一份版本。
 
 - WRITER：pixel-video-writer，变量 PIXEL_VIDEO_WRITER_SKILL。
 - FOUNDATION：pixel-game-video，变量 PIXEL_VIDEO_SKILL；命令行 `--foundation` 优先，技术定位仍按 [基础交接](handoff.md)。
+- 发布包装使用 pixel-video-packaging，按需读取其 `SKILL.md`。
 
 本包内部路径相对本包根目录，跨包路径相对实际定位的根目录；仓库跨技能链接仅作浏览入口，独立安装不假定同级。
 

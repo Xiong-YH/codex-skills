@@ -112,7 +112,8 @@ def load_sources(project):
         for component in shot['components']:
             component_data = component.get('data', {})
             for item in [component_data, *component_data.get('items', [])]:
-                fields = ('title', 'eyebrow', 'detail', 'label', 'unit', 'index', 'rootTitle', 'language', 'text')
+                fields = ('title', 'eyebrow', 'detail', 'label', 'unit', 'index', 'rootTitle', 'language', 'text',
+                          'button', 'status')
                 if component.get('kind') != 'bars':
                     fields += ('value',)
                 for field in fields:

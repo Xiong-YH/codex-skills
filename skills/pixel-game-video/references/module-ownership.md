@@ -4,7 +4,9 @@
 
 ## 分层与职责
 
-任务入口分为三类：pixel-video-writer 管选题、叙事、逐字文案与内容自查；pixel-video-director 管视听表达、分镜、制作统筹与创作 review；pixel-game-video 管工程制作与技术交付。编剧可独立交付文案，导演从当前完整文案继续，不将视觉表设为编剧完成前提。七大模块提供能力，公共执行层负责合同、统一事件时间线、编译、后端适配及工作台桥接。工作台负责独立剪辑分支与最终导出，不是第八个能力模块。
+视频制作由 pixel-video-writer 负责选题、叙事、上屏文案与内容自查，pixel-video-director 负责视听表达、分镜、制作统筹与创作 review，pixel-game-video 负责工程制作与技术交付。编剧可先独立交付完整文案，导演接手后再设计视觉方案。需要封面、发布标题或介绍文案时按需调用独立的 pixel-video-packaging。
+
+七大模块提供能力，公共执行层负责合同、统一事件时间线、编译、后端适配及工作台桥接。工作台负责独立剪辑分支与最终导出，不是第八个能力模块。
 
 | 模块入口 | 唯一负责 | 输入与输出关系 | 不在本模块决定 |
 | --- | --- | --- | --- |
@@ -32,9 +34,8 @@
 | `library/catalog.json`、`characters/`、`prepare.py`、`computing.js`、`education.js` | 人物/物体身份、图像和原子绘制 | 保留 library；素材集身份与适用范围继续跟随原素材，系列讲述者与姿势由项目/导演系列文件维护 | 保留；人物库入口已去除重复系列要求 |
 | `library/CHARACTERS.md`、原 `PRESENTER-ACTIONS.md` | 素材能力、表演接入和系列口播限制原先交叉 | 人物身份/变体留 library；事件合同进入 scenes/PRESENTER-ACTIONS.md；固定姿势等系列偏好只引用当前项目 | 已拆分；library 旧入口为兼容链接 |
 | `library/runtime.js`、`actor-performance.js`、原 `presenter-actions.js` | 原子放置与事件姿态适配原先同目录 | 静态放置代理留 library；事件姿态执行器进入 scenes/presenter-actions.js；公共依赖清单按新路径加载 | 已迁移事件适配，原像素与运行接口不变 |
-| `components/contract.py`、catalog、`runtime.js`、`plain.js`、`style-layers.js` | 信息组件结构和表现 | 保留 components；消费 style 规范，不把机械/能量行为挪成全局风格 | 保留 |
-| `components/apparatus.js`、`fusion-component.js`、`object-components.json` | 独立物体组件与十二类 `shot.components.kind` 路径不同 | 保留 components；明确调用路径与可用范围，不虚构新 kind | 保留 |
-| `components/BASIC-COMPONENTS.md`、`DESIGN.md`、`INFORMATION-COMPONENTS.md`、`OBJECT-COMPONENTS.md`、`REFERENCES.md` | 基础合同、设计方法和参考图 | 保留 components；通用动作时长引用 motion，不复制规则 | 保留 |
+| `components/contract.py`、catalog、`runtime.js`、`look.js` | 组件合同、状态执行和 R41 材质绘制 | 组件归 components，整体美术规范归 style | 已接入 Canvas |
+| `components/BASIC-COMPONENTS.md`、`DESIGN.md`、`INFORMATION-COMPONENTS.md` | 基础字段、设计方法和参数 | 组件规范引用 motion 的通用动作时长 | 保留 |
 | `text/runtime.js`、catalog、`narrative-progress.js`、`NARRATIVE-PROGRESS.md` | 排字与叙事覆盖层 | 保留 text；风格给皮肤，项目给标签和事件；系列选择归项目 | 保留 |
 | `motion/runtime.js`、`staging.js`、`content-handoffs.js`、`narrative-transitions.js`、`handoffs.py`、recipes/catalog | 通用运动与转场，部分为空间专用实现 | 保留 motion；专用能力不能仅因存于 motion 就宣称通用 | 保留 |
 | `motion/game-feedback.js` | 几何、缓动、回弹、角标和粒子辅助 | 保留 motion；业务状态和资源规则由 scenes 拥有 | 保留 |
@@ -75,7 +76,7 @@
 
 ## 技能入口与详细规则
 
-根 README 维护技能索引、常用资料与安装导航。三个 SKILL.md 维护任务路由、必要前置读取和交付入口；各阶段的具体判据在所属流程或模块维护。基础入口直接链接本包模块，导演入口通过 handoff 定位 FOUNDATION，再读取其模块路径；基础技能独立安装不依赖导演文件。
+根 README 维护技能索引、常用资料与安装导航。各技能的 SKILL.md 维护任务路由、必要前置读取和交付入口；各阶段的具体判据在所属流程或模块维护。基础入口直接链接本包模块，导演入口通过 handoff 定位 FOUNDATION，再读取其模块路径；基础技能独立安装不依赖导演文件。
 
 | 内容 | 详细规则归属 | 入口保留的职责 |
 | --- | --- | --- |

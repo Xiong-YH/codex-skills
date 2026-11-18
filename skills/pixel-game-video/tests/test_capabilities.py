@@ -27,21 +27,15 @@ class CapabilityTests(unittest.TestCase):
     def item(self, ident):
         return next(item for group in capabilities.query(ident=ident)['modules'] for item in group['items'])
 
-    def test_interview_actions_expose_their_own_coverage_without_claiming_a_test_run(self):
-        cases = {
-            'object.interview-cards.v1': 'tests/interview-components.cjs',
-            'object.judgment-stamp.v1': 'tests/interview-components.cjs',
-            'object.task-workbench.v1': 'tests/interview-components.cjs',
-            'object.character-offer-receive.v1': 'tests/offer-receive.cjs',
-            'object.transcript-reach-hold.v1': 'tests/transcript-reach.cjs',
-        }
-        for ident, test in cases.items():
-            with self.subTest(ident=ident):
-                item = self.item(ident)
-                self.assertEqual(item['references']['tests'], [test])
-                self.assertEqual(item['status'], 'standalone')
-                self.assertEqual(item['workbench']['editing'], 'not-integrated')
-                self.assertEqual(item['verification']['testRun'], 'not_run')
+    def test_r41_component_catalog_reports_the_current_canvas_scope(self):
+        group, = capabilities.query(module='components')['modules']
+        self.assertEqual(len(group['items']), 20)
+        for item in group['items']:
+            self.assertEqual(item['status'], 'registered')
+            self.assertTrue(item['backends']['canvas']['supported'])
+            self.assertFalse(item['backends']['remotion']['supported'])
+            self.assertEqual(item['workbench']['editing'], 'shot-props')
+            self.assertEqual(item['verification']['testRun'], 'not_run')
 
     def test_existing_catalog_output_and_source_files_are_unchanged(self):
         paths = list((ROOT / 'modules').glob('*/catalog.json'))
@@ -102,11 +96,8 @@ class CapabilityTests(unittest.TestCase):
                         compile_project(project)
 
     def test_demos_and_missing_features_never_become_registered_or_editable(self):
-        demo = self.item('object.resource-bundle-into-tray.v1')
-        self.assertEqual(demo['status'], 'standalone')
-        self.assertTrue(demo['backends']['canvas']['supported'])
-        self.assertEqual(demo['workbench']['editing'], 'not-integrated')
-        self.assertNotIn(demo['id'], {item['id'] for item in catalog()['components']['items']})
+        with self.assertRaisesRegex(ValueError, 'Unknown capability'):
+            capabilities.query(ident='object.resource-bundle-into-tray.v1')
         for ident in ('audio.tts.v1', 'scenes.local-mouth.v1', 'motion.shelf-travel.v1'):
             item = self.item(ident)
             self.assertFalse(any(backend['supported'] for backend in item['backends'].values()))
@@ -131,16 +122,6 @@ class CapabilityTests(unittest.TestCase):
         self.assertEqual(self.item('audio.narration-import.v1')['workbench']['track'], 'narration')
         self.assertEqual(self.item('audio.bgm-mix.v1')['workbench']['track'], 'bgm')
         self.assertTrue(any('PCM' in note for note in self.item('audio.bgm-mix.v1')['notes']))
-
-    def test_standalone_action_without_gallery_keeps_runtime_assets_and_scope(self):
-        action = self.item('object.transcript-reach-hold.v1')
-        self.assertEqual(action['status'], 'standalone')
-        self.assertEqual(action['references']['examples'], [])
-        self.assertIn('modules/components/character/transcript-reach.js', action['source']['resources'])
-        self.assertIn('modules/components/character/assets/a-transcript-reach.png', action['source']['resources'])
-        self.assertEqual(action['workbench']['editing'], 'not-integrated')
-        cards = self.item('object.interview-cards.v1')
-        self.assertIn('modules/components/interview/drawing.js', cards['source']['resources'])
 
     def test_query_filters_and_reference_check_do_not_claim_tests_or_review(self):
         native = capabilities.query(backend='remotion')

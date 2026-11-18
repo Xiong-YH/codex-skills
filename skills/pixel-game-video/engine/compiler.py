@@ -377,7 +377,8 @@ def compile_project(project_root, skill_root=None, *, write=False):
     spec.loader.exec_module(narration_module)
     unique((c["id"] for c in audio), "audio cues")
     for cue in audio:
-        frame = resolve(cue.pop("at"))
+        # Retain the authored reference for spotting reports and source traceability.
+        frame = resolve(cue["at"])
         if not 0 <= frame < cursor:
             raise ValueError(f"{cue['id']}: audio event outside video")
         if 'file' in cue:
